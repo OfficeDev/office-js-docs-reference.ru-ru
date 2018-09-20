@@ -1,0 +1,512 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 1edb094a629be9ec233e0765e18a470a0cd5e3c4
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24051918"
+items:
+- uid: outlook.Office.Item
+  summary: >-
+    Пространство имен элемента используется для доступа к выделенный в текущий момент сообщения, приглашения на собрание или встречи. Можно определить тип элемента с помощью `itemType` свойство.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restricted</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+  name: Office.Item
+  fullName: outlook.Office.Item
+  langs:
+  - typeScript
+  type: interface
+  package: outlook
+  children:
+  - outlook.Office.Item.addHandlerAsync
+  - outlook.Office.Item.body
+  - outlook.Office.Item.dateTimeCreated
+  - outlook.Office.Item.dateTimeModifed
+  - outlook.Office.Item.getInitializationContextAsync
+  - outlook.Office.Item.itemType
+  - outlook.Office.Item.loadCustomPropertiesAsync
+  - outlook.Office.Item.notificationMessages
+  - outlook.Office.Item.recurrence
+  - outlook.Office.Item.removeHandlerAsync
+  - outlook.Office.Item.seriesId
+- uid: outlook.Office.Item.addHandlerAsync
+  summary: >-
+    Добавляет обработчик для поддерживаемого события.
+
+
+    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, и `Office.EventType.RecurrencePatternChanged`.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+
+
+    В дополнение к этой подпись метода также имеет следующую подпись:
+
+
+    `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.initialize = function (reason) {
+        $(document).ready(function () {
+            Office.context.mailbox.item.addHandlerAsync(Office.EventType.RecurrencePatternChanged, loadNewItem, function (result) {
+                if (result.status === Office.AsyncResultStatus.Failed) {
+                    // Handle error
+                }
+            });
+        });
+    };
+
+
+    function loadNewItem(eventArgs) {
+        // Load the properties of the newly selected item
+        loadProps(Office.context.mailbox.item);
+    };
+
+    ```
+  isPreview: true
+  name: addHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.Item.addHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type:
+      - Office.EventType
+    - id: handler
+      description: Функция для обработки событий. Функции должны принимать один параметр, который является объектом литерала. Свойство type на параметр будет соответствовать параметру eventType, переданной в addHandlerAsync.
+      type:
+      - any
+    - id: options
+      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - any
+    - id: callback
+      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: outlook.Office.Item.body
+  summary: >-
+    Получает объект, предоставляющий методы для работы с основным текстом элемента.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+  name: body
+  fullName: outlook.Office.Item.body
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'body: Office.Body;'
+    return:
+      type:
+      - outlook.Office.Body
+- uid: outlook.Office.Item.dateTimeCreated
+  summary: >-
+    Получает дату и время создания элемента. Только в режиме чтения.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+  name: dateTimeCreated
+  fullName: outlook.Office.Item.dateTimeCreated
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeCreated: Date;'
+    return:
+      type:
+      - Date
+- uid: outlook.Office.Item.dateTimeModifed
+  summary: >-
+    Получает дату и время последнего изменения элемента. Только в режиме чтения.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+
+
+    Примечание. Этот элемент не поддерживается в Outlook для iOS или Outlook для Android.
+  name: dateTimeModifed
+  fullName: outlook.Office.Item.dateTimeModifed
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeModifed: Date;'
+    return:
+      type:
+      - Date
+- uid: outlook.Office.Item.getInitializationContextAsync
+  summary: >-
+    Получает данные инициализации передается при надстройки [активируется по функциональной сообщения](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.
+
+
+    Примечание. Этот метод поддерживается только Outlook 2016 для Windows (версии "нажми и работай" с номером больше 16.0.8413.1000) и Outlook в Интернете для Office 365.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Участник встречи</td></tr></table>
+
+
+    В дополнение к этой подпись метода также имеет следующую подпись:
+
+
+    `getInitializationContextAsync(callback?: (result: AsyncResult<string>) => void): void;`
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Get the initialization context (if present)
+
+    Office.context.mailbox.item.getInitializationContextAsync(
+        function(asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
+                if (asyncResult.value != null && asyncResult.value.length > 0) {
+                    // The value is a string, parse to an object
+                    var context = JSON.parse(asyncResult.value);
+                    // Do something with context
+                } else {
+                    // Empty context, treat as no context
+                }
+            } else {
+                if (asyncResult.error.code == 9020) {
+                    // GenericResponseError returned when there is no context
+                    // Treat as no context
+                } else {
+                    // Handle the error
+                }
+            }
+        }
+    );
+
+    ```
+  isPreview: true
+  name: getInitializationContextAsync(options, callback)
+  fullName: outlook.Office.Item.getInitializationContextAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult. В случае успешного выполнения инициализации данных предоставляются в свойство asyncResult.value как строку. Если контекст отсутствует инициализации, объект asyncResult будет содержать объект Error с его свойства кода 9020 и его имя свойства GenericResponseError.
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: outlook.Office.Item.itemType
+  summary: >-
+    Получает тип элемента, который представляет экземпляр.
+
+
+    Свойство itemType возвращает одно из значений перечисления ItemType, которое указывает, является ли экземпляр объекта item сообщением или собранием.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    if (Office.context.mailbox.item.itemType == Office.MailboxEnums.ItemType.Message)
+        // do something
+    else
+        // do something else
+    ```
+  name: itemType
+  fullName: outlook.Office.Item.itemType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemType: Office.MailboxEnums.ItemType;'
+    return:
+      type:
+      - outlook.Office.MailboxEnums.ItemType
+- uid: outlook.Office.Item.loadCustomPropertiesAsync
+  summary: >-
+    Асинхронно загружает настраиваемые свойства для надстройки для выбранного элемента.
+
+
+    Настраиваемые свойства сохраняются в виде пар "ключ-значение" для каждого приложения и каждого элемента. Этот метод возвращает объект CustomProperties при обратном вызове, который предоставляет методы для доступа к настраиваемым свойствам, характерным для текущего элемента и текущей надстройки. Настраиваемые свойства не шифруются для элемента, поэтому этот способ хранения не является безопасным.
+
+
+    Настраиваемые свойства предоставляются в виде объекта CustomProperties в свойстве asyncResult.value. Этот объект позволяет получить, задать и удалить настраиваемые свойства из элемента, а также сохранить изменения, внесенные в настраиваемое свойство, на сервере.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following example shows how to use the loadCustomPropertiesAsync method
+
+    // to asynchronously load custom properties that are specific to the current item.
+
+    // The example also shows how to use the saveAsync method to save these properties
+
+    // back to the server. After loading the custom properties, the example uses the
+
+    // get method to read the custom property myProp, the set method to write the
+
+    // custom property otherProp, and then finally calls the saveAsync method to save
+
+    // the custom properties.
+
+    Office.initialize = function () {
+        // Checks for the DOM to load using the jQuery ready function.
+        $(document).ready(function () {
+            // After the DOM is loaded, add-in-specific code can run.
+            var mailbox = Office.context.mailbox;
+            mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
+        });
+    }
+
+    function customPropsCallback(asyncResult) {
+        var customProps = asyncResult.value;
+        var myProp = customProps.get("myProp");
+
+        customProps.set("otherProp", "value");
+        customProps.saveAsync(saveCallback);
+    }
+
+
+    function saveCallback(asyncResult) {
+
+    }
+
+    ```
+  name: loadCustomPropertiesAsync(callback, userContext)
+  fullName: outlook.Office.Item.loadCustomPropertiesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (result: AsyncResult<Office.CustomProperties>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<Office.CustomProperties>) => void'
+    - id: userContext
+      description: Необязательный параметр. Разработчики могут предоставлять любого объекта, которые следует получить доступ к в функции обратного вызова. Этот объект можно получать свойство asyncResult.asyncContext в функции обратного вызова.
+      type:
+      - any
+- uid: outlook.Office.Item.notificationMessages
+  summary: >-
+    Получает сообщения уведомления для элемента.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+  name: notificationMessages
+  fullName: outlook.Office.Item.notificationMessages
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'notificationMessages: Office.NotificationMessages;'
+    return:
+      type:
+      - outlook.Office.NotificationMessages
+- uid: outlook.Office.Item.recurrence
+  summary: >-
+    Получает или задает шаблон повторения встречи. Получает шаблон повторения приглашения на собрание. Читать и создавать режимы для элементов встречи. В режиме чтения к собранию элементы запроса.
+
+
+    Свойство повторения возвращает объект повторения для повторяющиеся встречи или собрания запросы, если элемент ряд или экземпляра в последовательности. `null`возвращаются для одного встреч и приглашений на собрания из одного встреч. `undefined`возвращается для сообщений, которые не являются приглашений на собрания.
+
+
+    Примечание: Приглашений на собрание имеют значение itemClass IPM. Schedule.Meeting.Request.
+
+
+    Примечание: Если объект повторения имеет значение null, это указывает, что объект одной встречи или приглашения на собрание из одной встречи и не является частью серии.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+  isPreview: true
+  name: recurrence
+  fullName: outlook.Office.Item.recurrence
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'recurrence: Office.Recurrence;'
+    return:
+      type:
+      - outlook.Office.Recurrence
+- uid: outlook.Office.Item.removeHandlerAsync
+  summary: >-
+    Удаляет обработчик событий для события, поддерживаемые.
+
+
+    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, и `Office.EventType.RecurrencePatternChanged`.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+
+
+    В дополнение к этой подпись метода также имеет следующую подпись:
+
+
+    `removeHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.initialize = function (reason) {
+        $(document).ready(function () {
+            Office.context.mailbox.item.removeHandlerAsync(Office.EventType.RecurrencePatternChanged, loadNewItem, function (result) {
+                if (result.status === Office.AsyncResultStatus.Failed) {
+                    // Handle error
+                }
+            });
+        });
+    };
+
+
+    function loadNewItem(eventArgs) {
+        // Load the properties of the newly selected item
+        loadProps(Office.context.mailbox.item);
+    };
+
+    ```
+  isPreview: true
+  name: removeHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.Item.removeHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type:
+      - Office.EventType
+    - id: handler
+      description: Функция для обработки событий. Функции должны принимать один параметр, который является объектом литерала. Свойство type на параметр будет соответствовать параметру eventType, переданной в removeHandlerAsync.
+      type:
+      - any
+    - id: options
+      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - any
+    - id: callback
+      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: outlook.Office.Item.seriesId
+  summary: >-
+    Получает идентификатор серии, к которой принадлежит экземпляр.
+
+
+    В OWA и Outlook seriesId возвращает идентификатор веб-служб Exchange (EWS) элемента родительского (ряды), к которому принадлежит этот элемент. Тем не менее iOS и Android seriesId возвращает REST идентификатор родительского элемента.
+
+
+    Примечание: Идентификатор, возвращенный свойством seriesId — это то же, что идентификатор элемента веб-служб Exchange. Свойство seriesId не идентичен идентификаторы Outlook, используемые API-Интерфейс REST Outlook. Прежде чем вносить API-Интерфейс REST для звонков с помощью этого значения, его следует преобразовать с помощью Office.context.mailbox.convertToRestId. Для получения дополнительных сведений показано [Использование API REST Outlook из надстройки Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.
+
+
+    Свойство seriesId возвращает значение null для элементов, которые не имеют родительских элементов, таких как одного встреч, элементы ряда или собрания запрашивает и возвращает значение undefined, для других элементов, которые не являются приглашений на собрания.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>\n####Примеры\n\n```javascript\nvar seriesId = Office.context.mailbox.item.seriesId; \nvar isSeries = (seriesId == null);\n```"
+  isPreview: true
+  name: seriesId
+  fullName: outlook.Office.Item.seriesId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'seriesId: string;'
+    return:
+      type:
+      - string
