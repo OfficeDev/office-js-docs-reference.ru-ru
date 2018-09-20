@@ -1,0 +1,516 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 1edb094a629be9ec233e0765e18a470a0cd5e3c4
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24051918"
+items:
+- uid: outlook.Office.Item
+  summary: >-
+    <span data-ttu-id="9a16e-101">Пространство имен элемента используется для доступа к выделенный в текущий момент сообщения, приглашения на собрание или встречи.</span><span class="sxs-lookup"><span data-stu-id="9a16e-101">The item namespace is used to access the currently selected message, meeting request, or appointment.</span></span> <span data-ttu-id="9a16e-102">Можно определить тип элемента с помощью `itemType` свойство.</span><span class="sxs-lookup"><span data-stu-id="9a16e-102">You can determine the type of the item by using the `itemType` property.</span></span>
+
+
+    <span data-ttu-id="9a16e-103">\[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-103">\[ [API set: Mailbox 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-104">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-104">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-105">Restricted</span><span class="sxs-lookup"><span data-stu-id="9a16e-105">Restricted</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-106">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-106">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-107">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-107">Compose or read</span></span></td></tr></table>
+  name: Office.Item
+  fullName: outlook.Office.Item
+  langs:
+  - typeScript
+  type: interface
+  package: outlook
+  children:
+  - outlook.Office.Item.addHandlerAsync
+  - outlook.Office.Item.body
+  - outlook.Office.Item.dateTimeCreated
+  - outlook.Office.Item.dateTimeModifed
+  - outlook.Office.Item.getInitializationContextAsync
+  - outlook.Office.Item.itemType
+  - outlook.Office.Item.loadCustomPropertiesAsync
+  - outlook.Office.Item.notificationMessages
+  - outlook.Office.Item.recurrence
+  - outlook.Office.Item.removeHandlerAsync
+  - outlook.Office.Item.seriesId
+- uid: outlook.Office.Item.addHandlerAsync
+  summary: >-
+    <span data-ttu-id="9a16e-108">Добавляет обработчик для поддерживаемого события.</span><span class="sxs-lookup"><span data-stu-id="9a16e-108">Adds an event handler for a supported event.</span></span>
+
+
+    <span data-ttu-id="9a16e-109">В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, и `Office.EventType.RecurrencePatternChanged`.</span><span class="sxs-lookup"><span data-stu-id="9a16e-109">Currently the supported event types are `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, and `Office.EventType.RecurrencePatternChanged`.</span></span>
+
+
+    <span data-ttu-id="9a16e-110">\[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-110">\[ [API set: Mailbox Preview](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-111">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-111">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-112">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-112">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-113">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-113">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-114">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-114">Compose or read</span></span></td></tr></table>
+
+
+    <span data-ttu-id="9a16e-115">В дополнение к этой подпись метода также имеет следующую подпись:</span><span class="sxs-lookup"><span data-stu-id="9a16e-115">In addition to this signature, the method also has the following signature:</span></span>
+
+
+    `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+
+    #### <a name="examples"></a><span data-ttu-id="9a16e-116">Примеры</span><span class="sxs-lookup"><span data-stu-id="9a16e-116">Examples</span></span>
+
+
+    ```javascript
+
+    Office.initialize = function (reason) {
+        $(document).ready(function () {
+            Office.context.mailbox.item.addHandlerAsync(Office.EventType.RecurrencePatternChanged, loadNewItem, function (result) {
+                if (result.status === Office.AsyncResultStatus.Failed) {
+                    // Handle error
+                }
+            });
+        });
+    };
+
+
+    function loadNewItem(eventArgs) {
+        // Load the properties of the newly selected item
+        loadProps(Office.context.mailbox.item);
+    };
+
+    ```
+  isPreview: true
+  name: addHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.Item.addHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: <span data-ttu-id="9a16e-117">Событие, которое должно вызвать обработчик.</span><span class="sxs-lookup"><span data-stu-id="9a16e-117">The event that should invoke the handler.</span></span>
+      type:
+      - Office.EventType
+    - id: handler
+      description: <span data-ttu-id="9a16e-118">Функция для обработки событий.</span><span class="sxs-lookup"><span data-stu-id="9a16e-118">The function to handle the event.</span></span> <span data-ttu-id="9a16e-119">Функции должны принимать один параметр, который является объектом литерала.</span><span class="sxs-lookup"><span data-stu-id="9a16e-119">The function must accept a single parameter, which is an object literal.</span></span> <span data-ttu-id="9a16e-120">Свойство type на параметр будет соответствовать параметру eventType, переданной в addHandlerAsync.</span><span class="sxs-lookup"><span data-stu-id="9a16e-120">The type property on the parameter will match the eventType parameter passed to addHandlerAsync.</span></span>
+      type:
+      - any
+    - id: options
+      description: '<span data-ttu-id="9a16e-121">Необязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-121">Optional.</span></span> <span data-ttu-id="9a16e-122">Объектный литерал, содержащий одно или несколько из указанных ниже свойств.</span><span class="sxs-lookup"><span data-stu-id="9a16e-122">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="9a16e-123">asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="9a16e-123">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+      type:
+      - any
+    - id: callback
+      description: <span data-ttu-id="9a16e-124">Необязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-124">Optional.</span></span> <span data-ttu-id="9a16e-125">После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="9a16e-125">When the method completes, the function passed in the callback parameter is called with a single parameter, asyncResult, which is an Office.AsyncResult object.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: outlook.Office.Item.body
+  summary: >-
+    <span data-ttu-id="9a16e-126">Получает объект, предоставляющий методы для работы с основным текстом элемента.</span><span class="sxs-lookup"><span data-stu-id="9a16e-126">Gets an object that provides methods for manipulating the body of an item.</span></span>
+
+
+    <span data-ttu-id="9a16e-127">\[[Набор API-Интерфейсов: почтовый ящик 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-127">\[ [API set: Mailbox 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-128">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-128">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-129">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-129">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-130">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-130">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-131">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-131">Compose or read</span></span></td></tr></table>
+  name: body
+  fullName: outlook.Office.Item.body
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'body: Office.Body;'
+    return:
+      type:
+      - outlook.Office.Body
+- uid: outlook.Office.Item.dateTimeCreated
+  summary: >-
+    <span data-ttu-id="9a16e-p105">Получает дату и время создания элемента. Только в режиме чтения.</span><span class="sxs-lookup"><span data-stu-id="9a16e-p105">Gets the date and time that an item was created. Read mode only.</span></span>
+
+
+    <span data-ttu-id="9a16e-134">\[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-134">\[ [API set: Mailbox 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-135">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-135">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-136">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-136">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-137">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-137">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-138">Read</span><span class="sxs-lookup"><span data-stu-id="9a16e-138">Read</span></span></td></tr></table>
+  name: dateTimeCreated
+  fullName: outlook.Office.Item.dateTimeCreated
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeCreated: Date;'
+    return:
+      type:
+      - Date
+- uid: outlook.Office.Item.dateTimeModifed
+  summary: >-
+    <span data-ttu-id="9a16e-p106">Получает дату и время последнего изменения элемента. Только в режиме чтения.</span><span class="sxs-lookup"><span data-stu-id="9a16e-p106">Gets the date and time that an item was last modified. Read mode only.</span></span>
+
+
+    <span data-ttu-id="9a16e-141">\[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-141">\[ [API set: Mailbox 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-142">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-142">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-143">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-143">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-144">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-144">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-145">Read</span><span class="sxs-lookup"><span data-stu-id="9a16e-145">Read</span></span></td></tr></table>
+
+
+    <span data-ttu-id="9a16e-146">Примечание. Этот элемент не поддерживается в Outlook для iOS или Outlook для Android.</span><span class="sxs-lookup"><span data-stu-id="9a16e-146">Note: This member is not supported in Outlook for iOS or Outlook for Android.</span></span>
+  name: dateTimeModifed
+  fullName: outlook.Office.Item.dateTimeModifed
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeModifed: Date;'
+    return:
+      type:
+      - Date
+- uid: outlook.Office.Item.getInitializationContextAsync
+  summary: >-
+    <span data-ttu-id="9a16e-147">Получает данные инициализации передается при надстройки [активируется по функциональной сообщения](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="9a16e-147">Gets initialization data passed when the add-in is [activated by an actionable message](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="9a16e-148">Примечание. Этот метод поддерживается только Outlook 2016 для Windows (версии "нажми и работай" с номером больше 16.0.8413.1000) и Outlook в Интернете для Office 365.</span><span class="sxs-lookup"><span data-stu-id="9a16e-148">Note: This method is only supported by Outlook 2016 for Windows (Click-to-Run versions greater than 16.0.8413.1000) and Outlook on the web for Office 365.</span></span>
+
+
+    <span data-ttu-id="9a16e-149">\[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-149">\[ [API set: Mailbox Preview](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-150">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-150">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-151">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-151">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-152">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-152">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-153">Участник встречи</span><span class="sxs-lookup"><span data-stu-id="9a16e-153">Appointment Attendee</span></span></td></tr></table>
+
+
+    <span data-ttu-id="9a16e-154">В дополнение к этой подпись метода также имеет следующую подпись:</span><span class="sxs-lookup"><span data-stu-id="9a16e-154">In addition to this signature, the method also has the following signature:</span></span>
+
+
+    `getInitializationContextAsync(callback?: (result: AsyncResult<string>) => void): void;`
+
+    #### <a name="examples"></a><span data-ttu-id="9a16e-155">Примеры</span><span class="sxs-lookup"><span data-stu-id="9a16e-155">Examples</span></span>
+
+
+    ```javascript
+
+    // Get the initialization context (if present)
+
+    Office.context.mailbox.item.getInitializationContextAsync(
+        function(asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
+                if (asyncResult.value != null && asyncResult.value.length > 0) {
+                    // The value is a string, parse to an object
+                    var context = JSON.parse(asyncResult.value);
+                    // Do something with context
+                } else {
+                    // Empty context, treat as no context
+                }
+            } else {
+                if (asyncResult.error.code == 9020) {
+                    // GenericResponseError returned when there is no context
+                    // Treat as no context
+                } else {
+                    // Handle the error
+                }
+            }
+        }
+    );
+
+    ```
+  isPreview: true
+  name: getInitializationContextAsync(options, callback)
+  fullName: outlook.Office.Item.getInitializationContextAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: '<span data-ttu-id="9a16e-156">Необязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-156">Optional.</span></span> <span data-ttu-id="9a16e-157">Объектный литерал, содержащий одно или несколько из указанных ниже свойств.</span><span class="sxs-lookup"><span data-stu-id="9a16e-157">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="9a16e-158">asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="9a16e-158">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: <span data-ttu-id="9a16e-159">Необязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-159">Optional.</span></span> <span data-ttu-id="9a16e-160">После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="9a16e-160">When the method completes, the function passed in the callback parameter is called with a single parameter, asyncResult, which is an Office.AsyncResult object.</span></span> <span data-ttu-id="9a16e-161">В случае успешного выполнения инициализации данных предоставляются в свойство asyncResult.value как строку.</span><span class="sxs-lookup"><span data-stu-id="9a16e-161">On success, the initialization data is provided in the asyncResult.value property as a string.</span></span> <span data-ttu-id="9a16e-162">Если контекст отсутствует инициализации, объект asyncResult будет содержать объект Error с его свойства кода 9020 и его имя свойства GenericResponseError.</span><span class="sxs-lookup"><span data-stu-id="9a16e-162">If there is no initialization context, the asyncResult object will contain an Error object with its code property set to 9020 and its name property set to GenericResponseError.</span></span>
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: outlook.Office.Item.itemType
+  summary: >-
+    <span data-ttu-id="9a16e-163">Получает тип элемента, который представляет экземпляр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-163">Gets the type of item that an instance represents.</span></span>
+
+
+    <span data-ttu-id="9a16e-164">Свойство itemType возвращает одно из значений перечисления ItemType, которое указывает, является ли экземпляр объекта item сообщением или собранием.</span><span class="sxs-lookup"><span data-stu-id="9a16e-164">The itemType property returns one of the ItemType enumeration values, indicating whether the item object instance is a message or an appointment.</span></span>
+
+
+    <span data-ttu-id="9a16e-165">\[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-165">\[ [API set: Mailbox 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-166">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-166">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-167">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-167">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-168">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-168">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-169">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-169">Compose or read</span></span></td></tr></table><span data-ttu-id="9a16e-170">
+
+    ####Примеры</span><span class="sxs-lookup"><span data-stu-id="9a16e-170">
+
+    #### Examples</span></span>
+
+
+    ```javascript
+
+    if (Office.context.mailbox.item.itemType == Office.MailboxEnums.ItemType.Message)
+        // do something
+    else
+        // do something else
+    ```
+  name: itemType
+  fullName: outlook.Office.Item.itemType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemType: Office.MailboxEnums.ItemType;'
+    return:
+      type:
+      - outlook.Office.MailboxEnums.ItemType
+- uid: outlook.Office.Item.loadCustomPropertiesAsync
+  summary: >-
+    <span data-ttu-id="9a16e-171">Асинхронно загружает настраиваемые свойства для надстройки для выбранного элемента.</span><span class="sxs-lookup"><span data-stu-id="9a16e-171">Asynchronously loads custom properties for this add-in on the selected item.</span></span>
+
+
+    <span data-ttu-id="9a16e-p109">Настраиваемые свойства сохраняются в виде пар "ключ-значение" для каждого приложения и каждого элемента. Этот метод возвращает объект CustomProperties при обратном вызове, который предоставляет методы для доступа к настраиваемым свойствам, характерным для текущего элемента и текущей надстройки. Настраиваемые свойства не шифруются для элемента, поэтому этот способ хранения не является безопасным.</span><span class="sxs-lookup"><span data-stu-id="9a16e-p109">Custom properties are stored as key/value pairs on a per-app, per-item basis. This method returns a CustomProperties object in the callback, which provides methods to access the custom properties specific to the current item and the current add-in. Custom properties are not encrypted on the item, so this should not be used as secure storage.</span></span>
+
+
+    <span data-ttu-id="9a16e-p110">Настраиваемые свойства предоставляются в виде объекта CustomProperties в свойстве asyncResult.value. Этот объект позволяет получить, задать и удалить настраиваемые свойства из элемента, а также сохранить изменения, внесенные в настраиваемое свойство, на сервере.</span><span class="sxs-lookup"><span data-stu-id="9a16e-p110">The custom properties are provided as a CustomProperties object in the asyncResult.value property. This object can be used to get, set, and remove custom properties from the item and save changes to the custom property set back to the server.</span></span>
+
+
+    <span data-ttu-id="9a16e-177">\[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-177">\[ [API set: Mailbox 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-178">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-178">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-179">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-179">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-180">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-180">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-181">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-181">Compose or read</span></span></td></tr></table><span data-ttu-id="9a16e-182">
+
+    ####Примеры</span><span class="sxs-lookup"><span data-stu-id="9a16e-182">
+
+    #### Examples</span></span>
+
+
+    ```javascript
+
+    // The following example shows how to use the loadCustomPropertiesAsync method
+
+    // to asynchronously load custom properties that are specific to the current item.
+
+    // The example also shows how to use the saveAsync method to save these properties
+
+    // back to the server. After loading the custom properties, the example uses the
+
+    // get method to read the custom property myProp, the set method to write the
+
+    // custom property otherProp, and then finally calls the saveAsync method to save
+
+    // the custom properties.
+
+    Office.initialize = function () {
+        // Checks for the DOM to load using the jQuery ready function.
+        $(document).ready(function () {
+            // After the DOM is loaded, add-in-specific code can run.
+            var mailbox = Office.context.mailbox;
+            mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
+        });
+    }
+
+    function customPropsCallback(asyncResult) {
+        var customProps = asyncResult.value;
+        var myProp = customProps.get("myProp");
+
+        customProps.set("otherProp", "value");
+        customProps.saveAsync(saveCallback);
+    }
+
+
+    function saveCallback(asyncResult) {
+
+    }
+
+    ```
+  name: loadCustomPropertiesAsync(callback, userContext)
+  fullName: outlook.Office.Item.loadCustomPropertiesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (result: AsyncResult<Office.CustomProperties>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: <span data-ttu-id="9a16e-183">После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="9a16e-183">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span>
+      type:
+      - '(result: AsyncResult<Office.CustomProperties>) => void'
+    - id: userContext
+      description: <span data-ttu-id="9a16e-184">Необязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-184">Optional.</span></span> <span data-ttu-id="9a16e-185">Разработчики могут предоставлять любого объекта, которые следует получить доступ к в функции обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="9a16e-185">Developers can provide any object they wish to access in the callback function.</span></span> <span data-ttu-id="9a16e-186">Этот объект можно получать свойство asyncResult.asyncContext в функции обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="9a16e-186">This object can be accessed by the asyncResult.asyncContext property in the callback function.</span></span>
+      type:
+      - any
+- uid: outlook.Office.Item.notificationMessages
+  summary: >-
+    <span data-ttu-id="9a16e-187">Получает сообщения уведомления для элемента.</span><span class="sxs-lookup"><span data-stu-id="9a16e-187">Gets the notification messages for an item.</span></span>
+
+
+    <span data-ttu-id="9a16e-188">\[[Набор API-Интерфейсов: почтовый ящик 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-188">\[ [API set: Mailbox 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-189">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-189">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-190">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-190">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-191">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-191">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-192">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-192">Compose or read</span></span></td></tr></table>
+  name: notificationMessages
+  fullName: outlook.Office.Item.notificationMessages
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'notificationMessages: Office.NotificationMessages;'
+    return:
+      type:
+      - outlook.Office.NotificationMessages
+- uid: outlook.Office.Item.recurrence
+  summary: >-
+    <span data-ttu-id="9a16e-193">Получает или задает шаблон повторения встречи.</span><span class="sxs-lookup"><span data-stu-id="9a16e-193">Gets or sets the recurrence pattern of an appointment.</span></span> <span data-ttu-id="9a16e-194">Получает шаблон повторения приглашения на собрание.</span><span class="sxs-lookup"><span data-stu-id="9a16e-194">Gets the recurrence pattern of a meeting request.</span></span> <span data-ttu-id="9a16e-195">Читать и создавать режимы для элементов встречи.</span><span class="sxs-lookup"><span data-stu-id="9a16e-195">Read and compose modes for appointment items.</span></span> <span data-ttu-id="9a16e-196">В режиме чтения к собранию элементы запроса.</span><span class="sxs-lookup"><span data-stu-id="9a16e-196">Read mode for meeting request items.</span></span>
+
+
+    <span data-ttu-id="9a16e-197">Свойство повторения возвращает объект повторения для повторяющиеся встречи или собрания запросы, если элемент ряд или экземпляра в последовательности.</span><span class="sxs-lookup"><span data-stu-id="9a16e-197">The recurrence property returns a recurrence object for recurring appointments or meetings requests if an item is a series or an instance in a series.</span></span> <span data-ttu-id="9a16e-198">`null`возвращаются для одного встреч и приглашений на собрания из одного встреч.</span><span class="sxs-lookup"><span data-stu-id="9a16e-198">`null` is returned for single appointments and meeting requests of single appointments.</span></span> <span data-ttu-id="9a16e-199">`undefined`возвращается для сообщений, которые не являются приглашений на собрания.</span><span class="sxs-lookup"><span data-stu-id="9a16e-199">`undefined` is returned for messages that are not meeting requests.</span></span>
+
+
+    <span data-ttu-id="9a16e-200">Примечание: Приглашений на собрание имеют значение itemClass IPM. Schedule.Meeting.Request.</span><span class="sxs-lookup"><span data-stu-id="9a16e-200">Note: Meeting requests have an itemClass value of IPM.Schedule.Meeting.Request.</span></span>
+
+
+    <span data-ttu-id="9a16e-201">Примечание: Если объект повторения имеет значение null, это указывает, что объект одной встречи или приглашения на собрание из одной встречи и не является частью серии.</span><span class="sxs-lookup"><span data-stu-id="9a16e-201">Note: If the recurrence object is null, this indicates that the object is a single appointment or a meeting request of a single appointment and NOT a part of a series.</span></span>
+
+
+    <span data-ttu-id="9a16e-202">\[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-202">\[ [API set: Mailbox Preview](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-203">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-203">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-204">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-204">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-205">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-205">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-206">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-206">Compose or read</span></span></td></tr></table>
+  isPreview: true
+  name: recurrence
+  fullName: outlook.Office.Item.recurrence
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'recurrence: Office.Recurrence;'
+    return:
+      type:
+      - outlook.Office.Recurrence
+- uid: outlook.Office.Item.removeHandlerAsync
+  summary: >-
+    <span data-ttu-id="9a16e-207">Удаляет обработчик событий для события, поддерживаемые.</span><span class="sxs-lookup"><span data-stu-id="9a16e-207">Removes an event handler for a supported event.</span></span>
+
+
+    <span data-ttu-id="9a16e-208">В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, и `Office.EventType.RecurrencePatternChanged`.</span><span class="sxs-lookup"><span data-stu-id="9a16e-208">Currently the supported event types are `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, and `Office.EventType.RecurrencePatternChanged`.</span></span>
+
+
+    <span data-ttu-id="9a16e-209">\[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-209">\[ [API set: Mailbox Preview](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: >-
+    <table><tr><td>[<span data-ttu-id="9a16e-210">Минимальный уровень разрешений</span><span class="sxs-lookup"><span data-stu-id="9a16e-210">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id="9a16e-211">ReadItem</span><span class="sxs-lookup"><span data-stu-id="9a16e-211">ReadItem</span></span></td></tr>
+
+
+    <tr><td>[<span data-ttu-id="9a16e-212">Применимый режим Outlook</span><span class="sxs-lookup"><span data-stu-id="9a16e-212">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id="9a16e-213">Создание или чтение</span><span class="sxs-lookup"><span data-stu-id="9a16e-213">Compose or read</span></span></td></tr></table>
+
+
+    <span data-ttu-id="9a16e-214">В дополнение к этой подпись метода также имеет следующую подпись:</span><span class="sxs-lookup"><span data-stu-id="9a16e-214">In addition to this signature, the method also has the following signature:</span></span>
+
+
+    `removeHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+
+    #### <a name="examples"></a><span data-ttu-id="9a16e-215">Примеры</span><span class="sxs-lookup"><span data-stu-id="9a16e-215">Examples</span></span>
+
+
+    ```javascript
+
+    Office.initialize = function (reason) {
+        $(document).ready(function () {
+            Office.context.mailbox.item.removeHandlerAsync(Office.EventType.RecurrencePatternChanged, loadNewItem, function (result) {
+                if (result.status === Office.AsyncResultStatus.Failed) {
+                    // Handle error
+                }
+            });
+        });
+    };
+
+
+    function loadNewItem(eventArgs) {
+        // Load the properties of the newly selected item
+        loadProps(Office.context.mailbox.item);
+    };
+
+    ```
+  isPreview: true
+  name: removeHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.Item.removeHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: <span data-ttu-id="9a16e-216">Событие, которое должно вызвать обработчик.</span><span class="sxs-lookup"><span data-stu-id="9a16e-216">The event that should invoke the handler.</span></span>
+      type:
+      - Office.EventType
+    - id: handler
+      description: <span data-ttu-id="9a16e-217">Функция для обработки событий.</span><span class="sxs-lookup"><span data-stu-id="9a16e-217">The function to handle the event.</span></span> <span data-ttu-id="9a16e-218">Функции должны принимать один параметр, который является объектом литерала.</span><span class="sxs-lookup"><span data-stu-id="9a16e-218">The function must accept a single parameter, which is an object literal.</span></span> <span data-ttu-id="9a16e-219">Свойство type на параметр будет соответствовать параметру eventType, переданной в removeHandlerAsync.</span><span class="sxs-lookup"><span data-stu-id="9a16e-219">The type property on the parameter will match the eventType parameter passed to removeHandlerAsync.</span></span>
+      type:
+      - any
+    - id: options
+      description: '<span data-ttu-id="9a16e-220">Необязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-220">Optional.</span></span> <span data-ttu-id="9a16e-221">Объектный литерал, содержащий одно или несколько из указанных ниже свойств.</span><span class="sxs-lookup"><span data-stu-id="9a16e-221">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="9a16e-222">asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="9a16e-222">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+      type:
+      - any
+    - id: callback
+      description: <span data-ttu-id="9a16e-223">Необязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-223">Optional.</span></span> <span data-ttu-id="9a16e-224">После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="9a16e-224">When the method completes, the function passed in the callback parameter is called with a single parameter, asyncResult, which is an Office.AsyncResult object.</span></span>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: outlook.Office.Item.seriesId
+  summary: >-
+    <span data-ttu-id="9a16e-225">Получает идентификатор серии, к которой принадлежит экземпляр.</span><span class="sxs-lookup"><span data-stu-id="9a16e-225">Gets the id of the series that an instance belongs to.</span></span>
+
+
+    <span data-ttu-id="9a16e-226">В OWA и Outlook seriesId возвращает идентификатор веб-служб Exchange (EWS) элемента родительского (ряды), к которому принадлежит этот элемент.</span><span class="sxs-lookup"><span data-stu-id="9a16e-226">In OWA and Outlook, the seriesId returns the Exchange Web Services (EWS) ID of the parent (series) item that this item belongs to.</span></span> <span data-ttu-id="9a16e-227">Тем не менее iOS и Android seriesId возвращает REST идентификатор родительского элемента.</span><span class="sxs-lookup"><span data-stu-id="9a16e-227">However, in iOS and Android, the seriesId returns the REST ID of the parent item.</span></span>
+
+
+    <span data-ttu-id="9a16e-228">Примечание: Идентификатор, возвращенный свойством seriesId — это то же, что идентификатор элемента веб-служб Exchange.</span><span class="sxs-lookup"><span data-stu-id="9a16e-228">Note: The identifier returned by the seriesId property is the same as the Exchange Web Services item identifier.</span></span> <span data-ttu-id="9a16e-229">Свойство seriesId не идентичен идентификаторы Outlook, используемые API-Интерфейс REST Outlook.</span><span class="sxs-lookup"><span data-stu-id="9a16e-229">The seriesId property is not identical to the Outlook IDs used by the Outlook REST API.</span></span> <span data-ttu-id="9a16e-230">Прежде чем вносить API-Интерфейс REST для звонков с помощью этого значения, его следует преобразовать с помощью Office.context.mailbox.convertToRestId.</span><span class="sxs-lookup"><span data-stu-id="9a16e-230">Before making REST API calls using this value, it should be converted using Office.context.mailbox.convertToRestId.</span></span> <span data-ttu-id="9a16e-231">Для получения дополнительных сведений показано [Использование API REST Outlook из надстройки Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="9a16e-231">For more details, see [Use the Outlook REST APIs from an Outlook add-in](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.</span></span>
+
+
+    <span data-ttu-id="9a16e-232">Свойство seriesId возвращает значение null для элементов, которые не имеют родительских элементов, таких как одного встреч, элементы ряда или собрания запрашивает и возвращает значение undefined, для других элементов, которые не являются приглашений на собрания.</span><span class="sxs-lookup"><span data-stu-id="9a16e-232">The seriesId property returns null for items that do not have parent items such as single appointments, series items, or meeting requests and returns undefined for any other items that are not meeting requests.</span></span>
+
+
+    <span data-ttu-id="9a16e-233">\[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9a16e-233">\[ [API set: Mailbox Preview](/javascript/office/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+  remarks: "<table><tr><td>[<span data-ttu-id=\"9a16e-234\">Минимальный уровень разрешений</span><span class=\"sxs-lookup\"><span data-stu-id=\"9a16e-234\">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td><span data-ttu-id=\"9a16e-235\">ReadItem</span><span class=\"sxs-lookup\"><span data-stu-id=\"9a16e-235\">ReadItem</span></span></td></tr>\n\n<tr><td>[<span data-ttu-id=\"9a16e-236\">Применимый режим Outlook</span><span class=\"sxs-lookup\"><span data-stu-id=\"9a16e-236\">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td><span data-ttu-id=\"9a16e-237\">Создание или чтение</span><span class=\"sxs-lookup\"><span data-stu-id=\"9a16e-237\">Compose or read</span></span></td></tr></table><span data-ttu-id=\"9a16e-238\">\n####Примеры</span><span class=\"sxs-lookup\"><span data-stu-id=\"9a16e-238\">\n#### Examples</span></span>\n\n```javascript\nvar seriesId = Office.context.mailbox.item.seriesId; \nvar isSeries = (seriesId == null);\n```"
+  isPreview: true
+  name: seriesId
+  fullName: outlook.Office.Item.seriesId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'seriesId: string;'
+    return:
+      type:
+      - string
