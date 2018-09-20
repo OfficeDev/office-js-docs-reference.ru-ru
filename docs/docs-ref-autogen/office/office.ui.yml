@@ -1,0 +1,157 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 26ce48cc61720d1f718d6ca3a76cf4dd6b640df8
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24051304"
+items:
+- uid: office.Office.UI
+  summary: >-
+    Предоставляет объекты и методы, которые можно использовать для создания и управления компонентов пользовательского интерфейса, таких как диалоговые окна, в Office Add-ins.
+
+
+    Посетите страницу "[Использование интерфейса API диалогового окна в Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-api-in-office-add-ins)<!-- -->" для получения дополнительных сведений.
+  name: Office.UI
+  fullName: office.Office.UI
+  langs:
+  - typeScript
+  type: interface
+  package: office
+  children:
+  - office.Office.UI.closeContainer
+  - office.Office.UI.displayDialogAsync
+  - office.Office.UI.messageParent
+- uid: office.Office.UI.closeContainer
+  summary: Закрывает контейнер пользовательского интерфейса, в котором выполняется код JavaScript.
+  remarks: >-
+    <table><tr><td>Hosts</td><td>Excel, Word, PowerPoint, Outlook (минимальное требование set: 1,5 почтового ящика)</td></tr></table>
+
+
+    Поведение этого метода определяется следующими службами:
+
+
+    - Вызов выполняется из кнопки команды без интерфейса пользователя: не влияет. Все диалоговые окна, открытые с помощью метода displayDialogAsync, останутся открытыми.
+
+
+    - Вызов выполняется из taskpane: область задач закрывается. Любое диалоговое окно открывается с displayDialogAsync также будет закрыто. Если область задач поддерживает закрепление и была закреплена пользователем, она будет откреплена.
+
+
+    - Вызов выполняется из расширения модуль: не влияет.
+  name: closeContainer()
+  fullName: office.Office.UI.closeContainer
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'closeContainer(): void;'
+    return:
+      type:
+      - void
+      description: ''
+- uid: office.Office.UI.displayDialogAsync
+  summary: Отображает диалоговое окно для отображения или сбора сведений у пользователя или для упрощения навигации Web.
+  remarks: >-
+    <table><tr><td>Hosts</td><td>Word, Excel, Outlook, PowerPoint</td></tr>
+
+
+    <tr><td>Наборы требований</td><td>DialogAPI почтовый ящик 1.4</td></tr></table>
+
+
+    Этот метод доступен в DialogApi требования для надстройки Word, Excel и PowerPoint, и в почтовом ящике требование набор 1.4 для Outlook. Для получения дополнительных сведений о том, как указать является обязательным требованием, задайте в манифесте см [узлов укажите Office и требования к API](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
+
+
+    Начальной страницы должен находиться на том же домене, как страницы родительского (параметр startAddress). После загрузки начальной страницы можно перейти к другим доменам.
+
+
+    Все страницы вызова `office.context.ui.messageParent` также должен быть на том же домене, как страницы родительского.
+
+
+    **Рекомендации по проектированию**:
+
+
+    К диалоговым окнам применяются следующие рекомендации по оформлению:
+
+
+    - Область задач Office Add-in может иметь только одно диалоговое окно Открыть в любое время. Несколько диалоговых окон можно открыть в то же время из команд надстроек (настраиваемая лента кнопок и пунктов меню).
+
+
+    - Пользователь может перемещать все диалоговые окна и изменять их размер.
+
+
+    - При открытии все диалоговые окна размещаются по центру экрана.
+
+
+    - Диалоговые окна отображаются поверх ведущего приложения в порядке создания.
+
+
+    Примеры применения диалогового окна:
+
+
+    - Отображение страниц проверки подлинности для сбора учетных данных пользователей.
+
+
+    - С экрана об ошибках или хода выполнения и ввода ShowTaskpane или ExecuteAction команды.
+
+
+    - Временное увеличение пространства, доступного пользователю для выполнения задачи.
+
+
+    Не используйте диалоговое окно для работы с документом. Используйте область задач.
+
+
+    Шаблон, который можно использовать для создания [диалогового окна](https://github.com/OfficeDev/Office-Add-in-UX-Design-Patterns/blob/master/Patterns/Client_Dialog.md), см. в репозитории шаблонов на сайте GitHub.
+
+
+    **displayDialogAsync ошибки**:
+
+
+    <table> <tr> <th>Цифровой код</th> <th>Значение</th> </tr> <tr> <td>12004</td> <td>Домен URL-адрес, переданной в displayDialogAsync не является доверенным. Домен должен быть в том же домене, что на главной странице (в том числе протокол и номер порта), или она должна быть зарегистрирована в <AppDomains> раздел манифеста надстройки.</td> </tr> <tr> <td>12005</td> <td>URL-адрес, переданной в displayDialogAsync использует протокол HTTP. HTTPS является обязательным. (В некоторых версиях Office сообщение об ошибке, возвращаемое с 12005 аналогична один возвращаются для 12004.)</td> </tr> <tr> <td>12007</td> <td>Диалоговое окно уже открыто из области задач. Надстройка области задач не может открывать сразу несколько диалоговых окон.</td> </tr> </table>
+
+
+    В функции обратного вызова, переданной в метод displayDialogAsync можно использовать свойства объекта AsyncResult для возврата следующей информации.
+
+
+    <table> <tr> <th>Свойство</th> <th>Применение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Доступ к объекту Dialog.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Получает доступ к объекту Error, который содержит сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Доступ к определенному пользователем object или значению, если оно передано в качестве параметра asyncContext.</td> </tr> </table>
+  name: displayDialogAsync(startAddress, options, callback)
+  fullName: office.Office.UI.displayDialogAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayDialogAsync(startAddress: string, options?: DialogOptions, callback?: (result: AsyncResult<Dialog>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: startAddress
+      description: Принимает начальное HTTPS URL-адрес, который открывает в диалоговом окне.
+      type:
+      - string
+    - id: options
+      description: Необязательный параметр. Принимает объект[Office.DialogOptions](xref:office.Office.DialogOptions) для определения отображения диалогового окна.
+      type:
+      - office.Office.DialogOptions
+    - id: callback
+      description: Необязательный параметр. Принимает метод обратного вызова, обрабатывающий попытку создания диалогового окна. В случае успешного выполнения AsyncResult.value — это объект диалогового окна.
+      type:
+      - '(result: AsyncResult<Dialog>) => void'
+- uid: office.Office.UI.messageParent
+  summary: Доставляет сообщение из диалогового окна родительской странице. Страница, вызывающая этот API, и родительская страница должны быть в одном домене.
+  name: messageParent(messageObject)
+  fullName: office.Office.UI.messageParent
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'messageParent(messageObject: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: messageObject
+      description: Принимает от диалогового окна сообщение, доставляемое надстройке.
+      type:
+      - any

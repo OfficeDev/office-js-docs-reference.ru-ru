@@ -1,0 +1,657 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 41bea1d7d038468f8f23a3b11b411b235c26bf53
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24050091"
+items:
+- uid: excel.Excel.Worksheet
+  summary: >-
+    Лист Excel представляет собой сетку ячеек. Он может содержать данные, таблицы, диаграммы и т. д.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  remarks: Наш [руководство по работе с листами](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets) подробные пошаговые руководства и примеры кодов.
+  name: Excel.Worksheet
+  fullName: excel.Excel.Worksheet
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.Worksheet.activate
+  - excel.Excel.Worksheet.calculate
+  - excel.Excel.Worksheet.charts
+  - excel.Excel.Worksheet.copy
+  - excel.Excel.Worksheet.delete
+  - excel.Excel.Worksheet.freezePanes
+  - excel.Excel.Worksheet.getCell
+  - excel.Excel.Worksheet.getNext
+  - excel.Excel.Worksheet.getNextOrNullObject
+  - excel.Excel.Worksheet.getPrevious
+  - excel.Excel.Worksheet.getPreviousOrNullObject
+  - excel.Excel.Worksheet.getRange
+  - excel.Excel.Worksheet.getRangeByIndexes
+  - excel.Excel.Worksheet.getUsedRange
+  - excel.Excel.Worksheet.getUsedRangeOrNullObject
+  - excel.Excel.Worksheet.id
+  - excel.Excel.Worksheet.load
+  - excel.Excel.Worksheet.name
+  - excel.Excel.Worksheet.names
+  - excel.Excel.Worksheet.onActivated
+  - excel.Excel.Worksheet.onChanged
+  - excel.Excel.Worksheet.onDeactivated
+  - excel.Excel.Worksheet.onSelectionChanged
+  - excel.Excel.Worksheet.pivotTables
+  - excel.Excel.Worksheet.position
+  - excel.Excel.Worksheet.protection
+  - excel.Excel.Worksheet.standardHeight
+  - excel.Excel.Worksheet.standardWidth
+  - excel.Excel.Worksheet.tabColor
+  - excel.Excel.Worksheet.tables
+  - excel.Excel.Worksheet.toJSON
+  - excel.Excel.Worksheet.visibility
+- uid: excel.Excel.Worksheet.activate
+  summary: >-
+    Активация листа в пользовательском интерфейсе Excel.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: activate()
+  fullName: excel.Excel.Worksheet.activate
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'activate(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.activate();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Worksheet.calculate
+  summary: >-
+    Вычисляет все ячейки на листе.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: calculate(markAllDirty)
+  fullName: excel.Excel.Worksheet.calculate
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'calculate(markAllDirty: boolean): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: markAllDirty
+      description: Значение true, чтобы пометить все как dirty.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.charts
+  summary: >-
+    Возвращает коллекцию диаграмм, имеющихся на листе. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: charts
+  fullName: excel.Excel.Worksheet.charts
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly charts: Excel.ChartCollection;'
+    return:
+      type:
+      - excel.Excel.ChartCollection
+- uid: excel.Excel.Worksheet.copy
+  summary: >-
+    Скопируйте листа и поместите его в заданной позиции. Возвращает копии листа.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: copy(positionType, relativeTo)
+  fullName: excel.Excel.Worksheet.copy
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n\n    let myWorkbook = context.workbook;\n    let sampleSheet = myWorkbook.worksheets.getActiveWorksheet();\n    let copiedSheet = sampleSheet.copy(\"End\")\n\n    sampleSheet.load(\"name\");\n    copiedSheet.load(\"name\");\n\n    await context.sync();\n\n    console.log(\"'\" + sampleSheet.name + \"' was copied to '\" + copiedSheet.name + \"'\")\n});\n```"
+    parameters:
+    - id: positionType
+      description: Необязательный.
+      type:
+      - excel.Excel.WorksheetPositionType
+    - id: relativeTo
+      description: Необязательный.
+      type:
+      - excel.Excel.Worksheet
+- uid: excel.Excel.Worksheet.delete
+  summary: >-
+    Удаляет лист из книги.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: delete()
+  fullName: excel.Excel.Worksheet.delete
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Worksheet.freezePanes
+  summary: >-
+    Получает объект, который можно использовать для работы с закрепление областей в рабочем листе. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: freezePanes
+  fullName: excel.Excel.Worksheet.freezePanes
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly freezePanes: Excel.WorksheetFreezePanes;'
+    return:
+      type:
+      - excel.Excel.WorksheetFreezePanes
+- uid: excel.Excel.Worksheet.getCell
+  summary: >-
+    Получает объект диапазона, содержащий одну ячейку, на основе номера строки и столбца. Ячейка может быть вне родительского диапазона, если она расположена в таблице листа.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getCell(row, column)
+  fullName: excel.Excel.Worksheet.getCell
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCell(row: number, column: number): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var cell = worksheet.getCell(0,0);\n    cell.load('address');\n    return ctx.sync().then(function() {\n        console.log(cell.address);\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: row
+      description: Номер строки ячейки, которую требуется извлечь. Используется нулевой индекс.
+      type:
+      - number
+    - id: column
+      description: Номер столбца ячейки, которую требуется извлечь. Используется нулевой индекс.
+      type:
+      - number
+- uid: excel.Excel.Worksheet.getNext
+  summary: >-
+    Получает следующий лист. Если следующего листа нет, возникает ошибка.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getNext(visibleOnly)
+  fullName: excel.Excel.Worksheet.getNext
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    OfficeHelpers.UI.notify(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: visibleOnly
+      description: Необязательный. Если указано значение true, учитываются только видимые листы (скрытые пропускаются).
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getNextOrNullObject
+  summary: >-
+    Получает следующий лист. Если следующего листа нет, метод возвращает объект null.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getNextOrNullObject(visibleOnly)
+  fullName: excel.Excel.Worksheet.getNextOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: ''
+    parameters:
+    - id: visibleOnly
+      description: Необязательный. Если указано значение true, учитываются только видимые листы (скрытые пропускаются).
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getPrevious
+  summary: >-
+    Возвращает предыдущий лист. Если предыдущего листа нет, возникает ошибка.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getPrevious(visibleOnly)
+  fullName: excel.Excel.Worksheet.getPrevious
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n    const currentSheet = sheets.getActiveWorksheet();\n    const previousYearSheet = currentSheet.getPrevious();\n    const currentTaxDueRange = currentSheet.getRange(\"C2\");\n    const previousTaxDueRange = previousYearSheet.getRange(\"C2\");\n\n    currentSheet.load(\"name\");\n    previousYearSheet.load(\"name\");\n    currentTaxDueRange.load(\"text\");\n    previousTaxDueRange.load(\"text\");\n\n    await context.sync();\n\n    let currentYear = currentSheet.name.substr(5, 4);\n    let previousYear = previousYearSheet.name.substr(5, 4);\n    OfficeHelpers.UI.notify(\"Two Year Tax Due Comparison\", `Tax due for ${currentYear} was ${currentTaxDueRange.text[0][0]}\\nTax due for ${previousYear} was ${previousTaxDueRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: visibleOnly
+      description: Необязательный. Если указано значение true, учитываются только видимые листы (скрытые пропускаются).
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getPreviousOrNullObject
+  summary: >-
+    Возвращает предыдущий лист. Если предыдущего листа нет, этот метод возвращает объект null.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getPreviousOrNullObject(visibleOnly)
+  fullName: excel.Excel.Worksheet.getPreviousOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: ''
+    parameters:
+    - id: visibleOnly
+      description: Необязательный. Если указано значение true, учитываются только видимые листы (скрытые пропускаются).
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getRange
+  summary: >-
+    Получает объект range, представляющий один прямоугольный блок ячеек, указан адрес или имя.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getRange(address)
+  fullName: excel.Excel.Worksheet.getRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRange(address?: string): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Below example uses range address to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Below example uses a named-range to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeName = 'MyRange';\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeName);\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: address
+      description: 'Необязательный параметр. Строка, представляющая адрес или имя диапазона. Например «a1: B2». Если не указан, возвращается диапазон всего рабочего листа.'
+      type:
+      - string
+- uid: excel.Excel.Worksheet.getRangeByIndexes
+  summary: >-
+    Метод  возвращает объект диапазона, начинающегося с определенных строки и столбца и занимающего определенное количество строк и столбцов.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getRangeByIndexes(startRow, startColumn, rowCount, columnCount)
+  fullName: excel.Excel.Worksheet.getRangeByIndexes
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRangeByIndexes(startRow: number, startColumn: number, rowCount: number, columnCount: number): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: ''
+    parameters:
+    - id: startRow
+      description: Начало строки (индексируются нулю).
+      type:
+      - number
+    - id: startColumn
+      description: Запустите столбца (индексируются нулю).
+      type:
+      - number
+    - id: rowCount
+      description: Количество строк, включаемых в диапазоне.
+      type:
+      - number
+    - id: columnCount
+      description: Число столбцов для включения в диапазоне.
+      type:
+      - number
+- uid: excel.Excel.Worksheet.getUsedRange
+  summary: >-
+    Используемые значения — от наименьшего диапазона, который содержит все ячейки, которые имеют значение или форматирования назначенные им. Если весь лист не задан, эта функция возвращает верхней левой ячейки (то есть он будет *не* порождает произошла ошибка).
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getUsedRange(valuesOnly)
+  fullName: excel.Excel.Worksheet.getUsedRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    var usedRange = worksheet.getUsedRange();\n    usedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(usedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: valuesOnly
+      description: 'Необязательный параметр. Если значение true, рассматривает только ячейки со значениями как используемые ячеек (без учета форматирования). \[Набор API-интерфейсов: ExcelApi 1.2 (en)\]'
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.getUsedRangeOrNullObject
+  summary: >-
+    Используемый диапазон — это наименьший диапазон, включающий в себя все ячейки, которые содержат значение или форматирование. Если весь лист пустой, эта функция возвращает пустой объект.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getUsedRangeOrNullObject(valuesOnly)
+  fullName: excel.Excel.Worksheet.getUsedRangeOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getUsedRangeOrNullObject(valuesOnly?: boolean): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: ''
+    parameters:
+    - id: valuesOnly
+      description: Необязательный. Учитывает только ячейки со значениями.
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.id
+  summary: >-
+    Возвращает значение, однозначно идентифицирующее лист в данной книге. Значение идентификатора остается прежним, даже если переименовать или переместить лист. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: id
+  fullName: excel.Excel.Worksheet.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.Worksheet.load
+  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
+  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Get worksheet properties based on sheet name.\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.load('position')\n    return ctx.sync().then(function() {\n            console.log(worksheet.position);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set worksheet position. \nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.position = 2;\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.Worksheet.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.Worksheet;'
+    return:
+      type:
+      - excel.Excel.Worksheet
+      description: ''
+    parameters:
+    - id: option
+      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      type:
+      - string | string[]
+- uid: excel.Excel.Worksheet.name
+  summary: >-
+    Отображаемое имя листа.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: name
+  fullName: excel.Excel.Worksheet.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'name: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.Worksheet.names
+  summary: >-
+    Коллекция имен, относящих к текущему листу. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: names
+  fullName: excel.Excel.Worksheet.names
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly names: Excel.NamedItemCollection;'
+    return:
+      type:
+      - excel.Excel.NamedItemCollection
+- uid: excel.Excel.Worksheet.onActivated
+  summary: >-
+    Происходит при активации рабочего листа.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onActivated
+  fullName: excel.Excel.Worksheet.onActivated
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>
+- uid: excel.Excel.Worksheet.onChanged
+  summary: >-
+    Происходит при изменении данных на конкретный лист.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onChanged
+  fullName: excel.Excel.Worksheet.onChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onChanged.add(onChange);\n\n    await context.sync();\n\n    OfficeHelpers.UI.notify(\"A handler has been registered for the onChanged event.\");\n});\n```"
+- uid: excel.Excel.Worksheet.onDeactivated
+  summary: >-
+    Происходит при отключении рабочего листа.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onDeactivated
+  fullName: excel.Excel.Worksheet.onDeactivated
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onDeactivated: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
+- uid: excel.Excel.Worksheet.onSelectionChanged
+  summary: >-
+    Возникает при изменении выбора на конкретный лист.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onSelectionChanged
+  fullName: excel.Excel.Worksheet.onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
+- uid: excel.Excel.Worksheet.pivotTables
+  summary: >-
+    Коллекция сводных таблиц на листе. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.3](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: pivotTables
+  fullName: excel.Excel.Worksheet.pivotTables
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly pivotTables: Excel.PivotTableCollection;'
+    return:
+      type:
+      - excel.Excel.PivotTableCollection
+- uid: excel.Excel.Worksheet.position
+  summary: >-
+    Положение листа (начиная с нуля) в книге.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: position
+  fullName: excel.Excel.Worksheet.position
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'position: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.Worksheet.protection
+  summary: >-
+    Возвращает объект защиты листа. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.2](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: protection
+  fullName: excel.Excel.Worksheet.protection
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly protection: Excel.WorksheetProtection;'
+    return:
+      type:
+      - excel.Excel.WorksheetProtection
+- uid: excel.Excel.Worksheet.standardHeight
+  summary: >-
+    Возвращает высоту по умолчанию все строки в рабочем листе в пунктах. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: standardHeight
+  fullName: excel.Excel.Worksheet.standardHeight
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly standardHeight: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.Worksheet.standardWidth
+  summary: >-
+    Возвращает или задает ширину standard (по умолчанию) всех столбцов на листе. Единицы ширины столбца равна ширине одного знака в обычный стиль. Для пропорциональных шрифтов используется ширина символа 0 (ноль).
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: standardWidth
+  fullName: excel.Excel.Worksheet.standardWidth
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'standardWidth: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.Worksheet.tabColor
+  summary: >-
+    Получает или задает цвет ярлычка листа. При получении Цвет ярлычка, если лист невидимой, будет иметь значение null. Если лист будет отображаться, но Цвет ярлычка задано значение auto, будут возвращены пустую строку. В противном случае свойство будет иметь значение цвета, в виде "\#123456" при задании цвет, используйте пустой строки для задания «Автоматическая» цветовая или реальных цвета в противном случае.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tabColor
+  fullName: excel.Excel.Worksheet.tabColor
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tabColor: string;'
+    return:
+      type:
+      - string
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.tabColor = \"#FF0000\";\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.Worksheet.tables
+  summary: >-
+    Коллекция таблиц, имеющихся на листе. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tables
+  fullName: excel.Excel.Worksheet.tables
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly tables: Excel.TableCollection;'
+    return:
+      type:
+      - excel.Excel.TableCollection
+- uid: excel.Excel.Worksheet.toJSON
+  name: toJSON()
+  fullName: excel.Excel.Worksheet.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorksheetData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.WorksheetData
+      description: ''
+- uid: excel.Excel.Worksheet.visibility
+  summary: >-
+    Видимость рабочего листа.
+
+
+    \[[Набор API-Интерфейсов: ExcelApi 1.1 для чтения видимости; 1.2 для задания его](/javascript/office/requirement-sets/excel-api-requirement-sets) \]
+  name: visibility
+  fullName: excel.Excel.Worksheet.visibility
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'visibility: Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden";'
+    return:
+      type:
+      - Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden"

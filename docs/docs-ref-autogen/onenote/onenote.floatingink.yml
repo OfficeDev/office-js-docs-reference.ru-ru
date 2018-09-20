@@ -1,0 +1,135 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 6027a1fa89d077e9c6dea3657f8b66debb9a1542
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24050871"
+items:
+- uid: onenote.OneNote.FloatingInk
+  summary: >-
+    Представляет группу росчерков пера.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.FloatingInk
+  fullName: onenote.OneNote.FloatingInk
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.FloatingInk.id
+  - onenote.OneNote.FloatingInk.inkStrokes
+  - onenote.OneNote.FloatingInk.load
+  - onenote.OneNote.FloatingInk.pageContent
+  - onenote.OneNote.FloatingInk.toJSON
+  - onenote.OneNote.FloatingInk.track
+  - onenote.OneNote.FloatingInk.untrack
+- uid: onenote.OneNote.FloatingInk.id
+  summary: >-
+    Получает идентификатор объекта FloatingInk. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: id
+  fullName: onenote.OneNote.FloatingInk.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.FloatingInk.inkStrokes
+  summary: >-
+    Получает росчерки объекта FloatingInk. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: inkStrokes
+  fullName: onenote.OneNote.FloatingInk.inkStrokes
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly inkStrokes: OneNote.InkStrokeCollection;'
+    return:
+      type:
+      - onenote.OneNote.InkStrokeCollection
+- uid: onenote.OneNote.FloatingInk.load
+  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
+  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): OneNote.FloatingInk`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.FloatingInk`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function(context) {\n\n    // Gets the active page.\n    var page = context.application.getActivePage();\n    var contents = page.contents;\n    \n    // Load page contents and their types.\n    page.load('contents/type');\n    return context.sync()\n        .then(function(){\n        \n            // Load every ink content.\n            $.each(contents.items, function(i, content) {\n                if (content.type == \"Ink\")\n                {\n                    content.load('ink/id');\n                }                            \n            })\n            return context.sync();\n        })\n        .then(function(){\n        \n            // Log ID of every ink content.\n            $.each(contents.items, function(i, content) {\n                if (content.type == \"Ink\")\n                {\n                    console.log(content.ink.id);\n                }                            \n            })                \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  name: load(option)
+  fullName: onenote.OneNote.FloatingInk.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.FloatingInk;'
+    return:
+      type:
+      - onenote.OneNote.FloatingInk
+      description: ''
+    parameters:
+    - id: option
+      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      type:
+      - string | string[]
+- uid: onenote.OneNote.FloatingInk.pageContent
+  summary: >-
+    Возвращает родительский объект PageContent для объекта FloatingInk. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: pageContent
+  fullName: onenote.OneNote.FloatingInk.pageContent
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly pageContent: OneNote.PageContent;'
+    return:
+      type:
+      - onenote.OneNote.PageContent
+- uid: onenote.OneNote.FloatingInk.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.FloatingInk.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.FloatingInkData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.FloatingInkData
+      description: ''
+- uid: onenote.OneNote.FloatingInk.track
+  summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
+  name: track()
+  fullName: onenote.OneNote.FloatingInk.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.FloatingInk;'
+    return:
+      type:
+      - onenote.OneNote.FloatingInk
+      description: ''
+- uid: onenote.OneNote.FloatingInk.untrack
+  summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
+  name: untrack()
+  fullName: onenote.OneNote.FloatingInk.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.FloatingInk;'
+    return:
+      type:
+      - onenote.OneNote.FloatingInk
+      description: ''

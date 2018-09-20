@@ -1,0 +1,183 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 10737336d011fe6c5a29f0e1e139c8ba5061732e
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24050870"
+items:
+- uid: onenote.OneNote.NotebookCollection
+  summary: >-
+    Представляет коллекцию записных книжек.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.NotebookCollection
+  fullName: onenote.OneNote.NotebookCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.NotebookCollection.count
+  - onenote.OneNote.NotebookCollection.getByName
+  - onenote.OneNote.NotebookCollection.getItem
+  - onenote.OneNote.NotebookCollection.getItemAt
+  - onenote.OneNote.NotebookCollection.items
+  - onenote.OneNote.NotebookCollection.load
+  - onenote.OneNote.NotebookCollection.toJSON
+  - onenote.OneNote.NotebookCollection.track
+  - onenote.OneNote.NotebookCollection.untrack
+- uid: onenote.OneNote.NotebookCollection.count
+  summary: >-
+    Возвращает количество записных книжек в коллекции. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: count
+  fullName: onenote.OneNote.NotebookCollection.count
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.NotebookCollection.getByName
+  summary: >-
+    Получает коллекцию записных книжек с указанным именем, открытую в экземпляре приложения.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getByName(name)
+  fullName: onenote.OneNote.NotebookCollection.getByName
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getByName(name: string): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the notebooks that are open in the application instance and have the specified name.\n    var notebooks = context.application.notebooks.getByName(\"Homework\");\n\n    // Queue a command to load the notebooks. \n    // For best performance, request specific properties.           \n    notebooks.load(\"id,name\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index,\n            // for example: notebooks.items[0]\n            if (notebooks.items.length > 0) {\n                console.log(\"Notebook name: \" + notebooks.items[0].name);\n                console.log(\"Notebook ID: \" + notebooks.items[0].id);\n            }\n                \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: name
+      description: Имя записной книжки.
+      type:
+      - string
+- uid: onenote.OneNote.NotebookCollection.getItem
+  summary: >-
+    Получает записную книжку по ее идентификатору или индексу в коллекции. Только для чтения.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getItem(index)
+  fullName: onenote.OneNote.NotebookCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(index: number | string): OneNote.Notebook;'
+    return:
+      type:
+      - onenote.OneNote.Notebook
+      description: ''
+    parameters:
+    - id: index
+      description: Идентификатор записной книжки или расположение индекса записной книжки в коллекции.
+      type:
+      - number | string
+- uid: onenote.OneNote.NotebookCollection.getItemAt
+  summary: >-
+    Получает записную книжку по ее позиции в коллекции.
+
+
+    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: getItemAt(index)
+  fullName: onenote.OneNote.NotebookCollection.getItemAt
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): OneNote.Notebook;'
+    return:
+      type:
+      - onenote.OneNote.Notebook
+      description: ''
+    parameters:
+    - id: index
+      description: Значение индекса получаемого объекта. Используется нулевой индекс.
+      type:
+      - number
+- uid: onenote.OneNote.NotebookCollection.items
+  summary: Получает загруженных дочерних элементов в этом семействе.
+  name: items
+  fullName: onenote.OneNote.NotebookCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: OneNote.Notebook[];'
+    return:
+      type:
+      - OneNote.Notebook[]
+- uid: onenote.OneNote.NotebookCollection.load
+  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
+  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): OneNote.NotebookCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.NotebookCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the notebooks that are open in the application instance and have the specified name.\n    var notebooks = context.application.notebooks.getByName(\"Homework\");\n\n    // Queue a command to load the notebooks. \n    // For best performance, request specific properties.           \n    notebooks.load(\"id\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index, \n            // for example: notebooks.items[0]\n            $.each(notebooks.items, function(index, notebook) {\n                notebook.addSection(\"Biology\");\n                notebook.addSection(\"Spanish\");\n                notebook.addSection(\"Computer Science\");\n            });\n            \n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: onenote.OneNote.NotebookCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      type:
+      - string | string[]
+- uid: onenote.OneNote.NotebookCollection.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.NotebookCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.NotebookCollectionData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.NotebookCollectionData
+      description: ''
+- uid: onenote.OneNote.NotebookCollection.track
+  summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
+  name: track()
+  fullName: onenote.OneNote.NotebookCollection.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: ''
+- uid: onenote.OneNote.NotebookCollection.untrack
+  summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
+  name: untrack()
+  fullName: onenote.OneNote.NotebookCollection.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.NotebookCollection;'
+    return:
+      type:
+      - onenote.OneNote.NotebookCollection
+      description: ''
