@@ -1,0 +1,1371 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 5ac60a614cecf18414880df349e901f46e4a918b
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24049863"
+items:
+- uid: outlook.Office.MessageRead
+  summary: >-
+    Сообщение в режиме [Office.context.mailbox.item](xref:outlook.Office.Item)чтения<!-- -->.
+
+
+    Важно: Это внутренний объект Outlook, непосредственно не предоставляется через существующие интерфейсы. Вам следует рассматривать как режим Office.context.mailbox.item. Ссылки на страницы объектной модели для получения дополнительных сведений.
+  name: Office.MessageRead
+  fullName: outlook.Office.MessageRead
+  langs:
+  - typeScript
+  type: interface
+  extends:
+  - Message
+  package: outlook
+  children:
+  - outlook.Office.MessageRead.addHandlerAsync
+  - outlook.Office.MessageRead.attachments
+  - outlook.Office.MessageRead.body
+  - outlook.Office.MessageRead.cc
+  - outlook.Office.MessageRead.conversationId
+  - outlook.Office.MessageRead.dateTimeCreated
+  - outlook.Office.MessageRead.dateTimeModifed
+  - outlook.Office.MessageRead.displayReplyAllForm
+  - outlook.Office.MessageRead.displayReplyForm
+  - outlook.Office.MessageRead.from
+  - outlook.Office.MessageRead.getEntities
+  - outlook.Office.MessageRead.getEntitiesByType
+  - outlook.Office.MessageRead.getFilteredEntitiesByName
+  - outlook.Office.MessageRead.getInitializationContextAsync
+  - outlook.Office.MessageRead.getRegExMatches
+  - outlook.Office.MessageRead.getRegExMatchesByName
+  - outlook.Office.MessageRead.getSelectedEntities
+  - outlook.Office.MessageRead.getSelectedRegExMatches
+  - outlook.Office.MessageRead.internetMessageId
+  - outlook.Office.MessageRead.itemClass
+  - outlook.Office.MessageRead.itemId
+  - outlook.Office.MessageRead.itemType
+  - outlook.Office.MessageRead.loadCustomPropertiesAsync
+  - outlook.Office.MessageRead.normalizedSubject
+  - outlook.Office.MessageRead.notificationMessages
+  - outlook.Office.MessageRead.recurrence
+  - outlook.Office.MessageRead.removeHandlerAsync
+  - outlook.Office.MessageRead.sender
+  - outlook.Office.MessageRead.seriesId
+  - outlook.Office.MessageRead.subject
+  - outlook.Office.MessageRead.to
+- uid: outlook.Office.MessageRead.addHandlerAsync
+  summary: >-
+    Добавляет обработчик для поддерживаемого события.
+
+
+    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, и `Office.EventType.RecurrencePatternChanged`.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+
+    В дополнение к этой подпись метода также имеет следующую подпись:
+
+
+    `addHandlerAsync(eventType:EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+  isPreview: true
+  name: addHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.MessageRead.addHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType:EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type:
+      - EventType
+    - id: handler
+      description: Функция для обработки событий. Функции должны принимать один параметр, который является объектом литерала. Свойство type на параметр будет соответствовать параметру eventType, переданной в addHandlerAsync.
+      type:
+      - any
+    - id: options
+      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - any
+    - id: callback
+      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: outlook.Office.MessageRead.attachments
+  summary: >-
+    Получает массив вложений для элемента.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+
+    Примечание: Определенных типов файлов блокируемых в Outlook из-за потенциальных проблем безопасности и поэтому не возвращаются. Для получения дополнительных сведений см [Блокировка вложений в Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // The following code builds an HTML string with details of all attachments on the current item.
+
+    var _Item = Office.context.mailbox.item;
+
+    var outputString = "";
+
+
+    if (_Item.attachments.length > 0) {
+        for (i = 0 ; i < _Item.attachments.length ; i++) {
+            var _att = _Item.attachments[i];
+            outputString += "<BR>" + i + ". Name: ";
+            outputString += _att.name;
+            outputString += "<BR>ID: " + _att.id;
+            outputString += "<BR>contentType: " + _att.contentType;
+            outputString += "<BR>size: " + _att.size;
+            outputString += "<BR>attachmentType: " + _att.attachmentType;
+            outputString += "<BR>isInline: " + _att.isInline;
+        }
+    }
+
+
+    // Do something with outputString
+
+    ```
+  name: attachments
+  fullName: outlook.Office.MessageRead.attachments
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'attachments: Office.AttachmentDetails[];'
+    return:
+      type:
+      - Office.AttachmentDetails[]
+- uid: outlook.Office.MessageRead.body
+  summary: >-
+    Получает объект, предоставляющий методы для работы с основным текстом элемента.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.1](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: body
+  fullName: outlook.Office.MessageRead.body
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'body: Office.Body;'
+    return:
+      type:
+      - outlook.Office.Body
+- uid: outlook.Office.MessageRead.cc
+  summary: >-
+    Предоставляет доступ к «копия» (копия) получателей сообщения. Уровень доступа и тип объекта, зависит от режима текущего элемента.
+
+
+    Свойство cc возвращает массив, содержащий объект EmailAddressDetails для каждого получателя в строке Копии сообщения. Коллекция может включать не более 100 элементов.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.cc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.cc.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.cc.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfCcRecipients = asyncResult.value;
+    }
+
+    ```
+  name: cc
+  fullName: outlook.Office.MessageRead.cc
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'cc: EmailAddressDetails[];'
+    return:
+      type:
+      - EmailAddressDetails[]
+- uid: outlook.Office.MessageRead.conversationId
+  summary: >-
+    Получает идентификатор разговора по электронной почте, содержащего конкретное сообщение.
+
+
+    Вы можете получить целочисленное значение этого свойства, если ваше почтовое приложение активируется в формах просмотра или формах создания ответов. Если пользователь изменит тему ответа, после его отправки идентификатор беседы будет изменен, и полученное ранее значение будет недействительным.
+
+
+    Это свойство имеет значение NULL для нового элемента в форме создания. Если пользователь задаст тему и сохранит элемент, свойство conversationId вернет значение.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: conversationId
+  fullName: outlook.Office.MessageRead.conversationId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'conversationId: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.MessageRead.dateTimeCreated
+  summary: >-
+    Получает дату и время создания элемента. Только в режиме чтения.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: dateTimeCreated
+  fullName: outlook.Office.MessageRead.dateTimeCreated
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeCreated: Date;'
+    return:
+      type:
+      - Date
+- uid: outlook.Office.MessageRead.dateTimeModifed
+  summary: >-
+    Получает дату и время последнего изменения элемента. Только в режиме чтения.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+
+    Примечание. Этот элемент не поддерживается в Outlook для iOS или Outlook для Android.
+  name: dateTimeModifed
+  fullName: outlook.Office.MessageRead.dateTimeModifed
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'dateTimeModifed: Date;'
+    return:
+      type:
+      - Date
+- uid: outlook.Office.MessageRead.displayReplyAllForm
+  summary: >-
+    Отображает форму ответа, включающую отправителя и всех получателей выбранного сообщения или организатора и всех участников выбранной встречи.
+
+
+    В Outlook Web App форма ответа отображается в виде всплывающей формы в представлении с 3 либо 1 или 2 колонками.
+
+
+    Если любой строковый параметр превышает указанные для него ограничения, displayReplyAllForm возвращает исключение.
+
+
+    Если в параметре formData.attachments указаны вложения, Outlook и Outlook Web App пытаются скачать все вложения и вложить их в форму ответа. Если не удается добавить какие-либо вложения, в форме пользовательского интерфейса отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following code passes a string to the `displayReplyAllForm` function.
+
+    Office.context.mailbox.item.displayReplyAllForm('hello there');
+
+    Office.context.mailbox.item.displayReplyAllForm('<b>hello there</b>');
+
+
+    // Reply with an empty body.
+
+    Office.context.mailbox.item.displayReplyAllForm({});
+
+
+    // Reply with just a body.
+
+    Office.context.mailbox.item.displayReplyAllForm(
+
+    {
+
+    'htmlBody' : 'hi'
+
+    });
+
+
+    // Reply with a body and a file attachment.
+
+    Office.context.mailbox.item.displayReplyAllForm(
+
+    {
+        'htmlBody' : 'hi',
+        'attachments' :
+        [
+            {
+            'type' : Office.MailboxEnums.AttachmentType.File,
+            'name' : 'squirrel.png',
+            'url' : 'http://i.imgur.com/sRgTlGR.jpg'
+            }
+        ]
+    });
+
+
+    // Reply with a body and an item attachment.
+
+    Office.context.mailbox.item.displayReplyAllForm(
+
+    {
+        'htmlBody' : 'hi',
+        'attachments' :
+        [
+            {
+            'type' : 'item',
+            'name' : 'rand',
+            'itemId' : Office.context.mailbox.item.itemId
+            }
+        ]
+    });
+
+
+    // Reply with a body, file attachment, item attachment, and a callback.
+
+    Office.context.mailbox.item.displayReplyAllForm(
+
+    {
+        'htmlBody' : 'hi',
+        'attachments' :
+        [
+            {
+                'type' : Office.MailboxEnums.AttachmentType.File,
+                'name' : 'squirrel.png',
+                'url' : 'http://i.imgur.com/sRgTlGR.jpg'
+            },
+            {
+                'type' : 'item',
+                'name' : 'rand',
+                'itemId' : Office.context.mailbox.item.itemId
+            }
+        ],
+        'callback' : function(asyncResult)
+        {
+            console.log(asyncResult.value);
+        }
+    });
+
+    ```
+  name: displayReplyAllForm(formData)
+  fullName: outlook.Office.MessageRead.displayReplyAllForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayReplyAllForm(formData: string | ReplyFormData): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: formData
+      description: Строка, содержащая текст и HTML-код, представляющие собой основной текст формы ответа. Строка ограничена 32 КБ или объект[Office.ReplyFormData](xref:outlook.Office.ReplyFormData) , который содержит текст или вложения данных и функции обратного вызова
+      type:
+      - string | ReplyFormData
+- uid: outlook.Office.MessageRead.displayReplyForm
+  summary: >-
+    Отображает форму ответа, включающую только отправителя выбранного сообщения или организатора выбранной встречи.
+
+
+    В Outlook Web App форма ответа отображается в виде всплывающей формы в представлении с 3 либо 1 или 2 колонками.
+
+
+    Если любой строковый параметр превышает указанные для него ограничения, displayReplyForm возвращает исключение.
+
+
+    Если в параметре formData.attachments указаны вложения, Outlook и Outlook Web App пытаются скачать все вложения и вложить их в форму ответа. Если не удается добавить какие-либо вложения, в форме пользовательского интерфейса отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following code passes a string to the `displayReplyForm` function.
+
+    Office.context.mailbox.item.displayReplyForm('hello there');
+
+    Office.context.mailbox.item.displayReplyForm('<b>hello there</b>');
+
+
+    // Reply with an empty body.
+
+    Office.context.mailbox.item.displayReplyForm({});
+
+
+    // Reply with just a body.
+
+    Office.context.mailbox.item.displayReplyForm(
+
+    {
+        'htmlBody' : 'hi'
+    });
+
+
+    // Reply with a body and a file attachment.
+
+    Office.context.mailbox.item.displayReplyForm(
+
+    {
+        'htmlBody' : 'hi',
+        'attachments' :
+        [
+            {
+                'type' : Office.MailboxEnums.AttachmentType.File,
+                'name' : 'squirrel.png',
+                'url' : 'http://i.imgur.com/sRgTlGR.jpg'
+            }
+        ]
+    });
+
+
+    // Reply with a body and an item attachment.
+
+    Office.context.mailbox.item.displayReplyForm(
+
+    {
+        'htmlBody' : 'hi',
+        'attachments' :
+        [
+            {
+                'type' : 'item',
+                'name' : 'rand',
+                'itemId' : Office.context.mailbox.item.itemId
+            }
+        ]
+    });
+
+
+    // Reply with a body, file attachment, item attachment, and a callback.
+
+    Office.context.mailbox.item.displayReplyForm(
+
+    {
+        'htmlBody' : 'hi',
+        'attachments' :
+        [
+            {
+                'type' : Office.MailboxEnums.AttachmentType.File,
+                'name' : 'squirrel.png',
+                'url' : 'http://i.imgur.com/sRgTlGR.jpg'
+            },
+            {
+                'type' : 'item',
+                'name' : 'rand',
+                'itemId' : Office.context.mailbox.item.itemId
+            }
+        ],
+        'callback' : function(asyncResult)
+        {
+            console.log(asyncResult.value);
+        }
+    });
+
+    ```
+  name: displayReplyForm(formData)
+  fullName: outlook.Office.MessageRead.displayReplyForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayReplyForm(formData: string | ReplyFormData): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: formData
+      description: Строка, содержащая текст и HTML-код, представляющие собой основной текст формы ответа. Длина строки ограничена 32 символами. ИЛИ объект[Office.ReplyFormData](xref:outlook.Office.ReplyFormData) , который содержит текст или вложения данных и функции обратного вызова.
+      type:
+      - string | ReplyFormData
+- uid: outlook.Office.MessageRead.from
+  summary: >-
+    Получает адрес электронной почты отправителя сообщения.
+
+
+    Свойства from и sender представляют одно лицо, если сообщение не отправлено делегатом. Если сообщение отправлено делегатом, то свойство from представляет делегирующее лицо, а свойство sender представляет делегата.
+
+
+    Примечание: Свойство recipientType объекта EmailAddressDetails в из свойства не определено.
+
+
+    Возвращает объект EmailAddressDetails, из свойства.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: from
+  fullName: outlook.Office.MessageRead.from
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'from: EmailAddressDetails;'
+    return:
+      type:
+      - EmailAddressDetails
+- uid: outlook.Office.MessageRead.getEntities
+  summary: >-
+    Возвращает сущности, обнаруженные в тело выбранного элемента.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: getEntities()
+  fullName: outlook.Office.MessageRead.getEntities
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getEntities(): Entities;'
+    return:
+      type:
+      - Entities
+      description: ''
+- uid: outlook.Office.MessageRead.getEntitiesByType
+  summary: >-
+    Получает массив всех сущностей указанного типа, обнаруженных в тело выбранного элемента.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restricted</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+
+
+    Хотя минимальный уровень разрешений для использования этого метода — Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.
+
+
+    <table> <tr> <th>Значение параметра entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Уровень необходимых разрешений</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL-адрес</td> <td>String</td> <td>Restricted</td> </tr> </table>
+
+    #### Примеры
+
+
+    ```javascript
+
+    // The following example shows how to access an array of strings that represent postal addresses
+
+    // in the current item's body.
+
+
+    // The initialize function is required for all apps.
+
+    Office.initialize = function () {
+        // Checks for the DOM to load using the jQuery ready function.
+        $(document).ready(function () {
+            // After the DOM is loaded, app-specific code can run.
+            var item = Office.context.mailbox.item;
+            // Get an array of strings that represent postal addresses in the current item's body.
+            var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);
+            // Continue processing the array of addresses.
+        });
+    }
+
+    ```
+  name: getEntitiesByType(entityType)
+  fullName: outlook.Office.MessageRead.getEntitiesByType
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getEntitiesByType(entityType: Office.MailboxEnums.EntityType): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+    return:
+      type:
+      - (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]
+      description: Если значение, переданное в entityType не является допустимым член перечисления EntityType, метод возвращает значение null. Если сущности указанного типа отсутствуют в основной текст элемента, метод возвращает пустой массив. В противном случае — тип объектов в возвращаемый массив зависит от типа сущности запроса с помощью параметра entityType.
+    parameters:
+    - id: entityType
+      description: Одно из значений перечисления EntityType.
+      type:
+      - outlook.Office.MailboxEnums.EntityType
+- uid: outlook.Office.MessageRead.getFilteredEntitiesByName
+  summary: >-
+    Возвращает известные сущности в выбранном элементе, которые проходят через именованный фильтр, определяемый в XML-файле манифеста.
+
+
+    Метод getFilteredEntitiesByName возвращает сущности, соответствующие регулярному выражению, которое определяется в элементе правила ItemHasKnownEntity в XML-файле манифеста, с использованием указанного значения элемента FilterName.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: getFilteredEntitiesByName(name)
+  fullName: outlook.Office.MessageRead.getFilteredEntitiesByName
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getFilteredEntitiesByName(name: string): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+    return:
+      type:
+      - (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]
+      description: Если в манифесте нет элемента ItemHasKnownEntity со значением FilterName, соответствующим параметру name, метод возвращает null. Если параметр name не соответствует элементу ItemHasKnownEntity в манифесте, но при этом в текущем элементе нет соответствующих сущностей, метод возвращает пустой массив.
+    parameters:
+    - id: name
+      description: Имя элемента правила ItemHasKnownEntity, определяющее соответствующий фильтр.
+      type:
+      - string
+- uid: outlook.Office.MessageRead.getInitializationContextAsync
+  summary: >-
+    Получает данные инициализации передается при надстройки [активируется по функциональной сообщения](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.
+
+
+    Примечание. Этот метод поддерживается только Outlook 2016 для Windows (версии "нажми и работай" с номером больше 16.0.8413.1000) и Outlook в Интернете для Office 365.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+
+    В дополнение к этой подпись метода также имеет следующую подпись:
+
+
+    `getInitializationContextAsync(callback?: (result: AsyncResult<string>) => void): void;`
+  isPreview: true
+  name: getInitializationContextAsync(options, callback)
+  fullName: outlook.Office.MessageRead.getInitializationContextAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getInitializationContextAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult. В случае успешного выполнения инициализации данных предоставляются в свойство asyncResult.value как строку. Если контекст отсутствует инициализации, объект asyncResult будет содержать объект Error с его свойства кода 9020 и его имя свойства GenericResponseError.
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: outlook.Office.MessageRead.getRegExMatches
+  summary: >-
+    Возвращает строковые значения в выбранном элементе, которые соответствуют регулярным выражениям, определенным в XML-файле манифеста.
+
+
+    Метод getRegExMatches возвращает строки, которые соответствуют регулярным выражениям, определенным в каждом элементе правила ItemHasRegularExpressionMatch или ItemHasKnownEntity в XML-файле манифеста. Для правила ItemHasRegularExpressionMatch соответствующая строка должна содержаться в свойстве элемента, указанного этим правилом. Простой тип PropertyName определяет поддерживаемые свойства.
+
+
+    Если вы указываете правило ItemHasRegularExpressionMatch для свойства текста элемента, регулярное выражение должно дальше фильтровать текст, а не пытаться вернуть весь текст элемента. Использование регулярного выражения типа .* для получения всего текста элемента не всегда приносит ожидаемые результаты. Вместо него используйте метод Body.getAsync, чтобы извлечь весь текст.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following example shows how to access the array of
+
+    // matches for the regular expression rule elements `fruits`
+
+    // and `veggies`, which are specified in the manifest.
+
+    var allMatches = Office.context.mailbox.item.getRegExMatches();
+
+    var fruits = allMatches.fruits;
+
+    var veges = allMatches.veggies;
+
+    ```
+  name: getRegExMatches()
+  fullName: outlook.Office.MessageRead.getRegExMatches
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRegExMatches(): any;'
+    return:
+      type:
+      - any
+      description: Объект, содержащий массив строк, которые соответствуют регулярным выражениям, определяемым в XML-файле манифеста. Имя каждого массива равно соответствующему значению атрибута RegExName подходящего правила ItemHasRegularExpressionMatch или атрибута FilterName соответствующего правила ItemHasKnownEntity.
+- uid: outlook.Office.MessageRead.getRegExMatchesByName
+  summary: >-
+    Возвращает строковые значения в выбранном элементе, которые соответствуют именованному регулярному выражению, определенному в XML-файле манифеста.
+
+
+    Метод getRegExMatchesByName возвращает строки, соответствующие регулярному выражению, которое определяется в элементе правила ItemHasRegularExpressionMatch в XML-файле манифеста, с использованием указанного значения элемента RegExName.
+
+
+    Если вы указываете правило ItemHasRegularExpressionMatch для свойства текста элемента, регулярное выражение должно дальше фильтровать текст, а не пытаться вернуть весь текст элемента. Использование регулярного выражения типа .* для получения всего текста элемента не всегда приносит ожидаемые результаты.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    var fruits = Office.context.mailbox.item.getRegExMatchesByName("fruits");
+
+    var veggies = Office.context.mailbox.item.getRegExMatchesByName("veggies");
+
+    ```
+  name: getRegExMatchesByName(name)
+  fullName: outlook.Office.MessageRead.getRegExMatchesByName
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRegExMatchesByName(name: string): string[];'
+    return:
+      type:
+      - string[]
+      description: Массив строк, соответствующих регулярному выражению, определяемому в XML-файле манифеста.
+    parameters:
+    - id: name
+      description: Имя элемента правила ItemHasRegularExpressionMatch, определяющее соответствующий фильтр.
+      type:
+      - string
+- uid: outlook.Office.MessageRead.getSelectedEntities
+  summary: >-
+    Возвращает сущности, найденные в выделенном совпадении, выбранном пользователем. Выделенные совпадения применяются к контекстным надстройкам.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.6](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following example accesses the addresses entities in the highlighted
+
+    // match selected by the user.
+
+    var contacts = Office.context.mailbox.item.getSelectedEntities().addresses;
+
+    ```
+  name: getSelectedEntities()
+  fullName: outlook.Office.MessageRead.getSelectedEntities
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getSelectedEntities(): Entities;'
+    return:
+      type:
+      - Entities
+      description: ''
+- uid: outlook.Office.MessageRead.getSelectedRegExMatches
+  summary: >-
+    Возвращает строковые значения в выделенном совпадении, которые соответствуют регулярным выражениям, определенным в XML-файле манифеста. Выделенные совпадения применяются к контекстным надстройкам.
+
+
+    Метод getSelectedRegExMatches возвращает строк, соответствующих регулярному выражению, определяемому в каждом элементе правила ItemHasKnownEntity или ItemHasRegularExpressionMatch в XML-файле манифеста. Для правила ItemHasRegularExpressionMatch строки сопоставления не требуются в свойстве элемента, который указан с помощью этого правила. Простой тип PropertyName определяет поддерживаемые свойства.
+
+
+    Если вы указываете правило ItemHasRegularExpressionMatch для свойства текста элемента, регулярное выражение должно дальше фильтровать текст, а не пытаться вернуть весь текст элемента. Использование регулярного выражения типа .* для получения всего текста элемента не всегда приносит ожидаемые результаты. Вместо него используйте метод Body.getAsync, чтобы извлечь весь текст.
+
+
+    Примечание. Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.6](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following example shows how to access the array of matches for the
+
+    // regular expression rule elements `fruits` and `veggies`, which are
+
+    // specified in the manifest.
+
+    var selectedMatches = Office.context.mailbox.item.getSelectedRegExMatches();
+
+    var fruits = selectedMatches.fruits;
+
+    var veggies = selectedMatches.veggies;
+
+    ```
+  name: getSelectedRegExMatches()
+  fullName: outlook.Office.MessageRead.getSelectedRegExMatches
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getSelectedRegExMatches(): any;'
+    return:
+      type:
+      - any
+      description: Объект, содержащий массив строк, которые соответствуют регулярным выражениям, определяемым в XML-файле манифеста. Имя каждого массива равно соответствующему значению атрибута RegExName подходящего правила ItemHasRegularExpressionMatch или атрибута FilterName соответствующего правила ItemHasKnownEntity.
+- uid: outlook.Office.MessageRead.internetMessageId
+  summary: >-
+    Получает идентификатор интернет-сообщения для сообщения электронной почты.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: internetMessageId
+  fullName: outlook.Office.MessageRead.internetMessageId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'internetMessageId: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.MessageRead.itemClass
+  summary: >-
+    Получает класс элемента веб-служб Exchange для выбранного элемента.
+
+
+    Можно создавать настраиваемые классы сообщения, расширяющие класс сообщения по умолчанию, например, настраиваемый класс сообщения о встрече IPM.Appointment.Contoso.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+
+    Свойство itemClass указывает класс сообщения выбранного элемента. Далее приводятся классы сообщения по умолчанию для элемента сообщения или встречи.
+
+
+    <table> <tr> <th>Тип</th> <th>Описание</th> <th>Класс элемента</th> </tr> <tr> <td>Элементы встречи</td> <td>Это элементы календаря с классом элементов IPM.Appointment или IPM.Appointment.Occurence.</td> <td>IPM. Встречи, IPM. Appointment.Occurence</td> </tr> <tr> <td>Элементы сообщения</td> <td>Сюда входят сообщения электронной почты с классом сообщения по умолчанию IPM.Note, а также приглашения на собрания, ответы на приглашения и отмены собраний, использующие IPM.Schedule.Meeting в качестве базового класса сообщения.</td> <td>IPM. Примечание IPM. Schedule.Meeting.Request,IPM. Schedule.Meeting.Neg,IPM. Schedule.Meeting.Pos,IPM. Schedule.Meeting.Tent,IPM. Schedule.Meeting.Canceled</td> </tr> </table>
+  name: itemClass
+  fullName: outlook.Office.MessageRead.itemClass
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemClass: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.MessageRead.itemId
+  summary: >-
+    Получает идентификатор элемента веб-служб Exchange для текущего элемента.
+
+
+    Свойство itemId недоступен в режиме создания. Если требуется идентификатор элемента, метод saveAsync можно использовать для сохранения элемента в хранилище, которое возвращает идентификатор элемента с помощью параметра AsyncResult.value в функции обратного вызова.
+
+
+    Примечание: Идентификатор, возвращенный свойством itemId — это то же, что идентификатор элемента веб-служб Exchange. Свойство itemId не совпадать с Идентификатором, используемым API-Интерфейс REST Outlook или идентификатор записи Outlook. Прежде чем вносить API-Интерфейс REST для звонков с помощью этого значения, его следует преобразовать с помощью Office.context.mailbox.convertToRestId. Для получения дополнительных сведений показано [Использование API REST Outlook из надстройки Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)<!-- -->.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following code checks for the presence of an item
+
+    // identifier. If the `itemId` property returns `null` or
+
+    // `undefined`, it saves the item to the store and gets the
+
+    // item identifier from the asynchronous result.
+
+    var itemId = Office.context.mailbox.item.itemId;
+
+    if (itemId === null || itemId == undefined) {
+        Office.context.mailbox.item.saveAsync(function(result){
+            itemId = result.value;
+        });
+    }
+
+    ```
+  name: itemId
+  fullName: outlook.Office.MessageRead.itemId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemId: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.MessageRead.itemType
+  summary: >-
+    Получает тип элемента, который представляет экземпляр.
+
+
+    Свойство itemType возвращает одно из значений перечисления ItemType, которое указывает, является ли экземпляр объекта item сообщением или собранием.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: itemType
+  fullName: outlook.Office.MessageRead.itemType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'itemType: Office.MailboxEnums.ItemType;'
+    return:
+      type:
+      - outlook.Office.MailboxEnums.ItemType
+- uid: outlook.Office.MessageRead.loadCustomPropertiesAsync
+  summary: >-
+    Асинхронно загружает настраиваемые свойства для надстройки для выбранного элемента.
+
+
+    Настраиваемые свойства сохраняются в виде пар "ключ-значение" для каждого приложения и каждого элемента. Этот метод возвращает объект CustomProperties при обратном вызове, который предоставляет методы для доступа к настраиваемым свойствам, характерным для текущего элемента и текущей надстройки. Настраиваемые свойства не шифруются для элемента, поэтому этот способ хранения не является безопасным.
+
+
+    Настраиваемые свойства предоставляются в виде объекта CustomProperties в свойстве asyncResult.value. Этот объект позволяет получить, задать и удалить настраиваемые свойства из элемента, а также сохранить изменения, внесенные в настраиваемое свойство, на сервере.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: loadCustomPropertiesAsync(callback, userContext)
+  fullName: outlook.Office.MessageRead.loadCustomPropertiesAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (result: AsyncResult<Office.CustomProperties>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<Office.CustomProperties>) => void'
+    - id: userContext
+      description: Необязательный параметр. Разработчики могут предоставлять любого объекта, которые следует получить доступ к в функции обратного вызова. Этот объект можно получать свойство asyncResult.asyncContext в функции обратного вызова.
+      type:
+      - any
+- uid: outlook.Office.MessageRead.normalizedSubject
+  summary: >-
+    Получает тему элемента, в которой удалены все префиксы (включая RE: и FWD:).
+
+
+    Свойство normalizedSubject получает тему элемента со стандартными префиксами (такими как RE: и FW:), добавляемыми почтовыми программами. Для получения темы элемента с префиксами используйте свойство subject.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  name: normalizedSubject
+  fullName: outlook.Office.MessageRead.normalizedSubject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'normalizedSubject: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.MessageRead.notificationMessages
+  summary: >-
+    Получает сообщения уведомления для элемента.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+  name: notificationMessages
+  fullName: outlook.Office.MessageRead.notificationMessages
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'notificationMessages: Office.NotificationMessages;'
+    return:
+      type:
+      - outlook.Office.NotificationMessages
+- uid: outlook.Office.MessageRead.recurrence
+  summary: >-
+    Получает шаблон повторения встречи. Получает шаблон повторения приглашения на собрание. Читать и создавать режимы для элементов встречи. В режиме чтения к собранию элементы запроса.
+
+
+    Свойство повторения возвращает объект повторения для повторяющиеся встречи или собрания запросы, если элемент ряд или экземпляра в последовательности. `null`возвращаются для одного встреч и приглашений на собрания из одного встреч. `undefined`возвращается для сообщений, которые не являются приглашений на собрания.
+
+
+    Примечание: Приглашений на собрание имеют значение itemClass IPM. Schedule.Meeting.Request.
+
+
+    Примечание: Если объект повторения имеет значение null, это указывает, что объект одной встречи или приглашения на собрание из одной встречи и не является частью серии.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  isPreview: true
+  name: recurrence
+  fullName: outlook.Office.MessageRead.recurrence
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'recurrence: Recurrence;'
+    return:
+      type:
+      - outlook.Office.Recurrence
+- uid: outlook.Office.MessageRead.removeHandlerAsync
+  summary: >-
+    Удаляет обработчик событий для события, поддерживаемые.
+
+
+    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged`, `Office.EventType.RecipientsChanged`, и `Office.EventType.RecurrencePatternChanged`.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+
+    В дополнение к этой подпись метода также имеет следующую подпись:
+
+
+    `removeHandlerAsync(eventType:EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+  isPreview: true
+  name: removeHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.MessageRead.removeHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType:EventType, handler: any, options?: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type:
+      - EventType
+    - id: handler
+      description: Функция для обработки событий. Функции должны принимать один параметр, который является объектом литерала. Свойство type на параметр будет соответствовать параметру eventType, переданной в removeHandlerAsync.
+      type:
+      - any
+    - id: options
+      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - any
+    - id: callback
+      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: outlook.Office.MessageRead.sender
+  summary: >-
+    Получает адрес электронной почты отправителя сообщения.
+
+
+    Свойства from и sender представляют одно лицо, если сообщение не отправлено делегатом. Если сообщение отправлено делегатом, то свойство from представляет делегирующее лицо, а свойство sender представляет делегата.
+
+
+    Примечание: Свойство recipientType объекта EmailAddressDetails в свойстве отправителя не определено.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    var senderName = Office.context.mailbox.item.sender.displayName;
+
+    var senderAddress = Office.context.mailbox.item.sender.emailAddress;
+
+    ```
+  name: sender
+  fullName: outlook.Office.MessageRead.sender
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'sender: EmailAddressDetails;'
+    return:
+      type:
+      - EmailAddressDetails
+- uid: outlook.Office.MessageRead.seriesId
+  summary: >-
+    Получает идентификатор серии, к которой принадлежит экземпляр.
+
+
+    В OWA и Outlook seriesId возвращает идентификатор веб-служб Exchange (EWS) элемента родительского (ряды), к которому принадлежит этот элемент. Тем не менее iOS и Android seriesId возвращает REST идентификатор родительского элемента.
+
+
+    Примечание: Идентификатор, возвращенный свойством seriesId — это то же, что идентификатор элемента веб-служб Exchange. Свойство seriesId не идентичен идентификаторы Outlook, используемые API-Интерфейс REST Outlook. Прежде чем вносить API-Интерфейс REST для звонков с помощью этого значения, его следует преобразовать с помощью Office.context.mailbox.convertToRestId. Для получения дополнительных сведений показано [Использование API REST Outlook из надстройки Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.
+
+
+    Свойство seriesId возвращает значение null для элементов, которые не имеют родительских элементов, таких как одного встреч, элементы ряда или собрания запрашивает и возвращает значение undefined, для других элементов, которые не являются приглашений на собрания.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+  isPreview: true
+  name: seriesId
+  fullName: outlook.Office.MessageRead.seriesId
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'seriesId: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.MessageRead.subject
+  summary: >-
+    Получает описание, которое отображается в поле Тема элемента.
+
+
+    Свойство subject получает или задает всю тему элемента для отправки с почтового сервера.
+
+
+    Свойство subject возвращает строку. Свойство normalizedSubject позволяет получить тему без начальных префиксов, таких как RE: и FW:.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    // The following JavaScript code example shows how to access the
+
+    // `subject` property of the current item in Outlook.
+
+
+    // The initialize function is required for all apps.
+
+    Office.initialize = function () {
+        // Checks for the DOM to load using the jQuery ready function.
+        $(document).ready(function () {
+            // After the DOM is loaded, app-specific code can run.
+            var item = Office.context.mailbox.item;
+            var subject = item.subject;
+            // Continue with processing the subject of the current item,
+            // which can be a message or appointment.
+        });
+    }
+
+    ```
+  name: subject
+  fullName: outlook.Office.MessageRead.subject
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'subject: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.MessageRead.to
+  summary: >-
+    Предоставляет доступ к получателей в строке сообщения. Уровень доступа и тип объекта, зависит от режима текущего элемента.
+
+
+    Свойство to возвращает массив, содержащий объект EmailAddressDetails для каждого получателя в строке Кому сообщения. Коллекция может включать не более 100 элементов.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Чтение сообщения</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.to.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.to.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.to.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfToRecipients = asyncResult.value;
+    }
+
+    ```
+  name: to
+  fullName: outlook.Office.MessageRead.to
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'to: EmailAddressDetails[];'
+    return:
+      type:
+      - EmailAddressDetails[]
