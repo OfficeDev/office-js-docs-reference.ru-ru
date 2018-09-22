@@ -1,0 +1,146 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: b4d491d6430eb7ad42edc4bf1fd90f6060e7de30
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24050640"
+items:
+- uid: visio.Visio.CommentCollection
+  summary: >-
+    Представляет CommentCollection для заданной фигуры.
+
+
+    \[[Набор API-Интерфейсов: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: Visio.CommentCollection
+  fullName: visio.Visio.CommentCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: visio
+  children:
+  - visio.Visio.CommentCollection.getCount
+  - visio.Visio.CommentCollection.getItem
+  - visio.Visio.CommentCollection.items
+  - visio.Visio.CommentCollection.load
+  - visio.Visio.CommentCollection.toJSON
+- uid: visio.Visio.CommentCollection.getCount
+  summary: >-
+    Получает количество примечаний.
+
+
+    \[[Набор API-Интерфейсов: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getCount()
+  fullName: visio.Visio.CommentCollection.getCount
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: visio.Visio.CommentCollection.getItem
+  summary: >-
+    Получает примечание по имени.
+
+
+    \[[Набор API-Интерфейсов: 1.1](/javascript/office/overview/visio-javascript-reference-overview)\]
+  name: getItem(key)
+  fullName: visio.Visio.CommentCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(key: string): Visio.Comment;'
+    return:
+      type:
+      - visio.Visio.Comment
+      description: ''
+    parameters:
+    - id: key
+      description: Ключ — это имя примечания, которое нужно извлечь.
+      type:
+      - string
+- uid: visio.Visio.CommentCollection.items
+  summary: Получает загруженных дочерних элементов в этом семействе.
+  name: items
+  fullName: visio.Visio.CommentCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Visio.Comment[];'
+    return:
+      type:
+      - Visio.Comment[]
+- uid: visio.Visio.CommentCollection.load
+  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: { select?: string; expand?: string; }): Visio.CommentCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.CommentCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Visio.run(session, function (ctx) {
+        var activePage = ctx.document.getActivePage();
+        var shapeName = "Position Belt.41";
+        var shape = activePage.shapes.getItem(shapeName);
+        var shapecomments= shape.comments;
+        shapecomments.load();
+        return ctx.sync().then(function () {
+            for(var i=0; i<shapecomments.items.length;i++)
+            {
+                var comment= shapecomments.items[i];
+                console.log("comment Author: " + comment.author);
+                console.log("Comment Text: " + comment.text);
+                console.log("Date " + comment.date);
+            }
+        });
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+  name: load(option)
+  fullName: visio.Visio.CommentCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Visio.CommentCollection;'
+    return:
+      type:
+      - visio.Visio.CommentCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      type:
+      - string | string[]
+- uid: visio.Visio.CommentCollection.toJSON
+  name: toJSON()
+  fullName: visio.Visio.CommentCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Visio.Interfaces.CommentCollectionData;'
+    return:
+      type:
+      - visio.Visio.Interfaces.CommentCollectionData
+      description: ''

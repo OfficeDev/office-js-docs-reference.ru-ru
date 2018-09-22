@@ -88,11 +88,11 @@
 
 | Имя | Тип | Описание | Минимальное требование set |
 |---|---|---|---|
-|`AppointmentTimeChanged`| String | Встречи, даты или времени выбранного серии, была изменена. | Preview |
+|`AppointmentTimeChanged`| String | Дата или время выбранной встречи или серии, была изменена. | 1.7 |
 |`ItemChanged`| String | Выбранный элемент изменился. | 1.5 |
 |`OfficeThemeChanged`| String | Выбранный элемент изменился. | Preview |
-|`RecipientsChanged`| String | Список получателей выбранного элемента, была изменена. | Preview |
-|`RecurrencePatternChanged`| String | Шаблон повторения выбранного серии, была изменена. | Preview |
+|`RecipientsChanged`| String | Список получателей в выбранное расположение элемента или встречи, была изменена. | 1.7 |
+|`RecurrenceChanged`| String | Шаблон повторения выбранного серии, была изменена. | 1.7 |
 
 ##### <a name="requirements"></a>Требования
 

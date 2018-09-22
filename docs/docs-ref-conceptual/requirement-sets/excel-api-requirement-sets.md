@@ -12,11 +12,12 @@
 |  Набор требований  |  Office 365 для Windows\*  |  Office 365 для iPad  |  Office 365 для Mac  | Office Online  |  Office Online Server  |
 |:-----|-----|:-----|:-----|:-----|:-----|
 | Бета-версия  | Пожалуйста, [посетите страницу открытых спецификаций Excel JavaScript API](https://github.com/OfficeDev/office-js-docs/tree/ExcelJs_OpenSpec)! |
-| ExcelApi1.7  | Версия 1801 (построение 9001.2171) или более поздней версии| 2,9 или более поздняя версия | 16,9 или более поздняя версия | Апрель 2018 г. | Скоро |
-| ExcelApi1.6  | Версия 1704 (сборка 8201.2001) или более поздняя| Версия 2.2 или более поздняя |Версия 15.36 или более поздняя| Апрель 2017 г. | Скоро|
-| ExcelApi1.5  | Версия 1703 (сборка 8067.2070) или более поздняя| Версия 2.2 или более поздняя |Версия 15.36 или более поздняя| Март 2017 г. | Скоро|
-| ExcelApi1.4 | Версия 1701 (сборка 7870.2024) или более поздняя| Версия 2.2 или более поздняя |Версия 15.36 или более поздняя| Январь 2017 г. | Скоро|
-| ExcelApi1.3  | Версия 1608 (сборка 7369.2055) или более поздняя| 1.27 или более поздняя |  15.27 или более поздняя| Сентябрь 2016 г. | Версия 1608 (сборка 7601.6800) или более поздняя|
+| ExcelApi1.8  | Версия 1808 (построение 10730.20102) или более поздней версии | 2.17 или более поздней версии | 16.17 или более поздней версии | Сентябрь 2018 | Ожидается в скором времени |
+| ExcelApi1.7  | Версия 1801 (построение 9001.2171) или более поздней версии   | 2,9 или более поздняя версия | 16,9 или более поздняя версия | Апрель 2018 г. | Скоро |
+| ExcelApi1.6  | Версия 1704 (сборка 8201.2001) или более поздняя   | Версия 2.2 или более поздняя |Версия 15.36 или более поздняя| Апрель 2017 г. | Скоро|
+| ExcelApi1.5  | Версия 1703 (сборка 8067.2070) или более поздняя   | Версия 2.2 или более поздняя |Версия 15.36 или более поздняя| Март 2017 г. | Скоро|
+| ExcelApi1.4  | Версия 1701 (сборка 7870.2024) или более поздняя   | Версия 2.2 или более поздняя |Версия 15.36 или более поздняя| Январь 2017 г. | Скоро|
+| ExcelApi1.3  | Версия 1608 (сборка 7369.2055) или более поздняя | 1.27 или более поздняя |  15.27 или более поздняя| Сентябрь 2016 г. | Версия 1608 (сборка 7601.6800) или более поздняя|
 | ExcelApi1.2  | Версия 1601 (сборка 6741.2088) или более поздняя | 1.21 или более поздняя | 15.22 или более поздняя| Январь 2016 г. ||
 | ExcelApi1.1  | Версия 1509 (сборка 4266.1001) или более поздняя | 1.19 или более поздняя | 15.20 или более поздняя| Январь 2016 г. ||
 
@@ -31,9 +32,279 @@
 - 
   [Обзор Office Online Server](https://docs.microsoft.com/officeonlineserver/office-online-server-overview).
 
+## <a name="whats-new-in-excel-javascript-api-18"></a>Новые возможности Excel 1,8 API JavaScript
+
+Возможности Excel JavaScript API требование set 1,8 включают API-интерфейсы для сводных таблиц, выполнить проверку данных, диаграмм, события для диаграмм, параметры быстродействия и создания книги.
+
+### <a name="pivottable"></a>Сводная таблица
+
+2 звукового файла API-интерфейсов сводной таблицы позволяет надстроек иерархии сводной таблицы. Теперь можно управлять данные и как обобщения. Наш [сводной таблицы в статье](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-pivottables) имеет несколько новых функциональных возможностей сводной таблицы.
+
+### <a name="data-validation"></a>проверку данных;
+
+Данные проверки дает возможность из какой пользователь вводит на листе. Можно ограничить ячеек, чтобы предварительно заданные ответов наборов или предоставить всплывающих предупреждений о нежелательный входные данные. Дополнительные сведения о [добавлении проверки данных к диапазонам](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-data-validation) сегодня.
+
+### <a name="charts"></a>диаграммы;
+
+Другой круговой диаграммы API-интерфейсы сводит программного управления элементы диаграммы. Имеется доступ к легенды, осей, линия тренда и область построения.
+
+### <a name="events"></a>События
+
+Добавлены дополнительные [события](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-events) диаграмм. У вашей надстройки реагировать на пользователей, которым взаимодействует с диаграммой. Также можно [Переключить событий](https://docs.microsoft.com/office/dev/add-ins/excel/performance#enable-and-disable-events) обработки по всей книги.
+
+
+|Объект| Новые возможности| Описание|Наборы требований|
+|:----|:----|:----|:----|
+|[application](/javascript/api/excel/excel.application)|_Метод_ > [createWorkbook(base64File: string)](/javascript/api/excel/excel.application)|Создает новую книгу скрытых с помощью файла закодированный .xlsx необязательно base64.|1,8|
+|[basicDataValidation](/javascript/api/excel/excel.basicdatavalidation)|_Свойство_ > formula1|Получает или задает Formula1, то есть минимальное значение или значение в зависимости от оператора.|1,8|
+|[basicDataValidation](/javascript/api/excel/excel.basicdatavalidation)|_Свойство_ > formula2|Получает или задает Formula2, то есть максимальное значение или значение в зависимости от оператора.|1,8|
+|[basicDataValidation](/javascript/api/excel/excel.basicdatavalidation)|_Отношения_ > оператор|Оператор, используемый для проверки данных.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Свойство_ > categoryLabelLevel|Возвращает или задает константа перечисления ChartCategoryLabelLevel ссылается на уровне где подписи категорий извлеченные из. Чтение и запись.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Свойство_ > plotVisibleOnly|Значение true, если только видимые ячейки. False, если оба отображаемые и скрытые ячеек на диаграмме. ReadWrite.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Свойство_ > seriesNameLevel|Возвращает или задает константа перечисления ChartSeriesNameLevel ссылается на уровне где имена являются, извлеченные из. Чтение и запись.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Свойство_ > showDataLabelsOverMaximum|Представляет, следует ли отображать метки данных, если значение больше, чем максимальное значение на оси значений.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Свойство_ > style|Возвращает или задает стиль диаграммы для диаграммы. ReadWrite.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Отношения_ > displayBlanksAs|Возвращает или задает способ, что пустые ячейки будут отображаться на диаграмме. ReadWrite.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Отношения_ > plotArea|Представляет plotArea для диаграммы. Только для чтения.|1,8|
+|[chart](/javascript/api/excel/excel.chart)|_Отношения_ > plotBy|Возвращает или задает способ столбцы или строки используются в качестве рядов данных на диаграмме. ReadWrite.|1,8|
+|[chartActivatedEventArgs](/javascript/api/excel/excel.chartactivatedeventargs)|_Свойство_ > chartId|Получает идентификатор диаграммы, который активируется.|1,8|
+|[chartActivatedEventArgs](/javascript/api/excel/excel.chartactivatedeventargs)|_Свойство_ > тип|Получает тип события.|1,8|
+|[chartActivatedEventArgs](/javascript/api/excel/excel.chartactivatedeventargs)|_Свойство_ > worksheetId|Получает идентификатор листа, в котором активируется диаграммы.|1,8|
+|[chartAddedEventArgs](/javascript/api/excel/excel.chartaddedeventargs)|_Свойство_ > chartId|Получает идентификатор, который добавляется в лист диаграммы.|1,8|
+|[chartAddedEventArgs](/javascript/api/excel/excel.chartaddedeventargs)|_Свойство_ > тип|Получает тип события.|1,8|
+|[chartAddedEventArgs](/javascript/api/excel/excel.chartaddedeventargs)|_Свойство_ > worksheetId|Получает идентификатор листа, в которую добавляется диаграммы.|1,8|
+|[chartAddedEventArgs](/javascript/api/excel/excel.chartaddedeventargs)|_Отношения_ > источник|Получает источник события.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Свойство_ > isBetweenCategories|Представляет ли ось пересечения оси категорий.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Свойство_ > многоуровневой|Указывает, находится ли оси многоуровневой или нет.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Свойство_ > numberFormat|Представляет код формата для метки делений оси.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Свойство_ > смещение|Представляет расстояние между уровнями меток и расстояние между первый уровень и линии оси. Значение должно быть целое число от 0 до 1000.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Свойство_ > positionAt|Представляет пересечения другой оси в положение указанной оси. Чтобы задать это свойство, следует использовать метод SetPositionAt(double). Только для чтения.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Свойство_ > textOrientation|Представляет ориентации текста тактов подпись оси. Значение должно быть целое число либо от -90 до 90 или 180 для вертикально ориентированного текста.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Отношения_ > Выравнивание|Представляет выравнивание для метки делений указанной оси.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Отношения_ > позиции|Представляет положение указанного оси, пересечения другой оси.|1,8|
+|[chartAxis](/javascript/api/excel/excel.chartaxis)|_Метод_ > [setPositionAt(value: double)](/javascript/api/excel/excel.chartaxis)|Задайте положение указанного оси, где другой оси пересечение в.|1,8|
+|[chartAxisFormat](/javascript/api/excel/excel.chartaxisformat)|_Отношения_ > заливки|Представляет параметры форматирования заливки диаграммы. Только для чтения.|1,8|
+|[chartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|_Метод_ > [setFormula(formula: string)](/javascript/api/excel/excel.chartaxistitle)|Строковое значение, представляющее формула заголовка оси диаграммы с помощью нотации стиля A1.|1,8|
+|[chartAxisTitleFormat](/javascript/api/excel/excel.chartaxistitleformat)|_Отношения_ > границы|Представляет формат границы, включая цвет, линии и вес. Только для чтения.|1,8|
+|[chartAxisTitleFormat](/javascript/api/excel/excel.chartaxistitleformat)|_Отношения_ > заливки|Представляет параметры форматирования заливки диаграммы. Только для чтения.|1,8|
+|[chartBorder](/javascript/api/excel/excel.chartborder)|_Метод_ > [clear()](/javascript/api/excel/excel.chartborder)|Очистить формат границы элемента диаграммы.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > Автотекст|Логическое значение, указывающее Если подписей данных автоматически создает текст на основе контекста.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > формулы|Строковое значение, представляющее формула нотации стиля A1 подпись данных диаграммы.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > height|Возвращает высоту, в пунктах метки данных диаграммы. Только для чтения. NULL, если подпись данных диаграммы не отображается. Только для чтения.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > слева|Представляет расстояние в пунктах от левого края диаграмму метки данных для левого края области диаграммы. NULL, если подпись данных диаграммы не отображается.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > numberFormat|Строковое значение, представляющее код формата для метки данных.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > text|Строка, представляющая текст метки данных на диаграмме.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > textOrientation|Представляет ориентации текста метки данных диаграммы. Значение должно быть целое число либо от -90 до 90 или 180 для вертикально ориентированного текста.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > в начало|Представляет расстояние в пунктах от верхнего края подпись данных диаграммы в верхней части области диаграммы. NULL, если подпись данных диаграммы не отображается.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Свойство_ > width|Возвращает ширину в точках метки данных диаграммы. Только для чтения. NULL, если подпись данных диаграммы не отображается. Только для чтения.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Отношения_ > формат|Представляет формат метки данных диаграммы. Только для чтения.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Связь_ > horizontalAlignment|Представляет горизонтальное выравнивание для метки данных диаграммы.|1,8|
+|[chartDataLabel](/javascript/api/excel/excel.chartdatalabel)|_Связь_ > verticalAlignment|Представляет вертикальное выравнивание метки данных диаграммы.|1,8|
+|[chartDataLabelFormat](/javascript/api/excel/excel.chartdatalabelformat)|_Отношения_ > границы|Представляет формат границы, включая цвет, линии и вес. Только для чтения.|1,8|
+|[chartDataLabels](/javascript/api/excel/excel.chartdatalabels)|_Свойство_ > Автотекст|Представляет ли метки данных автоматически создавать соответствующий текст на основе контекста.|1,8|
+|[chartDataLabels](/javascript/api/excel/excel.chartdatalabels)|_Свойство_ > numberFormat|Представляет код формата для метки данных.|1,8|
+|[chartDataLabels](/javascript/api/excel/excel.chartdatalabels)|_Свойство_ > textOrientation|Представляет ориентации текста метки данных. Значение должно быть целое число, либо от -90 до 90 или 0 – 180 для вертикально ориентированного текста.|1,8|
+|[chartDataLabels](/javascript/api/excel/excel.chartdatalabels)|_Связь_ > horizontalAlignment|Представляет горизонтальное выравнивание для метки данных диаграммы.|1,8|
+|[chartDataLabels](/javascript/api/excel/excel.chartdatalabels)|_Связь_ > verticalAlignment|Представляет вертикальное выравнивание метки данных диаграммы.|1,8|
+|[chartDeactivatedEventArgs](/javascript/api/excel/excel.chartdeactivatedeventargs)|_Свойство_ > chartId|Получает идентификатор диаграммы, деактивирован.|1,8|
+|[chartDeactivatedEventArgs](/javascript/api/excel/excel.chartdeactivatedeventargs)|_Свойство_ > тип|Получает тип события.|1,8|
+|[chartDeactivatedEventArgs](/javascript/api/excel/excel.chartdeactivatedeventargs)|_Свойство_ > worksheetId|Получает идентификатор листа, в котором деактивирован диаграммы.|1,8|
+|[chartDeletedEventArgs](/javascript/api/excel/excel.chartdeletedeventargs)|_Свойство_ > chartId|Получает идентификатор диаграммы, удаляется с листа.|1,8|
+|[chartDeletedEventArgs](/javascript/api/excel/excel.chartdeletedeventargs)|_Свойство_ > тип|Получает тип события.|1,8|
+|[chartDeletedEventArgs](/javascript/api/excel/excel.chartdeletedeventargs)|_Свойство_ > worksheetId|Получает идентификатор листа, в которой удаляется диаграммы.|1,8|
+|[chartDeletedEventArgs](/javascript/api/excel/excel.chartdeletedeventargs)|_Отношения_ > источник|Получает источник события.|1,8|
+|[chartLegendEntry](/javascript/api/excel/excel.chartlegendentry)|_Свойство_ > height|Представляет высоту legendEntry в условных обозначениях диаграммы. Только для чтения.|1,8|
+|[chartLegendEntry](/javascript/api/excel/excel.chartlegendentry)|_Свойство_ > index|Представляет индекс legendEntry в условных обозначениях диаграммы. Только для чтения.|1,8|
+|[chartLegendEntry](/javascript/api/excel/excel.chartlegendentry)|_Свойство_ > слева|Представляет слева от диаграммы legendEntry. Только для чтения.|1,8|
+|[chartLegendEntry](/javascript/api/excel/excel.chartlegendentry)|_Свойство_ > в начало|Представляет в верхней части диаграммы legendEntry. Только для чтения.|1,8|
+|[chartLegendEntry](/javascript/api/excel/excel.chartlegendentry)|_Свойство_ > width|Представляет ширину legendEntry легенды диаграммы. Только для чтения.|1,8|
+|[chartLegendFormat](/javascript/api/excel/excel.chartlegendformat)|_Отношения_ > границы|Представляет формат границы, включая цвет, линии и вес. Только для чтения.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > height|Представляет значения высоты plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > insideHeight|Представляет значение insideHeight plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > insideLeft|Представляет значение insideLeft plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > insideTop|Представляет значение insideTop plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > insideWidth|Представляет значение insideWidth plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > слева|Представляет левой значение plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > в начало|Представляет максимального значения plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Свойство_ > width|Представляет значение ширины plotArea.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Отношения_ > формат|Представляет форматирования plotArea диаграммы. Только для чтения.|1,8|
+|[chartPlotArea](/javascript/api/excel/excel.chartplotarea)|_Отношения_ > позиции|Представляет положение plotArea.|1,8|
+|[chartPlotAreaFormat](/javascript/api/excel/excel.chartplotareaformat)|_Отношения_ > границы|Представляет атрибуты границы plotArea диаграммы. Только для чтения.|1,8|
+|[chartPlotAreaFormat](/javascript/api/excel/excel.chartplotareaformat)|_Отношения_ > заливки|Представляет формат заливки объекта, включая сведения о форматировании фона. Только для чтения.|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Свойство_ > развертывания|Возвращает или задает значение развертывание круговой диаграммы или кольцевая фрагмента. Возвращает нуль (0), если нет без развертывания (Совет фрагмент — в центре круговой диаграммы). ReadWrite.|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Свойство_ > firstSliceAngle|Возвращает или задает угол первого сектора круговой диаграммы или кольцевая диаграмма, в градусов (часовой с вертикального). Применяется только к круговая, объемных круговых и кольцевых диаграммах. Может быть в диапазоне от 0 до 360. ReadWrite|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Свойство_ > invertIfNegative|Значение true, если Microsoft Excel инвертирует шаблон в элементе, если он соответствует отрицательное значение. ReadWrite.|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Свойство_ > пересекаются|Указывает расположение строки и столбцы. Может быть в диапазоне от -100 до 100. Применяется только к плоских диаграмм и гистограмм 2-D. ReadWrite.|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Свойство_ > secondPlotSize|Возвращает или задает размер дополнительного раздела либо Вторичная круговая диаграмма или панели круговой диаграммы в процентах от размера основной круговой диаграммы. Может быть в диапазоне от 5 до 200. ReadWrite.|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Свойство_ > varyByCategories|Значение true, если Microsoft Excel назначает разные цвета или узора к маркерам данных. Диаграмма должен содержать только один ряд. ReadWrite.|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Отношения_ > axisGroup|Возвращает или задает группу для указанного ряда. ReadWrite|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Отношения_ > dataLabels|Представляет коллекцию всех dataLabels из серии. Только для чтения.|1,8|
+|[ChartSeries ряд](/javascript/api/excel/excel.chartseries)|_Отношения_ > splitType|Возвращает или задает способ разделить два раздела Вторичная круговая диаграмма или панели круговой диаграммы. ReadWrite.|1,8|
+|[chartTrendline](/javascript/api/excel/excel.charttrendline)|_Свойство_ > backwardPeriod|Представляет число периодов, линия тренда расширяет назад.|1,8|
+|[chartTrendline](/javascript/api/excel/excel.charttrendline)|_Свойство_ > forwardPeriod|Представляет число периодов, линия тренда расширяет вперед.|1,8|
+|[chartTrendline](/javascript/api/excel/excel.charttrendline)|_Свойство_ > showEquation|Значение true, если формулу для линии тренда отображается на диаграмме.|1,8|
+|[chartTrendline](/javascript/api/excel/excel.charttrendline)|_Свойство_ > showRSquared|Значение true, если R-квадрат для линии тренда отображается на диаграмме.|1,8|
+|[chartTrendline](/javascript/api/excel/excel.charttrendline)|_Отношения_ > метки|Представляет метку линии тренда диаграммы. Только для чтения.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > Автотекст|Логическое значение, представляющее Если подписи линии тренда автоматически создает текст на основе контекста.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > формулы|Строковое значение, представляющее формула подпись диаграммы тренда нотации стиля A1.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > height|Возвращает высоту, в пунктах подпись линии тренда диаграммы. Только для чтения. NULL, если подпись диаграммы тренда не отображается. Только для чтения.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > слева|Представляет расстояние в пунктах от левого края диаграммы тренда метки для левого края области диаграммы. NULL, если подпись диаграммы тренда не отображается.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > numberFormat|Строковое значение, представляющее код формата для линии тренда метки.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > text|Строка, представляющая текст подписи линии тренда на диаграмме.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > textOrientation|Представляет ориентации текста диаграммы тренда метки. Значение должно быть целое число либо от -90 до 90 или 180 для вертикально ориентированного текста.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > в начало|Представляет расстояние в пунктах от верхнего края диаграммы тренда метки в верхней части области диаграммы. NULL, если подпись диаграммы тренда не отображается.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Свойство_ > width|Возвращает ширину в пунктах подпись линии тренда диаграммы. Только для чтения. NULL, если подпись диаграммы тренда не отображается. Только для чтения.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Отношения_ > формат|Представляет формат подписи линии тренда диаграммы. Только для чтения.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Связь_ > horizontalAlignment|Представляет горизонтальное выравнивание для диаграммы тренда метки.|1,8|
+|[chartTrendlineLabel](/javascript/api/excel/excel.charttrendlinelabel)|_Связь_ > verticalAlignment|Представляет вертикальное выравнивание подпись линии тренда диаграммы.|1,8|
+|[chartTrendlineLabelFormat](/javascript/api/excel/excel.charttrendlinelabelformat)|_Отношения_ > границы|Представляет формат границы, включая цвет, линии и вес. Только для чтения.|1,8|
+|[chartTrendlineLabelFormat](/javascript/api/excel/excel.charttrendlinelabelformat)|_Отношения_ > заливки|Представляет формат заливки метку линия тренда диаграммы. Только для чтения.|1,8|
+|[chartTrendlineLabelFormat](/javascript/api/excel/excel.charttrendlinelabelformat)|_Связь_ > font|Представляет атрибуты шрифта (шрифт, размер шрифта, цвета, и т.д.) для элемента label линия тренда диаграммы. Только для чтения.|1,8|
+|[createWorkbookPostProcessAction](/javascript/api/excel/excel.createworkbookpostprocessaction)|_Свойство_ > fakeFileId|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[createWorkbookPostProcessAction](/javascript/api/excel/excel.createworkbookpostprocessaction)|_Свойство_ > fileBase64|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[createWorkbookPostProcessAction](/javascript/api/excel/excel.createworkbookpostprocessaction)|_Отношения_ > тип действия|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[customDataValidation](/javascript/api/excel/excel.customdatavalidation)|_Свойство_ > формулы| Формула проверки пользовательских данных. Это создает специальные правила ввода, например, препятствующие дубликатов или ограничивать всего в диапазоне ячеек.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Свойство_ > id|Идентификатор DataPivotHierarchy. Только для чтения.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Свойство_ > name|Имя DataPivotHierarchy.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Свойство_ > numberFormat|Числовой формат DataPivotHierarchy.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Свойство_ > позиции|Положение DataPivotHierarchy.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Отношения_ > поля|Возвращает сводные поля, связанного с DataPivotHierarchy. Только для чтения.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Отношения_ > showAs|Определяет, должны ли отображаться данные как конкретных сводки.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Отношения_ > summarizeBy|Определяет, следует ли отображать все элементы DataPivotHierarchy.|1,8|
+|[dataPivotHierarchy](/javascript/api/excel/excel.datapivothierarchy)|_Метод_ > [setToDefault()](/javascript/api/excel/excel.datapivothierarchy#settodefault)|Сброс DataPivotHierarchy значения по умолчанию.|1,8|
+|[dataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|_Свойство_ > items|Коллекция объектов dataPivotHierarchy. Только для чтения.|1,8|
+|[dataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|_Метод_ > [add(pivotHierarchy: PivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection)|Добавляет PivotHierarchy текущей оси.|1,8|
+|[dataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|_Метод_ > [getCount()](/javascript/api/excel/excel.datapivothierarchycollection)|Возвращает количество иерархий pivot в коллекции.|1,8|
+|[dataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|_Метод_ > [getItem(name: string)](/javascript/api/excel/excel.datapivothierarchycollection)|Получает DataPivotHierarchy по его имени или идентификатора.|1,8|
+|[dataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|_Метод_ > [getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.datapivothierarchycollection)|Возвращает DataPivotHierarchy по имени. Если DataPivotHierarchy не существует, возвращает значение null, object.|1,8|
+|[dataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|_Метод_ > [remove(DataPivotHierarchy: DataPivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection)|Удаляет PivotHierarchy от текущей оси.|1,8|
+|[dataValidation](/javascript/api/excel/excel.datavalidation)|_Свойство_ > ignoreBlanks|Игнорировать пустые ячейки: проверка данных не будет выполнена на пустые ячейки, по умолчанию используется значение true.|1,8|
+|[dataValidation](/javascript/api/excel/excel.datavalidation)|_Свойство_ > допустимое|Представляет, если все значения являются допустимыми в соответствии с правилами проверки данных. Только для чтения.|1,8|
+|[dataValidation](/javascript/api/excel/excel.datavalidation)|_Отношения_ > errorAlert|Сообщение об ошибке, когда пользователь вводит недопустимые данные.|1,8|
+|[dataValidation](/javascript/api/excel/excel.datavalidation)|_Отношения_ > строки|Строки, когда пользователь выбирает ячейки.|1,8|
+|[dataValidation](/javascript/api/excel/excel.datavalidation)|_Отношения_ > правила|Правила проверки данных, который содержит различные типы условия проверки данных.|1,8|
+|[dataValidation](/javascript/api/excel/excel.datavalidation)|_Связь_ > type|Введите проверки данных, просматривать [Excel.DataValidationType](/javascript/api/excel/excel.datavalidationtype) для получения дополнительных сведений. Только для чтения.|1,8|
+|[dataValidation](/javascript/api/excel/excel.datavalidation)|_Метод_ > [clear()](/javascript/api/excel/excel.datavalidation)|Очищает проверку данных из текущего диапазона.|1,8|
+|[dataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|_Свойство_ > сообщения|Представляет предупреждающее сообщение об ошибке.|1,8|
+|[dataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|_Свойство_ > showAlert|Определяет, следует ли отображать ошибки диалогового окна предупреждения или не в том случае, если пользователь вводит недопустимые данные. Значение по умолчанию: true.|1,8|
+|[dataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|_Свойство_ > title|Представляет заголовок диалогового окна оповещения об ошибках.|1,8|
+|[dataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|_Отношения_ > Стиль|Проверка данных представляет тип оповещения, можно найти [Excel.DataValidationAlertStyle](/javascript/api/excel/excel.datavalidationalertstyle) для получения дополнительных сведений.|1,8|
+|[dataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|_Свойство_ > сообщения|Представляет сообщение приглашения.|1,8|
+|[dataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|_Свойство_ > showPrompt|Определяет необходимость устанавливать в строке, если пользователь выбирает ячейку с помощью проверки данных.|1,8|
+|[dataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|_Свойство_ > title|Представляет заголовок сообщения.|1,8|
+|[dataValidationRule](/javascript/api/excel/excel.datavalidationrule)|_Отношения_ > настраиваемых|Условия проверки пользовательских данных.|1,8|
+|[dataValidationRule](/javascript/api/excel/excel.datavalidationrule)|_Отношения_ > даты|Дата условия проверки данных.|1,8|
+|[dataValidationRule](/javascript/api/excel/excel.datavalidationrule)|_Отношения_ > decimal|Условия проверки данных Decimal.|1,8|
+|[dataValidationRule](/javascript/api/excel/excel.datavalidationrule)|_Связь_ > list|Условия проверки данных списка.|1,8|
+|[dataValidationRule](/javascript/api/excel/excel.datavalidationrule)|_Отношения_ > textLength|Условия проверки данных TextLength.|1,8|
+|[dataValidationRule](/javascript/api/excel/excel.datavalidationrule)|_Отношения_ > времени|Условия проверки данных времени.|1,8|
+|[dataValidationRule](/javascript/api/excel/excel.datavalidationrule)|_Отношения_ > wholeNumber|WholeNumber условия проверки данных.|1,8|
+|[dateTimeDataValidation](/javascript/api/excel/excel.datetimedatavalidation)|_Свойство_ > formula1|Получает или задает Formula1, то есть минимальное значение или значение в зависимости от оператора.|1,8|
+|[dateTimeDataValidation](/javascript/api/excel/excel.datetimedatavalidation)|_Свойство_ > formula2|Получает или задает Formula2, то есть максимальное значение или значение в зависимости от оператора.|1,8|
+|[dateTimeDataValidation](/javascript/api/excel/excel.datetimedatavalidation)|_Отношения_ > оператор|Оператор, используемый для проверки данных.|1,8|
+|[enableEventsPostProcessAction](/javascript/api/excel/excel.enableeventspostprocessaction)|_Свойство_ > isEnableEvents {|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[enableEventsPostProcessAction](/javascript/api/excel/excel.enableeventspostprocessaction)|_Отношения_ > тип действия|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[enableEventsPostProcessAction](/javascript/api/excel/excel.enableeventspostprocessaction)|_Отношения_ > controlId|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[filterPivotHierarchy](/javascript/api/excel/excel.filterpivothierarchy)|_Свойство_ > enableMultipleFilterItems|Определяет, следует ли разрешить несколько элементов фильтра.|1,8|
+|[filterPivotHierarchy](/javascript/api/excel/excel.filterpivothierarchy)|_Свойство_ > id|Идентификатор FilterPivotHierarchy. Только для чтения.|1,8|
+|[filterPivotHierarchy](/javascript/api/excel/excel.filterpivothierarchy)|_Свойство_ > name|Имя FilterPivotHierarchy.|1,8|
+|[filterPivotHierarchy](/javascript/api/excel/excel.filterpivothierarchy)|_Свойство_ > позиции|Положение FilterPivotHierarchy.|1,8|
+|[filterPivotHierarchy](/javascript/api/excel/excel.filterpivothierarchy)|_Отношение_ > fields|Возвращает сводные поля, связанного с FilterPivotHierarchy. Только для чтения.|1,8|
+|[filterPivotHierarchy](/javascript/api/excel/excel.filterpivothierarchy)|_Метод_ > [setToDefault()](/javascript/api/excel/excel.filterpivothierarchy)|Сброс FilterPivotHierarchy значения по умолчанию.|1,8|
+|[filterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|_Свойство_ > items|Коллекция объектов filterPivotHierarchy. Только для чтения.|1,8|
+|[filterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|_Метод_ > [add(pivotHierarchy: PivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection)|Добавляет PivotHierarchy текущей оси. При наличии других местах на строки, столбца или оси фильтра иерархии, он будет удален из этого расположения.|1,8|
+|[filterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|_Метод_ > [getCount()](/javascript/api/excel/excel.filterpivothierarchycollection)|Возвращает количество иерархий pivot в коллекции.|1,8|
+|[filterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|_Метод_ > [getItem(name: string)](/javascript/api/excel/excel.filterpivothierarchycollection)|Получает FilterPivotHierarchy по его имени или идентификатора.|1,8|
+|[filterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|_Метод_ > [getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.filterpivothierarchycollection)|Возвращает FilterPivotHierarchy по имени. Если FilterPivotHierarchy не существует, возвращает значение null, object.|1,8|
+|[filterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|_Метод_ > [remove(filterPivotHierarchy: FilterPivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection)|Удаляет PivotHierarchy от текущей оси.|1,8|
+|[listDataValidation](/javascript/api/excel/excel.listdatavalidation)|_Свойство_ > inCellDropDown|Раскрывающийся список в ячейке или не отображается, по умолчанию используется значение true.|1,8|
+|[listDataValidation](/javascript/api/excel/excel.listdatavalidation)|_Свойство_ > источник|Исходный список для проверки данных|1,8|
+|[openWorkbookPostProcessAction](/javascript/api/excel/excel.openworkbookpostprocessaction)|_Свойство_ > fakeFileId|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[openWorkbookPostProcessAction](/javascript/api/excel/excel.openworkbookpostprocessaction)|_Отношения_ > тип действия|Передает дополнительные данные на стороне клиента, например, worksheetId для TableSelectionChangedEvent.|1,8|
+|[сводных полей](/javascript/api/excel/excel.pivotfield)|_Свойство_ > id|Идентификатор сводных полей. Только для чтения.|1,8|
+|[сводных полей](/javascript/api/excel/excel.pivotfield)|_Свойство_ > name|Имя сводных полей.|1,8|
+|[сводных полей](/javascript/api/excel/excel.pivotfield)|_Свойство_ > showAllItems|Определяет, следует ли отображать все элементы сводных полей.|1,8|
+|[сводных полей](/javascript/api/excel/excel.pivotfield)|_Отношения_ > элементов|Возвращает сводные поля, связанного с сводных полей. Только для чтения.|1,8|
+|[сводных полей](/javascript/api/excel/excel.pivotfield)|_Отношения_ > промежуточные итоги|Промежуточные итоги сводных полей.|1,8|
+|[сводных полей](/javascript/api/excel/excel.pivotfield)|_Метод_ > [sortByLabels(sortby: SortBy)](/javascript/api/excel/excel.pivotfield)|Сортировка сводных полей. Если DataPivotHierarchy указан, затем сортировки будет применяться на его основе, если не сводных полей самого зависит сортировки.|1,8|
+|[pivotFieldCollection](/javascript/api/excel/excel.pivotfieldcollection)|_Свойство_ > items|Коллекция объектов сводных полей. Только для чтения.|1,8|
+|[pivotFieldCollection](/javascript/api/excel/excel.pivotfieldcollection)|_Метод_ > [getCount()](/javascript/api/excel/excel.pivotfieldcollection)|Возвращает количество иерархий pivot в коллекции.|1,8|
+|[pivotFieldCollection](/javascript/api/excel/excel.pivotfieldcollection)|_Метод_ > [getItem(name: string)](/javascript/api/excel/excel.pivotfieldcollection)|Получает PivotHierarchy по его имени или идентификатора.|1,8|
+|[pivotFieldCollection](/javascript/api/excel/excel.pivotfieldcollection)|_Метод_ > [getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.pivotfieldcollection)|Возвращает PivotHierarchy по имени. Если PivotHierarchy не существует, возвращает значение null, object.|1,8|
+|[pivotHierarchy](/javascript/api/excel/excel.pivothierarchy)|_Свойство_ > id|Идентификатор PivotHierarchy. Только для чтения.|1,8|
+|[pivotHierarchy](/javascript/api/excel/excel.pivothierarchy)|_Свойство_ > name|Имя PivotHierarchy.|1,8|
+|[pivotHierarchy](/javascript/api/excel/excel.pivothierarchy)|_Отношение_ > fields|Возвращает сводные поля, связанного с PivotHierarchy. Только для чтения.|1,8|
+|[pivotHierarchyCollection](/javascript/api/excel/excel.pivothierarchycollection)|_Свойство_ > items|Коллекция объектов pivotHierarchy. Только для чтения.|1,8|
+|[pivotHierarchyCollection](/javascript/api/excel/excel.pivothierarchycollection)|_Метод_ > [getCount()](/javascript/api/excel/excel.pivothierarchycollection)|Возвращает количество иерархий pivot в коллекции.|1,8|
+|[pivotHierarchyCollection](/javascript/api/excel/excel.pivothierarchycollection)|_Метод_ > [getItem(name: string)](/javascript/api/excel/excel.pivothierarchycollection)|Получает PivotHierarchy по его имени или идентификатора.|1,8|
+|[pivotHierarchyCollection](/javascript/api/excel/excel.pivothierarchycollection)|_Метод_ > [getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.pivothierarchycollection)|Возвращает PivotHierarchy по имени. Если PivotHierarchy не существует, возвращает значение null, object.|1,8|
+|[элемент сводной таблицы](/javascript/api/excel/excel.pivotitem)|_Свойство_ > id|Идентификатор элемент сводной таблицы. Только для чтения.|1,8|
+|[элемент сводной таблицы](/javascript/api/excel/excel.pivotitem)|_Свойство_ > isExpanded|Определяет, развернут ли для отображения дочерних элементов элемента или если он свернут, и дочерние элементы являются скрытыми.|1,8|
+|[элемент сводной таблицы](/javascript/api/excel/excel.pivotitem)|_Свойство_ > name|Имя элемент сводной таблицы.|1,8|
+|[элемент сводной таблицы](/javascript/api/excel/excel.pivotitem)|_Свойство_ > visible|Определяет, отображается ли элемент сводной таблицы или нет.|1,8|
+|[pivotItemCollection](/javascript/api/excel/excel.pivotitemcollection)|_Свойство_ > items|Коллекция объектов элемент сводной таблицы. Только для чтения.|1,8|
+|[pivotItemCollection](/javascript/api/excel/excel.pivotitemcollection)|_Метод_ > [getCount()](/javascript/api/excel/excel.pivotitemcollection)|Возвращает количество иерархий pivot в коллекции.|1,8|
+|[pivotItemCollection](/javascript/api/excel/excel.pivotitemcollection)|_Метод_ > [getItem(name: string)](/javascript/api/excel/excel.pivotitemcollection)|Получает PivotHierarchy по его имени или идентификатора.|1,8|
+|[pivotItemCollection](/javascript/api/excel/excel.pivotitemcollection)|_Метод_ > [getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.pivotitemcollection)|Возвращает PivotHierarchy по имени. Если PivotHierarchy не существует, возвращает значение null, object.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Свойство_ > showColumnGrandTotals|Значение true, если сводной таблицы, отчет отображает общие итоги для столбцов.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Свойство_ > showRowGrandTotals|Значение true, если сводной таблицы, отчет отображает общих итогов для строк.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Свойство_ > subtotalLocation|Это свойство показывает SubtotalLocationType всех полей в сводной таблице. Если поля имеют различные состояния, это будет null. Возможные значения: AtTop, AtBottom.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Отношения_ > layoutType|Это свойство показывает PivotLayoutType всех полей в сводной таблице. Если поля имеют различные состояния, это будет null.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Метод_ > [getColumnLabelRange()](/javascript/api/excel/excel.pivotlayout)|Возвращает диапазон, где находятся названия столбцов со сводными таблицами.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Метод_ > [getDataBodyRange()](/javascript/api/excel/excel.pivotlayout)|Возвращает диапазон, где находятся значения данных со сводными таблицами.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout.md)|_Метод_ > [getFilterAxisRange()](/javascript/api/excel/excel.pivotlayout)|Возвращает диапазон область фильтра сводной таблицы.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Метод_ > [getRange()](/javascript/api/excel/excel.pivotlayout)|Возвращает диапазон, который существует со сводными таблицами, за исключением области фильтра.|1,8|
+|[pivotLayout](/javascript/api/excel/excel.pivotlayout)|_Метод_ > [getRowLabelRange()](/javascript/api/excel/excel.pivotlayout)|Возвращает диапазон, где находятся названия строк со сводными таблицами.|1,8|
+|[pivotTable](/javascript/api/excel/excel.pivottable)|_Отношения_ > columnHierarchies|Иерархии Pivot столбцов сводной таблицы. Только для чтения.|1,8|
+|[pivotTable](/javascript/api/excel/excel.pivottable)|_Отношения_ > dataHierarchies|Иерархии сводных данных сводной таблицы. Только для чтения.|1,8|
+|[pivotTable](/javascript/api/excel/excel.pivottable)|_Отношения_ > filterHierarchies|Иерархии Pivot фильтра сводной таблицы. Только для чтения.|1,8|
+|[pivotTable](/javascript/api/excel/excel.pivottable)|_Отношения_ > иерархий|Иерархии Pivot сводной таблицы. Только для чтения.|1,8|
+|[pivotTable](/javascript/api/excel/excel.pivottable)|_Отношения_ > макета|PivotLayout, описывающий макет и визуальной структуры со сводными таблицами. Только для чтения.|1,8|
+|[pivotTable](/javascript/api/excel/excel.pivottable)|_Отношения_ > rowHierarchies|Иерархии Pivot строк сводной таблицы. Только для чтения.|1,8|
+|[pivotTable](/javascript/api/excel/excel.pivottable)|_Метод_ > [delete()](/javascript/api/excel/excel.pivottable)|Удаляет со сводными таблицами.|1,8|
+|[pivotTableCollection](/javascript/api/excel/excel.pivottablecollection)|_Метод_ > [add(name: string, source: object, destination: object)](/javascript/api/excel/excel.pivottablecollection)|Добавление сводной таблицы на основе указанного источника данных и вставить его в верхнюю левую ячейку конечного диапазона.|1,8|
+|[range](/javascript/api/excel/excel.range)|_Отношения_ > dataValidation|Возвращает объект проверки данных. Только для чтения.|1,8|
+|[rowColumnPivotHierarchy](/javascript/api/excel/excel.rowcolumnpivothierarchy)|_Свойство_ > id|Идентификатор RowColumnPivotHierarchy. Только для чтения.|1,8|
+|[rowColumnPivotHierarchy](/javascript/api/excel/excel.rowcolumnpivothierarchy)|_Свойство_ > name|Имя RowColumnPivotHierarchy.|1,8|
+|[rowColumnPivotHierarchy](/javascript/api/excel/excel.rowcolumnpivothierarchy)|_Свойство_ > позиции|Положение RowColumnPivotHierarchy.|1,8|
+|[rowColumnPivotHierarchy](/javascript/api/excel/excel.rowcolumnpivothierarchy)|_Отношение_ > fields|Возвращает сводные поля, связанного с RowColumnPivotHierarchy. Только для чтения.|1,8|
+|[rowColumnPivotHierarchy](/javascript/api/excel/excel.rowcolumnpivothierarchy)|_Метод_ > [setToDefault()](/javascript/api/excel/excel.rowcolumnpivothierarchy)|Сброс RowColumnPivotHierarchy значения по умолчанию.|1,8|
+|[rowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|_Свойство_ > items|Коллекция объектов rowColumnPivotHierarchy. Только для чтения.|1,8|
+|[rowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|_Метод_ > [add(pivotHierarchy: PivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|Добавляет PivotHierarchy текущей оси. При наличии в другом месте в той строке иерархии столбец,|1,8|
+|[rowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|_Метод_ > [getCount()](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|Возвращает количество иерархий pivot в коллекции.|1,8|
+|[rowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|_Метод_ > [getItem(name: string)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|Получает RowColumnPivotHierarchy по его имени или идентификатора.|1,8|
+|[rowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|_Метод_ > [getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|Возвращает RowColumnPivotHierarchy по имени. Если RowColumnPivotHierarchy не существует, возвращает значение null, object.|1,8|
+|[rowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|_Метод_ > [remove(rowColumnPivotHierarchy: RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|Удаляет PivotHierarchy от текущей оси.|1,8|
+|[среда времени выполнения](/javascript/api/excel/excel.runtime)|_Свойство_ > enableEvents|Переключение события JavaScript в текущей taskpane или контента надстройки.|1,8|
+|[showAsRule](/javascript/api/excel/excel.showasrule)|_Отношения_ > baseField|Базовый сводных полей будет создана вычислений ShowAs, если это возможно на основании типа ShowAsCalculation, в противном случае значение null.|1,8|
+|[showAsRule](/javascript/api/excel/excel.showasrule)|_Отношения_ > baseItem|Базовый элемент для вычисления ShowAs на, если это возможно на основании типа ShowAsCalculation, в противном случае значение null.|1,8|
+|[showAsRule](/javascript/api/excel/excel.showasrule)|_Отношения_ > вычислений|Расчет ShowAs для сводных полей данных.|1,8|
+|[style](/javascript/api/excel/excel.style)|_Свойство_ > autoIndent|Указывает, если текст автоматический отступ, если для выравнивания текста в ячейку в равномерного распределения.|1,8|
+|[style](/javascript/api/excel/excel.style)|_Свойство_ > textOrientation|Ориентация текста для стиля.|1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > автоматического|Если автоматический задано значение true, то все остальные значения будет игнорироваться при задании промежуточных итогов.|1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > среднее| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > count| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > countNumbers| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > max| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > мин.| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > продукта| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > standardDeviation| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > standardDeviationP| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > сумм| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > отклонение| |1,8|
+|[промежуточные итоги](/javascript/api/excel/excel.subtotals)|_Свойство_ > varianceP| |1,8|
+|[table](/javascript/api/excel/excel.table)|_Свойство_ > legacyId|Возвращает числовой идентификатор. Только для чтения.|1,8|
+|[workbook](/javascript/api/excel/excel.workbook)|_Свойство_ > только для чтения|Значение true, если книга открыта в режиме только для чтения. Только для чтения.|1,8|
+|[workbookCreated](/javascript/api/excel/excel.workbookcreated)|_Свойство_ > id|Возвращает значение, уникальным образом идентифицирующее объект WorkbookCreated. Только для чтения.|1,8|
+|[workbookCreated](/javascript/api/excel/excel.workbookcreated)|_Метод_ > [open()](/javascript/api/excel/excel.workbookcreated)|Откройте книгу.|1,8|
+|[worksheet](/javascript/api/excel/excel.worksheet)|_Свойство_ > showGridlines|Получает или задает флаг линии сетки рабочего листа.|1,8|
+|[worksheet](/javascript/api/excel/excel.worksheet)|_Свойство_ > showHeadings|Получает или задает заголовки флаг рабочего листа.|1,8|
+|[worksheetCalculatedEventArgs](/javascript/api/excel/excel.worksheetcalculatedeventargs)|_Свойство_ > тип|Получает тип события.|1,8|
+|[worksheetCalculatedEventArgs](/javascript/api/excel/excel.worksheetcalculatedeventargs)|_Свойство_ > worksheetId|Получает идентификатор листа, который вычисляется.|1,8|
+
 ## <a name="whats-new-in-excel-javascript-api-17"></a>Новые возможности Excel JavaScript API 1.7
 
-Возможности Excel JavaScript API требование set 1.7 включают интерфейсы API для диаграмм, события, выполнить проверку данных, таблицы, диапазоны, свойства документа, именованные элементы, параметры защиты и стили.
+Возможности Excel JavaScript API требование set 1.7 включают API-интерфейсы для диаграмм, события, таблицы, диапазоны, свойства документа, именованные элементы, параметры защиты и стили.
 
 ### <a name="customize-charts"></a>Настройка диаграмм
 

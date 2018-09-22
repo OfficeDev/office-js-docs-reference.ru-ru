@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-15"></a>Набор обязательных элементов API для надстройки Outlook 1.5
 
-Подмножество API надстройки Outlook в API JavaScript для Office включает объекты, методы, свойства и события, которые можно использовать в надстройке Outlook.
+Outlook надстройки API подмножество API JavaScript для Office включает объекты, методы, свойства, и надстройки событий, можно использовать в Outlook.
 
 > [!NOTE]
 > В этой документации — [Задайте требование](/javascript/office/requirement-sets/outlook-api-requirement-sets) отличный от новейшие наборы требований.

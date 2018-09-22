@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-16"></a>Задайте 1.6 требование API надстройки для Outlook
 
-Подмножество API надстройки Outlook в API JavaScript для Office включает объекты, методы, свойства и события, которые можно использовать в надстройке Outlook.
+Outlook надстройки API подмножество API JavaScript для Office включает объекты, методы, свойства, и надстройки событий, можно использовать в Outlook.
 
 ## <a name="whats-new-in-16"></a>Новые возможности в 1.6?
 
