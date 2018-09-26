@@ -1453,7 +1453,7 @@ Office.initialize = function () {
 Получает данные инициализации, передаваемые при [активации надстройки интерактивным сообщением](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message).
 
 > [!NOTE]
-> Этот метод поддерживается только Outlook 2016 для Windows (больше, чем 16.0.8413.1000 версии Click-to-Run) и Outlook в Интернете для Office 365.
+> Этот метод поддерживается только по Outlook 2016 или более поздней версии для Windows (более поздней, чем 16.0.8413.1000 версии Click-to-Run) и Outlook в Интернете для Office 365.
 
 ##### <a name="parameters"></a>Параметры
 |Имя|Тип|Атрибуты|Описание|

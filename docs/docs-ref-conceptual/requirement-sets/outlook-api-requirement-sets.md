@@ -49,8 +49,8 @@ if (item.somePropertyOrFunction !== undefined) {
 | Outlook для iPhone | 1.1, 1.2, 1.3, 1.4, 1.5 |
 | Outlook для Android | 1.1, 1.2, 1.3, 1.4, 1.5 |
 | Outlook в Интернете (Office 365 и Outlook.com) | 1.1, 1.2, 1.3, 1.4, 1,5, 1.6 |
-| Outlook Web App (локальная версия Exchange 2013) | 1.1 |
-| Outlook Web App (локальная версия Exchange 2016) | 1.1, 1.2. 1.3 |
+| Outlook Web App (Exchange 2013 в локальной) | 1.1 |
+| Outlook Web App (Exchange 2016 локально) | 1.1, 1.2. 1.3 |
 
 > [!NOTE]
 > Как часть [8 декабря 2015, обновление для Outlook 2013 (KB3114349)](https://support.microsoft.com/kb/3114349)была добавлена поддержка 1,3 в Outlook 2013. Как часть [13 сентября 2016, обновление для Outlook 2013 (KB3118280)](https://support.microsoft.com/help/3118280)была добавлена поддержка 1.4 в Outlook 2013.
