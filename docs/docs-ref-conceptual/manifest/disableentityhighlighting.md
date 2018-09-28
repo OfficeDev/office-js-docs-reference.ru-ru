@@ -1,16 +1,16 @@
-# <a name="disableentityhighlighting-element"></a><span data-ttu-id="0a03d-101">Элемент DisableEntityHighlighting</span><span class="sxs-lookup"><span data-stu-id="0a03d-101">DisableEntityHighlighting element</span></span>
+# <a name="disableentityhighlighting-element"></a><span data-ttu-id="c4ead-101">Элемент DisableEntityHighlighting</span><span class="sxs-lookup"><span data-stu-id="c4ead-101">DisableEntityHighlighting element</span></span>
 
-<span data-ttu-id="0a03d-102">Указывает, следует ли выключить выделение объекта для почтовой надстройки.</span><span class="sxs-lookup"><span data-stu-id="0a03d-102">Specifies whether entity highlighting should be turned off for your mail add-in.</span></span>
+<span data-ttu-id="c4ead-102">Указывает, следует ли выключить выделение объекта для почтовой надстройки.</span><span class="sxs-lookup"><span data-stu-id="c4ead-102">Specifies whether entity highlighting should be turned off for your mail add-in.</span></span>
 
-<span data-ttu-id="0a03d-103">**Тип надстройки:** почтовые.</span><span class="sxs-lookup"><span data-stu-id="0a03d-103">**Add-in type:** Mail</span></span>
+<span data-ttu-id="c4ead-103">**Тип надстройки:** почтовые.</span><span class="sxs-lookup"><span data-stu-id="c4ead-103">**Add-in type:** Mail</span></span>
 
-## <a name="syntax"></a><span data-ttu-id="0a03d-104">Синтаксис</span><span class="sxs-lookup"><span data-stu-id="0a03d-104">Syntax</span></span>
+## <a name="syntax"></a><span data-ttu-id="c4ead-104">Синтаксис</span><span class="sxs-lookup"><span data-stu-id="c4ead-104">Syntax</span></span>
 
 ```XML
 <DisableEntityHighlighting> [true | false]</DisableEntityHighlighting>
 ```
 
-## <a name="contained-in"></a><span data-ttu-id="0a03d-105">Содержащиеся в</span><span class="sxs-lookup"><span data-stu-id="0a03d-105">Contained in</span></span>
+## <a name="contained-in"></a><span data-ttu-id="c4ead-105">Содержащиеся в</span><span class="sxs-lookup"><span data-stu-id="c4ead-105">Contained in</span></span>
 
-[<span data-ttu-id="0a03d-106">OfficeApp</span><span class="sxs-lookup"><span data-stu-id="0a03d-106">OfficeApp</span></span>](officeapp.md)
+[<span data-ttu-id="c4ead-106">OfficeApp</span><span class="sxs-lookup"><span data-stu-id="c4ead-106">OfficeApp</span></span>](officeapp.md)
 

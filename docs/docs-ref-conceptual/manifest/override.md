@@ -1,38 +1,38 @@
-# <a name="override-element"></a><span data-ttu-id="bc70e-101">Переопределение элемента</span><span class="sxs-lookup"><span data-stu-id="bc70e-101">Override element</span></span>
+# <a name="override-element"></a><span data-ttu-id="4e14c-101">Переопределение элемента</span><span class="sxs-lookup"><span data-stu-id="4e14c-101">Override element</span></span>
 
-<span data-ttu-id="bc70e-102">Предоставляет способ указать значение параметра для дополнительного языкового стандарта.</span><span class="sxs-lookup"><span data-stu-id="bc70e-102">Provides a way to specify the value of a setting for an additional locale.</span></span>
+<span data-ttu-id="4e14c-102">Предоставляет способ указать значение параметра для дополнительного языкового стандарта.</span><span class="sxs-lookup"><span data-stu-id="4e14c-102">Provides a way to specify the value of a setting for an additional locale.</span></span>
 
-<span data-ttu-id="bc70e-103">**Тип надстройки:** контентные и почтовые надстройки, надстройки области задач.</span><span class="sxs-lookup"><span data-stu-id="bc70e-103">**Add-in type:** Content, Task pane, Mail</span></span>
+<span data-ttu-id="4e14c-103">**Тип надстройки:** контентные и почтовые надстройки, надстройки области задач.</span><span class="sxs-lookup"><span data-stu-id="4e14c-103">**Add-in type:** Content, Task pane, Mail</span></span>
 
-## <a name="syntax"></a><span data-ttu-id="bc70e-104">Синтаксис</span><span class="sxs-lookup"><span data-stu-id="bc70e-104">Syntax</span></span>
+## <a name="syntax"></a><span data-ttu-id="4e14c-104">Синтаксис</span><span class="sxs-lookup"><span data-stu-id="4e14c-104">Syntax</span></span>
 
 ```XML
 <Override Locale="string" Value="string" />
 ```
 
-## <a name="contained-in"></a><span data-ttu-id="bc70e-105">Содержащиеся в</span><span class="sxs-lookup"><span data-stu-id="bc70e-105">Contained in</span></span>
+## <a name="contained-in"></a><span data-ttu-id="4e14c-105">Содержащиеся в</span><span class="sxs-lookup"><span data-stu-id="4e14c-105">Contained in</span></span>
 
-|<span data-ttu-id="bc70e-106">**Элемент**</span><span class="sxs-lookup"><span data-stu-id="bc70e-106">**Element**</span></span>|
+|<span data-ttu-id="4e14c-106">**Элемент**</span><span class="sxs-lookup"><span data-stu-id="4e14c-106">**Element**</span></span>|
 |:-----|
-|[<span data-ttu-id="bc70e-107">CitationText</span><span class="sxs-lookup"><span data-stu-id="bc70e-107">CitationText</span></span>](citationtext.md)|
-|[<span data-ttu-id="bc70e-108">Описание</span><span class="sxs-lookup"><span data-stu-id="bc70e-108">Description</span></span>](description.md)|
-|[<span data-ttu-id="bc70e-109">DictionaryName</span><span class="sxs-lookup"><span data-stu-id="bc70e-109">DictionaryName</span></span>](dictionaryname.md)|
-|[<span data-ttu-id="bc70e-110">DictionaryHomePage</span><span class="sxs-lookup"><span data-stu-id="bc70e-110">DictionaryHomePage</span></span>](dictionaryhomepage.md)|
-|[<span data-ttu-id="bc70e-111">Отображаемое имя</span><span class="sxs-lookup"><span data-stu-id="bc70e-111">DisplayName</span></span>](displayname.md)|
-|[<span data-ttu-id="bc70e-112">HighResolutionIconUrl</span><span class="sxs-lookup"><span data-stu-id="bc70e-112">HighResolutionIconUrl</span></span>](highresolutioniconurl.md)|
-|[<span data-ttu-id="bc70e-113">IconUrl</span><span class="sxs-lookup"><span data-stu-id="bc70e-113">IconUrl</span></span>](iconurl.md)|
-|[<span data-ttu-id="bc70e-114">QueryUri</span><span class="sxs-lookup"><span data-stu-id="bc70e-114">QueryUri</span></span>](queryuri.md)|
-|[<span data-ttu-id="bc70e-115">SourceLocation</span><span class="sxs-lookup"><span data-stu-id="bc70e-115">SourceLocation</span></span>](sourcelocation.md)|
-|[<span data-ttu-id="bc70e-116">SupportUrl</span><span class="sxs-lookup"><span data-stu-id="bc70e-116">SupportUrl</span></span>](supporturl.md)|
+|[<span data-ttu-id="4e14c-107">CitationText</span><span class="sxs-lookup"><span data-stu-id="4e14c-107">CitationText</span></span>](citationtext.md)|
+|[<span data-ttu-id="4e14c-108">Описание</span><span class="sxs-lookup"><span data-stu-id="4e14c-108">Description</span></span>](description.md)|
+|[<span data-ttu-id="4e14c-109">DictionaryName</span><span class="sxs-lookup"><span data-stu-id="4e14c-109">DictionaryName</span></span>](dictionaryname.md)|
+|[<span data-ttu-id="4e14c-110">DictionaryHomePage</span><span class="sxs-lookup"><span data-stu-id="4e14c-110">DictionaryHomePage</span></span>](dictionaryhomepage.md)|
+|[<span data-ttu-id="4e14c-111">Отображаемое имя</span><span class="sxs-lookup"><span data-stu-id="4e14c-111">DisplayName</span></span>](displayname.md)|
+|[<span data-ttu-id="4e14c-112">HighResolutionIconUrl</span><span class="sxs-lookup"><span data-stu-id="4e14c-112">HighResolutionIconUrl</span></span>](highresolutioniconurl.md)|
+|[<span data-ttu-id="4e14c-113">IconUrl</span><span class="sxs-lookup"><span data-stu-id="4e14c-113">IconUrl</span></span>](iconurl.md)|
+|[<span data-ttu-id="4e14c-114">QueryUri</span><span class="sxs-lookup"><span data-stu-id="4e14c-114">QueryUri</span></span>](queryuri.md)|
+|[<span data-ttu-id="4e14c-115">SourceLocation</span><span class="sxs-lookup"><span data-stu-id="4e14c-115">SourceLocation</span></span>](sourcelocation.md)|
+|[<span data-ttu-id="4e14c-116">SupportUrl</span><span class="sxs-lookup"><span data-stu-id="4e14c-116">SupportUrl</span></span>](supporturl.md)|
 
-## <a name="attributes"></a><span data-ttu-id="bc70e-117">Атрибуты</span><span class="sxs-lookup"><span data-stu-id="bc70e-117">Attributes</span></span>
+## <a name="attributes"></a><span data-ttu-id="4e14c-117">Атрибуты</span><span class="sxs-lookup"><span data-stu-id="4e14c-117">Attributes</span></span>
 
-|<span data-ttu-id="bc70e-118">**Атрибут**</span><span class="sxs-lookup"><span data-stu-id="bc70e-118">**Attribute**</span></span>|<span data-ttu-id="bc70e-119">**Тип**</span><span class="sxs-lookup"><span data-stu-id="bc70e-119">**Type**</span></span>|<span data-ttu-id="bc70e-120">**Обязательный**</span><span class="sxs-lookup"><span data-stu-id="bc70e-120">**Required**</span></span>|<span data-ttu-id="bc70e-121">**Описание**</span><span class="sxs-lookup"><span data-stu-id="bc70e-121">**Description**</span></span>|
+|<span data-ttu-id="4e14c-118">**Атрибут**</span><span class="sxs-lookup"><span data-stu-id="4e14c-118">**Attribute**</span></span>|<span data-ttu-id="4e14c-119">**Тип**</span><span class="sxs-lookup"><span data-stu-id="4e14c-119">**Type**</span></span>|<span data-ttu-id="4e14c-120">**Обязательный**</span><span class="sxs-lookup"><span data-stu-id="4e14c-120">**Required**</span></span>|<span data-ttu-id="4e14c-121">**Описание**</span><span class="sxs-lookup"><span data-stu-id="4e14c-121">**Description**</span></span>|
 |:-----|:-----|:-----|:-----|
-|<span data-ttu-id="bc70e-122">Locale</span><span class="sxs-lookup"><span data-stu-id="bc70e-122">Locale</span></span>|<span data-ttu-id="bc70e-123">string</span><span class="sxs-lookup"><span data-stu-id="bc70e-123">string</span></span>|<span data-ttu-id="bc70e-124">Обязательный</span><span class="sxs-lookup"><span data-stu-id="bc70e-124">required</span></span>|<span data-ttu-id="bc70e-125">Задает имя языка и региональных параметров для языкового стандарта этого переопределения в формате языковых тегов BCP 47, например `"en-US"`.</span><span class="sxs-lookup"><span data-stu-id="bc70e-125">Specifies the culture name of the locale for this override in the BCP 47 language tag format, such as  `"en-US"`.</span></span>|
-|<span data-ttu-id="bc70e-126">Значение</span><span class="sxs-lookup"><span data-stu-id="bc70e-126">Value</span></span>|<span data-ttu-id="bc70e-127">string</span><span class="sxs-lookup"><span data-stu-id="bc70e-127">string</span></span>|<span data-ttu-id="bc70e-128">Обязательный</span><span class="sxs-lookup"><span data-stu-id="bc70e-128">required</span></span>|<span data-ttu-id="bc70e-129">Задает значение параметра, представленное для указанного языкового стандарта.</span><span class="sxs-lookup"><span data-stu-id="bc70e-129">Specifies value of the setting expressed for the specified locale.</span></span>|
+|<span data-ttu-id="4e14c-122">Locale</span><span class="sxs-lookup"><span data-stu-id="4e14c-122">Locale</span></span>|<span data-ttu-id="4e14c-123">string</span><span class="sxs-lookup"><span data-stu-id="4e14c-123">string</span></span>|<span data-ttu-id="4e14c-124">Обязательный</span><span class="sxs-lookup"><span data-stu-id="4e14c-124">required</span></span>|<span data-ttu-id="4e14c-125">Задает имя языка и региональных параметров для языкового стандарта этого переопределения в формате языковых тегов BCP 47, например `"en-US"`.</span><span class="sxs-lookup"><span data-stu-id="4e14c-125">Specifies the culture name of the locale for this override in the BCP 47 language tag format, such as  `"en-US"`.</span></span>|
+|<span data-ttu-id="4e14c-126">Значение</span><span class="sxs-lookup"><span data-stu-id="4e14c-126">Value</span></span>|<span data-ttu-id="4e14c-127">string</span><span class="sxs-lookup"><span data-stu-id="4e14c-127">string</span></span>|<span data-ttu-id="4e14c-128">Обязательный</span><span class="sxs-lookup"><span data-stu-id="4e14c-128">required</span></span>|<span data-ttu-id="4e14c-129">Задает значение параметра, представленное для указанного языкового стандарта.</span><span class="sxs-lookup"><span data-stu-id="4e14c-129">Specifies value of the setting expressed for the specified locale.</span></span>|
 
-## <a name="see-also"></a><span data-ttu-id="bc70e-130">См. также</span><span class="sxs-lookup"><span data-stu-id="bc70e-130">See also</span></span>
+## <a name="see-also"></a><span data-ttu-id="4e14c-130">См. также</span><span class="sxs-lookup"><span data-stu-id="4e14c-130">See also</span></span>
 
-- [<span data-ttu-id="bc70e-131">Локализация надстроек Office</span><span class="sxs-lookup"><span data-stu-id="bc70e-131">Localization for Office Add-ins</span></span>](https://docs.microsoft.com/office/dev/add-ins/develop/localization)
+- [<span data-ttu-id="4e14c-131">Локализация надстроек Office</span><span class="sxs-lookup"><span data-stu-id="4e14c-131">Localization for Office Add-ins</span></span>](https://docs.microsoft.com/office/dev/add-ins/develop/localization)
     
