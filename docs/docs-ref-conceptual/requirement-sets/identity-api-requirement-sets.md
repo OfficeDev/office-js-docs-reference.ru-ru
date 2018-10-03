@@ -24,7 +24,7 @@
 
 ## <a name="identityapi-11"></a>IdentityAPI 1.1 
 
-IdentityAPI 1.1 для единого входа — это первая версия API. Для получения дополнительных сведений об API увидеть `getAccessTokenAsync` метод в справочном разделе [Office.Auth](/javascript/api/office/office.auth) .
+IdentityAPI 1.1 для единого входа — это первая версия API. Для получения дополнительных сведений о этот интерфейс API обратитесь к разделу [Справка по API службы единого входа](https://docs.microsoft.com/office/dev/add-ins/develop/sso-in-office-add-ins#sso-api-reference) для [Включения службы единого входа в надстройку](https://docs.microsoft.com/office/dev/add-ins/develop/sso-in-office-add-ins).
 
 ## <a name="see-also"></a>См. также
 
