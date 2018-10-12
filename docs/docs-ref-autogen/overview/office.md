@@ -11,5 +11,5 @@ API JavaScript для Office позволяет создавать веб-при
 
 ## <a name="see-also"></a>См. также
 
-- [API JavaScript для Office](https://docs.microsoft.com/javascript/office/javascript-api-for-office?view=office-js)
+- [API JavaScript для Office](https://docs.microsoft.com/office/dev/add-ins/reference/javascript-api-for-office?view=office-js)
 - [Краткие руководства, учебные материалы и расширенные руководства по программированию для надстроек Office](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins?view=office-js)
