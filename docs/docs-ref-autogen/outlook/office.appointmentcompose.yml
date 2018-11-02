@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6c616ec330f09b7d31dc22942a4a25639e73a1d4
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 2aac9cd9cd3a0c9ab9b91f311f7637f786170cf7
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25586278"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25912888"
 items:
 - uid: outlook.Office.AppointmentCompose
   summary: >-
@@ -30,6 +30,7 @@ items:
   - outlook.Office.AppointmentCompose.dateTimeCreated
   - outlook.Office.AppointmentCompose.dateTimeModifed
   - outlook.Office.AppointmentCompose.end
+  - outlook.Office.AppointmentCompose.getAttachmentsAsync
   - outlook.Office.AppointmentCompose.getInitializationContextAsync
   - outlook.Office.AppointmentCompose.getSelectedDataAsync
   - outlook.Office.AppointmentCompose.itemType
@@ -66,7 +67,7 @@ items:
     <tr><td>[Применимые режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Организатор встречи</td></tr>
 
 
-    <tr><td>Errors</td><td>AttachmentSizeExceeded - вложение больше, чем разрешено.</td></tr><tr><td></td><td>FileTypeNotSupported - вложение имеет неподдерживаемое расширение не допускается.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - сообщение или встреча содержит слишком много вложений.</td></tr></table>
+    <tr><td>Ошибки</td><td>AttachmentSizeExceeded - вложение больше, чем разрешено.</td></tr><tr><td></td><td>FileTypeNotSupported - вложение имеет неподдерживаемое расширение не допускается.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - сообщение или встреча содержит слишком много вложений.</td></tr></table>
 
 
     В дополнение к подписи этот метод также содержит следующие подписи:
@@ -124,7 +125,7 @@ items:
       type:
       - string
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова. isInline: Если значение true, указывает, что вложения будут показаны встроенные в теле сообщения и не должно отображаться в списке вложения.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова. isInline: Если значение true, указывает, что вложения будут показаны встроенные в теле сообщения и не должно отображаться в списке вложения.'
       type:
       - office.Office.AsyncContextOptions
     - id: callback
@@ -150,7 +151,7 @@ items:
     <tr><td>[Применимые режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Организатор встречи</td></tr>
 
 
-    <tr><td>Errors</td><td>AttachmentSizeExceeded - вложение больше, чем разрешено.</td></tr><tr><td></td><td>FileTypeNotSupported - вложение имеет неподдерживаемое расширение не допускается.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - сообщение или встреча содержит слишком много вложений.</td></tr></table>
+    <tr><td>Ошибки</td><td>AttachmentSizeExceeded - вложение больше, чем разрешено.</td></tr><tr><td></td><td>FileTypeNotSupported - вложение имеет неподдерживаемое расширение не допускается.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - сообщение или встреча содержит слишком много вложений.</td></tr></table>
 
     ####Примеры
 
@@ -195,7 +196,7 @@ items:
       type:
       - string
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова. isInline: Если значение true, указывает, что вложения будут показаны встроенные в теле сообщения и не должно отображаться в списке вложения.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова. isInline: Если значение true, указывает, что вложения будут показаны встроенные в теле сообщения и не должно отображаться в списке вложения.'
       type:
       - office.Office.AsyncContextOptions
     - id: callback
@@ -207,7 +208,7 @@ items:
     Добавляет обработчик для поддерживаемого события.
 
 
-    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, и `Office.EventType.RecurrenceChanged` <!-- -->.
+    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, и `Office.EventType.RecurrenceChanged` <!-- -->. В режиме предварительного просмотра `Office.EventType.AttachmentsChanged` также поддерживается.
 
 
     \[[Набор API-Интерфейсов: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -243,11 +244,11 @@ items:
       type:
       - any
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
       - any
     - id: callback
-      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
+      description: Необязательно указывать. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
       type:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.AppointmentCompose.addItemAttachmentAsync
@@ -272,7 +273,7 @@ items:
     <tr><td>[Применимые режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Организатор встречи</td></tr>
 
 
-    <tr><td>Errors</td><td>NumberOfAttachmentsExceeded - сообщение или встреча содержит слишком много вложений.</td></tr></table>
+    <tr><td>Ошибки</td><td>NumberOfAttachmentsExceeded - сообщение или встреча содержит слишком много вложений.</td></tr></table>
 
 
     В дополнение к подписи этот метод также имеет следующие цифровые подписи.
@@ -496,6 +497,34 @@ items:
     return:
       type:
       - Time
+- uid: outlook.Office.AppointmentCompose.getAttachmentsAsync
+  summary: >-
+    Получает вложений элемента в виде массива.
+
+
+    \[[Набор API-Интерфейсов: Просмотр почтовых ящиков](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Применимые режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание</td></tr></table>\n####Примеры\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar outputString = \"\";\nitem.getAttachmentsAsync(callback);  \nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var _att = result.value [i];\n            outputString += \"<BR>\" + i + \". Name: \";\n            outputString += _att.name;\n            outputString += \"<BR>ID: \" + _att.id;\n            outputString += \"<BR>contentType: \" + _att.contentType;\n            outputString += \"<BR>size: \" + _att.size;\n            outputString += \"<BR>attachmentType: \" + _att.attachmentType;\n            outputString += \"<BR>isInline: \" + _att.isInline;\n        }\n    }\n}\n```"
+  isPreview: true
+  name: getAttachmentsAsync(options, callback)
+  fullName: outlook.Office.AppointmentCompose.getAttachmentsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAttachmentsAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.AttachmentDetails[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Необязательно указывать. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. В случае сбоя вызова будет содержать свойство asyncResult.error и код ошибки с причину сбоя.
+      type:
+      - '(result: AsyncResult<Office.AttachmentDetails[]>) => void'
 - uid: outlook.Office.AppointmentCompose.getInitializationContextAsync
   summary: >-
     Получает данные инициализации, передаваемые при активации надстройки интерактивным сообщением.
@@ -527,11 +556,11 @@ items:
       description: ''
     parameters:
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
       - office.Office.AsyncContextOptions
     - id: callback
-      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. В случае успешного выполнения инициализации данных предоставляются в свойство asyncResult.value как строку. Если контекст отсутствует инициализации, объект asyncResult будет содержать объект Error с его свойства кода 9020 и его имя свойства GenericResponseError.
+      description: Необязательно указывать. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. В случае успешного выполнения инициализации данных предоставляются в свойство asyncResult.value как строку. Если контекст отсутствует инициализации, объект asyncResult будет содержать объект Error с его свойства кода 9020 и его имя свойства GenericResponseError.
       type:
       - '(result: AsyncResult<string>) => void'
 - uid: outlook.Office.AppointmentCompose.getSelectedDataAsync
@@ -659,7 +688,7 @@ items:
       type:
       - '(result: AsyncResult<Office.CustomProperties>) => void'
     - id: userContext
-      description: Необязательный параметр. Разработчики могут предоставлять любого объекта, которые следует получить доступ к в функции обратного вызова. Этот объект можно получать свойство asyncResult.asyncContext в функции обратного вызова.
+      description: Необязательно указывать. Разработчики могут предоставлять любого объекта, которые следует получить доступ к в функции обратного вызова. Этот объект можно получать свойство asyncResult.asyncContext в функции обратного вызова.
       type:
       - any
 - uid: outlook.Office.AppointmentCompose.location
@@ -830,7 +859,7 @@ items:
     Удаляет вложение из сообщения или встречи.
 
 
-    Метод removeAttachmentAsync удаляет из элемента вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для их удаления, только если вложение добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook Web App и Outlook Web App для устройств идентификатор вложения действителен только в рамках одного сеанса. Сеанс завершается, когда пользователь закрывает приложение или начинает создавать элемент во встроенной форме, а затем переходит из формы в отдельное окно.
+    Метод removeAttachmentAsync из элемента удаляется вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook Web App и Outlook Web App для устройств идентификатор вложения действителен только в рамках одного сеанса. Сеанс — через при закрытии приложения пользователем, или если пользователь начинает составлять форму встроенного впоследствии извлекает данные формы в отдельном окне, чтобы продолжить.
 
 
     \[[Набор API-Интерфейсов: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -841,7 +870,7 @@ items:
     <tr><td>[Применимые режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Организатор встречи</td></tr>
 
 
-    <tr><td>Errors</td><td>InvalidAttachmentId - идентификатор вложения не существует.</td></tr></table>
+    <tr><td>Ошибки</td><td>InvalidAttachmentId - идентификатор вложения не существует.</td></tr></table>
 
 
     В дополнение к подписи этот метод также содержит следующие подписи:
@@ -889,11 +918,11 @@ items:
       type:
       - string
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
       - office.Office.AsyncContextOptions
     - id: callback
-      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. Если не удается удалить вложение, свойство asyncResult.error будет содержать код ошибки с причину сбоя.
+      description: Необязательно указывать. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. Если не удается удалить вложение, свойство asyncResult.error будет содержать код ошибки с причину сбоя.
       type:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.AppointmentCompose.removeHandlerAsync
@@ -901,7 +930,7 @@ items:
     Удаляет обработчик событий для события, поддерживаемые.
 
 
-    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, и `Office.EventType.RecurrenceChanged` <!-- -->.
+    В настоящее время поддерживаемые типы событий, `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, и `Office.EventType.RecurrenceChanged` <!-- -->. В режиме предварительного просмотра `Office.EventType.AttachmentsChanged` также поддерживается.
 
 
     \[[Набор API-Интерфейсов: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -929,7 +958,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: Событие, которое должно вызвать обработчик.
+      description: Событие, которое необходимо отменить обработчик.
       type:
       - EventType
     - id: handler
@@ -937,11 +966,11 @@ items:
       type:
       - any
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
       - any
     - id: callback
-      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
+      description: Необязательно указывать. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult.
       type:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.AppointmentCompose.requiredAttendees
@@ -1014,7 +1043,7 @@ items:
     <tr><td>[Применимые режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Организатор встречи</td></tr>
 
 
-    <tr><td>Errors</td><td>InvalidAttachmentId - идентификатор вложения не существует.</td></tr></table>
+    <tr><td>Ошибки</td><td>InvalidAttachmentId - идентификатор вложения не существует.</td></tr></table>
 
 
     В дополнение к подписи этот метод также содержит следующие подписи:
@@ -1026,7 +1055,7 @@ items:
     `saveAsync(options: Office.AsyncContextOptions): void;`
 
 
-    `saveAsync(callback: (result: AsyncResult<void>) => void): void;`
+    `saveAsync(callback: (result: AsyncResult<string>) => void): void;`
 
     #### <a name="examples"></a>Примеры
 
@@ -1060,20 +1089,20 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'saveAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    content: 'saveAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
     return:
       type:
       - void
       description: ''
     parameters:
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
       - office.Office.AsyncContextOptions
     - id: callback
-      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
+      description: Необязательно указывать. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
       type:
-      - '(result: AsyncResult<void>) => void'
+      - '(result: AsyncResult<string>) => void'
 - uid: outlook.Office.AppointmentCompose.seriesId
   summary: >-
     Получает идентификатор серии, к которой принадлежит экземпляр.
@@ -1120,7 +1149,7 @@ items:
     <tr><td>[Применимые режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Организатор встречи</td></tr>
 
 
-    <tr><td>Errors</td><td>InvalidAttachmentId - идентификатор вложения не существует.</td></tr></table>
+    <tr><td>Ошибки</td><td>InvalidAttachmentId - идентификатор вложения не существует.</td></tr></table>
 
 
     В дополнение к подписи этот метод также содержит следующие подписи:
@@ -1161,11 +1190,11 @@ items:
       type:
       - string
     - id: options
-      description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова. coercionType: Если текст, текущий стиль применяется в Outlook Web App и Outlook. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML-код и поле поддерживает HTML (не тему), текущий стиль применяется в Outlook Web App и применяется стиль по умолчанию в Outlook. Если это поле является текстовым полем, возвращается ошибка InvalidDataFormat. Если параметр coercionType не задан, результат зависит от поля. Если поле содержит HTML, используется HTML. Если поле текстовое, используется обычный текст.'
+      description: 'Необязательно указывать. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова. coercionType: Если текст, текущий стиль применяется в Outlook Web App и Outlook. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML-код и поле поддерживает HTML (не тему), текущий стиль применяется в Outlook Web App и применяется стиль по умолчанию в Outlook. Если это поле является текстовым полем, возвращается ошибка InvalidDataFormat. Если параметр coercionType не задан, результат зависит от поля. Если поле содержит HTML, используется HTML. Если поле текстовое, используется обычный текст.'
       type:
       - Office.AsyncContextOptions & CoercionTypeOptions
     - id: callback
-      description: Необязательный параметр. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
+      description: Необязательно указывать. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
       type:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.AppointmentCompose.start
