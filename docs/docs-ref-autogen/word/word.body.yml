@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8befcf25bc1b0fb41b1366a292685bae6cfb32d1
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
+ms.openlocfilehash: 0c7c0ba26034c7ca935a47ace83ad05366419cd7
+ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26235103"
+ms.lasthandoff: 11/30/2018
+ms.locfileid: "26995405"
 items:
 - uid: word.Word.Body
   summary: >-
@@ -18,7 +18,7 @@ items:
   - typeScript
   type: class
   extends:
-  - OfficeExtension.ClientObject
+  - office.OfficeExtension.ClientObject
   package: word
   children:
   - word.Word.Body.clear
@@ -158,7 +158,7 @@ items:
       description: ''
     parameters:
     - id: rangeLocation
-      description: Необязательно указывать. Расположение диапазона может быть «Целое», «Запуск», «End», «После», или «Содержимое».
+      description: Необязательный атрибут. Расположение диапазона может быть «Целое», «Запуск», «End», «После», или «Содержимое».
       type:
       - word.Word.RangeLocation
 - uid: word.Word.Body.inlinePictures
@@ -662,7 +662,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a commmand to search the document.\n    var searchResults = context.document.body.search('video', {matchCase: false});\n\n    // Queue a commmand to load the results.\n    context.load(searchResults, 'text, font');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        var results = 'Found count: ' + searchResults.items.length +\n                      '; we highlighted the results.';\n\n        // Queue a command to change the font for each found item.\n        for (var i = 0; i < searchResults.items.length; i++) {\n          searchResults.items[i].font.color = '#FF0000'    // Change color to Red\n          searchResults.items[i].font.highlightColor = '#FFFF00';\n          searchResults.items[i].font.bold = true;\n        }\n\n        // Synchronize the document state by executing the queued commands,\n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(results);\n        });\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n\n// The Word-Add-in-DocumentAssembly sample provides another example of how to search a document.\n// https://github.com/OfficeDev/Word-Add-in-DocumentAssembly\n```\n```typescript\nawait Word.run(async (context) => {\n    let results = context.document.body.search(\"Online\");\n    results.load(\"font/highlightColor\");\n\n    await context.sync();\n\n    // Let's traverse the search results... and highlight...\n    for (let i = 0; i < results.items.length; i++) {\n        results.items[i].font.highlightColor = \"yellow\";\n    }\n\n    await context.sync();\n});\n```\n```typescript\nawait Word.run(async (context) => {\n    // Check out how wildcard expression are built, also use the second parameter of the search method to include search modes (i.e. we are using wildcards).\n    let results = context.document.body.search(\"$*.[0-9][0-9]\", { matchWildcards: true });\n    results.load(\"font/highlightColor, font/color\");\n\n    await context.sync();\n\n    // Let's traverse the search results... and highlight...\n    for (let i = 0; i < results.items.length; i++) {\n        results.items[i].font.highlightColor = \"red\";\n        results.items[i].font.color = \"white\";\n    }\n\n    await context.sync();\n});\n```"
     parameters:
     - id: searchText
-      description: Обязательно указывать. Текст поиска. Может быть не более 255 знаков.
+      description: Обязательный атрибут. Текст поиска. Может быть не более 255 знаков.
       type:
       - string
     - id: searchOptions
