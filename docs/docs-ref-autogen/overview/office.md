@@ -7,7 +7,7 @@ API JavaScript для Office позволяет создавать веб-при
 - [Outlook](https://docs.microsoft.com/javascript/api/outlook?view=office-js)
 - [Visio](https://docs.microsoft.com/javascript/api/visio?view=office-js)
 - [Word](https://docs.microsoft.com/javascript/api/word?view=office-js)
-- [Shared API](https://docs.microsoft.com/javascript/api/office?view=office-js)
+- [Общий API-Интерфейс](https://docs.microsoft.com/javascript/api/office?view=office-js)
 
 ## <a name="see-also"></a>См. также
 
