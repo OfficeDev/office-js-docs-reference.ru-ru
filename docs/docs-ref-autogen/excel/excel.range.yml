@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0113e19fe75f6a676740174afd9f8d42681f847a
-ms.sourcegitcommit: c12dfe8b909dec25d284f5254d97bd6478823b8f
+ms.openlocfilehash: 8538878d7c5ae5deb7dd090b3760f6eaf146efed
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "27243466"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724964"
 items:
 - uid: excel.Excel.Range
   summary: >-
@@ -31,6 +31,7 @@ items:
   - excel.Excel.Range.columnHidden
   - excel.Excel.Range.columnIndex
   - excel.Excel.Range.conditionalFormats
+  - excel.Excel.Range.context
   - excel.Excel.Range.dataValidation
   - excel.Excel.Range.delete
   - excel.Excel.Range.format
@@ -168,7 +169,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Below example clears format and contents of the range. \nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"D:F\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.clear();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: applyTo
-      description: Необязательно указывать. Определяет тип очистить действия. Для получения дополнительных сведений в разделе Excel.ClearApplyTo.
+      description: Необязательно. Определяет тип очистить действия. Для получения дополнительных сведений в разделе Excel.ClearApplyTo.
       type:
       - excel.Excel.ClearApplyTo
 - uid: excel.Excel.Range.columnCount
@@ -235,6 +236,18 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormatCollection
+- uid: excel.Excel.Range.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Range.dataValidation
   summary: >-
     Возвращает объект проверки данных.
@@ -339,7 +352,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.getAbsoluteResizedRange
   summary: >-
-    Получает объект Range с одной левый верхний угол как текущий объект Range, но с указанного номера строк и столбцов.
+    Получает объект Range с той же верхней левой ячейкой, что и текущий объект Range, но с указанным количеством строк и столбцов.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -552,7 +565,7 @@ items:
       - Range | string
 - uid: excel.Excel.Range.getIntersectionOrNullObject
   summary: >-
-    Возвращает объект range, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не найдено, возвращает пустой объект.
+    Получает объект range, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не найдено, возвращает пустой объект.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -743,7 +756,7 @@ items:
       - number
 - uid: excel.Excel.Range.getSurroundingRegion
   summary: >-
-    Возвращает объект Range, который представляет окружающих регион левый верхний угол в этот диапазон. Окружающих область — диапазон, в любом сочетании пустые строки и пустые столбцы, относящиеся к этот диапазон.
+    Возвращает объект Range, представляющий область вокруг верхней левой ячейки в этом диапазоне. Это диапазон, ограниченный любым сочетанием пустых строк и столбцов, относящихся к этому диапазону.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -876,7 +889,7 @@ items:
       - excel.Excel.InsertShiftDirection
 - uid: excel.Excel.Range.isEntireColumn
   summary: >-
-    Представляет, если текущий диапазон целый столбец. Только для чтения.
+    Указывает, является ли текущий диапазон целым столбцом. Только для чтения.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -892,7 +905,7 @@ items:
       - boolean
 - uid: excel.Excel.Range.isEntireRow
   summary: >-
-    Представляет, если текущий диапазон всю строку. Только для чтения.
+    Указывает, является ли текущий диапазон целой строкой. Только для чтения.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -965,7 +978,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.numberFormatLocal
   summary: >-
-    Представляет код числового формата Excel для указанного диапазона как строку в языке пользователя. При задании локального формат номера к диапазону, аргумент значение может быть одним значением (string) или двухмерный массив. Если аргумент является одним значением, он применяется ко всем ячейкам в диапазоне.
+    Представляет код числового формата Excel для указанного диапазона в виде строки на языке пользователя. При задании локального формат номера к диапазону, аргумент значение может быть одним значением (string) или двухмерный массив. Если аргумент является одним значением, он применяется ко всем ячейкам в диапазоне.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1046,7 +1059,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:F10\"; \n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.select();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Range.showCard
   summary: >-
-    Отображает карточку для активной ячейки, если он имеет значение Форматированный контент.
+    Отображает карточку для активной ячейки, если она имеет содержимое c форматированным значением.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1079,7 +1092,7 @@ items:
       - excel.Excel.RangeSort
 - uid: excel.Excel.Range.style
   summary: >-
-    Представляет стиль текущий диапазон. Если стили ячеек их необходимо будет возвращено значение null. Для пользовательских стилей будут возвращены имени стиля. Строка, представляющая значение перечисления BuiltInStyle будут возвращены для встроенных стилей.
+    Представляет стиль текущего диапазона. Если стили ячеек их необходимо будет возвращено значение null. Для пользовательских стилей будут возвращены имени стиля. Строка, представляющая значение перечисления BuiltInStyle будут возвращены для встроенных стилей.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1111,6 +1124,7 @@ items:
       type:
       - string[][]
 - uid: excel.Excel.Range.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Range является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.RangeData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:

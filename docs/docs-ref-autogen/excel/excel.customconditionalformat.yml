@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7fe2749f1909178ca2d68c749c88c39969676651
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: f4f916e815d07c180ea51cf80f2c481bfce96d25
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995040"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724467"
 items:
 - uid: excel.Excel.CustomConditionalFormat
   summary: >-
@@ -21,10 +21,23 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.CustomConditionalFormat.context
   - excel.Excel.CustomConditionalFormat.format
   - excel.Excel.CustomConditionalFormat.load
   - excel.Excel.CustomConditionalFormat.rule
   - excel.Excel.CustomConditionalFormat.toJSON
+- uid: excel.Excel.CustomConditionalFormat.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.CustomConditionalFormat.format
   summary: >-
     Возвращает объект формата, который содержит шрифт, заливку, границы и другие свойства условного форматирования. Только для чтения.
@@ -86,6 +99,7 @@ items:
       - excel.Excel.ConditionalFormatRule
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) {\n    var sheet = ctx.workbook.worksheets.getActiveWorksheet();\n    var range = sheet.getRange(\"A1:A5\");\n    range.values = [[1], [20], [\"\"], [5], [\"test\"]];\n    var cf = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);\n    var cfCustom = cf.customOrNullObject;\n    cfCustom.rule.formula = \"=ISBLANK(A1)\";\n    cfCustom.format.fill.color = \"#00FF00\";\n    return ctx.sync().then(function () {\n        console.log(\"Added new custom conditional format highlighting all blank cells.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.CustomConditionalFormat.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.CustomConditionalFormat является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.CustomConditionalFormatData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:

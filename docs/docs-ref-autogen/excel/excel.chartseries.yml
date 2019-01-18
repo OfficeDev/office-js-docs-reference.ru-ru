@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: d80c2b5614e70b2f7bc3d2d5b76c5ef005934184
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 89607844254d949746bb049f3571256a51318f54
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996629"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724950"
 items:
 - uid: excel.Excel.ChartSeries
   summary: >-
@@ -23,6 +23,7 @@ items:
   children:
   - excel.Excel.ChartSeries.axisGroup
   - excel.Excel.ChartSeries.chartType
+  - excel.Excel.ChartSeries.context
   - excel.Excel.ChartSeries.dataLabels
   - excel.Excel.ChartSeries.delete
   - excel.Excel.ChartSeries.doughnutHoleSize
@@ -84,9 +85,21 @@ items:
     return:
       type:
       - Excel.ChartType | "Invalid" | "ColumnClustered" | "ColumnStacked" | "ColumnStacked100" | "3DColumnClustered" | "3DColumnStacked" | "3DColumnStacked100" | "BarClustered" | "BarStacked" | "BarStacked100" | "3DBarClustered" | "3DBarStacked" | "3DBarStacked100" | "LineStacked" | "LineStacked100" | "LineMarkers" | "LineMarkersStacked" | "LineMarkersStacked100" | "PieOfPie" | "PieExploded" | "3DPieExploded" | "BarOfPie" | "XYScatterSmooth" | "XYScatterSmoothNoMarkers" | "XYScatterLines" | "XYScatterLinesNoMarkers" | "AreaStacked" | "AreaStacked100" | "3DAreaStacked" | "3DAreaStacked100" | "DoughnutExploded" | "RadarMarkers" | "RadarFilled" | "Surface" | "SurfaceWireframe" | "SurfaceTopView" | "SurfaceTopViewWireframe" | "Bubble" | "Bubble3DEffect" | "StockHLC" | "StockOHLC" | "StockVHLC" | "StockVOHLC" | "CylinderColClustered" | "CylinderColStacked" | "CylinderColStacked100" | "CylinderBarClustered" | "CylinderBarStacked" | "CylinderBarStacked100" | "CylinderCol" | "ConeColClustered" | "ConeColStacked" | "ConeColStacked100" | "ConeBarClustered" | "ConeBarStacked" | "ConeBarStacked100" | "ConeCol" | "PyramidColClustered" | "PyramidColStacked" | "PyramidColStacked100" | "PyramidBarClustered" | "PyramidBarStacked" | "PyramidBarStacked100" | "PyramidCol" | "3DColumn" | "Line" | "3DLine" | "3DPie" | "Pie" | "XYScatter" | "3DArea" | "Area" | "Doughnut" | "Radar" | "Histogram" | "Boxwhisker" | "Pareto" | "RegionMap" | "Treemap" | "Waterfall" | "Sunburst" | "Funnel"
+- uid: excel.Excel.ChartSeries.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.ChartSeries.dataLabels
   summary: >-
-    Представляет коллекцию всех dataLabels из серии.
+    Представляет коллекцию всех dataLabels в ряду.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -102,7 +115,7 @@ items:
       - excel.Excel.ChartDataLabels
 - uid: excel.Excel.ChartSeries.delete
   summary: >-
-    Удаляет рядов диаграммы.
+    Удаляет ряд диаграммы.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -119,7 +132,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n  const sheet = context.workbook.worksheets.getItem(\"Sample\");\n  const seriesCollection = sheet.charts.getItemAt(0).series;\n  seriesCollection.load(\"count\");\n  await context.sync();\n\n  if (seriesCollection.count > 0) {\n    const series = seriesCollection.getItemAt(0);\n\n    // Delete the first series.\n    series.delete();\n  }\n\n  await context.sync();\n});\n```"
 - uid: excel.Excel.ChartSeries.doughnutHoleSize
   summary: >-
-    Представляет размер кольцевых отверстий рядов диаграммы. Допустимо только в doughnutExploded и кольцевых диаграммах. Создает исключение недопустимый аргумент на недопустимое диаграмм.
+    Представляет размер отверстия ряда кольцевой диаграммы. Допустимо только в doughnutExploded и кольцевых диаграммах. Создает исключение недопустимый аргумент на недопустимое диаграмм.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -135,7 +148,7 @@ items:
       - number
 - uid: excel.Excel.ChartSeries.explosion
   summary: >-
-    Возвращает или задает значение развертывание круговой диаграммы или кольцевая фрагмента. Возвращает нуль (0), если нет без развертывания (Совет фрагмент — в центре круговой диаграммы). Чтение и запись.
+    Возвращает или задает значение развертывания для сектора круговой или кольцевой диаграммы. Возвращает нуль (0) при отсутствии развертывания (верхушка сектора — в центре круговой диаграммы). Для чтения и записи.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -151,7 +164,7 @@ items:
       - number
 - uid: excel.Excel.ChartSeries.filtered
   summary: >-
-    Логическое значение, представляющее Если серии фильтруется или нет. Неприменимо для предоставления диаграмм.
+    Логическое значение, которое указывает, фильтруется ли ряд. Неприменимо для поверхностных диаграмм.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -167,7 +180,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartSeries.firstSliceAngle
   summary: >-
-    Возвращает или задает угол первого сектора круговой диаграммы или кольцевая диаграмма, в градусов (часовой с вертикального). Применяется только к круговая, объемных круговых и кольцевых диаграммах. Может быть в диапазоне от 0 до 360. Чтение и запись
+    Возвращает или задает угол первого сектора круговой или кольцевой диаграммы, в градусах (по часовой стрелке из вертикального положения). Применяется только к круговым, объемным круговым и кольцевым диаграммам. Может находиться в диапазоне от 0 до 360. Чтение и запись
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -215,7 +228,7 @@ items:
       - number
 - uid: excel.Excel.ChartSeries.hasDataLabels
   summary: >-
-    Логическое значение, представляющее серия имеет метки данных или нет.
+    Логическое значение, которое указывает, имеют ли ряды метки данных.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -231,7 +244,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartSeries.invertIfNegative
   summary: >-
-    Значение true, если Microsoft Excel инвертирует шаблон в элементе, если он соответствует отрицательное значение. Чтение и запись.
+    Значение true, если Microsoft Excel инвертирует шаблон в элементе, когда он соответствует отрицательному числу. Для чтения и записи.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -266,7 +279,7 @@ items:
       - string | string[]
 - uid: excel.Excel.ChartSeries.markerBackgroundColor
   summary: >-
-    Представляет цвет фона маркеры рядов диаграммы.
+    Представляет цвет фона маркеров для рядов диаграммы.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -283,7 +296,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets.getItem(\"Sample\");\n    let salesTable = sheet.tables.getItem(\"SalesTable\");\n    let dataRange = sheet.getRange(\"A1:E7\");\n\n    // Create an XY scatter chart.\n    let chart = sheet.charts.add(\"XYScatterSmooth\", dataRange, \"Auto\");\n    chart.title.text = \"Bicycle Parts Quarterly Sales\"; \n  \n    let series = chart.series;\n    let series0 = series.getItemAt(0);\n    let series1 = series.getItemAt(1);\n    let series2 = series.getItemAt(2);\n    let series3 = series.getItemAt(3);\n\n    // Set markers.\n    series0.markerStyle = \"Dash\";\n    series0.markerForegroundColor = \"black\";\n    series1.markerStyle = \"Star\";\n    series1.markerForegroundColor = \"black\";\n    series2.markerStyle = \"X\";\n    series2.markerSize = 12;\n    series3.markerStyle = \"Triangle\";\n    series3.markerBackgroundColor = \"purple\";\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ChartSeries.markerForegroundColor
   summary: >-
-    Представляет цвет переднего плана маркеры рядов диаграммы.
+    Представляет цвет переднего плана для рядов диаграммы.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -350,7 +363,7 @@ items:
       - string
 - uid: excel.Excel.ChartSeries.overlap
   summary: >-
-    Указывает расположение строки и столбцы. Может быть в диапазоне от-100 до 100. Применяется только к плоских диаграмм и гистограмм 2-D. Чтение и запись.
+    Указывает на расположение строк и столбцов. Может быть в диапазоне от-100 до 100. Применяется только к двумерным диаграммам и гистограммам. Для чтения и записи.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -366,7 +379,7 @@ items:
       - number
 - uid: excel.Excel.ChartSeries.plotOrder
   summary: >-
-    Представляет порядка отображения рядов диаграммы в группе диаграммы.
+    Представляет порядок построения рядов диаграммы в группе диаграммы.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -398,7 +411,7 @@ items:
       - excel.Excel.ChartPointsCollection
 - uid: excel.Excel.ChartSeries.secondPlotSize
   summary: >-
-    Возвращает или задает размер дополнительного раздела либо Вторичная круговая диаграмма или панели круговой диаграммы в процентах от размера основной круговой диаграммы. Может быть в диапазоне от 5 до 200. Чтение и запись.
+    Возвращает или задает размер вторичного раздела круга круговой диаграммы либо линии круговой диаграммы в процентах от размера основной круговой диаграммы. Может находиться в диапазоне от 5 до 200. Для чтения и записи.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -414,7 +427,7 @@ items:
       - number
 - uid: excel.Excel.ChartSeries.setBubbleSizes
   summary: >-
-    Настройка размеров пузырьковой для ряда диаграммы. Работает только для пузырьковых диаграмм.
+    Задает размеры пузырьков для ряда диаграммы. Применяется только для пузырьковых диаграмм.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -436,7 +449,7 @@ items:
       - Range
 - uid: excel.Excel.ChartSeries.setValues
   summary: >-
-    Задайте значения для ряда диаграммы. Точечные диаграммы это означает значения оси Y.
+    Задает значения для ряда диаграммы.  Для точечной диаграммы это соответствует значениям оси Y.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -458,7 +471,7 @@ items:
       - Range
 - uid: excel.Excel.ChartSeries.setXAxisValues
   summary: >-
-    Задайте значения X оси для ряда диаграммы. Работает только для точечных диаграмм.
+    Задает значения оси X для ряда диаграммы.  Применяется только для точечных диаграмм.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -496,7 +509,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartSeries.smooth
   summary: >-
-    Логическое значение, представляющее если ряд является легко или нет. Применимо только к графиков и точечных диаграмм.
+    Логическое значение, которое указывает, является ли ряд плавным.  Применимо только к графиков и точечных диаграмм.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -512,7 +525,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartSeries.splitType
   summary: >-
-    Возвращает или задает способ разделить два раздела Вторичная круговая диаграмма или панели круговой диаграммы. Чтение и запись.
+    Возвращает или задает способ разделения двух разделов круга круговой диаграммы либо линии круговой диаграммы. Для чтения и записи.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -522,11 +535,12 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'splitType: "SplitByPosition" | "SplitByValue" | "SplitByPercentValue" | "SplitByCustomSplit";'
+    content: 'splitType: Excel.ChartSplitType | "SplitByPosition" | "SplitByValue" | "SplitByPercentValue" | "SplitByCustomSplit";'
     return:
       type:
-      - "\"SplitByPosition\" | \"SplitByValue\" | \"SplitByPercentValue\" | \"SplitByCustomSplit\""
+      - Excel.ChartSplitType | "SplitByPosition" | "SplitByValue" | "SplitByPercentValue" | "SplitByCustomSplit"
 - uid: excel.Excel.ChartSeries.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.ChartSeries является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.ChartSeriesData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -540,7 +554,7 @@ items:
       description: ''
 - uid: excel.Excel.ChartSeries.trendlines
   summary: >-
-    Представляет коллекцию линии тренда в серии. Только для чтения.
+    Представляет коллекцию линий тренда в ряду. Только для чтения.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -556,7 +570,7 @@ items:
       - excel.Excel.ChartTrendlineCollection
 - uid: excel.Excel.ChartSeries.varyByCategories
   summary: >-
-    Значение true, если Microsoft Excel назначает разные цвета или узора к маркерам данных. Диаграмма должен содержать только один ряд. Чтение и запись.
+    Значение true, если Microsoft Excel назначает разные цвета или шаблоны каждому маркеру данных. Диаграмма должна содержать только один ряд. Для чтения и записи.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

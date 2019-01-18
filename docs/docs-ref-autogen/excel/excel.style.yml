@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b343e503a3fa62d30beef4789b3ad81a209df463
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 6ba3e82f178c68789eb1283a7a0b28a8ae4c3704
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996167"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725440"
 items:
 - uid: excel.Excel.Style
   summary: >-
@@ -24,6 +24,7 @@ items:
   - excel.Excel.Style.autoIndent
   - excel.Excel.Style.borders
   - excel.Excel.Style.builtIn
+  - excel.Excel.Style.context
   - excel.Excel.Style.delete
   - excel.Excel.Style.fill
   - excel.Excel.Style.font
@@ -49,7 +50,7 @@ items:
   - excel.Excel.Style.wrapText
 - uid: excel.Excel.Style.autoIndent
   summary: >-
-    Указывает, если текст автоматический отступ, если для выравнивания текста в ячейку в равномерного распределения.
+    Указывает, будет ли выполнен автоматический отступ для текста, если выравнивание текста в ячейке установлено на равномерное распределение.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -65,7 +66,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.borders
   summary: >-
-    Границы коллекцию объектов четыре границы, которые представляют стиль четыре границы.
+    Коллекция Border из четырех объектов Border, представляющих стиль четырех границ.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -81,7 +82,7 @@ items:
       - excel.Excel.RangeBorderCollection
 - uid: excel.Excel.Style.builtIn
   summary: >-
-    Указывает, является ли стиль встроенных стилей.
+    Указывает, является ли стиль встроенным.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -95,6 +96,18 @@ items:
     return:
       type:
       - boolean
+- uid: excel.Excel.Style.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Style.delete
   summary: >-
     Удаляет этот стиль.
@@ -114,7 +127,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Diagonal Orientation Style\");\n\n    // Delete the diagonal orientation style from the style collection.\n    // Styles are in the Home tab ribbon.\n    style.delete();\n\n    await context.sync();\n\n    console.log(\"Successfully deleted the diagonal orientation style from the Home tab ribbon.\");\n});\n```"
 - uid: excel.Excel.Style.fill
   summary: >-
-    Заливку стиля.
+    Заливка стиля.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -130,7 +143,7 @@ items:
       - excel.Excel.RangeFill
 - uid: excel.Excel.Style.font
   summary: >-
-    Объект Font, представляющий шрифта, стиля.
+    Объект Font, представляющий шрифт стиля.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -147,7 +160,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let style = context.workbook.styles.getItem(\"Normal\");\n    style.font.load(\"bold, color, italic, name, size\");\n    style.fill.load(\"color\");\n\n    await context.sync();\n\n    console.log(\"Bold: \" + style.font.bold);\n    console.log(\"Font color: \" + style.font.color);\n    console.log(\"Italic: \" + style.font.italic);\n    console.log(\"Name: \" + style.font.name);\n    console.log(\"Size: \" + style.font.size);\n    console.log(\"Fill color: \" + style.fill.color);\n});\n```"
 - uid: excel.Excel.Style.formulaHidden
   summary: >-
-    Указывает, если формула будет скрыта при использовании защищенного рабочего листа.
+    Указывает, будет ли формула скрыта, если лист защищен.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -180,7 +193,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let worksheet = context.workbook.worksheets.getItem(\"Sample\");\n    let range = worksheet.getRange(\"A1:E1\");\n\n    // Apply built-in style. \n    // Styles are in the Home tab ribbon.\n    range.style = Excel.BuiltInStyle.neutral;\n    range.format.horizontalAlignment = \"Right\";\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Style.includeAlignment
   summary: >-
-    Указывает, если стиль включает в себя свойства AutoIndent, HorizontalAlignment, ВертикальноеВыравнивание, WrapText, IndentLevel и TextOrientation.
+    Указывает, содержатся ли в стиле такие свойства, как AutoIndent, HorizontalAlignment, VerticalAlignment, WrapText, IndentLevel и TextOrientation.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -196,7 +209,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeBorder
   summary: >-
-    Указывает, если стиль включает в себя свойства границы цвет, ColorIndex (en), линии и вес.
+    Указывает, содержатся ли в стиле такие свойства границ, как Color, ColorIndex, LineStyle и Weight.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -212,7 +225,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeFont
   summary: >-
-    Указывает, если стиль включает в себя свойства шрифта фона, полужирный, цвет, ColorIndex (en), FontStyle, курсив, имя, размер, зачеркивание, подстрочный знак, надстрочный знак и подчеркивание.
+    Указывает, содержатся ли в стиле такие свойства шрифта, как Background, Bold, Color, ColorIndex, FontStyle, Italic, Name, Size, Strikethrough, Subscript, Superscript и Underline.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -228,7 +241,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeNumber
   summary: >-
-    Указывает, если стиль включает в себя свойства формат числа.
+    Указывает, содержится ли в стиле свойство NumberFormat.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -244,7 +257,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includePatterns
   summary: >-
-    Указывает, если стиль включает в себя цвета ColorIndex (en), InvertIfNegative, шаблон, PatternColor и PatternColorIndex внутренних свойств.
+    Указывает, содержатся ли в стиле такие внутренние свойства, как Color, ColorIndex, InvertIfNegative, Pattern, PatternColor и PatternColorIndex.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -260,7 +273,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.includeProtection
   summary: >-
-    Указывает, если стиль включает в себя свойства защиты FormulaHidden и Защищаемая ячейка.
+    Указывает, содержатся ли в стиле такие свойства защиты, как FormulaHidden и Locked.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -276,7 +289,7 @@ items:
       - boolean
 - uid: excel.Excel.Style.indentLevel
   summary: >-
-    Целое число от 0 до 250 знаков, которое указывает, уровень отступа для стиля.
+    Целое число от 0 до 250, указывающее уровень отступа для стиля.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -311,7 +324,7 @@ items:
       - string | string[]
 - uid: excel.Excel.Style.locked
   summary: >-
-    Указывает, если объект заблокирован, когда лист защищен.
+    Указывает, заблокирован ли объект, если лист защищен.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -343,7 +356,7 @@ items:
       - string
 - uid: excel.Excel.Style.numberFormat
   summary: >-
-    Код формата числовой формат для стиля.
+    Код числового формата для стиля.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -359,7 +372,7 @@ items:
       - string
 - uid: excel.Excel.Style.numberFormatLocal
   summary: >-
-    Код локализованном формате числовой формат для стиля.
+    Локализованный код числового формата для стиля.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -375,7 +388,7 @@ items:
       - string
 - uid: excel.Excel.Style.readingOrder
   summary: >-
-    Порядок чтения для стиля.
+    Направление чтения для стиля.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -391,7 +404,7 @@ items:
       - Excel.ReadingOrder | "Context" | "LeftToRight" | "RightToLeft"
 - uid: excel.Excel.Style.shrinkToFit
   summary: >-
-    Указывает, если текст автоматически сжимается для соответствия ширине необходимые столбцы.
+    Указывает, сжимается ли автоматически текст для соответствия имеющейся ширине столбца.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -422,6 +435,7 @@ items:
       type:
       - number
 - uid: excel.Excel.Style.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Style является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.StyleData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -451,7 +465,7 @@ items:
       - Excel.VerticalAlignment | "Top" | "Center" | "Bottom" | "Justify" | "Distributed"
 - uid: excel.Excel.Style.wrapText
   summary: >-
-    Указывает, если Microsoft Excel переносит текст в объект.
+    Указывает, применяет ли Microsoft Excel обтекание текстом для объекта.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

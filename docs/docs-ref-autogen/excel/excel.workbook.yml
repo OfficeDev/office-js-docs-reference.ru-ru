@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e28789800e3c2104c303da210cc49dc5438093d7
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: c35d258e429129a43943d53e26b3daaab4653edd
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995278"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724957"
 items:
 - uid: excel.Excel.Workbook
   summary: >-
@@ -23,6 +23,7 @@ items:
   children:
   - excel.Excel.Workbook.application
   - excel.Excel.Workbook.bindings
+  - excel.Excel.Workbook.context
   - excel.Excel.Workbook.customXmlParts
   - excel.Excel.Workbook.dataConnections
   - excel.Excel.Workbook.functions
@@ -73,6 +74,18 @@ items:
     return:
       type:
       - excel.Excel.BindingCollection
+- uid: excel.Excel.Workbook.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Workbook.customXmlParts
   summary: >-
     Представляет коллекцию пользовательских XML-частей, содержащихся в этой книге. Только для чтения.
@@ -123,7 +136,7 @@ items:
       - excel.Excel.Functions
 - uid: excel.Excel.Workbook.getActiveCell
   summary: >-
-    Получает активную ячейку в книге.
+    Получает текущую активную ячейку из книги.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -264,7 +277,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let titleValue = \"Excel document properties API\";\n    let subjectValue = \"Set and get document properties\";\n    let keywordsValue = \"Set and get operations\";\n    let commentsValue = \"This is an Excel document properties API code sample\";\n    let categoryValue = \"Office Add-ins\";\n    let managerValue = \"John\";\n    let companyValue = \"Microsoft\";\n\n    let docProperties = context.workbook.properties;\n\n    // Set the writeable document properties.\n    docProperties.title = titleValue;\n    docProperties.subject = subjectValue;\n    docProperties.keywords = keywordsValue;\n    docProperties.comments = commentsValue;\n    docProperties.category = categoryValue;\n    docProperties.manager = managerValue;\n    docProperties.company = companyValue;\n\n    await context.sync();\n\n    console.log(\"Set the following document properties: title, subject, keywords, comments, category, manager, company.\");\n});\n```"
 - uid: excel.Excel.Workbook.protection
   summary: >-
-    Возвращает объект Защита книги для книги. Только для чтения.
+    Возвращает объект защиты книги. Только для чтения.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -312,7 +325,7 @@ items:
       - excel.Excel.SettingCollection
 - uid: excel.Excel.Workbook.styles
   summary: >-
-    Представляет коллекцию стилей, связанное с книгой. Только для чтения.
+    Представляет коллекцию стилей, связанных с книгой. Только для чтения.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -343,6 +356,7 @@ items:
       type:
       - excel.Excel.TableCollection
 - uid: excel.Excel.Workbook.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Workbook является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.WorkbookData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:

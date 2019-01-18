@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7bbe8e85f7addd8ac293b7c98e1316f4467d926e
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 84d9bbc70d85f1cc092218f4f43b47b4827eb5e1
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996678"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724719"
 items:
 - uid: excel.Excel.TextConditionalFormat
   summary: >-
@@ -21,10 +21,23 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.TextConditionalFormat.context
   - excel.Excel.TextConditionalFormat.format
   - excel.Excel.TextConditionalFormat.load
   - excel.Excel.TextConditionalFormat.rule
   - excel.Excel.TextConditionalFormat.toJSON
+- uid: excel.Excel.TextConditionalFormat.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.TextConditionalFormat.format
   summary: >-
     Возвращает объект формата, который содержит шрифт, заливку, границы и другие свойства условного форматирования. Только для чтения.
@@ -86,6 +99,7 @@ items:
       - excel.Excel.ConditionalTextComparisonRule
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B16:D18\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.containsText);\n    conditionalFormat.textComparison.format.font.color = \"red\";\n    conditionalFormat.textComparison.rule = { operator: Excel.ConditionalTextOperator.contains, text: \"Delayed\" };\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.TextConditionalFormat.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.TextConditionalFormat является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.TextConditionalFormatData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:

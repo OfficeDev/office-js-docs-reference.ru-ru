@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 9ab0bdc1c89055d686c563df42d99b7a5bf33549
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 0ba9b9efdfcbcd0573ab1eda7c0a4734a0de14a9
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994816"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724614"
 items:
 - uid: excel.Excel.CustomXmlPartScopedCollection
   summary: >-
@@ -21,6 +21,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.CustomXmlPartScopedCollection.context
   - excel.Excel.CustomXmlPartScopedCollection.getCount
   - excel.Excel.CustomXmlPartScopedCollection.getItem
   - excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
@@ -29,9 +30,21 @@ items:
   - excel.Excel.CustomXmlPartScopedCollection.items
   - excel.Excel.CustomXmlPartScopedCollection.load
   - excel.Excel.CustomXmlPartScopedCollection.toJSON
+- uid: excel.Excel.CustomXmlPartScopedCollection.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.CustomXmlPartScopedCollection.getCount
   summary: >-
-    Возвращает количество частей CustomXML в этой коллекции.
+    Получает количество частей CustomXML в этой коллекции.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -48,7 +61,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    $(\"#display-xml\").text(\"\");\n    const contosoNamespace = \"http://schemas.contoso.com/review/1.0\";\n    const customXmlParts = context.workbook.customXmlParts;\n    const filteredXmlParts = customXmlParts.getByNamespace(contosoNamespace);\n    const numberOfPartsInNamespace = filteredXmlParts.getCount();\n\n    await context.sync();\n\n    if (numberOfPartsInNamespace.value == 1) {\n        const onlyXmlPartInNamespace = filteredXmlParts.getOnlyItem();\n        const xmlBlob = onlyXmlPartInNamespace.getXml();\n\n        await context.sync();\n\n        // Make it a bit more readable.\n        const readableXml = xmlBlob.value.replace(/></g, \">\\n<\");\n\n        $(\"#display-xml\").text(`The only XML part in the namespace ${contosoNamespace} is:\n            ${readableXml}`);\n\n    } else {\n        OfficeHelpers.UI.notify(`There are ${numberOfPartsInNamespace.value} XML parts with namespace ${contosoNamespace}.\n            There should be exactly 1.`);\n    }        \n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.CustomXmlPartScopedCollection.getItem
   summary: >-
-    Возвращает пользовательскую XML-часть по идентификатору.
+    Получает пользовательскую XML-часть по идентификатору.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -70,7 +83,7 @@ items:
       - string
 - uid: excel.Excel.CustomXmlPartScopedCollection.getItemOrNullObject
   summary: >-
-    Возвращает пользовательскую XML-часть по идентификатору. Если CustomXmlPart не существует, свойство isNull возвращаемый объект будет иметь значение true.
+    Получает пользовательскую XML-часть по идентификатору. Если CustomXmlPart не существует, свойство isNull возвращаемый объект будет иметь значение true.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -163,6 +176,7 @@ items:
       type:
       - string | string[]
 - uid: excel.Excel.CustomXmlPartScopedCollection.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `Excel.CustomXmlPartScopedCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.CustomXmlPartScopedCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
   name: toJSON()
   fullName: toJSON
   langs:

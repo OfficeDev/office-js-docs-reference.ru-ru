@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 88b480928cb80e07541362126634363124f819fe
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 92d8c7c86435564093bdf0c639aeead2e374089e
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994580"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725363"
 items:
 - uid: excel.Excel.RangeFormat
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.RangeFormat.autofitRows
   - excel.Excel.RangeFormat.borders
   - excel.Excel.RangeFormat.columnWidth
+  - excel.Excel.RangeFormat.context
   - excel.Excel.RangeFormat.fill
   - excel.Excel.RangeFormat.font
   - excel.Excel.RangeFormat.horizontalAlignment
@@ -39,7 +40,7 @@ items:
   - excel.Excel.RangeFormat.wrapText
 - uid: excel.Excel.RangeFormat.autofitColumns
   summary: >-
-    Изменяет ширину столбцов текущего диапазона так, чтобы она была оптимальной, с учетом текущих данных в столбцах.
+    Изменяет ширину столбцов текущего диапазона на оптимальную с учетом текущих данных в столбцах.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -56,7 +57,7 @@ items:
       description: ''
 - uid: excel.Excel.RangeFormat.autofitRows
   summary: >-
-    Изменяет высоту строк текущего диапазона так, чтобы она была оптимальной, с учетом текущих данных в столбцах.
+    Изменяет высоту строк текущего диапазона на оптимальную с учетом текущих данных в столбцах.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -103,6 +104,18 @@ items:
     return:
       type:
       - number
+- uid: excel.Excel.RangeFormat.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.RangeFormat.fill
   summary: >-
     Возвращает объект заливки, определенный для всего диапазона. Только для чтения.
@@ -220,6 +233,7 @@ items:
       - number
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:E2\");\n\n    // Set textOrientation to either an integer between -90 and 90\n    // or to 180 for vertically-oriented text.\n    range.format.textOrientation = 90;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.RangeFormat.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.RangeFormat является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.RangeFormatData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -233,7 +247,7 @@ items:
       description: ''
 - uid: excel.Excel.RangeFormat.useStandardHeight
   summary: >-
-    Определяет, если высота строки объекта Range равно Стандартная высота листа. Возвращает значение True, если высота строки объекта Range = Стандартная высота листа. Возвращает значение Null, если диапазон содержит более одного ряда, а не одной высоты строки. В противном случае возвращает значение False.
+    Определяет, равна ли высота строки объекта Range стандартной высоте листа. Возвращает значение True, если высота строки объекта Range = Стандартная высота листа. Возвращает значение Null, если диапазон содержит более одного ряда, а не одной высоты строки. В противном случае возвращает значение False.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

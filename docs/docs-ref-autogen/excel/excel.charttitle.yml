@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 3fb4e1621cc3caa9d6cbf291cd77092ac86e592b
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: cf9f4130943925308b8272ba9ea6effef1d0781f
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996517"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724712"
 items:
 - uid: excel.Excel.ChartTitle
   summary: >-
@@ -21,6 +21,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.ChartTitle.context
   - excel.Excel.ChartTitle.format
   - excel.Excel.ChartTitle.getSubstring
   - excel.Excel.ChartTitle.height
@@ -38,6 +39,18 @@ items:
   - excel.Excel.ChartTitle.verticalAlignment
   - excel.Excel.ChartTitle.visible
   - excel.Excel.ChartTitle.width
+- uid: excel.Excel.ChartTitle.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.ChartTitle.format
   summary: >-
     Представляет форматирование названия диаграммы, включая формат заливки и шрифта. Только для чтения.
@@ -82,7 +95,7 @@ items:
       - number
 - uid: excel.Excel.ChartTitle.height
   summary: >-
-    Возвращает высоту, в пунктах заголовок диаграммы. NULL, если заголовок диаграммы не отображается. Только для чтения.
+    Возвращает высоту заголовка диаграммы (в пунктах). NULL, если заголовок диаграммы не отображается. Только для чтения.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -114,7 +127,7 @@ items:
       - Excel.ChartTextHorizontalAlignment | "Center" | "Left" | "Right" | "Justify" | "Distributed"
 - uid: excel.Excel.ChartTitle.left
   summary: >-
-    Представляет расстояние в пунктах от левого края название диаграммы с левого края области диаграммы. NULL, если заголовок диаграммы не отображается.
+    Представляет расстояние от левого края заголовка диаграммы до левого края области диаграммы (в пунктах). NULL, если заголовок диаграммы не отображается.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -181,7 +194,7 @@ items:
       - Excel.ChartTitlePosition | "Automatic" | "Top" | "Bottom" | "Left" | "Right"
 - uid: excel.Excel.ChartTitle.setFormula
   summary: >-
-    Задает строковое значение, представляющее формула нотации стиля A1 заголовка диаграммы.
+    Задает строковое значение, представляющее формулу заголовка диаграммы с использованием нотации стиля A1.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -203,7 +216,7 @@ items:
       - string
 - uid: excel.Excel.ChartTitle.showShadow
   summary: >-
-    Представляет логическое значение, которое определяет, имеет ли заголовка диаграммы тени.
+    Представляет логическое значение, которое определяет, имеет ли заголовок диаграммы тень.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -235,7 +248,7 @@ items:
       - string
 - uid: excel.Excel.ChartTitle.textOrientation
   summary: >-
-    Представляет ориентации текста заголовка диаграммы. Значение должно быть целое число либо от -90 до 90 или 180 для вертикально ориентированного текста.
+    Представляет ориентацию текста для заголовка диаграммы. Значение должно быть целым числом от -90 до 90 или 180 для вертикально-ориентированного текста.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -251,6 +264,7 @@ items:
       - number
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const title = sheet.charts.getItemAt(0).title;\n    title.textOrientation = -45;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.ChartTitle.toJSON
+  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.ChartTitle является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.ChartTitleData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON
   langs:
@@ -264,7 +278,7 @@ items:
       description: ''
 - uid: excel.Excel.ChartTitle.top
   summary: >-
-    Представляет расстояние в пунктах от верхнего края диаграммы заголовка в верхней части области диаграммы. NULL, если заголовок диаграммы не отображается.
+    Представляет расстояние от верхнего края заголовка диаграммы до верха области диаграммы (в пунктах). NULL, если заголовок диаграммы не отображается.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -280,7 +294,7 @@ items:
       - number
 - uid: excel.Excel.ChartTitle.verticalAlignment
   summary: >-
-    Представляет вертикальное выравнивание заголовка диаграммы. Для получения дополнительных сведений в разделе Excel.ChartTextVerticalAlignment.
+    Представляет вертикальное выравнивание для заголовка диаграммы. Для получения дополнительных сведений в разделе Excel.ChartTextVerticalAlignment.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -312,7 +326,7 @@ items:
       - boolean
 - uid: excel.Excel.ChartTitle.width
   summary: >-
-    Возвращает ширину в пунктах заголовок диаграммы. NULL, если заголовок диаграммы не отображается. Только для чтения.
+    Возвращает ширину заголовка диаграммы (в пунктах). NULL, если заголовок диаграммы не отображается. Только для чтения.
 
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
