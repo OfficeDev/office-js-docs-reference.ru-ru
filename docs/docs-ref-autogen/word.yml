@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 533959bd84b874bdcb9ec273179250f75bfd91ca
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
+ms.openlocfilehash: 009ce2031f68d04dfc98399f52828ee8944e2f3f
+ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26221264"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "29384561"
 items:
 - uid: word
   name: word
@@ -32,6 +32,7 @@ items:
   - word.Word.DocumentProperties
   - word.Word.DocumentPropertyType
   - word.Word.ErrorCodes
+  - word.Word.EventType
   - word.Word.FileContentFormat
   - word.Word.Font
   - word.Word.HeaderFooterType
@@ -124,23 +125,27 @@ items:
   - word.Word.UnderlineType
   - word.Word.VerticalAlignment
 - uid: word.Word.run
-  summary: Выполняет пакетного сценария, выполняющего действия в объектной модели Word, с помощью RequestContext ранее созданные объектам API.
-  name: run(objects, batch)
+  summary: Выполняет пакетного сценария, выполняющего действия в объектной модели Word, с помощью нового RequestContext. Отсутствие перспективы будет выпущено любой отслеживаемых объектов, выделенных автоматически во время выполнения.
+  remarks: >-
+    В дополнение к подписи этот метод также содержит следующие подписи, которые позволяют возобновить с помощью контекста запроса ранее созданной объектов:
+
+
+    Запустите<T>(объект: OfficeExtension.ClientObject, пакет: (контекста: Word.RequestContext) =&gt; Promise<T>): Promise<T>;
+
+
+    Запустите<T>(объекты: OfficeExtension.ClientObject\[\], пакет: (контекста: Word.RequestContext) =&gt; Promise<T>): Promise<T>;
+  name: run(batch)
   fullName: Word.run
   langs:
   - typeScript
   type: function
   syntax:
-    content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Word.RequestContext) => Promise<T>): Promise<T>;'
+    content: 'export function run<T>(batch: (context: Word.RequestContext) => Promise<T>): Promise<T>;'
     return:
       type:
       - Promise<T>
       description: ''
     parameters:
-    - id: objects
-      description: Массив объектов ранее созданные API. Чтобы убедиться в том, что все объекты общий доступ к тому же контексту проверяются массива. Пакет будет использовать этот общих RequestContext, что означает, что любые изменения, примененные к эти объекты будут подобрать «context.sync()».
-      type:
-      - OfficeExtension.ClientObject[]
     - id: batch
       description: Функция, которая принимает RequestContext и возвращает резервирование (как правило, только что результатов «context.sync()"). Параметр контекста облегчает запросов для приложения Word. Начиная с надстройки Office, а также приложения Word, выполните в двух различных процессах RequestContext является обязательным для получения доступа к объектной модели Word с надстройки.
       type:
@@ -184,6 +189,8 @@ references:
   name: Word.DocumentPropertyType
 - uid: word.Word.ErrorCodes
   name: Word.ErrorCodes
+- uid: word.Word.EventType
+  name: Word.EventType
 - uid: word.Word.FileContentFormat
   name: Word.FileContentFormat
 - uid: word.Word.Font

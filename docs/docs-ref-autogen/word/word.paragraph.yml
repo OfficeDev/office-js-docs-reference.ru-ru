@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6d7c92bc238efbb5a1fc6100c6e4bf9806d4668f
-ms.sourcegitcommit: c12dfe8b909dec25d284f5254d97bd6478823b8f
+ms.openlocfilehash: b263f2178c3a2b053f11b16b93eb694a2ff48b09
+ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "27243473"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "29385233"
 items:
 - uid: word.Word.Paragraph
   summary: >-
@@ -25,6 +25,7 @@ items:
   - word.Word.Paragraph.attachToList
   - word.Word.Paragraph.clear
   - word.Word.Paragraph.contentControls
+  - word.Word.Paragraph.context
   - word.Word.Paragraph.delete
   - word.Word.Paragraph.detachFromList
   - word.Word.Paragraph.firstLineIndent
@@ -156,6 +157,18 @@ items:
     return:
       type:
       - word.Word.ContentControlCollection
+- uid: word.Word.Paragraph.context
+  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: word.Word.Paragraph.delete
   summary: >-
     Удаляет абзац и его содержимое из документа.
@@ -224,7 +237,7 @@ items:
       - word.Word.Font
 - uid: word.Word.Paragraph.getHtml
   summary: >-
-    Возвращает HTML-представление объекта абзаца.
+    Получает представление HTML объекта абзац. При отображении в веб-страницы или средства просмотра HTML, форматирование будет закрыть, но не точное соответствие для форматирования документа. Этот метод не возвращает точный же HTML-код для одного документа на разных платформах (Windows, Mac, Word Online, и т.д.). Если требуется точное качеством или согласованности платформ, используйте `Paragraph.getOoxml()` и преобразования возвращенного XML в HTML-код.
 
 
     \[[Набор API-Интерфейсов: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -343,7 +356,7 @@ items:
       description: ''
     parameters:
     - id: rangeLocation
-      description: Необязательно указывать. Расположение диапазона может быть «Целое», «Запуск», «End», «После», или «Содержимое».
+      description: Не обязательно указывать. Расположение диапазона может быть «Целое», «Запуск», «End», «После», или «Содержимое».
       type:
       - word.Word.RangeLocation
 - uid: word.Word.Paragraph.getTextRanges
@@ -369,7 +382,7 @@ items:
       type:
       - string[]
     - id: trimSpacing
-      description: Необязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
+      description: Не обязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
       type:
       - boolean
 - uid: word.Word.Paragraph.inlinePictures
@@ -390,7 +403,7 @@ items:
       - word.Word.InlinePictureCollection
 - uid: word.Word.Paragraph.insertBreak
   summary: >-
-    Вставка разрыва в выбранном расположении в основной документ.
+    Вставляет разрыв в указанном расположении в основном документе. Возможные значения insertLocation: Before и After.
 
 
     \[[Набор API-Интерфейсов: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -537,7 +550,7 @@ items:
       - Word.InsertLocation
 - uid: word.Word.Paragraph.insertParagraph
   summary: >-
-    Вставляет абзац в указанном расположении.
+    Вставляет абзац в указанном расположении. Возможные значения insertLocation: Before и After.
 
 
     \[[Набор API-Интерфейсов: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -563,7 +576,7 @@ items:
       - Word.InsertLocation
 - uid: word.Word.Paragraph.insertTable
   summary: >-
-    Вставка таблицы с указанного числа строк и столбцов.
+    Вставляет таблицу с указанным количеством строк и столбцов. Возможные значения insertLocation: Before и After.
 
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -1075,11 +1088,11 @@ items:
       type:
       - string[]
     - id: trimDelimiters
-      description: Необязательно указывать. Указывает, следует ли удалить разделители из диапазонов в коллекции диапазона. Значение по умолчанию — значение false, который означает, что разделители включаются в диапазонах, возвращаемых в коллекции диапазона.
+      description: Не обязательно указывать. Указывает, следует ли удалить разделители из диапазонов в коллекции диапазона. Значение по умолчанию — значение false, который означает, что разделители включаются в диапазонах, возвращаемых в коллекции диапазона.
       type:
       - boolean
     - id: trimSpacing
-      description: Необязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
+      description: Не обязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
       type:
       - boolean
 - uid: word.Word.Paragraph.startNewList
