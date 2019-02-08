@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7cbc1926f0589f43f253d19e1f0c058236d283e1
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 1077f04ac5e9c2aad9e8486c9291da742d949b08
+ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384533"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "29769731"
 items:
 - uid: onenote.OneNote.Table
   summary: >-
@@ -35,6 +35,7 @@ items:
   - onenote.OneNote.Table.paragraph
   - onenote.OneNote.Table.rowCount
   - onenote.OneNote.Table.rows
+  - onenote.OneNote.Table.set
   - onenote.OneNote.Table.setShadingColor
   - onenote.OneNote.Table.toJSON
   - onenote.OneNote.Table.track
@@ -80,7 +81,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, append a column.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                var row = table.appendRow([\"cell0\", \"cell1\"]);\n            }\n        }\n        return ctx.sync();\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: values
-      description: Необязательный. Строки, которые необходимо вставить в новую строку, заданные в виде массива. Значений в этом параметре не должно быть больше, чем столбцов в таблице.
+      description: Необязательное свойство. Строки, которые необходимо вставить в новую строку, заданные в виде массива. Значений в этом параметре не должно быть больше, чем столбцов в таблице.
       type:
       - string[]
 - uid: onenote.OneNote.Table.borderVisible
@@ -235,7 +236,7 @@ items:
       type:
       - number
     - id: values
-      description: Необязательный. Строки, которые необходимо вставить в новую строку, заданные в виде массива. Значений в этом параметре не должно быть больше, чем столбцов в таблице.
+      description: Необязательное свойство. Строки, которые необходимо вставить в новую строку, заданные в виде массива. Значений в этом параметре не должно быть больше, чем столбцов в таблице.
       type:
       - string[]
 - uid: onenote.OneNote.Table.load
@@ -305,6 +306,33 @@ items:
     return:
       type:
       - OneNote.TableRowCollection
+- uid: onenote.OneNote.Table.set
+  summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
+  remarks: >-
+    Этот метод имеет следующие дополнительные подписи.
+
+
+    `set(properties: OneNote.Table): void`
+  name: set(properties, options)
+  fullName: set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.TableUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, которые isomorphically структурированы для свойства объекта, для которого вызывается метод.
+      type:
+      - Interfaces.TableUpdateData
+    - id: options
+      description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
+      type:
+      - office.OfficeExtension.UpdateOptions
 - uid: onenote.OneNote.Table.setShadingColor
   summary: >-
     Задает цвет заливки всех ячеек в таблице. Код цвета, который нужно задать ячейкам.

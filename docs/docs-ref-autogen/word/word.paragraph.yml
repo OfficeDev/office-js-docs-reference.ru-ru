@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b263f2178c3a2b053f11b16b93eb694a2ff48b09
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: d9b768001e0e026c4a8ea3b0fad6f075042235ed
+ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385233"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "29769801"
 items:
 - uid: word.Word.Paragraph
   summary: >-
@@ -70,6 +70,7 @@ items:
   - word.Word.Paragraph.rightIndent
   - word.Word.Paragraph.search
   - word.Word.Paragraph.select
+  - word.Word.Paragraph.set
   - word.Word.Paragraph.spaceAfter
   - word.Word.Paragraph.spaceBefore
   - word.Word.Paragraph.split
@@ -356,7 +357,7 @@ items:
       description: ''
     parameters:
     - id: rangeLocation
-      description: Не обязательно указывать. Расположение диапазона может быть «Целое», «Запуск», «End», «После», или «Содержимое».
+      description: Необязательное свойство. Расположение диапазона может быть «Целое», «Запуск», «End», «После», или «Содержимое».
       type:
       - word.Word.RangeLocation
 - uid: word.Word.Paragraph.getTextRanges
@@ -382,7 +383,7 @@ items:
       type:
       - string[]
     - id: trimSpacing
-      description: Не обязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
+      description: Необязательное свойство. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
       type:
       - boolean
 - uid: word.Word.Paragraph.inlinePictures
@@ -1032,6 +1033,69 @@ items:
       description: 'Необязательный параметр. Возможные режимы выбора: Select, Start и End. Значение по умолчанию — Select.'
       type:
       - Word.SelectionMode
+- uid: word.Word.Paragraph.set
+  summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
+  remarks: >-
+    Этот метод имеет следующие дополнительные подписи.
+
+
+    `set(properties: Word.Paragraph): void`
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    await Word.run(async (context) => {
+      const paragraph = context.document.body.paragraphs.getFirst();
+      paragraph.set({
+        leftIndent: 30,
+        font: {
+          bold: true,
+          color: "red"
+        }
+      });
+
+      await context.sync();
+    });
+
+    ```
+
+    ```typescript
+
+    await Word.run(async (context) => {
+      const firstParagraph = context.document.body.paragraphs.getFirst();
+      const secondParagraph = firstParagraph.getNext();
+      firstParagraph.load("text, font/color, font/bold, leftIndent");
+
+      await context.sync();
+
+      secondParagraph.set(firstParagraph);
+
+      await context.sync();
+    });
+
+    ```
+  name: set(properties, options)
+  fullName: set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.ParagraphUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, которые isomorphically структурированы для свойства объекта, для которого вызывается метод.
+      type:
+      - Interfaces.ParagraphUpdateData
+    - id: options
+      description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
+      type:
+      - office.OfficeExtension.UpdateOptions
 - uid: word.Word.Paragraph.spaceAfter
   summary: >-
     Возвращает или задает междустрочный интервал после абзаца (в пунктах).
@@ -1088,11 +1152,11 @@ items:
       type:
       - string[]
     - id: trimDelimiters
-      description: Не обязательно указывать. Указывает, следует ли удалить разделители из диапазонов в коллекции диапазона. Значение по умолчанию — значение false, который означает, что разделители включаются в диапазонах, возвращаемых в коллекции диапазона.
+      description: Необязательное свойство. Указывает, следует ли удалить разделители из диапазонов в коллекции диапазона. Значение по умолчанию — значение false, который означает, что разделители включаются в диапазонах, возвращаемых в коллекции диапазона.
       type:
       - boolean
     - id: trimSpacing
-      description: Не обязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
+      description: Необязательное свойство. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
       type:
       - boolean
 - uid: word.Word.Paragraph.startNewList

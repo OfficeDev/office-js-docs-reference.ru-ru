@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4ec604434ffbae02c99cb4a027cdec774427dfc8
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 304334e90c787f73e8e1b37719ab4fca33a25ac5
+ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385394"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "29769724"
 items:
 - uid: word.Word.ContentControl
   summary: >-
@@ -58,6 +58,7 @@ items:
   - word.Word.ContentControl.removeWhenEdited
   - word.Word.ContentControl.search
   - word.Word.ContentControl.select
+  - word.Word.ContentControl.set
   - word.Word.ContentControl.split
   - word.Word.ContentControl.style
   - word.Word.ContentControl.styleBuiltIn
@@ -270,7 +271,7 @@ items:
       description: ''
     parameters:
     - id: rangeLocation
-      description: Не обязательно указывать. Расположение диапазона может быть «Целое», «До», «Пуск», «Завершение», «После», или «Содержимое».
+      description: Необязательное свойство. Расположение диапазона может быть «Целое», «До», «Пуск», «Завершение», «После», или «Содержимое».
       type:
       - word.Word.RangeLocation
 - uid: word.Word.ContentControl.getTextRanges
@@ -296,7 +297,7 @@ items:
       type:
       - string[]
     - id: trimSpacing
-      description: Не обязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
+      description: Необязательное свойство. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
       type:
       - boolean
 - uid: word.Word.ContentControl.id
@@ -808,6 +809,74 @@ items:
       description: 'Необязательный параметр. Возможные режимы выбора: Select, Start и End. Значение по умолчанию — Select.'
       type:
       - Word.SelectionMode
+- uid: word.Word.ContentControl.set
+  summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
+  remarks: >-
+    Этот метод имеет следующие дополнительные подписи.
+
+
+    `set(properties: Word.ContentControl): void`
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Adds title and colors to odd and even content controls and changes their appearance.
+
+    await Word.run(async (context) => {
+        // Gets the complete sentence  (as range) associated with the insertion point.
+        let evenContentControls = context.document.contentControls.getByTag("even");
+        let oddContentControls = context.document.contentControls.getByTag("odd");
+        evenContentControls.load("color,title,appearance");
+        oddContentControls.load("color,title,appearance");
+
+        await context.sync();
+
+        for (let i = 0; i < evenContentControls.items.length; i++) {
+            // Change a few properties and append a paragraph
+            evenContentControls.items[i].set({
+                color: 'red',
+                title: 'Odd ContentControl #' + (i + 1),
+                appearance: 'Tags'
+            });
+            evenContentControls.items[i].insertParagraph("This is an odd content control", "End");
+        }
+
+        for (let j = 0; j < oddContentControls.items.length; j++) {
+            // Change a few properties and append a paragraph
+            oddContentControls.items[j].set({
+                color: 'green',
+                title: 'Even ContentControl #' + (j + 1),
+                appearance: 'Tags'
+            });
+            oddContentControls.items[j].insertHtml("This is an <b>even</b> content control", "End");
+        }
+
+        await context.sync();
+    });
+
+    ```
+  name: set(properties, options)
+  fullName: set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.ContentControlUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, которые isomorphically структурированы для свойства объекта, для которого вызывается метод.
+      type:
+      - Interfaces.ContentControlUpdateData
+    - id: options
+      description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
+      type:
+      - office.OfficeExtension.UpdateOptions
 - uid: word.Word.ContentControl.split
   summary: >-
     Разделяет элемент управления содержимым на дочерние диапазоны с помощью разделителей.
@@ -831,15 +900,15 @@ items:
       type:
       - string[]
     - id: multiParagraphs
-      description: Не обязательно указывать. Указывает, будет ли диапазон возвращаемый дочерний могут охватывать несколько абзацев. Значение по умолчанию — значение false, который означает, что границы абзаца также используются в качестве разделителей.
+      description: Необязательное свойство. Указывает, будет ли диапазон возвращаемый дочерний могут охватывать несколько абзацев. Значение по умолчанию — значение false, который означает, что границы абзаца также используются в качестве разделителей.
       type:
       - boolean
     - id: trimDelimiters
-      description: Не обязательно указывать. Указывает, следует ли удалить разделители из диапазонов в коллекции диапазона. Значение по умолчанию — значение false, который означает, что разделители включаются в диапазонах, возвращаемых в коллекции диапазона.
+      description: Необязательное свойство. Указывает, следует ли удалить разделители из диапазонов в коллекции диапазона. Значение по умолчанию — значение false, который означает, что разделители включаются в диапазонах, возвращаемых в коллекции диапазона.
       type:
       - boolean
     - id: trimSpacing
-      description: Не обязательно указывать. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
+      description: Необязательное свойство. Указывает, следует ли удалить знаки интервалы (пробелы, вкладок, столбцов и end абзаца) из начала и окончания диапазонов, возвращаемых в коллекции диапазона. Значение по умолчанию — false означает, символы интервалов в начало и конец диапазонов включены в диапазоне семейства.
       type:
       - boolean
 - uid: word.Word.ContentControl.style
