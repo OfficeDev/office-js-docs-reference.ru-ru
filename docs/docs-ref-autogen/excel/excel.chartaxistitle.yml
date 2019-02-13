@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 21da61576224455d59c18e4d2ab4f0f9185b1e8f
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: d6fe6846fdd0dbf1eeeac097002e51a35cdfa070
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769976"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29981838"
 items:
 - uid: excel.Excel.ChartAxisTitle
   summary: >-
@@ -24,7 +24,10 @@ items:
   - excel.Excel.ChartAxisTitle.context
   - excel.Excel.ChartAxisTitle.format
   - excel.Excel.ChartAxisTitle.load
+  - excel.Excel.ChartAxisTitle.load_1
+  - excel.Excel.ChartAxisTitle.load_2
   - excel.Excel.ChartAxisTitle.set
+  - excel.Excel.ChartAxisTitle.set_1
   - excel.Excel.ChartAxisTitle.setFormula
   - excel.Excel.ChartAxisTitle.text
   - excel.Excel.ChartAxisTitle.toJSON
@@ -59,23 +62,69 @@ items:
       - excel.Excel.ChartAxisTitleFormat
 - uid: excel.Excel.ChartAxisTitle.load
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartAxisTitle`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxisTitle`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Get the text of Chart Axis Title from the value axis of Chart1.\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\"); \n    var title = chart.axes.valueAxis.title;\n    title.load('text');\n    return ctx.sync().then(function() {\n            console.log(title.text);\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```\n```javascript\n// Add \"Values\" as the title for the value Axis \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\"); \n    chart.axes.valueAxis.title.text = \"Values\";\n    return ctx.sync().then(function() {\n            console.log(\"Axis Title Added \");\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): Excel.ChartAxisTitle`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.ChartAxisTitle`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxisTitle`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartAxisTitle;'
+    content: 'load(option?: Excel.Interfaces.ChartAxisTitleLoadOptions): Excel.ChartAxisTitle;'
     return:
       type:
       - excel.Excel.ChartAxisTitle
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartAxisTitleLoadOptions
+- uid: excel.Excel.ChartAxisTitle.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartAxisTitle;'
+    return:
+      type:
+      - excel.Excel.ChartAxisTitle
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Get the text of Chart Axis Title from the value axis of Chart1.\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\"); \n    var title = chart.axes.valueAxis.title;\n    title.load('text');\n    return ctx.sync().then(function() {\n            console.log(title.text);\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```\n```javascript\n// Add \"Values\" as the title for the value Axis \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\"); \n    chart.axes.valueAxis.title.text = \"Values\";\n    return ctx.sync().then(function() {\n            console.log(\"Axis Title Added \");\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.ChartAxisTitle.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartAxisTitle;'
+    return:
+      type:
+      - excel.Excel.ChartAxisTitle
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartAxisTitle.set
   summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
   remarks: >-
@@ -84,7 +133,7 @@ items:
 
     `set(properties: Excel.ChartAxisTitle): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -103,6 +152,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartAxisTitle.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartAxisTitle): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartAxisTitle
 - uid: excel.Excel.ChartAxisTitle.setFormula
   summary: >-
     Строковое значение, представляющее формулу заголовка оси диаграммы с использованием нотации стиля A1.
@@ -110,7 +177,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setFormula(formula)
-  fullName: setFormula
+  fullName: setFormula(formula)
   langs:
   - typeScript
   type: method
@@ -144,7 +211,7 @@ items:
 - uid: excel.Excel.ChartAxisTitle.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.ChartAxisTitle является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.ChartAxisTitleData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

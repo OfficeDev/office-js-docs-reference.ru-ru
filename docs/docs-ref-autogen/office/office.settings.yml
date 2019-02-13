@@ -1,15 +1,15 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 23b7483ce952c74d17ee7e8fd2f70b9ad37ed7cc
-ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
+ms.openlocfilehash: 666a959eb1a9e6ea60da03b8f347ac1ca2f1998d
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/22/2018
-ms.locfileid: "26647849"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979493"
 items:
 - uid: office.Office.Settings
   summary: Представляет пользовательские параметры для надстройки области задач или контентной надстройки, которые хранятся в документе ведущего приложения как пары "имя-значение".
   remarks: >-
-    <table><tr><td>Hosts</td><td>Access, Excel, PowerPoint, Word</td></tr>
+    <table><tr><td>Узлы</td><td>Access, Excel, PowerPoint, Word</td></tr>
 
 
     <tr><td>Наборы требований</td><td>Параметры</td></tr></table>
@@ -33,21 +33,28 @@ items:
   package: office
   children:
   - office.Office.Settings.addHandlerAsync
+  - office.Office.Settings.addHandlerAsync_1
   - office.Office.Settings.get
   - office.Office.Settings.refreshAsync
   - office.Office.Settings.remove
   - office.Office.Settings.removeHandlerAsync
+  - office.Office.Settings.removeHandlerAsync_1
   - office.Office.Settings.saveAsync
+  - office.Office.Settings.saveAsync_1
   - office.Office.Settings.set
 - uid: office.Office.Settings.addHandlerAsync
   summary: >-
     Добавляет обработчик событий для события settingsChanged.
 
 
-    Важно: Код вашей надстройки можно зарегистрировать обработчик для события settingsChanged, если надстройка работает с любой клиент Excel, но события будет срабатывать, только в том случае, если надстройка загружается с электронной таблицы, которая открыта в Excel Online и редактирования более одного пользователя Электронная таблица (совместной работы). Таким образом эффективно событие settingsChanged поддерживается только в Excel Online в сценарии совместного редактирования документов.
-  remarks: "<table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>\n\nМожно добавить несколько обработчиков событий для указанного объекта eventType, поскольку имя каждой функции обработчика событий является уникальным.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction addSelectionChangedEventHandler() {\n    Office.context.document.settings.addHandlerAsync(Office.EventType.SettingsChanged, MyHandler);\n}\n\nfunction MyHandler(eventArgs) {\n    write('Event raised: ' + eventArgs.type);\n    doSomethingWithSettings(eventArgs.settings);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    **Важно**: код вашей надстройки можно зарегистрировать обработчик для события settingsChanged, если надстройка работает с любой клиент Excel, но события будет выполняться, только когда надстройки загружается с электронной таблицы, которая открыта в Excel Online и более одного пользователя Редактирует электронной таблицы (совместной работы). Таким образом эффективно событие settingsChanged поддерживается только в Excel Online в сценарии совместного редактирования документов.
+  remarks: >-
+    <table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>
+
+
+    Можно добавить несколько обработчиков событий для указанного объекта eventType, поскольку имя каждой функции обработчика событий является уникальным.
   name: addHandlerAsync(eventType, handler, options, callback)
-  fullName: addHandlerAsync
+  fullName: addHandlerAsync(eventType, handler, options, callback)
   langs:
   - typeScript
   type: method
@@ -72,7 +79,54 @@ items:
       - office.Office.AsyncContextOptions
     - id: callback
       description: >-
-        Необязательно указывать. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
+        Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
+
+
+        <table> <tr> <th>Свойство</th> <th>Применение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefined, так как нет данных или объектов для извлечения при добавлении обработчика событий.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Получает доступ к объекту Error, который содержит сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>
+
+
+        **Сведения о поддержке**
+
+
+        Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.
+
+
+        Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+
+
+        *Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> </td><td> Да </td><td> </td></tr> </table>
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.Settings.addHandlerAsync_1
+  summary: >-
+    Добавляет обработчик событий для события settingsChanged.
+
+
+    **Важно**: код вашей надстройки можно зарегистрировать обработчик для события settingsChanged, если надстройка работает с любой клиент Excel, но события будет выполняться, только когда надстройки загружается с электронной таблицы, которая открыта в Excel Online и более одного пользователя Редактирует электронной таблицы (совместной работы). Таким образом эффективно событие settingsChanged поддерживается только в Excel Online в сценарии совместного редактирования документов.
+  remarks: "<table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>\n\nМожно добавить несколько обработчиков событий для указанного объекта eventType, поскольку имя каждой функции обработчика событий является уникальным.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction addSelectionChangedEventHandler() {\n    Office.context.document.settings.addHandlerAsync(Office.EventType.SettingsChanged, MyHandler);\n}\n\nfunction MyHandler(eventArgs) {\n    write('Event raised: ' + eventArgs.type);\n    doSomethingWithSettings(eventArgs.settings);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: addHandlerAsync(eventType, handler, callback)
+  fullName: addHandlerAsync(eventType, handler, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Указывает тип добавляемого события. Обязательный.
+      type:
+      - Office.EventType
+    - id: handler
+      description: Функцию обработчика событий для добавления, единственный параметр которой имеет тип [Office.SettingsChangedEventArgs](xref:office.Office.SettingsChangedEventArgs)<!-- -->. Обязательно указывать.
+      type:
+      - any
+    - id: callback
+      description: >-
+        Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
 
 
         <table> <tr> <th>Свойство</th> <th>Применение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefined, так как нет данных или объектов для извлечения при добавлении обработчика событий.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Получает доступ к объекту Error, который содержит сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>
@@ -94,7 +148,7 @@ items:
   summary: Извлекает указанный параметр.
   remarks: "<table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office for iPad </th><th> Office for Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>Word</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction displayMySetting() {\n    write('Current value for mySetting: ' + Office.context.document.settings.get('mySetting'));\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: get(name)
-  fullName: get
+  fullName: get(name)
   langs:
   - typeScript
   type: method
@@ -113,7 +167,7 @@ items:
   summary: Считывает все параметры, сохраненные в документе, и обновляет копию этих параметров в памяти для контентной надстройки или надстройки области задач.
   remarks: "<table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>\n\nЭтот метод полезен в Excel, Word и PowerPoint, совместное редактирование сценариев несколько экземпляров одной надстройки используются при работе с одного документа. Так как каждый надстройка работает на в памяти копию параметров, загруженных из документов во время, пользователь может открыть его, параметры, которые можно получить синхронизированы значения, используемые каждым пользователем. Это может произойти, когда экземпляр надстройка вызывает метод Settings.saveAsync для сохранения всех параметров этого пользователя в документ. Вызов метода refreshAsync из обработчика события для события settingsChanged надстройки будет обновлять значения параметров для всех пользователей.\n\nВ функции обратного вызова, переданной в метод refreshAsync можно использовать свойства объекта AsyncResult для возврата следующей информации.\n\n<table> <tr> <th>Свойство</th> <th>Применение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Получает доступ к объекту Settings с обновленными значениями.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Получает доступ к объекту Error, который содержит сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> </td></tr> <tr><td><strong>Word</strong></td><td> Да </td><td> Да </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction refreshSettings() {\n    Office.context.document.settings.refreshAsync(function (asyncResult) {\n        write('Settings refreshed with status: ' + asyncResult.status);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: refreshAsync(callback)
-  fullName: refreshAsync
+  fullName: refreshAsync(callback)
   langs:
   - typeScript
   type: method
@@ -125,7 +179,7 @@ items:
       description: ''
     parameters:
     - id: callback
-      description: Необязательно указывать. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойства результата — это объект [Office.Settings](xref:office.Office.Settings) с обновленными значениями.
+      description: Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойства результата — это объект [Office.Settings](xref:office.Office.Settings) с обновленными значениями.
       type:
       - '(result: AsyncResult<Office.Settings>) => void'
 - uid: office.Office.Settings.remove
@@ -133,7 +187,7 @@ items:
     Удаляет указанный параметр.
 
 
-    Важно: Обратите внимание, что влияет на метод Settings.Remove, но только в памяти копии контейнера свойств. Чтобы сохранить удаления указанного параметра в документе, к определенному моменту после вызова метода Settings.Remove, но и перед закрытием надстройки необходимо вызвать метод Settings.saveAsync.
+    **Важно**: помните о том, что влияет на метод Settings.Remove, но только в памяти копии контейнера свойств. Чтобы сохранить удаления указанного параметра в документе, к определенному моменту после вызова метода Settings.Remove, но и перед закрытием надстройки необходимо вызвать метод Settings.saveAsync.
   remarks: >-
     <table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>
 
@@ -163,7 +217,7 @@ items:
 
     ```
   name: remove(name)
-  fullName: remove
+  fullName: remove(name)
   langs:
   - typeScript
   type: method
@@ -180,9 +234,31 @@ items:
       - string
 - uid: office.Office.Settings.removeHandlerAsync
   summary: Удаляет обработчик событий для события settingsChanged.
-  remarks: "<table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>\n\nЕсли необязательный параметр handler опущен при вызове метода removeHandlerAsync, все обработчики событий для указанного объекта eventType будут удалены.\n\nПри выполнении функции, переданной в параметре callback, она получает объект AsyncResult, можно получить доступ с помощью единственного параметра функции обратного вызова.\n\nВ функции обратного вызова, переданной в метод removeHandlerAsync можно использовать свойства объекта AsyncResult для возврата следующей информации.\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> </td><td> Да </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction removeSettingsChangedEventHandler() {\n    Office.context.document.settings.removeHandlerAsync(Office.EventType.SettingsChanged, MyHandler);\n}\n\nfunction MyHandler(eventArgs) {\n    write('Event raised: ' + eventArgs.type);\n    doSomethingWithSettings(eventArgs.settings);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  remarks: >-
+    <table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>
+
+
+    Если необязательный параметр handler опущен при вызове метода removeHandlerAsync, все обработчики событий для указанного объекта eventType будут удалены.
+
+
+    При выполнении функции, переданной в параметре callback, она получает объект AsyncResult, можно получить доступ с помощью единственного параметра функции обратного вызова.
+
+
+    В функции обратного вызова, переданной в метод removeHandlerAsync можно использовать свойства объекта AsyncResult для возврата следующей информации.
+
+
+    **Сведения о поддержке**
+
+
+    Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.
+
+
+    Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+
+
+    *Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> </td><td> Да </td><td> </td></tr> </table>
   name: removeHandlerAsync(eventType, options, callback)
-  fullName: removeHandlerAsync
+  fullName: removeHandlerAsync(eventType, options, callback)
   langs:
   - typeScript
   type: method
@@ -202,14 +278,56 @@ items:
       type:
       - office.Office.RemoveHandlerOptions
     - id: callback
-      description: Необязательно указывать. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
+      description: Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.Settings.removeHandlerAsync_1
+  summary: Удаляет обработчик событий для события settingsChanged.
+  remarks: "<table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>\n\nЕсли необязательный параметр handler опущен при вызове метода removeHandlerAsync, все обработчики событий для указанного объекта eventType будут удалены.\n\nПри выполнении функции, переданной в параметре callback, она получает объект AsyncResult, можно получить доступ с помощью единственного параметра функции обратного вызова.\n\nВ функции обратного вызова, переданной в метод removeHandlerAsync можно использовать свойства объекта AsyncResult для возврата следующей информации.\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> </td><td> Да </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction removeSettingsChangedEventHandler() {\n    Office.context.document.settings.removeHandlerAsync(Office.EventType.SettingsChanged, MyHandler);\n}\n\nfunction MyHandler(eventArgs) {\n    write('Event raised: ' + eventArgs.type);\n    doSomethingWithSettings(eventArgs.settings);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: removeHandlerAsync(eventType, callback)
+  fullName: removeHandlerAsync(eventType, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: Указывает тип удаляемого события. Обязательный параметр.
+      type:
+      - Office.EventType
+    - id: callback
+      description: Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
       type:
       - '(result: AsyncResult<void>) => void'
 - uid: office.Office.Settings.saveAsync
   summary: Хранится в копии контейнера свойств параметров в документе, содержащейся в памяти.
-  remarks: "Все параметры, ранее сохраненные надстройкой, загружаются при ее инициализации, поэтому на протяжении всего сеанса можно использовать только методы set и get для работы с копией контейнера свойств в памяти. Если требуется сохранить параметры, чтобы они были доступны при следующем использовании надстройки, воспользуйтесь методом saveAsync.\n\nПримечание: Метод saveAsync повторяется контейнера свойств в памяти в файл документа. Тем не менее для самого файла документа будут сохранены только в том случае, когда пользователь (или параметр автовосстановления) сохраняет документ в файловую систему. Метод refreshAsync полезно только в совместное редактирование сценарии, когда других экземпляров одной надстройки могут изменить параметры, и эти изменения должны быть доступны для всех экземпляров.\n\n<table> <tr> <th>Свойство</th> <th>Применение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefined, так как нет объекта или данных для извлечения.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Получает доступ к объекту Error, который содержит сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office for iPad </th><th> Office for Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>Word</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction persistSettings() {\n    Office.context.document.settings.saveAsync(function (asyncResult) {\n        write('Settings saved with status: ' + asyncResult.status);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  remarks: >-
+    Все параметры, ранее сохраненные надстройкой, загружаются при ее инициализации, поэтому на протяжении всего сеанса можно использовать только методы set и get для работы с копией контейнера свойств в памяти. Если требуется сохранить параметры, чтобы они были доступны при следующем использовании надстройки, воспользуйтесь методом saveAsync.
+
+
+    **Примечание**: метод saveAsync контейнера свойств в памяти сохраняется в файл документа. Тем не менее для самого файла документа будут сохранены только в том случае, когда пользователь (или параметр автовосстановления) сохраняет документ в файловую систему. Метод refreshAsync полезно только в совместное редактирование сценарии, когда других экземпляров одной надстройки могут изменить параметры, и эти изменения должны быть доступны для всех экземпляров.
+
+
+    <table> <tr> <th>Свойство</th> <th>Применение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefined, так как нет объекта или данных для извлечения.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Получает доступ к объекту Error, который содержит сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>
+
+
+    **Сведения о поддержке**
+
+
+    Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.
+
+
+    Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+
+
+    *Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office for iPad </th><th> Office for Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>Word</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> </table>
   name: saveAsync(options, callback)
-  fullName: saveAsync
+  fullName: saveAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -225,7 +343,26 @@ items:
       type:
       - office.Office.SaveSettingsOptions
     - id: callback
-      description: Необязательно указывать. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
+      description: Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: office.Office.Settings.saveAsync_1
+  summary: Хранится в копии контейнера свойств параметров в документе, содержащейся в памяти.
+  remarks: "Все параметры, ранее сохраненные надстройкой, загружаются при ее инициализации, поэтому на протяжении всего сеанса можно использовать только методы set и get для работы с копией контейнера свойств в памяти. Если требуется сохранить параметры, чтобы они были доступны при следующем использовании надстройки, воспользуйтесь методом saveAsync.\n\n**Примечание**: метод saveAsync контейнера свойств в памяти сохраняется в файл документа. Тем не менее для самого файла документа будут сохранены только в том случае, когда пользователь (или параметр автовосстановления) сохраняет документ в файловую систему. Метод refreshAsync полезно только в совместное редактирование сценарии, когда других экземпляров одной надстройки могут изменить параметры, и эти изменения должны быть доступны для всех экземпляров.\n\n<table> <tr> <th>Свойство</th> <th>Применение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefined, так как нет объекта или данных для извлечения.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Получает доступ к объекту Error, который содержит сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office for iPad </th><th> Office for Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>Word</strong></td><td> Да </td><td> Да </td><td> Да </td><td> Да </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction persistSettings() {\n    Office.context.document.settings.saveAsync(function (asyncResult) {\n        write('Settings saved with status: ' + asyncResult.status);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  name: saveAsync(callback)
+  fullName: saveAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.
       type:
       - '(result: AsyncResult<void>) => void'
 - uid: office.Office.Settings.set
@@ -233,7 +370,7 @@ items:
     Устанавливает или создает указанный параметр.
 
 
-    Важно: Обратите внимание, что метод Settings.set влияет только в памяти копии контейнера свойств. Чтобы убедиться в том, что добавления или изменения параметров можно будет в следующем запуске открытии документа в определенный момент после вызова метода Settings.set и до закрытия надстройки необходимо вызвать метод Settings.saveAsync для сохранения параметры в документе.
+    **Важно**: помните о том, что влияет на метод Settings.set только в памяти копии контейнера свойств. Чтобы убедиться в том, что добавления или изменения параметров можно будет в следующем запуске открытии документа в определенный момент после вызова метода Settings.set и до закрытия надстройки необходимо вызвать метод Settings.saveAsync для сохранения параметры в документе.
   remarks: >-
     <table><tr><td>Наборы требований</td><td>Параметры</td></tr></table>
 
@@ -263,7 +400,7 @@ items:
 
     ```
   name: set(name, value)
-  fullName: set
+  fullName: set(name, value)
   langs:
   - typeScript
   type: method
