@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b83bb9648d9fd43d05078539c4368a8b1495bab7
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: da73d45ceb0b9a6e8425aa2896021d0c10aa48e0
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384834"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978394"
 items:
 - uid: word.Word.List
   summary: >-
@@ -26,14 +26,20 @@ items:
   - word.Word.List.getLevelString
   - word.Word.List.id
   - word.Word.List.insertParagraph
+  - word.Word.List.insertParagraph_1
   - word.Word.List.levelExistences
   - word.Word.List.levelTypes
   - word.Word.List.load
+  - word.Word.List.load_1
+  - word.Word.List.load_2
   - word.Word.List.paragraphs
   - word.Word.List.setLevelAlignment
+  - word.Word.List.setLevelAlignment_1
   - word.Word.List.setLevelBullet
+  - word.Word.List.setLevelBullet_1
   - word.Word.List.setLevelIndents
   - word.Word.List.setLevelNumbering
+  - word.Word.List.setLevelNumbering_1
   - word.Word.List.setLevelStartingNumber
   - word.Word.List.toJSON
   - word.Word.List.track
@@ -57,7 +63,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getLevelParagraphs(level)
-  fullName: getLevelParagraphs
+  fullName: getLevelParagraphs(level)
   langs:
   - typeScript
   type: method
@@ -79,7 +85,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getLevelString(level)
-  fullName: getLevelString
+  fullName: getLevelString(level)
   langs:
   - typeScript
   type: method
@@ -117,7 +123,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: insertParagraph(paragraphText, insertLocation)
-  fullName: insertParagraph
+  fullName: insertParagraph(paragraphText, insertLocation)
   langs:
   - typeScript
   type: method
@@ -136,6 +142,32 @@ items:
       description: Обязательно указывать. Значение может быть «Запуск», «End», «До» или «После».
       type:
       - Word.InsertLocation
+- uid: word.Word.List.insertParagraph_1
+  summary: >-
+    Вставляет абзац в указанном расположении. Значение insertLocation может быть «Запуск», «End», «До» или «После».
+
+
+    \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: insertParagraph(paragraphText, insertLocationString)
+  fullName: insertParagraph(paragraphText, insertLocationString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
+    return:
+      type:
+      - Word.Paragraph
+      description: ''
+    parameters:
+    - id: paragraphText
+      description: Обязательный параметр. Текст абзаца, который необходимо вставить.
+      type:
+      - string
+    - id: insertLocationString
+      description: Обязательно указывать. Значение может быть «Запуск», «End», «До» или «После».
+      type:
+      - "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
 - uid: word.Word.List.levelExistences
   summary: >-
     Проверяет наличие каждого из 9 уровней в списке. Значение true указывает, что уровень существует, то есть на этом уровне имеется по крайней мере один элемент списка. Только для чтения.
@@ -174,26 +206,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Word.List`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Word.List`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.List`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.List;'
+    content: 'load(option?: Word.Interfaces.ListLoadOptions): Word.List;'
     return:
       type:
       - word.Word.List
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - word.Word.Interfaces.ListLoadOptions
+- uid: word.Word.List.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.List;'
+    return:
+      type:
+      - word.Word.List
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: word.Word.List.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.List;'
+    return:
+      type:
+      - word.Word.List
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: word.Word.List.paragraphs
   summary: >-
     Возвращает абзацы в списке. Только для чтения.
@@ -217,7 +288,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelAlignment(level, alignment)
-  fullName: setLevelAlignment
+  fullName: setLevelAlignment(level, alignment)
   langs:
   - typeScript
   type: method
@@ -236,6 +307,32 @@ items:
       description: Обязательно указывать. Выравнивание уровня, который может быть «Left», «По центру» или «Right».
       type:
       - word.Word.Alignment
+- uid: word.Word.List.setLevelAlignment_1
+  summary: >-
+    Задает выравнивание маркера, номера или рисунка на указанном уровне списка.
+
+
+    \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: setLevelAlignment(level, alignmentString)
+  fullName: setLevelAlignment(level, alignmentString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setLevelAlignment(level: number, alignmentString: "Mixed" | "Unknown" | "Left" | "Centered" | "Right" | "Justified"): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: level
+      description: Обязательный. Уровень в списке.
+      type:
+      - number
+    - id: alignmentString
+      description: Обязательно указывать. Выравнивание уровня, который может быть «Left», «По центру» или «Right».
+      type:
+      - "\"Mixed\" | \"Unknown\" | \"Left\" | \"Centered\" | \"Right\" | \"Justified\""
 - uid: word.Word.List.setLevelBullet
   summary: >-
     Задает формат маркеров на указанном уровне списка. Если задан формат Custom, то параметр charCode является обязательным.
@@ -243,7 +340,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelBullet(level, listBullet, charCode, fontName)
-  fullName: setLevelBullet
+  fullName: setLevelBullet(level, listBullet, charCode, fontName)
   langs:
   - typeScript
   type: method
@@ -263,11 +360,45 @@ items:
       type:
       - word.Word.ListBullet
     - id: charCode
-      description: Не обязательно указывать. Значение код знака маркера. Используется только в том случае, если маркер является «Custom».
+      description: Необязательное свойство. Значение код знака маркера. Используется только в том случае, если маркер является «Custom».
       type:
       - number
     - id: fontName
-      description: Не обязательно указывать. Имя шрифта маркера. Используется только в том случае, если маркер является «Custom».
+      description: Необязательное свойство. Имя шрифта маркера. Используется только в том случае, если маркер является «Custom».
+      type:
+      - string
+- uid: word.Word.List.setLevelBullet_1
+  summary: >-
+    Задает формат маркеров на указанном уровне списка. Если задан формат Custom, то параметр charCode является обязательным.
+
+
+    \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: setLevelBullet(level, listBulletString, charCode, fontName)
+  fullName: setLevelBullet(level, listBulletString, charCode, fontName)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setLevelBullet(level: number, listBulletString: "Custom" | "Solid" | "Hollow" | "Square" | "Diamonds" | "Arrow" | "Checkmark", charCode?: number, fontName?: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: level
+      description: Обязательный. Уровень в списке.
+      type:
+      - number
+    - id: listBulletString
+      description: Обязательно указывать. Маркер.
+      type:
+      - "\"Custom\" | \"Solid\" | \"Hollow\" | \"Square\" | \"Diamonds\" | \"Arrow\" | \"Checkmark\""
+    - id: charCode
+      description: Необязательное свойство. Значение код знака маркера. Используется только в том случае, если маркер является «Custom».
+      type:
+      - number
+    - id: fontName
+      description: Необязательное свойство. Имя шрифта маркера. Используется только в том случае, если маркер является «Custom».
       type:
       - string
 - uid: word.Word.List.setLevelIndents
@@ -277,7 +408,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelIndents(level, textIndent, bulletNumberPictureIndent)
-  fullName: setLevelIndents
+  fullName: setLevelIndents(level, textIndent, bulletNumberPictureIndent)
   langs:
   - typeScript
   type: method
@@ -307,7 +438,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelNumbering(level, listNumbering, formatString)
-  fullName: setLevelNumbering
+  fullName: setLevelNumbering(level, listNumbering, formatString)
   langs:
   - typeScript
   type: method
@@ -327,7 +458,37 @@ items:
       type:
       - word.Word.ListNumbering
     - id: formatString
-      description: Не обязательно указывать. Строка формат нумерации определен как массив строк и/или целых чисел. Каждое целое число — это уровень типа номера, который больше или равен к этому уровню. К примеру, массив \["(", уровень - 1, ".", уровня, "")"»\] можно определить format «(2.c)», где 2 — номер родительского элемента и c — номер элемента этот уровень.
+      description: Необязательное свойство. Строка формат нумерации определен как массив строк и/или целых чисел. Каждое целое число — это уровень типа номера, который больше или равен к этому уровню. К примеру, массив \["(", уровень - 1, ".", уровня, "")"»\] можно определить format «(2.c)», где 2 — номер родительского элемента и c — номер элемента этот уровень.
+      type:
+      - any[]
+- uid: word.Word.List.setLevelNumbering_1
+  summary: >-
+    Задает формат нумерации на указанном уровне списка.
+
+
+    \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: setLevelNumbering(level, listNumberingString, formatString)
+  fullName: setLevelNumbering(level, listNumberingString, formatString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setLevelNumbering(level: number, listNumberingString: "None" | "Arabic" | "UpperRoman" | "LowerRoman" | "UpperLetter" | "LowerLetter", formatString?: any[]): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: level
+      description: Обязательный. Уровень в списке.
+      type:
+      - number
+    - id: listNumberingString
+      description: Обязательно указывать. Порядковый номер формата.
+      type:
+      - "\"None\" | \"Arabic\" | \"UpperRoman\" | \"LowerRoman\" | \"UpperLetter\" | \"LowerLetter\""
+    - id: formatString
+      description: Необязательное свойство. Строка формат нумерации определен как массив строк и/или целых чисел. Каждое целое число — это уровень типа номера, который больше или равен к этому уровню. К примеру, массив \["(", уровень - 1, ".", уровня, "")"»\] можно определить format «(2.c)», где 2 — номер родительского элемента и c — номер элемента этот уровень.
       type:
       - any[]
 - uid: word.Word.List.setLevelStartingNumber
@@ -337,7 +498,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelStartingNumber(level, startingNumber)
-  fullName: setLevelStartingNumber
+  fullName: setLevelStartingNumber(level, startingNumber)
   langs:
   - typeScript
   type: method
@@ -358,7 +519,7 @@ items:
       - number
 - uid: word.Word.List.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -371,7 +532,7 @@ items:
 - uid: word.Word.List.track
   summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -384,7 +545,7 @@ items:
 - uid: word.Word.List.untrack
   summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

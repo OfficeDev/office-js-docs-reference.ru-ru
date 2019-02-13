@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8f4bc60ae424ee68581aea187ec124cc434a80e7
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: b8cef1a9fb6b0a28a9c36743a8cc320cb0f260a6
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29770004"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973669"
 items:
 - uid: visio.Visio.Document
   summary: >-
@@ -24,6 +24,8 @@ items:
   - visio.Visio.Document.application
   - visio.Visio.Document.getActivePage
   - visio.Visio.Document.load
+  - visio.Visio.Document.load_1
+  - visio.Visio.Document.load_2
   - visio.Visio.Document.onDataRefreshComplete
   - visio.Visio.Document.onDocumentLoadComplete
   - visio.Visio.Document.onPageLoadComplete
@@ -32,6 +34,7 @@ items:
   - visio.Visio.Document.onShapeMouseLeave
   - visio.Visio.Document.pages
   - visio.Visio.Document.set
+  - visio.Visio.Document.set_1
   - visio.Visio.Document.setActivePage
   - visio.Visio.Document.startDataRefresh
   - visio.Visio.Document.toJSON
@@ -59,7 +62,7 @@ items:
 
     \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: getActivePage()
-  fullName: getActivePage
+  fullName: getActivePage()
   langs:
   - typeScript
   type: method
@@ -75,76 +78,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Visio.Document`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Visio.Document`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Document`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var pages = ctx.document.pages;
-        var pageCount = pages.getCount();
-        return ctx.sync().then(function () {
-            console.log("Pages Count: " +pageCount.value);
-        });
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var documentView = ctx.document.view;
-        documentView.disableHyperlinks();
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var application = ctx.document.application;
-        application.showToolbars = false;
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Visio.Document;'
+    content: 'load(option?: Visio.Interfaces.DocumentLoadOptions): Visio.Document;'
     return:
       type:
       - Visio.Document
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - visio.Visio.Interfaces.DocumentLoadOptions
+- uid: visio.Visio.Document.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Visio.Document;'
+    return:
+      type:
+      - Visio.Document
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: visio.Visio.Document.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Document;'
+    return:
+      type:
+      - Visio.Document
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: visio.Visio.Document.onDataRefreshComplete
   summary: >-
     Происходит при обновлении данных в диаграмме.
@@ -257,6 +249,7 @@ items:
     return:
       type:
       - Visio.PageCollection
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nVisio.run(session, function (ctx) {\n    var pages = ctx.document.pages;\n    var pageCount = pages.getCount();\n    return ctx.sync().then(function () {\n        console.log(\"Pages Count: \" +pageCount.value);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: visio.Visio.Document.set
   summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
   remarks: >-
@@ -265,7 +258,7 @@ items:
 
     `set(properties: Visio.Document): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -284,6 +277,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: visio.Visio.Document.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Visio.Document): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - Visio.Document
 - uid: visio.Visio.Document.setActivePage
   summary: >-
     Задает активную страницу документа.
@@ -291,7 +302,7 @@ items:
 
     \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: setActivePage(PageName)
-  fullName: setActivePage
+  fullName: setActivePage(PageName)
   langs:
   - typeScript
   type: method
@@ -313,7 +324,7 @@ items:
 
     \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: startDataRefresh()
-  fullName: startDataRefresh
+  fullName: startDataRefresh()
   langs:
   - typeScript
   type: method
@@ -325,7 +336,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nVisio.run(session, function (ctx) {\n    var document = ctx.document;\n    document.startDataRefresh();\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: visio.Visio.Document.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

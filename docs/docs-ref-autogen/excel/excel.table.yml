@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a5fb3f4975900e0b332201d217c1fc1f28f3616c
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 5bd5b055e39908e3c3fdd513f2d48f9665544f8a
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769962"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978388"
 items:
 - uid: excel.Excel.Table
   summary: >-
@@ -35,12 +35,15 @@ items:
   - excel.Excel.Table.id
   - excel.Excel.Table.legacyId
   - excel.Excel.Table.load
+  - excel.Excel.Table.load_1
+  - excel.Excel.Table.load_2
   - excel.Excel.Table.name
   - excel.Excel.Table.onChanged
   - excel.Excel.Table.onSelectionChanged
   - excel.Excel.Table.reapplyFilters
   - excel.Excel.Table.rows
   - excel.Excel.Table.set
+  - excel.Excel.Table.set_1
   - excel.Excel.Table.showBandedColumns
   - excel.Excel.Table.showBandedRows
   - excel.Excel.Table.showFilterButton
@@ -57,7 +60,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clearFilters()
-  fullName: clearFilters
+  fullName: clearFilters()
   langs:
   - typeScript
   type: method
@@ -102,7 +105,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: convertToRange()
-  fullName: convertToRange
+  fullName: convertToRange()
   langs:
   - typeScript
   type: method
@@ -119,7 +122,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -136,7 +139,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getDataBodyRange()
-  fullName: getDataBodyRange
+  fullName: getDataBodyRange()
   langs:
   - typeScript
   type: method
@@ -153,7 +156,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getHeaderRowRange()
-  fullName: getHeaderRowRange
+  fullName: getHeaderRowRange()
   langs:
   - typeScript
   type: method
@@ -170,7 +173,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
-  fullName: getRange
+  fullName: getRange()
   langs:
   - typeScript
   type: method
@@ -187,7 +190,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getTotalRowRange()
-  fullName: getTotalRowRange
+  fullName: getTotalRowRange()
   langs:
   - typeScript
   type: method
@@ -263,23 +266,69 @@ items:
       - string
 - uid: excel.Excel.Table.load
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): Excel.Table`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Table`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Get a table by name. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('index')\n    return ctx.sync().then(function() {\n            console.log(table.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get a table by index.\nExcel.run(function (ctx) { \n    var index = 0;\n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('id')\n    return ctx.sync().then(function() {\n            console.log(table.id);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set table style. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.name = 'Table1-Renamed';\n    table.showTotals = false;\n    table.style = 'TableStyleMedium2';\n    table.load('tableStyle');\n    return ctx.sync().then(function() {\n            console.log(table.style);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): Excel.Table`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Table`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Table`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Table;'
+    content: 'load(option?: Excel.Interfaces.TableLoadOptions): Excel.Table;'
     return:
       type:
       - excel.Excel.Table
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.TableLoadOptions
+- uid: excel.Excel.Table.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Get a table by name. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('index')\n    return ctx.sync().then(function() {\n            console.log(table.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get a table by index.\nExcel.run(function (ctx) { \n    var index = 0;\n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('id')\n    return ctx.sync().then(function() {\n            console.log(table.id);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set table style. \nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.name = 'Table1-Renamed';\n    table.showTotals = false;\n    table.style = 'TableStyleMedium2';\n    table.load('tableStyle');\n    return ctx.sync().then(function() {\n            console.log(table.style);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.Table.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Table.name
   summary: >-
     Имя таблицы.
@@ -337,7 +386,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: reapplyFilters()
-  fullName: reapplyFilters
+  fullName: reapplyFilters()
   langs:
   - typeScript
   type: method
@@ -371,7 +420,7 @@ items:
 
     `set(properties: Excel.Table): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -390,6 +439,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Table.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Table): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Table
 - uid: excel.Excel.Table.showBandedColumns
   summary: >-
     Указывает, чередуется ли форматирование четных и нечетных столбцов для более удобного просмотра таблицы.
@@ -505,7 +572,7 @@ items:
 - uid: excel.Excel.Table.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Table является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.TableData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

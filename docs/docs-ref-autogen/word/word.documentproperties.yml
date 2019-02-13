@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e13c8c816259a94fa37e7f941591b02b9a942ef4
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: d6990beb87f3bf3a6583025aa863eeb4f4311945
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769948"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977253"
 items:
 - uid: word.Word.DocumentProperties
   summary: >-
@@ -35,10 +35,13 @@ items:
   - word.Word.DocumentProperties.lastPrintDate
   - word.Word.DocumentProperties.lastSaveTime
   - word.Word.DocumentProperties.load
+  - word.Word.DocumentProperties.load_1
+  - word.Word.DocumentProperties.load_2
   - word.Word.DocumentProperties.manager
   - word.Word.DocumentProperties.revisionNumber
   - word.Word.DocumentProperties.security
   - word.Word.DocumentProperties.set
+  - word.Word.DocumentProperties.set_1
   - word.Word.DocumentProperties.subject
   - word.Word.DocumentProperties.template
   - word.Word.DocumentProperties.title
@@ -255,26 +258,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Word.DocumentProperties`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Word.DocumentProperties`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.DocumentProperties`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.DocumentProperties;'
+    content: 'load(option?: Word.Interfaces.DocumentPropertiesLoadOptions): Word.DocumentProperties;'
     return:
       type:
       - Word.DocumentProperties
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Word.Interfaces.DocumentPropertiesLoadOptions
+- uid: word.Word.DocumentProperties.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.DocumentProperties;'
+    return:
+      type:
+      - Word.DocumentProperties
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: word.Word.DocumentProperties.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.DocumentProperties;'
+    return:
+      type:
+      - Word.DocumentProperties
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: word.Word.DocumentProperties.manager
   summary: >-
     Возвращает или задает менеджера документа.
@@ -331,7 +373,7 @@ items:
 
     `set(properties: Word.DocumentProperties): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -350,6 +392,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: word.Word.DocumentProperties.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Word.DocumentProperties): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - Word.DocumentProperties
 - uid: word.Word.DocumentProperties.subject
   summary: >-
     Возвращает или задает тему документа.
@@ -400,7 +460,7 @@ items:
       - string
 - uid: word.Word.DocumentProperties.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -413,7 +473,7 @@ items:
 - uid: word.Word.DocumentProperties.track
   summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -426,7 +486,7 @@ items:
 - uid: word.Word.DocumentProperties.untrack
   summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method
