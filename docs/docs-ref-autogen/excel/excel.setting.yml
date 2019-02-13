@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 62904d67e19474e7501e5d285d22f2f2b9d1c02c
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: f22bf9036a775c7fc8c1cab73d62683ac58b0913
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769325"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29980277"
 items:
 - uid: excel.Excel.Setting
   summary: >-
@@ -25,7 +25,10 @@ items:
   - excel.Excel.Setting.delete
   - excel.Excel.Setting.key
   - excel.Excel.Setting.load
+  - excel.Excel.Setting.load_1
+  - excel.Excel.Setting.load_2
   - excel.Excel.Setting.set
+  - excel.Excel.Setting.set_1
   - excel.Excel.Setting.toJSON
   - excel.Excel.Setting.value
 - uid: excel.Excel.Setting.context
@@ -47,7 +50,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -79,26 +82,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Excel.Setting`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.Setting`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Setting`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Setting;'
+    content: 'load(option?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
     return:
       type:
       - excel.Excel.Setting
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.SettingLoadOptions
+- uid: excel.Excel.Setting.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.Setting.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Setting.set
   summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
   remarks: >-
@@ -107,7 +149,7 @@ items:
 
     `set(properties: Excel.Setting): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -126,10 +168,28 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Setting.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Setting): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Setting
 - uid: excel.Excel.Setting.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Setting является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.SettingData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

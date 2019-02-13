@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5be3dae9e1d063aaf0ab87c8dae6ee2cf3eebcee
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 9e7758795081c8a15536292bd568fc244f3fb953
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769969"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979934"
 items:
 - uid: excel.Excel.ConditionalFormat
   summary: >-
@@ -37,10 +37,13 @@ items:
   - excel.Excel.ConditionalFormat.iconSetOrNullObject
   - excel.Excel.ConditionalFormat.id
   - excel.Excel.ConditionalFormat.load
+  - excel.Excel.ConditionalFormat.load_1
+  - excel.Excel.ConditionalFormat.load_2
   - excel.Excel.ConditionalFormat.preset
   - excel.Excel.ConditionalFormat.presetOrNullObject
   - excel.Excel.ConditionalFormat.priority
   - excel.Excel.ConditionalFormat.set
+  - excel.Excel.ConditionalFormat.set_1
   - excel.Excel.ConditionalFormat.stopIfTrue
   - excel.Excel.ConditionalFormat.textComparison
   - excel.Excel.ConditionalFormat.textComparisonOrNullObject
@@ -199,7 +202,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -216,7 +219,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
-  fullName: getRange
+  fullName: getRange()
   langs:
   - typeScript
   type: method
@@ -233,7 +236,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRangeOrNullObject()
-  fullName: getRangeOrNullObject
+  fullName: getRangeOrNullObject()
   langs:
   - typeScript
   type: method
@@ -298,26 +301,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Excel.ConditionalFormat`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormat`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormat`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ConditionalFormat;'
+    content: 'load(option?: Excel.Interfaces.ConditionalFormatLoadOptions): Excel.ConditionalFormat;'
     return:
       type:
       - excel.Excel.ConditionalFormat
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ConditionalFormatLoadOptions
+- uid: excel.Excel.ConditionalFormat.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormat
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.ConditionalFormat.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalFormat
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ConditionalFormat.preset
   summary: >-
     Возвращает условное форматирование предварительно критериев. Для получения дополнительных сведений в разделе Excel.PresetCriteriaConditionalFormat.
@@ -375,7 +417,7 @@ items:
 
     `set(properties: Excel.ConditionalFormat): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -394,6 +436,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ConditionalFormat.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ConditionalFormat): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ConditionalFormat
 - uid: excel.Excel.ConditionalFormat.stopIfTrue
   summary: >-
     Если выполняются условия этого условного форматирования, форматы с более низким приоритетом не будут применяться в этой ячейке. NULL на databars, наборы значков и colorscales как существует такого понятия StopIfTrue для этих
@@ -446,7 +506,7 @@ items:
 - uid: excel.Excel.ConditionalFormat.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.ConditionalFormat является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.ConditionalFormatData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

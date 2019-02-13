@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: df7f436e878f20213f5017210a23cf421172c8f7
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: fd28d2f87afa87c519ea0aab2c3394849149cdcd
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29704130"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979416"
 items:
 - uid: Outlook_1_7.Office.From
   summary: >-
@@ -25,6 +25,7 @@ items:
   package: Outlook_1_7
   children:
   - Outlook_1_7.Office.From.getAsync
+  - Outlook_1_7.Office.From.getAsync_1
 - uid: Outlook_1_7.Office.From.getAsync
   summary: >-
     Получает от значения сообщения.
@@ -49,7 +50,7 @@ items:
 
     `getAsync(callback?: (result: Office.AsyncResult<EmailAddressDetails>) => void): void;`
   name: getAsync(options, callback)
-  fullName: getAsync
+  fullName: getAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -63,7 +64,55 @@ items:
     - id: options
       description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult. `value` Свойства результата — это сообщения из значения, как объект EmailAddressDetails.
+      type:
+      - '(result: Office.AsyncResult<EmailAddressDetails>) => void'
+- uid: Outlook_1_7.Office.From.getAsync_1
+  summary: >-
+    Получает от значения сообщения.
+
+
+    Метод getAsync запускает асинхронный вызов на сервер Exchange для получения от значения сообщения.
+
+
+    Из значение элемента предоставляется в качестве [Office.EmailAddressDetails](xref:Outlook_1_7.Office.EmailAddressDetails) в свойство asyncResult.value.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.from.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var from = asyncResult.value;
+        console.log("From " + from);
+    }
+
+    ```
+  name: getAsync(callback)
+  fullName: getAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(callback?: (result: Office.AsyncResult<EmailAddressDetails>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
     - id: callback
       description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с одним параметра asyncResult, который является объектом Office.AsyncResult. `value` Свойства результата — это сообщения из значения, как объект EmailAddressDetails.
       type:
