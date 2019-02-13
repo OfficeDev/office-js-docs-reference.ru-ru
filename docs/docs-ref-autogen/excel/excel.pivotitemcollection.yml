@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8b94792be0dac18a9ee06aaa0b3bc15173b2c2cc
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: 39ffc7b0739be7e1e5f3a1de63d824a00cc8f103
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724362"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29981054"
 items:
 - uid: excel.Excel.PivotItemCollection
   summary: >-
@@ -27,6 +27,8 @@ items:
   - excel.Excel.PivotItemCollection.getItemOrNullObject
   - excel.Excel.PivotItemCollection.items
   - excel.Excel.PivotItemCollection.load
+  - excel.Excel.PivotItemCollection.load_1
+  - excel.Excel.PivotItemCollection.load_2
   - excel.Excel.PivotItemCollection.toJSON
 - uid: excel.Excel.PivotItemCollection.context
   summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
@@ -47,7 +49,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -64,7 +66,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(name)
-  fullName: getItem
+  fullName: getItem(name)
   langs:
   - typeScript
   type: method
@@ -86,7 +88,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(name)
-  fullName: getItemOrNullObject
+  fullName: getItemOrNullObject(name)
   langs:
   - typeScript
   type: method
@@ -119,30 +121,68 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Excel.PivotItemCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.PivotItemCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotItemCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.PivotItemCollection;'
+    content: 'load(option?: Excel.Interfaces.PivotItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotItemCollection;'
     return:
       type:
       - excel.Excel.PivotItemCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.PivotItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.PivotItemCollection.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotItemCollection;'
+    return:
+      type:
+      - excel.Excel.PivotItemCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.PivotItemCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.PivotItemCollection;'
+    return:
+      type:
+      - excel.Excel.PivotItemCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.PivotItemCollection.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `Excel.PivotItemCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.PivotItemCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

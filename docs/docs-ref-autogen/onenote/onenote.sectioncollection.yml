@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4b4e39ddf965774ae59fceb04e4d9d6e1a3ad9e8
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 88fbef979db0a3a940cbe0b25c22979ac33b3923
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384316"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29980942"
 items:
 - uid: onenote.OneNote.SectionCollection
   summary: >-
@@ -28,6 +28,8 @@ items:
   - onenote.OneNote.SectionCollection.getItemAt
   - onenote.OneNote.SectionCollection.items
   - onenote.OneNote.SectionCollection.load
+  - onenote.OneNote.SectionCollection.load_1
+  - onenote.OneNote.SectionCollection.load_2
   - onenote.OneNote.SectionCollection.toJSON
   - onenote.OneNote.SectionCollection.track
   - onenote.OneNote.SectionCollection.untrack
@@ -66,7 +68,7 @@ items:
 
     \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getByName(name)
-  fullName: getByName
+  fullName: getByName(name)
   langs:
   - typeScript
   type: method
@@ -88,7 +90,7 @@ items:
 
     \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getItem(index)
-  fullName: getItem
+  fullName: getItem(index)
   langs:
   - typeScript
   type: method
@@ -110,7 +112,7 @@ items:
 
     \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getItemAt(index)
-  fullName: getItemAt
+  fullName: getItemAt(index)
   langs:
   - typeScript
   type: method
@@ -139,27 +141,72 @@ items:
       - OneNote.Section[]
 - uid: onenote.OneNote.SectionCollection.load
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): OneNote.SectionCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the sections in the current notebook.\n    var sections = context.application.getActiveNotebook().sections;\n\n    // Queue a command to load the sections. \n    // For best performance, request specific properties.\n    sections.load(\"name\"); \n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Iterate through the collection or access items individually by index, for example: sections.items[0]\n            $.each(sections.items, function(index, section) {\n                if (section.name === \"Homework\") {\n                    section.addPage(\"Biology\");\n                    section.addPage(\"Spanish\");\n                    section.addPage(\"Computer Science\");\n                }\n            });\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): OneNote.SectionCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.SectionCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.SectionCollection;'
+    content: 'load(option?: OneNote.Interfaces.SectionCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.SectionCollection;'
     return:
       type:
       - onenote.OneNote.SectionCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - OneNote.Interfaces.SectionCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
+- uid: onenote.OneNote.SectionCollection.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.SectionCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionCollection
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the sections in the current notebook.\n    var sections = context.application.getActiveNotebook().sections;\n\n    // Queue a command to load the sections. \n    // For best performance, request specific properties.\n    sections.load(\"name\"); \n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Iterate through the collection or access items individually by index, for example: sections.items[0]\n            $.each(sections.items, function(index, section) {\n                if (section.name === \"Homework\") {\n                    section.addPage(\"Biology\");\n                    section.addPage(\"Spanish\");\n                    section.addPage(\"Computer Science\");\n                }\n            });\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: onenote.OneNote.SectionCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): OneNote.SectionCollection;'
+    return:
+      type:
+      - onenote.OneNote.SectionCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: onenote.OneNote.SectionCollection.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `OneNote.SectionCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `OneNote.Interfaces.SectionCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -172,7 +219,7 @@ items:
 - uid: onenote.OneNote.SectionCollection.track
   summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -185,7 +232,7 @@ items:
 - uid: onenote.OneNote.SectionCollection.untrack
   summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

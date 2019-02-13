@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5d4128a9b6e41ad3005f9fe70ea511c5fc377643
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: e49427f5d3f2ab326f3b853f8c92221091ee9080
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769605"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29981047"
 items:
 - uid: onenote.OneNote.InkAnalysis
   summary: >-
@@ -24,8 +24,11 @@ items:
   - onenote.OneNote.InkAnalysis.context
   - onenote.OneNote.InkAnalysis.id
   - onenote.OneNote.InkAnalysis.load
+  - onenote.OneNote.InkAnalysis.load_1
+  - onenote.OneNote.InkAnalysis.load_2
   - onenote.OneNote.InkAnalysis.page
   - onenote.OneNote.InkAnalysis.set
+  - onenote.OneNote.InkAnalysis.set_1
   - onenote.OneNote.InkAnalysis.toJSON
   - onenote.OneNote.InkAnalysis.track
   - onenote.OneNote.InkAnalysis.untrack
@@ -59,23 +62,69 @@ items:
       - string
 - uid: onenote.OneNote.InkAnalysis.load
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysis`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysis`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    // Load ink paragraphs.\n    page.load('inkAnalysisOrNull/paragraphs');\n    \n    return ctx.sync()\n        .then(function() {\n            console.log(page.inkAnalysisOrNull.paragraphs.items.length);\n        })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): OneNote.InkAnalysis`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysis`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysis`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.InkAnalysis;'
+    content: 'load(option?: OneNote.Interfaces.InkAnalysisLoadOptions): OneNote.InkAnalysis;'
     return:
       type:
       - onenote.OneNote.InkAnalysis
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - onenote.OneNote.Interfaces.InkAnalysisLoadOptions
+- uid: onenote.OneNote.InkAnalysis.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.InkAnalysis;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysis
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    \n    // Load ink paragraphs.\n    page.load('inkAnalysisOrNull/paragraphs');\n    \n    return ctx.sync()\n        .then(function() {\n            console.log(page.inkAnalysisOrNull.paragraphs.items.length);\n        })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: onenote.OneNote.InkAnalysis.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.InkAnalysis;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysis
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.InkAnalysis.page
   summary: >-
     Возвращает родительский объект страницы. Только для чтения.
@@ -100,7 +149,7 @@ items:
 
     `set(properties: OneNote.InkAnalysis): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -119,10 +168,28 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: onenote.OneNote.InkAnalysis.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: OneNote.InkAnalysis): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - onenote.OneNote.InkAnalysis
 - uid: onenote.OneNote.InkAnalysis.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект OneNote.InkAnalysis является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `OneNote.Interfaces.InkAnalysisData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -135,7 +202,7 @@ items:
 - uid: onenote.OneNote.InkAnalysis.track
   summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -148,7 +215,7 @@ items:
 - uid: onenote.OneNote.InkAnalysis.untrack
   summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

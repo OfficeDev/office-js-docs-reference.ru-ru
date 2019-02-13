@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a74f0bb3c12aee505fb37db2191e26863b44522b
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 304d358c1d4c6cbeb86eec30e5f5500c432d82c9
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769052"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29980767"
 items:
 - uid: excel.Excel.DataValidation
   summary: >-
@@ -26,9 +26,12 @@ items:
   - excel.Excel.DataValidation.errorAlert
   - excel.Excel.DataValidation.ignoreBlanks
   - excel.Excel.DataValidation.load
+  - excel.Excel.DataValidation.load_1
+  - excel.Excel.DataValidation.load_2
   - excel.Excel.DataValidation.prompt
   - excel.Excel.DataValidation.rule
   - excel.Excel.DataValidation.set
+  - excel.Excel.DataValidation.set_1
   - excel.Excel.DataValidation.toJSON
   - excel.Excel.DataValidation.type
   - excel.Excel.DataValidation.valid
@@ -39,7 +42,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clear()
-  fullName: clear
+  fullName: clear()
   langs:
   - typeScript
   type: method
@@ -100,26 +103,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Excel.DataValidation`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.DataValidation;'
+    content: 'load(option?: Excel.Interfaces.DataValidationLoadOptions): Excel.DataValidation;'
     return:
       type:
       - excel.Excel.DataValidation
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.DataValidationLoadOptions
+- uid: excel.Excel.DataValidation.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.DataValidation;'
+    return:
+      type:
+      - excel.Excel.DataValidation
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.DataValidation.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.DataValidation;'
+    return:
+      type:
+      - excel.Excel.DataValidation
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.DataValidation.prompt
   summary: >-
     Запрос, при выборе ячейки.
@@ -160,7 +202,7 @@ items:
 
     `set(properties: Excel.DataValidation): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -179,10 +221,28 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.DataValidation.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.DataValidation): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.DataValidation
 - uid: excel.Excel.DataValidation.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.DataValidation является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.DataValidationData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

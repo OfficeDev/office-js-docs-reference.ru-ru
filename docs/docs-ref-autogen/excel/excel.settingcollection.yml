@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 779baf962704aeafd44299d52bb44a2ad936bcd0
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: 1a8f80148f46248cd4fc130a989910cc008dac44
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28725405"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29981075"
 items:
 - uid: excel.Excel.SettingCollection
   summary: >-
@@ -28,6 +28,8 @@ items:
   - excel.Excel.SettingCollection.getItemOrNullObject
   - excel.Excel.SettingCollection.items
   - excel.Excel.SettingCollection.load
+  - excel.Excel.SettingCollection.load_1
+  - excel.Excel.SettingCollection.load_2
   - excel.Excel.SettingCollection.onSettingsChanged
   - excel.Excel.SettingCollection.toJSON
 - uid: excel.Excel.SettingCollection.add
@@ -37,7 +39,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(key, value)
-  fullName: add
+  fullName: add(key, value)
   langs:
   - typeScript
   type: method
@@ -75,7 +77,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -92,7 +94,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(key)
-  fullName: getItem
+  fullName: getItem(key)
   langs:
   - typeScript
   type: method
@@ -114,7 +116,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject
+  fullName: getItemOrNullObject(key)
   langs:
   - typeScript
   type: method
@@ -147,26 +149,64 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Excel.SettingCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.SettingCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SettingCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.SettingCollection;'
+    content: 'load(option?: Excel.Interfaces.SettingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.SettingCollection;'
     return:
       type:
       - excel.Excel.SettingCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.SettingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.SettingCollection.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.SettingCollection;'
+    return:
+      type:
+      - excel.Excel.SettingCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.SettingCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.SettingCollection;'
+    return:
+      type:
+      - excel.Excel.SettingCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.SettingCollection.onSettingsChanged
   summary: >-
     Происходит при изменении объектов Setting в документе.
@@ -187,7 +227,7 @@ items:
 - uid: excel.Excel.SettingCollection.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `Excel.SettingCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.SettingCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

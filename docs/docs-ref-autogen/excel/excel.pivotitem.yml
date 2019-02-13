@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0659b8f3d10250c765d2ce623c11dc8af055aa58
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 800a8fda4c5ea5e2efa609fc764d386516c06c63
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769409"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29980501"
 items:
 - uid: excel.Excel.PivotItem
   summary: >-
@@ -25,8 +25,11 @@ items:
   - excel.Excel.PivotItem.id
   - excel.Excel.PivotItem.isExpanded
   - excel.Excel.PivotItem.load
+  - excel.Excel.PivotItem.load_1
+  - excel.Excel.PivotItem.load_2
   - excel.Excel.PivotItem.name
   - excel.Excel.PivotItem.set
+  - excel.Excel.PivotItem.set_1
   - excel.Excel.PivotItem.toJSON
   - excel.Excel.PivotItem.visible
 - uid: excel.Excel.PivotItem.context
@@ -79,26 +82,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Excel.PivotItem`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.PivotItem`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotItem`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.PivotItem;'
+    content: 'load(option?: Excel.Interfaces.PivotItemLoadOptions): Excel.PivotItem;'
     return:
       type:
       - excel.Excel.PivotItem
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.PivotItemLoadOptions
+- uid: excel.Excel.PivotItem.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotItem;'
+    return:
+      type:
+      - excel.Excel.PivotItem
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.PivotItem.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.PivotItem;'
+    return:
+      type:
+      - excel.Excel.PivotItem
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.PivotItem.name
   summary: >-
     Имя элемента сводной таблицы.
@@ -123,7 +165,7 @@ items:
 
     `set(properties: Excel.PivotItem): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -142,10 +184,28 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.PivotItem.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.PivotItem): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.PivotItem
 - uid: excel.Excel.PivotItem.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.PivotItem является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.PivotItemData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
