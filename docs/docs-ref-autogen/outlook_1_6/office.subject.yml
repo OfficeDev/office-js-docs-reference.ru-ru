@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 496d2a2fe9c29139fa88c4c0db194396c3406c42
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: 4f5fb5aedbae7c585cfd822925980cd5990fe55e
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29703857"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29976532"
 items:
 - uid: Outlook_1_6.Office.Subject
   summary: >-
@@ -25,7 +25,11 @@ items:
   package: Outlook_1_6
   children:
   - Outlook_1_6.Office.Subject.getAsync
+  - Outlook_1_6.Office.Subject.getAsync_1
   - Outlook_1_6.Office.Subject.setAsync
+  - Outlook_1_6.Office.Subject.setAsync_1
+  - Outlook_1_6.Office.Subject.setAsync_2
+  - Outlook_1_6.Office.Subject.setAsync_3
 - uid: Outlook_1_6.Office.Subject.getAsync
   summary: >-
     Получает тему встречи или сообщения.
@@ -47,7 +51,7 @@ items:
 
     `getAsync(callback: (result: Office.AsyncResult<string>) => void): void;`
   name: getAsync(options, callback)
-  fullName: getAsync
+  fullName: getAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -61,7 +65,51 @@ items:
     - id: options
       description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. `value` Свойства результата — Тема элемента.
+      type:
+      - '(result: Office.AsyncResult<string>) => void'
+- uid: Outlook_1_6.Office.Subject.getAsync_1
+  summary: >-
+    Получает тему встречи или сообщения.
+
+
+    Метод getAsync выполняет асинхронный вызов на сервер Exchange Server, чтобы получить тему встречи или сообщения.
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.subject.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var subject = asyncResult.value;
+    }
+
+    ```
+  name: getAsync(callback)
+  fullName: getAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(callback: (result: Office.AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
     - id: callback
       description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. `value` Свойства результата — Тема элемента.
       type:
@@ -96,7 +144,7 @@ items:
 
     `setAsync(subject: string, callback: (result: Office.AsyncResult<void>) => void): void;`
   name: setAsync(subject, options, callback)
-  fullName: setAsync
+  fullName: setAsync(subject, options, callback)
   langs:
   - typeScript
   type: method
@@ -114,7 +162,127 @@ items:
     - id: options
       description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. Если параметру возникает ошибка темы, свойство asyncResult.error будет содержать код ошибки.
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_6.Office.Subject.setAsync_1
+  summary: >-
+    Задает тему встречи или сообщения.
+
+
+    Метод setAsync запускает асинхронный запрос на сервере Exchange Server, чтобы задать тему встречи или сообщения. При задании темы перезаписывается текущая тема, но сохраняются все префиксы, такие как "Fwd:" или "Re:".
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание</td></tr>
+
+
+    <tr><td>Ошибки</td><td>DataExceedsMaximumSize - параметр subject содержит более 255 знаков.</td></tr></table>
+  name: setAsync(data)
+  fullName: setAsync(data)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(data: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: ''
+      type:
+      - string
+- uid: Outlook_1_6.Office.Subject.setAsync_2
+  summary: >-
+    Задает тему встречи или сообщения.
+
+
+    Метод setAsync запускает асинхронный запрос на сервере Exchange Server, чтобы задать тему встречи или сообщения. При задании темы перезаписывается текущая тема, но сохраняются все префиксы, такие как "Fwd:" или "Re:".
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание</td></tr>
+
+
+    <tr><td>Ошибки</td><td>DataExceedsMaximumSize - параметр subject содержит более 255 знаков.</td></tr></table>
+  name: setAsync(data, options)
+  fullName: setAsync(data, options)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(data: string, options: Office.AsyncContextOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: ''
+      type:
+      - string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставлять любого объекта, их необходимо получить доступ в метод обратного вызова.'
+      type:
+      - Office.AsyncContextOptions
+- uid: Outlook_1_6.Office.Subject.setAsync_3
+  summary: >-
+    Задает тему встречи или сообщения.
+
+
+    Метод setAsync запускает асинхронный запрос на сервере Exchange Server, чтобы задать тему встречи или сообщения. При задании темы перезаписывается текущая тема, но сохраняются все префиксы, такие как "Fwd:" или "Re:".
+
+
+    \[[Набор API-Интерфейсов: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание</td></tr>
+
+
+    <tr><td>Ошибки</td><td>DataExceedsMaximumSize - параметр subject содержит более 255 знаков.</td></tr></table>
+
+    ####Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.subject.setAsync("New subject!", function (asyncResult) {
+        if (asyncResult.status === "failed") {
+            console.log("Action failed with error: " + asyncResult.error.message);
+        }
+    });
+
+    ```
+  name: setAsync(data, callback)
+  fullName: setAsync(data, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(data: string, callback: (result: Office.AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: ''
+      type:
+      - string
     - id: callback
       description: После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult. Если параметру возникает ошибка темы, свойство asyncResult.error будет содержать код ошибки.
       type:

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e4e9e017641e2720a3b047505d2abb8f5514694d
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 870447aa1cd308fcdc0372d1a79277e3a0e306cd
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769619"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978632"
 items:
 - uid: visio.Visio.Page
   summary: >-
@@ -28,8 +28,11 @@ items:
   - visio.Visio.Page.index
   - visio.Visio.Page.isBackground
   - visio.Visio.Page.load
+  - visio.Visio.Page.load_1
+  - visio.Visio.Page.load_2
   - visio.Visio.Page.name
   - visio.Visio.Page.set
+  - visio.Visio.Page.set_1
   - visio.Visio.Page.shapes
   - visio.Visio.Page.toJSON
   - visio.Visio.Page.view
@@ -41,7 +44,7 @@ items:
 
     \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: activate()
-  fullName: activate
+  fullName: activate()
   langs:
   - typeScript
   type: method
@@ -137,26 +140,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Visio.Page`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Visio.Page`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Page`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Visio.Page;'
+    content: 'load(option?: Visio.Interfaces.PageLoadOptions): Visio.Page;'
     return:
       type:
       - Visio.Page
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Visio.Interfaces.PageLoadOptions
+- uid: visio.Visio.Page.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Visio.Page;'
+    return:
+      type:
+      - Visio.Page
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: visio.Visio.Page.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Page;'
+    return:
+      type:
+      - Visio.Page
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: visio.Visio.Page.name
   summary: >-
     Имя страницы. Только для чтения.
@@ -181,7 +223,7 @@ items:
 
     `set(properties: Visio.Page): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -200,6 +242,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: visio.Visio.Page.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Visio.Page): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - Visio.Page
 - uid: visio.Visio.Page.shapes
   summary: >-
     Все фигуры верхнего уровня в поле только для Page.Read.
@@ -218,7 +278,7 @@ items:
       - visio.Visio.ShapeCollection
 - uid: visio.Visio.Page.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

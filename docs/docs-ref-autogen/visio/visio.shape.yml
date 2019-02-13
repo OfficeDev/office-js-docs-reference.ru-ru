@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 65505e8299d177a83f554c86ebc2926401f4861a
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: b1e9b5c038d95d276dd8bba24bec9bb871147043
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769766"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29976995"
 items:
 - uid: visio.Visio.Shape
   summary: >-
@@ -26,9 +26,12 @@ items:
   - visio.Visio.Shape.hyperlinks
   - visio.Visio.Shape.id
   - visio.Visio.Shape.load
+  - visio.Visio.Shape.load_1
+  - visio.Visio.Shape.load_2
   - visio.Visio.Shape.name
   - visio.Visio.Shape.select
   - visio.Visio.Shape.set
+  - visio.Visio.Shape.set_1
   - visio.Visio.Shape.shapeDataItems
   - visio.Visio.Shape.subShapes
   - visio.Visio.Shape.text
@@ -57,7 +60,7 @@ items:
 
     \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: getBounds()
-  fullName: getBounds
+  fullName: getBounds()
   langs:
   - typeScript
   type: method
@@ -103,6 +106,9 @@ items:
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
   remarks: >-
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): Visio.Shape`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; }): Visio.Shape`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
@@ -151,21 +157,57 @@ items:
 
     ```
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Visio.Shape;'
+    content: 'load(option?: Visio.Interfaces.ShapeLoadOptions): Visio.Shape;'
     return:
       type:
       - visio.Visio.Shape
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - visio.Visio.Interfaces.ShapeLoadOptions
+- uid: visio.Visio.Shape.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Visio.Shape;'
+    return:
+      type:
+      - visio.Visio.Shape
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: visio.Visio.Shape.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Shape;'
+    return:
+      type:
+      - visio.Visio.Shape
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: visio.Visio.Shape.name
   summary: >-
     Имя фигуры. Только для чтения.
@@ -206,7 +248,7 @@ items:
 
     `set(properties: Visio.Shape): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -225,6 +267,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: visio.Visio.Shape.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Visio.Shape): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - visio.Visio.Shape
 - uid: visio.Visio.Shape.shapeDataItems
   summary: >-
     Возвращает раздел данных фигуры. Только для чтения.
@@ -275,7 +335,7 @@ items:
       - string
 - uid: visio.Visio.Shape.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
