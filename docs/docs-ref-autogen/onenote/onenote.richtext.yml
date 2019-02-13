@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: bcd243c523da2752210925c2d288c65af609543b
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 2aa063637350bf669966d58aeee1253bce7edd21
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29385492"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975615"
 items:
 - uid: onenote.OneNote.RichText
   summary: >-
@@ -26,6 +26,8 @@ items:
   - onenote.OneNote.RichText.id
   - onenote.OneNote.RichText.languageId
   - onenote.OneNote.RichText.load
+  - onenote.OneNote.RichText.load_1
+  - onenote.OneNote.RichText.load_2
   - onenote.OneNote.RichText.paragraph
   - onenote.OneNote.RichText.text
   - onenote.OneNote.RichText.toJSON
@@ -50,7 +52,7 @@ items:
 
     \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getHtml()
-  fullName: getHtml
+  fullName: getHtml()
   langs:
   - typeScript
   type: method
@@ -94,23 +96,69 @@ items:
       - string
 - uid: onenote.OneNote.RichText.load
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): OneNote.RichText`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.RichText`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its outline's paragraphs.\n    var outlinePageContents = ;\n    var paragraphs = ;\n    var richTextParagraphs = ;\n    // Queue a command to load the id and type of each page content in the outline.\n    pageContents.load(\"id,type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            // Load all page contents of type Outline\n            $.each(pageContents.items, function(index, pageContent) {\n                if(pageContent.type == 'Outline')\n                {\n                    pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');\n                    outlinePageContents.push(pageContent);\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Load all rich text paragraphs across outlines\n            $.each(outlinePageContents, function(index, outlinePageContent) {\n                var outline = outlinePageContent.outline;\n                paragraphs = paragraphs.concat(outline.paragraphs.items);\n            });\n            $.each(paragraphs, function(index, paragraph) {\n                if(paragraph.type == 'RichText')\n                {\n                    richTextParagraphs.push(paragraph);\n                    paragraph.load(\"id,richText/text\");\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Display all rich text paragraphs to the console\n            $.each(richTextParagraphs, function(index, richTextParagraph) {\n                var richText = richTextParagraph.richText;\n                console.log(\n                    \"Paragraph found with richtext content : \" + \n                    richText.text + \" and richtext id : \" + richText.id);\n            });\n            return context.sync();\n        });\n});\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): OneNote.RichText`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.RichText`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.RichText`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.RichText;'
+    content: 'load(option?: OneNote.Interfaces.RichTextLoadOptions): OneNote.RichText;'
     return:
       type:
       - onenote.OneNote.RichText
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - onenote.OneNote.Interfaces.RichTextLoadOptions
+- uid: onenote.OneNote.RichText.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.RichText;'
+    return:
+      type:
+      - onenote.OneNote.RichText
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its outline's paragraphs.\n    var outlinePageContents = ;\n    var paragraphs = ;\n    var richTextParagraphs = ;\n    // Queue a command to load the id and type of each page content in the outline.\n    pageContents.load(\"id,type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            // Load all page contents of type Outline\n            $.each(pageContents.items, function(index, pageContent) {\n                if(pageContent.type == 'Outline')\n                {\n                    pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');\n                    outlinePageContents.push(pageContent);\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Load all rich text paragraphs across outlines\n            $.each(outlinePageContents, function(index, outlinePageContent) {\n                var outline = outlinePageContent.outline;\n                paragraphs = paragraphs.concat(outline.paragraphs.items);\n            });\n            $.each(paragraphs, function(index, paragraph) {\n                if(paragraph.type == 'RichText')\n                {\n                    richTextParagraphs.push(paragraph);\n                    paragraph.load(\"id,richText/text\");\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Display all rich text paragraphs to the console\n            $.each(richTextParagraphs, function(index, richTextParagraph) {\n                var richText = richTextParagraph.richText;\n                console.log(\n                    \"Paragraph found with richtext content : \" + \n                    richText.text + \" and richtext id : \" + richText.id);\n            });\n            return context.sync();\n        });\n});\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: onenote.OneNote.RichText.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.RichText;'
+    return:
+      type:
+      - onenote.OneNote.RichText
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.RichText.paragraph
   summary: >-
     Получает объект Paragraph, содержащий объект RichText. Только для чтения.
@@ -146,7 +194,7 @@ items:
 - uid: onenote.OneNote.RichText.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект OneNote.RichText является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `OneNote.Interfaces.RichTextData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -159,7 +207,7 @@ items:
 - uid: onenote.OneNote.RichText.track
   summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -172,7 +220,7 @@ items:
 - uid: onenote.OneNote.RichText.untrack
   summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6ee32694f520b1c3c78b0946823331d65deca536
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 4eaf88574524ad44b5432f746afe09404b9019a7
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769675"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973298"
 items:
 - uid: excel.Excel.Workbook
   summary: >-
@@ -30,6 +30,8 @@ items:
   - excel.Excel.Workbook.getActiveCell
   - excel.Excel.Workbook.getSelectedRange
   - excel.Excel.Workbook.load
+  - excel.Excel.Workbook.load_1
+  - excel.Excel.Workbook.load_2
   - excel.Excel.Workbook.name
   - excel.Excel.Workbook.names
   - excel.Excel.Workbook.onSelectionChanged
@@ -38,6 +40,7 @@ items:
   - excel.Excel.Workbook.protection
   - excel.Excel.Workbook.readOnly
   - excel.Excel.Workbook.set
+  - excel.Excel.Workbook.set_1
   - excel.Excel.Workbook.settings
   - excel.Excel.Workbook.styles
   - excel.Excel.Workbook.tables
@@ -142,7 +145,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getActiveCell()
-  fullName: getActiveCell
+  fullName: getActiveCell()
   langs:
   - typeScript
   type: method
@@ -159,7 +162,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getSelectedRange()
-  fullName: getSelectedRange
+  fullName: getSelectedRange()
   langs:
   - typeScript
   type: method
@@ -175,26 +178,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Excel.Workbook`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.Workbook`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Workbook;'
+    content: 'load(option?: Excel.Interfaces.WorkbookLoadOptions): Excel.Workbook;'
     return:
       type:
       - excel.Excel.Workbook
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.WorkbookLoadOptions
+- uid: excel.Excel.Workbook.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Workbook;'
+    return:
+      type:
+      - excel.Excel.Workbook
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.Workbook.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Workbook;'
+    return:
+      type:
+      - excel.Excel.Workbook
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Workbook.name
   summary: >-
     Получает имя книги. Только для чтения.
@@ -316,7 +358,7 @@ items:
 
     `set(properties: Excel.Workbook): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -335,6 +377,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Workbook.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Workbook): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Workbook
 - uid: excel.Excel.Workbook.settings
   summary: >-
     Представляет коллекцию параметров, сопоставленных с книгой. Только для чтения.
@@ -386,7 +446,7 @@ items:
 - uid: excel.Excel.Workbook.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Workbook является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.WorkbookData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

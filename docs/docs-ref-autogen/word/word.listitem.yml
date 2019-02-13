@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b087d0fd310a949ee62701db97c8a0aac149be8d
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: ce16b4094906d9aeef2947bd45b529e914378b0c
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769388"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29972920"
 items:
 - uid: word.Word.ListItem
   summary: >-
@@ -28,7 +28,10 @@ items:
   - word.Word.ListItem.level
   - word.Word.ListItem.listString
   - word.Word.ListItem.load
+  - word.Word.ListItem.load_1
+  - word.Word.ListItem.load_2
   - word.Word.ListItem.set
+  - word.Word.ListItem.set_1
   - word.Word.ListItem.siblingIndex
   - word.Word.ListItem.toJSON
   - word.Word.ListItem.track
@@ -52,7 +55,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getAncestor(parentOnly)
-  fullName: getAncestor
+  fullName: getAncestor(parentOnly)
   langs:
   - typeScript
   type: method
@@ -74,7 +77,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getAncestorOrNullObject(parentOnly)
-  fullName: getAncestorOrNullObject
+  fullName: getAncestorOrNullObject(parentOnly)
   langs:
   - typeScript
   type: method
@@ -96,7 +99,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getDescendants(directChildrenOnly)
-  fullName: getDescendants
+  fullName: getDescendants(directChildrenOnly)
   langs:
   - typeScript
   type: method
@@ -149,26 +152,65 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Word.ListItem`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Word.ListItem`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ListItem`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.ListItem;'
+    content: 'load(option?: Word.Interfaces.ListItemLoadOptions): Word.ListItem;'
     return:
       type:
       - word.Word.ListItem
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - word.Word.Interfaces.ListItemLoadOptions
+- uid: word.Word.ListItem.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.ListItem;'
+    return:
+      type:
+      - word.Word.ListItem
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: word.Word.ListItem.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.ListItem;'
+    return:
+      type:
+      - word.Word.ListItem
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: word.Word.ListItem.set
   summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
   remarks: >-
@@ -177,7 +219,7 @@ items:
 
     `set(properties: Word.ListItem): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -196,6 +238,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: word.Word.ListItem.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Word.ListItem): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - word.Word.ListItem
 - uid: word.Word.ListItem.siblingIndex
   summary: >-
     Возвращает порядковый номер элемента списка относительно элементов того же уровня. Только для чтения.
@@ -214,7 +274,7 @@ items:
       - number
 - uid: word.Word.ListItem.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -227,7 +287,7 @@ items:
 - uid: word.Word.ListItem.track
   summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -240,7 +300,7 @@ items:
 - uid: word.Word.ListItem.untrack
   summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

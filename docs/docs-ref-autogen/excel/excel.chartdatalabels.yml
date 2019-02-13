@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 34409ecf94d658cab9e05da3046c14e7e646b838
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: cc5bab8bd3c91b5deb09e439a5e26d1e7bf52a37
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769431"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973032"
 items:
 - uid: excel.Excel.ChartDataLabels
   summary: >-
@@ -26,10 +26,13 @@ items:
   - excel.Excel.ChartDataLabels.format
   - excel.Excel.ChartDataLabels.horizontalAlignment
   - excel.Excel.ChartDataLabels.load
+  - excel.Excel.ChartDataLabels.load_1
+  - excel.Excel.ChartDataLabels.load_2
   - excel.Excel.ChartDataLabels.numberFormat
   - excel.Excel.ChartDataLabels.position
   - excel.Excel.ChartDataLabels.separator
   - excel.Excel.ChartDataLabels.set
+  - excel.Excel.ChartDataLabels.set_1
   - excel.Excel.ChartDataLabels.showBubbleSize
   - excel.Excel.ChartDataLabels.showCategoryName
   - excel.Excel.ChartDataLabels.showLegendKey
@@ -101,23 +104,69 @@ items:
       - Excel.ChartTextHorizontalAlignment | "Center" | "Left" | "Right" | "Justify" | "Distributed"
 - uid: excel.Excel.ChartDataLabels.load
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartDataLabels`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartDataLabels`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Make Series Name shown in Datalabels and set the position of datalabels to be \"top\";\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.datalabels.showValue = true;\n    chart.datalabels.position = \"top\";\n    chart.datalabels.showSeriesName = true;\n    return ctx.sync().then(function() {\n            console.log(\"Datalabels Shown\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): Excel.ChartDataLabels`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.ChartDataLabels`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartDataLabels`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartDataLabels;'
+    content: 'load(option?: Excel.Interfaces.ChartDataLabelsLoadOptions): Excel.ChartDataLabels;'
     return:
       type:
       - excel.Excel.ChartDataLabels
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartDataLabelsLoadOptions
+- uid: excel.Excel.ChartDataLabels.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartDataLabels;'
+    return:
+      type:
+      - excel.Excel.ChartDataLabels
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Make Series Name shown in Datalabels and set the position of datalabels to be \"top\";\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.datalabels.showValue = true;\n    chart.datalabels.position = \"top\";\n    chart.datalabels.showSeriesName = true;\n    return ctx.sync().then(function() {\n            console.log(\"Datalabels Shown\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.ChartDataLabels.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartDataLabels;'
+    return:
+      type:
+      - excel.Excel.ChartDataLabels
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartDataLabels.numberFormat
   summary: >-
     Представляет код формата для меток данных.
@@ -174,7 +223,7 @@ items:
 
     `set(properties: Excel.ChartDataLabels): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -193,6 +242,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartDataLabels.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartDataLabels): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartDataLabels
 - uid: excel.Excel.ChartDataLabels.showBubbleSize
   summary: >-
     Логическое значение, которое указывает, отображается ли размер пузырьков с метками данных.
@@ -308,7 +375,7 @@ items:
 - uid: excel.Excel.ChartDataLabels.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.ChartDataLabels является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.ChartDataLabelsData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

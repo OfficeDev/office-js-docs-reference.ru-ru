@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: abeba507e7c49fc343cfb6332221abebff8483e5
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 489f6e21bc481eeabd8b1c8ce7e4628d9a1d5177
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29770018"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975041"
 items:
 - uid: excel.Excel.ChartSeries
   summary: >-
@@ -35,6 +35,8 @@ items:
   - excel.Excel.ChartSeries.hasDataLabels
   - excel.Excel.ChartSeries.invertIfNegative
   - excel.Excel.ChartSeries.load
+  - excel.Excel.ChartSeries.load_1
+  - excel.Excel.ChartSeries.load_2
   - excel.Excel.ChartSeries.markerBackgroundColor
   - excel.Excel.ChartSeries.markerForegroundColor
   - excel.Excel.ChartSeries.markerSize
@@ -45,6 +47,7 @@ items:
   - excel.Excel.ChartSeries.points
   - excel.Excel.ChartSeries.secondPlotSize
   - excel.Excel.ChartSeries.set
+  - excel.Excel.ChartSeries.set_1
   - excel.Excel.ChartSeries.setBubbleSizes
   - excel.Excel.ChartSeries.setValues
   - excel.Excel.ChartSeries.setXAxisValues
@@ -121,7 +124,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -261,23 +264,69 @@ items:
       - boolean
 - uid: excel.Excel.ChartSeries.load
   summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: "В дополнение к подписи этот метод имеет следующие цифровые подписи.\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartSeries`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartSeries`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Rename the 1st series of Chart1 to \"New Series Name\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.series.getItemAt(0).name = \"New Series Name\";\n    return ctx.sync().then(function() {\n            console.log(\"Series1 Renamed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+
+
+    `load(option?: string | string[]): Excel.ChartSeries`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.ChartSeries`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartSeries`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartSeries;'
+    content: 'load(option?: Excel.Interfaces.ChartSeriesLoadOptions): Excel.ChartSeries;'
     return:
       type:
       - excel.Excel.ChartSeries
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartSeriesLoadOptions
+- uid: excel.Excel.ChartSeries.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartSeries;'
+    return:
+      type:
+      - excel.Excel.ChartSeries
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Rename the 1st series of Chart1 to \"New Series Name\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.series.getItemAt(0).name = \"New Series Name\";\n    return ctx.sync().then(function() {\n            console.log(\"Series1 Renamed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: excel.Excel.ChartSeries.load_2
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartSeries;'
+    return:
+      type:
+      - excel.Excel.ChartSeries
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartSeries.markerBackgroundColor
   summary: >-
     Представляет цвет фона маркеров для рядов диаграммы.
@@ -434,7 +483,7 @@ items:
 
     `set(properties: Excel.ChartSeries): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -453,6 +502,24 @@ items:
       description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartSeries.set_1
+  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartSeries): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartSeries
 - uid: excel.Excel.ChartSeries.setBubbleSizes
   summary: >-
     Задает размеры пузырьков для ряда диаграммы. Применяется только для пузырьковых диаграмм.
@@ -460,7 +527,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setBubbleSizes(sourceData)
-  fullName: setBubbleSizes
+  fullName: setBubbleSizes(sourceData)
   langs:
   - typeScript
   type: method
@@ -482,7 +549,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setValues(sourceData)
-  fullName: setValues
+  fullName: setValues(sourceData)
   langs:
   - typeScript
   type: method
@@ -504,7 +571,7 @@ items:
 
     \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setXAxisValues(sourceData)
-  fullName: setXAxisValues
+  fullName: setXAxisValues(sourceData)
   langs:
   - typeScript
   type: method
@@ -570,7 +637,7 @@ items:
 - uid: excel.Excel.ChartSeries.toJSON
   summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.ChartSeries является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.ChartSeriesData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
