@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0fb30940c298e31e4f68fc1f88d42be56978bf8c
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 7052e6a415d7eaccb2167deb92d629758b4c9c6c
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384806"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29982512"
 items:
 - uid: word.Word.CustomPropertyCollection
   summary: >-
@@ -29,6 +29,8 @@ items:
   - word.Word.CustomPropertyCollection.getItemOrNullObject
   - word.Word.CustomPropertyCollection.items
   - word.Word.CustomPropertyCollection.load
+  - word.Word.CustomPropertyCollection.load_1
+  - word.Word.CustomPropertyCollection.load_2
   - word.Word.CustomPropertyCollection.toJSON
   - word.Word.CustomPropertyCollection.track
   - word.Word.CustomPropertyCollection.untrack
@@ -39,7 +41,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: add(key, value)
-  fullName: add
+  fullName: add(key, value)
   langs:
   - typeScript
   type: method
@@ -77,7 +79,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: deleteAll()
-  fullName: deleteAll
+  fullName: deleteAll()
   langs:
   - typeScript
   type: method
@@ -94,7 +96,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -111,7 +113,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getItem(key)
-  fullName: getItem
+  fullName: getItem(key)
   langs:
   - typeScript
   type: method
@@ -133,7 +135,7 @@ items:
 
     \[[Набор API-Интерфейсов: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject
+  fullName: getItemOrNullObject(key)
   langs:
   - typeScript
   type: method
@@ -167,29 +169,67 @@ items:
     В дополнение к подписи этот метод имеет следующие цифровые подписи.
 
 
+    `load(option?: string | string[]): Word.CustomPropertyCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+
+
     `load(option?: { select?: string; expand?: string; }): Word.CustomPropertyCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.CustomPropertyCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.CustomPropertyCollection;'
+    content: 'load(option?: Word.Interfaces.CustomPropertyCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.CustomPropertyCollection;'
     return:
       type:
       - Word.CustomPropertyCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Word.Interfaces.CustomPropertyCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions
+- uid: word.Word.CustomPropertyCollection.load_1
+  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.CustomPropertyCollection;'
+    return:
+      type:
+      - Word.CustomPropertyCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
       type:
       - string | string[]
+- uid: word.Word.CustomPropertyCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Word.CustomPropertyCollection;'
+    return:
+      type:
+      - Word.CustomPropertyCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: word.Word.CustomPropertyCollection.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -202,7 +242,7 @@ items:
 - uid: word.Word.CustomPropertyCollection.track
   summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -215,7 +255,7 @@ items:
 - uid: word.Word.CustomPropertyCollection.untrack
   summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method
