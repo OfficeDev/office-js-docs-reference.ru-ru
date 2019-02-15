@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 1e94a2fa0a6c07178da29be21ab4fdfd3bce52b9
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: bc0b03fcb57f4e7cf26096d6d2cdc1cd707c127d
+ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29974474"
+ms.lasthandoff: 02/15/2019
+ms.locfileid: "30056076"
 items:
 - uid: Outlook_1_5.Office.RoamingSettings
   summary: >-
@@ -20,12 +20,12 @@ items:
     К объекту RoamingSettings можно получить доступ с помощью свойства roamingSettings в пространстве имен Office.context.
 
 
-    **Важно**: инициализируется объект RoamingSettings из постоянного хранилища только в том случае, если надстройка сначала загружается. Для области задач это означает, что он инициализируется только при открытии области задач. Если область задач переходит на другую страницу или перезагрузка текущей страницы, в памяти объект сбрасывается начального значения, даже в том случае, если надстройка сохранить изменения. Постоянные изменения не будут недоступны, пока не будет закрыто и повторно открыть область задач.
+    **Важно!** объект roamingSettings инициализируется из материализованного хранилища только при первой загрузке надстройки. Для областей задач это означает, что она инициализируется только при первом открытии области задач. Если область задач переходит к другой странице или Перезагружает текущую страницу, объект в памяти сбрасывается в исходные значения, даже если ваша надстройка сохраняет изменения. Сохраненные изменения не будут доступны до тех пор, пока область задач не будет закрыта и открыта повторно.
 
 
-    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Ограниченный доступ</td></tr>
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>С ограничениями</td></tr>
 
 
     <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
@@ -35,15 +35,15 @@ items:
 
     ```javascript
 
-    // Get the current value of the 'myKey' setting
+    // Get the current value of the 'myKey' setting.
 
     var value = Office.context.roamingSettings.get('myKey');
 
-    // Update the value of the 'myKey' setting
+    // Update the value of the 'myKey' setting.
 
     Office.context.roamingSettings.set('myKey', 'Hello World!');
 
-    // Persist the change
+    // Persist the change.
 
     Office.context.roamingSettings.saveAsync();
 
@@ -64,9 +64,9 @@ items:
     Извлекает указанный параметр.
 
 
-    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restricted</td></tr>
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>С ограничениями</td></tr>
 
 
     <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
@@ -80,7 +80,7 @@ items:
     return:
       type:
       - any
-      description: 'Тип: String \| номер \| логическое \| объект \| массива'
+      description: 'Тип: \| строковый \| номер \| логический \| массив объектов'
     parameters:
     - id: name
       description: Имя извлекаемого параметра с учетом регистра.
@@ -91,9 +91,9 @@ items:
     Удаляет указанный параметр
 
 
-    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Ограниченный доступ</td></tr>
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>С ограничениями</td></tr>
 
 
     <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
@@ -121,9 +121,9 @@ items:
     Все параметры, ранее сохраненные надстройкой, загружаются при ее инициализации, поэтому на протяжении всего сеанса можно использовать только методы set и get для работы с копией контейнера свойств в памяти. Если требуется сохранить параметры, чтобы они были доступны при следующем использовании надстройки, воспользуйтесь методом saveAsync.
 
 
-    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Ограниченный доступ</td></tr>
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>С ограничениями</td></tr>
 
 
     <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
@@ -140,7 +140,7 @@ items:
       description: ''
     parameters:
     - id: callback
-      description: Необязательное свойство. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
+      description: Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.
       type:
       - '(result: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_5.Office.RoamingSettings.set
@@ -151,15 +151,15 @@ items:
     Метод set создает новый параметр с указанным именем, если он еще не существует, или устанавливает существующий параметр с указанным именем. Значение сохраняется в документе как сериализованное представление JSON с его типом данных.
 
 
-    Не более 32 КБ доступно для настройки каждой надстройки.
+    Для параметров каждой надстройки доступен максимум 32 КБ.
 
 
     Любые изменения, внесенные в параметры с помощью функции set, будут сохранены на сервере только после вызова функции saveAsync.
 
 
-    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Ограниченный доступ</td></tr>
+    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>С ограничениями</td></tr>
 
 
     <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
