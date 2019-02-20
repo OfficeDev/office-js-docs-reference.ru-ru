@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e1aeb311af13a575bdc735e6fe2601d9cfe7a3e4
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 03b77d5315bd854e9f1766c69a92758779337b39
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29975195"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30095823"
 items:
 - uid: excel.Excel.StyleCollection
   summary: >-
-    Представляет коллекцию всех стилей. Предупреждение: Массив элементов StyleCollection имеет известная проблема при загрузке элементов из коллекции. Не используйте `StyleCollection.items` <!-- -->любые `load()` метод и `toJSON()` метод.
+    Представляет коллекцию всех стилей.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.StyleCollection
   fullName: Excel.StyleCollection
   langs:
@@ -23,7 +23,9 @@ items:
   children:
   - excel.Excel.StyleCollection.add
   - excel.Excel.StyleCollection.context
+  - excel.Excel.StyleCollection.getCount
   - excel.Excel.StyleCollection.getItem
+  - excel.Excel.StyleCollection.getItemAt
   - excel.Excel.StyleCollection.items
   - excel.Excel.StyleCollection.load
   - excel.Excel.StyleCollection.load_1
@@ -34,7 +36,7 @@ items:
     Добавляет новый стиль в коллекцию.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(name)
   fullName: add(name)
   langs:
@@ -48,11 +50,11 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let styles = context.workbook.styles;\n\n    // Add a new style to the style collection.\n    // Styles is in the Home tab ribbon.\n    styles.add(\"Diagonal Orientation Style\");\n          \n    let newStyle = styles.getItem(\"Diagonal Orientation Style\");\n    \n    // The \"Diagonal Orientation Style\" properties.\n    newStyle.textOrientation = 38;\n    newStyle.autoIndent = true;\n    newStyle.includeProtection = true;\n    newStyle.shrinkToFit = true;\n    newStyle.locked = false;\n    \n    await context.sync();\n\n    console.log(\"Successfully added a new style with diagonal orientation to the Home tab ribbon.\");\n});\n```"
     parameters:
     - id: name
-      description: Имя стиля для добавления.
+      description: Имя добавляемого стиля.
       type:
       - string
 - uid: excel.Excel.StyleCollection.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
   name: context
   fullName: context
   langs:
@@ -63,12 +65,30 @@ items:
     return:
       type:
       - RequestContext
+- uid: excel.Excel.StyleCollection.getCount
+  summary: >-
+    Получает число стилей в коллекции.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getCount()
+  fullName: getCount()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
 - uid: excel.Excel.StyleCollection.getItem
   summary: >-
     Получает стиль по имени.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(name)
   fullName: getItem(name)
   langs:
@@ -82,11 +102,34 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let styles = context.workbook.styles;\n\n    // Add a new style to the style collection.\n    // Styles is in the Home tab ribbon.\n    styles.add(\"Diagonal Orientation Style\");\n          \n    let newStyle = styles.getItem(\"Diagonal Orientation Style\");\n    \n    // The \"Diagonal Orientation Style\" properties.\n    newStyle.textOrientation = 38;\n    newStyle.autoIndent = true;\n    newStyle.includeProtection = true;\n    newStyle.shrinkToFit = true;\n    newStyle.locked = false;\n    \n    await context.sync();\n\n    console.log(\"Successfully added a new style with diagonal orientation to the Home tab ribbon.\");\n});\n```"
     parameters:
     - id: name
-      description: Имя стиля нужно вернуть.
+      description: Имя извлекаемого стиля.
       type:
       - string
+- uid: excel.Excel.StyleCollection.getItemAt
+  summary: >-
+    Получает стиль на основе его позиции в коллекции.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getItemAt(index)
+  fullName: getItemAt(index)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): Excel.Style;'
+    return:
+      type:
+      - excel.Excel.Style
+      description: ''
+    parameters:
+    - id: index
+      description: Значение индекса получаемого объекта. Используется нулевой индекс.
+      type:
+      - number
 - uid: excel.Excel.StyleCollection.items
-  summary: 'Предупреждение: Массив элементов StyleCollection имеет известная проблема при загрузке элементов из коллекции. Не используйте `StyleCollection.items` <!-- -->любые `load()` метод и `toJSON()` метод.'
+  summary: Получает загруженные дочерние элементы в этой коллекции.
   name: items
   fullName: items
   langs:
@@ -98,7 +141,18 @@ items:
       type:
       - Excel.Style[]
 - uid: excel.Excel.StyleCollection.load
-  summary: 'Предупреждение: Массив элементов StyleCollection имеет известная проблема при загрузке элементов из коллекции. Не используйте `StyleCollection.items` <!-- -->любые `load()` метод и `toJSON()` метод.'
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств необходимо вызвать метод Context. Sync ().
+  remarks: >-
+    В дополнение к этой подписи этот метод имеет следующие подписи:
+
+
+    `load(option?: string | string[]): Excel.StyleCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.StyleCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
   name: load(option)
   fullName: load(option)
   langs:
@@ -116,7 +170,7 @@ items:
       type:
       - Excel.Interfaces.StyleCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
 - uid: excel.Excel.StyleCollection.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -130,7 +184,7 @@ items:
       description: ''
     parameters:
     - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
       type:
       - string | string[]
 - uid: excel.Excel.StyleCollection.load_2
@@ -151,7 +205,7 @@ items:
       type:
       - office.OfficeExtension.LoadOption
 - uid: excel.Excel.StyleCollection.toJSON
-  summary: 'Предупреждение: Массив элементов StyleCollection имеет известная проблема при загрузке элементов из коллекции. Не используйте `StyleCollection.items` <!-- -->любые `load()` метод и `toJSON()` метод.'
+  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.StyleCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.StyleCollectionData` <!-- -->"Items"), содержащий массив "Items" с неполной копией всех загруженных свойств из элементов коллекции.
   name: toJSON()
   fullName: toJSON()
   langs:

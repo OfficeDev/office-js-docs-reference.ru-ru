@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 304d358c1d4c6cbeb86eec30e5f5500c432d82c9
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: a7364f74de108934b520064f974324f6fd9eadaf
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980767"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30097972"
 items:
 - uid: excel.Excel.DataValidation
   summary: >-
-    Представляет проверку данных, применяемые к текущий диапазон.
+    Представляет проверку данных, применяемую к текущему диапазону.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.DataValidation
   fullName: Excel.DataValidation
   langs:
@@ -24,6 +24,8 @@ items:
   - excel.Excel.DataValidation.clear
   - excel.Excel.DataValidation.context
   - excel.Excel.DataValidation.errorAlert
+  - excel.Excel.DataValidation.getInvalidCells
+  - excel.Excel.DataValidation.getInvalidCellsOrNullObject
   - excel.Excel.DataValidation.ignoreBlanks
   - excel.Excel.DataValidation.load
   - excel.Excel.DataValidation.load_1
@@ -40,7 +42,7 @@ items:
     Очищает проверку данных из текущего диапазона.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: clear()
   fullName: clear()
   langs:
@@ -53,7 +55,7 @@ items:
       - void
       description: ''
 - uid: excel.Excel.DataValidation.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
   name: context
   fullName: context
   langs:
@@ -69,7 +71,7 @@ items:
     Сообщение об ошибке, когда пользователь вводит недопустимые данные.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: errorAlert
   fullName: errorAlert
   langs:
@@ -81,12 +83,48 @@ items:
       type:
       - excel.Excel.DataValidationErrorAlert
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.DataValidation.getInvalidCells
+  summary: >-
+    Возвращает объект RangeAreas, состоящий из одного или нескольких прямоугольных диапазонов с недопустимыми значениями ячейки. Если все значения ячеек допустимы, эта функция вызовет ошибку ItemNotFound.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getInvalidCells()
+  fullName: getInvalidCells()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getInvalidCells(): Excel.RangeAreas;'
+    return:
+      type:
+      - excel.Excel.RangeAreas
+      description: ''
+- uid: excel.Excel.DataValidation.getInvalidCellsOrNullObject
+  summary: >-
+    Возвращает объект RangeAreas, состоящий из одного или нескольких прямоугольных диапазонов с недопустимыми значениями ячейки. Если все значения ячеек являются допустимыми, эта функция возвратит значение null.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getInvalidCellsOrNullObject()
+  fullName: getInvalidCellsOrNullObject()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getInvalidCellsOrNullObject(): Excel.RangeAreas;'
+    return:
+      type:
+      - excel.Excel.RangeAreas
+      description: ''
 - uid: excel.Excel.DataValidation.ignoreBlanks
   summary: >-
     Игнорировать пустые ячейки: проверка данных не будет выполняться в пустых ячейках, по умолчанию используется значение true.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: ignoreBlanks
   fullName: ignoreBlanks
   langs:
@@ -98,18 +136,18 @@ items:
       type:
       - boolean
 - uid: excel.Excel.DataValidation.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств необходимо вызвать метод Context. Sync ().
   remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+    В дополнение к этой подписи этот метод имеет следующие подписи:
 
 
-    `load(option?: string | string[]): Excel.DataValidation`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+    `load(option?: string | string[]): Excel.DataValidation`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+    `load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
   name: load(option)
   fullName: load(option)
   langs:
@@ -127,7 +165,7 @@ items:
       type:
       - excel.Excel.Interfaces.DataValidationLoadOptions
 - uid: excel.Excel.DataValidation.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -141,11 +179,11 @@ items:
       description: ''
     parameters:
     - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
       type:
       - string | string[]
 - uid: excel.Excel.DataValidation.load_2
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
   langs:
@@ -159,15 +197,15 @@ items:
       description: ''
     parameters:
     - id: propertyNamesAndPaths
-      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      description: Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
       type:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.DataValidation.prompt
   summary: >-
-    Запрос, при выборе ячейки.
+    ВыДавать запрос при выборе пользователем ячейки.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: prompt
   fullName: prompt
   langs:
@@ -180,10 +218,10 @@ items:
       - excel.Excel.DataValidationPrompt
 - uid: excel.Excel.DataValidation.rule
   summary: >-
-    Правила проверки данных, содержащий другой тип условия проверки данных.
+    Правило проверки данных, которое содержит различные типы условий проверки данных.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: rule
   fullName: rule
   langs:
@@ -195,9 +233,9 @@ items:
       type:
       - excel.Excel.DataValidationRule
 - uid: excel.Excel.DataValidation.set
-  summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
+  summary: Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.
   remarks: >-
-    Этот метод имеет следующие дополнительные подписи.
+    Этот метод имеет следующую дополнительную подпись:
 
 
     `set(properties: Excel.DataValidation): void`
@@ -214,15 +252,15 @@ items:
       description: ''
     parameters:
     - id: properties
-      description: Объект JavaScript со свойствами, которые isomorphically структурированы для свойства объекта, для которого вызывается метод.
+      description: Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.
       type:
       - Interfaces.DataValidationUpdateData
     - id: options
-      description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
+      description: Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.DataValidation.set_1
-  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
   name: set(properties)
   fullName: set(properties)
   langs:
@@ -240,7 +278,7 @@ items:
       type:
       - excel.Excel.DataValidation
 - uid: excel.Excel.DataValidation.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.DataValidation является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.DataValidationData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
+  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то же время исходный объект Excel. IsValid является объектом API, `toJSON` метод возвращает простой объект JavaScript (типизированный тип `Excel.Interfaces.DataValidationData` <!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON()
   langs:
@@ -257,7 +295,7 @@ items:
     Тип проверки данных, подробные сведения см. в статье Excel.DataValidationType.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: type
   fullName: type
   langs:
@@ -270,10 +308,10 @@ items:
       - Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
 - uid: excel.Excel.DataValidation.valid
   summary: >-
-    Указывает, являются ли все значения ячеек допустимыми в соответствии с правилами проверки данных. Возвращает значение true, если все значения допустимого, или значение false, если все значения являются недопустимыми. Возвращает значение null, если оба значения допустимые и недопустимые ячейки в диапазоне.
+    Указывает, являются ли все значения ячеек допустимыми в соответствии с правилами проверки данных. Возвращает значение true, если все значения ячеек являются допустимыми, или false, если все значения ячеек являются недопустимыми. Возвращает значение null, если в диапазоне есть допустимые и недопустимые значения ячеек.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: valid
   fullName: valid
   langs:

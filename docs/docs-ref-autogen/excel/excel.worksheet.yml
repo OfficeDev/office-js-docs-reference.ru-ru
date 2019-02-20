@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b497ed4356fd389b20f3f9a3a7a29dcf18a306a9
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: a3efae33e400954ea270e85c640f6f139cda2004
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29981103"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30095739"
 items:
 - uid: excel.Excel.Worksheet
   summary: >-
     Лист Excel представляет собой сетку ячеек. Он может содержать данные, таблицы, диаграммы и т. д.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.Worksheet
   fullName: Excel.Worksheet
   langs:
@@ -22,12 +22,17 @@ items:
   package: excel
   children:
   - excel.Excel.Worksheet.activate
+  - excel.Excel.Worksheet.autoFilter
   - excel.Excel.Worksheet.calculate
   - excel.Excel.Worksheet.charts
+  - excel.Excel.Worksheet.comments
   - excel.Excel.Worksheet.context
   - excel.Excel.Worksheet.copy
   - excel.Excel.Worksheet.copy_1
   - excel.Excel.Worksheet.delete
+  - excel.Excel.Worksheet.enableCalculation
+  - excel.Excel.Worksheet.findAll
+  - excel.Excel.Worksheet.findAllOrNullObject
   - excel.Excel.Worksheet.freezePanes
   - excel.Excel.Worksheet.getCell
   - excel.Excel.Worksheet.getNext
@@ -36,8 +41,10 @@ items:
   - excel.Excel.Worksheet.getPreviousOrNullObject
   - excel.Excel.Worksheet.getRange
   - excel.Excel.Worksheet.getRangeByIndexes
+  - excel.Excel.Worksheet.getRanges
   - excel.Excel.Worksheet.getUsedRange
   - excel.Excel.Worksheet.getUsedRangeOrNullObject
+  - excel.Excel.Worksheet.horizontalPageBreaks
   - excel.Excel.Worksheet.id
   - excel.Excel.Worksheet.load
   - excel.Excel.Worksheet.load_1
@@ -48,26 +55,33 @@ items:
   - excel.Excel.Worksheet.onCalculated
   - excel.Excel.Worksheet.onChanged
   - excel.Excel.Worksheet.onDeactivated
+  - excel.Excel.Worksheet.onFiltered
+  - excel.Excel.Worksheet.onFormatChanged
   - excel.Excel.Worksheet.onSelectionChanged
+  - excel.Excel.Worksheet.pageLayout
   - excel.Excel.Worksheet.pivotTables
   - excel.Excel.Worksheet.position
   - excel.Excel.Worksheet.protection
+  - excel.Excel.Worksheet.replaceAll
   - excel.Excel.Worksheet.set
   - excel.Excel.Worksheet.set_1
+  - excel.Excel.Worksheet.shapes
   - excel.Excel.Worksheet.showGridlines
   - excel.Excel.Worksheet.showHeadings
+  - excel.Excel.Worksheet.slicers
   - excel.Excel.Worksheet.standardHeight
   - excel.Excel.Worksheet.standardWidth
   - excel.Excel.Worksheet.tabColor
   - excel.Excel.Worksheet.tables
   - excel.Excel.Worksheet.toJSON
+  - excel.Excel.Worksheet.verticalPageBreaks
   - excel.Excel.Worksheet.visibility
 - uid: excel.Excel.Worksheet.activate
   summary: >-
     Активация листа в пользовательском интерфейсе Excel.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: activate()
   fullName: activate()
   langs:
@@ -79,12 +93,29 @@ items:
       type:
       - void
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.activate();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Worksheet.autoFilter
+  summary: >-
+    Представляет объект автоФильтра рабочего листа. Только для чтения.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: autoFilter
+  fullName: autoFilter
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly autoFilter: Excel.AutoFilter;'
+    return:
+      type:
+      - excel.Excel.AutoFilter
 - uid: excel.Excel.Worksheet.calculate
   summary: >-
     Вычисляет все ячейки на листе.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: calculate(markAllDirty)
   fullName: calculate(markAllDirty)
   langs:
@@ -98,7 +129,7 @@ items:
       description: ''
     parameters:
     - id: markAllDirty
-      description: Значение true, чтобы пометить все как dirty.
+      description: Значение true, чтобы пометить все как "грязный".
       type:
       - boolean
 - uid: excel.Excel.Worksheet.charts
@@ -106,7 +137,7 @@ items:
     Возвращает коллекцию диаграмм, имеющихся на листе. Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: charts
   fullName: charts
   langs:
@@ -117,8 +148,25 @@ items:
     return:
       type:
       - excel.Excel.ChartCollection
+- uid: excel.Excel.Worksheet.comments
+  summary: >-
+    Возвращает коллекцию всех объектов Comments на листе. Только для чтения.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: comments
+  fullName: comments
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly comments: Excel.CommentCollection;'
+    return:
+      type:
+      - excel.Excel.CommentCollection
 - uid: excel.Excel.Worksheet.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
   name: context
   fullName: context
   langs:
@@ -134,7 +182,7 @@ items:
     Копирует лист и размещает его в указанном положении. Возвращает скопированный лист.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: copy(positionType, relativeTo)
   fullName: copy(positionType, relativeTo)
   langs:
@@ -160,7 +208,7 @@ items:
     Копирует лист и размещает его в указанном положении. Возвращает скопированный лист.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: copy(positionTypeString, relativeTo)
   fullName: copy(positionTypeString, relativeTo)
   langs:
@@ -183,10 +231,10 @@ items:
       - excel.Excel.Worksheet
 - uid: excel.Excel.Worksheet.delete
   summary: >-
-    Удаляет лист из книги.
+    Удаляет лист из книги. Обратите внимание, что если для отображения листа задано значение "Верихидден", операция удаления завершится с помощью GeneralException.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
   fullName: delete()
   langs:
@@ -198,12 +246,83 @@ items:
       type:
       - void
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Worksheet.enableCalculation
+  summary: >-
+    Получает или задает свойство Енаблекалкулатион рабочего листа. Имеет значение true, если Excel пересчитывает лист при необходимости. False, если Excel не пересчитывает лист.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: enableCalculation
+  fullName: enableCalculation
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'enableCalculation: boolean;'
+    return:
+      type:
+      - boolean
+- uid: excel.Excel.Worksheet.findAll
+  summary: >-
+    Находит все вхождения указанной строки на основе указанных критериев и возвращает их в виде объекта RangeAreas, состоящего из одного или нескольких прямоугольных диапазонов.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: findAll(text, criteria)
+  fullName: findAll(text, criteria)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'findAll(text: string, criteria: Excel.WorksheetSearchCriteria): Excel.RangeAreas;'
+    return:
+      type:
+      - excel.Excel.RangeAreas
+      description: Объект Ранжеареа, состоящий из одного или нескольких прямоугольных диапазонов, которые соответствуют условиям поиска. Если ни одна ячейка не соответствует этим условиям, будет выдано сообщение об ошибке ItemNotFound.
+    parameters:
+    - id: text
+      description: Строка для поиска.
+      type:
+      - string
+    - id: criteria
+      description: Дополнительные условия.
+      type:
+      - excel.Excel.WorksheetSearchCriteria
+- uid: excel.Excel.Worksheet.findAllOrNullObject
+  summary: >-
+    Находит все вхождения указанной строки на основе указанных критериев и возвращает их в виде объекта RangeAreas, состоящего из одного или нескольких прямоугольных диапазонов.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: findAllOrNullObject(text, criteria)
+  fullName: findAllOrNullObject(text, criteria)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'findAllOrNullObject(text: string, criteria: Excel.WorksheetSearchCriteria): Excel.RangeAreas;'
+    return:
+      type:
+      - excel.Excel.RangeAreas
+      description: Объект Ранжеареа, состоящий из одного или нескольких прямоугольных диапазонов, которые соответствуют условиям поиска. Если совпадений нет, эта функция возвращает пустой объект.
+    parameters:
+    - id: text
+      description: Строка для поиска.
+      type:
+      - string
+    - id: criteria
+      description: Дополнительные условия.
+      type:
+      - excel.Excel.WorksheetSearchCriteria
 - uid: excel.Excel.Worksheet.freezePanes
   summary: >-
-    Получает объект, который можно использовать для работы с закрепление областей в рабочем листе. Только для чтения.
+    Получает объект, который можно использовать для работы с замороженными областями на листе. Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: freezePanes
   fullName: freezePanes
   langs:
@@ -219,7 +338,7 @@ items:
     Получает объект диапазона, содержащий одну ячейку, на основе номера строки и столбца. Ячейка может быть вне родительского диапазона, если она расположена в таблице листа.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCell(row, column)
   fullName: getCell(row, column)
   langs:
@@ -245,7 +364,7 @@ items:
     Получает следующий лист. Если следующего листа нет, возникает ошибка.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getNext(visibleOnly)
   fullName: getNext(visibleOnly)
   langs:
@@ -267,7 +386,7 @@ items:
     Получает следующий лист. Если следующего листа нет, метод возвращает пустой объект.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getNextOrNullObject(visibleOnly)
   fullName: getNextOrNullObject(visibleOnly)
   langs:
@@ -289,7 +408,7 @@ items:
     Получает предыдущий лист. Если предыдущего листа нет, возникает ошибка.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getPrevious(visibleOnly)
   fullName: getPrevious(visibleOnly)
   langs:
@@ -311,7 +430,7 @@ items:
     Получает предыдущий лист. Если предыдущего листа нет, этот метод возвращает пустой объект.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getPreviousOrNullObject(visibleOnly)
   fullName: getPreviousOrNullObject(visibleOnly)
   langs:
@@ -330,10 +449,10 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.getRange
   summary: >-
-    Получает объект range, представляющий один прямоугольный блок ячеек, указан адрес или имя.
+    Получает объект Range, представляющий отдельный прямоугольный блок ячеек, заданный по адресу или имени.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange(address)
   fullName: getRange(address)
   langs:
@@ -347,7 +466,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Below example uses range address to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Below example uses a named-range to get the range object.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeName = 'MyRange';\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeName);\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: address
-      description: 'Необязательное свойство. Строка, представляющая адрес или имя диапазона. Например «a1: B2». Если не указан, возвращается диапазон всего рабочего листа.'
+      description: 'Необязательное свойство. Строка, представляющая адрес или имя диапазона. Например, "a1: B2". Если этот параметр не указан, возвращается весь диапазон листа.'
       type:
       - string
 - uid: excel.Excel.Worksheet.getRangeByIndexes
@@ -355,7 +474,7 @@ items:
     Получает объект диапазона, начинающегося с определенных строки и столбца и занимающего определенное количество строк и столбцов.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRangeByIndexes(startRow, startColumn, rowCount, columnCount)
   fullName: getRangeByIndexes(startRow, startColumn, rowCount, columnCount)
   langs:
@@ -369,27 +488,50 @@ items:
       description: ''
     parameters:
     - id: startRow
-      description: Начало строки (индексируются нулю).
+      description: Строка начала (с нулевым индексированием).
       type:
       - number
     - id: startColumn
-      description: Запустите столбца (индексируются нулю).
+      description: Столбец "начало" (с нулевым индексом).
       type:
       - number
     - id: rowCount
-      description: Количество строк, включаемых в диапазоне.
+      description: Количество строк, включаемых в диапазон.
       type:
       - number
     - id: columnCount
-      description: Число столбцов для включения в диапазоне.
+      description: Число столбцов, включаемых в диапазон.
       type:
       - number
+- uid: excel.Excel.Worksheet.getRanges
+  summary: >-
+    Возвращает объект RangeAreas, представляющий один или несколько блоков прямоугольных диапазонов, заданных по адресу или имени.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getRanges(address)
+  fullName: getRanges(address)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRanges(address?: string): Excel.RangeAreas;'
+    return:
+      type:
+      - excel.Excel.RangeAreas
+      description: ''
+    parameters:
+    - id: address
+      description: 'Необязательное свойство. Строка, содержащая разделенные запятыми адреса или имена отдельных диапазонов. Например, "a1: B2, A5: B5". Если этот параметр не указан, возвращается объект Ранжеареа для всего листа.'
+      type:
+      - string
 - uid: excel.Excel.Worksheet.getUsedRange
   summary: >-
-    Используемые значения — от наименьшего диапазона, который содержит все ячейки, которые имеют значение или форматирования назначенные им. Если весь лист не задан, эта функция возвращает верхней левой ячейки (то есть он будет *не* порождает произошла ошибка).
+    Используемый диапазон — это наименьший диапазон, охватывающий все ячейки, которые имеют значение или форматирование, назначенные им. Если лист пуст, эта функция возвратит верхнюю левую ячейку (то есть *не* выдает ошибку).
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getUsedRange(valuesOnly)
   fullName: getUsedRange(valuesOnly)
   langs:
@@ -403,7 +545,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    var usedRange = worksheet.getUsedRange();\n    usedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(usedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: valuesOnly
-      description: 'Необязательное свойство. Если значение true, рассматривает только ячейки со значениями как используемые ячеек (без учета форматирования). \[Набор API-интерфейсов: ExcelApi 1.2 (en)\]'
+      description: 'Необязательное свойство. Если этот параметр имеет значение true, учитываются только ячейки со значениями в качестве используемых ячеек (игнорируя форматирование). \[Набор API: ExcelApi 1,2\]'
       type:
       - boolean
 - uid: excel.Excel.Worksheet.getUsedRangeOrNullObject
@@ -411,7 +553,7 @@ items:
     Используемый диапазон — это наименьший диапазон, включающий в себя все ячейки, которые содержат значение или форматирование. Если весь лист пустой, эта функция возвращает пустой объект.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getUsedRangeOrNullObject(valuesOnly)
   fullName: getUsedRangeOrNullObject(valuesOnly)
   langs:
@@ -428,12 +570,29 @@ items:
       description: Необязательный. Учитывает только ячейки со значениями.
       type:
       - boolean
+- uid: excel.Excel.Worksheet.horizontalPageBreaks
+  summary: >-
+    Получает коллекцию по горизонтали для листа. Эта коллекция содержит только разрывы страниц вручную.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: horizontalPageBreaks
+  fullName: horizontalPageBreaks
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly horizontalPageBreaks: Excel.PageBreakCollection;'
+    return:
+      type:
+      - excel.Excel.PageBreakCollection
 - uid: excel.Excel.Worksheet.id
   summary: >-
     Возвращает значение, однозначно идентифицирующее лист в данной книге. Значение идентификатора остается прежним, даже если переименовать или переместить лист. Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: id
   fullName: id
   langs:
@@ -445,18 +604,18 @@ items:
       type:
       - string
 - uid: excel.Excel.Worksheet.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств необходимо вызвать метод Context. Sync ().
   remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+    В дополнение к этой подписи этот метод имеет следующие подписи:
 
 
-    `load(option?: string | string[]): Excel.Worksheet`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+    `load(option?: string | string[]): Excel.Worksheet`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+    `load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
   name: load(option)
   fullName: load(option)
   langs:
@@ -474,7 +633,7 @@ items:
       type:
       - excel.Excel.Interfaces.WorksheetLoadOptions
 - uid: excel.Excel.Worksheet.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -488,11 +647,11 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Get worksheet properties based on sheet name.\nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.load('position')\n    return ctx.sync().then(function() {\n            console.log(worksheet.position);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set worksheet position. \nExcel.run(function (ctx) { \n    var wSheetName = 'Sheet1';\n    var worksheet = ctx.workbook.worksheets.getItem(wSheetName);\n    worksheet.position = 2;\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
       type:
       - string | string[]
 - uid: excel.Excel.Worksheet.load_2
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
   langs:
@@ -506,7 +665,7 @@ items:
       description: ''
     parameters:
     - id: propertyNamesAndPaths
-      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+      description: Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
       type:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Worksheet.name
@@ -514,7 +673,7 @@ items:
     Отображаемое имя листа.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: name
   fullName: name
   langs:
@@ -530,7 +689,7 @@ items:
     Коллекция имен, относящих к текущему листу. Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: names
   fullName: names
   langs:
@@ -543,10 +702,10 @@ items:
       - excel.Excel.NamedItemCollection
 - uid: excel.Excel.Worksheet.onActivated
   summary: >-
-    Происходит при активации рабочего листа.
+    Возникает при активации листа.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onActivated
   fullName: onActivated
   langs:
@@ -560,10 +719,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onActivated.add(function (event) {\n        return Excel.run((context) => {\n            console.log(\"The activated worksheet ID is: \" + event.worksheetId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
 - uid: excel.Excel.Worksheet.onCalculated
   summary: >-
-    Происходит, когда рассчитывается рабочего листа.
+    Возникает при вычислении листа.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onCalculated
   fullName: onCalculated
   langs:
@@ -577,10 +736,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onCalculated.add(function (event) {\n        return Excel.run((context) => {\n            console.log(\"The worksheet has recalculated.\");\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
 - uid: excel.Excel.Worksheet.onChanged
   summary: >-
-    Происходит при изменении данных на конкретный лист.
+    Происходит при изменении данных на конкретном листе.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onChanged
   fullName: onChanged
   langs:
@@ -594,10 +753,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onChanged.add(onChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the onChanged event.\");\n});\n```"
 - uid: excel.Excel.Worksheet.onDeactivated
   summary: >-
-    Происходит при отключении рабочего листа.
+    Возникает при отключении рабочего листа.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onDeactivated
   fullName: onDeactivated
   langs:
@@ -609,12 +768,46 @@ items:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onDeactivated.add(function (event) {\n        return Excel.run((context) => {\n            console.log(\"The deactivated worksheet is: \" + event.worksheetId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+- uid: excel.Excel.Worksheet.onFiltered
+  summary: >-
+    Происходит, когда фильтр применяется к определенному листу.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFiltered
+  fullName: onFiltered
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>
+- uid: excel.Excel.Worksheet.onFormatChanged
+  summary: >-
+    Происходит при изменении формата на определенном листе.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFormatChanged
+  fullName: onFormatChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
 - uid: excel.Excel.Worksheet.onSelectionChanged
   summary: >-
-    Возникает при изменении выбора на конкретный лист.
+    Возникает при изменении выделенного фрагмента на определенном листе.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onSelectionChanged
   fullName: onSelectionChanged
   langs:
@@ -626,12 +819,29 @@ items:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (context) {\n    var sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.onSelectionChanged.add(function (event) {\n        return Excel.run((context) => {\n            console.log(\"The selected range has changed to: \" + event.address);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+- uid: excel.Excel.Worksheet.pageLayout
+  summary: >-
+    Возвращает объект PageLayout рабочего листа.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: pageLayout
+  fullName: pageLayout
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly pageLayout: Excel.PageLayout;'
+    return:
+      type:
+      - excel.Excel.PageLayout
 - uid: excel.Excel.Worksheet.pivotTables
   summary: >-
     Коллекция сводных таблиц на листе. Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: pivotTables
   fullName: pivotTables
   langs:
@@ -647,7 +857,7 @@ items:
     Положение листа (начиная с нуля) в книге.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: position
   fullName: position
   langs:
@@ -663,7 +873,7 @@ items:
     Возвращает объект защиты листа. Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: protection
   fullName: protection
   langs:
@@ -674,10 +884,41 @@ items:
     return:
       type:
       - excel.Excel.WorksheetProtection
+- uid: excel.Excel.Worksheet.replaceAll
+  summary: >-
+    Находит и заменяет заданную строку в соответствии с критериями, указанными в текущем листе.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: replaceAll(text, replacement, criteria)
+  fullName: replaceAll(text, replacement, criteria)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'replaceAll(text: string, replacement: string, criteria: Excel.ReplaceCriteria): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: Количество выполненных замен.
+    parameters:
+    - id: text
+      description: Строка для поиска.
+      type:
+      - string
+    - id: replacement
+      description: Строка для замены оригинала на.
+      type:
+      - string
+    - id: criteria
+      description: Дополнительные условия замены.
+      type:
+      - excel.Excel.ReplaceCriteria
 - uid: excel.Excel.Worksheet.set
-  summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
+  summary: Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.
   remarks: >-
-    Этот метод имеет следующие дополнительные подписи.
+    Этот метод имеет следующую дополнительную подпись:
 
 
     `set(properties: Excel.Worksheet): void`
@@ -694,15 +935,15 @@ items:
       description: ''
     parameters:
     - id: properties
-      description: Объект JavaScript со свойствами, которые isomorphically структурированы для свойства объекта, для которого вызывается метод.
+      description: Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.
       type:
       - Interfaces.WorksheetUpdateData
     - id: options
-      description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
+      description: Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.
       type:
       - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.Worksheet.set_1
-  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
+  summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
   name: set(properties)
   fullName: set(properties)
   langs:
@@ -719,12 +960,29 @@ items:
       description: ''
       type:
       - excel.Excel.Worksheet
+- uid: excel.Excel.Worksheet.shapes
+  summary: >-
+    Возвращает коллекцию всех объектов Shape на листе. Только для чтения.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: shapes
+  fullName: shapes
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly shapes: Excel.ShapeCollection;'
+    return:
+      type:
+      - excel.Excel.ShapeCollection
 - uid: excel.Excel.Worksheet.showGridlines
   summary: >-
-    Получает или задает флаг линий сетки листа. Этот флаг определяет, будет ли линии сетки являются видимыми для пользователя.
+    Получает или задает флаг линий сетки листа. Этот флаг определяет, отображаются ли линии сетки для пользователя.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showGridlines
   fullName: showGridlines
   langs:
@@ -738,10 +996,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.showGridlines = true;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Worksheet.showHeadings
   summary: >-
-    Получает или задает флаг заголовков листа. Этот флаг определяет, будет ли заголовки являются видимыми для пользователя.
+    Получает или задает флаг заголовков листа. Этот флаг определяет, отображаются ли заголовки для пользователя.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: showHeadings
   fullName: showHeadings
   langs:
@@ -752,12 +1010,29 @@ items:
     return:
       type:
       - boolean
+- uid: excel.Excel.Worksheet.slicers
+  summary: >-
+    Возвращает коллекцию срезов, которые входят в состав рабочего листа. Только для чтения.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: slicers
+  fullName: slicers
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly slicers: Excel.SlicerCollection;'
+    return:
+      type:
+      - excel.Excel.SlicerCollection
 - uid: excel.Excel.Worksheet.standardHeight
   summary: >-
     Возвращает стандартную (по умолчанию) высоту всех строк на листе (в пунктах). Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: standardHeight
   fullName: standardHeight
   langs:
@@ -770,10 +1045,10 @@ items:
       - number
 - uid: excel.Excel.Worksheet.standardWidth
   summary: >-
-    Возвращает или задает стандартную (по умолчанию) ширину всех столбцов на листе. Единицы ширины столбца равна ширине одного знака в обычный стиль. Для пропорциональных шрифтов используется ширина символа 0 (ноль).
+    Возвращает или задает стандартную (по умолчанию) ширину всех столбцов на листе. Одна единица измерения ширины столбца равна ширине одного символа в стиле Normal. Для пропорциональных шрифтов используется ширина знака 0 (ноль).
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: standardWidth
   fullName: standardWidth
   langs:
@@ -786,10 +1061,10 @@ items:
       - number
 - uid: excel.Excel.Worksheet.tabColor
   summary: >-
-    Получает или задает цвет вкладки листа. При получении Цвет ярлычка, если лист невидимой, будет иметь значение null. Если лист будет отображаться, но Цвет ярлычка задано значение auto, будут возвращены пустую строку. В противном случае свойство будет иметь значение цвета, в виде "\#123456" при задании цвет, используйте пустой строки для задания «Автоматическая» цветовая или реальных цвета в противном случае.
+    Получает или задает цвет вкладки листа. При получении цвета вкладки, если лист невидим, значение будет равно null. Если лист является видимым, но для цвета вкладки задано значение Авто, возвращается пустая строка. В противном случае для свойства задается цвет, в виде "\#123456" при задании цвета используйте пустую строку для установки "Авто" или "реальный цвет" в противном случае.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: tabColor
   fullName: tabColor
   langs:
@@ -806,7 +1081,7 @@ items:
     Коллекция таблиц, имеющихся на листе. Только для чтения.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: tables
   fullName: tables
   langs:
@@ -818,7 +1093,7 @@ items:
       type:
       - excel.Excel.TableCollection
 - uid: excel.Excel.Worksheet.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Worksheet является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.WorksheetData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
+  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. лист является объектом API, `toJSON` метод возвращает простой объект JavaScript (типизированный тип `Excel.Interfaces.WorksheetData` <!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
   name: toJSON()
   fullName: toJSON()
   langs:
@@ -830,12 +1105,29 @@ items:
       type:
       - excel.Excel.Interfaces.WorksheetData
       description: ''
+- uid: excel.Excel.Worksheet.verticalPageBreaks
+  summary: >-
+    Получает коллекцию вертикальных разрывов страниц для листа. Эта коллекция содержит только разрывы страниц вручную.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: verticalPageBreaks
+  fullName: verticalPageBreaks
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly verticalPageBreaks: Excel.PageBreakCollection;'
+    return:
+      type:
+      - excel.Excel.PageBreakCollection
 - uid: excel.Excel.Worksheet.visibility
   summary: >-
-    Видимость рабочего листа.
+    Видимость листа.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1 для чтения видимости; 1.2 для задания его](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+    \[[Набор API: ExcelApi 1,1 для чтения видимости; 1,2 — для его установки.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
   name: visibility
   fullName: visibility
   langs:

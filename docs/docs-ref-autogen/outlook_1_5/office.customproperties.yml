@@ -1,25 +1,21 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 1dbe73f521f12fca480b640b2300abcbae512e54
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: cc1eb7b646879448b805714de003b1c4224ff975
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29978156"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30098427"
 items:
 - uid: Outlook_1_5.Office.CustomProperties
   summary: >-
     Объект CustomProperties представляет собой настраиваемые свойства, которые относятся к конкретному элементу и надстройке почты для Outlook. Например, надстройка почты может сохранить данные, которые относятся к текущему электронному сообщению, активировавшему надстройку. Если пользователь впоследствии откроет это сообщение и повторно активирует надстройку почты, она сможет получить данные, сохраненные в виде настраиваемых свойств.
 
 
-    Поскольку Outlook для Mac не кэширования настраиваемых свойств, если отключается пользователя сети, надстроек почты не удается доступ к их настраиваемые свойства.
+    Так как Outlook для Mac не кэширует настраиваемые свойства, если сеть пользователя отключена, почтовые надстройки не смогут получить доступ к их настраиваемым свойствам.
 
 
-    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
   name: Office.CustomProperties
   fullName: Office.CustomProperties
   langs:
@@ -30,14 +26,12 @@ items:
   - Outlook_1_5.Office.CustomProperties.get
   - Outlook_1_5.Office.CustomProperties.remove
   - Outlook_1_5.Office.CustomProperties.saveAsync
+  - Outlook_1_5.Office.CustomProperties.saveAsync_1
+  - Outlook_1_5.Office.CustomProperties.saveAsync_2
   - Outlook_1_5.Office.CustomProperties.set
 - uid: Outlook_1_5.Office.CustomProperties.get
   summary: Возвращает значение указанного настраиваемого свойства.
-  remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+  remarks: <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
   name: get(name)
   fullName: get(name)
   langs:
@@ -52,7 +46,7 @@ items:
         Значение указанного настраиваемого свойства.
 
 
-        \[Набор API-интерфейсов: почтовый ящик 1.0\]
+        \[Набор API: Mailbox 1,0\]
     parameters:
     - id: name
       description: Имя возвращаемого настраиваемого свойства.
@@ -64,11 +58,7 @@ items:
 
 
     Чтобы удаление свойства было постоянным, вызовите метод saveAsync объекта CustomProperties.
-  remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+  remarks: <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
   name: remove(name)
   fullName: remove(name)
   langs:
@@ -86,7 +76,7 @@ items:
         Имя удаляемого свойства.
 
 
-        \[Набор API-интерфейсов: почтовый ящик 1.0\]
+        \[Набор API: Mailbox 1,0\]
       type:
       - string
 - uid: Outlook_1_5.Office.CustomProperties.saveAsync
@@ -97,12 +87,43 @@ items:
     Необходимо вызвать метод saveAsync, чтобы сохранить все изменения, внесенные с помощью метода set или remove объекта CustomProperties. Сохранение — асинхронное действие.
 
 
-    Рекомендуется иметь функции обратного вызова поиск и устранение ошибок из saveAsync. В частности, надстройка чтения может активироваться, когда подключенный пользователь открыл форму чтения, а затем отключился. Если надстройка вызывает saveAsync в отключенном состоянии, saveAsync возвратит ошибку. Метод обратного вызова должен обрабатывать эту ошибку соответствующим образом.
+    Рекомендуется проверять функцию обратного вызова и обрабатывать ошибки из saveAsync. В частности, надстройка чтения может активироваться, когда подключенный пользователь открыл форму чтения, а затем отключился. Если надстройка вызывает saveAsync, находясь в отключенном состоянии, saveAsync возвращает ошибку. Метод обратного вызова должен обрабатывать эту ошибку соответствующим образом.
+  remarks: <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
+  name: saveAsync(callback, asyncContext)
+  fullName: saveAsync(callback, asyncContext)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(callback?: (result: Office.AsyncResult<void>) => void, asyncContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+    - id: asyncContext
+      description: >-
+        Необязательное свойство. Данные о состоянии, передаваемые в метод обратного вызова.
+
+
+        \[Набор API: Mailbox 1,0\]
+      type:
+      - any
+- uid: Outlook_1_5.Office.CustomProperties.saveAsync_1
+  summary: >-
+    Сохраняет настраиваемые свойства конкретного элемента на сервере.
+
+
+    Необходимо вызвать метод saveAsync, чтобы сохранить все изменения, внесенные с помощью метода set или remove объекта CustomProperties. Сохранение — асинхронное действие.
+
+
+    Рекомендуется проверять функцию обратного вызова и обрабатывать ошибки из saveAsync. В частности, надстройка чтения может активироваться, когда подключенный пользователь открыл форму чтения, а затем отключился. Если надстройка вызывает saveAsync, находясь в отключенном состоянии, saveAsync возвращает ошибку. Метод обратного вызова должен обрабатывать эту ошибку соответствующим образом.
   remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+    <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
 
     ####Примеры
 
@@ -163,30 +184,50 @@ items:
     }
 
     ```
-  name: saveAsync(callback, asyncContext)
-  fullName: saveAsync(callback, asyncContext)
+  name: saveAsync(callback)
+  fullName: saveAsync(callback)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'saveAsync(callback?: (result: Office.AsyncResult<void>) => void, asyncContext?: any): void;'
+    content: 'saveAsync(callback?: (result: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
       description: ''
     parameters:
     - id: callback
-      description: Необязательное свойство. После завершения работы метода, функции, переданной в параметре обратного вызова вызывается с один параметр типа Office.AsyncResult.
+      description: >-
+        Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.
+
+
+        \[Набор API: Mailbox 1,0\]
       type:
       - '(result: Office.AsyncResult<void>) => void'
-    - id: asyncContext
-      description: >-
-        Необязательное свойство. Данные о состоянии, передаваемые в метод обратного вызова.
+- uid: Outlook_1_5.Office.CustomProperties.saveAsync_2
+  summary: >-
+    Сохраняет настраиваемые свойства конкретного элемента на сервере.
 
 
-        \[Набор API-интерфейсов: почтовый ящик 1.0\]
+    Необходимо вызвать метод saveAsync, чтобы сохранить все изменения, внесенные с помощью метода set или remove объекта CustomProperties. Сохранение — асинхронное действие.
+
+
+    Рекомендуется проверять функцию обратного вызова и обрабатывать ошибки из saveAsync. В частности, надстройка чтения может активироваться, когда подключенный пользователь открыл форму чтения, а затем отключился. Если надстройка вызывает saveAsync, находясь в отключенном состоянии, saveAsync возвращает ошибку. Метод обратного вызова должен обрабатывать эту ошибку соответствующим образом.
+
+
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
+  name: saveAsync()
+  fullName: saveAsync()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(): void;'
+    return:
       type:
-      - any
+      - void
+      description: ''
 - uid: Outlook_1_5.Office.CustomProperties.set
   summary: >-
     Присваивает указанному свойству заданное значение.
@@ -198,12 +239,8 @@ items:
     Метод set создает свойство, если указанное свойство не существует. В противном случае существующее значение заменяется на новое значение. Параметр value может быть любого типа, однако он всегда передается на сервер в виде строки.
 
 
-    \[[Набор API-Интерфейсов: почтовый ящик 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr></table>
+    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
   name: set(name, value)
   fullName: set(name, value)
   langs:

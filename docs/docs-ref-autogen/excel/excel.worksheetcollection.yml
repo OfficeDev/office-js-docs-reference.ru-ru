@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 09ae4be877fcadf8d226394758f6569dff40a618
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 0cc0db56f3778fc9cef827cc4541bed17a5f34c2
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980291"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30096117"
 items:
 - uid: excel.Excel.WorksheetCollection
   summary: >-
     Представляет коллекцию объектов листа, включенных в книгу.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.WorksheetCollection
   fullName: Excel.WorksheetCollection
   langs:
@@ -22,6 +22,8 @@ items:
   package: excel
   children:
   - excel.Excel.WorksheetCollection.add
+  - excel.Excel.WorksheetCollection.addFromBase64
+  - excel.Excel.WorksheetCollection.addFromBase64_1
   - excel.Excel.WorksheetCollection.context
   - excel.Excel.WorksheetCollection.getActiveWorksheet
   - excel.Excel.WorksheetCollection.getCount
@@ -36,15 +38,19 @@ items:
   - excel.Excel.WorksheetCollection.onActivated
   - excel.Excel.WorksheetCollection.onAdded
   - excel.Excel.WorksheetCollection.onCalculated
+  - excel.Excel.WorksheetCollection.onChanged
   - excel.Excel.WorksheetCollection.onDeactivated
   - excel.Excel.WorksheetCollection.onDeleted
+  - excel.Excel.WorksheetCollection.onFiltered
+  - excel.Excel.WorksheetCollection.onFormatChanged
+  - excel.Excel.WorksheetCollection.onSelectionChanged
   - excel.Excel.WorksheetCollection.toJSON
 - uid: excel.Excel.WorksheetCollection.add
   summary: >-
     Добавляет новый лист в книгу. Лист будет добавлен в конец набора имеющихся листов. Если вы хотите активировать только что добавленный лист, вызовите команду .activate().
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(name)
   fullName: add(name)
   langs:
@@ -61,8 +67,78 @@ items:
       description: Необязательный параметр. Имя добавляемого листа. Если параметр используется, имя должно быть уникальным. В противном случае Excel определяет имя нового листа.
       type:
       - string
+- uid: excel.Excel.WorksheetCollection.addFromBase64
+  summary: >-
+    Вставляет указанные листы книги в текущую книгу.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: Массив, каждый элемент которого представляет идентификатор нового вставленного листа.
+    parameters:
+    - id: base64File
+      description: Обязательно указывать. Строка Base64, представляющая исходную книгу.
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: Необязательное свойство. Имена листов спеифиед, которые необходимо вставить. По умолчанию будут вставлены все листы из исходной книги.
+      type:
+      - string[]
+    - id: positionType
+      description: Необязательное свойство. Тип позиции INSERT дополнительные сведения можно найти в статье Excel. Воркшитпоситионтипе. Значение по умолчанию — "Start".
+      type:
+      - excel.Excel.WorksheetPositionType
+    - id: relativeTo
+      description: 'Необязательное свойство. Объект листового листа или имя или идентификатор листа в текущей книге. Значение по умолчанию: NULL и в соответствии с параметром Постионтипе будет вставлять листы в начало или конец текущей книги.'
+      type:
+      - Worksheet | string
+- uid: excel.Excel.WorksheetCollection.addFromBase64_1
+  summary: >-
+    Вставляет указанные листы книги в текущую книгу.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: Массив, каждый элемент которого представляет идентификатор нового вставленного листа.
+    parameters:
+    - id: base64File
+      description: Обязательно указывать. Строка Base64, представляющая исходную книгу.
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: Необязательное свойство. Имена листов спеифиед, которые необходимо вставить. По умолчанию будут вставлены все листы из исходной книги.
+      type:
+      - string[]
+    - id: positionTypeString
+      description: Необязательное свойство. Тип позиции INSERT дополнительные сведения можно найти в статье Excel. Воркшитпоситионтипе. Значение по умолчанию — "Start".
+      type:
+      - "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
+    - id: relativeTo
+      description: 'Необязательное свойство. Объект листового листа или имя или идентификатор листа в текущей книге. Значение по умолчанию: NULL и в соответствии с параметром Постионтипе будет вставлять листы в начало или конец текущей книги.'
+      type:
+      - Worksheet | string
 - uid: excel.Excel.WorksheetCollection.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
   name: context
   fullName: context
   langs:
@@ -78,7 +154,7 @@ items:
     Получает текущий активный лист в книге.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getActiveWorksheet()
   fullName: getActiveWorksheet()
   langs:
@@ -95,7 +171,7 @@ items:
     Получает количество листов в коллекции.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount(visibleOnly)
   fullName: getCount(visibleOnly)
   langs:
@@ -117,7 +193,7 @@ items:
     Получает первый лист в коллекции.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getFirst(visibleOnly)
   fullName: getFirst(visibleOnly)
   langs:
@@ -139,7 +215,7 @@ items:
     Получает объект листа по его имени или ИД.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(key)
   fullName: getItem(key)
   langs:
@@ -161,7 +237,7 @@ items:
     Получает объект листа по его имени или идентификатору. Если лист не существует, возвращает пустой объект.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(key)
   fullName: getItemOrNullObject(key)
   langs:
@@ -183,7 +259,7 @@ items:
     Получает последний лист в коллекции.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getLast(visibleOnly)
   fullName: getLast(visibleOnly)
   langs:
@@ -201,7 +277,7 @@ items:
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.items
-  summary: Получает загруженных дочерних элементов в этом семействе.
+  summary: Получает загруженные дочерние элементы в этой коллекции.
   name: items
   fullName: items
   langs:
@@ -213,18 +289,18 @@ items:
       type:
       - Excel.Worksheet[]
 - uid: excel.Excel.WorksheetCollection.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств необходимо вызвать метод Context. Sync ().
   remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+    В дополнение к этой подписи этот метод имеет следующие подписи:
 
 
-    `load(option?: string | string[]): Excel.WorksheetCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+    `load(option?: string | string[]): Excel.WorksheetCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
+    `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
   name: load(option)
   fullName: load(option)
   langs:
@@ -242,7 +318,7 @@ items:
       type:
       - Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
 - uid: excel.Excel.WorksheetCollection.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -256,7 +332,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
+      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
       type:
       - string | string[]
 - uid: excel.Excel.WorksheetCollection.load_2
@@ -278,10 +354,10 @@ items:
       - office.OfficeExtension.LoadOption
 - uid: excel.Excel.WorksheetCollection.onActivated
   summary: >-
-    Происходит при активации любого листа в книге.
+    Возникает при активации любого листа в книге.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onActivated
   fullName: onActivated
   langs:
@@ -298,7 +374,7 @@ items:
     Возникает при добавлении нового листа в книгу.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onAdded
   fullName: onAdded
   langs:
@@ -312,10 +388,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets;\n    sheet.onAdded.add(onWorksheetAdd);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnAdded event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onCalculated
   summary: >-
-    Происходит, когда рассчитывается любого листа в книге.
+    Возникает при вычислении любого листа в книге.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onCalculated
   fullName: onCalculated
   langs:
@@ -326,12 +402,29 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onChanged
+  summary: >-
+    Возникает при изменении любого листа в книге.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onChanged
+  fullName: onChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.onDeactivated
   summary: >-
-    Происходит при отключении любого листа в книге.
+    Возникает, когда отключается любой лист в книге.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onDeactivated
   fullName: onDeactivated
   langs:
@@ -345,10 +438,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onDeactivated.add(onDeactivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnDeactivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onDeleted
   summary: >-
-    Происходит, когда лист удаляется из книги.
+    Возникает при удалении листа из книги.
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onDeleted
   fullName: onDeleted
   langs:
@@ -359,8 +452,59 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeletedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFiltered
+  summary: >-
+    Происходит, когда в книгу применяется любой фильтр листа.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFiltered
+  fullName: onFiltered
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFormatChanged
+  summary: >-
+    Возникает при изменении формата листа в книге.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFormatChanged
+  fullName: onFormatChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onSelectionChanged
+  summary: >-
+    Возникает при изменении выделения на любом листе.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onSelectionChanged
+  fullName: onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `Excel.WorksheetCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.WorksheetCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
+  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.WorksheetCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.WorksheetCollectionData` <!-- -->"Items"), содержащий массив "Items" с неполной копией всех загруженных свойств из элементов коллекции.
   name: toJSON()
   fullName: toJSON()
   langs:
