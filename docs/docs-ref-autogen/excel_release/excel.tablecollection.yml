@@ -1,0 +1,279 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 52dfa8d5297822fc8557510d5e1a667f4cdf660c
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.translationtype: MT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30114311"
+items:
+- uid: excel_release.Excel.TableCollection
+  summary: >-
+    Представляет коллекцию всех таблиц, входящих в состав книги или листа, в зависимости от способа доступа.
+
+
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.TableCollection
+  fullName: Excel.TableCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - office.OfficeExtension.ClientObject
+  package: excel_release
+  children:
+  - excel_release.Excel.TableCollection.add
+  - excel_release.Excel.TableCollection.context
+  - excel_release.Excel.TableCollection.count
+  - excel_release.Excel.TableCollection.getCount
+  - excel_release.Excel.TableCollection.getItem
+  - excel_release.Excel.TableCollection.getItemAt
+  - excel_release.Excel.TableCollection.getItemOrNullObject
+  - excel_release.Excel.TableCollection.items
+  - excel_release.Excel.TableCollection.load
+  - excel_release.Excel.TableCollection.load_1
+  - excel_release.Excel.TableCollection.load_2
+  - excel_release.Excel.TableCollection.onChanged
+  - excel_release.Excel.TableCollection.toJSON
+- uid: excel_release.Excel.TableCollection.add
+  summary: >-
+    Создание таблицы. Объект или исходный адрес диапазона определяет лист, на который будет добавлена таблица. Если добавить таблицу не удается (например, если адрес недействителен или одна таблица будет перекрываться другой), выводится сообщение об ошибке.
+
+
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: add(address, hasHeaders)
+  fullName: add(address, hasHeaders)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'add(address: Range | string, hasHeaders: boolean): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.add('Sheet1!A1:E7', true);\n    table.load('name');\n    return ctx.sync().then(function() {\n        console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: address
+      description: 'Объект Range или строковый адрес или имя диапазона, представляющего источник данных. Если адрес не содержит имени листа, используется активный лист. \[Набор API: ExcelApi 1,1/1,3. До ExcelApi 1,3 этот параметр должен быть строкой. Начиная с Excel API 1,3, этот параметр может быть объектом Range или String.\]'
+      type:
+      - Range | string
+    - id: hasHeaders
+      description: Логическое значение, указывающее, имеют ли импортируемые данные метки столбцов. Если источник не содержит заголовков (например, если этому свойству присвоено значение false), Excel автоматически создаст заголовок и сдвинет данные на одну строку вниз.
+      type:
+      - boolean
+- uid: excel_release.Excel.TableCollection.context
+  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
+- uid: excel_release.Excel.TableCollection.count
+  summary: >-
+    Возвращает количество таблиц в книге. Только для чтения.
+
+
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: count
+  fullName: count
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type:
+      - number
+- uid: excel_release.Excel.TableCollection.getCount
+  summary: >-
+    Получает количество таблиц в коллекции.
+
+
+    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getCount()
+  fullName: getCount()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: excel_release.Excel.TableCollection.getItem
+  summary: >-
+    Получает таблицу по имени или ИД.
+
+
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getItem(key)
+  fullName: getItem(key)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(key: string): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: key
+      description: Имя или ИД получаемой таблицы.
+      type:
+      - string
+- uid: excel_release.Excel.TableCollection.getItemAt
+  summary: >-
+    Получает таблицу на основании ее позиции в коллекции.
+
+
+    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getItemAt(index)
+  fullName: getItemAt(index)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: index
+      description: Значение индекса получаемого объекта. Используется нулевой индекс.
+      type:
+      - number
+- uid: excel_release.Excel.TableCollection.getItemOrNullObject
+  summary: >-
+    Получает таблицу по имени или идентификатору. Если таблица не существует, возвращает пустой объект.
+
+
+    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getItemOrNullObject(key)
+  fullName: getItemOrNullObject(key)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: ''
+    parameters:
+    - id: key
+      description: Имя или ИД получаемой таблицы.
+      type:
+      - string
+- uid: excel_release.Excel.TableCollection.items
+  summary: Получает загруженные дочерние элементы в этой коллекции.
+  name: items
+  fullName: items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Excel.Table[];'
+    return:
+      type:
+      - Excel.Table[]
+- uid: excel_release.Excel.TableCollection.load
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств необходимо вызвать метод Context. Sync ().
+  remarks: >-
+    В дополнение к этой подписи этот метод имеет следующие подписи:
+
+
+    `load(option?: string | string[]): Excel.TableCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.TableCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableCollection;'
+    return:
+      type:
+      - excel.Excel.TableCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel_release.Excel.TableCollection.load_1
+  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableCollection;'
+    return:
+      type:
+      - excel.Excel.TableCollection
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    tables.load();\n    return ctx.sync().then(function() {\n        console.log(\"tables Count: \" + tables.count);\n        for (var i = 0; i < tables.items.length; i++)\n        {\n            console.log(tables.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of tables\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    tables.load('count');\n    return ctx.sync().then(function() {\n        console.log(tables.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
+      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
+      type:
+      - string | string[]
+- uid: excel_release.Excel.TableCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.TableCollection;'
+    return:
+      type:
+      - excel.Excel.TableCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
+- uid: excel_release.Excel.TableCollection.onChanged
+  summary: >-
+    Возникает при изменении данных в любой таблице книги или на листе.
+
+
+    \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: onChanged
+  fullName: onChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    let tables = context.workbook.tables;\n    tables.onChanged.add(onChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the table collection onChanged event\");\n});\n```"
+- uid: excel_release.Excel.TableCollection.toJSON
+  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.TableCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.TableCollectionData` <!-- -->"Items"), содержащий массив "Items" с неполной копией всех загруженных свойств из элементов коллекции.
+  name: toJSON()
+  fullName: toJSON()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableCollectionData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.TableCollectionData
+      description: ''
