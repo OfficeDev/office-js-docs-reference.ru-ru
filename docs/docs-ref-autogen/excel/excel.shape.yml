@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6ee2491ed2571cd9e34670b0778164ba9452c9bf
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 92c35f5db99c5a152a3b1a23d7f0c058df15bbe1
+ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30108109"
+ms.lasthandoff: 02/27/2019
+ms.locfileid: "30303041"
 items:
 - uid: excel.Excel.Shape
   summary: >-
@@ -24,6 +24,7 @@ items:
   children:
   - excel.Excel.Shape.altTextDescription
   - excel.Excel.Shape.altTextTitle
+  - excel.Excel.Shape.connectionSiteCount
   - excel.Excel.Shape.context
   - excel.Excel.Shape.delete
   - excel.Excel.Shape.fill
@@ -101,6 +102,23 @@ items:
     return:
       type:
       - string
+- uid: excel.Excel.Shape.connectionSiteCount
+  summary: >-
+    Возвращает число сайтов подключения к указанной фигуре. Только для чтения.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: connectionSiteCount
+  fullName: connectionSiteCount
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly connectionSiteCount: number;'
+    return:
+      type:
+      - number
 - uid: excel.Excel.Shape.context
   summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
   isPreview: true
@@ -131,7 +149,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shapes = sheet.shapes;\n\n    // load all the shapes in the collection without loading their properties\n    shapes.load(\"items/$none\");\n    await context.sync();\n\n    shapes.items.forEach((shape) => shape.delete());\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.fill
   summary: >-
     Возвращает форматирование заливки объекта Shape. Только для чтения.
@@ -149,6 +167,7 @@ items:
     return:
       type:
       - excel.Excel.ShapeFill
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.smileyFace);\n    shape.left = 300;\n    shape.top = 100;\n    shape.height = 100;\n    shape.width = 100;\n    shape.fill.foreColor = \"yellow\"\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.geometricShape
   summary: >-
     Возвращает геометрическую форму для объекта Shape. Будет выдаваться сообщение об ошибке, если объект Shape относится к другому типу фигуры (например, Image, SmartArt и т. д.), а не Жеометрикшапе.
@@ -268,7 +287,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Square\")\n    shape.incrementLeft(-25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: Указывает, насколько далеко фигура перемещается по горизонтали (в пунктах). Положительное значение перемещает фигуру вправо; отрицательное значение перемещается влево. Если лист RTL, Инкрементлефт с положительным значением, должен переместить фигуру влево, а не вправо.
@@ -291,7 +310,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Image\");\n    shape.incrementRotation(180);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: Указывает, насколько далеко фигура вращается горизонтально (в градусах). Положительное значение поворачивает фигуру по часовой стрелке; отрицательное значение поворачивает его против часовой стрелки.
@@ -314,7 +333,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Pentagon\")\n    shape.incrementTop(25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
       description: Указывает, насколько далеко фигура будет перемещаться по вертикали (в пунктах). Положительное значение перемещает фигуру вниз; отрицательное значение перемещается вверх.
@@ -575,6 +594,7 @@ items:
     return:
       type:
       - number
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.triangle);\n    shape.left = 100;\n    shape.top = 300;\n    shape.height = 150;\n    shape.width = 200;\n    shape.rotation = 45;\n    shape.fill.clear();\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.saveAsPicture
   summary: >-
     Сохраняет фигуру в виде рисунка и возвращает изображение в виде строки в кодировке Base64, используя для параметра DPI значение 96. Поддерживается только сохранение в Excel. PictureFormat. BMP, Excel. PictureFormat. PNG, Excel. PictureFormat. JPEG и Excel. PictureFormat. GIF.
@@ -638,7 +658,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.scaleHeight(1.25, Excel.ShapeScaleType.currentSize);\n    shape.scaleWidth(1.25, Excel.ShapeScaleType.currentSize);\n    await context.sync();\n});\n```"
     parameters:
     - id: scaleFactor
       description: Задает отношение высоты фигуры после изменения ее размера и текущей или исходной высоты.
@@ -700,7 +720,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.scaleHeight(1.25, Excel.ShapeScaleType.currentSize);\n    shape.scaleWidth(1.25, Excel.ShapeScaleType.currentSize);\n    await context.sync();\n});\n```"
     parameters:
     - id: scaleFactor
       description: Задает отношение ширины фигуры после изменения ее размера и текущей или исходной ширины.
@@ -809,7 +829,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.setZOrder(Excel.ShapeZOrder.sendBackward);\n    await context.sync();\n});\n```"
     parameters:
     - id: value
       description: место перемещения указанной фигуры относительно других фигур. Дополнительные сведения см. в статье Excel. Шапезордер.
