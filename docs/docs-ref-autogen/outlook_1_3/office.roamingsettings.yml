@@ -1,14 +1,14 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: bb1e6bca95427061f06015898acdead07fd36560
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 58bf311507d7a8d59e6835c18f9a110eaf494505
+ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30096866"
+ms.lasthandoff: 02/22/2019
+ms.locfileid: "30198426"
 items:
 - uid: Outlook_1_3.Office.RoamingSettings
   summary: >-
-    Параметры, созданные с помощью методов объекта RoamingSettings, сохраняются на уровне надстройки и на уровне пользователя. Таким образом, они доступны исключительно надстройке, с помощью которой они созданы, и только из почтового ящика пользователя, в котором они сохранены.
+    Параметры, созданные с помощью методов объекта RoamingSettings, сохраняются в надстройке и на уровне пользователя. То есть они доступны только для создавшей их надстройки и только из почтового ящика пользователя, в котором они сохранены.
 
 
     Хотя API "Надстройка Outlook" предоставляет доступ к этим параметрам только надстройке, с помощью которой они созданы, эти параметры не следует считать безопасным способом хранения. К ним можно получить доступ с помощью веб-служб Exchange или расширенного MAPI. Их не следует использовать для хранения конфиденциальных сведений, таких как учетные данные пользователя или маркеры безопасности.
@@ -17,7 +17,7 @@ items:
     Имя параметра — это String, а значение может быть String, Number, Boolean, null, Object или Array.
 
 
-    К объекту RoamingSettings можно получить доступ с помощью свойства roamingSettings в пространстве имен Office.context.
+    Объект RoamingSettings доступен через свойство roamingSettings в пространстве имен Office. Context.
 
 
     **Важно!** объект roamingSettings инициализируется из материализованного хранилища только при первой загрузке надстройки. Для областей задач это означает, что она инициализируется только при первом открытии области задач. Если область задач переходит к другой странице или Перезагружает текущую страницу, объект в памяти сбрасывается в исходные значения, даже если ваша надстройка сохраняет изменения. Сохраненные изменения не будут доступны до тех пор, пока область задач не будет закрыта и открыта повторно.
@@ -55,7 +55,6 @@ items:
   - Outlook_1_3.Office.RoamingSettings.get
   - Outlook_1_3.Office.RoamingSettings.remove
   - Outlook_1_3.Office.RoamingSettings.saveAsync
-  - Outlook_1_3.Office.RoamingSettings.saveAsync_1
   - Outlook_1_3.Office.RoamingSettings.set
 - uid: Outlook_1_3.Office.RoamingSettings.get
   summary: >-
@@ -119,7 +118,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'saveAsync(callback?: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -128,28 +127,7 @@ items:
     - id: callback
       description: Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.
       type:
-      - '(result: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_3.Office.RoamingSettings.saveAsync_1
-  summary: >-
-    Сохраняет параметры.
-
-
-    Все параметры, ранее сохраненные надстройкой, загружаются при ее инициализации, поэтому на протяжении всего сеанса можно использовать только методы set и get для работы с копией контейнера свойств в памяти. Если требуется сохранить параметры, чтобы они были доступны при следующем использовании надстройки, воспользуйтесь методом saveAsync.
-
-
-    \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Минимальный уровень разрешений](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>С ограничениями</td></tr> <tr><td>[Применимый режим Outlook](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Создание или чтение</td></tr> </table>
-  name: saveAsync()
-  fullName: saveAsync()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'saveAsync(): void;'
-    return:
-      type:
-      - void
-      description: ''
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_3.Office.RoamingSettings.set
   summary: >-
     Устанавливает или создает указанный параметр.
@@ -161,7 +139,7 @@ items:
     Для параметров каждой надстройки доступен максимум 32 КБ.
 
 
-    Любые изменения, внесенные в параметры с помощью функции set, будут сохранены на сервере только после вызова функции saveAsync.
+    Любые изменения, внесенные в параметры с помощью функции SET, не будут сохранены на сервере до тех пор, пока не будет вызвана функция saveAsync.
 
 
     \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -183,6 +161,6 @@ items:
       type:
       - string
     - id: value
-      description: Задает значение для сохранения.
+      description: Задает сохраняемое значение.
       type:
       - any
