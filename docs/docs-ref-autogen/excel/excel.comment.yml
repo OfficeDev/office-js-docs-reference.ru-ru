@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0ea5cd6cd465b02e88d5fd4ac9df49c68a479b1d
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 7f5326d754fc3c11d77eb399b06f5a7bfc0f1297
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30113366"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575804"
 items:
 - uid: excel.Excel.Comment
   summary: >-
@@ -22,9 +22,13 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
+  - excel.Excel.Comment.authorEmail
+  - excel.Excel.Comment.authorName
   - excel.Excel.Comment.content
   - excel.Excel.Comment.context
+  - excel.Excel.Comment.creationDate
   - excel.Excel.Comment.delete
+  - excel.Excel.Comment.getLocation
   - excel.Excel.Comment.id
   - excel.Excel.Comment.isParent
   - excel.Excel.Comment.load
@@ -34,9 +38,43 @@ items:
   - excel.Excel.Comment.set
   - excel.Excel.Comment.set_1
   - excel.Excel.Comment.toJSON
+- uid: excel.Excel.Comment.authorEmail
+  summary: >-
+    Получение сообщения об авторе комментария.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: authorEmail
+  fullName: authorEmail
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly authorEmail: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.Comment.authorName
+  summary: >-
+    Получение имени автора комментария.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: authorName
+  fullName: authorName
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly authorName: string;'
+    return:
+      type:
+      - string
 - uid: excel.Excel.Comment.content
   summary: >-
-    Получите или задайте содержимое.
+    Получает или задает содержимое.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -64,9 +102,26 @@ items:
     return:
       type:
       - RequestContext
+- uid: excel.Excel.Comment.creationDate
+  summary: >-
+    Получение времени создания комментария. Возвращает значение null, если комментарий преобразован из заметки, как в этом случае комментарий не будет создан.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: creationDate
+  fullName: creationDate
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly creationDate: Date;'
+    return:
+      type:
+      - Date
 - uid: excel.Excel.Comment.delete
   summary: >-
-    Удаляет поток комментариев.
+    Удаляет цепочку примечаний.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -82,9 +137,27 @@ items:
       type:
       - void
       description: ''
+- uid: excel.Excel.Comment.getLocation
+  summary: >-
+    Получение расположения комментария.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getLocation()
+  fullName: getLocation()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getLocation(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: ''
 - uid: excel.Excel.Comment.id
   summary: >-
-    Представляет идентификатор комментария. Только для чтения.
+    Представляет идентификатор примечания. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -101,7 +174,7 @@ items:
       - string
 - uid: excel.Excel.Comment.isParent
   summary: >-
-    Указывает, является ли он потоком комментариев или ответом. Всегда возвращайте значение true здесь. Только для чтения.
+    Указывает, является ли объект цепочкой примечаний или ответом. Всегда возвращайте здесь значение true. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -117,7 +190,7 @@ items:
       type:
       - boolean
 - uid: excel.Excel.Comment.load
-  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств необходимо вызвать метод Context. Sync ().
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
   remarks: >-
     В дополнение к этой подписи этот метод имеет следующие подписи:
 
@@ -147,7 +220,7 @@ items:
       type:
       - excel.Excel.Interfaces.CommentLoadOptions
 - uid: excel.Excel.Comment.load_1
-  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   isPreview: true
   name: load(propertyNames)
   fullName: load(propertyNames)
@@ -166,7 +239,7 @@ items:
       type:
       - string | string[]
 - uid: excel.Excel.Comment.load_2
-  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
   isPreview: true
   name: load(propertyNamesAndPaths)
   fullName: load(propertyNamesAndPaths)
@@ -186,7 +259,7 @@ items:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Comment.replies
   summary: >-
-    Представляет коллекцию объектов ответа, связанных с комментарием. Только для чтения.
+    Представляет коллекцию объектов ответов, связанных с примечанием. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -249,7 +322,7 @@ items:
       type:
       - excel.Excel.Comment
 - uid: excel.Excel.Comment.toJSON
-  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Comment является объектом API, `toJSON` метод возвращает простой объект JavaScript (типизированный тип `Excel.Interfaces.CommentData` <!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
+  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Comment является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.CommentData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
   isPreview: true
   name: toJSON()
   fullName: toJSON()

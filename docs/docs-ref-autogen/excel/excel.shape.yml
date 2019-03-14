@@ -1,14 +1,14 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4438c2b727e8957db232766dbffb6b4f9e5670d1
-ms.sourcegitcommit: 788ab9c595c9143f8b8f4822a170e8b90d72ee1d
+ms.openlocfilehash: 67621ae13426a756364e0cd8e317a2635a1bc17e
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "30413863"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575686"
 items:
 - uid: excel.Excel.Shape
   summary: >-
-    Представляет объект универсальной фигуры на листе.
+    Представляет объект универсальной фигуры на листе. Фигурой может быть геометрическая фигура, линия, Группа фигур и т. д.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -30,6 +30,8 @@ items:
   - excel.Excel.Shape.fill
   - excel.Excel.Shape.geometricShape
   - excel.Excel.Shape.geometricShapeType
+  - excel.Excel.Shape.getAsImage
+  - excel.Excel.Shape.getAsImage_1
   - excel.Excel.Shape.group
   - excel.Excel.Shape.height
   - excel.Excel.Shape.id
@@ -51,8 +53,6 @@ items:
   - excel.Excel.Shape.parentGroup
   - excel.Excel.Shape.placement
   - excel.Excel.Shape.rotation
-  - excel.Excel.Shape.saveAsPicture
-  - excel.Excel.Shape.saveAsPicture_1
   - excel.Excel.Shape.scaleHeight
   - excel.Excel.Shape.scaleHeight_1
   - excel.Excel.Shape.scaleWidth
@@ -70,7 +70,7 @@ items:
   - excel.Excel.Shape.zorderPosition
 - uid: excel.Excel.Shape.altTextDescription
   summary: >-
-    Возвращает или задает строку описательного замещающего текста для объекта Shape, если объект сохранен на веб-странице.
+    Возвращает или задает текст альтернативного описания для объекта Shape.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -87,7 +87,7 @@ items:
       - string
 - uid: excel.Excel.Shape.altTextTitle
   summary: >-
-    Возвращает или задает текстовую строку замещающего заголовка для объекта Shape, если объект сохранен на веб-странице.
+    Возвращает или задает текст альтернативного заголовка для объекта Shape.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -104,7 +104,7 @@ items:
       - string
 - uid: excel.Excel.Shape.connectionSiteCount
   summary: >-
-    Возвращает число сайтов подключения к указанной фигуре. Только для чтения.
+    Возвращает число сайтов подключения на этой фигуре. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -134,7 +134,7 @@ items:
       - RequestContext
 - uid: excel.Excel.Shape.delete
   summary: >-
-    Удаляет фигуру
+    Удаляет фигуру из листа.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -152,7 +152,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shapes = sheet.shapes;\n\n    // load all the shapes in the collection without loading their properties\n    shapes.load(\"items/$none\");\n    await context.sync();\n\n    shapes.items.forEach((shape) => shape.delete());\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.fill
   summary: >-
-    Возвращает формат заливки объекта shape. Только для чтения.
+    Возвращает форматирование заливки данной фигуры. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -167,10 +167,10 @@ items:
     return:
       type:
       - excel.Excel.ShapeFill
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.smileyFace);\n    shape.left = 300;\n    shape.top = 100;\n    shape.height = 100;\n    shape.width = 100;\n    shape.fill.foreColor = \"yellow\"\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.smileyFace);\n    shape.left = 300;\n    shape.top = 100;\n    shape.height = 100;\n    shape.width = 100;\n    shape.fill.foregroundColor = \"yellow\"\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.geometricShape
   summary: >-
-    Возвращает геометрическую фигуру для объекта shape. Возникает ошибка, если объект shape относится к другому типу фигуры (например, Image, SmartArt и т. д.), а не к типу GeometricShape.
+    Возвращает геометрическую фигуру, связанную с фигурой. Если тип Shape не "Жеометрикшапе", будет выдаваться сообщение об ошибке.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -187,7 +187,7 @@ items:
       - excel.Excel.GeometricShape
 - uid: excel.Excel.Shape.geometricShapeType
   summary: >-
-    Представляет геометрический тип указанной фигуры. Дополнительные сведения см. в статье Excel.GeometricShapeType. Возвращает значение null, если фигура не геометрическая, например запрос get GeometricShapeType для строки или диаграммы возвращает значение null.
+    Представляет тип геометрической фигуры для этой геометрической фигуры. Дополнительные сведения см. в статье Excel. Жеометрикшапетипе. Возвращает значение null, если тип фигуры не "Жеометрикшапе".
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -202,9 +202,55 @@ items:
     return:
       type:
       - Excel.GeometricShapeType | "LineInverse" | "Triangle" | "RightTriangle" | "Rectangle" | "Diamond" | "Parallelogram" | "Trapezoid" | "NonIsoscelesTrapezoid" | "Pentagon" | "Hexagon" | "Heptagon" | "Octagon" | "Decagon" | "Dodecagon" | "Star4" | "Star5" | "Star6" | "Star7" | "Star8" | "Star10" | "Star12" | "Star16" | "Star24" | "Star32" | "RoundRectangle" | "Round1Rectangle" | "Round2SameRectangle" | "Round2DiagonalRectangle" | "SnipRoundRectangle" | "Snip1Rectangle" | "Snip2SameRectangle" | "Snip2DiagonalRectangle" | "Plaque" | "Ellipse" | "Teardrop" | "HomePlate" | "Chevron" | "PieWedge" | "Pie" | "BlockArc" | "Donut" | "NoSmoking" | "RightArrow" | "LeftArrow" | "UpArrow" | "DownArrow" | "StripedRightArrow" | "NotchedRightArrow" | "BentUpArrow" | "LeftRightArrow" | "UpDownArrow" | "LeftUpArrow" | "LeftRightUpArrow" | "QuadArrow" | "LeftArrowCallout" | "RightArrowCallout" | "UpArrowCallout" | "DownArrowCallout" | "LeftRightArrowCallout" | "UpDownArrowCallout" | "QuadArrowCallout" | "BentArrow" | "UturnArrow" | "CircularArrow" | "LeftCircularArrow" | "LeftRightCircularArrow" | "CurvedRightArrow" | "CurvedLeftArrow" | "CurvedUpArrow" | "CurvedDownArrow" | "SwooshArrow" | "Cube" | "Can" | "LightningBolt" | "Heart" | "Sun" | "Moon" | "SmileyFace" | "IrregularSeal1" | "IrregularSeal2" | "FoldedCorner" | "Bevel" | "Frame" | "HalfFrame" | "Corner" | "DiagonalStripe" | "Chord" | "Arc" | "LeftBracket" | "RightBracket" | "LeftBrace" | "RightBrace" | "BracketPair" | "BracePair" | "Callout1" | "Callout2" | "Callout3" | "AccentCallout1" | "AccentCallout2" | "AccentCallout3" | "BorderCallout1" | "BorderCallout2" | "BorderCallout3" | "AccentBorderCallout1" | "AccentBorderCallout2" | "AccentBorderCallout3" | "WedgeRectCallout" | "WedgeRRectCallout" | "WedgeEllipseCallout" | "CloudCallout" | "Cloud" | "Ribbon" | "Ribbon2" | "EllipseRibbon" | "EllipseRibbon2" | "LeftRightRibbon" | "VerticalScroll" | "HorizontalScroll" | "Wave" | "DoubleWave" | "Plus" | "FlowChartProcess" | "FlowChartDecision" | "FlowChartInputOutput" | "FlowChartPredefinedProcess" | "FlowChartInternalStorage" | "FlowChartDocument" | "FlowChartMultidocument" | "FlowChartTerminator" | "FlowChartPreparation" | "FlowChartManualInput" | "FlowChartManualOperation" | "FlowChartConnector" | "FlowChartPunchedCard" | "FlowChartPunchedTape" | "FlowChartSummingJunction" | "FlowChartOr" | "FlowChartCollate" | "FlowChartSort" | "FlowChartExtract" | "FlowChartMerge" | "FlowChartOfflineStorage" | "FlowChartOnlineStorage" | "FlowChartMagneticTape" | "FlowChartMagneticDisk" | "FlowChartMagneticDrum" | "FlowChartDisplay" | "FlowChartDelay" | "FlowChartAlternateProcess" | "FlowChartOffpageConnector" | "ActionButtonBlank" | "ActionButtonHome" | "ActionButtonHelp" | "ActionButtonInformation" | "ActionButtonForwardNext" | "ActionButtonBackPrevious" | "ActionButtonEnd" | "ActionButtonBeginning" | "ActionButtonReturn" | "ActionButtonDocument" | "ActionButtonSound" | "ActionButtonMovie" | "Gear6" | "Gear9" | "Funnel" | "MathPlus" | "MathMinus" | "MathMultiply" | "MathDivide" | "MathEqual" | "MathNotEqual" | "CornerTabs" | "SquareTabs" | "PlaqueTabs" | "ChartX" | "ChartStar" | "ChartPlus"
+- uid: excel.Excel.Shape.getAsImage
+  summary: >-
+    Преобразует фигуру в изображение и возвращает изображение в виде строки в кодировке Base64. Значение DPI — 96. Поддерживаются только форматы`Excel.PictureFormat.BMP`<!-- -->, `Excel.PictureFormat.PNG`<!-- -->, `Excel.PictureFormat.JPEG`<!-- -->, а`Excel.PictureFormat.GIF`<!-- -->.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getAsImage(format)
+  fullName: getAsImage(format)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsImage(format: Excel.PictureFormat): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: ''
+    parameters:
+    - id: format
+      description: Задает формат изображения.
+      type:
+      - excel.Excel.PictureFormat
+- uid: excel.Excel.Shape.getAsImage_1
+  summary: >-
+    Преобразует фигуру в изображение и возвращает изображение в виде строки в кодировке Base64. Значение DPI — 96. Поддерживаются только форматы`Excel.PictureFormat.BMP`<!-- -->, `Excel.PictureFormat.PNG`<!-- -->, `Excel.PictureFormat.JPEG`<!-- -->, а`Excel.PictureFormat.GIF`<!-- -->.
+
+
+    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: getAsImage(formatString)
+  fullName: getAsImage(formatString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsImage(formatString: "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: ''
+    parameters:
+    - id: formatString
+      description: Задает формат изображения.
+      type:
+      - "\"UNKNOWN\" | \"BMP\" | \"JPEG\" | \"GIF\" | \"PNG\" | \"SVG\""
 - uid: excel.Excel.Shape.group
   summary: >-
-    Возвращает группу фигуры для объекта shape. Возникает ошибка, если объект shape относится к другому типу фигуры (например, Image, SmartArt и т. д.), а не к типу GroupShape.
+    Возвращает группу фигур, связанную с фигурой. Если тип Shape не "Граупшапе", будет выдаваться сообщение об ошибке.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -219,6 +265,7 @@ items:
     return:
       type:
       - excel.Excel.ShapeGroup
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n\n    const shapeGroup = sheet.shapes.getItem(\"Group\").group;\n    shapeGroup.ungroup();\n    console.log(\"Shapes ungrouped\");\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.height
   summary: >-
     Представляет высоту фигуры (в пунктах). При задании с отрицательным значением или нулем в качестве входных данных создается исключение недопустимого аргумента.
@@ -255,7 +302,7 @@ items:
       - string
 - uid: excel.Excel.Shape.image
   summary: >-
-    Возвращает изображение для объекта shape. Возникает ошибка, если объект shape относится к другому типу фигуры (например, GeometricShape, SmartArt и т. д.), а не к типу Image.
+    Возвращает изображение, связанное с фигурой. Если тип Shape не "Image", будет выдаваться сообщение об ошибке.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -290,12 +337,12 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Square\")\n    shape.incrementLeft(-25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
-      description: Указывает, насколько далеко фигура перемещается по горизонтали (в пунктах). Положительное значение перемещает фигуру вправо; отрицательное значение перемещается влево. Если лист RTL, Инкрементлефт с положительным значением, должен переместить фигуру влево, а не вправо.
+      description: 'Приращение фигуры будет горизонтально перемещено в пункт точки. Положительное значение перемещает фигуру вправо, а отрицательное значение — влево. Если лист ориентирован справа налево, это значение изменяется на противоположный: положительные значения перемещают фигуру влево, а отрицательные — вправо.'
       type:
       - number
 - uid: excel.Excel.Shape.incrementRotation
   summary: >-
-    Изменяет угол поворота фигуры относительно оси Z на указанное число градусов. Используйте свойство вращения, чтобы задать абсолютный поворот фигуры.
+    ПоВорачивает фигуру вокруг оси z по часовой стрелке на заданное число градусов. Используйте `rotation` свойство, чтобы задать абсолютный поворот фигуры.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -313,7 +360,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Image\");\n    shape.incrementRotation(180);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
-      description: Указывает, насколько далеко фигура вращается горизонтально (в градусах). Положительное значение поворачивает фигуру по часовой стрелке; отрицательное значение поворачивает его против часовой стрелки.
+      description: Количество градусов, на котором будет вращаться фигура. Положительное значение поворачивает фигуру по часовой стрелке; отрицательное значение поворачивает его против часовой стрелки.
       type:
       - number
 - uid: excel.Excel.Shape.incrementTop
@@ -336,12 +383,12 @@ items:
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Pentagon\")\n    shape.incrementTop(25);\n    await context.sync();\n});\n```"
     parameters:
     - id: increment
-      description: Указывает, насколько далеко фигура будет перемещаться по вертикали (в пунктах). Положительное значение перемещает фигуру вниз; отрицательное значение перемещается вверх.
+      description: Увеличение (в пунктах) фигура будет перемещена по вертикали. в пунктах. Положительное значение перемещает фигуру вниз и отрицательное значение перемещается вверх.
       type:
       - number
 - uid: excel.Excel.Shape.left
   summary: >-
-    Расстояние в пунктах от левого края фигуры до левого края листа. При задании с отрицательным значением в качестве входных данных создается исключение недопустимого аргумента.
+    Расстояние от левой стороны фигуры до левого края листа (в пунктах). При задании с отрицательным значением в качестве входных данных создается исключение недопустимого аргумента.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -358,7 +405,7 @@ items:
       - number
 - uid: excel.Excel.Shape.level
   summary: >-
-    Представляет уровень указанной фигуры. Уровень 0 означает фигуру, не являющуюся частью группы, уровень 1 означает, что фигура является частью группы верхнего уровня, и т. д.
+    Представляет уровень указанной фигуры. Например, уровень 0 означает, что фигура не является частью каких-либо групп, а уровень 1 означает, что фигура является частью группы верхнего уровня, а уровень 2 означает, что фигура является частью подгруппы верхнего уровня.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -375,7 +422,7 @@ items:
       - number
 - uid: excel.Excel.Shape.line
   summary: >-
-    Возвращает объект line для объекта shape. Возникает ошибка, если объект shape относится к другому типу фигуры (например, GeometricShape, SmartArt и т. д.), а не к типу Image.
+    Возвращает строку, связанную с фигурой. Если тип Shape не "Line", будет выдаваться сообщение об ошибке.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -390,10 +437,10 @@ items:
     return:
       type:
       - excel.Excel.Line
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const shapes = context.workbook.worksheets.getItem(\"Shapes\").shapes;\n    const line = shapes.getItem(\"StraightLine\").line;\n    line.beginArrowHeadLength = Excel.ArrowHeadLength.long;\n    line.beginArrowHeadWidth = Excel.ArrowHeadWidth.wide;\n    line.beginArrowHeadStyle = Excel.ArrowHeadStyle.oval;\n\n    line.endArrowHeadLength = Excel.ArrowHeadLength.long;\n    line.endArrowHeadWidth = Excel.ArrowHeadWidth.wide;\n    line.endArrowHeadStyle = Excel.ArrowHeadStyle.triangle;\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const shapes = context.workbook.worksheets.getItem(\"Shapes\").shapes;\n    const line = shapes.getItem(\"StraightLine\").line;\n    line.beginArrowheadLength = Excel.ArrowheadLength.long;\n    line.beginArrowheadWidth = Excel.ArrowheadWidth.wide;\n    line.beginArrowheadStyle = Excel.ArrowheadStyle.oval;\n\n    line.endArrowheadLength = Excel.ArrowheadLength.long;\n    line.endArrowheadWidth = Excel.ArrowheadWidth.wide;\n    line.endArrowheadStyle = Excel.ArrowheadStyle.triangle;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Shape.lineFormat
   summary: >-
-    Возвращает формат линии для объекта shape. Только для чтения.
+    Возвращает форматирование линии данной фигуры. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -478,7 +525,7 @@ items:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Shape.lockAspectRatio
   summary: >-
-    Представляет зафиксированные пропорции фигуры (в логических значениях).
+    Указывает, заблокировано ли пропорции данной фигуры.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -529,7 +576,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.ShapeActivatedEventArgs>
 - uid: excel.Excel.Shape.onDeactivated
   summary: >-
-    Возникает, если фигура активирована.
+    Возникает при отключении фигуры.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -546,7 +593,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.ShapeDeactivatedEventArgs>
 - uid: excel.Excel.Shape.parentGroup
   summary: >-
-    Представляет родительскую группу указанной фигуры.
+    Представляет родительскую группу этой фигуры.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -563,7 +610,7 @@ items:
       - excel.Excel.Shape
 - uid: excel.Excel.Shape.placement
   summary: >-
-    Представляет значение расположения, указывающее способ привязки объекта к ячейкам под ним.
+    Представляет способ вложения объекта в ячейки под ним.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -596,55 +643,9 @@ items:
       type:
       - number
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.addGeometricShape(Excel.GeometricShapeType.triangle);\n    shape.left = 100;\n    shape.top = 300;\n    shape.height = 150;\n    shape.width = 200;\n    shape.rotation = 45;\n    shape.fill.clear();\n    await context.sync();\n});\n```"
-- uid: excel.Excel.Shape.saveAsPicture
-  summary: >-
-    Сохраняет фигуру в виде рисунка и возвращает его как строку в кодировке base64 с установкой значения DPI равного 96. Поддерживается сохранение только в форматах Excel.PictureFormat.BMP, Excel.PictureFormat.PNG, Excel.PictureFormat.JPEG и Excel.PictureFormat.GIF.
-
-
-    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: saveAsPicture(format)
-  fullName: saveAsPicture(format)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'saveAsPicture(format: Excel.PictureFormat): OfficeExtension.ClientResult<string>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<string>
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Image\");\n    const result = shape.saveAsPicture(Excel.PictureFormat.png);\n    await context.sync();\n\n    const imageString = result.value;\n    // Your add-in would save this string as a .png file.\n    console.log(\"The image's base64-encoded string: \" + imageString);\n});\n```"
-    parameters:
-    - id: format
-      description: ''
-      type:
-      - excel.Excel.PictureFormat
-- uid: excel.Excel.Shape.saveAsPicture_1
-  summary: >-
-    Сохраняет фигуру в виде рисунка и возвращает его как строку в кодировке base64 с установкой значения DPI равного 96. Поддерживается сохранение только в форматах Excel.PictureFormat.BMP, Excel.PictureFormat.PNG, Excel.PictureFormat.JPEG и Excel.PictureFormat.GIF.
-
-
-    \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: saveAsPicture(formatString)
-  fullName: saveAsPicture(formatString)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'saveAsPicture(formatString: "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"): OfficeExtension.ClientResult<string>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<string>
-      description: ''
-    parameters:
-    - id: formatString
-      description: ''
-      type:
-      - "\"UNKNOWN\" | \"BMP\" | \"JPEG\" | \"GIF\" | \"PNG\" | \"SVG\""
 - uid: excel.Excel.Shape.scaleHeight
   summary: >-
-    Масштабирует высоту фигуры с применением указанного коэффициента. Для рисунков можно указать, следует ли изменить масштаб фигуры относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей высоты.
+    Масштабирует высоту фигуры с применением указанного коэффициента. Для изображений можно указать, следует ли масштабировать фигуру относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей высоты.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -666,16 +667,16 @@ items:
       type:
       - number
     - id: scaleType
-      description: OriginalSize для масштабирования фигуры относительно исходного размера. Куррентсизе для масштабирования по отношению к текущему размеру. Можно указать OriginalSize для этого аргумента, только если указанная фигура является рисунком.
+      description: Указывает, масштабируется ли фигура относительно исходного или текущего размера. Параметр масштабирование исходного размера работает только для изображений.
       type:
       - excel.Excel.ShapeScaleType
     - id: scaleFrom
-      description: Необязательное. Одна из констант Шапескалефром, указывающая, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
+      description: Необязательное свойство. Указывает, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
       type:
       - excel.Excel.ShapeScaleFrom
 - uid: excel.Excel.Shape.scaleHeight_1
   summary: >-
-    Масштабирует высоту фигуры с применением указанного коэффициента. Для рисунков можно указать, следует ли изменить масштаб фигуры относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей высоты.
+    Масштабирует высоту фигуры с применением указанного коэффициента. Для изображений можно указать, следует ли масштабировать фигуру относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей высоты.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -697,16 +698,16 @@ items:
       type:
       - number
     - id: scaleTypeString
-      description: OriginalSize для масштабирования фигуры относительно исходного размера. Куррентсизе для масштабирования по отношению к текущему размеру. Можно указать OriginalSize для этого аргумента, только если указанная фигура является рисунком.
+      description: Указывает, масштабируется ли фигура относительно исходного или текущего размера. Параметр масштабирование исходного размера работает только для изображений.
       type:
       - "\"CurrentSize\" | \"OriginalSize\""
     - id: scaleFrom
-      description: Необязательное. Одна из констант Шапескалефром, указывающая, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
+      description: Необязательное свойство. Указывает, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
       type:
       - "\"ScaleFromTopLeft\" | \"ScaleFromMiddle\" | \"ScaleFromBottomRight\""
 - uid: excel.Excel.Shape.scaleWidth
   summary: >-
-    Масштабирует ширину фигуры с применением указанного коэффициента. Для рисунков можно указать, следует ли изменить масштаб фигуры относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей ширины.
+    Масштабирует ширину фигуры с применением указанного коэффициента. Для изображений можно указать, следует ли масштабировать фигуру относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей ширины.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -728,16 +729,16 @@ items:
       type:
       - number
     - id: scaleType
-      description: OriginalSize для масштабирования фигуры относительно исходного размера. Куррентсизе для масштабирования по отношению к текущему размеру. Можно указать OriginalSize для этого аргумента, только если указанная фигура является рисунком.
+      description: Указывает, масштабируется ли фигура относительно исходного или текущего размера. Параметр масштабирование исходного размера работает только для изображений.
       type:
       - excel.Excel.ShapeScaleType
     - id: scaleFrom
-      description: Необязательное. Одна из констант Шапескалефром, указывающая, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
+      description: Необязательное свойство. Указывает, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
       type:
       - excel.Excel.ShapeScaleFrom
 - uid: excel.Excel.Shape.scaleWidth_1
   summary: >-
-    Масштабирует ширину фигуры с применением указанного коэффициента. Для рисунков можно указать, следует ли изменить масштаб фигуры относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей ширины.
+    Масштабирует ширину фигуры с применением указанного коэффициента. Для изображений можно указать, следует ли масштабировать фигуру относительно исходного или текущего размера. Фигуры, не являющиеся рисунками, всегда масштабируются относительно их текущей ширины.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -759,11 +760,11 @@ items:
       type:
       - number
     - id: scaleTypeString
-      description: OriginalSize для масштабирования фигуры относительно исходного размера. Куррентсизе для масштабирования по отношению к текущему размеру. Можно указать OriginalSize для этого аргумента, только если указанная фигура является рисунком.
+      description: Указывает, масштабируется ли фигура относительно исходного или текущего размера. Параметр масштабирование исходного размера работает только для изображений.
       type:
       - "\"CurrentSize\" | \"OriginalSize\""
     - id: scaleFrom
-      description: Необязательное. Одна из констант Шапескалефром, указывающая, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
+      description: Необязательное свойство. Указывает, какая часть фигуры сохраняет свое положение при масштабировании фигуры. Если этот параметр опущен, то он представляет свое положение в левом верхнем углу фигуры.
       type:
       - "\"ScaleFromTopLeft\" | \"ScaleFromMiddle\" | \"ScaleFromBottomRight\""
 - uid: excel.Excel.Shape.set
@@ -815,53 +816,53 @@ items:
       - excel.Excel.Shape
 - uid: excel.Excel.Shape.setZOrder
   summary: >-
-    Помещает указанную фигуру перед или за другими фигурами в коллекции (то есть изменяет положение фигуры по оси Z).
+    ПереМещает указанную фигуру вверх или вниз по z-порядку, которая смещается перед другими фигурами или позади нее.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   isPreview: true
-  name: setZOrder(value)
-  fullName: setZOrder(value)
+  name: setZOrder(position)
+  fullName: setZOrder(position)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'setZOrder(value: Excel.ShapeZOrder): void;'
+    content: 'setZOrder(position: Excel.ShapeZOrder): void;'
     return:
       type:
       - void
       description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Shapes\");\n    const shape = sheet.shapes.getItem(\"Octagon\")\n    shape.setZOrder(Excel.ShapeZOrder.sendBackward);\n    await context.sync();\n});\n```"
     parameters:
-    - id: value
-      description: место перемещения указанной фигуры относительно других фигур. Дополнительные сведения см. в статье Excel. Шапезордер.
+    - id: position
+      description: Место перемещения фигуры в стеке z по отношению к другим фигурам. Дополнительные сведения см. в статье Excel. Шапезордер.
       type:
       - excel.Excel.ShapeZOrder
 - uid: excel.Excel.Shape.setZOrder_1
   summary: >-
-    Помещает указанную фигуру перед или за другими фигурами в коллекции (то есть изменяет положение фигуры по оси Z).
+    ПереМещает указанную фигуру вверх или вниз по z-порядку, которая смещается перед другими фигурами или позади нее.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   isPreview: true
-  name: setZOrder(valueString)
-  fullName: setZOrder(valueString)
+  name: setZOrder(positionString)
+  fullName: setZOrder(positionString)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'setZOrder(valueString: "BringToFront" | "BringForward" | "SendToBack" | "SendBackward"): void;'
+    content: 'setZOrder(positionString: "BringToFront" | "BringForward" | "SendToBack" | "SendBackward"): void;'
     return:
       type:
       - void
       description: ''
     parameters:
-    - id: valueString
-      description: место перемещения указанной фигуры относительно других фигур. Дополнительные сведения см. в статье Excel. Шапезордер.
+    - id: positionString
+      description: Место перемещения фигуры в стеке z по отношению к другим фигурам. Дополнительные сведения см. в статье Excel. Шапезордер.
       type:
       - "\"BringToFront\" | \"BringForward\" | \"SendToBack\" | \"SendBackward\""
 - uid: excel.Excel.Shape.textFrame
   summary: >-
-    Возвращает объект textFrame фигуры. Только для чтения.
+    Возвращает объект текстового фрейма этой фигуры. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -877,7 +878,7 @@ items:
       type:
       - excel.Excel.TextFrame
 - uid: excel.Excel.Shape.toJSON
-  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Shape является объектом API, `toJSON` метод возвращает простой объект JavaScript (типизированный тип `Excel.Interfaces.ShapeData` <!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
+  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Shape является объектом API, `toJSON` метод возвращает простой объект JavaScript (типизированный как`Excel.Interfaces.ShapeData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
   isPreview: true
   name: toJSON()
   fullName: toJSON()
@@ -892,7 +893,7 @@ items:
       description: ''
 - uid: excel.Excel.Shape.top
   summary: >-
-    Расстояние в пунктах от верхнего края фигуры до верхнего края листа. При задании с отрицательным значением в качестве входных данных создается исключение недопустимого аргумента.
+    Расстояние от верхнего края фигуры до верхнего края листа (в пунктах). При задании с отрицательным значением в качестве входных данных создается исключение недопустимого аргумента.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -909,7 +910,7 @@ items:
       - number
 - uid: excel.Excel.Shape.type
   summary: >-
-    Возвращает тип указанной фигуры. Только для чтения. Дополнительные сведения см. в статье Excel.ShapeType.
+    Возвращает тип данной фигуры. Дополнительные сведения см. в статье Excel. Шапетипе. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -920,13 +921,13 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'readonly type: Excel.ShapeType | "Unknown" | "Image" | "GeometricShape" | "Group" | "Line";'
+    content: 'readonly type: Excel.ShapeType | "Unsupported" | "Image" | "GeometricShape" | "Group" | "Line";'
     return:
       type:
-      - Excel.ShapeType | "Unknown" | "Image" | "GeometricShape" | "Group" | "Line"
+      - Excel.ShapeType | "Unsupported" | "Image" | "GeometricShape" | "Group" | "Line"
 - uid: excel.Excel.Shape.visible
   summary: >-
-    Представляет видимость указанной фигуры (в логических значениях).
+    Представляет видимость этой фигуры.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -960,7 +961,7 @@ items:
       - number
 - uid: excel.Excel.Shape.zorderPosition
   summary: >-
-    Возвращает положение указанной фигуры по оси Z. Значение самого нижнего положения фигуры по оси Z равно 0. Только для чтения.
+    Возвращает позицию указанной фигуры в z – порядке, значение 0, представляющее нижнюю часть стека заказов. Только для чтения.
 
 
     \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
