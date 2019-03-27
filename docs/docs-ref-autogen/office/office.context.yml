@@ -1,13 +1,13 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8e6466bb6dfda6abd3e0eb6a79501046c9d540d8
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
+ms.openlocfilehash: 9ca931791933cc631ecd0b0618ed15dcc2200604
+ms.sourcegitcommit: a422a2c3b9ada79477a9f873276b3c00765f7072
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30054767"
+ms.lasthandoff: 03/27/2019
+ms.locfileid: "30900379"
 items:
 - uid: office.Office.Context
-  summary: Представляет среду выполнения надстройки и открывает доступ к ключевым объектам API. Текущий контекст существует как свойство Office. Доступ к нему осуществляется `Office.context` <!-- -->с помощью.
+  summary: Представляет среду выполнения надстройки и открывает доступ к ключевым объектам API. Текущий контекст существует как свойство Office. Доступ к нему осуществляется с помощью`Office.context`<!-- -->.
   remarks: <table><tr><td>Узлы</td><td>Access, Excel, Outlook, PowerPoint, Project, Word </td></tr></table>
   name: Office.Context
   fullName: Office.Context
@@ -16,6 +16,7 @@ items:
   type: interface
   package: office
   children:
+  - office.Office.Context.auth
   - office.Office.Context.commerceAllowed
   - office.Office.Context.contentLanguage
   - office.Office.Context.diagnostics
@@ -30,22 +31,35 @@ items:
   - office.Office.Context.roamingSettings
   - office.Office.Context.touchEnabled
   - office.Office.Context.ui
+- uid: office.Office.Context.auth
+  summary: Предоставляет информацию и доступ вошедшему в систему пользователю.
+  isPreview: true
+  name: auth
+  fullName: auth
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'auth: Auth;'
+    return:
+      type:
+      - office.Office.Auth
 - uid: office.Office.Context.commerceAllowed
   summary: True, если текущая платформа позволяет надстройке отображать пользовательский интерфейс для продажи или обновления; в противном случае возвращает значение false.
   remarks: >-
-    Магазин приложений для iOS не поддерживает приложения с надстройками, которые предоставляют ссылки на дополнительные системы платежей. Тем не менее, надстройки Office, запущенные на рабочем столе Windows или Office Online в браузере, разрешают такие ссылки. Если вы хотите, чтобы пользовательский интерфейс надстройки предоставил ссылку на внешнюю систему оплаты на платформах, отличных от iOS, вы можете использовать свойство commerceAllowed для управления отображением этой ссылки.
+    App Store для iOS не поддерживает apps с надстройками, которые предоставляют ссылки на дополнительные системы платежей. Тем не менее, надстройки Office, запущенные на рабочем столе Windows или Office Online в браузере, разрешают такие ссылки. Если вы хотите, чтобы пользовательский интерфейс надстройки предоставил ссылку на внешнюю систему оплаты на платформах, отличных от iOS, вы можете использовать свойство commerceAllowed для управления отображением этой ссылки.
 
 
     **Сведения о поддержке**
 
 
-    Прописная Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка указывает на то, что ведущее приложение Office не поддерживает это перечисление.
+    Заглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.
 
 
-    Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в разделе Требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+    Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
 
-    *Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для iPad </th></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td></tr> </table>
+    *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для iPad </th></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td></tr> </table>
   name: commerceAllowed
   fullName: commerceAllowed
   langs:
@@ -57,8 +71,8 @@ items:
       type:
       - boolean
 - uid: office.Office.Context.contentLanguage
-  summary: Получает языковой стандарт (язык), указанный пользователем для редактирования документа или элемента.
-  remarks: "Значение отражает параметр **язык редактирования** , указанный с помощью **языка &gt; параметров &gt; файлов** в ведущем приложении Office. `contentLanguage`\n\nВ контентных надстройках для веб-приложений Access `contentLanguage` свойство получает язык и региональные параметры надстройки (например, \"en-GB\").\n\n**Сведения о поддержке**\n\nПрописная Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка указывает на то, что ведущее приложение Office не поддерживает это перечисление.\n\nДополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в разделе Требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th><th> OWA для устройств </th><th> Office для Mac </th></tr> <tr><td><strong>Обращения</strong></td><td> </td><td> Да </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Приложению</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction sayHelloWithContentLanguage() {\n    var myContentLanguage = Office.context.contentLanguage;\n    switch (myContentLanguage) {\n        case 'en-US':\n            write('Hello!');\n            break;\n        case 'en-NZ':\n            write('G\\'day mate!');\n            break;\n    }\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: Получает указанный пользователем языковой стандарт (язык) для редактирования документа или элемента.
+  remarks: "Значение отражает параметр **язык редактирования** , указанный с помощью **языка &gt; параметров &gt; файлов** в ведущем приложении Office. `contentLanguage`\n\nВ контентных надстройках для веб-приложений Access `contentLanguage` свойство получает язык и региональные параметры надстройки (например, \"en-GB\").\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.\n\nДополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th><th> Outlook Web App для устройств </th><th> Office для Mac </th></tr> <tr><td><strong>Обращения</strong></td><td> </td><td> Да </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Приложению</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction sayHelloWithContentLanguage() {\n    var myContentLanguage = Office.context.contentLanguage;\n    switch (myContentLanguage) {\n        case 'en-US':\n            write('Hello!');\n            break;\n        case 'en-NZ':\n            write('G\\'day mate!');\n            break;\n    }\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: contentLanguage
   fullName: contentLanguage
   langs:
@@ -82,8 +96,8 @@ items:
       type:
       - office.Office.ContextInformation
 - uid: office.Office.Context.displayLanguage
-  summary: Получает определенную пользователем региональную настройку (язык) для пользовательского интерфейса ведущего приложения Office.
-  remarks: "Возвращаемое значение — это строка в формате языковых тегов RFC 1766, например en-US.\n\nЗначение отражает текущий параметр **языка отображения** , указанный с помощью **языка &gt; параметров &gt; файлов** ведущего приложения Office. `displayLanguage`\n\nВ контентных надстройках для веб-приложений Access `displayLanguage property` получает язык надстройки (например, \"en-US\").\n\nПри использовании в Outlook подходящими режимами является создание или чтение.\n\n**Сведения о поддержке**\n\nПрописная Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка указывает на то, что ведущее приложение Office не поддерживает это перечисление.\n\nДополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в разделе Требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th><th> OWA для устройств </th><th> Office для Mac </th></tr> <tr><td><strong>Обращения</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Приложению</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> </td><td> Да </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction sayHelloWithDisplayLanguage() {\n    var myDisplayLanguage = Office.context.displayLanguage;\n    switch (myDisplayLanguage) {\n        case 'en-US':\n            write('Hello!');\n            break;\n        case 'en-NZ':\n            write('G\\'day mate!');\n            break;\n    }\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  summary: Получает определенный пользователем языковой стандарт (язык) для пользовательского интерфейса ведущего приложения Office.
+  remarks: "Возвращаемое значение — это строка в формате языковых тегов RFC 1766, например en-US.\n\nЗначение отражает текущий параметр **языка отображения** , указанный с помощью **языка &gt; параметров &gt; файлов** ведущего приложения Office. `displayLanguage`\n\nВ контентных надстройках для веб-приложений Access `displayLanguage property` получает язык надстройки (например, \"en-US\").\n\nПри использовании в Outlook подходящими режимами является создание или чтение.\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.\n\nДополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th><th> Outlook Web App для устройств </th><th> Office для Mac </th></tr> <tr><td><strong>Обращения</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Приложению</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> </td><td> Да </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction sayHelloWithDisplayLanguage() {\n    var myDisplayLanguage = Office.context.displayLanguage;\n    switch (myDisplayLanguage) {\n        case 'en-US':\n            write('Hello!');\n            break;\n        case 'en-NZ':\n            write('G\\'day mate!');\n            break;\n    }\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: displayLanguage
   fullName: displayLanguage
   langs:
@@ -100,10 +114,10 @@ items:
     **Сведения о поддержке**
 
 
-    Прописная Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка указывает на то, что ведущее приложение Office не поддерживает это перечисление.
+    Заглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.
 
 
-    Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в разделе Требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+    Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
 
     *Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для компьютера с Windows </th><th> Office Online (в браузере) </th><th> Office для iPad </th></tr> <tr><td><strong>Обращения</strong></td><td> </td><td> Да </td><td> </td></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> Да </td><td> Да </td></tr> </table>
@@ -247,7 +261,7 @@ items:
     Получает объект, представляющий настраиваемые параметры или состояние надстройки почты, сохраненное в почтовом ящике пользователя.
 
 
-    Объект RoamingSettings позволяет сохранять данные для надстройки почты, записанные в почтовом ящике пользователя, и получать к ним доступ, таким образом делая их доступными для этой надстройки, когда она запускается из любого клиентского ведущего приложения, используемого для доступа к этому почтовому ящику.
+    Объект RoamingSettings позволяет хранить и получать доступ к данным для почтовой надстройки, хранящейся в почтовом ящике пользователя, поэтому она будет доступна в любом клиентском приложении размещения, используемом для доступа к этому почтовому ящику.
 
 
     \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/javascript-api-for-office)\]
@@ -271,13 +285,13 @@ items:
     **Сведения о поддержке**
 
 
-    Прописная Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка указывает на то, что ведущее приложение Office не поддерживает это перечисление.
+    Заглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.
 
 
-    Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в разделе Требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+    Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье требования к запуску надстроек [Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
 
-    *Поддерживаемые ведущие приложения на разных платформах* <table> <tr><th> </th><th> Office для iPad </th></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td></tr> </table>
+    *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для iPad </th></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td></tr> </table>
   name: touchEnabled
   fullName: touchEnabled
   langs:
