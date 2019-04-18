@@ -1,464 +1,527 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: af7a7e2f643fa925c2786c1c667ff4e7dcc86df9
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29973942"
 items:
-- uid: office.Office.Bindings
-  summary: <span data-ttu-id="d783c-101">Представляет привязки, которые есть у надстройки в документе.</span><span class="sxs-lookup"><span data-stu-id="d783c-101">Represents the bindings the add-in has within the document.</span></span>
-  name: Office.Bindings
-  fullName: Office.Bindings
-  langs:
-  - typeScript
-  type: interface
-  package: office
-  children:
-  - office.Office.Bindings.addFromNamedItemAsync
-  - office.Office.Bindings.addFromNamedItemAsync_1
-  - office.Office.Bindings.addFromPromptAsync
-  - office.Office.Bindings.addFromPromptAsync_1
-  - office.Office.Bindings.addFromSelectionAsync
-  - office.Office.Bindings.addFromSelectionAsync_1
-  - office.Office.Bindings.getAllAsync
-  - office.Office.Bindings.getAllAsync_1
-  - office.Office.Bindings.getByIdAsync
-  - office.Office.Bindings.getByIdAsync_1
-  - office.Office.Bindings.releaseByIdAsync
-  - office.Office.Bindings.releaseByIdAsync_1
-  - office.Office.Bindings.document
-- uid: office.Office.Bindings.addFromNamedItemAsync
-  summary: <span data-ttu-id="d783c-102">Создает привязку именованного объекта в документе.</span><span class="sxs-lookup"><span data-stu-id="d783c-102">Creates a binding against a named object in the document.</span></span>
-  remarks: "<table><tr><td><span data-ttu-id=\"d783c-103\">Наборы требований</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-103\">Requirement Sets</span></span></td><td><span data-ttu-id=\"d783c-104\">MatrixBindings, TableBindings, TextBindings</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-104\">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>\n\n<span data-ttu-id=\"d783c-105\">В Excel параметр itemName может ссылаться на именованный диапазон или таблицу.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-105\">For Excel, the itemName parameter can refer to a named range or a table.</span></span>\n\n<span data-ttu-id=\"d783c-106\">По умолчанию при добавлении таблиц в Excel первой таблице назначается имя \"Таблица1\", второй — \"Таблица2\" и т. д.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-106\">By default, adding a table in Excel assigns the name \"Table1\" for the first table you add, \"Table2\" for the second table you add, and so on.</span></span> <span data-ttu-id=\"d783c-107\">Чтобы назначить понятное имя таблицы в пользовательском Интерфейсе Excel, используйте свойство имя таблицы с таблицами \\| вкладки \"Конструктор\" на ленте.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-107\">To assign a meaningful name for a table in the Excel UI, use the Table Name property on the Table Tools \\| Design tab of the ribbon.</span></span>\n\n<span data-ttu-id=\"d783c-108\">**Примечание**: В Excel, при задании таблицы как именованного элемента необходимо указать полное имя, включив таблицы входило имя листа в следующем формате: «Sheet1! Table1»</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-108\">**Note**: In Excel, when specifying a table as a named item, you must fully qualify the name to include the worksheet name in the name of the table in this format: \"Sheet1!Table1\"</span></span>\n\n<span data-ttu-id=\"d783c-109\">Для Word параметр itemName относится к свойства Title элемента управления контентом форматированного текста.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-109\">For Word, the itemName parameter refers to the Title property of a Rich Text content control.</span></span> <span data-ttu-id=\"d783c-110\">(Нельзя привязать к элементам управления контентом, отличный от элемента управления контентом форматированный текст).</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-110\">(You can't bind to content controls other than the Rich Text content control).</span></span>\n\n<span data-ttu-id=\"d783c-111\">По умолчанию элемент управления содержимым не содержит заголовок значения назначен.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-111\">By default, a content control has no Title value assigned.</span></span> <span data-ttu-id=\"d783c-112\">Чтобы назначить понятное имя в пользовательском интерфейсе Word, выполните следующее. Вставьте элемент управления содержимым Форматированный текст группу Элементы управления на вкладке Разработчик ленты. Выберите команду Свойства в группе Элементы управления, чтобы открыть диалоговое окно Свойства элемента управления содержимым.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-112\">To assign a meaningful name in the Word UI, after inserting a Rich Text content control from the Controls group on the Developer tab of the ribbon, use the Properties command in the Controls group to display the Content Control Properties dialog box.</span></span> <span data-ttu-id=\"d783c-113\">Задайте для свойства Title, принадлежащего элементу управления содержимым, имя, на которое вы будете ссылаться в коде.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-113\">Then set the Title property of the content control to the name you want to reference from your code.</span></span>\n\n<span data-ttu-id=\"d783c-114\">**Примечание**: В Word, при наличии нескольких форматированный текст элементов управления контентом с тем же значением свойства Title (название) и выполнить привязку один эти материалы элементы управления с помощью этого метода (путем указания имени и параметр itemName), операция завершится с ошибкой.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-114\">**Note**: In Word, if there are multiple Rich Text content controls with the same Title property value (name), and you try to bind to one these content controls with this method (by specifying its name as the itemName parameter), the operation will fail.</span></span>\n\n<span data-ttu-id=\"d783c-115\">**Сведения о поддержке**</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-115\">**Support details**</span></span>\n\n<span data-ttu-id=\"d783c-p104\">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-p104\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"d783c-118\">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-118\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"d783c-119\">*Поддерживаемые ведущие приложения на разных платформах*</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-119\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"d783c-120\">Office для компьютера с Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-120\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"d783c-121\">Office Online (в браузере)</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-121\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"d783c-122\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-122\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"d783c-123\">Office for Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-123\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"d783c-124\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-124\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"d783c-125\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-125\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"d783c-126\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-126\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"d783c-127\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-127\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-128\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-128\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-129\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-129\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-130\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-130\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"d783c-131\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-131\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"d783c-132\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-132\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-133\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-133\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-134\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-134\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-135\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-135\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"d783c-136\">Примеры</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-136\">Examples</span></span>\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: addFromNamedItemAsync(itemName, bindingType, options, callback)
-  fullName: addFromNamedItemAsync(itemName, bindingType, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFromNamedItemAsync(itemName: string, bindingType: BindingType, options?: AddBindingFromNamedItemOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: itemName
-      description: <span data-ttu-id="d783c-137">Имя объекта привязки в документе.</span><span class="sxs-lookup"><span data-stu-id="d783c-137">Name of the bindable object in the document.</span></span> <span data-ttu-id="d783c-138">Например в Excel в таблице «MyExpenses».»</span><span class="sxs-lookup"><span data-stu-id="d783c-138">For Example 'MyExpenses' table in Excel."</span></span>
-      type:
-      - string
-    - id: bindingType
-      description: <span data-ttu-id="d783c-139">[Office.BindingType](xref:office.Office.BindingType) для данных.</span><span class="sxs-lookup"><span data-stu-id="d783c-139">The [Office.BindingType](xref:office.Office.BindingType) for the data.</span></span> <span data-ttu-id="d783c-140">Метод возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="d783c-140">The method returns null if the selected object cannot be coerced into the specified type.</span></span>
-      type:
-      - BindingType
-    - id: options
-      description: <span data-ttu-id="d783c-141">Предоставляет параметры для настройки привязки, которая создается.</span><span class="sxs-lookup"><span data-stu-id="d783c-141">Provides options for configuring the binding that is created.</span></span>
-      type:
-      - office.Office.AddBindingFromNamedItemOptions
-    - id: callback
-      description: <span data-ttu-id="d783c-142">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-142">Optional.</span></span> <span data-ttu-id="d783c-143">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-143">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-144">`value` Свойства результата — это объект Binding, который представляет указанный именованный элемент.</span><span class="sxs-lookup"><span data-stu-id="d783c-144">The `value` property of the result is the Binding object that represents the specified named item.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.addFromNamedItemAsync_1
-  summary: <span data-ttu-id="d783c-145">Создает привязку именованного объекта в документе.</span><span class="sxs-lookup"><span data-stu-id="d783c-145">Creates a binding against a named object in the document.</span></span>
-  remarks: >-
-    <table><tr><td><span data-ttu-id="d783c-146">Наборы требований</span><span class="sxs-lookup"><span data-stu-id="d783c-146">Requirement Sets</span></span></td><td><span data-ttu-id="d783c-147">MatrixBindings, TableBindings, TextBindings</span><span class="sxs-lookup"><span data-stu-id="d783c-147">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>
-
-
-    <span data-ttu-id="d783c-148">В Excel параметр itemName может ссылаться на именованный диапазон или таблицу.</span><span class="sxs-lookup"><span data-stu-id="d783c-148">For Excel, the itemName parameter can refer to a named range or a table.</span></span>
-
-
-    <span data-ttu-id="d783c-149">По умолчанию при добавлении таблиц в Excel первой таблице назначается имя "Таблица1", второй — "Таблица2" и т. д.</span><span class="sxs-lookup"><span data-stu-id="d783c-149">By default, adding a table in Excel assigns the name "Table1" for the first table you add, "Table2" for the second table you add, and so on.</span></span> <span data-ttu-id="d783c-150">Чтобы назначить понятное имя таблицы в пользовательском Интерфейсе Excel, используйте свойство имя таблицы с таблицами \| вкладки "Конструктор" на ленте.</span><span class="sxs-lookup"><span data-stu-id="d783c-150">To assign a meaningful name for a table in the Excel UI, use the Table Name property on the Table Tools \| Design tab of the ribbon.</span></span>
-
-
-    <span data-ttu-id="d783c-151">**Примечание**: В Excel, при задании таблицы как именованного элемента необходимо указать полное имя, включив таблицы входило имя листа в следующем формате: «Sheet1! Table1»</span><span class="sxs-lookup"><span data-stu-id="d783c-151">**Note**: In Excel, when specifying a table as a named item, you must fully qualify the name to include the worksheet name in the name of the table in this format: "Sheet1!Table1"</span></span>
-
-
-    <span data-ttu-id="d783c-152">Для Word параметр itemName относится к свойства Title элемента управления контентом форматированного текста.</span><span class="sxs-lookup"><span data-stu-id="d783c-152">For Word, the itemName parameter refers to the Title property of a Rich Text content control.</span></span> <span data-ttu-id="d783c-153">(Нельзя привязать к элементам управления контентом, отличный от элемента управления контентом форматированный текст).</span><span class="sxs-lookup"><span data-stu-id="d783c-153">(You can't bind to content controls other than the Rich Text content control).</span></span>
-
-
-    <span data-ttu-id="d783c-154">По умолчанию элемент управления содержимым не содержит заголовок значения назначен.</span><span class="sxs-lookup"><span data-stu-id="d783c-154">By default, a content control has no Title value assigned.</span></span> <span data-ttu-id="d783c-155">Чтобы назначить понятное имя в пользовательском интерфейсе Word, выполните следующее. Вставьте элемент управления содержимым Форматированный текст группу Элементы управления на вкладке Разработчик ленты. Выберите команду Свойства в группе Элементы управления, чтобы открыть диалоговое окно Свойства элемента управления содержимым.</span><span class="sxs-lookup"><span data-stu-id="d783c-155">To assign a meaningful name in the Word UI, after inserting a Rich Text content control from the Controls group on the Developer tab of the ribbon, use the Properties command in the Controls group to display the Content Control Properties dialog box.</span></span> <span data-ttu-id="d783c-156">Задайте для свойства Title, принадлежащего элементу управления содержимым, имя, на которое вы будете ссылаться в коде.</span><span class="sxs-lookup"><span data-stu-id="d783c-156">Then set the Title property of the content control to the name you want to reference from your code.</span></span>
-
-
-    <span data-ttu-id="d783c-157">**Примечание**: В Word, при наличии нескольких форматированный текст элементов управления контентом с тем же значением свойства Title (название) и выполнить привязку один эти материалы элементы управления с помощью этого метода (путем указания имени и параметр itemName), операция завершится с ошибкой.</span><span class="sxs-lookup"><span data-stu-id="d783c-157">**Note**: In Word, if there are multiple Rich Text content controls with the same Title property value (name), and you try to bind to one these content controls with this method (by specifying its name as the itemName parameter), the operation will fail.</span></span>
-
-
-    <span data-ttu-id="d783c-158">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="d783c-158">**Support details**</span></span>
-
-
-    <span data-ttu-id="d783c-p111">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="d783c-p111">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
-
-
-    <span data-ttu-id="d783c-161">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-161">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
-
-
-    <span data-ttu-id="d783c-162">*Поддерживаемые ведущие приложения на разных платформах*</span><span class="sxs-lookup"><span data-stu-id="d783c-162">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="d783c-163">Office для компьютера с Windows</span><span class="sxs-lookup"><span data-stu-id="d783c-163">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="d783c-164">Office Online (в браузере)</span><span class="sxs-lookup"><span data-stu-id="d783c-164">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="d783c-165">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="d783c-165">Office for iPad</span></span> </th><th> <span data-ttu-id="d783c-166">Office for Mac</span><span class="sxs-lookup"><span data-stu-id="d783c-166">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="d783c-167"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-167"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="d783c-168">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-168">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="d783c-169"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-169"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="d783c-170">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-170">Y</span></span> </td><td> <span data-ttu-id="d783c-171">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-171">Y</span></span> </td><td> <span data-ttu-id="d783c-172">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-172">Y</span></span> </td><td> <span data-ttu-id="d783c-173">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-173">Y</span></span> </td></tr> <tr><td><span data-ttu-id="d783c-174"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-174"><strong> Word </strong></span></span></td><td> <span data-ttu-id="d783c-175">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-175">Y</span></span> </td><td> <span data-ttu-id="d783c-176">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-176">Y</span></span> </td><td> <span data-ttu-id="d783c-177">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-177">Y</span></span> </td><td> <span data-ttu-id="d783c-178">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-178">Y</span></span> </td></tr> </table>
-  name: addFromNamedItemAsync(itemName, bindingType, callback)
-  fullName: addFromNamedItemAsync(itemName, bindingType, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFromNamedItemAsync(itemName: string, bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: itemName
-      description: <span data-ttu-id="d783c-179">Имя объекта привязки в документе.</span><span class="sxs-lookup"><span data-stu-id="d783c-179">Name of the bindable object in the document.</span></span> <span data-ttu-id="d783c-180">Например в Excel в таблице «MyExpenses».»</span><span class="sxs-lookup"><span data-stu-id="d783c-180">For Example 'MyExpenses' table in Excel."</span></span>
-      type:
-      - string
-    - id: bindingType
-      description: <span data-ttu-id="d783c-181">[Office.BindingType](xref:office.Office.BindingType) для данных.</span><span class="sxs-lookup"><span data-stu-id="d783c-181">The [Office.BindingType](xref:office.Office.BindingType) for the data.</span></span> <span data-ttu-id="d783c-182">Метод возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="d783c-182">The method returns null if the selected object cannot be coerced into the specified type.</span></span>
-      type:
-      - BindingType
-    - id: callback
-      description: <span data-ttu-id="d783c-183">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-183">Optional.</span></span> <span data-ttu-id="d783c-184">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-184">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-185">`value` Свойства результата — это объект Binding, который представляет указанный именованный элемент.</span><span class="sxs-lookup"><span data-stu-id="d783c-185">The `value` property of the result is the Binding object that represents the specified named item.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.addFromPromptAsync
-  summary: <span data-ttu-id="d783c-186">Создание привязки с запросом выделения в документе.</span><span class="sxs-lookup"><span data-stu-id="d783c-186">Create a binding by prompting the user to make a selection on the document.</span></span>
-  remarks: "<table><tr><td><span data-ttu-id=\"d783c-187\">Наборы требований</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-187\">Requirement Sets</span></span></td><td><span data-ttu-id=\"d783c-188\">Не в наборе</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-188\">Not in a set</span></span></td></tr></table>\n\n<span data-ttu-id=\"d783c-189\">Добавляет объект привязки указанного типа в коллекцию Bindings, которая определяется идентификатором id. Метод завершается ошибкой, если заданную выборку невозможно привязать.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-189\">Adds a binding object of the specified type to the Bindings collection, which will be identified with the supplied id. The method fails if the specified selection cannot be bound.</span></span>\n\n<span data-ttu-id=\"d783c-190\">**Сведения о поддержке**</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-190\">**Support details**</span></span>\n\n<span data-ttu-id=\"d783c-p115\">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-p115\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"d783c-193\">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-193\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"d783c-194\">*Поддерживаемые ведущие приложения на разных платформах*</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-194\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"d783c-195\">Office для компьютера с Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-195\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"d783c-196\">Office Online (в браузере)</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-196\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"d783c-197\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-197\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"d783c-198\">Office for Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-198\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"d783c-199\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-199\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"d783c-200\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-200\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"d783c-201\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-201\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"d783c-202\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-202\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-203\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-203\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-204\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-204\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-205\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-205\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"d783c-206\">Примеры</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-206\">Examples</span></span>\n\n```javascript\nfunction addBindingFromPrompt() {\n    Office.context.document.bindings.addFromPromptAsync(\n        Office.BindingType.Text, \n        { id: 'MyBinding', promptText: 'Select text to bind to.' },\n        function (asyncResult) {\n            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: addFromPromptAsync(bindingType, options, callback)
-  fullName: addFromPromptAsync(bindingType, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFromPromptAsync(bindingType: BindingType, options?: AddBindingFromPromptOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: bindingType
-      description: <span data-ttu-id="d783c-207">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="d783c-207">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="d783c-208">Обязательно указывать.</span><span class="sxs-lookup"><span data-stu-id="d783c-208">Required.</span></span> <span data-ttu-id="d783c-209">Возвращает значение NULL, если выбранный объект нельзя привести к заданному типу.</span><span class="sxs-lookup"><span data-stu-id="d783c-209">Returns null if the selected object cannot be coerced into the specified type.</span></span>
-      type:
-      - BindingType
-    - id: options
-      description: <span data-ttu-id="d783c-210">Предоставляет параметры для настройки строке, а также определение привязку, которая создается.</span><span class="sxs-lookup"><span data-stu-id="d783c-210">Provides options for configuring the prompt and identifying the binding that is created.</span></span>
-      type:
-      - office.Office.AddBindingFromPromptOptions
-    - id: callback
-      description: <span data-ttu-id="d783c-211">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-211">Optional.</span></span> <span data-ttu-id="d783c-212">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-212">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-213">`value` Свойства результата — это объект Binding, который представляет выделение, заданное пользователем.</span><span class="sxs-lookup"><span data-stu-id="d783c-213">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.addFromPromptAsync_1
-  summary: <span data-ttu-id="d783c-214">Создание привязки с запросом выделения в документе.</span><span class="sxs-lookup"><span data-stu-id="d783c-214">Create a binding by prompting the user to make a selection on the document.</span></span>
-  remarks: >-
-    <table><tr><td><span data-ttu-id="d783c-215">Наборы требований</span><span class="sxs-lookup"><span data-stu-id="d783c-215">Requirement Sets</span></span></td><td><span data-ttu-id="d783c-216">Не в наборе</span><span class="sxs-lookup"><span data-stu-id="d783c-216">Not in a set</span></span></td></tr></table>
-
-
-    <span data-ttu-id="d783c-217">Добавляет объект привязки указанного типа в коллекцию Bindings, которая определяется идентификатором id. Метод завершается ошибкой, если заданную выборку невозможно привязать.</span><span class="sxs-lookup"><span data-stu-id="d783c-217">Adds a binding object of the specified type to the Bindings collection, which will be identified with the supplied id. The method fails if the specified selection cannot be bound.</span></span>
-
-
-    <span data-ttu-id="d783c-218">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="d783c-218">**Support details**</span></span>
-
-
-    <span data-ttu-id="d783c-p118">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="d783c-p118">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
-
-
-    <span data-ttu-id="d783c-221">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-221">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
-
-
-    <span data-ttu-id="d783c-222">*Поддерживаемые ведущие приложения на разных платформах*</span><span class="sxs-lookup"><span data-stu-id="d783c-222">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="d783c-223">Office для компьютера с Windows</span><span class="sxs-lookup"><span data-stu-id="d783c-223">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="d783c-224">Office Online (в браузере)</span><span class="sxs-lookup"><span data-stu-id="d783c-224">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="d783c-225">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="d783c-225">Office for iPad</span></span> </th><th> <span data-ttu-id="d783c-226">Office for Mac</span><span class="sxs-lookup"><span data-stu-id="d783c-226">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="d783c-227"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-227"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="d783c-228">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-228">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="d783c-229"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-229"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="d783c-230">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-230">Y</span></span> </td><td> <span data-ttu-id="d783c-231">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-231">Y</span></span> </td><td> <span data-ttu-id="d783c-232">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-232">Y</span></span> </td><td> <span data-ttu-id="d783c-233">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-233">Y</span></span> </td></tr> </table>
-  name: addFromPromptAsync(bindingType, callback)
-  fullName: addFromPromptAsync(bindingType, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFromPromptAsync(bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: bindingType
-      description: <span data-ttu-id="d783c-234">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="d783c-234">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="d783c-235">Обязательно указывать.</span><span class="sxs-lookup"><span data-stu-id="d783c-235">Required.</span></span> <span data-ttu-id="d783c-236">Возвращает значение NULL, если выбранный объект нельзя привести к заданному типу.</span><span class="sxs-lookup"><span data-stu-id="d783c-236">Returns null if the selected object cannot be coerced into the specified type.</span></span>
-      type:
-      - BindingType
-    - id: callback
-      description: <span data-ttu-id="d783c-237">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-237">Optional.</span></span> <span data-ttu-id="d783c-238">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-238">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-239">`value` Свойства результата — это объект Binding, который представляет выделение, заданное пользователем.</span><span class="sxs-lookup"><span data-stu-id="d783c-239">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.addFromSelectionAsync
-  summary: <span data-ttu-id="d783c-240">Создание привязки на основе текущего выбора пользователя.</span><span class="sxs-lookup"><span data-stu-id="d783c-240">Create a binding based on the user's current selection.</span></span>
-  remarks: "<table><tr><td><span data-ttu-id=\"d783c-241\">Наборы требований</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-241\">Requirement Sets</span></span></td><td><span data-ttu-id=\"d783c-242\">MatrixBindings, TableBindings, TextBindings</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-242\">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>\n\n<span data-ttu-id=\"d783c-243\">Добавляет указанный тип объекта привязки в коллекцию привязки, которая будет идентифицироваться по заданному id.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-243\">Adds the specified type of binding object to the Bindings collection, which will be identified with the supplied id.</span></span>\n\n<span data-ttu-id=\"d783c-244\">Примечание в Excel, вызовите метод addFromSelectionAsync, передав в Binding.id существующей привязки, Binding.type эту привязку используется и его тип пользователи не могут менять значения для параметра bindingType.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-244\">Note In Excel, if you call the addFromSelectionAsync method passing in the Binding.id of an existing binding, the Binding.type of that binding is used, and its type cannot be changed by specifying a different value for the bindingType parameter.</span></span> <span data-ttu-id=\"d783c-245\">Если вам требуется использовать существующий id и изменить bindingType, вызовите сначала метод Bindings.releaseByIdAsync, чтобы освободить привязку, а затем метод addFromSelectionAsync, чтобы повторно установить привязку с новым типом.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-245\">If you need to use an existing id and change the bindingType, call the Bindings.releaseByIdAsync method first to release the binding, and then call the addFromSelectionAsync method to reestablish the binding with a new type.</span></span>\n\n<span data-ttu-id=\"d783c-246\">**Сведения о поддержке**</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-246\">**Support details**</span></span>\n\n<span data-ttu-id=\"d783c-p122\">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-p122\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"d783c-249\">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-249\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"d783c-250\">*Поддерживаемые ведущие приложения на разных платформах*</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-250\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"d783c-251\">Office для компьютера с Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-251\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"d783c-252\">Office Online (в браузере)</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-252\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"d783c-253\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-253\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"d783c-254\">Office for Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-254\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"d783c-255\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-255\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"d783c-256\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-256\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"d783c-257\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-257\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"d783c-258\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-258\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-259\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-259\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-260\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-260\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-261\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-261\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"d783c-262\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-262\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"d783c-263\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-263\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-264\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-264\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-265\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-265\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-266\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-266\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"d783c-267\">Примеры</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-267\">Examples</span></span>\n\n```javascript\nfunction addBindingFromSelection() {\n    Office.context.document.bindings.addFromSelectionAsync(Office.BindingType.Text, { id: 'MyBinding' }, \n        function (asyncResult) {\n        write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n        }\n    );\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: addFromSelectionAsync(bindingType, options, callback)
-  fullName: addFromSelectionAsync(bindingType, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFromSelectionAsync(bindingType: BindingType, options?: AddBindingFromSelectionOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: bindingType
-      description: <span data-ttu-id="d783c-268">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="d783c-268">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="d783c-269">Обязательно указывать.</span><span class="sxs-lookup"><span data-stu-id="d783c-269">Required.</span></span> <span data-ttu-id="d783c-270">Возвращает значение NULL, если выбранный объект нельзя привести к заданному типу.</span><span class="sxs-lookup"><span data-stu-id="d783c-270">Returns null if the selected object cannot be coerced into the specified type.</span></span>
-      type:
-      - BindingType
-    - id: options
-      description: <span data-ttu-id="d783c-271">Предоставляет параметры для настройки строке, а также определение привязку, которая создается.</span><span class="sxs-lookup"><span data-stu-id="d783c-271">Provides options for configuring the prompt and identifying the binding that is created.</span></span>
-      type:
-      - office.Office.AddBindingFromSelectionOptions
-    - id: callback
-      description: <span data-ttu-id="d783c-272">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-272">Optional.</span></span> <span data-ttu-id="d783c-273">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-273">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-274">`value` Свойства результата — это объект Binding, который представляет выделение, заданное пользователем.</span><span class="sxs-lookup"><span data-stu-id="d783c-274">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.addFromSelectionAsync_1
-  summary: <span data-ttu-id="d783c-275">Создание привязки на основе текущего выбора пользователя.</span><span class="sxs-lookup"><span data-stu-id="d783c-275">Create a binding based on the user's current selection.</span></span>
-  remarks: >-
-    <table><tr><td><span data-ttu-id="d783c-276">Наборы требований</span><span class="sxs-lookup"><span data-stu-id="d783c-276">Requirement Sets</span></span></td><td><span data-ttu-id="d783c-277">MatrixBindings, TableBindings, TextBindings</span><span class="sxs-lookup"><span data-stu-id="d783c-277">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>
-
-
-    <span data-ttu-id="d783c-278">Добавляет указанный тип объекта привязки в коллекцию привязки, которая будет идентифицироваться по заданному id.</span><span class="sxs-lookup"><span data-stu-id="d783c-278">Adds the specified type of binding object to the Bindings collection, which will be identified with the supplied id.</span></span>
-
-
-    <span data-ttu-id="d783c-279">Примечание в Excel, вызовите метод addFromSelectionAsync, передав в Binding.id существующей привязки, Binding.type эту привязку используется и его тип пользователи не могут менять значения для параметра bindingType.</span><span class="sxs-lookup"><span data-stu-id="d783c-279">Note In Excel, if you call the addFromSelectionAsync method passing in the Binding.id of an existing binding, the Binding.type of that binding is used, and its type cannot be changed by specifying a different value for the bindingType parameter.</span></span> <span data-ttu-id="d783c-280">Если вам требуется использовать существующий id и изменить bindingType, вызовите сначала метод Bindings.releaseByIdAsync, чтобы освободить привязку, а затем метод addFromSelectionAsync, чтобы повторно установить привязку с новым типом.</span><span class="sxs-lookup"><span data-stu-id="d783c-280">If you need to use an existing id and change the bindingType, call the Bindings.releaseByIdAsync method first to release the binding, and then call the addFromSelectionAsync method to reestablish the binding with a new type.</span></span>
-
-
-    <span data-ttu-id="d783c-281">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="d783c-281">**Support details**</span></span>
-
-
-    <span data-ttu-id="d783c-p126">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="d783c-p126">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
-
-
-    <span data-ttu-id="d783c-284">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-284">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
-
-
-    <span data-ttu-id="d783c-285">*Поддерживаемые ведущие приложения на разных платформах*</span><span class="sxs-lookup"><span data-stu-id="d783c-285">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="d783c-286">Office для компьютера с Windows</span><span class="sxs-lookup"><span data-stu-id="d783c-286">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="d783c-287">Office Online (в браузере)</span><span class="sxs-lookup"><span data-stu-id="d783c-287">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="d783c-288">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="d783c-288">Office for iPad</span></span> </th><th> <span data-ttu-id="d783c-289">Office for Mac</span><span class="sxs-lookup"><span data-stu-id="d783c-289">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="d783c-290"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-290"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="d783c-291">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-291">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="d783c-292"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-292"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="d783c-293">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-293">Y</span></span> </td><td> <span data-ttu-id="d783c-294">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-294">Y</span></span> </td><td> <span data-ttu-id="d783c-295">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-295">Y</span></span> </td><td> <span data-ttu-id="d783c-296">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-296">Y</span></span> </td></tr> <tr><td><span data-ttu-id="d783c-297"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-297"><strong> Word </strong></span></span></td><td> <span data-ttu-id="d783c-298">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-298">Y</span></span> </td><td> <span data-ttu-id="d783c-299">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-299">Y</span></span> </td><td> <span data-ttu-id="d783c-300">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-300">Y</span></span> </td><td> <span data-ttu-id="d783c-301">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-301">Y</span></span> </td></tr> </table>
-  name: addFromSelectionAsync(bindingType, callback)
-  fullName: addFromSelectionAsync(bindingType, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'addFromSelectionAsync(bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: bindingType
-      description: <span data-ttu-id="d783c-302">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="d783c-302">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="d783c-303">Обязательно указывать.</span><span class="sxs-lookup"><span data-stu-id="d783c-303">Required.</span></span> <span data-ttu-id="d783c-304">Возвращает значение NULL, если выбранный объект нельзя привести к заданному типу.</span><span class="sxs-lookup"><span data-stu-id="d783c-304">Returns null if the selected object cannot be coerced into the specified type.</span></span>
-      type:
-      - BindingType
-    - id: callback
-      description: <span data-ttu-id="d783c-305">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-305">Optional.</span></span> <span data-ttu-id="d783c-306">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-306">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-307">`value` Свойства результата — это объект Binding, который представляет выделение, заданное пользователем.</span><span class="sxs-lookup"><span data-stu-id="d783c-307">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.getAllAsync
-  summary: <span data-ttu-id="d783c-308">Получает все ранее созданные привязки.</span><span class="sxs-lookup"><span data-stu-id="d783c-308">Gets all bindings that were previously created.</span></span>
-  remarks: >-
-    <table><tr><td><span data-ttu-id="d783c-309">Наборы требований</span><span class="sxs-lookup"><span data-stu-id="d783c-309">Requirement Sets</span></span></td><td><span data-ttu-id="d783c-310">MatrixBindings, TableBindings, TextBindings</span><span class="sxs-lookup"><span data-stu-id="d783c-310">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>
-
-
-    <span data-ttu-id="d783c-311">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="d783c-311">**Support details**</span></span>
-
-
-    <span data-ttu-id="d783c-p129">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="d783c-p129">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
-
-
-    <span data-ttu-id="d783c-314">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-314">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
-
-
-    <span data-ttu-id="d783c-315">*Поддерживаемые ведущие приложения на разных платформах*</span><span class="sxs-lookup"><span data-stu-id="d783c-315">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="d783c-316">Office для компьютера с Windows</span><span class="sxs-lookup"><span data-stu-id="d783c-316">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="d783c-317">Office Online (в браузере)</span><span class="sxs-lookup"><span data-stu-id="d783c-317">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="d783c-318">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="d783c-318">Office for iPad</span></span> </th><th> <span data-ttu-id="d783c-319">Office for Mac</span><span class="sxs-lookup"><span data-stu-id="d783c-319">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="d783c-320"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-320"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="d783c-321">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-321">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="d783c-322"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-322"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="d783c-323">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-323">Y</span></span> </td><td> <span data-ttu-id="d783c-324">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-324">Y</span></span> </td><td> <span data-ttu-id="d783c-325">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-325">Y</span></span> </td><td> <span data-ttu-id="d783c-326">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-326">Y</span></span> </td></tr> <tr><td><span data-ttu-id="d783c-327"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-327"><strong> Word </strong></span></span></td><td> <span data-ttu-id="d783c-328">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-328">Y</span></span> </td><td> <span data-ttu-id="d783c-329">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-329">Y</span></span> </td><td> <span data-ttu-id="d783c-330">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-330">Y</span></span> </td><td> <span data-ttu-id="d783c-331">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-331">Y</span></span> </td></tr> </table>
-  name: getAllAsync(options, callback)
-  fullName: getAllAsync(options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAllAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding[]>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: options
-      description: <span data-ttu-id="d783c-332">Предоставляет возможность сохранения данных контекста любого типа, без изменений, для использования в функции обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="d783c-332">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
-      type:
-      - office.Office.AsyncContextOptions
-    - id: callback
-      description: <span data-ttu-id="d783c-333">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-333">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-334">`value` Свойства результата — это массив, содержащий все привязки, созданные для указанного объекта Bindings.</span><span class="sxs-lookup"><span data-stu-id="d783c-334">The `value` property of the result is an array that contains each binding created for the referenced Bindings object.</span></span>
-      type:
-      - '(result: AsyncResult<Binding[]>) => void'
-- uid: office.Office.Bindings.getAllAsync_1
-  summary: <span data-ttu-id="d783c-335">Получает все ранее созданные привязки.</span><span class="sxs-lookup"><span data-stu-id="d783c-335">Gets all bindings that were previously created.</span></span>
-  remarks: "<table><tr><td><span data-ttu-id=\"d783c-336\">Наборы требований</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-336\">Requirement Sets</span></span></td><td><span data-ttu-id=\"d783c-337\">MatrixBindings, TableBindings, TextBindings</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-337\">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>\n\n<span data-ttu-id=\"d783c-338\">**Сведения о поддержке**</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-338\">**Support details**</span></span>\n\n<span data-ttu-id=\"d783c-p131\">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-p131\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"d783c-341\">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-341\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"d783c-342\">*Поддерживаемые ведущие приложения на разных платформах*</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-342\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"d783c-343\">Office для компьютера с Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-343\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"d783c-344\">Office Online (в браузере)</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-344\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"d783c-345\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-345\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"d783c-346\">Office for Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-346\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"d783c-347\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-347\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"d783c-348\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-348\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"d783c-349\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-349\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"d783c-350\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-350\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-351\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-351\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-352\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-352\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-353\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-353\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"d783c-354\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-354\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"d783c-355\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-355\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-356\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-356\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-357\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-357\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-358\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-358\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"d783c-359\">Примеры</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-359\">Examples</span></span>\n\n```javascript\nfunction displayAllBindingNames() {\n    Office.context.document.bindings.getAllAsync(function (asyncResult) {\n        var bindingString = '';\n        for (var i in asyncResult.value) {\n            bindingString += asyncResult.value[i].id + '\\n';\n        }\n        write('Existing bindings: ' + bindingString);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: getAllAsync(callback)
-  fullName: getAllAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAllAsync(callback?: (result: AsyncResult<Binding[]>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: <span data-ttu-id="d783c-360">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-360">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-361">`value` Свойства результата — это массив, содержащий все привязки, созданные для указанного объекта Bindings.</span><span class="sxs-lookup"><span data-stu-id="d783c-361">The `value` property of the result is an array that contains each binding created for the referenced Bindings object.</span></span>
-      type:
-      - '(result: AsyncResult<Binding[]>) => void'
-- uid: office.Office.Bindings.getByIdAsync
-  summary: <span data-ttu-id="d783c-362">Извлекает привязки на основе ее имени</span><span class="sxs-lookup"><span data-stu-id="d783c-362">Retrieves a binding based on its Name</span></span>
-  remarks: >-
-    <table><tr><td><span data-ttu-id="d783c-363">Наборы требований</span><span class="sxs-lookup"><span data-stu-id="d783c-363">Requirement Sets</span></span></td><td><span data-ttu-id="d783c-364">CustomXmlParts, MatrixBindings, TableBindings, TextBindings</span><span class="sxs-lookup"><span data-stu-id="d783c-364">CustomXmlParts, MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>
-
-
-    <span data-ttu-id="d783c-365">Не удается, если указанный идентификатор не существует.</span><span class="sxs-lookup"><span data-stu-id="d783c-365">Fails if the specified id does not exist.</span></span>
-
-
-    <span data-ttu-id="d783c-366">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="d783c-366">**Support details**</span></span>
-
-
-    <span data-ttu-id="d783c-p133">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="d783c-p133">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
-
-
-    <span data-ttu-id="d783c-369">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-369">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
-
-
-    <span data-ttu-id="d783c-370">*Поддерживаемые ведущие приложения на разных платформах*</span><span class="sxs-lookup"><span data-stu-id="d783c-370">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="d783c-371">Office для компьютера с Windows</span><span class="sxs-lookup"><span data-stu-id="d783c-371">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="d783c-372">Office Online (в браузере)</span><span class="sxs-lookup"><span data-stu-id="d783c-372">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="d783c-373">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="d783c-373">Office for iPad</span></span> </th><th> <span data-ttu-id="d783c-374">Office for Mac</span><span class="sxs-lookup"><span data-stu-id="d783c-374">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="d783c-375"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-375"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="d783c-376">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-376">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="d783c-377"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-377"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="d783c-378">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-378">Y</span></span> </td><td> <span data-ttu-id="d783c-379">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-379">Y</span></span> </td><td> <span data-ttu-id="d783c-380">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-380">Y</span></span> </td><td> <span data-ttu-id="d783c-381">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-381">Y</span></span> </td></tr> <tr><td><span data-ttu-id="d783c-382"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-382"><strong> Word </strong></span></span></td><td> <span data-ttu-id="d783c-383">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-383">Y</span></span> </td><td> <span data-ttu-id="d783c-384">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-384">Y</span></span> </td><td> <span data-ttu-id="d783c-385">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-385">Y</span></span> </td><td> <span data-ttu-id="d783c-386">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-386">Y</span></span> </td></tr> </table>
-  name: getByIdAsync(id, options, callback)
-  fullName: getByIdAsync(id, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: id
-      description: <span data-ttu-id="d783c-387">Указывает уникальное имя объекта binding.</span><span class="sxs-lookup"><span data-stu-id="d783c-387">Specifies the unique name of the binding object.</span></span> <span data-ttu-id="d783c-388">Обязательно указывать.</span><span class="sxs-lookup"><span data-stu-id="d783c-388">Required.</span></span>
-      type:
-      - string
-    - id: options
-      description: <span data-ttu-id="d783c-389">Предоставляет возможность сохранения данных контекста любого типа, без изменений, для использования в функции обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="d783c-389">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
-      type:
-      - office.Office.AsyncContextOptions
-    - id: callback
-      description: <span data-ttu-id="d783c-390">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-390">Optional.</span></span> <span data-ttu-id="d783c-391">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-391">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-392">`value` Свойства результата — это объект Binding, определяемому id в вызове.</span><span class="sxs-lookup"><span data-stu-id="d783c-392">The `value` property of the result is the Binding object specified by the id in the call.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.getByIdAsync_1
-  summary: <span data-ttu-id="d783c-393">Извлекает привязки на основе ее имени</span><span class="sxs-lookup"><span data-stu-id="d783c-393">Retrieves a binding based on its Name</span></span>
-  remarks: "<table><tr><td><span data-ttu-id=\"d783c-394\">Наборы требований</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-394\">Requirement Sets</span></span></td><td><span data-ttu-id=\"d783c-395\">CustomXmlParts, MatrixBindings, TableBindings, TextBindings</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-395\">CustomXmlParts, MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>\n\n<span data-ttu-id=\"d783c-396\">Не удается, если указанный идентификатор не существует.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-396\">Fails if the specified id does not exist.</span></span>\n\n<span data-ttu-id=\"d783c-397\">**Сведения о поддержке**</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-397\">**Support details**</span></span>\n\n<span data-ttu-id=\"d783c-p136\">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-p136\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"d783c-400\">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-400\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"d783c-401\">*Поддерживаемые ведущие приложения на разных платформах*</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-401\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"d783c-402\">Office для компьютера с Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-402\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"d783c-403\">Office Online (в браузере)</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-403\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"d783c-404\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-404\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"d783c-405\">Office for Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-405\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"d783c-406\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-406\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"d783c-407\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-407\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"d783c-408\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-408\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"d783c-409\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-409\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-410\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-410\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-411\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-411\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-412\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-412\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"d783c-413\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-413\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"d783c-414\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-414\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-415\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-415\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-416\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-416\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-417\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-417\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"d783c-418\">Примеры</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-418\">Examples</span></span>\n\n```javascript\nfunction displayBindingType() {\n    Office.context.document.bindings.getByIdAsync('MyBinding', function (asyncResult) {\n        write('Retrieved binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: getByIdAsync(id, callback)
-  fullName: getByIdAsync(id, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getByIdAsync(id: string, callback?: (result: AsyncResult<Binding>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: id
-      description: <span data-ttu-id="d783c-419">Указывает уникальное имя объекта binding.</span><span class="sxs-lookup"><span data-stu-id="d783c-419">Specifies the unique name of the binding object.</span></span> <span data-ttu-id="d783c-420">Обязательно указывать.</span><span class="sxs-lookup"><span data-stu-id="d783c-420">Required.</span></span>
-      type:
-      - string
-    - id: callback
-      description: <span data-ttu-id="d783c-421">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-421">Optional.</span></span> <span data-ttu-id="d783c-422">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-422">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span> <span data-ttu-id="d783c-423">`value` Свойства результата — это объект Binding, определяемому id в вызове.</span><span class="sxs-lookup"><span data-stu-id="d783c-423">The `value` property of the result is the Binding object specified by the id in the call.</span></span>
-      type:
-      - '(result: AsyncResult<Binding>) => void'
-- uid: office.Office.Bindings.releaseByIdAsync
-  summary: <span data-ttu-id="d783c-424">Удаляет привязки из документа</span><span class="sxs-lookup"><span data-stu-id="d783c-424">Removes the binding from the document</span></span>
-  remarks: >-
-    <table><tr><td><span data-ttu-id="d783c-425">Наборы требований</span><span class="sxs-lookup"><span data-stu-id="d783c-425">Requirement Sets</span></span></td><td><span data-ttu-id="d783c-426">MatrixBindings, TableBindings, TextBindings</span><span class="sxs-lookup"><span data-stu-id="d783c-426">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>
-
-
-    <span data-ttu-id="d783c-427">Не удается, если указанный идентификатор не существует.</span><span class="sxs-lookup"><span data-stu-id="d783c-427">Fails if the specified id does not exist.</span></span>
-
-
-    <span data-ttu-id="d783c-428">**Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office.**</span><span class="sxs-lookup"><span data-stu-id="d783c-428">**Support details**</span></span>
-
-
-    <span data-ttu-id="d783c-p139">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="d783c-p139">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
-
-
-    <span data-ttu-id="d783c-431">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-431">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
-
-
-    <span data-ttu-id="d783c-432">*Поддерживаемые ведущие приложения на разных платформах*</span><span class="sxs-lookup"><span data-stu-id="d783c-432">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="d783c-433">Office для компьютера с Windows</span><span class="sxs-lookup"><span data-stu-id="d783c-433">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="d783c-434">Office Online (в браузере)</span><span class="sxs-lookup"><span data-stu-id="d783c-434">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="d783c-435">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="d783c-435">Office for iPad</span></span> </th><th> <span data-ttu-id="d783c-436">Office for Mac</span><span class="sxs-lookup"><span data-stu-id="d783c-436">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="d783c-437"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-437"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="d783c-438">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-438">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="d783c-439"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-439"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="d783c-440">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-440">Y</span></span> </td><td> <span data-ttu-id="d783c-441">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-441">Y</span></span> </td><td> <span data-ttu-id="d783c-442">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-442">Y</span></span> </td><td> <span data-ttu-id="d783c-443">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-443">Y</span></span> </td></tr> <tr><td><span data-ttu-id="d783c-444"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-444"><strong> Word </strong></span></span></td><td> <span data-ttu-id="d783c-445">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-445">Y</span></span> </td><td> <span data-ttu-id="d783c-446">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-446">Y</span></span> </td><td> <span data-ttu-id="d783c-447">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-447">Y</span></span> </td><td> <span data-ttu-id="d783c-448">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-448">Y</span></span> </td></tr> </table>
-  name: releaseByIdAsync(id, options, callback)
-  fullName: releaseByIdAsync(id, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'releaseByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: id
-      description: <span data-ttu-id="d783c-p140">Задает уникальное имя, используемое для идентификации объекта привязки. Обязательный.</span><span class="sxs-lookup"><span data-stu-id="d783c-p140">Specifies the unique name to be used to identify the binding object. Required.</span></span>
-      type:
-      - string
-    - id: options
-      description: <span data-ttu-id="d783c-451">Предоставляет возможность сохранения данных контекста любого типа, без изменений, для использования в функции обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="d783c-451">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>
-      type:
-      - office.Office.AsyncContextOptions
-    - id: callback
-      description: <span data-ttu-id="d783c-452">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-452">Optional.</span></span> <span data-ttu-id="d783c-453">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-453">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
-      type:
-      - '(result: AsyncResult<void>) => void'
-- uid: office.Office.Bindings.releaseByIdAsync_1
-  summary: <span data-ttu-id="d783c-454">Удаляет привязки из документа</span><span class="sxs-lookup"><span data-stu-id="d783c-454">Removes the binding from the document</span></span>
-  remarks: "<table><tr><td><span data-ttu-id=\"d783c-455\">Наборы требований</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-455\">Requirement Sets</span></span></td><td><span data-ttu-id=\"d783c-456\">MatrixBindings, TableBindings, TextBindings</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-456\">MatrixBindings, TableBindings, TextBindings</span></span></td></tr></table>\n\n<span data-ttu-id=\"d783c-457\">Не удается, если указанный идентификатор не существует.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-457\">Fails if the specified id does not exist.</span></span>\n\n<span data-ttu-id=\"d783c-458\">**Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office.**</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-458\">**Support details**</span></span>\n\n<span data-ttu-id=\"d783c-p142\">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-p142\">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>\n\n<span data-ttu-id=\"d783c-461\">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-461\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"d783c-462\">*Поддерживаемые ведущие приложения на разных платформах*</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-462\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"d783c-463\">Office для компьютера с Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-463\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"d783c-464\">Office Online (в браузере)</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-464\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"d783c-465\">Office for iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-465\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"d783c-466\">Office for Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-466\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"d783c-467\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-467\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"d783c-468\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-468\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"d783c-469\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-469\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"d783c-470\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-470\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-471\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-471\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-472\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-472\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-473\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-473\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"d783c-474\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-474\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"d783c-475\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-475\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-476\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-476\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-477\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-477\">Y</span></span> </td><td> <span data-ttu-id=\"d783c-478\">Да</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-478\">Y</span></span> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"d783c-479\">Примеры</span><span class=\"sxs-lookup\"><span data-stu-id=\"d783c-479\">Examples</span></span>\n\n```javascript\nOffice.context.document.bindings.releaseByIdAsync(\"MyBinding\", function (asyncResult) { \n    write(\"Released MyBinding!\"); \n}); \n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message;  \n}\n```"
-  name: releaseByIdAsync(id, callback)
-  fullName: releaseByIdAsync(id, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'releaseByIdAsync(id: string, callback?: (result: AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: id
-      description: <span data-ttu-id="d783c-p143">Задает уникальное имя, используемое для идентификации объекта привязки. Обязательный.</span><span class="sxs-lookup"><span data-stu-id="d783c-p143">Specifies the unique name to be used to identify the binding object. Required.</span></span>
-      type:
-      - string
-    - id: callback
-      description: <span data-ttu-id="d783c-482">Необязательное свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-482">Optional.</span></span> <span data-ttu-id="d783c-483">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-483">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)<!-- -->.</span></span>
-      type:
-      - '(result: AsyncResult<void>) => void'
-- uid: office.Office.Bindings.document
-  summary: <span data-ttu-id="d783c-484">Получает объект [Office.Document](xref:office.Office.Document) , который представляет документ, связанный с набором привязок.</span><span class="sxs-lookup"><span data-stu-id="d783c-484">Gets an [Office.Document](xref:office.Office.Document) object that represents the document associated with this set of bindings.</span></span>
-  remarks: >-
-    <span data-ttu-id="d783c-485">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="d783c-485">**Support details**</span></span>
-
-
-    <span data-ttu-id="d783c-p145">Заглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это свойство.</span><span class="sxs-lookup"><span data-stu-id="d783c-p145">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this property.</span></span>
-
-
-    <span data-ttu-id="d783c-488">Дополнительные сведения о требованиях к приложения и сервера узла Office можно [требования для запуска надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="d783c-488">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
-
-
-    <span data-ttu-id="d783c-489">*Поддерживаемые ведущие приложения на разных платформах*</span><span class="sxs-lookup"><span data-stu-id="d783c-489">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="d783c-490">Office для компьютера с Windows</span><span class="sxs-lookup"><span data-stu-id="d783c-490">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="d783c-491">Office Online (в браузере)</span><span class="sxs-lookup"><span data-stu-id="d783c-491">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="d783c-492">Office for iPad</span><span class="sxs-lookup"><span data-stu-id="d783c-492">Office for iPad</span></span> </th><th> <span data-ttu-id="d783c-493">Office for Mac</span><span class="sxs-lookup"><span data-stu-id="d783c-493">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="d783c-494"><strong>Access</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-494"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id="d783c-495">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-495">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="d783c-496"><strong>Excel</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-496"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="d783c-497">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-497">Y</span></span> </td><td> <span data-ttu-id="d783c-498">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-498">Y</span></span> </td><td> <span data-ttu-id="d783c-499">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-499">Y</span></span> </td><td> <span data-ttu-id="d783c-500">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-500">Y</span></span> </td></tr> <tr><td><span data-ttu-id="d783c-501"><strong>Word</strong></span><span class="sxs-lookup"><span data-stu-id="d783c-501"><strong> Word </strong></span></span></td><td> <span data-ttu-id="d783c-502">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-502">Y</span></span> </td><td> <span data-ttu-id="d783c-503">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-503">Y</span></span> </td><td> <span data-ttu-id="d783c-504">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-504">Y</span></span> </td><td> <span data-ttu-id="d783c-505">Да</span><span class="sxs-lookup"><span data-stu-id="d783c-505">Y</span></span> </td></tr> </table>
-  name: document
-  fullName: document
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'document: Document;'
-    return:
-      type:
-      - Document
+  - uid: office.Office.Bindings
+    summary: '<span data-ttu-id="61711-101">Представляет привязки, которые есть у надстройки в документе.</span><span class="sxs-lookup"><span data-stu-id="61711-101">Represents the bindings the add-in has within the document.</span></span>'
+    name: Office.Bindings
+    fullName: Office.Bindings
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.Bindings.addFromNamedItemAsync
+      - office.Office.Bindings.addFromNamedItemAsync_1
+      - office.Office.Bindings.addFromPromptAsync
+      - office.Office.Bindings.addFromPromptAsync_1
+      - office.Office.Bindings.addFromSelectionAsync
+      - office.Office.Bindings.addFromSelectionAsync_1
+      - office.Office.Bindings.getAllAsync
+      - office.Office.Bindings.getAllAsync_1
+      - office.Office.Bindings.getByIdAsync
+      - office.Office.Bindings.getByIdAsync_1
+      - office.Office.Bindings.releaseByIdAsync
+      - office.Office.Bindings.releaseByIdAsync_1
+      - office.Office.Bindings.document
+  - uid: office.Office.Bindings.addFromNamedItemAsync
+    summary: <span data-ttu-id="61711-102">Создает привязку для именованного объекта в документе.</span><span class="sxs-lookup"><span data-stu-id="61711-102">Creates a binding against a named object in the document.</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-103">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-103">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-104">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-104">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-105">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-105">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-106">Для Excel параметр itemName может ссылаться на именованный диапазон или таблицу.</span><span class="sxs-lookup"><span data-stu-id="61711-106">For Excel, the itemName parameter can refer to a named range or a table.</span></span>
+
+      <span data-ttu-id="61711-107">По умолчанию при добавлении таблиц в Excel имя "Table1" назначается первой добавленной таблице, "Table2" — второй таблице и так далее.</span><span class="sxs-lookup"><span data-stu-id="61711-107">By default, adding a table in Excel assigns the name "Table1" for the first table you add, "Table2" for the second table you add, and so on.</span></span> <span data-ttu-id="61711-108">Чтобы присвоить понятное имя таблице в ПОЛЬЗОВАТЕЛЬСКОМ ИНТЕРФЕЙСе Excel, используйте свойство Table name на вкладке Конструктор инструментов \| таблицы ленты.</span><span class="sxs-lookup"><span data-stu-id="61711-108">To assign a meaningful name for a table in the Excel UI, use the Table Name property on the Table Tools \| Design tab of the ribbon.</span></span>
+
+      <span data-ttu-id="61711-109">**Note**: в Excel при указании таблицы в качестве именованного элемента необходимо полностью указать имя листа в качестве имени таблицы в следующем формате: "Лист1! Таблицу</span><span class="sxs-lookup"><span data-stu-id="61711-109">**Note**: In Excel, when specifying a table as a named item, you must fully qualify the name to include the worksheet name in the name of the table in this format: "Sheet1!Table1"</span></span>
+
+      <span data-ttu-id="61711-110">Для Word параметр itemName ссылается на свойство Title элемента управления содержимым "форматированный текст".</span><span class="sxs-lookup"><span data-stu-id="61711-110">For Word, the itemName parameter refers to the Title property of a Rich Text content control.</span></span> <span data-ttu-id="61711-111">(Привязка к элементам управления содержимым, отличным от элемента управления содержимым "форматированный текст", невозможна).</span><span class="sxs-lookup"><span data-stu-id="61711-111">(You can't bind to content controls other than the Rich Text content control).</span></span>
+
+      <span data-ttu-id="61711-112">По умолчанию для элемента управления содержимым не назначено значение Title.</span><span class="sxs-lookup"><span data-stu-id="61711-112">By default, a content control has no Title value assigned.</span></span> <span data-ttu-id="61711-113">Чтобы назначить понятное имя в пользовательском интерфейсе Word, после вставки элемента управления контентом Форматированный текст из группы Элементы управления на вкладке Разработчик ленты выберите команду Свойства в группе Элементы управления, чтобы открыть диалоговое окно Свойства элемента управления контентом.</span><span class="sxs-lookup"><span data-stu-id="61711-113">To assign a meaningful name in the Word UI, after inserting a Rich Text content control from the Controls group on the Developer tab of the ribbon, use the Properties command in the Controls group to display the Content Control Properties dialog box.</span></span> <span data-ttu-id="61711-114">Затем задайте для свойства Title элемента управления контентом имя, на которое вы будете ссылаться в коде.</span><span class="sxs-lookup"><span data-stu-id="61711-114">Then set the Title property of the content control to the name you want to reference from your code.</span></span>
+
+      <span data-ttu-id="61711-115">**Примечание**: в Word при наличии нескольких элементов управления форматированным текстом с одинаковым значением свойства Title (Name) и попытке выполнить присоединение к одному из этих элементов управления содержимым с помощью этого метода (указав его имя как параметр itemName) операция завершится с ошибками.</span><span class="sxs-lookup"><span data-stu-id="61711-115">**Note**: In Word, if there are multiple Rich Text content controls with the same Title property value (name), and you try to bind to one these content controls with this method (by specifying its name as the itemName parameter), the operation will fail.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="61711-116">Примеры</span><span class="sxs-lookup"><span data-stu-id="61711-116">Examples</span></span>
+
+      ```javascript
+      // The following example adds a binding to the myRange named item in Excel as a "matrix" binding,
+      // and assigns the binding's id as myMatrix.
+      function bindNamedItem() {
+          Office.context.document.bindings.addFromNamedItemAsync(
+              "myRange", "matrix", {id:'myMatrix'}, function (result) {
+              if (result.status == 'succeeded'){
+                  write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);
+                  }
+              else
+                  write('Error: ' + result.error.message);
+          });
+      }
+
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+
+      // The following example adds a binding to the Table1 named item in Excel as a "table" binding,
+      // and assigns the binding's id as myTable.
+      function bindNamedItem() {
+          Office.context.document.bindings.addFromNamedItemAsync(
+              "Table1", "table", {id:'myTable'}, function (result) {
+              if (result.status == 'succeeded'){
+                  write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);
+                  }
+              else
+                  write('Error: ' + result.error.message);
+          });
+      }
+
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+
+      // The following example creates a text binding in Word to a rich text content control named "FirstName",
+      // assigns the id "firstName", and then displays that information.
+      function bindContentControl() {
+          Office.context.document.bindings.addFromNamedItemAsync('FirstName', 
+              Office.BindingType.Text, {id:'firstName'},
+              function (result) {
+                  if (result.status === Office.AsyncResultStatus.Succeeded) {
+                      write('Control bound. Binding.id: '
+                          + result.value.id + ' Binding.type: ' + result.value.type);
+                  } else {
+                      write('Error:', result.error.message);
+                  }
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'addFromNamedItemAsync(itemName, bindingType, options, callback)'
+    fullName: 'addFromNamedItemAsync(itemName, bindingType, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFromNamedItemAsync(itemName: string, bindingType: BindingType, options?: AddBindingFromNamedItemOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemName
+          description: '<span data-ttu-id="61711-117">Имя объекта с возможностью связывания в документе.</span><span class="sxs-lookup"><span data-stu-id="61711-117">Name of the bindable object in the document.</span></span> <span data-ttu-id="61711-118">Например, таблица "Мекспенсес" в Excel. "</span><span class="sxs-lookup"><span data-stu-id="61711-118">For Example ''MyExpenses'' table in Excel."</span></span>'
+          type:
+            - string
+        - id: bindingType
+          description: '<span data-ttu-id="61711-119">[Office. BindingType](xref:office.Office.BindingType) для данных.</span><span class="sxs-lookup"><span data-stu-id="61711-119">The [Office.BindingType](xref:office.Office.BindingType) for the data.</span></span> <span data-ttu-id="61711-120">Метод возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="61711-120">The method returns null if the selected object cannot be coerced into the specified type.</span></span>'
+          type:
+            - BindingType
+        - id: options
+          description: <span data-ttu-id="61711-121">Предоставляет параметры для настройки создаваемой привязки.</span><span class="sxs-lookup"><span data-stu-id="61711-121">Provides options for configuring the binding that is created.</span></span>
+          type:
+            - office.Office.AddBindingFromNamedItemOptions
+        - id: callback
+          description: '<span data-ttu-id="61711-122">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-122">Optional.</span></span> <span data-ttu-id="61711-123">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-123">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-124">.</span><span class="sxs-lookup"><span data-stu-id="61711-124"></span></span> <span data-ttu-id="61711-125">`value` Свойство Result представляет объект Binding, представляющий указанный именованный элемент.</span><span class="sxs-lookup"><span data-stu-id="61711-125">The `value` property of the result is the Binding object that represents the specified named item.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.addFromNamedItemAsync_1
+    summary: <span data-ttu-id="61711-126">Создает привязку для именованного объекта в документе.</span><span class="sxs-lookup"><span data-stu-id="61711-126">Creates a binding against a named object in the document.</span></span>
+    remarks: |-
+      [<span data-ttu-id="61711-127">MatrixBindings</span><span class="sxs-lookup"><span data-stu-id="61711-127">MatrixBindings</span></span>](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)<!-- --><span data-ttu-id="61711-128">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-128">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-129">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-129">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-130">Для Excel параметр itemName может ссылаться на именованный диапазон или таблицу.</span><span class="sxs-lookup"><span data-stu-id="61711-130">For Excel, the itemName parameter can refer to a named range or a table.</span></span>
+
+      <span data-ttu-id="61711-131">По умолчанию при добавлении таблиц в Excel имя "Table1" назначается первой добавленной таблице, "Table2" — второй таблице и так далее.</span><span class="sxs-lookup"><span data-stu-id="61711-131">By default, adding a table in Excel assigns the name "Table1" for the first table you add, "Table2" for the second table you add, and so on.</span></span> <span data-ttu-id="61711-132">Чтобы присвоить понятное имя таблице в ПОЛЬЗОВАТЕЛЬСКОМ ИНТЕРФЕЙСе Excel, используйте свойство Table name на вкладке Конструктор инструментов \| таблицы ленты.</span><span class="sxs-lookup"><span data-stu-id="61711-132">To assign a meaningful name for a table in the Excel UI, use the Table Name property on the Table Tools \| Design tab of the ribbon.</span></span>
+
+      <span data-ttu-id="61711-133">**Note**: в Excel при указании таблицы в качестве именованного элемента необходимо полностью указать имя листа в качестве имени таблицы в следующем формате: "Лист1! Таблицу</span><span class="sxs-lookup"><span data-stu-id="61711-133">**Note**: In Excel, when specifying a table as a named item, you must fully qualify the name to include the worksheet name in the name of the table in this format: "Sheet1!Table1"</span></span>
+
+      <span data-ttu-id="61711-134">Для Word параметр itemName ссылается на свойство Title элемента управления содержимым "форматированный текст".</span><span class="sxs-lookup"><span data-stu-id="61711-134">For Word, the itemName parameter refers to the Title property of a Rich Text content control.</span></span> <span data-ttu-id="61711-135">(Привязка к элементам управления содержимым, отличным от элемента управления содержимым "форматированный текст", невозможна).</span><span class="sxs-lookup"><span data-stu-id="61711-135">(You can't bind to content controls other than the Rich Text content control).</span></span>
+
+      <span data-ttu-id="61711-136">По умолчанию для элемента управления содержимым не назначено значение Title.</span><span class="sxs-lookup"><span data-stu-id="61711-136">By default, a content control has no Title value assigned.</span></span> <span data-ttu-id="61711-137">Чтобы назначить понятное имя в пользовательском интерфейсе Word, после вставки элемента управления контентом Форматированный текст из группы Элементы управления на вкладке Разработчик ленты выберите команду Свойства в группе Элементы управления, чтобы открыть диалоговое окно Свойства элемента управления контентом.</span><span class="sxs-lookup"><span data-stu-id="61711-137">To assign a meaningful name in the Word UI, after inserting a Rich Text content control from the Controls group on the Developer tab of the ribbon, use the Properties command in the Controls group to display the Content Control Properties dialog box.</span></span> <span data-ttu-id="61711-138">Затем задайте для свойства Title элемента управления контентом имя, на которое вы будете ссылаться в коде.</span><span class="sxs-lookup"><span data-stu-id="61711-138">Then set the Title property of the content control to the name you want to reference from your code.</span></span>
+
+      <span data-ttu-id="61711-139">**Примечание**: в Word при наличии нескольких элементов управления форматированным текстом с одинаковым значением свойства Title (Name) и попытке выполнить присоединение к одному из этих элементов управления содержимым с помощью этого метода (указав его имя как параметр itemName) операция завершится с ошибками.</span><span class="sxs-lookup"><span data-stu-id="61711-139">**Note**: In Word, if there are multiple Rich Text content controls with the same Title property value (name), and you try to bind to one these content controls with this method (by specifying its name as the itemName parameter), the operation will fail.</span></span>
+    name: 'addFromNamedItemAsync(itemName, bindingType, callback)'
+    fullName: 'addFromNamedItemAsync(itemName, bindingType, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFromNamedItemAsync(itemName: string, bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemName
+          description: '<span data-ttu-id="61711-140">Имя объекта с возможностью связывания в документе.</span><span class="sxs-lookup"><span data-stu-id="61711-140">Name of the bindable object in the document.</span></span> <span data-ttu-id="61711-141">Например, таблица "Мекспенсес" в Excel. "</span><span class="sxs-lookup"><span data-stu-id="61711-141">For Example ''MyExpenses'' table in Excel."</span></span>'
+          type:
+            - string
+        - id: bindingType
+          description: '<span data-ttu-id="61711-142">[Office. BindingType](xref:office.Office.BindingType) для данных.</span><span class="sxs-lookup"><span data-stu-id="61711-142">The [Office.BindingType](xref:office.Office.BindingType) for the data.</span></span> <span data-ttu-id="61711-143">Метод возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="61711-143">The method returns null if the selected object cannot be coerced into the specified type.</span></span>'
+          type:
+            - BindingType
+        - id: callback
+          description: '<span data-ttu-id="61711-144">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-144">Optional.</span></span> <span data-ttu-id="61711-145">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-145">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-146">.</span><span class="sxs-lookup"><span data-stu-id="61711-146"></span></span> <span data-ttu-id="61711-147">`value` Свойство Result представляет объект Binding, представляющий указанный именованный элемент.</span><span class="sxs-lookup"><span data-stu-id="61711-147">The `value` property of the result is the Binding object that represents the specified named item.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.addFromPromptAsync
+    summary: '<span data-ttu-id="61711-148">Создайте привязку, запросите пользователя сделать выбор в документе.</span><span class="sxs-lookup"><span data-stu-id="61711-148">Create a binding by prompting the user to make a selection on the document.</span></span>'
+    remarks: |-
+      <span data-ttu-id="61711-149">**Набор**обязательных элементов: [не в наборе](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)</span><span class="sxs-lookup"><span data-stu-id="61711-149">**Requirement set**: [Not in a set](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)</span></span>
+
+      <span data-ttu-id="61711-150">Добавляет объект привязки указанного типа в коллекцию Bindings, которая определяется идентификатором id. Метод завершается ошибкой, если заданную выборку невозможно привязать.</span><span class="sxs-lookup"><span data-stu-id="61711-150">Adds a binding object of the specified type to the Bindings collection, which will be identified with the supplied id. The method fails if the specified selection cannot be bound.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="61711-151">Примеры</span><span class="sxs-lookup"><span data-stu-id="61711-151">Examples</span></span>
+
+      ```javascript
+      function addBindingFromPrompt() {
+          Office.context.document.bindings.addFromPromptAsync(
+              Office.BindingType.Text, 
+              { id: 'MyBinding', promptText: 'Select text to bind to.' },
+              function (asyncResult) {
+                  write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'addFromPromptAsync(bindingType, options, callback)'
+    fullName: 'addFromPromptAsync(bindingType, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFromPromptAsync(bindingType: BindingType, options?: AddBindingFromPromptOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: bindingType
+          description: '<span data-ttu-id="61711-152">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="61711-152">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="61711-153">Обязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="61711-153">Required.</span></span> <span data-ttu-id="61711-154">Возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="61711-154">Returns null if the selected object cannot be coerced into the specified type.</span></span>'
+          type:
+            - BindingType
+        - id: options
+          description: <span data-ttu-id="61711-155">Предоставляет параметры для настройки подсказки и идентификации создаваемой привязки.</span><span class="sxs-lookup"><span data-stu-id="61711-155">Provides options for configuring the prompt and identifying the binding that is created.</span></span>
+          type:
+            - office.Office.AddBindingFromPromptOptions
+        - id: callback
+          description: '<span data-ttu-id="61711-156">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-156">Optional.</span></span> <span data-ttu-id="61711-157">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-157">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-158">.</span><span class="sxs-lookup"><span data-stu-id="61711-158"></span></span> <span data-ttu-id="61711-159">Результатом `value` этого свойства является объект Binding, представляющий выбранное пользователем значение.</span><span class="sxs-lookup"><span data-stu-id="61711-159">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.addFromPromptAsync_1
+    summary: '<span data-ttu-id="61711-160">Создайте привязку, запросите пользователя сделать выбор в документе.</span><span class="sxs-lookup"><span data-stu-id="61711-160">Create a binding by prompting the user to make a selection on the document.</span></span>'
+    remarks: |-
+      <span data-ttu-id="61711-161">**Набор**обязательных элементов: [не в наборе](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)</span><span class="sxs-lookup"><span data-stu-id="61711-161">**Requirement set**: [Not in a set](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)</span></span>
+
+      <span data-ttu-id="61711-162">Добавляет объект привязки указанного типа в коллекцию Bindings, которая определяется идентификатором id. Метод завершается ошибкой, если заданную выборку невозможно привязать.</span><span class="sxs-lookup"><span data-stu-id="61711-162">Adds a binding object of the specified type to the Bindings collection, which will be identified with the supplied id. The method fails if the specified selection cannot be bound.</span></span>
+    name: 'addFromPromptAsync(bindingType, callback)'
+    fullName: 'addFromPromptAsync(bindingType, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFromPromptAsync(bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: bindingType
+          description: '<span data-ttu-id="61711-163">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="61711-163">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="61711-164">Обязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="61711-164">Required.</span></span> <span data-ttu-id="61711-165">Возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="61711-165">Returns null if the selected object cannot be coerced into the specified type.</span></span>'
+          type:
+            - BindingType
+        - id: callback
+          description: '<span data-ttu-id="61711-166">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-166">Optional.</span></span> <span data-ttu-id="61711-167">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-167">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-168">.</span><span class="sxs-lookup"><span data-stu-id="61711-168"></span></span> <span data-ttu-id="61711-169">Результатом `value` этого свойства является объект Binding, представляющий выбранное пользователем значение.</span><span class="sxs-lookup"><span data-stu-id="61711-169">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.addFromSelectionAsync
+    summary: <span data-ttu-id="61711-170">Создание привязки на основе выбранного пользователем фрагмента.</span><span class="sxs-lookup"><span data-stu-id="61711-170">Create a binding based on the user's current selection.</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-171">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-171">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-172">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-172">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-173">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-173">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-174">Добавляет указанный тип объекта привязки в коллекцию Bindings, которая будет идентифицирована с помощью указанного идентификатора.</span><span class="sxs-lookup"><span data-stu-id="61711-174">Adds the specified type of binding object to the Bindings collection, which will be identified with the supplied id.</span></span>
+
+      <span data-ttu-id="61711-175">Примечание в Excel при вызове метода addFromSelectionAsync, переданного в Binding.id существующей привязки, используется привязка. тип этой привязки, и ее тип невозможно изменить, указав другое значение для параметра bindingType.</span><span class="sxs-lookup"><span data-stu-id="61711-175">Note In Excel, if you call the addFromSelectionAsync method passing in the Binding.id of an existing binding, the Binding.type of that binding is used, and its type cannot be changed by specifying a different value for the bindingType parameter.</span></span> <span data-ttu-id="61711-176">Если вам требуется использовать существующий id и изменить bindingType, вызовите сначала метод Bindings.releaseByIdAsync, чтобы освободить привязку, а затем метод addFromSelectionAsync, чтобы повторно установить привязку с новым типом.</span><span class="sxs-lookup"><span data-stu-id="61711-176">If you need to use an existing id and change the bindingType, call the Bindings.releaseByIdAsync method first to release the binding, and then call the addFromSelectionAsync method to reestablish the binding with a new type.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="61711-177">Примеры</span><span class="sxs-lookup"><span data-stu-id="61711-177">Examples</span></span>
+
+      ```javascript
+      function addBindingFromSelection() {
+          Office.context.document.bindings.addFromSelectionAsync(Office.BindingType.Text, { id: 'MyBinding' }, 
+              function (asyncResult) {
+              write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+              }
+          );
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'addFromSelectionAsync(bindingType, options, callback)'
+    fullName: 'addFromSelectionAsync(bindingType, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFromSelectionAsync(bindingType: BindingType, options?: AddBindingFromSelectionOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: bindingType
+          description: '<span data-ttu-id="61711-178">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="61711-178">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="61711-179">Обязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="61711-179">Required.</span></span> <span data-ttu-id="61711-180">Возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="61711-180">Returns null if the selected object cannot be coerced into the specified type.</span></span>'
+          type:
+            - BindingType
+        - id: options
+          description: <span data-ttu-id="61711-181">Предоставляет параметры для настройки подсказки и идентификации создаваемой привязки.</span><span class="sxs-lookup"><span data-stu-id="61711-181">Provides options for configuring the prompt and identifying the binding that is created.</span></span>
+          type:
+            - office.Office.AddBindingFromSelectionOptions
+        - id: callback
+          description: '<span data-ttu-id="61711-182">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-182">Optional.</span></span> <span data-ttu-id="61711-183">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-183">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-184">.</span><span class="sxs-lookup"><span data-stu-id="61711-184"></span></span> <span data-ttu-id="61711-185">Результатом `value` этого свойства является объект Binding, представляющий выбранное пользователем значение.</span><span class="sxs-lookup"><span data-stu-id="61711-185">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.addFromSelectionAsync_1
+    summary: <span data-ttu-id="61711-186">Создание привязки на основе выбранного пользователем фрагмента.</span><span class="sxs-lookup"><span data-stu-id="61711-186">Create a binding based on the user's current selection.</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-187">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-187">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-188">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-188">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-189">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-189">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-190">Добавляет указанный тип объекта привязки в коллекцию Bindings, которая будет идентифицирована с помощью указанного идентификатора.</span><span class="sxs-lookup"><span data-stu-id="61711-190">Adds the specified type of binding object to the Bindings collection, which will be identified with the supplied id.</span></span>
+
+      <span data-ttu-id="61711-191">Примечание в Excel при вызове метода addFromSelectionAsync, переданного в Binding.id существующей привязки, используется привязка. тип этой привязки, и ее тип невозможно изменить, указав другое значение для параметра bindingType.</span><span class="sxs-lookup"><span data-stu-id="61711-191">Note In Excel, if you call the addFromSelectionAsync method passing in the Binding.id of an existing binding, the Binding.type of that binding is used, and its type cannot be changed by specifying a different value for the bindingType parameter.</span></span> <span data-ttu-id="61711-192">Если вам требуется использовать существующий id и изменить bindingType, вызовите сначала метод Bindings.releaseByIdAsync, чтобы освободить привязку, а затем метод addFromSelectionAsync, чтобы повторно установить привязку с новым типом.</span><span class="sxs-lookup"><span data-stu-id="61711-192">If you need to use an existing id and change the bindingType, call the Bindings.releaseByIdAsync method first to release the binding, and then call the addFromSelectionAsync method to reestablish the binding with a new type.</span></span>
+    name: 'addFromSelectionAsync(bindingType, callback)'
+    fullName: 'addFromSelectionAsync(bindingType, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFromSelectionAsync(bindingType: BindingType, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: bindingType
+          description: '<span data-ttu-id="61711-193">Указывает тип объекта привязки для создания.</span><span class="sxs-lookup"><span data-stu-id="61711-193">Specifies the type of the binding object to create.</span></span> <span data-ttu-id="61711-194">Обязательный параметр.</span><span class="sxs-lookup"><span data-stu-id="61711-194">Required.</span></span> <span data-ttu-id="61711-195">Возвращает значение null, если выбранный объект нельзя привести к указанному типу.</span><span class="sxs-lookup"><span data-stu-id="61711-195">Returns null if the selected object cannot be coerced into the specified type.</span></span>'
+          type:
+            - BindingType
+        - id: callback
+          description: '<span data-ttu-id="61711-196">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-196">Optional.</span></span> <span data-ttu-id="61711-197">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-197">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-198">.</span><span class="sxs-lookup"><span data-stu-id="61711-198"></span></span> <span data-ttu-id="61711-199">Результатом `value` этого свойства является объект Binding, представляющий выбранное пользователем значение.</span><span class="sxs-lookup"><span data-stu-id="61711-199">The `value` property of the result is the Binding object that represents the selection specified by the user.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.getAllAsync
+    summary: <span data-ttu-id="61711-200">Получает все ранее созданные привязки.</span><span class="sxs-lookup"><span data-stu-id="61711-200">Gets all bindings that were previously created.</span></span>
+    remarks: '<span data-ttu-id="61711-201">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-201">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-202">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-202">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-203">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-203">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>'
+    name: 'getAllAsync(options, callback)'
+    fullName: 'getAllAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAllAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: '<span data-ttu-id="61711-204">Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.</span><span class="sxs-lookup"><span data-stu-id="61711-204">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>'
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="61711-205">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-205">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-206">.</span><span class="sxs-lookup"><span data-stu-id="61711-206"></span></span> <span data-ttu-id="61711-207">Результатом `value` этого свойства является массив, содержащий каждую привязку, созданную для упоминаемого объекта Bindings.</span><span class="sxs-lookup"><span data-stu-id="61711-207">The `value` property of the result is an array that contains each binding created for the referenced Bindings object.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding[]>) => void'
+  - uid: office.Office.Bindings.getAllAsync_1
+    summary: <span data-ttu-id="61711-208">Получает все ранее созданные привязки.</span><span class="sxs-lookup"><span data-stu-id="61711-208">Gets all bindings that were previously created.</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-209">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-209">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-210">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-210">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-211">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-211">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="61711-212">Примеры</span><span class="sxs-lookup"><span data-stu-id="61711-212">Examples</span></span>
+
+      ```javascript
+      function displayAllBindingNames() {
+          Office.context.document.bindings.getAllAsync(function (asyncResult) {
+              var bindingString = '';
+              for (var i in asyncResult.value) {
+                  bindingString += asyncResult.value[i].id + '\n';
+              }
+              write('Existing bindings: ' + bindingString);
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: getAllAsync(callback)
+    fullName: getAllAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAllAsync(callback?: (result: AsyncResult<Binding[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: '<span data-ttu-id="61711-213">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-213">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-214">.</span><span class="sxs-lookup"><span data-stu-id="61711-214"></span></span> <span data-ttu-id="61711-215">Результатом `value` этого свойства является массив, содержащий каждую привязку, созданную для упоминаемого объекта Bindings.</span><span class="sxs-lookup"><span data-stu-id="61711-215">The `value` property of the result is an array that contains each binding created for the referenced Bindings object.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding[]>) => void'
+  - uid: office.Office.Bindings.getByIdAsync
+    summary: <span data-ttu-id="61711-216">Получает привязку с учетом ее имени</span><span class="sxs-lookup"><span data-stu-id="61711-216">Retrieves a binding based on its Name</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-217">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-217">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-218">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-218">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-219">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-219">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-220">Завершается с ошибкой, если указанный идентификатор не существует.</span><span class="sxs-lookup"><span data-stu-id="61711-220">Fails if the specified id does not exist.</span></span>
+    name: 'getByIdAsync(id, options, callback)'
+    fullName: 'getByIdAsync(id, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: <span data-ttu-id="61711-221">Задает уникальное имя объекта Binding.</span><span class="sxs-lookup"><span data-stu-id="61711-221">Specifies the unique name of the binding object.</span></span> <span data-ttu-id="61711-222">Обязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-222">Required.</span></span>
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="61711-223">Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.</span><span class="sxs-lookup"><span data-stu-id="61711-223">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>'
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="61711-224">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-224">Optional.</span></span> <span data-ttu-id="61711-225">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-225">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-226">.</span><span class="sxs-lookup"><span data-stu-id="61711-226"></span></span> <span data-ttu-id="61711-227">`value` Свойство Result является объектом Binding, указанным идентификатором в вызове.</span><span class="sxs-lookup"><span data-stu-id="61711-227">The `value` property of the result is the Binding object specified by the id in the call.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.getByIdAsync_1
+    summary: <span data-ttu-id="61711-228">Получает привязку с учетом ее имени</span><span class="sxs-lookup"><span data-stu-id="61711-228">Retrieves a binding based on its Name</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-229">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-229">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-230">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-230">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-231">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-231">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-232">Завершается с ошибкой, если указанный идентификатор не существует.</span><span class="sxs-lookup"><span data-stu-id="61711-232">Fails if the specified id does not exist.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="61711-233">Примеры</span><span class="sxs-lookup"><span data-stu-id="61711-233">Examples</span></span>
+
+      ```javascript
+      function displayBindingType() {
+          Office.context.document.bindings.getByIdAsync('MyBinding', function (asyncResult) {
+              write('Retrieved binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'getByIdAsync(id, callback)'
+    fullName: 'getByIdAsync(id, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByIdAsync(id: string, callback?: (result: AsyncResult<Binding>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: <span data-ttu-id="61711-234">Задает уникальное имя объекта Binding.</span><span class="sxs-lookup"><span data-stu-id="61711-234">Specifies the unique name of the binding object.</span></span> <span data-ttu-id="61711-235">Обязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-235">Required.</span></span>
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="61711-236">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-236">Optional.</span></span> <span data-ttu-id="61711-237">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-237">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-238">.</span><span class="sxs-lookup"><span data-stu-id="61711-238"></span></span> <span data-ttu-id="61711-239">`value` Свойство Result является объектом Binding, указанным идентификатором в вызове.</span><span class="sxs-lookup"><span data-stu-id="61711-239">The `value` property of the result is the Binding object specified by the id in the call.</span></span>'
+          type:
+            - '(result: AsyncResult<Binding>) => void'
+  - uid: office.Office.Bindings.releaseByIdAsync
+    summary: <span data-ttu-id="61711-240">Удаляет привязку из документа.</span><span class="sxs-lookup"><span data-stu-id="61711-240">Removes the binding from the document</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-241">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-241">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-242">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-242">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-243">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-243">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-244">Завершается с ошибкой, если указанный идентификатор не существует.</span><span class="sxs-lookup"><span data-stu-id="61711-244">Fails if the specified id does not exist.</span></span>
+    name: 'releaseByIdAsync(id, options, callback)'
+    fullName: 'releaseByIdAsync(id, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'releaseByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: '<span data-ttu-id="61711-245">Задает уникальное имя, используемое для идентификации объекта привязки.</span><span class="sxs-lookup"><span data-stu-id="61711-245">Specifies the unique name to be used to identify the binding object.</span></span> <span data-ttu-id="61711-246">Обязательный.</span><span class="sxs-lookup"><span data-stu-id="61711-246">Required.</span></span>'
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="61711-247">Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.</span><span class="sxs-lookup"><span data-stu-id="61711-247">Provides an option for preserving context data of any type, unchanged, for use in a callback.</span></span>'
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="61711-248">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-248">Optional.</span></span> <span data-ttu-id="61711-249">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-249">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-250">.</span><span class="sxs-lookup"><span data-stu-id="61711-250"></span></span>'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Bindings.releaseByIdAsync_1
+    summary: <span data-ttu-id="61711-251">Удаляет привязку из документа.</span><span class="sxs-lookup"><span data-stu-id="61711-251">Removes the binding from the document</span></span>
+    remarks: |-
+      <span data-ttu-id="61711-252">**Наборы требований**: [матриксбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-252">**Requirement sets**: [MatrixBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixbindings)</span></span><!-- --><span data-ttu-id="61711-253">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span><span class="sxs-lookup"><span data-stu-id="61711-253">, [TableBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablebindings)</span></span><!-- --><span data-ttu-id="61711-254">, [Текстбиндингс](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span><span class="sxs-lookup"><span data-stu-id="61711-254">, [TextBindings](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textbindings)</span></span>
+
+      <span data-ttu-id="61711-255">Завершается с ошибкой, если указанный идентификатор не существует.</span><span class="sxs-lookup"><span data-stu-id="61711-255">Fails if the specified id does not exist.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="61711-256">Примеры</span><span class="sxs-lookup"><span data-stu-id="61711-256">Examples</span></span>
+
+      ```javascript
+      Office.context.document.bindings.releaseByIdAsync("MyBinding", function (asyncResult) { 
+          write("Released MyBinding!"); 
+      }); 
+      // Function that writes to a div with id='message' on the page. 
+      function write(message){ 
+          document.getElementById('message').innerText += message;  
+      }
+      ```
+    name: 'releaseByIdAsync(id, callback)'
+    fullName: 'releaseByIdAsync(id, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'releaseByIdAsync(id: string, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: '<span data-ttu-id="61711-257">Задает уникальное имя, используемое для идентификации объекта привязки.</span><span class="sxs-lookup"><span data-stu-id="61711-257">Specifies the unique name to be used to identify the binding object.</span></span> <span data-ttu-id="61711-258">Обязательный.</span><span class="sxs-lookup"><span data-stu-id="61711-258">Required.</span></span>'
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="61711-259">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="61711-259">Optional.</span></span> <span data-ttu-id="61711-260">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)</span><span class="sxs-lookup"><span data-stu-id="61711-260">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office.Office.AsyncResult)</span></span><!-- --><span data-ttu-id="61711-261">.</span><span class="sxs-lookup"><span data-stu-id="61711-261"></span></span>'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Bindings.document
+    summary: '<span data-ttu-id="61711-262">Возвращает объект [Office. Document](xref:office.Office.Document) , представляющий документ, связанный с этим набором привязок.</span><span class="sxs-lookup"><span data-stu-id="61711-262">Gets an [Office.Document](xref:office.Office.Document) object that represents the document associated with this set of bindings.</span></span>'
+    name: document
+    fullName: document
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'document: Document;'
+      return:
+        type:
+          - Document
