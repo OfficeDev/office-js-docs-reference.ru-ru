@@ -1,246 +1,264 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 305ae1cf89ec36fb2facf30722812b7e6783aea7
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30112827"
 items:
-- uid: excel_release.Excel.Application
-  summary: >-
-    Представляет приложение Excel, которое управляет книгой.
+  - uid: excel_release.Excel.Application
+    summary: |-
+      Представляет приложение Excel, которое управляет книгой.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Application
+    fullName: Excel.Application
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel_release
+    children:
+      - excel_release.Excel.Application.calculate
+      - excel_release.Excel.Application.calculate_1
+      - excel_release.Excel.Application.calculationMode
+      - excel_release.Excel.Application.context
+      - excel_release.Excel.Application.load
+      - excel_release.Excel.Application.load_1
+      - excel_release.Excel.Application.load_2
+      - excel_release.Excel.Application.set
+      - excel_release.Excel.Application.set_1
+      - excel_release.Excel.Application.suspendApiCalculationUntilNextSync
+      - excel_release.Excel.Application.toJSON
+  - uid: excel_release.Excel.Application.calculate
+    summary: |-
+      Пересчитывает данные во всех открытых в текущий момент книгах Excel.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculate(calculationType)
+    fullName: calculate(calculationType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'calculate(calculationType: Excel.CalculationType): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: calculationType
+          description: 'Определяет тип расчета, который нужно использовать. Дополнительные сведения см. в статье Excel. Калкулатионтипе.'
+          type:
+            - excel.Excel.CalculationType
+  - uid: excel_release.Excel.Application.calculate_1
+    summary: |-
+      Пересчитывает данные во всех открытых в текущий момент книгах Excel.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculate(calculationTypeString)
+    fullName: calculate(calculationTypeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'calculate(calculationTypeString: "Recalculate" | "Full" | "FullRebuild"): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.Application
-  fullName: Excel.Application
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel_release
-  children:
-  - excel_release.Excel.Application.calculate
-  - excel_release.Excel.Application.calculate_1
-  - excel_release.Excel.Application.calculationMode
-  - excel_release.Excel.Application.context
-  - excel_release.Excel.Application.load
-  - excel_release.Excel.Application.load_1
-  - excel_release.Excel.Application.load_2
-  - excel_release.Excel.Application.set
-  - excel_release.Excel.Application.set_1
-  - excel_release.Excel.Application.suspendApiCalculationUntilNextSync
-  - excel_release.Excel.Application.toJSON
-- uid: excel_release.Excel.Application.calculate
-  summary: >-
-    Пересчитывает данные во всех открытых в текущий момент книгах Excel.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) {
+              ctx.workbook.application.calculate('Full');
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: calculationTypeString
+          description: 'Определяет тип расчета, который нужно использовать. Дополнительные сведения см. в статье Excel. Калкулатионтипе.'
+          type:
+            - '"Recalculate" | "Full" | "FullRebuild"'
+  - uid: excel_release.Excel.Application.calculationMode
+    summary: |-
+      Возвращает режим вычислений, используемый в книге в соответствии с константами в Excel. Калкулатионмоде. Возможные значения:`Automatic`<!-- -->, где Excel управляет пересчетом;`AutomaticExceptTables`<!-- -->, где Excel контролирует пересчет, но игнорирует изменения в таблицах;`Manual`<!-- -->, где выполняется расчет, когда пользователь запрашивает его.
+
+      \[[Набор API: ExcelApi 1,1 для Get, 1,8 для Set](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationMode
+    fullName: calculationMode
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'calculationMode: Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual";'
+      return:
+        type:
+          - Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual"
+  - uid: excel_release.Excel.Application.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel_release.Excel.Application.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Excel.Application`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.Application`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Application`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.ApplicationLoadOptions): Excel.Application;'
+      return:
+        type:
+          - excel.Excel.Application
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.ApplicationLoadOptions
+  - uid: excel_release.Excel.Application.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Application;'
+      return:
+        type:
+          - excel.Excel.Application
+        description: |-
 
 
-    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: calculate(calculationType)
-  fullName: calculate(calculationType)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'calculate(calculationType: Excel.CalculationType): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: calculationType
-      description: Указывает тип вычисления, который необходимо использовать. Дополнительные сведения см. в статье Excel. Калкулатионтипе.
-      type:
-      - excel.Excel.CalculationType
-- uid: excel_release.Excel.Application.calculate_1
-  summary: >-
-    Пересчитывает данные во всех открытых в текущий момент книгах Excel.
+          #### <a name="examples"></a>Примеры
 
+          ```javascript
+          Excel.run(function (ctx) {
+              var application = ctx.workbook.application;
+              application.load('calculationMode');
+              return ctx.sync().then(function() {
+                  console.log(application.calculationMode);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: excel_release.Excel.Application.load_2
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Application;'
+      return:
+        type:
+          - excel.Excel.Application
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.Application.set
+    summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
+    remarks: |-
+      Этот метод имеет следующую дополнительную подпись:
 
-    \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: calculate(calculationTypeString)
-  fullName: calculate(calculationTypeString)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'calculate(calculationTypeString: "Recalculate" | "Full" | "FullRebuild"): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) {\n    ctx.workbook.application.calculate('Full');\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: calculationTypeString
-      description: Указывает тип вычисления, который необходимо использовать. Дополнительные сведения см. в статье Excel. Калкулатионтипе.
-      type:
-      - "\"Recalculate\" | \"Full\" | \"FullRebuild\""
-- uid: excel_release.Excel.Application.calculationMode
-  summary: >-
-    Возвращает режим вычислений, используемый в книге в соответствии с константами в Excel. Калкулатионмоде. Возможные значения: `Automatic` <!-- -->, где Excel управляет пересчетом; `AutomaticExceptTables`, где Excel контролирует пересчет, но игнорирует изменения в таблицах <!-- -->; `Manual`, где выполняется расчет, когда пользователь запрашивает <!-- -->его.
+      `set(properties: Excel.Application): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.ApplicationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: 'Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.'
+          type:
+            - Interfaces.ApplicationUpdateData
+        - id: options
+          description: 'Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.'
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel_release.Excel.Application.set_1
+    summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.Application): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.Application
+  - uid: excel_release.Excel.Application.suspendApiCalculationUntilNextSync
+    summary: |-
+      Приостанавливает вычисление до вызова следующего "context.sync()". После этого за пересчет книги и распространение всех зависимостей несет ответственность разработчик.
 
-
-    \[[Набор API: ExcelApi 1,1 для Get, 1,8 для Set](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: calculationMode
-  fullName: calculationMode
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'calculationMode: Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual";'
-    return:
-      type:
-      - Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual"
-- uid: excel_release.Excel.Application.context
-  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel_release.Excel.Application.load
-  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств необходимо вызвать метод Context. Sync ().
-  remarks: >-
-    В дополнение к этой подписи этот метод имеет следующие подписи:
-
-
-    `load(option?: string | string[]): Excel.Application`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.Application`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Application`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.ApplicationLoadOptions): Excel.Application;'
-    return:
-      type:
-      - excel.Excel.Application
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.ApplicationLoadOptions
-- uid: excel_release.Excel.Application.load_1
-  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.Application;'
-    return:
-      type:
-      - excel.Excel.Application
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) {\n    var application = ctx.workbook.application;\n    application.load('calculationMode');\n    return ctx.sync().then(function() {\n        console.log(application.calculationMode);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
-      type:
-      - string | string[]
-- uid: excel_release.Excel.Application.load_2
-  summary: Ставит в очередь команду, чтобы загрузить указанные свойства объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Application;'
-    return:
-      type:
-      - excel.Excel.Application
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel_release.Excel.Application.set
-  summary: Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.
-  remarks: >-
-    Этот метод имеет следующую дополнительную подпись:
-
-
-    `set(properties: Excel.Application): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.ApplicationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.
-      type:
-      - Interfaces.ApplicationUpdateData
-    - id: options
-      description: Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel_release.Excel.Application.set_1
-  summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.Application): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.Application
-- uid: excel_release.Excel.Application.suspendApiCalculationUntilNextSync
-  summary: >-
-    Приостанавливает вычисление до вызова следующего "context.sync()". После этого за пересчет книги и распространение всех зависимостей несет ответственность разработчик.
-
-
-    \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: suspendApiCalculationUntilNextSync()
-  fullName: suspendApiCalculationUntilNextSync()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'suspendApiCalculationUntilNextSync(): void;'
-    return:
-      type:
-      - void
-      description: ''
-- uid: excel_release.Excel.Application.toJSON
-  summary: ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче `JSON.stringify()` <!-- -->объекта API. (`JSON.stringify`<!-- -->в свою очередь вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Application — это объект API, `toJSON` метод возвращает простой объект JavaScript (типизированный тип `Excel.Interfaces.ApplicationData` <!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.ApplicationData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.ApplicationData
-      description: ''
+      \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: suspendApiCalculationUntilNextSync()
+    fullName: suspendApiCalculationUntilNextSync()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'suspendApiCalculationUntilNextSync(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel_release.Excel.Application.toJSON
+    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Application — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ApplicationData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.ApplicationData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.ApplicationData
+        description: ''

@@ -1,235 +1,308 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: bf9c1bb2d260a20869bbbbf6574bd4b8c70a733d
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29978380"
 items:
-- uid: excel.Excel.IconSetConditionalFormat
-  summary: >-
-    Представляет условия условного форматирования IconSet.
+  - uid: excel.Excel.IconSetConditionalFormat
+    summary: |-
+      Представляет критерии набора значков для условного форматирования.
+
+      \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.IconSetConditionalFormat
+    fullName: Excel.IconSetConditionalFormat
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.IconSetConditionalFormat.context
+      - excel.Excel.IconSetConditionalFormat.criteria
+      - excel.Excel.IconSetConditionalFormat.load
+      - excel.Excel.IconSetConditionalFormat.load_1
+      - excel.Excel.IconSetConditionalFormat.load_2
+      - excel.Excel.IconSetConditionalFormat.reverseIconOrder
+      - excel.Excel.IconSetConditionalFormat.set
+      - excel.Excel.IconSetConditionalFormat.set_1
+      - excel.Excel.IconSetConditionalFormat.showIconOnly
+      - excel.Excel.IconSetConditionalFormat.style
+      - excel.Excel.IconSetConditionalFormat.toJSON
+  - uid: excel.Excel.IconSetConditionalFormat.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.IconSetConditionalFormat.criteria
+    summary: |-
+      Массив критериев и IconSets для правил и потенциальных настраиваемых значков для условных значков. Обратите внимание, что для первого критерия можно изменить только настраиваемый значок, в то время как тип, формула и оператор будут игнорироваться при установке.
+
+      \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: criteria
+    fullName: criteria
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'criteria: Excel.ConditionalIconCriterion[];'
+      return:
+        type:
+          - 'Excel.ConditionalIconCriterion[]'
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.IconSetConditionalFormat
-  fullName: Excel.IconSetConditionalFormat
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.IconSetConditionalFormat.context
-  - excel.Excel.IconSetConditionalFormat.criteria
-  - excel.Excel.IconSetConditionalFormat.load
-  - excel.Excel.IconSetConditionalFormat.load_1
-  - excel.Excel.IconSetConditionalFormat.load_2
-  - excel.Excel.IconSetConditionalFormat.reverseIconOrder
-  - excel.Excel.IconSetConditionalFormat.set
-  - excel.Excel.IconSetConditionalFormat.set_1
-  - excel.Excel.IconSetConditionalFormat.showIconOnly
-  - excel.Excel.IconSetConditionalFormat.style
-  - excel.Excel.IconSetConditionalFormat.toJSON
-- uid: excel.Excel.IconSetConditionalFormat.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.IconSetConditionalFormat.criteria
-  summary: >-
-    Массив условий и IconSets правил и потенциальные настраиваемых значков условного значков. Обратите внимание, что для первый критерий только пользовательский значок можно изменить, при тип, формулы, и оператор игнорируется, если параметр.
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const range = sheet.getRange("B8:E13");
+              const conditionalFormat = range.conditionalFormats
+                  .add(Excel.ConditionalFormatType.iconSet);
+              const iconSetCF = conditionalFormat.iconSet;
+              iconSetCF.style = Excel.IconSet.threeTriangles;
+
+              /*
+                  The iconSetCF.criteria array is automatically prepopulated with
+                  criterion elements whose properties have been given default settings.
+                  You can't write to each property of a criterion directly. Instead,
+                  replace the whole criteria object.
+
+                  With a "three*" icon set style, such as "threeTriangles", the third
+                  element in the criteria array (criteria[2]) defines the "top" icon;
+                  e.g., a green triangle. The second (criteria[1]) defines the "middle"
+                  icon, The first (criteria[0]) defines the "low" icon, but it
+                  can often be left empty as this method does below, because every
+                  cell that does not match the other two criteria always gets the low
+                  icon.            
+              */
+              iconSetCF.criteria = [
+                  {} as any,
+                  {
+                      type: Excel.ConditionalFormatIconRuleType.number,
+                      operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,
+                      formula: "=700"
+                  },
+                  {
+                      type: Excel.ConditionalFormatIconRuleType.number,
+                      operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,
+                      formula: "=1000",
+                  }
+              ];
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.IconSetConditionalFormat.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Excel.IconSetConditionalFormat`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.IconSetConditionalFormat`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.IconSetConditionalFormat`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.IconSetConditionalFormatLoadOptions): Excel.IconSetConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.IconSetConditionalFormat
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.IconSetConditionalFormatLoadOptions
+  - uid: excel.Excel.IconSetConditionalFormat.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.IconSetConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.IconSetConditionalFormat
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.IconSetConditionalFormat.load_2
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.IconSetConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.IconSetConditionalFormat
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.IconSetConditionalFormat.reverseIconOrder
+    summary: |-
+      Если этот параметр имеет значение true, отменяет порядок значков для набора значков. Обратите внимание, что этот параметр невозможно задать при использовании настраиваемых значков.
+
+      \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: reverseIconOrder
+    fullName: reverseIconOrder
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'reverseIconOrder: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel.Excel.IconSetConditionalFormat.set
+    summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
+    remarks: |-
+      Этот метод имеет следующую дополнительную подпись:
+
+      `set(properties: Excel.IconSetConditionalFormat): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.IconSetConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: 'Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.'
+          type:
+            - Interfaces.IconSetConditionalFormatUpdateData
+        - id: options
+          description: 'Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.'
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel.Excel.IconSetConditionalFormat.set_1
+    summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.IconSetConditionalFormat): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.IconSetConditionalFormat
+  - uid: excel.Excel.IconSetConditionalFormat.showIconOnly
+    summary: |-
+      Значение true скрывает значения и показывает только значки.
+
+      \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: showIconOnly
+    fullName: showIconOnly
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showIconOnly: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel.Excel.IconSetConditionalFormat.style
+    summary: |-
+      Если этот параметр установлен, отображается параметр "набор значков" для условного форматирования.
+
+      \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: style
+    fullName: style
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'style: Excel.IconSet | "Invalid" | "ThreeArrows" | "ThreeArrowsGray" | "ThreeFlags" | "ThreeTrafficLights1" | "ThreeTrafficLights2" | "ThreeSigns" | "ThreeSymbols" | "ThreeSymbols2" | "FourArrows" | "FourArrowsGray" | "FourRedToBlack" | "FourRating" | "FourTrafficLights" | "FiveArrows" | "FiveArrowsGray" | "FiveRating" | "FiveQuarters" | "ThreeStars" | "ThreeTriangles" | "FiveBoxes" | "LinkedEntityFinanceIcon" | "LinkedEntityMapIcon";'
+      return:
+        type:
+          - Excel.IconSet | "Invalid" | "ThreeArrows" | "ThreeArrowsGray" | "ThreeFlags" | "ThreeTrafficLights1" | "ThreeTrafficLights2" | "ThreeSigns" | "ThreeSymbols" | "ThreeSymbols2" | "FourArrows" | "FourArrowsGray" | "FourRedToBlack" | "FourRating" | "FourTrafficLights" | "FiveArrows" | "FiveArrowsGray" | "FiveRating" | "FiveQuarters" | "ThreeStars" | "ThreeTriangles" | "FiveBoxes" | "LinkedEntityFinanceIcon" | "LinkedEntityMapIcon"
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: criteria
-  fullName: criteria
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'criteria: Excel.ConditionalIconCriterion[];'
-    return:
-      type:
-      - Excel.ConditionalIconCriterion[]
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.iconSet);\n    const iconSetCF = conditionalFormat.iconSet;\n    iconSetCF.style = Excel.IconSet.threeTriangles;\n\n    /*\n        The iconSetCF.criteria array is automatically prepopulated with\n        criterion elements whose properties have been given default settings.\n        You can't write to each property of a criterion directly. Instead,\n        replace the whole criteria object.\n\n        With a \"three*\" icon set style, such as \"threeTriangles\", the third\n        element in the criteria array (criteria[2]) defines the \"top\" icon;\n        e.g., a green triangle. The second (criteria[1]) defines the \"middle\"\n        icon, The first (criteria[0]) defines the \"low\" icon, but it\n        can often be left empty as this method does below, because every\n        cell that does not match the other two criteria always gets the low\n        icon.            \n    */\n    iconSetCF.criteria = [\n        {} as any,\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=700\"\n        },\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=1000\",\n        }\n    ];\n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.IconSetConditionalFormat.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+          #### <a name="examples"></a>Примеры
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const range = sheet.getRange("B8:E13");
+              const conditionalFormat = range.conditionalFormats
+                  .add(Excel.ConditionalFormatType.iconSet);
+              const iconSetCF = conditionalFormat.iconSet;
+              iconSetCF.style = Excel.IconSet.threeTriangles;
 
-    `load(option?: string | string[]): Excel.IconSetConditionalFormat`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+              /*
+                  The iconSetCF.criteria array is automatically prepopulated with
+                  criterion elements whose properties have been given default settings.
+                  You can't write to each property of a criterion directly. Instead,
+                  replace the whole criteria object.
 
+                  With a "three*" icon set style, such as "threeTriangles", the third
+                  element in the criteria array (criteria[2]) defines the "top" icon;
+                  e.g., a green triangle. The second (criteria[1]) defines the "middle"
+                  icon, The first (criteria[0]) defines the "low" icon, but it
+                  can often be left empty as this method does below, because every
+                  cell that does not match the other two criteria always gets the low
+                  icon.            
+              */
+              iconSetCF.criteria = [
+                  {} as any,
+                  {
+                      type: Excel.ConditionalFormatIconRuleType.number,
+                      operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,
+                      formula: "=700"
+                  },
+                  {
+                      type: Excel.ConditionalFormatIconRuleType.number,
+                      operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,
+                      formula: "=1000",
+                  }
+              ];
 
-    `load(option?: { select?: string; expand?: string; }): Excel.IconSetConditionalFormat`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.IconSetConditionalFormat`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.IconSetConditionalFormatLoadOptions): Excel.IconSetConditionalFormat;'
-    return:
-      type:
-      - excel.Excel.IconSetConditionalFormat
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.IconSetConditionalFormatLoadOptions
-- uid: excel.Excel.IconSetConditionalFormat.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.IconSetConditionalFormat;'
-    return:
-      type:
-      - excel.Excel.IconSetConditionalFormat
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
-      type:
-      - string | string[]
-- uid: excel.Excel.IconSetConditionalFormat.load_2
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.IconSetConditionalFormat;'
-    return:
-      type:
-      - excel.Excel.IconSetConditionalFormat
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.IconSetConditionalFormat.reverseIconOrder
-  summary: >-
-    Значение true меняет порядок значков в наборе значков на обратный. Обратите внимание, что это значение нельзя задать, если используются специальные значки.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: reverseIconOrder
-  fullName: reverseIconOrder
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'reverseIconOrder: boolean;'
-    return:
-      type:
-      - boolean
-- uid: excel.Excel.IconSetConditionalFormat.set
-  summary: Задание нескольких свойств объекта в то же время. Вы можете передать простой объект с соответствующих свойств или другой объект API одного типа.
-  remarks: >-
-    Этот метод имеет следующие дополнительные подписи.
-
-
-    `set(properties: Excel.IconSetConditionalFormat): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.IconSetConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Объект JavaScript со свойствами, которые isomorphically структурированы для свойства объекта, для которого вызывается метод.
-      type:
-      - Interfaces.IconSetConditionalFormatUpdateData
-    - id: options
-      description: Предоставляет возможность отключать ошибки, если объект свойств пытается записать все свойства только для чтения.
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel.Excel.IconSetConditionalFormat.set_1
-  summary: Задает несколько свойств объекта в то же время, на основе существующего загруженных объекта.
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.IconSetConditionalFormat): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.IconSetConditionalFormat
-- uid: excel.Excel.IconSetConditionalFormat.showIconOnly
-  summary: >-
-    Значение true скрывает значения и показывает только значки.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: showIconOnly
-  fullName: showIconOnly
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'showIconOnly: boolean;'
-    return:
-      type:
-      - boolean
-- uid: excel.Excel.IconSetConditionalFormat.style
-  summary: >-
-    Если значение, то отображается параметр IconSet условного форматирования.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: style
-  fullName: style
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'style: Excel.IconSet | "Invalid" | "ThreeArrows" | "ThreeArrowsGray" | "ThreeFlags" | "ThreeTrafficLights1" | "ThreeTrafficLights2" | "ThreeSigns" | "ThreeSymbols" | "ThreeSymbols2" | "FourArrows" | "FourArrowsGray" | "FourRedToBlack" | "FourRating" | "FourTrafficLights" | "FiveArrows" | "FiveArrowsGray" | "FiveRating" | "FiveQuarters" | "ThreeStars" | "ThreeTriangles" | "FiveBoxes" | "LinkedEntityFinanceIcon" | "LinkedEntityMapIcon";'
-    return:
-      type:
-      - Excel.IconSet | "Invalid" | "ThreeArrows" | "ThreeArrowsGray" | "ThreeFlags" | "ThreeTrafficLights1" | "ThreeTrafficLights2" | "ThreeSigns" | "ThreeSymbols" | "ThreeSymbols2" | "FourArrows" | "FourArrowsGray" | "FourRedToBlack" | "FourRating" | "FourTrafficLights" | "FiveArrows" | "FiveArrowsGray" | "FiveRating" | "FiveQuarters" | "ThreeStars" | "ThreeTriangles" | "FiveBoxes" | "LinkedEntityFinanceIcon" | "LinkedEntityMapIcon"
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.iconSet);\n    const iconSetCF = conditionalFormat.iconSet;\n    iconSetCF.style = Excel.IconSet.threeTriangles;\n\n    /*\n        The iconSetCF.criteria array is automatically prepopulated with\n        criterion elements whose properties have been given default settings.\n        You can't write to each property of a criterion directly. Instead,\n        replace the whole criteria object.\n\n        With a \"three*\" icon set style, such as \"threeTriangles\", the third\n        element in the criteria array (criteria[2]) defines the \"top\" icon;\n        e.g., a green triangle. The second (criteria[1]) defines the \"middle\"\n        icon, The first (criteria[0]) defines the \"low\" icon, but it\n        can often be left empty as this method does below, because every\n        cell that does not match the other two criteria always gets the low\n        icon.            \n    */\n    iconSetCF.criteria = [\n        {} as any,\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=700\"\n        },\n        {\n            type: Excel.ConditionalFormatIconRuleType.number,\n            operator: Excel.ConditionalIconCriterionOperator.greaterThanOrEqual,\n            formula: \"=1000\",\n        }\n    ];\n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.IconSetConditionalFormat.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.IconSetConditionalFormat является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.IconSetConditionalFormatData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.IconSetConditionalFormatData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.IconSetConditionalFormatData
-      description: ''
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.IconSetConditionalFormat.toJSON
+    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Иконсеткондитионалформат — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.IconSetConditionalFormatData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.IconSetConditionalFormatData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.IconSetConditionalFormatData
+        description: ''

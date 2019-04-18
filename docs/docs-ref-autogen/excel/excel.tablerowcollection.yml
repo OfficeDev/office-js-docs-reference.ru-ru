@@ -1,224 +1,286 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 73c84fbb6898246c63eb3f172ccdad1706650b6c
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29972934"
 items:
-- uid: excel.Excel.TableRowCollection
-  summary: >-
-    Представляет коллекцию всех строк, включенных в таблицу.
+  - uid: excel.Excel.TableRowCollection
+    summary: |-
+      Представляет коллекцию всех строк, включенных в таблицу.
+
+      Обратите внимание, что в отличие от диапазонов или столбцов, которые будут подстраиваться при добавлении новых строк и столбцов перед ними, объект TableRow представляет физическое расположение строки таблицы, но не данные. То есть, если данные сортируются или добавляются новые строки, строка таблицы по-прежнему будет направляться на индекс, для которого она была создана.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.TableRowCollection
+    fullName: Excel.TableRowCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.TableRowCollection.add
+      - excel.Excel.TableRowCollection.context
+      - excel.Excel.TableRowCollection.count
+      - excel.Excel.TableRowCollection.getCount
+      - excel.Excel.TableRowCollection.getItemAt
+      - excel.Excel.TableRowCollection.items
+      - excel.Excel.TableRowCollection.load
+      - excel.Excel.TableRowCollection.load_1
+      - excel.Excel.TableRowCollection.load_2
+      - excel.Excel.TableRowCollection.toJSON
+  - uid: excel.Excel.TableRowCollection.add
+    summary: |-
+      Добавляет одну или несколько строк в таблицу. Возвращается объект, находящийся над новыми строками.
+
+      Обратите внимание, что в отличие от диапазонов или столбцов, которые будут подстраиваться при добавлении новых строк и столбцов перед ними, объект TableRow представляет физическое расположение строки таблицы, но не данные. То есть, если данные сортируются или добавляются новые строки, строка таблицы по-прежнему будет направляться на индекс, для которого она была создана.
+
+      \[[Набор API: ExcelApi 1,1 для добавления одной строки; 1,4 допускает добавление нескольких строк.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+    name: 'add(index, values)'
+    fullName: 'add(index, values)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: |-
 
 
-    Обратите внимание, что в отличие от диапазонов или столбцы, которые будут настроить перед их при добавлении новых строк и столбцов, объект TableRow представляет физическое расположение строка таблицы, но не данные. То есть если сортируется данные или добавляются новые строки, строка таблицы будет предоставляться для указания по индексу, для которого он был создан.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var values = [["Sample", "Values", "For", "New", "Row"]];
+              var row = tables.getItem("Table1").rows.add(null, values);
+              row.load('index');
+              return ctx.sync().then(function() {
+                  console.log(row.index);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: 'Необязательный параметр. Определяет относительную позицию новой строки. Если задано значение null или -1, столбец добавляется в конце. Все строки ниже вставляемой строки сдвигаются вниз. Используется нулевой индекс.'
+          type:
+            - number
+        - id: values
+          description: Необязательный параметр. Двухмерный массив неформатированных значений строки таблицы.
+          type:
+            - Array<Array<boolean | string | number>> | boolean | string | number
+  - uid: excel.Excel.TableRowCollection.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.TableRowCollection.count
+    summary: |-
+      Возвращает количество строк в таблице. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableRowCollection.getCount
+    summary: |-
+      Получает количество строк в таблице.
+
+      \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.TableRowCollection.getItemAt
+    summary: |-
+      Получает строку на основании ее позиции в коллекции.
+
+      Обратите внимание, что в отличие от диапазонов или столбцов, которые будут подстраиваться при добавлении новых строк и столбцов перед ними, объект TableRow представляет физическое расположение строки таблицы, но не данные. То есть, если данные сортируются или добавляются новые строки, строка таблицы по-прежнему будет направляться на индекс, для которого она была создана.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.TableRowCollection
-  fullName: Excel.TableRowCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.TableRowCollection.add
-  - excel.Excel.TableRowCollection.context
-  - excel.Excel.TableRowCollection.count
-  - excel.Excel.TableRowCollection.getCount
-  - excel.Excel.TableRowCollection.getItemAt
-  - excel.Excel.TableRowCollection.items
-  - excel.Excel.TableRowCollection.load
-  - excel.Excel.TableRowCollection.load_1
-  - excel.Excel.TableRowCollection.load_2
-  - excel.Excel.TableRowCollection.toJSON
-- uid: excel.Excel.TableRowCollection.add
-  summary: >-
-    Добавляет одну или несколько строк в таблицу. Возвращается объект, находящийся над новыми строками.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablerow = ctx.workbook.tables.getItem('Table1').rows.getItemAt(0);
+              tablerow.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablerow.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: Значение индекса получаемого объекта. Используется нулевой индекс.
+          type:
+            - number
+  - uid: excel.Excel.TableRowCollection.items
+    summary: Получает загруженные дочерние элементы в этой коллекции.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.TableRow[];'
+      return:
+        type:
+          - 'Excel.TableRow[]'
+  - uid: excel.Excel.TableRowCollection.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Excel.TableRowCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.TableRowCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRowCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableRowCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableRowCollection;'
+      return:
+        type:
+          - excel.Excel.TableRowCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.TableRowCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.TableRowCollection.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableRowCollection;'
+      return:
+        type:
+          - excel.Excel.TableRowCollection
+        description: |-
 
 
-    Обратите внимание, что в отличие от диапазонов или столбцы, которые будут настроить перед их при добавлении новых строк и столбцов, объект TableRow представляет физическое расположение строка таблицы, но не данные. То есть если сортируется данные или добавляются новые строки, строка таблицы будет предоставляться для указания по индексу, для которого он был создан.
+          #### <a name="examples"></a>Примеры
 
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.1 для добавления одной строки; 1.4 позволяет добавлять несколько строк.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
-  name: add(index, values)
-  fullName: add(index, values)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var row = tables.getItem(\"Table1\").rows.add(null, values);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: Необязательный параметр. Определяет относительную позицию новой строки. Если задано значение null или -1, столбец добавляется в конце. Все строки ниже вставляемой строки сдвигаются вниз. Используется нулевой индекс.
-      type:
-      - number
-    - id: values
-      description: Необязательный параметр. Двухмерный массив неформатированных значений строки таблицы.
-      type:
-      - Array<Array<boolean | string | number>> | boolean | string | number
-- uid: excel.Excel.TableRowCollection.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.TableRowCollection.count
-  summary: >-
-    Возвращает количество строк в таблице. Только для чтения.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: count
-  fullName: count
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly count: number;'
-    return:
-      type:
-      - number
-- uid: excel.Excel.TableRowCollection.getCount
-  summary: >-
-    Получает количество строк в таблице.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: excel.Excel.TableRowCollection.getItemAt
-  summary: >-
-    Получает строку на основании сведений о ее позиции в коллекции.
-
-
-    Обратите внимание, что в отличие от диапазонов или столбцы, которые будут настроить перед их при добавлении новых строк и столбцов, объект TableRow представляет физическое расположение строка таблицы, но не данные. То есть если сортируется данные или добавляются новые строки, строка таблицы будет предоставляться для указания по индексу, для которого он был создан.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItemAt(index)
-  fullName: getItemAt(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemAt(index: number): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tablerow = ctx.workbook.tables.getItem('Table1').rows.getItemAt(0);\n    tablerow.load('name');\n    return ctx.sync().then(function() {\n            console.log(tablerow.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: Значение индекса получаемого объекта. Используется нулевой индекс.
-      type:
-      - number
-- uid: excel.Excel.TableRowCollection.items
-  summary: Получает загруженных дочерних элементов в этом семействе.
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.TableRow[];'
-    return:
-      type:
-      - Excel.TableRow[]
-- uid: excel.Excel.TableRowCollection.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
-
-
-    `load(option?: string | string[]): Excel.TableRowCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.TableRowCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRowCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.TableRowCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableRowCollection;'
-    return:
-      type:
-      - excel.Excel.TableRowCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.TableRowCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.TableRowCollection.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.TableRowCollection;'
-    return:
-      type:
-      - excel.Excel.TableRowCollection
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tablerows = ctx.workbook.tables.getItem('Table1').rows;\n    tablerows.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"tablerows Count: \" + tablerows.count);\n        for (var i = 0; i < tablerows.items.length; i++)\n        {\n            console.log(tablerows.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// In the example, we'll select the top 100 rows of the table.\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.getItem(\"Table1\");\n    var tableRows = table.rows.load({\"select\" : \"index, values\",\"top\": 100, \"skip\": 0 })\n    return ctx.sync().then(function() {\n        for (var i = 0; i < tableRows.items.length; i++)\n        {\n            console.log(tableRows.items[i].index);\n            console.log(tableRows.items[i].values);\n        }\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
-      type:
-      - string | string[]
-- uid: excel.Excel.TableRowCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.TableRowCollection;'
-    return:
-      type:
-      - excel.Excel.TableRowCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.TableRowCollection.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `Excel.TableRowCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.TableRowCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.TableRowCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.TableRowCollectionData
-      description: ''
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablerows = ctx.workbook.tables.getItem('Table1').rows;
+              tablerows.load('items');
+              return ctx.sync().then(function() {
+                  console.log("tablerows Count: " + tablerows.count);
+                  for (var i = 0; i < tablerows.items.length; i++)
+                  {
+                      console.log(tablerows.items[i].index);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // In the example, we'll select the top 100 rows of the table.
+          Excel.run(function (ctx) { 
+              var table = ctx.workbook.tables.getItem("Table1");
+              var tableRows = table.rows.load({"select" : "index, values","top": 100, "skip": 0 })
+              return ctx.sync().then(function() {
+                  for (var i = 0; i < tableRows.items.length; i++)
+                  {
+                      console.log(tableRows.items[i].index);
+                      console.log(tableRows.items[i].values);
+                  }
+              });
+          }).catch(function(error) {
+                  console.log("Error: " + error);
+                  if (error instanceof OfficeExtension.Error) {
+                      console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                  }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableRowCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.TableRowCollection;'
+      return:
+        type:
+          - excel.Excel.TableRowCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.TableRowCollection.toJSON
+    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.TableRowCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.TableRowCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableRowCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableRowCollectionData
+        description: ''
