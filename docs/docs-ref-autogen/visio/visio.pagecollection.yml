@@ -1,157 +1,162 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 75b8b59dfb4eb9a725b22f3d45db1e5ee5e5aaee
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29973165"
 items:
-- uid: visio.Visio.PageCollection
-  summary: >-
-    Представляет коллекцию объектов Page, включенных в документ.
+  - uid: visio.Visio.PageCollection
+    summary: |-
+      Представляет коллекцию объектов Page, включенных в документ.
+
+      \[[Набор API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: Visio.PageCollection
+    fullName: Visio.PageCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: visio
+    children:
+      - visio.Visio.PageCollection.getCount
+      - visio.Visio.PageCollection.getItem
+      - visio.Visio.PageCollection.items
+      - visio.Visio.PageCollection.load
+      - visio.Visio.PageCollection.load_1
+      - visio.Visio.PageCollection.load_2
+      - visio.Visio.PageCollection.toJSON
+  - uid: visio.Visio.PageCollection.getCount
+    summary: |-
+      Возвращает количество страниц в коллекции.
+
+      \[[Набор API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: visio.Visio.PageCollection.getItem
+    summary: |-
+      Возвращает страницу по ключу (имени или идентификатору).
+
+      \[[Набор API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: number | string): Visio.Page;'
+      return:
+        type:
+          - Visio.Page
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: Visio.PageCollection
-  fullName: Visio.PageCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: visio
-  children:
-  - visio.Visio.PageCollection.getCount
-  - visio.Visio.PageCollection.getItem
-  - visio.Visio.PageCollection.items
-  - visio.Visio.PageCollection.load
-  - visio.Visio.PageCollection.load_1
-  - visio.Visio.PageCollection.load_2
-  - visio.Visio.PageCollection.toJSON
-- uid: visio.Visio.PageCollection.getCount
-  summary: >-
-    Возвращает количество страниц в коллекции.
+          #### <a name="examples"></a>Примеры
 
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var pageName = 'Page-1';
+              var page = ctx.document.pages.getItem(pageName);
+              page.activate();
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: Ключ — имя или идентификатор получаемой страницы.
+          type:
+            - number | string
+  - uid: visio.Visio.PageCollection.items
+    summary: Получает загруженные дочерние элементы в этой коллекции.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Visio.Page[];'
+      return:
+        type:
+          - 'Visio.Page[]'
+  - uid: visio.Visio.PageCollection.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
 
-    \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: visio.Visio.PageCollection.getItem
-  summary: >-
-    Возвращает страницу по ключу (имени или идентификатору).
+      `load(option?: string | string[]): Visio.PageCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
 
+      `load(option?: { select?: string; expand?: string; }): Visio.PageCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
 
-    \[[Набор API-Интерфейсов: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: getItem(key)
-  fullName: getItem(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(key: number | string): Visio.Page;'
-    return:
-      type:
-      - Visio.Page
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nVisio.run(session, function (ctx) {\n    var pageName = 'Page-1';\n    var page = ctx.document.pages.getItem(pageName);\n    page.activate();\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: key
-      description: Ключ — имя или идентификатор получаемой страницы.
-      type:
-      - number | string
-- uid: visio.Visio.PageCollection.items
-  summary: Получает загруженных дочерних элементов в этом семействе.
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Visio.Page[];'
-    return:
-      type:
-      - Visio.Page[]
-- uid: visio.Visio.PageCollection.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
-
-
-    `load(option?: string | string[]): Visio.PageCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; }): Visio.PageCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.PageCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Visio.Interfaces.PageCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions): Visio.PageCollection;'
-    return:
-      type:
-      - Visio.PageCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Visio.Interfaces.PageCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions
-- uid: visio.Visio.PageCollection.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Visio.PageCollection;'
-    return:
-      type:
-      - Visio.PageCollection
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
-      type:
-      - string | string[]
-- uid: visio.Visio.PageCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Visio.PageCollection;'
-    return:
-      type:
-      - Visio.PageCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: visio.Visio.PageCollection.toJSON
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Visio.Interfaces.PageCollectionData;'
-    return:
-      type:
-      - Visio.Interfaces.PageCollectionData
-      description: ''
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.PageCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Visio.Interfaces.PageCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions): Visio.PageCollection;'
+      return:
+        type:
+          - Visio.PageCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Visio.Interfaces.PageCollectionLoadOptions & Visio.Interfaces.CollectionLoadOptions
+  - uid: visio.Visio.PageCollection.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Visio.PageCollection;'
+      return:
+        type:
+          - Visio.PageCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: visio.Visio.PageCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Visio.PageCollection;'
+      return:
+        type:
+          - Visio.PageCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: visio.Visio.PageCollection.toJSON
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Visio.Interfaces.PageCollectionData;'
+      return:
+        type:
+          - Visio.Interfaces.PageCollectionData
+        description: ''

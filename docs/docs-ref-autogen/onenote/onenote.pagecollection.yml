@@ -1,244 +1,304 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 96c0ad9f60239cb1b0da0bd12a80409e10591542
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29976644"
 items:
-- uid: onenote.OneNote.PageCollection
-  summary: >-
-    Представляет коллекцию страниц.
+  - uid: onenote.OneNote.PageCollection
+    summary: |-
+      Представляет коллекцию страниц.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: OneNote.PageCollection
+    fullName: OneNote.PageCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: onenote
+    children:
+      - onenote.OneNote.PageCollection.context
+      - onenote.OneNote.PageCollection.count
+      - onenote.OneNote.PageCollection.getByTitle
+      - onenote.OneNote.PageCollection.getItem
+      - onenote.OneNote.PageCollection.getItemAt
+      - onenote.OneNote.PageCollection.items
+      - onenote.OneNote.PageCollection.load
+      - onenote.OneNote.PageCollection.load_1
+      - onenote.OneNote.PageCollection.load_2
+      - onenote.OneNote.PageCollection.toJSON
+      - onenote.OneNote.PageCollection.track
+      - onenote.OneNote.PageCollection.untrack
+  - uid: onenote.OneNote.PageCollection.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: onenote.OneNote.PageCollection.count
+    summary: |-
+      Возвращает количество страниц в коллекции. Только для чтения.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: onenote.OneNote.PageCollection.getByTitle
+    summary: |-
+      Возвращает коллекцию объектов Page с указанным названием.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: getByTitle(title)
+    fullName: getByTitle(title)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByTitle(title: string): OneNote.PageCollection;'
+      return:
+        type:
+          - onenote.OneNote.PageCollection
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  name: OneNote.PageCollection
-  fullName: OneNote.PageCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: onenote
-  children:
-  - onenote.OneNote.PageCollection.context
-  - onenote.OneNote.PageCollection.count
-  - onenote.OneNote.PageCollection.getByTitle
-  - onenote.OneNote.PageCollection.getItem
-  - onenote.OneNote.PageCollection.getItemAt
-  - onenote.OneNote.PageCollection.items
-  - onenote.OneNote.PageCollection.load
-  - onenote.OneNote.PageCollection.load_1
-  - onenote.OneNote.PageCollection.load_2
-  - onenote.OneNote.PageCollection.toJSON
-  - onenote.OneNote.PageCollection.track
-  - onenote.OneNote.PageCollection.untrack
-- uid: onenote.OneNote.PageCollection.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: onenote.OneNote.PageCollection.count
-  summary: >-
-    Возвращает количество страниц в коллекции. Только для чтения.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          OneNote.run(function (context) {
+
+              // Get all the pages in the current section.
+              var allPages = context.application.getActiveSection().pages;
+
+              // Queue a command to load the pages. 
+              // For best performance, request specific properties.
+              allPages.load("id"); 
+
+              // Run the queued commands, and return a promise to indicate task completion.
+              return context.sync()
+                  .then(function () {
+
+                      // Get the sections with the specified name.
+                      var todoPages = allPages.getByTitle("Todo list");
+
+                      // Queue a command to load the section. 
+                      // For best performance, request specific properties.
+                      todoPages.load("id,title"); 
+
+                      return context.sync()
+                          .then(function () {
+
+                              // Iterate through the collection or access items individually by index.
+                              if (todoPages.items.length > 0) {
+                                  console.log("Page title: " + todoPages.items[0].title);
+                                  console.log("Page ID: " + todoPages.items[0].id);
+                              }
+                          });
+                  });
+          })
+          .catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: title
+          description: Заголовок страницы.
+          type:
+            - string
+  - uid: onenote.OneNote.PageCollection.getItem
+    summary: |-
+      Возвращает объект Page по его идентификатору или индексу в коллекции. Только для чтения.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: getItem(index)
+    fullName: getItem(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(index: number | string): OneNote.Page;'
+      return:
+        type:
+          - onenote.OneNote.Page
+        description: ''
+      parameters:
+        - id: index
+          description: Идентификатор объекта Page или расположение индекса этого объекта в коллекции.
+          type:
+            - number | string
+  - uid: onenote.OneNote.PageCollection.getItemAt
+    summary: |-
+      Возвращает объект Page по его позиции в коллекции.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): OneNote.Page;'
+      return:
+        type:
+          - onenote.OneNote.Page
+        description: ''
+      parameters:
+        - id: index
+          description: Значение индекса получаемого объекта. Используется нулевой индекс.
+          type:
+            - number
+  - uid: onenote.OneNote.PageCollection.items
+    summary: Получает загруженные дочерние элементы в этой коллекции.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: OneNote.Page[];'
+      return:
+        type:
+          - 'OneNote.Page[]'
+  - uid: onenote.OneNote.PageCollection.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): OneNote.PageCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): OneNote.PageCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.PageCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OneNote.Interfaces.PageCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.PageCollection;'
+      return:
+        type:
+          - onenote.OneNote.PageCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OneNote.Interfaces.PageCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
+  - uid: onenote.OneNote.PageCollection.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): OneNote.PageCollection;'
+      return:
+        type:
+          - onenote.OneNote.PageCollection
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  name: count
-  fullName: count
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly count: number;'
-    return:
-      type:
-      - number
-- uid: onenote.OneNote.PageCollection.getByTitle
-  summary: >-
-    Возвращает коллекцию объектов Page с указанным названием.
+          #### <a name="examples"></a>Примеры
 
-
-    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  name: getByTitle(title)
-  fullName: getByTitle(title)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getByTitle(title: string): OneNote.PageCollection;'
-    return:
-      type:
-      - onenote.OneNote.PageCollection
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get all the pages in the current section.\n    var allPages = context.application.getActiveSection().pages;\n\n    // Queue a command to load the pages. \n    // For best performance, request specific properties.\n    allPages.load(\"id\"); \n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Get the sections with the specified name.\n            var todoPages = allPages.getByTitle(\"Todo list\");\n\n            // Queue a command to load the section. \n            // For best performance, request specific properties.\n            todoPages.load(\"id,title\"); \n\n            return context.sync()\n                .then(function () {\n\n                    // Iterate through the collection or access items individually by index.\n                    if (todoPages.items.length > 0) {\n                        console.log(\"Page title: \" + todoPages.items[0].title);\n                        console.log(\"Page ID: \" + todoPages.items[0].id);\n                    }\n                });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: title
-      description: Заголовок страницы.
-      type:
-      - string
-- uid: onenote.OneNote.PageCollection.getItem
-  summary: >-
-    Возвращает объект Page по его идентификатору или индексу в коллекции. Только для чтения.
-
-
-    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  name: getItem(index)
-  fullName: getItem(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(index: number | string): OneNote.Page;'
-    return:
-      type:
-      - onenote.OneNote.Page
-      description: ''
-    parameters:
-    - id: index
-      description: Идентификатор объекта Page или расположение индекса этого объекта в коллекции.
-      type:
-      - number | string
-- uid: onenote.OneNote.PageCollection.getItemAt
-  summary: >-
-    Возвращает объект Page по его позиции в коллекции.
-
-
-    \[[Набор API-Интерфейсов: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-  name: getItemAt(index)
-  fullName: getItemAt(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemAt(index: number): OneNote.Page;'
-    return:
-      type:
-      - onenote.OneNote.Page
-      description: ''
-    parameters:
-    - id: index
-      description: Значение индекса получаемого объекта. Используется нулевой индекс.
-      type:
-      - number
-- uid: onenote.OneNote.PageCollection.items
-  summary: Получает загруженных дочерних элементов в этом семействе.
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: OneNote.Page[];'
-    return:
-      type:
-      - OneNote.Page[]
-- uid: onenote.OneNote.PageCollection.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
-
-
-    `load(option?: string | string[]): OneNote.PageCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; }): OneNote.PageCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.PageCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OneNote.Interfaces.PageCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.PageCollection;'
-    return:
-      type:
-      - onenote.OneNote.PageCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - OneNote.Interfaces.PageCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
-- uid: onenote.OneNote.PageCollection.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): OneNote.PageCollection;'
-    return:
-      type:
-      - onenote.OneNote.PageCollection
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n    \n    // Get the pages in the current section.\n    var pages = context.application.getActiveSection().pages;\n    \n    // Queue a command to load the id and title for each page.            \n    pages.load('id,title');\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Display the properties.\n            $.each(pages.items, function(index, page) {\n                console.log(page.title);\n                console.log(page.id);\n            });\n        }); \n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
-      type:
-      - string | string[]
-- uid: onenote.OneNote.PageCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): OneNote.PageCollection;'
-    return:
-      type:
-      - onenote.OneNote.PageCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: onenote.OneNote.PageCollection.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `OneNote.PageCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `OneNote.Interfaces.PageCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): OneNote.Interfaces.PageCollectionData;'
-    return:
-      type:
-      - onenote.OneNote.Interfaces.PageCollectionData
-      description: ''
-- uid: onenote.OneNote.PageCollection.track
-  summary: Отслеживание объектов для автоматической на основании соседних изменения в документе. Этот вызов это сокращение для context.trackedObjects.add(thisObject). Если вы используете этот объект «.sync» вызовах и за пределами последовательного выполнение пакета «.run» и get «InvalidObjectPath» ошибка при установке свойства или вызова метода на объекте, необходимые для добавления объекта отслеживаемого объекта Сначала создается объект семейства сайтов.
-  name: track()
-  fullName: track()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'track(): OneNote.PageCollection;'
-    return:
-      type:
-      - onenote.OneNote.PageCollection
-      description: ''
-- uid: onenote.OneNote.PageCollection.untrack
-  summary: Выпуск памяти, связанное с объектом, если ранее отслеживаются. Этот вызов — это сокращение для context.trackedObjects.remove(thisObject). Создавая множество отслеживаемых объектов замедляет ведущего приложения, так помните освободить место на любые объекты, добавлении, после завершения их использования. Необходимо будет вызывать «context.sync()» до выпуска памяти вступает в силу.
-  name: untrack()
-  fullName: untrack()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'untrack(): OneNote.PageCollection;'
-    return:
-      type:
-      - onenote.OneNote.PageCollection
-      description: ''
+          ```javascript
+          OneNote.run(function (context) {
+              
+              // Get the pages in the current section.
+              var pages = context.application.getActiveSection().pages;
+              
+              // Queue a command to load the id and title for each page.            
+              pages.load('id,title');
+              
+              // Run the queued commands, and return a promise to indicate task completion.
+              return context.sync()
+                  .then(function () {
+                      
+                      // Display the properties.
+                      $.each(pages.items, function(index, page) {
+                          console.log(page.title);
+                          console.log(page.id);
+                      });
+                  }); 
+          })
+          .catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: onenote.OneNote.PageCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): OneNote.PageCollection;'
+      return:
+        type:
+          - onenote.OneNote.PageCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: onenote.OneNote.PageCollection.toJSON
+    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `OneNote.PageCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`OneNote.Interfaces.PageCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): OneNote.Interfaces.PageCollectionData;'
+      return:
+        type:
+          - onenote.OneNote.Interfaces.PageCollectionData
+        description: ''
+  - uid: onenote.OneNote.PageCollection.track
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): OneNote.PageCollection;'
+      return:
+        type:
+          - onenote.OneNote.PageCollection
+        description: ''
+  - uid: onenote.OneNote.PageCollection.untrack
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): OneNote.PageCollection;'
+      return:
+        type:
+          - onenote.OneNote.PageCollection
+        description: ''

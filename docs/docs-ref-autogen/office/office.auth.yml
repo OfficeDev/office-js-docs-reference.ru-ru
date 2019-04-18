@@ -1,102 +1,77 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 3de618d8e5fc94960295ea196b58e2151b5e101c
-ms.sourcegitcommit: a422a2c3b9ada79477a9f873276b3c00765f7072
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "30927708"
 items:
-- uid: office.Office.Auth
-  summary: Пространство имен Office AUTH, Office. Context. auth предоставляет метод, позволяющий ведущему приложению Office получать маркер доступа к веб-приложению надстройки. Косвенно это также дает возможность надстройке получать доступ к данным Microsoft Graph пользователя, вошедшего в систему, не требуя от пользователя еще раз выполнить вход в систему.
-  isPreview: true
-  name: Office.Auth
-  fullName: Office.Auth
-  langs:
-  - typeScript
-  type: interface
-  package: office
-  children:
-  - office.Office.Auth.getAccessTokenAsync
-  - office.Office.Auth.getAccessTokenAsync_1
-- uid: office.Office.Auth.getAccessTokenAsync
-  summary: >-
-    Вызывает конечную точку Azure Active Directory версии 2.0, чтобы получить маркер доступа к вашей надстройке в веб-приложении. Позволяет надстройкам идентифицировать пользователей. Код на стороне сервера может использовать этот маркер для доступа к Microsoft Graph для веб-приложения надстройки с помощью последующего [направления "от имени"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of) .<!-- -->.
+  - uid: office.Office.Auth
+    summary: 'Пространство имен Office AUTH, Office. Context. auth предоставляет метод, позволяющий ведущему приложению Office получать маркер доступа к веб-приложению надстройки. Косвенно это также дает возможность надстройке получать доступ к данным Microsoft Graph пользователя, вошедшего в систему, не требуя от пользователя еще раз выполнить вход в систему.'
+    isPreview: true
+    name: Office.Auth
+    fullName: Office.Auth
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.Auth.getAccessTokenAsync
+      - office.Office.Auth.getAccessTokenAsync_1
+  - uid: office.Office.Auth.getAccessTokenAsync
+    summary: "Вызывает конечную точку Azure Active Directory версии\_2.0, чтобы получить маркер доступа к вашей надстройке в веб-приложении. Позволяет надстройкам идентифицировать пользователей. Код на стороне сервера может использовать этот маркер для доступа к Microsoft Graph для веб-приложения надстройки с помощью последующего [направления \"от имени\"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of) .<!-- -->.\n\nВажно! в Outlook этот API не поддерживается, если надстройка загружена в почтовый ящик Outlook.com или Gmail."
+    remarks: |-
+      **Hosts**: Excel, OneNote, Outlook, PowerPoint, **набор**обязательных элементов Word: [IdentityAPI](https://docs.microsoft.com/en-us/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
 
+      Для этого API необходима конфигурация единого входа, связывающая надстройку с приложением Azure. Пользователи Office входят с помощью учетных записей организаций и учетных записей Майкрософт. Microsoft Azure возвращает маркеры, предназначенные для учетных записей обоих типов, для доступа к ресурсам в Microsoft Graph.
 
-    Важно! в Outlook этот API не поддерживается, если надстройка загружена в почтовый ящик Outlook.com или Gmail.
-  remarks: >-
-    <table><tr><td>Узлы</td><td>Excel, OneNote, Outlook, PowerPoint и Word.</td></tr>
+      #### <a name="examples"></a>Примеры
 
+      ```javascript
+      Office.context.auth.getAccessTokenAsync(function(result) {
+          if (result.status === "succeeded") {
+              var token = result.value;
+              // ...
+          } else {
+              console.log("Error obtaining token", result.error);
+          }
+      });
+      ```
+    isPreview: true
+    name: 'getAccessTokenAsync(options, callback)'
+    fullName: 'getAccessTokenAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: Необязательно. Принимает объект Аусоптионс для определения поведения при входе.
+          type:
+            - office.Office.AuthOptions
+        - id: callback
+          description: 'Необязательно. Принимает метод обратного вызова, который может использовать синтаксический анализ маркера для идентификатора пользователя или использовать маркер из последовательности "от имени" для получения доступа к Microsoft Graph. Если AsyncResult. Status — "succeeded", то AsyncResult. Value — это необработанный AAD, AAD v. версии 2.0.'
+          type:
+            - '(result: AsyncResult<string>) => void'
+  - uid: office.Office.Auth.getAccessTokenAsync_1
+    summary: "Вызывает конечную точку Azure Active Directory версии\_2.0, чтобы получить маркер доступа к вашей надстройке в веб-приложении. Позволяет надстройкам идентифицировать пользователей. Код на стороне сервера может использовать этот маркер для доступа к Microsoft Graph для веб-приложения надстройки с помощью последующего [направления \"от имени\"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of) .<!-- -->.\n\nВажно! в Outlook этот API не поддерживается, если надстройка загружена в почтовый ящик Outlook.com или Gmail."
+    remarks: |-
+      **Hosts**: Excel, OneNote, Outlook, PowerPoint, **набор**обязательных элементов Word: [IdentityAPI](https://docs.microsoft.com/en-us/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
 
-    <tr><td>Наборы требований</td><td>[IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)</td></tr></table>
-
-
-    Для этого API необходима конфигурация единого входа, связывающая надстройку с приложением Azure. Пользователи Office входят с помощью учетных записей организаций и учетных записей Майкрософт. Microsoft Azure возвращает маркеры, предназначенные для учетных записей обоих типов, для доступа к ресурсам в Microsoft Graph.
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    Office.context.auth.getAccessTokenAsync(function(result) {
-        if (result.status === "succeeded") {
-            var token = result.value;
-            // ...
-        } else {
-            console.log("Error obtaining token", result.error);
-        }
-    });
-
-    ```
-  isPreview: true
-  name: getAccessTokenAsync(options, callback)
-  fullName: getAccessTokenAsync(options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: options
-      description: Необязательный. Принимает объект Аусоптионс для определения поведения при входе.
-      type:
-      - office.Office.AuthOptions
-    - id: callback
-      description: Необязательный. Принимает метод обратного вызова, который может использовать синтаксический анализ маркера для идентификатора пользователя или использовать маркер из последовательности "от имени" для получения доступа к Microsoft Graph. Если AsyncResult. Status — "succeeded", то AsyncResult. Value — это необработанный AAD, AAD v. версии 2.0.
-      type:
-      - '(result: AsyncResult<string>) => void'
-- uid: office.Office.Auth.getAccessTokenAsync_1
-  summary: >-
-    Вызывает конечную точку Azure Active Directory версии 2.0, чтобы получить маркер доступа к вашей надстройке в веб-приложении. Позволяет надстройкам идентифицировать пользователей. Код на стороне сервера может использовать этот маркер для доступа к Microsoft Graph для веб-приложения надстройки с помощью последующего [направления "от имени"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of) .<!-- -->.
-
-
-    Важно! в Outlook этот API не поддерживается, если надстройка загружена в почтовый ящик Outlook.com или Gmail.
-  remarks: >-
-    <table><tr><td>Узлы</td><td>Excel, OneNote, Outlook, PowerPoint и Word.</td></tr>
-
-
-    <tr><td>Наборы требований</td><td>[IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)</td></tr></table>
-
-
-    Для этого API необходима конфигурация единого входа, связывающая надстройку с приложением Azure. Пользователи Office входят с помощью учетных записей организаций и учетных записей Майкрософт. Microsoft Azure возвращает маркеры, предназначенные для учетных записей обоих типов, для доступа к ресурсам в Microsoft Graph.
-  isPreview: true
-  name: getAccessTokenAsync(callback)
-  fullName: getAccessTokenAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAccessTokenAsync(callback?: (result: AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: Необязательный. Принимает метод обратного вызова, который может использовать синтаксический анализ маркера для идентификатора пользователя или использовать маркер из последовательности "от имени" для получения доступа к Microsoft Graph. Если AsyncResult. Status — "succeeded", то AsyncResult. Value — это необработанный AAD, AAD v. версии 2.0.
-      type:
-      - '(result: AsyncResult<string>) => void'
+      Для этого API необходима конфигурация единого входа, связывающая надстройку с приложением Azure. Пользователи Office входят с помощью учетных записей организаций и учетных записей Майкрософт. Microsoft Azure возвращает маркеры, предназначенные для учетных записей обоих типов, для доступа к ресурсам в Microsoft Graph.
+    isPreview: true
+    name: getAccessTokenAsync(callback)
+    fullName: getAccessTokenAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAccessTokenAsync(callback?: (result: AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Необязательно. Принимает метод обратного вызова, который может использовать синтаксический анализ маркера для идентификатора пользователя или использовать маркер из последовательности "от имени" для получения доступа к Microsoft Graph. Если AsyncResult. Status — "succeeded", то AsyncResult. Value — это необработанный AAD, AAD v. версии 2.0.'
+          type:
+            - '(result: AsyncResult<string>) => void'

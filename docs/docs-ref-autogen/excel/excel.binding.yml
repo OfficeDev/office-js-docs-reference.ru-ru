@@ -1,259 +1,332 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 18ecfe56c9e0724f06a12ea1ad9de1671608d1fe
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29981621"
 items:
-- uid: excel.Excel.Binding
-  summary: >-
-    Представляет привязку Office.js, которая определена в книге.
+  - uid: excel.Excel.Binding
+    summary: |-
+      Представляет привязку Office.js, которая определена в книге.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Binding
+    fullName: Excel.Binding
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.Binding.context
+      - excel.Excel.Binding.delete
+      - excel.Excel.Binding.getRange
+      - excel.Excel.Binding.getTable
+      - excel.Excel.Binding.getText
+      - excel.Excel.Binding.id
+      - excel.Excel.Binding.load
+      - excel.Excel.Binding.load_1
+      - excel.Excel.Binding.load_2
+      - excel.Excel.Binding.onDataChanged
+      - excel.Excel.Binding.onSelectionChanged
+      - excel.Excel.Binding.toJSON
+      - excel.Excel.Binding.type
+  - uid: excel.Excel.Binding.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.Binding.delete
+    summary: |-
+      Удаляет привязку.
+
+      \[[Набор API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel.Excel.Binding.getRange
+    summary: |-
+      Возвращает представленный привязкой диапазон. Если тип привязки неправильный, выдается ошибка.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.Binding
-  fullName: Excel.Binding
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.Binding.context
-  - excel.Excel.Binding.delete
-  - excel.Excel.Binding.getRange
-  - excel.Excel.Binding.getTable
-  - excel.Excel.Binding.getText
-  - excel.Excel.Binding.id
-  - excel.Excel.Binding.load
-  - excel.Excel.Binding.load_1
-  - excel.Excel.Binding.load_2
-  - excel.Excel.Binding.onDataChanged
-  - excel.Excel.Binding.onSelectionChanged
-  - excel.Excel.Binding.toJSON
-  - excel.Excel.Binding.type
-- uid: excel.Excel.Binding.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.Binding.delete
-  summary: >-
-    Удаляет привязку.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var range = binding.getRange();
+              range.load('cellCount');
+              return ctx.sync().then(function() {
+                  console.log(range.cellCount);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Binding.getTable
+    summary: |-
+      Возвращает представленную привязкой таблицу. Если тип привязки неправильный, выдается ошибка.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getTable()
+    fullName: getTable()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTable(): Excel.Table;'
+      return:
+        type:
+          - excel.Excel.Table
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: delete()
-  fullName: delete()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'delete(): void;'
-    return:
-      type:
-      - void
-      description: ''
-- uid: excel.Excel.Binding.getRange
-  summary: >-
-    Возвращает представленный привязкой диапазон. Если тип привязки неправильный, выдается ошибка.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var table = binding.getTable();
+              table.load('name');
+              return ctx.sync().then(function() {
+                      console.log(table.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Binding.getText
+    summary: |-
+      Возвращает представленный привязкой текст. Если тип привязки неправильный, выдается ошибка.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getText()
+    fullName: getText()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getText(): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getRange()
-  fullName: getRange()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getRange(): Excel.Range;'
-    return:
-      type:
-      - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var range = binding.getRange();\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel.Excel.Binding.getTable
-  summary: >-
-    Возвращает представленную привязкой таблицу. Если тип привязки неправильный, выдается ошибка.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              var text = binding.getText();
+              binding.load('text');
+              return ctx.sync().then(function() {
+                  console.log(text);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Binding.id
+    summary: |-
+      Представляет идентификатор привязки. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.Binding.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Excel.Binding`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.Binding`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Binding`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.BindingLoadOptions): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.BindingLoadOptions
+  - uid: excel.Excel.Binding.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getTable()
-  fullName: getTable()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getTable(): Excel.Table;'
-    return:
-      type:
-      - excel.Excel.Table
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var table = binding.getTable();\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel.Excel.Binding.getText
-  summary: >-
-    Возвращает представленный привязкой текст. Если тип привязки неправильный, выдается ошибка.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var binding = ctx.workbook.bindings.getItemAt(0);
+              binding.load('type');
+              return ctx.sync().then(function() {
+                  console.log(binding.type);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.Binding.load_2
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Binding;'
+      return:
+        type:
+          - excel.Excel.Binding
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.Binding.onDataChanged
+    summary: |-
+      Возникает при изменении данных или форматирования в привязке.
+
+      \[[Набор API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDataChanged
+    fullName: onDataChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDataChanged: OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getText()
-  fullName: getText()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getText(): OfficeExtension.ClientResult<string>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<string>
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var text = binding.getText();\n    binding.load('text');\n    return ctx.sync().then(function() {\n        console.log(text);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel.Excel.Binding.id
-  summary: >-
-    Представляет идентификатор привязки. Только для чтения.
+          #### <a name="examples"></a>Примеры
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");    
+              const salesTable = sheet.tables.getItem("SalesTable");
+              const salesByQuarterBinding = context.workbook.bindings.add(salesTable.getRange(), "Table", "SalesByQuarter");
+              salesByQuarterBinding.onDataChanged.add(onSalesDataChanged);
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: id
-  fullName: id
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly id: string;'
-    return:
-      type:
-      - string
-- uid: excel.Excel.Binding.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
+              console.log("The data changed handler is registered.");
 
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.Binding.onSelectionChanged
+    summary: |-
+      Возникает при изменении выбранного содержимого в привязке.
 
-    `load(option?: string | string[]): Excel.Binding`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
+      \[[Набор API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onSelectionChanged
+    fullName: onSelectionChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>
+  - uid: excel.Excel.Binding.toJSON
+    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Binding является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.BindingData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.BindingData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.BindingData
+        description: ''
+  - uid: excel.Excel.Binding.type
+    summary: |-
+      Возвращает тип привязки. Дополнительные сведения см. в статье Excel. BindingType. Только для чтения.
 
-
-    `load(option?: { select?: string; expand?: string; }): Excel.Binding`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Binding`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.BindingLoadOptions): Excel.Binding;'
-    return:
-      type:
-      - excel.Excel.Binding
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.BindingLoadOptions
-- uid: excel.Excel.Binding.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.Binding;'
-    return:
-      type:
-      - excel.Excel.Binding
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    binding.load('type');\n    return ctx.sync().then(function() {\n        console.log(binding.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
-      type:
-      - string | string[]
-- uid: excel.Excel.Binding.load_2
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Binding;'
-    return:
-      type:
-      - excel.Excel.Binding
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Где propertyNamesAndPaths.select — это разделенный запятыми строка, указывающая свойства для загрузки, а propertyNamesAndPaths.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.Binding.onDataChanged
-  summary: >-
-    Происходит при изменении данных или форматирования в привязке.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: onDataChanged
-  fullName: onDataChanged
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onDataChanged: OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");    \n    const salesTable = sheet.tables.getItem(\"SalesTable\");\n    const salesByQuarterBinding = context.workbook.bindings.add(salesTable.getRange(), \"Table\", \"SalesByQuarter\");\n    salesByQuarterBinding.onDataChanged.add(onSalesDataChanged);\n\n    console.log(\"The data changed handler is registered.\");\n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.Binding.onSelectionChanged
-  summary: >-
-    Происходит при изменении выбранного контента в привязке.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: onSelectionChanged
-  fullName: onSelectionChanged
-  langs:
-  - typeScript
-  type: event
-  syntax:
-    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>;'
-    return:
-      type:
-      - OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>
-- uid: excel.Excel.Binding.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходный объект Excel.Binding является объектом API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.BindingData` <!-- -->), который содержит неполные копии всех загруженных дочерних свойств из исходного объекта.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.BindingData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.BindingData
-      description: ''
-- uid: excel.Excel.Binding.type
-  summary: >-
-    Возвращает тип привязки. Для получения дополнительных сведений в разделе Excel.BindingType. Только для чтения.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: type
-  fullName: type
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly type: Excel.BindingType | "Range" | "Table" | "Text";'
-    return:
-      type:
-      - Excel.BindingType | "Range" | "Table" | "Text"
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly type: Excel.BindingType | "Range" | "Table" | "Text";'
+      return:
+        type:
+          - Excel.BindingType | "Range" | "Table" | "Text"

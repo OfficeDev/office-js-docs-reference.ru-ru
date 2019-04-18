@@ -1,265 +1,326 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: fd1fe7101ecdabc10e4fc8e689d8559a47086e96
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: ru-RU
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29973410"
 items:
-- uid: excel.Excel.TableColumnCollection
-  summary: >-
-    Представляет коллекцию всех столбцов, включенных в таблицу.
+  - uid: excel.Excel.TableColumnCollection
+    summary: |-
+      Представляет коллекцию всех столбцов, включенных в таблицу.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.TableColumnCollection
+    fullName: Excel.TableColumnCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.TableColumnCollection.add
+      - excel.Excel.TableColumnCollection.context
+      - excel.Excel.TableColumnCollection.count
+      - excel.Excel.TableColumnCollection.getCount
+      - excel.Excel.TableColumnCollection.getItem
+      - excel.Excel.TableColumnCollection.getItemAt
+      - excel.Excel.TableColumnCollection.getItemOrNullObject
+      - excel.Excel.TableColumnCollection.items
+      - excel.Excel.TableColumnCollection.load
+      - excel.Excel.TableColumnCollection.load_1
+      - excel.Excel.TableColumnCollection.load_2
+      - excel.Excel.TableColumnCollection.toJSON
+  - uid: excel.Excel.TableColumnCollection.add
+    summary: |-
+      Добавляет новый столбец в таблицу.
+
+      \[[Набор API: для ExcelApi 1,1 требуется индекс меньше, чем общее количество столбцов; 1,4 разрешает необязательный индекс (null или-1) и добавляет столбец в параметр End; 1,4 разрешает параметр Name во время создания.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+    name: 'add(index, values, name)'
+    fullName: 'add(index, values, name)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, name?: string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.TableColumnCollection
-  fullName: Excel.TableColumnCollection
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.TableColumnCollection.add
-  - excel.Excel.TableColumnCollection.context
-  - excel.Excel.TableColumnCollection.count
-  - excel.Excel.TableColumnCollection.getCount
-  - excel.Excel.TableColumnCollection.getItem
-  - excel.Excel.TableColumnCollection.getItemAt
-  - excel.Excel.TableColumnCollection.getItemOrNullObject
-  - excel.Excel.TableColumnCollection.items
-  - excel.Excel.TableColumnCollection.load
-  - excel.Excel.TableColumnCollection.load_1
-  - excel.Excel.TableColumnCollection.load_2
-  - excel.Excel.TableColumnCollection.toJSON
-- uid: excel.Excel.TableColumnCollection.add
-  summary: >-
-    Добавляет новый столбец в таблицу.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var values = [["Sample"], ["Values"], ["For"], ["New"], ["Column"]];
+              var column = tables.getItem("Table1").columns.add(null, values);
+              column.load('name');
+              return ctx.sync().then(function() {
+                  console.log(column.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: 'Необязательный. Определяет относительную позицию нового столбца. Если задано значение null или -1, столбец добавляется в конце. Столбцы с более высокими значениями индекса смещаются в сторону. Используется нулевой индекс.'
+          type:
+            - number
+        - id: values
+          description: Необязательный. Двухмерный массив неформатированных значений столбца таблицы.
+          type:
+            - Array<Array<boolean | string | number>> | boolean | string | number
+        - id: name
+          description: 'Необязательный параметр. Задает имя нового столбца. Если значение пустое, используется имя по умолчанию.'
+          type:
+            - string
+  - uid: excel.Excel.TableColumnCollection.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.TableColumnCollection.count
+    summary: |-
+      Возвращает количество столбцов в таблице. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.TableColumnCollection.getCount
+    summary: |-
+      Получает количество столбцов в таблице.
+
+      \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+  - uid: excel.Excel.TableColumnCollection.getItem
+    summary: |-
+      Возвращает объект column по имени или идентификатору.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1 требует меньше, чем количество общее столбцов индекса; 1.4 для индекса по желанию (null или -1) и добавляет столбец в конце; для 1.4 имя параметра во время создания.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
-  name: add(index, values, name)
-  fullName: add(index, values, name)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, name?: string): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\"], [\"Values\"], [\"For\"], [\"New\"], [\"Column\"]];\n    var column = tables.getItem(\"Table1\").columns.add(null, values);\n    column.load('name');\n    return ctx.sync().then(function() {\n        console.log(column.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: Необязательный. Определяет относительную позицию нового столбца. Если задано значение null или -1, столбец добавляется в конце. Столбцы с более высокими значениями индекса смещаются в сторону. Используется нулевой индекс.
-      type:
-      - number
-    - id: values
-      description: Необязательный параметр. Двухмерный массив неформатированных значений столбца таблицы.
-      type:
-      - Array<Array<boolean | string | number>> | boolean | string | number
-    - id: name
-      description: Необязательный параметр. Задает имя нового столбца. Если значение пустое, используется имя по умолчанию.
-      type:
-      - string
-- uid: excel.Excel.TableColumnCollection.context
-  summary: Контекста запроса, связанного с объектом. Это необходимо добавить в процесс для процесса ведущего приложения Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.TableColumnCollection.count
-  summary: >-
-    Возвращает количество столбцов в таблице. Только для чтения.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem('Table1').columns.getItem(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: Имя или ИД столбца.
+          type:
+            - number | string
+  - uid: excel.Excel.TableColumnCollection.getItemAt
+    summary: |-
+      Возвращает столбец на основании его позиции в коллекции.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: count
-  fullName: count
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly count: number;'
-    return:
-      type:
-      - number
-- uid: excel.Excel.TableColumnCollection.getCount
-  summary: >-
-    Получает количество столбцов в таблице.
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumn = ctx.workbook.tables.getItem['Table1'].columns.getItemAt(0);
+              tablecolumn.load('name');
+              return ctx.sync().then(function() {
+                      console.log(tablecolumn.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: Значение индекса получаемого объекта. Используется нулевой индекс.
+          type:
+            - number
+  - uid: excel.Excel.TableColumnCollection.getItemOrNullObject
+    summary: |-
+      Возвращает объект столбца по имени или ИД. Если столбец не существует, возвращает пустой объект.
+
+      \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
+      return:
+        type:
+          - excel.Excel.TableColumn
+        description: ''
+      parameters:
+        - id: key
+          description: Имя или ИД столбца.
+          type:
+            - number | string
+  - uid: excel.Excel.TableColumnCollection.items
+    summary: Получает загруженные дочерние элементы в этой коллекции.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.TableColumn[];'
+      return:
+        type:
+          - 'Excel.TableColumn[]'
+  - uid: excel.Excel.TableColumnCollection.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Excel.TableColumnCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.TableColumnCollection.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: |-
 
 
-    \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getCount()
-  fullName: getCount()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getCount(): OfficeExtension.ClientResult<number>;'
-    return:
-      type:
-      - OfficeExtension.ClientResult<number>
-      description: ''
-- uid: excel.Excel.TableColumnCollection.getItem
-  summary: >-
-    Возвращает объект столбца по имени или идентификатору.
+          #### <a name="examples"></a>Примеры
 
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItem(key)
-  fullName: getItem(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItem(key: number | string): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tablecolumn = ctx.workbook.tables.getItem('Table1').columns.getItem(0);\n    tablecolumn.load('name');\n    return ctx.sync().then(function() {\n            console.log(tablecolumn.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: key
-      description: Имя или идентификатор столбца.
-      type:
-      - number | string
-- uid: excel.Excel.TableColumnCollection.getItemAt
-  summary: >-
-    Возвращает столбец на основании его позиции в коллекции.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItemAt(index)
-  fullName: getItemAt(index)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemAt(index: number): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tablecolumn = ctx.workbook.tables.getItem['Table1'].columns.getItemAt(0);\n    tablecolumn.load('name');\n    return ctx.sync().then(function() {\n            console.log(tablecolumn.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: index
-      description: Значение индекса получаемого объекта. Используется нулевой индекс.
-      type:
-      - number
-- uid: excel.Excel.TableColumnCollection.getItemOrNullObject
-  summary: >-
-    Получает объект столбца по имени или идентификатору. Если столбец не существует, возвращает пустой объект.
-
-
-    \[[Набор API-Интерфейсов: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject(key)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
-    return:
-      type:
-      - excel.Excel.TableColumn
-      description: ''
-    parameters:
-    - id: key
-      description: Имя или идентификатор столбца.
-      type:
-      - number | string
-- uid: excel.Excel.TableColumnCollection.items
-  summary: Получает загруженных дочерних элементов в этом семействе.
-  name: items
-  fullName: items
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly items: Excel.TableColumn[];'
-    return:
-      type:
-      - Excel.TableColumn[]
-- uid: excel.Excel.TableColumnCollection.load
-  summary: Очереди команды для загрузки указанного свойства объекта. Перед чтением свойства необходимо вызвать «context.sync()».
-  remarks: >-
-    В дополнение к подписи этот метод имеет следующие цифровые подписи.
-
-
-    `load(option?: string | string[]): Excel.TableColumnCollection`-Где параметр — запятыми строку или массив строк, задающих свойства для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; }): Excel.TableColumnCollection`-Option.select — это разделенный запятыми строка, указывающая свойства для загрузки, куда options.expand — это разделенный запятыми строка, указывающая свойства навигации для загрузки.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableColumnCollection`-Доступно только на коллекцию типов. Это похоже на предыдущую. Option.Top указывает максимальное число элементов коллекции, которые можно включить в результат. Option.Skip указывает количество элементов, которые пропускаются и не включенный в результате. Если option.top указан, результирующий набор будет запущен процесс после пропускает указанное число элементов.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
-    return:
-      type:
-      - excel.Excel.TableColumnCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-- uid: excel.Excel.TableColumnCollection.load_1
-  summary: Очереди команды для загрузки указанного свойства объекта. Необходимо вызвать `context.sync()` перед чтением свойства.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
-    return:
-      type:
-      - excel.Excel.TableColumnCollection
-      description: "\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tablecolumns = ctx.workbook.tables.getItem('Table1').columns;\n    tablecolumns.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"tablecolumns Count: \" + tablecolumns.count);\n        for (var i = 0; i < tablecolumns.items.length; i++) {\n            console.log(tablecolumns.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: Строка, разделенных запятыми или массив строк, задающих свойства для загрузки.
-      type:
-      - string | string[]
-- uid: excel.Excel.TableColumnCollection.load_2
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
-    return:
-      type:
-      - excel.Excel.TableColumnCollection
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - office.OfficeExtension.LoadOption
-- uid: excel.Excel.TableColumnCollection.toJSON
-  summary: Переопределяет JavaScript `toJSON()` метод, чтобы обеспечить более необходимых результатов при передаче объекта API для `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается в нее.) В то время как исходные `Excel.TableColumnCollection` объект API `toJSON` метод возвращает обычный объектов JavaScript (тип `Excel.Interfaces.TableColumnCollectionData` <!-- -->), который содержит массив «элементы» неполные копии всех загруженных свойств из коллекции элементов.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.TableColumnCollectionData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.TableColumnCollectionData
-      description: ''
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tablecolumns = ctx.workbook.tables.getItem('Table1').columns;
+              tablecolumns.load('items');
+              return ctx.sync().then(function() {
+                  console.log("tablecolumns Count: " + tablecolumns.count);
+                  for (var i = 0; i < tablecolumns.items.length; i++) {
+                      console.log(tablecolumns.items[i].name);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.TableColumnCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
+      return:
+        type:
+          - excel.Excel.TableColumnCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - office.OfficeExtension.LoadOption
+  - uid: excel.Excel.TableColumnCollection.toJSON
+    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.TableColumnCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.TableColumnCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableColumnCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableColumnCollectionData
+        description: ''
