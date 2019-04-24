@@ -14,7 +14,7 @@ If your issue is not related to the Office Add-ins documentation, please post it
 
 <!--- Provide a general summary of the documentation issue in the Title above -->
 
-## <a name="article-url"></a>Статья URL-адрес
+## <a name="article-url"></a>URL-адрес статьи
 <!-- Provide the URL of the article that this documentation issue relates to -->
 
 ## <a name="issue"></a>Проблема
