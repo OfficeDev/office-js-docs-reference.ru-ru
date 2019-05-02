@@ -42,7 +42,22 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: Новый срез.
+        description: |-
+          Новый срез.
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Pivot");
+              const slicer = sheet.slicers.add(
+                  "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+                  "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+              );
+              slicer.name = "Fruit Slicer";
+              await context.sync();
+          });
+          ```
       parameters:
         - id: slicerSource
           description: 'Источник данных, на котором будет основан новый срез. Это может быть объект PivotTable, объект Table или строка. Когда объект сводной таблицы передается, источником данных является источник объекта сводной таблицы. Когда передается объект Table, источником данных является объект Table. Когда строка передается, она интерпретируется как имя/идентификатор сводной таблицы или таблицы.'
@@ -53,7 +68,7 @@ items:
           type:
             - string | PivotField | number | TableColumn
         - id: slicerDestination
-          description: 'Необязательный атрибут. Лист, в котором будет создан новый срез. Это может быть объект листа или имя или идентификатор листа. Этот параметр можно опустить, если коллекция срезов извлекается из листа.'
+          description: 'Необязательно. Лист, в котором будет создан новый срез. Это может быть объект листа или имя или идентификатор листа. Этот параметр можно опустить, если коллекция срезов извлекается из листа.'
           type:
             - string | Worksheet
   - uid: excel.Excel.SlicerCollection.context
@@ -102,7 +117,22 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const slicer = context.workbook.slicers.getItem("Fruit Slicer");
+              slicer.caption = "Fruit Types";
+              slicer.left = 395;
+              slicer.top = 15;
+              slicer.height = 135;
+              slicer.width = 150;
+              await context.sync();
+          });
+          ```
       parameters:
         - id: key
           description: Имя или идентификатор среза.
@@ -230,7 +260,7 @@ items:
           type:
             - office.OfficeExtension.LoadOption
   - uid: excel.Excel.SlicerCollection.toJSON
-    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.SlicerCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.SlicerCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.SlicerCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.SlicerCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
     isPreview: true
     name: toJSON()
     fullName: toJSON()
