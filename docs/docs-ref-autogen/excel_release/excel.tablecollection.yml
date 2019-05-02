@@ -25,7 +25,9 @@ items:
       - excel_release.Excel.TableCollection.load
       - excel_release.Excel.TableCollection.load_1
       - excel_release.Excel.TableCollection.load_2
+      - excel_release.Excel.TableCollection.onAdded
       - excel_release.Excel.TableCollection.onChanged
+      - excel_release.Excel.TableCollection.onDeleted
       - excel_release.Excel.TableCollection.toJSON
   - uid: excel_release.Excel.TableCollection.add
     summary: |-
@@ -323,6 +325,21 @@ items:
           description: ''
           type:
             - office.OfficeExtension.LoadOption
+  - uid: excel_release.Excel.TableCollection.onAdded
+    summary: |-
+      Возникает, если в книгу добавлена новая таблица.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onAdded
+    fullName: onAdded
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>
   - uid: excel_release.Excel.TableCollection.onChanged
     summary: |-
       Возникает при изменении данных в любой таблице книги или на листе.
@@ -352,8 +369,23 @@ items:
               console.log("A handler has been registered for the table collection onChanged event");
           });
           ```
+  - uid: excel_release.Excel.TableCollection.onDeleted
+    summary: |-
+      Возникает, если указанная таблица удалена из книги.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDeleted
+    fullName: onDeleted
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>
   - uid: excel_release.Excel.TableCollection.toJSON
-    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.TableCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.TableCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.TableCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.TableCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
     name: toJSON()
     fullName: toJSON()
     langs:

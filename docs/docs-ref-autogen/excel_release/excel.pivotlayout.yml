@@ -14,22 +14,44 @@ items:
       - office.OfficeExtension.ClientObject
     package: excel_release
     children:
+      - excel_release.Excel.PivotLayout.autoFormat
       - excel_release.Excel.PivotLayout.context
       - excel_release.Excel.PivotLayout.getColumnLabelRange
       - excel_release.Excel.PivotLayout.getDataBodyRange
+      - excel_release.Excel.PivotLayout.getDataHierarchy
       - excel_release.Excel.PivotLayout.getFilterAxisRange
+      - excel_release.Excel.PivotLayout.getPivotItems
+      - excel_release.Excel.PivotLayout.getPivotItems_1
       - excel_release.Excel.PivotLayout.getRange
       - excel_release.Excel.PivotLayout.getRowLabelRange
       - excel_release.Excel.PivotLayout.layoutType
       - excel_release.Excel.PivotLayout.load
       - excel_release.Excel.PivotLayout.load_1
       - excel_release.Excel.PivotLayout.load_2
+      - excel_release.Excel.PivotLayout.preserveFormatting
       - excel_release.Excel.PivotLayout.set
       - excel_release.Excel.PivotLayout.set_1
+      - excel_release.Excel.PivotLayout.setAutoSortOnCell
+      - excel_release.Excel.PivotLayout.setAutoSortOnCell_1
       - excel_release.Excel.PivotLayout.showColumnGrandTotals
       - excel_release.Excel.PivotLayout.showRowGrandTotals
       - excel_release.Excel.PivotLayout.subtotalLocation
       - excel_release.Excel.PivotLayout.toJSON
+  - uid: excel_release.Excel.PivotLayout.autoFormat
+    summary: |-
+      Указывает, будет ли форматирование автоматически форматироваться при его обновлении или при перемещении полей
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: autoFormat
+    fullName: autoFormat
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'autoFormat: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.PivotLayout.context
     summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
     name: context
@@ -96,6 +118,27 @@ items:
               await context.sync();
           });
           ```
+  - uid: excel_release.Excel.PivotLayout.getDataHierarchy
+    summary: |-
+      Получает объект DataHierarchy, использующийся для вычисления значения в указанном диапазоне сводной таблицы.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getDataHierarchy(cell)
+    fullName: getDataHierarchy(cell)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDataHierarchy(cell: Range | string): Excel.DataPivotHierarchy;'
+      return:
+        type:
+          - excel.Excel.DataPivotHierarchy
+        description: 'Объект DataPivotHierarchy, используемый для вычисления значения в указанной ячейке.'
+      parameters:
+        - id: cell
+          description: Отдельная ячейка в теле данных сводной таблицы.
+          type:
+            - Range | string
   - uid: excel_release.Excel.PivotLayout.getFilterAxisRange
     summary: |-
       Возвращает диапазон области фильтра сводной таблицы.
@@ -112,6 +155,56 @@ items:
         type:
           - excel.Excel.Range
         description: ''
+  - uid: excel_release.Excel.PivotLayout.getPivotItems
+    summary: |-
+      Получает объекты PivotItem с оси, образующие значение в указанном диапазоне сводной таблицы.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getPivotItems(axis, cell)'
+    fullName: 'getPivotItems(axis, cell)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPivotItems(axis: Excel.PivotAxis, cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
+        description: 'Коллекция PivotItems, которая используется для вычисления значений в указанной строке.'
+      parameters:
+        - id: axis
+          description: 'Ось, из которой необходимо получить PivotItems. Должен иметь значение "строка" или "столбец".'
+          type:
+            - excel.Excel.PivotAxis
+        - id: cell
+          description: Отдельная ячейка в теле данных сводной таблицы.
+          type:
+            - Range | string
+  - uid: excel_release.Excel.PivotLayout.getPivotItems_1
+    summary: |-
+      Получает объекты PivotItem с оси, образующие значение в указанном диапазоне сводной таблицы.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getPivotItems(axisString, cell)'
+    fullName: 'getPivotItems(axisString, cell)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPivotItems(axisString: "Unknown" | "Row" | "Column" | "Data" | "Filter", cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
+        description: 'Коллекция PivotItems, которая используется для вычисления значений в указанной строке.'
+      parameters:
+        - id: axisString
+          description: 'Ось, из которой необходимо получить PivotItems. Должен иметь значение "строка" или "столбец".'
+          type:
+            - '"Unknown" | "Row" | "Column" | "Data" | "Filter"'
+        - id: cell
+          description: Отдельная ячейка в теле данных сводной таблицы.
+          type:
+            - Range | string
   - uid: excel_release.Excel.PivotLayout.getRange
     summary: |-
       Возвращает диапазон, в котором существует сводная таблица, за исключением области фильтра.
@@ -221,6 +314,21 @@ items:
           description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
           type:
             - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.PivotLayout.preserveFormatting
+    summary: |-
+      Указывает, сохраняется ли форматирование при обновлении или пересчете отчета с помощью таких операций, как сведение, сортировка или изменение элементов поля страницы.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: preserveFormatting
+    fullName: preserveFormatting
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'preserveFormatting: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.PivotLayout.set
     summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
     remarks: |-
@@ -265,9 +373,59 @@ items:
           description: ''
           type:
             - excel.Excel.PivotLayout
+  - uid: excel_release.Excel.PivotLayout.setAutoSortOnCell
+    summary: |-
+      Задает автоматическую сортировку сводной таблицы с использованием указанной ячейки для автоматического выбора всех необходимых условий и контекста. Это аналогично применению автосортировки из ПОЛЬЗОВАТЕЛЬСКОГО интерфейса.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'setAutoSortOnCell(cell, sortBy)'
+    fullName: 'setAutoSortOnCell(cell, sortBy)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAutoSortOnCell(cell: Range | string, sortBy: Excel.SortBy): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cell
+          description: 'Одна ячейка, используемая для получения условий для применения автосортировки.'
+          type:
+            - Range | string
+        - id: sortBy
+          description: Направление сортировки.
+          type:
+            - excel.Excel.SortBy
+  - uid: excel_release.Excel.PivotLayout.setAutoSortOnCell_1
+    summary: |-
+      Задает автоматическую сортировку сводной таблицы с использованием указанной ячейки для автоматического выбора всех необходимых условий и контекста. Это аналогично применению автосортировки из ПОЛЬЗОВАТЕЛЬСКОГО интерфейса.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'setAutoSortOnCell(cell, sortByString)'
+    fullName: 'setAutoSortOnCell(cell, sortByString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAutoSortOnCell(cell: Range | string, sortByString: "Ascending" | "Descending"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cell
+          description: 'Одна ячейка, используемая для получения условий для применения автосортировки.'
+          type:
+            - Range | string
+        - id: sortByString
+          description: Направление сортировки.
+          type:
+            - '"Ascending" | "Descending"'
   - uid: excel_release.Excel.PivotLayout.showColumnGrandTotals
     summary: |-
-      Значение true, если отчет сводной таблицы отображает общие итоги для столбцов.
+      Указывает, отображаются ли в отчете сводной таблицы общие итоги для столбцов.
 
       \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: showColumnGrandTotals
@@ -282,7 +440,7 @@ items:
           - boolean
   - uid: excel_release.Excel.PivotLayout.showRowGrandTotals
     summary: |-
-      Значение true, если отчет сводной таблицы отображает общие итоги для строк.
+      Указывает, отображаются ли в отчете сводной таблицы общие итоги для строк.
 
       \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: showRowGrandTotals
@@ -311,7 +469,7 @@ items:
         type:
           - Excel.SubtotalLocationType | "AtTop" | "AtBottom" | "Off"
   - uid: excel_release.Excel.PivotLayout.toJSON
-    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. PivotLayout — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.PivotLayoutData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. PivotLayout — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.PivotLayoutData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:

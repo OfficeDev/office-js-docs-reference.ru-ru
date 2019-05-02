@@ -16,14 +16,18 @@ items:
     children:
       - excel_release.Excel.Application.calculate
       - excel_release.Excel.Application.calculate_1
+      - excel_release.Excel.Application.calculationEngineVersion
       - excel_release.Excel.Application.calculationMode
+      - excel_release.Excel.Application.calculationState
       - excel_release.Excel.Application.context
+      - excel_release.Excel.Application.iterativeCalculation
       - excel_release.Excel.Application.load
       - excel_release.Excel.Application.load_1
       - excel_release.Excel.Application.load_2
       - excel_release.Excel.Application.set
       - excel_release.Excel.Application.set_1
       - excel_release.Excel.Application.suspendApiCalculationUntilNextSync
+      - excel_release.Excel.Application.suspendScreenUpdatingUntilNextSync
       - excel_release.Excel.Application.toJSON
   - uid: excel_release.Excel.Application.calculate
     summary: |-
@@ -82,6 +86,21 @@ items:
           description: 'Определяет тип расчета, который нужно использовать. Дополнительные сведения см. в статье Excel. Калкулатионтипе.'
           type:
             - '"Recalculate" | "Full" | "FullRebuild"'
+  - uid: excel_release.Excel.Application.calculationEngineVersion
+    summary: |-
+      Возвращает версию модуля вычислений Excel, используемую для последнего полного пересчета. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationEngineVersion
+    fullName: calculationEngineVersion
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationEngineVersion: number;'
+      return:
+        type:
+          - number
   - uid: excel_release.Excel.Application.calculationMode
     summary: |-
       Возвращает режим вычислений, используемый в книге в соответствии с константами в Excel. Калкулатионмоде. Возможные значения:`Automatic`<!-- -->, где Excel управляет пересчетом;`AutomaticExceptTables`<!-- -->, где Excel контролирует пересчет, но игнорирует изменения в таблицах;`Manual`<!-- -->, где выполняется расчет, когда пользователь запрашивает его.
@@ -97,6 +116,21 @@ items:
       return:
         type:
           - Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual"
+  - uid: excel_release.Excel.Application.calculationState
+    summary: |-
+      Возвращает состояние вычисления приложения. Дополнительные сведения см. в статье Excel.CalculationState. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationState
+    fullName: calculationState
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationState: Excel.CalculationState | "Done" | "Calculating" | "Pending";'
+      return:
+        type:
+          - Excel.CalculationState | "Done" | "Calculating" | "Pending"
   - uid: excel_release.Excel.Application.context
     summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
     name: context
@@ -109,6 +143,21 @@ items:
       return:
         type:
           - RequestContext
+  - uid: excel_release.Excel.Application.iterativeCalculation
+    summary: |-
+      Возвращает параметры итеративных вычислений. В Excel для Windows и Excel для Mac параметры будут применены к приложению Excel. В Excel Online и Excel для других платформ параметры будут применены к активной книге.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: iterativeCalculation
+    fullName: iterativeCalculation
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly iterativeCalculation: Excel.IterativeCalculation;'
+      return:
+        type:
+          - excel.Excel.IterativeCalculation
   - uid: excel_release.Excel.Application.load
     summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
     remarks: |-
@@ -249,8 +298,56 @@ items:
         type:
           - void
         description: ''
+  - uid: excel_release.Excel.Application.suspendScreenUpdatingUntilNextSync
+    summary: |-
+      Приостанавливает обновление экрана до вызова следующего метода context.sync().
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: suspendScreenUpdatingUntilNextSync()
+    fullName: suspendScreenUpdatingUntilNextSync()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'suspendScreenUpdatingUntilNextSync(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const rowCount = 500;
+              const columnCount = 20;
+
+              const startTime = Date.now();
+              console.log("Starting...");
+
+              if (pauseScreenPainting) {
+                  context.application.suspendScreenUpdatingUntilNextSync();
+              }
+
+              for (let i = 0; i < rowCount; i++) {
+                  for (let j = 0; j < columnCount; j++) {
+                      let cell = sheet.getCell(i, j);
+                      cell.values = [[i * j * Math.random()]];
+                      if (untrack) {
+                          cell.untrack();
+                      }
+                  }
+              }
+
+              await context.sync();
+
+              console.log(`Ending. Adding ${rowCount * columnCount} cells took ${Date.now() - startTime} milliseconds`);
+          });
+          ```
   - uid: excel_release.Excel.Application.toJSON
-    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Application — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ApplicationData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Application — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ApplicationData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
