@@ -22,6 +22,7 @@ items:
       - word.Word.Range.expandTo
       - word.Word.Range.expandToOrNullObject
       - word.Word.Range.font
+      - word.Word.Range.getBookmarks
       - word.Word.Range.getHtml
       - word.Word.Range.getHyperlinkRanges
       - word.Word.Range.getNextTextRange
@@ -32,6 +33,7 @@ items:
       - word.Word.Range.getTextRanges
       - word.Word.Range.hyperlink
       - word.Word.Range.inlinePictures
+      - word.Word.Range.insertBookmark
       - word.Word.Range.insertBreak
       - word.Word.Range.insertBreak_1
       - word.Word.Range.insertContentControl
@@ -270,6 +272,32 @@ items:
       return:
         type:
           - word.Word.Font
+  - uid: word.Word.Range.getBookmarks
+    summary: |-
+      Получает имена всех закладок в диапазоне или перекрывают их. Закладка скрывается, если ее имя начинается с символа подчеркивания.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'getBookmarks(includeHidden, includeAdjacent)'
+    fullName: 'getBookmarks(includeHidden, includeAdjacent)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarks(includeHidden?: boolean, includeAdjacent?: boolean): OfficeExtension.ClientResult<string[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<string[]>'
+        description: ''
+      parameters:
+        - id: includeHidden
+          description: 'Необязательно. Указывает, следует ли включать скрытые закладки. Значение по умолчанию — false, что указывает на то, что скрытые закладки исключены.'
+          type:
+            - boolean
+        - id: includeAdjacent
+          description: 'Необязательно. Указывает, следует ли включать закладки, расположенные рядом с диапазоном. Значение по умолчанию — false, что указывает на то, что соседние закладки исключены.'
+          type:
+            - boolean
   - uid: word.Word.Range.getHtml
     summary: |-
       Возвращает HTML-представление объекта Range. При отображении на веб-странице или в средстве просмотра HTML форматирование будет близким, но не точным, соответствующим для форматирования документа. Этот метод не возвращает точно такой же HTML-код для одного и того же документа на различных платформах (Windows, Mac, Word Online и т. д.). Если вам нужна точная точность или согласованность на различных платформах `Range.getOoxml()` , используйте и преобразуйте возвращенный XML в HTML.
@@ -552,6 +580,28 @@ items:
       return:
         type:
           - word.Word.InlinePictureCollection
+  - uid: word.Word.Range.insertBookmark
+    summary: |-
+      Вставляет закладку в диапазон. Если закладка с таким же именем существует в другом месте, она будет удалена первыми.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: insertBookmark(name)
+    fullName: insertBookmark(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBookmark(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: 'Обязательно. Имя закладки, не зависящее от регистра. Если имя начинается со знака подчеркивания, закладка будет скрыта.'
+          type:
+            - string
   - uid: word.Word.Range.insertBreak
     summary: |-
       Вставляет разрыв в указанном расположении в основном документе. Возможные значения insertLocation: Before и After.
@@ -574,7 +624,7 @@ items:
           type:
             - word.Word.BreakType
         - id: insertLocation
-          description: 'Обязательный параметр. Возможные значения: Before и After.'
+          description: 'Обязательно. Возможные значения: Before и After.'
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertBreak_1
@@ -627,7 +677,7 @@ items:
           type:
             - '"Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line"'
         - id: insertLocation
-          description: 'Обязательный параметр. Возможные значения: Before и After.'
+          description: 'Обязательно. Возможные значения: Before и After.'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertContentControl
@@ -1103,7 +1153,7 @@ items:
             - 'string[][]'
   - uid: word.Word.Range.insertTable_1
     summary: |-
-      Вставляет таблицу с указанным количеством строк и столбцов. Возможные значения InsertLocation: Before и After.
+      Вставляет таблицу с указанным количеством строк и столбцов. Возможные значения insertLocation: Before и After.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertTable(rowCount, columnCount, insertLocationString, values)'
@@ -1497,7 +1547,7 @@ items:
           type:
             - string
         - id: searchOptions
-          description: Необязательно. Параметры поиска.
+          description: Необязательный параметр. Параметры поиска.
           type:
             - |-
               Word.SearchOptions | {

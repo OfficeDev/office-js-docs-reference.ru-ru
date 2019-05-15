@@ -17,16 +17,22 @@ items:
       - word.Word.Document.body
       - word.Word.Document.contentControls
       - word.Word.Document.context
+      - word.Word.Document.customXmlParts
+      - word.Word.Document.deleteBookmark
+      - word.Word.Document.getBookmarkRange
+      - word.Word.Document.getBookmarkRangeOrNullObject
       - word.Word.Document.getSelection
       - word.Word.Document.load
       - word.Word.Document.load_1
       - word.Word.Document.load_2
+      - word.Word.Document.onContentControlAdded
       - word.Word.Document.properties
       - word.Word.Document.save
       - word.Word.Document.saved
       - word.Word.Document.sections
       - word.Word.Document.set
       - word.Word.Document.set_1
+      - word.Word.Document.settings
       - word.Word.Document.toJSON
       - word.Word.Document.track
       - word.Word.Document.untrack
@@ -72,6 +78,88 @@ items:
       return:
         type:
           - RequestContext
+  - uid: word.Word.Document.customXmlParts
+    summary: |-
+      Возвращает пользовательские XML-части в документе. Только для чтения.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: customXmlParts
+    fullName: customXmlParts
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly customXmlParts: Word.CustomXmlPartCollection;'
+      return:
+        type:
+          - Word.CustomXmlPartCollection
+  - uid: word.Word.Document.deleteBookmark
+    summary: |-
+      Удаляет закладку, если она существует, из документа.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: deleteBookmark(name)
+    fullName: deleteBookmark(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteBookmark(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: 'Обязательно. Имя закладки, не зависящее от регистра.'
+          type:
+            - string
+  - uid: word.Word.Document.getBookmarkRange
+    summary: |-
+      Возвращает диапазон закладок. Вызывается, если закладка не существует.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getBookmarkRange(name)
+    fullName: getBookmarkRange(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarkRange(name: string): Word.Range;'
+      return:
+        type:
+          - Word.Range
+        description: ''
+      parameters:
+        - id: name
+          description: 'Обязательно. Имя закладки, не зависящее от регистра.'
+          type:
+            - string
+  - uid: word.Word.Document.getBookmarkRangeOrNullObject
+    summary: |-
+      Возвращает диапазон закладок. Возвращает нулевой объект, если закладка не существует.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getBookmarkRangeOrNullObject(name)
+    fullName: getBookmarkRangeOrNullObject(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarkRangeOrNullObject(name: string): Word.Range;'
+      return:
+        type:
+          - Word.Range
+        description: ''
+      parameters:
+        - id: name
+          description: 'Обязательно. Имя закладки, не зависящее от регистра.'
+          type:
+            - string
   - uid: word.Word.Document.getSelection
     summary: |-
       Возвращает текущий выбранный фрагмент документа. Получение нескольких выбранных фрагментов не поддерживается.
@@ -217,6 +305,22 @@ items:
           description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
           type:
             - '{ select?: string; expand?: string; }'
+  - uid: word.Word.Document.onContentControlAdded
+    summary: |-
+      Возникает при добавлении элемента управления содержимым. Выполните context. Sync () в обработчике, чтобы получить свойства нового элемента управления содержимым.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: onContentControlAdded
+    fullName: onContentControlAdded
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onContentControlAdded: OfficeExtension.EventHandlers<Word.ContentControlEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Word.ContentControlEventArgs>
   - uid: word.Word.Document.properties
     summary: |-
       Получает свойства документа. Только для чтения.
@@ -375,8 +479,24 @@ items:
           description: ''
           type:
             - Word.Document
+  - uid: word.Word.Document.settings
+    summary: |-
+      Получает параметры надстройки в документе. Только для чтения.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: settings
+    fullName: settings
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly settings: Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
   - uid: word.Word.Document.toJSON
-    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Document — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.DocumentData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Document — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.DocumentData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:

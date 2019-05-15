@@ -15,7 +15,9 @@ items:
     package: word
     children:
       - word.Word.List.context
+      - word.Word.List.getLevelFont
       - word.Word.List.getLevelParagraphs
+      - word.Word.List.getLevelPicture
       - word.Word.List.getLevelString
       - word.Word.List.id
       - word.Word.List.insertParagraph
@@ -26,6 +28,7 @@ items:
       - word.Word.List.load_1
       - word.Word.List.load_2
       - word.Word.List.paragraphs
+      - word.Word.List.resetLevelFont
       - word.Word.List.setLevelAlignment
       - word.Word.List.setLevelAlignment_1
       - word.Word.List.setLevelBullet
@@ -33,6 +36,7 @@ items:
       - word.Word.List.setLevelIndents
       - word.Word.List.setLevelNumbering
       - word.Word.List.setLevelNumbering_1
+      - word.Word.List.setLevelPicture
       - word.Word.List.setLevelStartingNumber
       - word.Word.List.toJSON
       - word.Word.List.track
@@ -49,6 +53,28 @@ items:
       return:
         type:
           - RequestContext
+  - uid: word.Word.List.getLevelFont
+    summary: |-
+      Получает или задает значение, указывающее, указаны ли в списке.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getLevelFont(level)
+    fullName: getLevelFont(level)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getLevelFont(level: number): Word.Font;'
+      return:
+        type:
+          - word.Word.Font
+        description: ''
+      parameters:
+        - id: level
+          description: Обязательно. Уровень в списке.
+          type:
+            - number
   - uid: word.Word.List.getLevelParagraphs
     summary: |-
       Возвращает абзацы, обнаруженные на указанном уровне списка.
@@ -67,7 +93,29 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
+          type:
+            - number
+  - uid: word.Word.List.getLevelPicture
+    summary: |-
+      Получает строковое представление изображения в кодировке Base64 на указанном уровне в списке.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getLevelPicture(level)
+    fullName: getLevelPicture(level)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getLevelPicture(level: number): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: ''
+      parameters:
+        - id: level
+          description: Обязательно. Уровень в списке.
           type:
             - number
   - uid: word.Word.List.getLevelString
@@ -88,7 +136,7 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
   - uid: word.Word.List.id
@@ -128,7 +176,7 @@ items:
           type:
             - string
         - id: insertLocation
-          description: 'Обязательный. Возможные значения: "Start", "End", "Before" и "After".'
+          description: 'Обязательно. Возможные значения: "Start", "End", "Before" и "After".'
           type:
             - Word.InsertLocation
   - uid: word.Word.List.insertParagraph_1
@@ -153,7 +201,7 @@ items:
           type:
             - string
         - id: insertLocationString
-          description: 'Обязательный. Возможные значения: "Start", "End", "Before" и "After".'
+          description: 'Обязательно. Возможные значения: "Start", "End", "Before" и "After".'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.List.levelExistences
@@ -263,6 +311,32 @@ items:
       return:
         type:
           - Word.ParagraphCollection
+  - uid: word.Word.List.resetLevelFont
+    summary: |-
+      Сбрасывает шрифт маркера, номера или изображения на указанном уровне списка.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'resetLevelFont(level, resetFontName)'
+    fullName: 'resetLevelFont(level, resetFontName)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'resetLevelFont(level: number, resetFontName?: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: level
+          description: Обязательно. Уровень в списке.
+          type:
+            - number
+        - id: resetFontName
+          description: 'Необязательно. Указывает, следует ли сбросить имя шрифта. Значение по умолчанию — false, что означает, что имя шрифта остается неизменным.'
+          type:
+            - boolean
   - uid: word.Word.List.setLevelAlignment
     summary: |-
       Задает выравнивание маркера, номера или рисунка на указанном уровне списка.
@@ -281,11 +355,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: alignment
-          description: 'Обязательный. Выравнивание уровня, которое может иметь значение "Left", "Centerd" или "Right".'
+          description: 'Обязательно. Выравнивание уровня, которое может иметь значение "Left", "Centerd" или "Right".'
           type:
             - word.Word.Alignment
   - uid: word.Word.List.setLevelAlignment_1
@@ -306,11 +380,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: alignmentString
-          description: 'Обязательный. Выравнивание уровня, которое может иметь значение "Left", "Centerd" или "Right".'
+          description: 'Обязательно. Выравнивание уровня, которое может иметь значение "Left", "Centerd" или "Right".'
           type:
             - '"Mixed" | "Unknown" | "Left" | "Centered" | "Right" | "Justified"'
   - uid: word.Word.List.setLevelBullet
@@ -331,19 +405,19 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: listBullet
-          description: Обязательный. Маркер.
+          description: Обязательно. Маркер.
           type:
             - word.Word.ListBullet
         - id: charCode
-          description: 'Необязательный атрибут. Значение кода маркера. Используется только в том случае, если маркер имеет значение Custom.'
+          description: 'Необязательно. Значение кода маркера. Используется только в том случае, если маркер имеет значение Custom.'
           type:
             - number
         - id: fontName
-          description: 'Необязательный атрибут. Имя шрифта маркера. Используется только в том случае, если маркер имеет значение Custom.'
+          description: 'Необязательно. Имя шрифта маркера. Используется только в том случае, если маркер имеет значение Custom.'
           type:
             - string
   - uid: word.Word.List.setLevelBullet_1
@@ -364,19 +438,19 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: listBulletString
-          description: Обязательный. Маркер.
+          description: Обязательно. Маркер.
           type:
             - '"Custom" | "Solid" | "Hollow" | "Square" | "Diamonds" | "Arrow" | "Checkmark"'
         - id: charCode
-          description: 'Необязательный атрибут. Значение кода маркера. Используется только в том случае, если маркер имеет значение Custom.'
+          description: 'Необязательно. Значение кода маркера. Используется только в том случае, если маркер имеет значение Custom.'
           type:
             - number
         - id: fontName
-          description: 'Необязательный атрибут. Имя шрифта маркера. Используется только в том случае, если маркер имеет значение Custom.'
+          description: 'Необязательно. Имя шрифта маркера. Используется только в том случае, если маркер имеет значение Custom.'
           type:
             - string
   - uid: word.Word.List.setLevelIndents
@@ -397,15 +471,15 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: textIndent
-          description: 'Обязательный. Отступ текста в пунктах. Это то же самое, что и отступ абзаца слева.'
+          description: 'Обязательно. Отступ текста в пунктах. Это то же самое, что и отступ абзаца слева.'
           type:
             - number
         - id: bulletNumberPictureIndent
-          description: 'Обязательный. Относительный отступ (в пунктах) маркера, номера или изображения. Это то же самое, что и отступ первой строки абзаца.'
+          description: 'Обязательно. Относительный отступ (в пунктах) маркера, номера или изображения. Это то же самое, что и отступ первой строки абзаца.'
           type:
             - number
   - uid: word.Word.List.setLevelNumbering
@@ -426,15 +500,15 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: listNumbering
-          description: Обязательный. Порядковый формат.
+          description: Обязательно. Порядковый формат.
           type:
             - word.Word.ListNumbering
         - id: formatString
-          description: 'Необязательный атрибут. Формат строки нумерации, определенный как массив строк и/или целых чисел. Каждое целое число — это уровень числового типа, который больше или равен этому уровню. Например, массив \["(", Level-1, ".", Level, ")"\] может определять формат "(2. c)", где 2 — это номер элемента родительского уровня, а c — это номер элемента этого уровня.'
+          description: 'Необязательно. Формат строки нумерации, определенный как массив строк и/или целых чисел. Каждое целое число — это уровень числового типа, который больше или равен этому уровню. Например, массив \["(", Level-1, ".", Level, ")"\] может определять формат "(2. c)", где 2 — это номер элемента родительского уровня, а c — это номер элемента этого уровня.'
           type:
             - Array<string | number>
   - uid: word.Word.List.setLevelNumbering_1
@@ -455,17 +529,43 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: listNumberingString
-          description: Обязательный. Порядковый формат.
+          description: Обязательно. Порядковый формат.
           type:
             - '"None" | "Arabic" | "UpperRoman" | "LowerRoman" | "UpperLetter" | "LowerLetter"'
         - id: formatString
-          description: 'Необязательный атрибут. Формат строки нумерации, определенный как массив строк и/или целых чисел. Каждое целое число — это уровень числового типа, который больше или равен этому уровню. Например, массив \["(", Level-1, ".", Level, ")"\] может определять формат "(2. c)", где 2 — это номер элемента родительского уровня, а c — это номер элемента этого уровня.'
+          description: 'Необязательно. Формат строки нумерации, определенный как массив строк и/или целых чисел. Каждое целое число — это уровень числового типа, который больше или равен этому уровню. Например, массив \["(", Level-1, ".", Level, ")"\] может определять формат "(2. c)", где 2 — это номер элемента родительского уровня, а c — это номер элемента этого уровня.'
           type:
             - Array<string | number>
+  - uid: word.Word.List.setLevelPicture
+    summary: |-
+      Задает рисунок на указанном уровне в списке.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'setLevelPicture(level, base64EncodedImage)'
+    fullName: 'setLevelPicture(level, base64EncodedImage)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setLevelPicture(level: number, base64EncodedImage?: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: level
+          description: Обязательно. Уровень в списке.
+          type:
+            - number
+        - id: base64EncodedImage
+          description: 'Необязательно. Устанавливаемое изображение в кодировке Base64. Если этот параметр не задан, устанавливается изображение по умолчанию.'
+          type:
+            - string
   - uid: word.Word.List.setLevelStartingNumber
     summary: |-
       Задает начальный номер на указанном уровне списка. Значение по умолчанию: 1.
@@ -484,15 +584,15 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Обязательный. Уровень в списке.
+          description: Обязательно. Уровень в списке.
           type:
             - number
         - id: startingNumber
-          description: 'Обязательный. Число, с которого начинается запуск.'
+          description: 'Обязательно. Число, с которого начинается запуск.'
           type:
             - number
   - uid: word.Word.List.toJSON
-    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. List — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.ListData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. List — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.ListData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
