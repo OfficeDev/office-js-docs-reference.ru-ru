@@ -4,7 +4,7 @@ items:
     summary: |-
       Режим чтения сообщений для [Office. Context. Mailbox. Item](xref:Outlook_1_4.Office.Item)<!-- -->.
 
-      **Важно!** это внутренний объект Outlook, который не предоставляется напрямую через существующие интерфейсы. Этот режим следует рассматривать как режим Office. Context. Mailbox. Item. Для получения дополнительных сведений обратитесь к странице [объектНой модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.4/office.context.mailbox.item) .
+      **Важно!** это внутренний объект Outlook, который не предоставляется напрямую через существующие интерфейсы. Этот режим следует рассматривать как режим Office. Context. Mailbox. Item. Для получения дополнительных сведений обратитесь к странице [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.4/office.context.mailbox.item) .
     name: Office.MessageRead
     fullName: Office.MessageRead
     langs:
@@ -286,14 +286,14 @@ items:
       **Примечание**: Этот метод не поддерживается в Outlook для iOS или Outlook для Android.
 
       \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>String</td> <td>С ограничениями</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>С ограничениями</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>С ограничениями</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```"
+    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL-адрес</td> <td>String</td> <td>Restricted</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```"
     name: getEntitiesByType(entityType)
     fullName: getEntitiesByType(entityType)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'getEntitiesByType(entityType: MailboxEnums.EntityType): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+      content: 'getEntitiesByType(entityType: MailboxEnums.EntityType | string): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
       return:
         type:
           - '(string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]'
@@ -302,7 +302,7 @@ items:
         - id: entityType
           description: Одно из значений перечисления EntityType.
           type:
-            - MailboxEnums.EntityType
+            - MailboxEnums.EntityType | string
   - uid: Outlook_1_4.Office.MessageRead.getFilteredEntitiesByName
     summary: |-
       Возвращает известные сущности в выбранном элементе, которые проходят через именованный фильтр, определяемый в XML-файле манифеста.
@@ -480,7 +480,7 @@ items:
 
       ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения
 
-      **Замечание**: некоторые типы файлов блокируЮтся в Outlook из-за возможных проблем с безопасностью, поэтому они не возвращаются. Дополнительные сведения см в разделе [заблокированные вложения в Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
+      **Замечание**: некоторые типы файлов блокируются в Outlook из-за возможных проблем с безопасностью, поэтому они не возвращаются. Дополнительные сведения см в разделе [заблокированные вложения в Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
 
       #### <a name="examples"></a>Примеры
 
@@ -735,7 +735,7 @@ items:
 
       Свойство itemClass указывает класс сообщения выбранного элемента. Ниже приводятся классы сообщения по умолчанию для элемента сообщения или встречи.
 
-      <table> <tr> <th>Тип</th> <th>Описание</th> <th>Класс элемента</th> </tr> <tr> <td>Элементы встречи</td> <td>Это элементы календаря для класса элемента IPM. Встреча или IPM. Встреча. вхождение.</td> <td>Класс. Встреча, IPM. Встреча. вхождение</td> </tr> <tr> <td>Элементы сообщения</td> <td>Сюда входят сообщения электронной почты с классом сообщения по умолчанию IPM.Note, а также приглашения на собрания, ответы на приглашения и отмены собраний, использующие IPM.Schedule.Meeting в качестве базового класса сообщения.</td> <td>Класс. Обратите внимание, что IPM. Schedule. Meeting. Request, IPM. Schedule. Meeting. unof, IPM. Schedule. Meeting. POS, IPM. Schedule. Meeting. домик, IPM. ЗаПланировать собрание. отменено</td> </tr> </table>
+      <table> <tr> <th>Тип</th> <th>Описание</th> <th>Класс элемента</th> </tr> <tr> <td>Элементы встречи</td> <td>Это элементы календаря для класса элемента IPM. Встреча или IPM. Встреча. вхождение.</td> <td>Класс. Встреча, IPM. Встреча. вхождение</td> </tr> <tr> <td>Элементы сообщения</td> <td>Сюда входят сообщения электронной почты с классом сообщения по умолчанию IPM.Note, а также приглашения на собрания, ответы на приглашения и отмены собраний, использующие IPM.Schedule.Meeting в качестве базового класса сообщения.</td> <td>Класс. Обратите внимание, что IPM. Schedule. Meeting. Request, IPM. Schedule. Meeting. unof, IPM. Schedule. Meeting. POS, IPM. Schedule. Meeting. домик, IPM. Запланировать собрание. отменено</td> </tr> </table>
 
       #### <a name="examples"></a>Примеры
 
@@ -818,10 +818,10 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'itemType: MailboxEnums.ItemType;'
+      content: 'itemType: MailboxEnums.ItemType | string;'
       return:
         type:
-          - MailboxEnums.ItemType
+          - MailboxEnums.ItemType | string
   - uid: Outlook_1_4.Office.MessageRead.normalizedSubject
     summary: |-
       Получает тему элемента со всеми удаленными префиксами (включая RE: и FWD:).
