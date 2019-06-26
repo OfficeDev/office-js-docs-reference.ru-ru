@@ -114,41 +114,6 @@ items:
       `load(option?: { select?: string; expand?: string; }): Visio.Shape`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
 
       `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Shape`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      Visio.run(session, function (ctx) {
-          var activePage = ctx.document.getActivePage();
-          var shapeName = "Sample Name";
-          var shape = activePage.shapes.getItem(shapeName);
-          shape.load();
-          return ctx.sync().then(function () {
-              console.log(shape.name );
-              console.log(shape.id );
-              console.log(shape.Text );
-              console.log(shape.Select );
-          });
-      }).catch(function(error) {
-          console.log("Error: " + error);
-          if (error instanceof OfficeExtension.Error) {
-              console.log("Debug info: " + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      Visio.run(session, function (ctx) {
-          var activePage = ctx.document.getActivePage();
-          var shape = activePage.shapes.getItem(0);
-          shape.view.highlight = { color: "#E7E7E7", width: 100 };
-          return ctx.sync();
-      }).catch(function(error) {
-          console.log("Error: " + error);
-          if (error instanceof OfficeExtension.Error) {
-              console.log("Debug info: " + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
     name: load(option)
     fullName: load(option)
     langs:
@@ -177,7 +142,43 @@ items:
       return:
         type:
           - Visio.Shape
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shapeName = "Sample Name";
+              var shape = activePage.shapes.getItem(shapeName);
+              shape.load(["name", "id", "text", "select"]);
+              return ctx.sync().then(function () {
+                  console.log(shape.name);
+                  console.log(shape.id);
+                  console.log(shape.text);
+                  console.log(shape.select);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shape = activePage.shapes.getItem(0);
+              shape.view.highlight = { color: "#E7E7E7", width: 100 };
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
       parameters:
         - id: propertyNames
           description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
@@ -321,7 +322,7 @@ items:
         type:
           - string
   - uid: visio.Visio.Shape.toJSON
-    summary: 'ПереОпределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Visio. Shape является объектом API, `toJSON` метод возвращает простой объект JavaScript (типизированный как`Visio.Interfaces.ShapeData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Visio. Shape является объектом API, `toJSON` метод возвращает простой объект JavaScript (типизированный как`Visio.Interfaces.ShapeData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
