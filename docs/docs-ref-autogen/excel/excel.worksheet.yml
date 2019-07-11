@@ -48,6 +48,7 @@ items:
       - excel.Excel.Worksheet.onDeactivated
       - excel.Excel.Worksheet.onFiltered
       - excel.Excel.Worksheet.onFormatChanged
+      - excel.Excel.Worksheet.onRowHiddenChanged
       - excel.Excel.Worksheet.onRowSorted
       - excel.Excel.Worksheet.onSelectionChanged
       - excel.Excel.Worksheet.onSingleClicked
@@ -267,7 +268,7 @@ items:
             - excel.Excel.Worksheet
   - uid: excel.Excel.Worksheet.delete
     summary: |-
-      Удаляет лист из книги. Обратите внимание, что если для отображения листа задано значение "Верихидден", операция удаления завершится с помощью GeneralException.
+      Удаляет лист из книги. Обратите внимание, что если для отображения листа задано значение "Верихидден", операция удаления завершится с `InvalidOperation` исключением. Прежде чем удалять его, необходимо сначала изменить его видимость на скрытую или видимую.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: delete()
@@ -1099,6 +1100,22 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+  - uid: excel.Excel.Worksheet.onRowHiddenChanged
+    summary: |-
+      Возникает при изменении скрытого состояния строки на определенном листе.
+
+      \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onRowHiddenChanged
+    fullName: onRowHiddenChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onRowHiddenChanged: OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>
   - uid: excel.Excel.Worksheet.onRowSorted
     summary: |-
       Возникает при сортировке по строкам.
