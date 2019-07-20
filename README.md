@@ -12,13 +12,11 @@
 
 * Мы также будем рады Вашим вкладам в эту документацию. Чтобы внести изменения, разработайте этот репозиторий, обновите файлы по мере необходимости и отправьте запрос на включение внесенных изменений. Дополнительные сведения см [в статье участие в этой документации](Contributing.md).
 
-    > **Важно!** не изменяйте файлы в папке [/Докс/Докс-реф-аутожен](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) этого репозитория. Все файлы в этой папке создаются автоматически, поэтому их невозможно обновлять с помощью запроса на включение внесенных изменений. Чтобы запросить изменение файлов в папке [/Докс/Докс-реф-аутожен](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) , [отправьте сообщение об ошибке](https://github.com/OfficeDev/office-js-docs-reference/issues) в этом репозитории.
+    > **Важно!** не изменяйте файлы в папке [/Докс/Докс-реф-аутожен](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) этого репозитория. Все файлы в этой папке создаются автоматически, поэтому их невозможно обновлять с помощью запроса на включение внесенных изменений. Чтобы запросить изменение файлов в папке [/Докс/Докс-реф-аутожен](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) , [отправьте сообщение об ошибке](https://github.com/OfficeDev/office-js-docs-reference/issues) в этом репозитории. Подробнее о том, как инструментарий в этом репозитории можно прочитать [здесь](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md).
 
 * Чтобы рассказать о своих впечатлениях от использования файлов и пожеланиях насчет будущих версий, примеров кода и т. д., поделитесь своими мыслями на [сайте UserVoice платформы разработки для Office](https://officespdev.uservoice.com/).
-
 
 ## <a name="microsoft-open-source-code-of-conduct"></a>Правила поведения Майкрософт, касающиеся обращения с открытым кодом
 
 Этот проект соответствует [правилам поведения Майкрософт, касающимся обращения с открытым кодом](https://opensource.microsoft.com/codeofconduct/).
 Для получения дополнительных сведений обратитесь к разделу " [проведение вопросов](https://opensource.microsoft.com/codeofconduct/faq/)" или свяжитесь с [opencode@microsoft.com](mailto:opencode@microsoft.com) с дополнительными вопросами или комментариями.
-
