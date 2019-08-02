@@ -1,0 +1,320 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.ChartAxis
+    summary: |-
+      Представляет одну ось на диаграмме.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.ChartAxis
+    fullName: Excel.ChartAxis
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.ChartAxis.context
+      - excel.Excel.ChartAxis.format
+      - excel.Excel.ChartAxis.load
+      - excel.Excel.ChartAxis.load_1
+      - excel.Excel.ChartAxis.load_2
+      - excel.Excel.ChartAxis.majorGridlines
+      - excel.Excel.ChartAxis.majorUnit
+      - excel.Excel.ChartAxis.maximum
+      - excel.Excel.ChartAxis.minimum
+      - excel.Excel.ChartAxis.minorGridlines
+      - excel.Excel.ChartAxis.minorUnit
+      - excel.Excel.ChartAxis.set
+      - excel.Excel.ChartAxis.set_1
+      - excel.Excel.ChartAxis.title
+      - excel.Excel.ChartAxis.toJSON
+  - uid: excel.Excel.ChartAxis.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.ChartAxis.format
+    summary: |-
+      Представляет форматирование объекта диаграммы, в том числе форматирование линий и шрифта. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: format
+    fullName: format
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly format: Excel.ChartAxisFormat;'
+      return:
+        type:
+          - excel.Excel.ChartAxisFormat
+  - uid: excel.Excel.ChartAxis.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Excel.ChartAxis`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.ChartAxisLoadOptions): Excel.ChartAxis;'
+      return:
+        type:
+          - excel.Excel.ChartAxis
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.ChartAxisLoadOptions
+  - uid: excel.Excel.ChartAxis.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.ChartAxis;'
+      return:
+        type:
+          - excel.Excel.ChartAxis
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Get the maximum of Chart Axis from Chart1
+          Excel.run(function (ctx) { 
+              var chart = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1");    
+              var axis = chart.axes.valueAxis;
+              axis.load('maximum');
+              return ctx.sync().then(function() {
+                      console.log(axis.maximum);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Set the maximum, minimum, majorunit, minorunit of valueaxis. 
+          Excel.run(function (ctx) { 
+              var chart = ctx.workbook.worksheets.getItem("Sheet1").charts.getItem("Chart1");    
+              chart.axes.valueAxis.maximum = 5;
+              chart.axes.valueAxis.minimum = 0;
+              chart.axes.valueAxis.majorUnit = 1;
+              chart.axes.valueAxis.minorUnit = 0.2;
+              return ctx.sync().then(function() {
+                      console.log("Axis Settings Changed");
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.ChartAxis.load_2
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartAxis;'
+      return:
+        type:
+          - excel.Excel.ChartAxis
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.ChartAxis.majorGridlines
+    summary: |-
+      Возвращает объект линии сетки, который представляет основные линии сетки для указанной оси. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: majorGridlines
+    fullName: majorGridlines
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly majorGridlines: Excel.ChartGridlines;'
+      return:
+        type:
+          - excel.Excel.ChartGridlines
+  - uid: excel.Excel.ChartAxis.majorUnit
+    summary: |-
+      Обозначает интервал между двумя основными делениями. Можно указать в виде числового значения или пустой строки. Возвращаемое значение всегда является числом.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: majorUnit
+    fullName: majorUnit
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'majorUnit: any;'
+      return:
+        type:
+          - any
+  - uid: excel.Excel.ChartAxis.maximum
+    summary: |-
+      Представляет максимальное значение на оси значений. Можно указать в виде числового значения или пустой строки (для автоматически заданных значений оси). Возвращаемое значение всегда является числом.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: maximum
+    fullName: maximum
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'maximum: any;'
+      return:
+        type:
+          - any
+  - uid: excel.Excel.ChartAxis.minimum
+    summary: |-
+      Представляет минимальное значение на оси значений. Ему можно присвоить числовое значение или пустую строку (для автоматически заданных значений оси). Возвращаемое значение всегда является числом.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: minimum
+    fullName: minimum
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'minimum: any;'
+      return:
+        type:
+          - any
+  - uid: excel.Excel.ChartAxis.minorGridlines
+    summary: |-
+      Возвращает объект Gridlines, который представляет вспомогательные линии сетки для указанной оси. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: minorGridlines
+    fullName: minorGridlines
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly minorGridlines: Excel.ChartGridlines;'
+      return:
+        type:
+          - excel.Excel.ChartGridlines
+  - uid: excel.Excel.ChartAxis.minorUnit
+    summary: |-
+      Представляет интервал между двумя промежуточными делениями. Его можно указать в виде числового значения или пустой строки (для автоматически заданных значений оси). Возвращаемое значение всегда является числом.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: minorUnit
+    fullName: minorUnit
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'minorUnit: any;'
+      return:
+        type:
+          - any
+  - uid: excel.Excel.ChartAxis.set
+    summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
+    remarks: |-
+      Этот метод имеет следующую дополнительную подпись:
+
+      `set(properties: Excel.ChartAxis): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.ChartAxisUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: 'Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.'
+          type:
+            - Interfaces.ChartAxisUpdateData
+        - id: options
+          description: 'Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.'
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: excel.Excel.ChartAxis.set_1
+    summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.ChartAxis): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.ChartAxis
+  - uid: excel.Excel.ChartAxis.title
+    summary: |-
+      Обозначает название оси. Только для чтения.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: title
+    fullName: title
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly title: Excel.ChartAxisTitle;'
+      return:
+        type:
+          - excel.Excel.ChartAxisTitle
+  - uid: excel.Excel.ChartAxis.toJSON
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. ChartAxis — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ChartAxisData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.ChartAxisData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.ChartAxisData
+        description: ''
