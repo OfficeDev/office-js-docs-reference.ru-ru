@@ -1,0 +1,388 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.WorksheetCollection
+    summary: |-
+      <span data-ttu-id="05952-101">Представляет коллекцию объектов листа, включенных в книгу.</span><span class="sxs-lookup"><span data-stu-id="05952-101">Represents a collection of worksheet objects that are part of the workbook.</span></span>
+
+      <span data-ttu-id="05952-102">\[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.WorksheetCollection
+    fullName: Excel.WorksheetCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.WorksheetCollection.add
+      - excel.Excel.WorksheetCollection.context
+      - excel.Excel.WorksheetCollection.getActiveWorksheet
+      - excel.Excel.WorksheetCollection.getCount
+      - excel.Excel.WorksheetCollection.getFirst
+      - excel.Excel.WorksheetCollection.getItem
+      - excel.Excel.WorksheetCollection.getItemOrNullObject
+      - excel.Excel.WorksheetCollection.getLast
+      - excel.Excel.WorksheetCollection.items
+      - excel.Excel.WorksheetCollection.load
+      - excel.Excel.WorksheetCollection.load_1
+      - excel.Excel.WorksheetCollection.load_2
+      - excel.Excel.WorksheetCollection.toJSON
+  - uid: excel.Excel.WorksheetCollection.add
+    summary: |-
+      <span data-ttu-id="05952-p101">Добавляет новый лист в книгу. Лист будет добавлен в конец набора имеющихся листов. Если вы хотите активировать только что добавленный лист, вызовите команду .activate().</span><span class="sxs-lookup"><span data-stu-id="05952-p101">Adds a new worksheet to the workbook. The worksheet will be added at the end of existing worksheets. If you wish to activate the newly added worksheet, call ".activate() on it.</span></span>
+
+      <span data-ttu-id="05952-106">\[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-106">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: add(name)
+    fullName: add(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(name?: string): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="05952-107">Примеры</span><span class="sxs-lookup"><span data-stu-id="05952-107">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sample Name';
+              var worksheet = ctx.workbook.worksheets.add(wSheetName);
+              worksheet.load('name');
+              return ctx.sync().then(function() {
+                  console.log(worksheet.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: name
+          description: '<span data-ttu-id="05952-p102">Необязательный параметр. Имя добавляемого листа. Если параметр используется, имя должно быть уникальным. В противном случае Excel определяет имя нового листа.</span><span class="sxs-lookup"><span data-stu-id="05952-p102">Optional. The name of the worksheet to be added. If specified, name should be unqiue. If not specified, Excel determines the name of the new worksheet.</span></span>'
+          type:
+            - string
+  - uid: excel.Excel.WorksheetCollection.context
+    summary: '<span data-ttu-id="05952-112">Контекст запроса, связанный с объектом.</span><span class="sxs-lookup"><span data-stu-id="05952-112">The request context associated with the object.</span></span> <span data-ttu-id="05952-113">Это подсоединяет процесс надстройки к процессу ведущего приложения Office.</span><span class="sxs-lookup"><span data-stu-id="05952-113">This connects the add-in''s process to the Office host application''s process.</span></span>'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.WorksheetCollection.getActiveWorksheet
+    summary: |-
+      <span data-ttu-id="05952-114">Получает текущий активный лист в книге.</span><span class="sxs-lookup"><span data-stu-id="05952-114">Gets the currently active worksheet in the workbook.</span></span>
+
+      <span data-ttu-id="05952-115">\[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-115">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getActiveWorksheet()
+    fullName: getActiveWorksheet()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getActiveWorksheet(): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="05952-116">Примеры</span><span class="sxs-lookup"><span data-stu-id="05952-116">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) {  
+              var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();
+              activeWorksheet.load('name');
+              return ctx.sync().then(function() {
+                      console.log(activeWorksheet.name);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.WorksheetCollection.getCount
+    summary: |-
+      <span data-ttu-id="05952-117">Получает количество листов в коллекции.</span><span class="sxs-lookup"><span data-stu-id="05952-117">Gets the number of worksheets in the collection.</span></span>
+
+      <span data-ttu-id="05952-118">\[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-118">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getCount(visibleOnly)
+    fullName: getCount(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: ''
+      parameters:
+        - id: visibleOnly
+          description: '<span data-ttu-id="05952-119">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="05952-119">Optional.</span></span> <span data-ttu-id="05952-120">Если задано значение true, учитываются только видимые листы, пропуская все скрытые.</span><span class="sxs-lookup"><span data-stu-id="05952-120">If true, considers only visible worksheets, skipping over any hidden ones.</span></span>'
+          type:
+            - boolean
+  - uid: excel.Excel.WorksheetCollection.getFirst
+    summary: |-
+      <span data-ttu-id="05952-121">Получает первый лист в коллекции.</span><span class="sxs-lookup"><span data-stu-id="05952-121">Gets the first worksheet in the collection.</span></span>
+
+      <span data-ttu-id="05952-122">\[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-122">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getFirst(visibleOnly)
+    fullName: getFirst(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="05952-123">Примеры</span><span class="sxs-lookup"><span data-stu-id="05952-123">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheets = context.workbook.worksheets;
+
+              // We don't want to include the default worksheet that was created
+              // when the workbook was created, so our "firstSheet" will be the one
+              // after the literal first. Note chaining of navigation methods.
+              const firstSheet = sheets.getFirst().getNext();
+              const lastSheet = sheets.getLast();
+              const firstTaxRateRange = firstSheet.getRange("B2");
+              const lastTaxRateRange = lastSheet.getRange("B2");
+
+              firstSheet.load("name");
+              lastSheet.load("name");
+              firstTaxRateRange.load("text");
+              lastTaxRateRange.load("text");
+
+              await context.sync();
+
+              let firstYear = firstSheet.name.substr(5, 4);
+              let lastYear = lastSheet.name.substr(5, 4);
+              console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: visibleOnly
+          description: '<span data-ttu-id="05952-124">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="05952-124">Optional.</span></span> <span data-ttu-id="05952-125">Если задано значение true, учитываются только видимые листы, пропуская все скрытые.</span><span class="sxs-lookup"><span data-stu-id="05952-125">If true, considers only visible worksheets, skipping over any hidden ones.</span></span>'
+          type:
+            - boolean
+  - uid: excel.Excel.WorksheetCollection.getItem
+    summary: |-
+      <span data-ttu-id="05952-126">Получает объект листа по его имени или ИД.</span><span class="sxs-lookup"><span data-stu-id="05952-126">Gets a worksheet object using its Name or ID.</span></span>
+
+      <span data-ttu-id="05952-127">\[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-127">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: string): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: key
+          description: <span data-ttu-id="05952-128">Имя или ИД листа.</span><span class="sxs-lookup"><span data-stu-id="05952-128">The Name or ID of the worksheet.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.WorksheetCollection.getItemOrNullObject
+    summary: |-
+      <span data-ttu-id="05952-129">Получает объект листа по его имени или ИД.</span><span class="sxs-lookup"><span data-stu-id="05952-129">Gets a worksheet object using its Name or ID.</span></span> <span data-ttu-id="05952-130">Если лист не существует, возвращает пустой объект.</span><span class="sxs-lookup"><span data-stu-id="05952-130">If the worksheet does not exist, will return a null object.</span></span>
+
+      <span data-ttu-id="05952-131">\[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-131">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: string): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: key
+          description: <span data-ttu-id="05952-132">Имя или ИД листа.</span><span class="sxs-lookup"><span data-stu-id="05952-132">The Name or ID of the worksheet.</span></span>
+          type:
+            - string
+  - uid: excel.Excel.WorksheetCollection.getLast
+    summary: |-
+      <span data-ttu-id="05952-133">Получает последний лист в коллекции.</span><span class="sxs-lookup"><span data-stu-id="05952-133">Gets the last worksheet in the collection.</span></span>
+
+      <span data-ttu-id="05952-134">\[[Набор API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="05952-134">\[ [API set: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getLast(visibleOnly)
+    fullName: getLast(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="05952-135">Примеры</span><span class="sxs-lookup"><span data-stu-id="05952-135">Examples</span></span>
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheets = context.workbook.worksheets;
+
+              // We don't want to include the default worksheet that was created
+              // when the workbook was created, so our "firstSheet" will be the one
+              // after the literal first. Note chaining of navigation methods.
+              const firstSheet = sheets.getFirst().getNext();
+              const lastSheet = sheets.getLast();
+              const firstTaxRateRange = firstSheet.getRange("B2");
+              const lastTaxRateRange = lastSheet.getRange("B2");
+
+              firstSheet.load("name");
+              lastSheet.load("name");
+              firstTaxRateRange.load("text");
+              lastTaxRateRange.load("text");
+
+              await context.sync();
+
+              let firstYear = firstSheet.name.substr(5, 4);
+              let lastYear = lastSheet.name.substr(5, 4);
+              console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: visibleOnly
+          description: '<span data-ttu-id="05952-136">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="05952-136">Optional.</span></span> <span data-ttu-id="05952-137">Если задано значение true, учитываются только видимые листы, пропуская все скрытые.</span><span class="sxs-lookup"><span data-stu-id="05952-137">If true, considers only visible worksheets, skipping over any hidden ones.</span></span>'
+          type:
+            - boolean
+  - uid: excel.Excel.WorksheetCollection.items
+    summary: <span data-ttu-id="05952-138">Получает загруженные дочерние элементы в этой коллекции.</span><span class="sxs-lookup"><span data-stu-id="05952-138">Gets the loaded child items in this collection.</span></span>
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.Worksheet[];'
+      return:
+        type:
+          - 'Excel.Worksheet[]'
+  - uid: excel.Excel.WorksheetCollection.load
+    summary: <span data-ttu-id="05952-139">Добавляет в очередь команду для загрузки указанных свойств объекта.</span><span class="sxs-lookup"><span data-stu-id="05952-139">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="05952-140">Перед чтением свойств необходимо вызвать метод context.sync().</span><span class="sxs-lookup"><span data-stu-id="05952-140">You must call "context.sync()" before reading the properties.</span></span>
+    remarks: |-
+      <span data-ttu-id="05952-141">В дополнение к этой подписи этот метод имеет следующие подписи:</span><span class="sxs-lookup"><span data-stu-id="05952-141">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="05952-142">`load(option?: string | string[]): Excel.WorksheetCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.</span><span class="sxs-lookup"><span data-stu-id="05952-142">`load(option?: string | string[]): Excel.WorksheetCollection` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="05952-143">`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.</span><span class="sxs-lookup"><span data-stu-id="05952-143">`load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="05952-144">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`— Доступно только для типов коллекций.</span><span class="sxs-lookup"><span data-stu-id="05952-144">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection` - Only available on collection types.</span></span> <span data-ttu-id="05952-145">Он аналогичен предыдущей подписи.</span><span class="sxs-lookup"><span data-stu-id="05952-145">It is similar to the preceding signature.</span></span> <span data-ttu-id="05952-146">Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат.</span><span class="sxs-lookup"><span data-stu-id="05952-146">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="05952-147">Option. skip указывает количество элементов, которые будут пропущены и не включены в результат.</span><span class="sxs-lookup"><span data-stu-id="05952-147">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="05952-148">Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.</span><span class="sxs-lookup"><span data-stu-id="05952-148">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
+      return:
+        type:
+          - excel.Excel.WorksheetCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+  - uid: excel.Excel.WorksheetCollection.load_1
+    summary: <span data-ttu-id="05952-149">Добавляет в очередь команду для загрузки указанных свойств объекта.</span><span class="sxs-lookup"><span data-stu-id="05952-149">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="05952-150">Перед чтением свойств `context.sync()` необходимо вызвать метод.</span><span class="sxs-lookup"><span data-stu-id="05952-150">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
+      return:
+        type:
+          - excel.Excel.WorksheetCollection
+        description: |-
+
+
+          #### <a name="examples"></a><span data-ttu-id="05952-151">Примеры</span><span class="sxs-lookup"><span data-stu-id="05952-151">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var worksheets = ctx.workbook.worksheets;
+              worksheets.load('items');
+              return ctx.sync().then(function() {
+                  for (var i = 0; i < worksheets.items.length; i++)
+                  {
+                      console.log(worksheets.items[i].name);
+                      console.log(worksheets.items[i].index);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: '<span data-ttu-id="05952-152">Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.</span><span class="sxs-lookup"><span data-stu-id="05952-152">A comma-delimited string or an array of strings that specify the properties to load.</span></span>'
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.WorksheetCollection.load_2
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
+      return:
+        type:
+          - excel.Excel.WorksheetCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: excel.Excel.WorksheetCollection.toJSON
+    summary: '<span data-ttu-id="05952-153">Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="05952-153">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="05952-154">.</span><span class="sxs-lookup"><span data-stu-id="05952-154"></span></span> <span data-ttu-id="05952-155">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="05952-155"></span></span><!-- --><span data-ttu-id="05952-156">, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.WorksheetCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.WorksheetCollectionData`</span><span class="sxs-lookup"><span data-stu-id="05952-156">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.WorksheetCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.WorksheetCollectionData`</span></span><!-- --><span data-ttu-id="05952-157">), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.</span><span class="sxs-lookup"><span data-stu-id="05952-157">) that contains an "items" array with shallow copies of any loaded properties from the collection''s items.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.WorksheetCollectionData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.WorksheetCollectionData
+        description: ''
