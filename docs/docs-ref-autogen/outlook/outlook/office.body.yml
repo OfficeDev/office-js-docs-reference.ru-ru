@@ -1,0 +1,471 @@
+### YamlMime:UniversalReference
+items:
+  - uid: outlook.Office.Body
+    summary: |-
+      <span data-ttu-id="acbaf-101">Объект Body предоставляет методы для добавления и обновления содержимого сообщения или встречи.</span><span class="sxs-lookup"><span data-stu-id="acbaf-101">The body object provides methods for adding and updating the content of the message or appointment.</span></span> <span data-ttu-id="acbaf-102">Он возвращается в свойстве body выбранного элемента.</span><span class="sxs-lookup"><span data-stu-id="acbaf-102">It is returned in the body property of the selected item.</span></span>
+
+      <span data-ttu-id="acbaf-103">\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-103">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-104">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-104">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="acbaf-105">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: "создание" или "чтение"</span><span class="sxs-lookup"><span data-stu-id="acbaf-105">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose or Read</span></span>
+    name: Office.Body
+    fullName: Office.Body
+    langs:
+      - typeScript
+    type: interface
+    package: outlook
+    children:
+      - outlook.Office.Body.getAsync
+      - outlook.Office.Body.getAsync_1
+      - outlook.Office.Body.getTypeAsync
+      - outlook.Office.Body.getTypeAsync_1
+      - outlook.Office.Body.prependAsync
+      - outlook.Office.Body.prependAsync_1
+      - outlook.Office.Body.setAsync
+      - outlook.Office.Body.setAsync_1
+      - outlook.Office.Body.setSelectedDataAsync
+      - outlook.Office.Body.setSelectedDataAsync_1
+  - uid: outlook.Office.Body.getAsync
+    summary: |-
+      <span data-ttu-id="acbaf-106">Возвращает текущий текст в указанном формате.</span><span class="sxs-lookup"><span data-stu-id="acbaf-106">Returns the current body in a specified format.</span></span>
+
+      <span data-ttu-id="acbaf-107">Этот метод возвращает весь текущий текст в формате, заданном coercionType.</span><span class="sxs-lookup"><span data-stu-id="acbaf-107">This method returns the entire current body in the format specified by coercionType.</span></span>
+
+      <span data-ttu-id="acbaf-108">При работе с текстом в формате HTML важно отметить, что методы Body. Async и Body. setAsync не идемпотентного.</span><span class="sxs-lookup"><span data-stu-id="acbaf-108">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="acbaf-109">Значение, возвращаемое методом методом, не обязательно должно совпадать со значением, переданным в метод setAsync ранее.</span><span class="sxs-lookup"><span data-stu-id="acbaf-109">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="acbaf-110">Клиент может изменить значение, передаваемое в setAsync, чтобы обеспечить эффективное отображение его обработчиком визуализации.</span><span class="sxs-lookup"><span data-stu-id="acbaf-110">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="acbaf-111">\[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-111">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-112">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-112">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="acbaf-113">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: "создание" или "чтение"</span><span class="sxs-lookup"><span data-stu-id="acbaf-113">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose or Read</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="acbaf-114">Примеры</span><span class="sxs-lookup"><span data-stu-id="acbaf-114">Examples</span></span>
+
+      ```javascript
+      // This example gets the body of the item as plain text.
+      Office.context.mailbox.item.body.getAsync(
+          "text",
+          { asyncContext: "This is passed to the callback" },
+          function callback(result) {
+              // Do something with the result.
+          });
+
+      // The following is an example of the result parameter passed to the callback function.
+      {
+          "value": "TEXT of whole body (including threads below)",
+          "status": "succeeded",
+          "asyncContext": "This is passed to the callback"
+      }
+      ```
+    name: 'getAsync(coercionType, options, callback)'
+    fullName: 'getAsync(coercionType, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(coercionType: Office.CoercionType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: coercionType
+          description: <span data-ttu-id="acbaf-115">Формат возвращаемого текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-115">The format for the returned body.</span></span>
+          type:
+            - Office.CoercionType | string
+        - id: options
+          description: '<span data-ttu-id="acbaf-116">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-116">Optional.</span></span> <span data-ttu-id="acbaf-117">Литерал объекта, содержащий одно или несколько из следующих свойств: asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="acbaf-117">An object literal that contains one or more of the following properties: asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="acbaf-118">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-118">Optional.</span></span> <span data-ttu-id="acbaf-119">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-119">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-120">Основной текст предоставляется в запрошенном формате в свойстве asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="acbaf-120">The body is provided in the requested format in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.Body.getAsync_1
+    summary: |-
+      <span data-ttu-id="acbaf-121">Возвращает текущий текст в указанном формате.</span><span class="sxs-lookup"><span data-stu-id="acbaf-121">Returns the current body in a specified format.</span></span>
+
+      <span data-ttu-id="acbaf-122">Этот метод возвращает весь текущий текст в формате, заданном coercionType.</span><span class="sxs-lookup"><span data-stu-id="acbaf-122">This method returns the entire current body in the format specified by coercionType.</span></span>
+
+      <span data-ttu-id="acbaf-123">При работе с текстом в формате HTML важно отметить, что методы Body. Async и Body. setAsync не идемпотентного.</span><span class="sxs-lookup"><span data-stu-id="acbaf-123">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="acbaf-124">Значение, возвращаемое методом методом, не обязательно должно совпадать со значением, переданным в метод setAsync ранее.</span><span class="sxs-lookup"><span data-stu-id="acbaf-124">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="acbaf-125">Клиент может изменить значение, передаваемое в setAsync, чтобы обеспечить эффективное отображение его обработчиком визуализации.</span><span class="sxs-lookup"><span data-stu-id="acbaf-125">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="acbaf-126">\[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-126">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-127">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-127">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="acbaf-128">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: "создание" или "чтение"</span><span class="sxs-lookup"><span data-stu-id="acbaf-128">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose or Read</span></span>
+    name: 'getAsync(coercionType, callback)'
+    fullName: 'getAsync(coercionType, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(coercionType: Office.CoercionType | string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: coercionType
+          description: <span data-ttu-id="acbaf-129">Формат возвращаемого текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-129">The format for the returned body.</span></span>
+          type:
+            - Office.CoercionType | string
+        - id: callback
+          description: '<span data-ttu-id="acbaf-130">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-130">Optional.</span></span> <span data-ttu-id="acbaf-131">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-131">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-132">Основной текст предоставляется в запрошенном формате в свойстве asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="acbaf-132">The body is provided in the requested format in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.Body.getTypeAsync
+    summary: |-
+      <span data-ttu-id="acbaf-133">Получает значение, указывающее формат содержимого: HTML или текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-133">Gets a value that indicates whether the content is in HTML or text format.</span></span>
+
+      <span data-ttu-id="acbaf-134">\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-134">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-135">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-135">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="acbaf-136">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-136">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+    name: 'getTypeAsync(options, callback)'
+    fullName: 'getTypeAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTypeAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: '<span data-ttu-id="acbaf-137">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-137">Optional.</span></span> <span data-ttu-id="acbaf-138">Объектный литерал, содержащий одно или несколько из указанных ниже свойств.</span><span class="sxs-lookup"><span data-stu-id="acbaf-138">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="acbaf-139">asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="acbaf-139">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="acbaf-140">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-140">Optional.</span></span> <span data-ttu-id="acbaf-141">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-141">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-142">Тип контента возвращается в виде одного из значений CoercionType в свойстве asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="acbaf-142">The content type is returned as one of the CoercionType values in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
+  - uid: outlook.Office.Body.getTypeAsync_1
+    summary: |-
+      <span data-ttu-id="acbaf-143">Получает значение, указывающее формат содержимого: HTML или текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-143">Gets a value that indicates whether the content is in HTML or text format.</span></span>
+
+      <span data-ttu-id="acbaf-144">\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-144">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-145">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-145">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="acbaf-146">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-146">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="acbaf-147">Примеры</span><span class="sxs-lookup"><span data-stu-id="acbaf-147">Examples</span></span>
+
+      ```javascript
+      Office.context.mailbox.item.body.getTypeAsync(function (asyncResult) {
+          if (asyncResult.status === "failed") {
+              console.log("Action failed with error: " + asyncResult.error.message);
+          } else {
+              console.log("Body type: " + asyncResult.value);
+          }
+      });
+      ```
+    name: getTypeAsync(callback)
+    fullName: getTypeAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getTypeAsync(callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: '<span data-ttu-id="acbaf-148">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-148">Optional.</span></span> <span data-ttu-id="acbaf-149">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-149">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-150">Тип контента возвращается в виде одного из значений CoercionType в свойстве asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="acbaf-150">The content type is returned as one of the CoercionType values in the asyncResult.value property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<Office.CoercionType>) => void'
+  - uid: outlook.Office.Body.prependAsync
+    summary: |-
+      <span data-ttu-id="acbaf-151">Добавляет указанное содержимое в начало текста элемента.</span><span class="sxs-lookup"><span data-stu-id="acbaf-151">Adds the specified content to the beginning of the item body.</span></span>
+
+      <span data-ttu-id="acbaf-152">Метод prependAsync вставляет указанную строку в начало основного текста элемента.</span><span class="sxs-lookup"><span data-stu-id="acbaf-152">The prependAsync method inserts the specified string at the beginning of the item body.</span></span> <span data-ttu-id="acbaf-153">После вставки курсор возвращается в исходное место относительно вставленного содержимого.</span><span class="sxs-lookup"><span data-stu-id="acbaf-153">After insertion, the cursor is returned to its original place, relative to the inserted content.</span></span>
+
+      <span data-ttu-id="acbaf-154">Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут ID для привязки (</span><span class="sxs-lookup"><span data-stu-id="acbaf-154">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="acbaf-155">a</span><span class="sxs-lookup"><span data-stu-id="acbaf-155">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="acbaf-156">) до "Лпнолп" (для примера можно просмотреть раздел "примеры").</span><span class="sxs-lookup"><span data-stu-id="acbaf-156">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="acbaf-157">\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-157">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-158">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-158">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="acbaf-159">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-159">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="acbaf-160">**Ошибки**:</span><span class="sxs-lookup"><span data-stu-id="acbaf-160">**Errors**:</span></span>
+
+      - <span data-ttu-id="acbaf-161">Датаексцеедсмаксимумсизе: параметр data имеет более 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-161">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="acbaf-162">Примеры</span><span class="sxs-lookup"><span data-stu-id="acbaf-162">Examples</span></span>
+
+      ```javascript
+      // When including links in HTML markup, you can disable online link preview
+      // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+      Office.context.mailbox.item.body.prependAsync(
+          '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+          {coercionType: Office.CoercionType.Html},
+          callback);
+      ```
+    name: 'prependAsync(data, options, callback)'
+    fullName: 'prependAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'prependAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="acbaf-163">Строка, добавляемая в начало основного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-163">The string to be inserted at the beginning of the body.</span></span> <span data-ttu-id="acbaf-164">Максимальная длина — 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-164">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="acbaf-165">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-165">Optional.</span></span> <span data-ttu-id="acbaf-166">Объектный литерал, содержащий одно или несколько из указанных ниже свойств.</span><span class="sxs-lookup"><span data-stu-id="acbaf-166">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="acbaf-167">asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="acbaf-167">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="acbaf-168">coercionType: нужный формат основного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-168">coercionType: The desired format for the body.</span></span> <span data-ttu-id="acbaf-169">Строка в параметре data будет преобразована в этот формат.</span><span class="sxs-lookup"><span data-stu-id="acbaf-169">The string in the data parameter will be converted to this format.</span></span>'
+          type:
+            - Office.AsyncContextOptions & CoercionTypeOptions
+        - id: callback
+          description: '<span data-ttu-id="acbaf-170">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-170">Optional.</span></span> <span data-ttu-id="acbaf-171">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-171">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-172">Все обнаруженные ошибки будут указаны в свойстве asyncResult. Error.</span><span class="sxs-lookup"><span data-stu-id="acbaf-172">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.prependAsync_1
+    summary: |-
+      <span data-ttu-id="acbaf-173">Добавляет указанное содержимое в начало текста элемента.</span><span class="sxs-lookup"><span data-stu-id="acbaf-173">Adds the specified content to the beginning of the item body.</span></span>
+
+      <span data-ttu-id="acbaf-174">Метод prependAsync вставляет указанную строку в начало основного текста элемента.</span><span class="sxs-lookup"><span data-stu-id="acbaf-174">The prependAsync method inserts the specified string at the beginning of the item body.</span></span> <span data-ttu-id="acbaf-175">После вставки курсор возвращается в исходное место относительно вставленного содержимого.</span><span class="sxs-lookup"><span data-stu-id="acbaf-175">After insertion, the cursor is returned to its original place, relative to the inserted content.</span></span>
+
+      <span data-ttu-id="acbaf-176">Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут ID для привязки (</span><span class="sxs-lookup"><span data-stu-id="acbaf-176">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="acbaf-177">a</span><span class="sxs-lookup"><span data-stu-id="acbaf-177">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="acbaf-178">) до "Лпнолп" (для примера можно просмотреть раздел "примеры").</span><span class="sxs-lookup"><span data-stu-id="acbaf-178">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="acbaf-179">\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-179">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-180">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-180">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="acbaf-181">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-181">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="acbaf-182">**Ошибки**:</span><span class="sxs-lookup"><span data-stu-id="acbaf-182">**Errors**:</span></span>
+
+      - <span data-ttu-id="acbaf-183">Датаексцеедсмаксимумсизе: параметр data имеет более 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-183">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+    name: 'prependAsync(data, callback)'
+    fullName: 'prependAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'prependAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="acbaf-184">Строка, добавляемая в начало основного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-184">The string to be inserted at the beginning of the body.</span></span> <span data-ttu-id="acbaf-185">Максимальная длина — 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-185">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="acbaf-186">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-186">Optional.</span></span> <span data-ttu-id="acbaf-187">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-187">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-188">Все обнаруженные ошибки будут указаны в свойстве asyncResult. Error.</span><span class="sxs-lookup"><span data-stu-id="acbaf-188">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setAsync
+    summary: |-
+      <span data-ttu-id="acbaf-189">Заменяет весь текст указанным текстом.</span><span class="sxs-lookup"><span data-stu-id="acbaf-189">Replaces the entire body with the specified text.</span></span>
+
+      <span data-ttu-id="acbaf-190">При работе с текстом в формате HTML важно отметить, что методы Body. Async и Body. setAsync не идемпотентного.</span><span class="sxs-lookup"><span data-stu-id="acbaf-190">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="acbaf-191">Значение, возвращаемое методом методом, не обязательно должно совпадать со значением, переданным в метод setAsync ранее.</span><span class="sxs-lookup"><span data-stu-id="acbaf-191">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="acbaf-192">Клиент может изменить значение, передаваемое в setAsync, чтобы обеспечить эффективное отображение его обработчиком визуализации.</span><span class="sxs-lookup"><span data-stu-id="acbaf-192">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="acbaf-193">Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут ID для привязки (</span><span class="sxs-lookup"><span data-stu-id="acbaf-193">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="acbaf-194">a</span><span class="sxs-lookup"><span data-stu-id="acbaf-194">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="acbaf-195">) до "Лпнолп" (для примера можно просмотреть раздел "примеры").</span><span class="sxs-lookup"><span data-stu-id="acbaf-195">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="acbaf-196">\[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-196">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-197">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-197">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="acbaf-198">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-198">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="acbaf-199">**Ошибки**:</span><span class="sxs-lookup"><span data-stu-id="acbaf-199">**Errors**:</span></span>
+
+      - <span data-ttu-id="acbaf-200">Датаексцеедсмаксимумсизе: параметр data имеет более 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-200">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="acbaf-201">Инвалидформатеррор: параметр options. coercionType имеет значение Office. CoercionType. HTML, а текст сообщения — в виде обычного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-201">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="acbaf-202">Примеры</span><span class="sxs-lookup"><span data-stu-id="acbaf-202">Examples</span></span>
+
+      ```javascript
+      // When including links in HTML markup, you can disable online link preview
+      // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+      Office.context.mailbox.item.body.setAsync(
+          '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+          {coercionType: Office.CoercionType.Html},
+          callback);
+      Office.context.mailbox.item.body.setAsync(
+          "<b>(replaces all body, including threads you are replying to that may be on the bottom)</b>",
+          { coercionType: "html", asyncContext: "This is passed to the callback" },
+          function callback(result) {
+              // Process the result.
+      });
+
+      // The following is an example of the result parameter passed to the callback function.
+      {
+          "value":null,
+          "status": "succeeded",
+          "asyncContext": "This is passed to the callback"
+      }
+      ```
+    name: 'setAsync(data, options, callback)'
+    fullName: 'setAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="acbaf-203">Строка, которая заменяет существующий текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-203">The string that will replace the existing body.</span></span> <span data-ttu-id="acbaf-204">Максимальная длина — 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-204">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="acbaf-205">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-205">Optional.</span></span> <span data-ttu-id="acbaf-206">Объектный литерал, содержащий одно или несколько из указанных ниже свойств.</span><span class="sxs-lookup"><span data-stu-id="acbaf-206">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="acbaf-207">asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="acbaf-207">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="acbaf-208">coercionType: нужный формат основного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-208">coercionType: The desired format for the body.</span></span> <span data-ttu-id="acbaf-209">Строка в параметре data будет преобразована в этот формат.</span><span class="sxs-lookup"><span data-stu-id="acbaf-209">The string in the data parameter will be converted to this format.</span></span>'
+          type:
+            - Office.AsyncContextOptions & CoercionTypeOptions
+        - id: callback
+          description: '<span data-ttu-id="acbaf-210">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-210">Optional.</span></span> <span data-ttu-id="acbaf-211">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-211">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-212">Все обнаруженные ошибки будут указаны в свойстве asyncResult. Error.</span><span class="sxs-lookup"><span data-stu-id="acbaf-212">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setAsync_1
+    summary: |-
+      <span data-ttu-id="acbaf-213">Заменяет весь текст указанным текстом.</span><span class="sxs-lookup"><span data-stu-id="acbaf-213">Replaces the entire body with the specified text.</span></span>
+
+      <span data-ttu-id="acbaf-214">При работе с текстом в формате HTML важно отметить, что методы Body. Async и Body. setAsync не идемпотентного.</span><span class="sxs-lookup"><span data-stu-id="acbaf-214">When working with HTML-formatted bodies, it is important to note that the Body.getAsync and Body.setAsync methods are not idempotent.</span></span> <span data-ttu-id="acbaf-215">Значение, возвращаемое методом методом, не обязательно должно совпадать со значением, переданным в метод setAsync ранее.</span><span class="sxs-lookup"><span data-stu-id="acbaf-215">The value returned from the getAsync method will not necessarily be exactly the same as the value that was passed in the setAsync method previously.</span></span> <span data-ttu-id="acbaf-216">Клиент может изменить значение, передаваемое в setAsync, чтобы обеспечить эффективное отображение его обработчиком визуализации.</span><span class="sxs-lookup"><span data-stu-id="acbaf-216">The client may modify the value passed to setAsync in order to make it render efficiently with its rendering engine.</span></span>
+
+      <span data-ttu-id="acbaf-217">Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут ID для привязки (</span><span class="sxs-lookup"><span data-stu-id="acbaf-217">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="acbaf-218">a</span><span class="sxs-lookup"><span data-stu-id="acbaf-218">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="acbaf-219">) до "Лпнолп" (для примера можно просмотреть раздел "примеры").</span><span class="sxs-lookup"><span data-stu-id="acbaf-219">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="acbaf-220">\[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-220">\[ [API set: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-221">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-221">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="acbaf-222">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-222">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="acbaf-223">**Ошибки**:</span><span class="sxs-lookup"><span data-stu-id="acbaf-223">**Errors**:</span></span>
+
+      - <span data-ttu-id="acbaf-224">Датаексцеедсмаксимумсизе: параметр data имеет более 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-224">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="acbaf-225">Инвалидформатеррор: параметр options. coercionType имеет значение Office. CoercionType. HTML, а текст сообщения — в виде обычного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-225">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+    name: 'setAsync(data, callback)'
+    fullName: 'setAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="acbaf-226">Строка, которая заменяет существующий текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-226">The string that will replace the existing body.</span></span> <span data-ttu-id="acbaf-227">Максимальная длина — 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-227">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="acbaf-228">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-228">Optional.</span></span> <span data-ttu-id="acbaf-229">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-229">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-230">Все обнаруженные ошибки будут указаны в свойстве asyncResult. Error.</span><span class="sxs-lookup"><span data-stu-id="acbaf-230">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setSelectedDataAsync
+    summary: |-
+      <span data-ttu-id="acbaf-231">Заменяет выделенный фрагмент в основном тексте на заданный текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-231">Replaces the selection in the body with the specified text.</span></span>
+
+      <span data-ttu-id="acbaf-232">Метод setSelectedDataAsync вставляет указанную строку на месте указателя в основном тексте элемента.</span><span class="sxs-lookup"><span data-stu-id="acbaf-232">The setSelectedDataAsync method inserts the specified string at the cursor location in the body of the item, or, if text is selected in the editor, it replaces the selected text.</span></span> <span data-ttu-id="acbaf-233">Если указатель не появлялся в основном тексте элемента, или элемент потерял фокус в интерфейсе, строка вставляется в начало основного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-233">If the cursor was never in the body of the item, or if the body of the item lost focus in the UI, the string will be inserted at the top of the body content.</span></span> <span data-ttu-id="acbaf-234">После вставки курсор помещается в конец вставленного содержимого.</span><span class="sxs-lookup"><span data-stu-id="acbaf-234">After insertion, the cursor is placed at the end of the inserted content.</span></span>
+
+      <span data-ttu-id="acbaf-235">Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут ID для привязки (</span><span class="sxs-lookup"><span data-stu-id="acbaf-235">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="acbaf-236">a</span><span class="sxs-lookup"><span data-stu-id="acbaf-236">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="acbaf-237">) до "Лпнолп" (для примера можно просмотреть раздел "примеры").</span><span class="sxs-lookup"><span data-stu-id="acbaf-237">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="acbaf-238">\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-238">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-239">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-239">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="acbaf-240">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-240">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="acbaf-241">**Ошибки**:</span><span class="sxs-lookup"><span data-stu-id="acbaf-241">**Errors**:</span></span>
+
+      - <span data-ttu-id="acbaf-242">Датаексцеедсмаксимумсизе: параметр data имеет более 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-242">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="acbaf-243">Инвалидформатеррор: параметр options. coercionType имеет значение Office. CoercionType. HTML, а текст сообщения — в виде обычного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-243">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="acbaf-244">Примеры</span><span class="sxs-lookup"><span data-stu-id="acbaf-244">Examples</span></span>
+
+      ```javascript
+      // When including links in HTML markup, you can disable online link preview
+      // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+      Office.context.mailbox.item.body.setSelectedDataAsync(
+          '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+          {coercionType: Office.CoercionType.Html},
+          callback);
+      ```
+    name: 'setSelectedDataAsync(data, options, callback)'
+    fullName: 'setSelectedDataAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="acbaf-245">Строка, которая заменяет существующий текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-245">The string that will replace the existing body.</span></span> <span data-ttu-id="acbaf-246">Максимальная длина — 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-246">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="acbaf-247">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-247">Optional.</span></span> <span data-ttu-id="acbaf-248">Объектный литерал, содержащий одно или несколько из указанных ниже свойств.</span><span class="sxs-lookup"><span data-stu-id="acbaf-248">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="acbaf-249">asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.</span><span class="sxs-lookup"><span data-stu-id="acbaf-249">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="acbaf-250">coercionType: нужный формат основного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-250">coercionType: The desired format for the body.</span></span> <span data-ttu-id="acbaf-251">Строка в параметре data будет преобразована в этот формат.</span><span class="sxs-lookup"><span data-stu-id="acbaf-251">The string in the data parameter will be converted to this format.</span></span>'
+          type:
+            - Office.AsyncContextOptions & CoercionTypeOptions
+        - id: callback
+          description: '<span data-ttu-id="acbaf-252">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-252">Optional.</span></span> <span data-ttu-id="acbaf-253">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-253">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-254">Все обнаруженные ошибки будут указаны в свойстве asyncResult. Error.</span><span class="sxs-lookup"><span data-stu-id="acbaf-254">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: outlook.Office.Body.setSelectedDataAsync_1
+    summary: |-
+      <span data-ttu-id="acbaf-255">Заменяет выделенный фрагмент в основном тексте на заданный текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-255">Replaces the selection in the body with the specified text.</span></span>
+
+      <span data-ttu-id="acbaf-256">Метод setSelectedDataAsync вставляет указанную строку на месте указателя в основном тексте элемента.</span><span class="sxs-lookup"><span data-stu-id="acbaf-256">The setSelectedDataAsync method inserts the specified string at the cursor location in the body of the item, or, if text is selected in the editor, it replaces the selected text.</span></span> <span data-ttu-id="acbaf-257">Если указатель не появлялся в основном тексте элемента, или элемент потерял фокус в интерфейсе, строка вставляется в начало основного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-257">If the cursor was never in the body of the item, or if the body of the item lost focus in the UI, the string will be inserted at the top of the body content.</span></span> <span data-ttu-id="acbaf-258">После вставки курсор помещается в конец вставленного содержимого.</span><span class="sxs-lookup"><span data-stu-id="acbaf-258">After insertion, the cursor is placed at the end of the inserted content.</span></span>
+
+      <span data-ttu-id="acbaf-259">Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут ID для привязки (</span><span class="sxs-lookup"><span data-stu-id="acbaf-259">When including links in HTML markup, you can disable online link preview by setting the id attribute on the anchor (</span></span><!-- -->&lt;<!-- --><span data-ttu-id="acbaf-260">a</span><span class="sxs-lookup"><span data-stu-id="acbaf-260">a</span></span><!-- -->&gt;<!-- --><span data-ttu-id="acbaf-261">) до "Лпнолп" (для примера можно просмотреть раздел "примеры").</span><span class="sxs-lookup"><span data-stu-id="acbaf-261">) to "LPNoLP" (please see the Examples section for a sample).</span></span>
+
+      <span data-ttu-id="acbaf-262">\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="acbaf-262">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="acbaf-263">\*\* [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений\*\*: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="acbaf-263">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="acbaf-264">\*\* [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook\*\*: создание</span><span class="sxs-lookup"><span data-stu-id="acbaf-264">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Compose</span></span>
+
+      <span data-ttu-id="acbaf-265">**Ошибки**:</span><span class="sxs-lookup"><span data-stu-id="acbaf-265">**Errors**:</span></span>
+
+      - <span data-ttu-id="acbaf-266">Датаексцеедсмаксимумсизе: параметр data имеет более 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-266">DataExceedsMaximumSize: The data parameter is longer than 1,000,000 characters.</span></span>
+
+      - <span data-ttu-id="acbaf-267">Инвалидформатеррор: параметр options. coercionType имеет значение Office. CoercionType. HTML, а текст сообщения — в виде обычного текста.</span><span class="sxs-lookup"><span data-stu-id="acbaf-267">InvalidFormatError: The options.coercionType parameter is set to Office.CoercionType.Html and the message body is in plain text.</span></span>
+    name: 'setSelectedDataAsync(data, callback)'
+    fullName: 'setSelectedDataAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: '<span data-ttu-id="acbaf-268">Строка, которая заменяет существующий текст.</span><span class="sxs-lookup"><span data-stu-id="acbaf-268">The string that will replace the existing body.</span></span> <span data-ttu-id="acbaf-269">Максимальная длина — 1 000 000 символов.</span><span class="sxs-lookup"><span data-stu-id="acbaf-269">The string is limited to 1,000,000 characters.</span></span>'
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="acbaf-270">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="acbaf-270">Optional.</span></span> <span data-ttu-id="acbaf-271">После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="acbaf-271">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="acbaf-272">Все обнаруженные ошибки будут указаны в свойстве asyncResult. Error.</span><span class="sxs-lookup"><span data-stu-id="acbaf-272">Any errors encountered will be provided in the asyncResult.error property.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
