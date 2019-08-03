@@ -1,0 +1,231 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.Office.CustomXmlParts
+    summary: Представляет коллекцию объектов CustomXmlPart.
+    remarks: '**Hosts**: Word'
+    name: Office.CustomXmlParts
+    fullName: Office.CustomXmlParts
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.CustomXmlParts.addAsync
+      - office.Office.CustomXmlParts.addAsync_1
+      - office.Office.CustomXmlParts.getByIdAsync
+      - office.Office.CustomXmlParts.getByIdAsync_1
+      - office.Office.CustomXmlParts.getByNamespaceAsync
+      - office.Office.CustomXmlParts.getByNamespaceAsync_1
+  - uid: office.Office.CustomXmlParts.addAsync
+    summary: Асинхронно добавляет новую настраиваемую XML-часть в файл.
+    remarks: '**Набор требований**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'addAsync(xml, options, callback)'
+    fullName: 'addAsync(xml, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addAsync(xml: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: xml
+          description: XML для добавления в недавно созданную пользовательскую XML-часть.
+          type:
+            - string
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойство Result — это созданный объект CustomXmlPart.'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.addAsync_1
+    summary: Асинхронно добавляет новую настраиваемую XML-часть в файл.
+    remarks: |-
+      **Набор требований**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      function addXMLPart() {
+          Office.context.document.customXmlParts.addAsync(
+              '<root categoryId="1" xmlns="http://tempuri.org"><item name="Cheap Item" price="$193.95"/><item name="Expensive Item" price="$931.88"/></root>',
+              function (result) {});
+      }
+
+      function addXMLPartandHandler() {
+          Office.context.document.customXmlParts.addAsync(
+              "<testns:book xmlns:testns='http://testns.com'><testns:page number='1'>Hello</testns:page><testns:page number='2'>world!</testns:page></testns:book>",
+              function(r) { r.value.addHandlerAsync(Office.EventType.DataNodeDeleted,
+                  function(a) {write(a.type)
+                  },
+                      function(s) {write(s.status)
+                      });
+              });
+      }
+
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message;
+      }
+      ```
+    name: 'addAsync(xml, callback)'
+    fullName: 'addAsync(xml, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addAsync(xml: string, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: xml
+          description: XML для добавления в недавно созданную пользовательскую XML-часть.
+          type:
+            - string
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойство Result — это созданный объект CustomXmlPart.'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.getByIdAsync
+    summary: Асинхронно получает указанную пользовательскую XML-часть по идентификатору.
+    remarks: |-
+      **Набор требований**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      function showXMLPartInnerXML() {
+          Office.context.document.customXmlParts.getByIdAsync(
+              "{3BC85265-09D6-4205-B665-8EB239A8B9A1}", function (result) {
+              var xmlPart = result.value;
+              xmlPart.getXmlAsync({}, function (eventArgs) {
+                  write(eventArgs.value);
+              });
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'getByIdAsync(id, options, callback)'
+    fullName: 'getByIdAsync(id, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByIdAsync(id: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: 'GUID пользовательской XML-части, заключенный в скобки.'
+          type:
+            - string
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойство Result является объектом CustomXMLPart, который представляет указанную ПОЛЬЗОВАТЕЛЬСКУЮ XML-часть. Если настраиваемая XML-часть с указанным идентификатором отсутствует, метод возвращает значение null.'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.getByIdAsync_1
+    summary: Асинхронно получает указанную пользовательскую XML-часть по идентификатору.
+    remarks: '**Набор требований**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'getByIdAsync(id, callback)'
+    fullName: 'getByIdAsync(id, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByIdAsync(id: string, callback?: (result: AsyncResult<CustomXmlPart>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: id
+          description: 'GUID пользовательской XML-части, заключенный в скобки.'
+          type:
+            - string
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойство Result является объектом CustomXMLPart, который представляет указанную ПОЛЬЗОВАТЕЛЬСКУЮ XML-часть. Если настраиваемая XML-часть с указанным идентификатором отсутствует, метод возвращает значение null.'
+          type:
+            - '(result: AsyncResult<CustomXmlPart>) => void'
+  - uid: office.Office.CustomXmlParts.getByNamespaceAsync
+    summary: Асинхронно получает указанные пользовательские XML-части по пространству имен.
+    remarks: '**Набор требований**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)'
+    name: 'getByNamespaceAsync(ns, options, callback)'
+    fullName: 'getByNamespaceAsync(ns, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByNamespaceAsync(ns: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<CustomXmlPart[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: ns
+          description: URI пространства имен.
+          type:
+            - string
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойство Result является массивом объектов CustomXMLPart, которые совпадают с указанным пространством имен.'
+          type:
+            - '(result: AsyncResult<CustomXmlPart[]>) => void'
+  - uid: office.Office.CustomXmlParts.getByNamespaceAsync_1
+    summary: Асинхронно получает указанные пользовательские XML-части по пространству имен.
+    remarks: |-
+      **Набор требований**: [CustomXmlParts](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#customxmlparts)
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      function showXMLPartsInNamespace() {
+          Office.context.document.customXmlParts.getByNamespaceAsync(
+              "http://tempuri.org", 
+              function (eventArgs) {
+                  write("Found " + eventArgs.value.length + " parts with this namespace");
+          }); 
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'getByNamespaceAsync(ns, callback)'
+    fullName: 'getByNamespaceAsync(ns, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getByNamespaceAsync(ns: string, callback?: (result: AsyncResult<CustomXmlPart[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: ns
+          description: URI пространства имен.
+          type:
+            - string
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. `value` Свойство Result является массивом объектов CustomXMLPart, которые совпадают с указанным пространством имен.'
+          type:
+            - '(result: AsyncResult<CustomXmlPart[]>) => void'

@@ -1,0 +1,739 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.Office.TableBinding
+    summary: 'Представляет привязку в двух измерениях строк и столбцов, при желании с заголовками.'
+    remarks: |-
+      Объект `id` TableBinding наследует свойство, `type` свойство, `getDataAsync` метод и `setDataAsync` метод из объекта [Office. Binding](xref:office.Office.Binding) .
+
+      Обратите внимание, что после создания привязки таблицы каждая новая строка, добавляемая пользователем в таблицу, автоматически включается в привязку и увеличивается значение rowCount.
+    name: Office.TableBinding
+    fullName: Office.TableBinding
+    langs:
+      - typeScript
+    type: interface
+    extends:
+      - office.Office.Binding
+    package: office
+    children:
+      - office.Office.TableBinding.addColumnsAsync
+      - office.Office.TableBinding.addColumnsAsync_1
+      - office.Office.TableBinding.addRowsAsync
+      - office.Office.TableBinding.addRowsAsync_1
+      - office.Office.TableBinding.clearFormatsAsync
+      - office.Office.TableBinding.clearFormatsAsync_1
+      - office.Office.TableBinding.deleteAllDataValuesAsync
+      - office.Office.TableBinding.deleteAllDataValuesAsync_1
+      - office.Office.TableBinding.getFormatsAsync
+      - office.Office.TableBinding.getFormatsAsync_1
+      - office.Office.TableBinding.setFormatsAsync
+      - office.Office.TableBinding.setFormatsAsync_1
+      - office.Office.TableBinding.setTableOptionsAsync
+      - office.Office.TableBinding.setTableOptionsAsync_1
+      - office.Office.TableBinding.columnCount
+      - office.Office.TableBinding.hasHeaders
+      - office.Office.TableBinding.rowCount
+  - uid: office.Office.TableBinding.addColumnsAsync
+    summary: Добавляет указанные данные в таблицу в качестве дополнительных столбцов.
+    remarks: |-
+      Чтобы добавить один или несколько столбцов, указывающих значения данных и заголовков, передайте объект TableData в качестве параметра data. Чтобы добавить один или несколько столбцов только с данными, передайте в качестве параметра data массив массивов ("матрицу").
+
+      Успех или неудача операции addColumnsAsync является атомарной. То есть либо вся операция добавления столбцов выполняется успешно, либо происходит полный откат (и свойство AsyncResult.status, возвращенное в обратный вызов, будет содержать сведения об ошибке).
+
+      - Каждая строка в массиве, передаваемой в качестве аргумента данных, должна иметь то же количество строк, что и обновляемая таблица. В противном случае вся операция завершится ошибкой.
+
+      - Все строки и ячейки массива должны быть успешно добавлены в новые столбцы таблицы. Если какая-либо строка или ячейка по какой-то причине не добавляется, вся операция завершается ошибкой.
+
+      - Если вы передаете объект TableData в качестве аргумента Data, число строк заголовков должно быть соответствующим для обновляемой таблицы.
+
+      Дополнительная зазамечание для Excel в Интернете: общее число ячеек в объекте TableData, переданном параметру Data, не может превышать 20 000 в единственном вызове этого метода.
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // The following example adds a single column with three rows to a bound table with the id "myTable"
+      // by passing a TableData object as the data argument of the addColumnsAsync method. To succeed,
+      // the table being updated must have three rows.
+
+      // Add a column to a binding of type table by passing a TableData object.
+      function addColumns() {
+          var myTable = new Office.TableData();
+          myTable.headers = [["Cities"]];
+          myTable.rows = [["Berlin"], ["Roma"], ["Tokyo"]];
+
+          Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+              result.value.addColumnsAsync(myTable);
+          });
+      }
+
+      // The following example adds a single column with three rows to a bound table with the id myTable
+      // by passing an array of arrays ("matrix") as the data argument of the addColumnsAsync method.
+      // To succeed, the table being updated must have three rows.
+
+      // Add a column to a binding of type table by passing an array of arrays.
+      function addColumns() {
+          var myTable = [["Berlin"], ["Roma"], ["Tokyo"]];
+
+          Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+              result.value.addColumnsAsync(myTable);
+          });
+      }
+      ```
+    name: 'addColumnsAsync(tableData, options, callback)'
+    fullName: 'addColumnsAsync(tableData, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addColumnsAsync(tableData: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: tableData
+          description: 'Массив массивов ("Matrix") или объект TableData, который содержит один или несколько столбцов данных для добавления в таблицу. Обязательно.'
+          type:
+            - 'TableData | any[][]'
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.addColumnsAsync_1
+    summary: Добавляет указанные данные в таблицу в качестве дополнительных столбцов.
+    remarks: |-
+      Чтобы добавить один или несколько столбцов, указывающих значения данных и заголовков, передайте объект TableData в качестве параметра data. Чтобы добавить один или несколько столбцов только с данными, передайте в качестве параметра data массив массивов ("матрицу").
+
+      Успех или неудача операции addColumnsAsync является атомарной. То есть либо вся операция добавления столбцов выполняется успешно, либо происходит полный откат (и свойство AsyncResult.status, возвращенное в обратный вызов, будет содержать сведения об ошибке).
+
+      - Каждая строка в массиве, передаваемой в качестве аргумента данных, должна иметь то же количество строк, что и обновляемая таблица. В противном случае вся операция завершится ошибкой.
+
+      - Все строки и ячейки массива должны быть успешно добавлены в новые столбцы таблицы. Если какая-либо строка или ячейка по какой-то причине не добавляется, вся операция завершается ошибкой.
+
+      - Если вы передаете объект TableData в качестве аргумента Data, число строк заголовков должно быть соответствующим для обновляемой таблицы.
+
+      Дополнительная зазамечание для Excel в Интернете: общее число ячеек в объекте TableData, переданном параметру Data, не может превышать 20 000 в единственном вызове этого метода.
+    name: 'addColumnsAsync(tableData, callback)'
+    fullName: 'addColumnsAsync(tableData, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addColumnsAsync(tableData: TableData | any[][], callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: tableData
+          description: 'Массив массивов ("Matrix") или объект TableData, который содержит один или несколько столбцов данных для добавления в таблицу. Обязательно.'
+          type:
+            - 'TableData | any[][]'
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.addRowsAsync
+    summary: Добавляет указанные данные в таблицу в качестве дополнительных строк.
+    remarks: |-
+      Успех или неудача операции addRowsAsync является атомарной. То есть либо вся операция добавления столбцов выполняется успешно, либо происходит полный откат (и свойство AsyncResult.status, возвращенное в обратный вызов, будет содержать сведения об ошибке).
+
+      - Каждая строка в массиве, передаваемой в качестве аргумента данных, должна иметь то же количество столбцов, что и обновляемая таблица. В противном случае вся операция завершится ошибкой.
+
+      - Каждый столбец и ячейка в массиве должны успешно добавить этот столбец или ячейку в таблицу во вновь добавленных строках. Если по какой либо причине не удается задать любой из столбцов или ячеек, вся операция завершится ошибкой.
+
+      - Если вы передаете объект TableData в качестве аргумента Data, число строк заголовков должно быть соответствующим для обновляемой таблицы.
+
+      Дополнительная зазамечание для Excel в Интернете: общее число ячеек в объекте TableData, переданном параметру Data, не может превышать 20 000 в единственном вызове этого метода.
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      function addRowsToTable() {
+          Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+              var binding = asyncResult.value;
+              binding.addRowsAsync([["6", "k"], ["7", "j"]]);
+          });
+      }
+      ```
+    name: 'addRowsAsync(rows, options, callback)'
+    fullName: 'addRowsAsync(rows, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addRowsAsync(rows: TableData | any[][], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: rows
+          description: 'Массив массивов ("Matrix") или объект TableData, который содержит одну или несколько строк данных для добавления в таблицу. Обязательно.'
+          type:
+            - 'TableData | any[][]'
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.addRowsAsync_1
+    summary: Добавляет указанные данные в таблицу в качестве дополнительных строк.
+    remarks: |-
+      Успех или неудача операции addRowsAsync является атомарной. То есть либо вся операция добавления столбцов выполняется успешно, либо происходит полный откат (и свойство AsyncResult.status, возвращенное в обратный вызов, будет содержать сведения об ошибке).
+
+      - Каждая строка в массиве, передаваемой в качестве аргумента данных, должна иметь то же количество столбцов, что и обновляемая таблица. В противном случае вся операция завершится ошибкой.
+
+      - Каждый столбец и ячейка в массиве должны успешно добавить этот столбец или ячейку в таблицу во вновь добавленных строках. Если по какой либо причине не удается задать любой из столбцов или ячеек, вся операция завершится ошибкой.
+
+      - Если вы передаете объект TableData в качестве аргумента Data, число строк заголовков должно быть соответствующим для обновляемой таблицы.
+
+      Дополнительная зазамечание для Excel в Интернете: общее число ячеек в объекте TableData, переданном параметру Data, не может превышать 20 000 в единственном вызове этого метода.
+    name: 'addRowsAsync(rows, callback)'
+    fullName: 'addRowsAsync(rows, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addRowsAsync(rows: TableData | any[][], callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: rows
+          description: 'Массив массивов ("Matrix") или объект TableData, который содержит одну или несколько строк данных для добавления в таблицу. Обязательно.'
+          type:
+            - 'TableData | any[][]'
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.clearFormatsAsync
+    summary: Очищает форматирование в привязанной таблице.
+    remarks: |-
+      Более подробную информацию можно узнать [в статье Format Tables in надстроек для Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) .
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // The following example shows how to clear the formatting of the bound table with an ID of "myBinding":
+      Office.select("bindings#myBinding").clearFormatsAsync();
+      ```
+    name: 'clearFormatsAsync(options, callback)'
+    fullName: 'clearFormatsAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearFormatsAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.clearFormatsAsync_1
+    summary: Очищает форматирование в привязанной таблице.
+    remarks: 'Более подробную информацию можно узнать [в статье Format Tables in надстроек для Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table) .'
+    name: clearFormatsAsync(callback)
+    fullName: clearFormatsAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clearFormatsAsync(callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.deleteAllDataValuesAsync
+    summary: 'Удаляет из таблицы все строки и их значения, кроме строк заголовка; сдвиг зависит от ведущего приложения.'
+    remarks: |-
+      В Excel, если в таблице нет строки заголовка, этот метод удалит всю таблицу.
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      function deleteAllRowsFromTable() {
+          Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+              var binding = asyncResult.value;
+              binding.deleteAllDataValuesAsync();
+          });
+      }
+      ```
+    name: 'deleteAllDataValuesAsync(options, callback)'
+    fullName: 'deleteAllDataValuesAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteAllDataValuesAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.deleteAllDataValuesAsync_1
+    summary: 'Удаляет из таблицы все строки и их значения, кроме строк заголовка; сдвиг зависит от ведущего приложения.'
+    remarks: 'В Excel, если в таблице нет строки заголовка, этот метод удалит всю таблицу.'
+    name: deleteAllDataValuesAsync(callback)
+    fullName: deleteAllDataValuesAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteAllDataValuesAsync(callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.getFormatsAsync
+    summary: Получает форматирование указанных элементов в таблице.
+    remarks: |-
+      **Возвращаемая структура формата**
+
+      Каждый объект JavaScript в массиве возвращаемых значений имеет следующую форму:`{cells:{ cell_range }, format:{ format_definition }}`
+
+      `cells:` Свойство указывает диапазон, который необходимо отформатировать, используя одно из следующих значений:
+
+      **Поддерживаемые диапазоны в свойстве ячеек**
+
+      <table> <tr> <th>параметры диапазона ячеек</th> <th>Описание</th> </tr> <tr> <td>`{row: n}`</td> <td>Задает диапазон данных, отменяющий строку данных с отсчетом от нуля в таблице.</td> </tr> <tr> <td>`{column: n}`</td> <td>Задает диапазон данных, который является столбцом n (от нуля) данных в таблице.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Задает одну ячейку, которая является i-ой строкой и столбцом j таблицы.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Указывает всю таблицу, включая заголовки столбцов, данные и итоги (если они имеются)</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Указывает только данные в таблице (без заголовков и итогов).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Указывает только строку заголовков.</td> </tr> </table>
+
+      `format:` Свойство указывает значения, соответствующие подмножеству параметров, доступных в диалоговом окне "Формат ячеек" в Excel (щелкните правой кнопкой &gt; мыши формат ячеек или &gt; ячеек &gt; формата основного формата).
+    name: 'getFormatsAsync(cellReference, formats, options, callback)'
+    fullName: 'getFormatsAsync(cellReference, formats, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFormatsAsync(cellReference?: any, formats?: any[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult< ({ cells: any, format: any})[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cellReference
+          description: 'Литерал объекта, содержащий пары "имя — значение", указывающие диапазон ячеек, из которых нужно получить форматирование.'
+          type:
+            - any
+        - id: formats
+          description: 'Массив, указывающий свойства формата, которые требуется получить.'
+          type:
+            - 'any[]'
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. Результатом `value` этого свойства является массив, содержащий один или несколько объектов JavaScript, указывающих форматирование соответствующих ячеек.'
+          type:
+            - '(result: AsyncResult< ({ cells: any, format: any})[]>) => void'
+  - uid: office.Office.TableBinding.getFormatsAsync_1
+    summary: Получает форматирование указанных элементов в таблице.
+    remarks: |-
+      **Возвращаемая структура формата**
+
+      Каждый объект JavaScript в массиве возвращаемых значений имеет следующую форму:`{cells:{ cell_range }, format:{ format_definition }}`
+
+      `cells:` Свойство указывает диапазон, который необходимо отформатировать, используя одно из следующих значений:
+
+      **Поддерживаемые диапазоны в свойстве ячеек**
+
+      <table> <tr> <th>параметры диапазона ячеек</th> <th>Описание</th> </tr> <tr> <td>`{row: n}`</td> <td>Задает диапазон данных, отменяющий строку данных с отсчетом от нуля в таблице.</td> </tr> <tr> <td>`{column: n}`</td> <td>Задает диапазон данных, который является столбцом n (от нуля) данных в таблице.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Задает одну ячейку, которая является i-ой строкой и столбцом j таблицы.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Указывает всю таблицу, включая заголовки столбцов, данные и итоги (если они имеются)</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Указывает только данные в таблице (без заголовков и итогов).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Указывает только строку заголовков.</td> </tr> </table>
+
+      `format:` Свойство указывает значения, соответствующие подмножеству параметров, доступных в диалоговом окне "Формат ячеек" в Excel (щелкните правой кнопкой &gt; мыши формат ячеек или &gt; ячеек &gt; формата основного формата).
+    name: 'getFormatsAsync(cellReference, formats, callback)'
+    fullName: 'getFormatsAsync(cellReference, formats, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFormatsAsync(cellReference?: any, formats?: any[], callback?: (result: AsyncResult< ({ cells: any, format: any})[]>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cellReference
+          description: 'Литерал объекта, содержащий пары "имя — значение", указывающие диапазон ячеек, из которых нужно получить форматирование.'
+          type:
+            - any
+        - id: formats
+          description: 'Массив, указывающий свойства формата, которые требуется получить.'
+          type:
+            - 'any[]'
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->. Результатом `value` этого свойства является массив, содержащий один или несколько объектов JavaScript, указывающих форматирование соответствующих ячеек.'
+          type:
+            - '(result: AsyncResult< ({ cells: any, format: any})[]>) => void'
+  - uid: office.Office.TableBinding.setFormatsAsync
+    summary: Задает форматирование для указанных элементов и данных в таблице.
+    remarks: |-
+      **Указание параметра cellFormat**
+
+      Используйте параметр cellFormat, чтобы задать или изменить значения форматирования ячейки, такие как ширина, высота, шрифт, фон, выравнивание и т. д. Значение, передаваемое в качестве параметра cellFormat, представляет собой массив, содержащий список из одного или нескольких объектов JavaScript, которые указывают, какие целевые ячейки (`cells:`<!-- -->) и форматы (`format:`<!-- -->), которые необходимо применить к ним.
+
+      Каждый объект JavaScript в массиве cellFormat имеет следующую форму:`{cells:{ cell_range }, format:{ format_definition }}`
+
+      `cells:` Свойство указывает диапазон, который необходимо отформатировать, используя одно из следующих значений:
+
+      **Поддерживаемые диапазоны в свойстве ячеек**
+
+      <table> <tr> <th>параметры диапазона ячеек</th> <th>Описание</th> </tr> <tr> <td>`{row: n}`</td> <td>Задает диапазон данных, отменяющий строку данных с отсчетом от нуля в таблице.</td> </tr> <tr> <td>`{column: n}`</td> <td>Задает диапазон данных, который является столбцом n (от нуля) данных в таблице.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Задает одну ячейку, которая является i-ой строкой и столбцом j таблицы.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Указывает всю таблицу, включая заголовки столбцов, данные и итоги (если они имеются)</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Указывает только данные в таблице (без заголовков и итогов).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Указывает только строку заголовков.</td> </tr> </table>
+
+      `format:` Свойство указывает значения, соответствующие подмножеству параметров, доступных в диалоговом окне "Формат ячеек" в Excel (щелкните правой кнопкой &gt; мыши формат ячеек или &gt; ячеек &gt; формата основного формата).
+
+      Значение `format:` свойства задается в виде списка из одной или нескольких пар "имя — значение свойства" в литерале объекта JavaScript. Имя свойства обозначает имя устанавливаемого свойства, а значение — значение этого свойства. Вы можете указать несколько значений формата, например цвет и размер шрифта.
+
+      Ниже приводятся три примера значений свойства `format:`:
+
+      `//Set cells: font color to green and size to 15 points.`
+
+      `format: {fontColor : "green", fontSize : 15}`
+
+      `//Set cells: border to dotted blue.`
+
+      `format: {borderStyle: "dotted", borderColor: "blue"}`
+
+      `//Set cells: background to red and alignment to centered.`
+
+      `format: {backgroundColor: "red", alignHorizontal: "center"}`
+
+      Вы можете указать числовые форматы, указав в `numberFormat:` свойстве строку "код" в формате "код". Строки формата чисел, которые можно указывать, соответствуют параметрам Excel, доступным в категории Дополнительный на вкладке Число диалогового окна Формат ячеек. В этом примере показано, как отформатировать число в виде процентного значения с двумя десятичными знаками:
+
+      `format: {numberFormat:"0.00%"}`
+
+      Дополнительные сведения см. в статье [Создание настраиваемого числового формата](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.
+
+      Чтобы задать форматирование таблиц при записи данных, используйте необязательные параметры tableOptions и cellFormat для методов `Document.setSelectedDataAsync` или `TableBinding.setDataAsync` .
+
+      Задание форматирования с использованием необязательных параметров `Document.setSelectedDataAsync` методов `TableBinding.setDataAsync` and работает только для установки форматирования при первом написании данных. Чтобы изменить форматирование после записи данных, используйте следующие методы:
+
+      - Чтобы обновить форматирование ячеек, например, цвет и стиль шрифта, используйте `TableBinding.setFormatsAsync` метод (этот метод).
+
+      - Чтобы обновить параметры таблицы, такие как чередующиеся строки и кнопки фильтра, используйте `TableBinding.setTableOptions` метод.
+
+      - Чтобы очистить форматирование, используйте `TableBinding.clearFormats` метод.
+
+      Дополнительные сведения и примеры приведены в статье [Форматирование таблиц в надстройках для Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Specifying a single target
+      // The following example shows a cellFormat value that sets the font color of the header row to red.
+      Office.select("bindings#myBinding").setFormatsAsync(
+          [{cells: Office.Table.Headers, format: {fontColor: "red"}}], 
+          function (asyncResult){});
+
+      // Specifying multiple targets
+      // The setFormatsAsync method can support formatting multiple targets within the bound table in a 
+      // single function call. To do that, you pass a list of objects in the cellFormat array 
+      // for each target that you want to format.
+      // For example, the following line of code will set the font color of the first row yellow, 
+      // and the fourth cell in the third row to have a white border and bold text.
+      Office.select("bindings#myBinding").setFormatsAsync(
+          [{cells: {row: 1}, format: {fontColor: "yellow"}}, 
+              {cells: {row: 3, column: 4}, format: {borderColor: "white", fontStyle: "bold"}}], 
+          function (asyncResult){});
+
+      // Additional remarks for Excel Online
+      // The number of formatting groups passed to the cellFormat parameter can't exceed 100. 
+      // A single formatting group consists of a set of formatting applied to a specified range of cells. 
+      // For example, the following call passes two formatting groups to cellFormat.
+      Office.select("bindings#myBinding").setFormatsAsync(
+          [{cells: {row: 1}, format: {fontColor: "yellow"}}, 
+              {cells: {row: 3, column: 4}, format: {borderColor: "white", fontStyle: "bold"}}], 
+          function (asyncResult){});
+      ```
+    name: 'setFormatsAsync(cellFormat, options, callback)'
+    fullName: 'setFormatsAsync(cellFormat, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setFormatsAsync(cellFormat: any[], options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cellFormat
+          description: 'Массив, содержащий один или несколько объектов JavaScript, указывающих целевые ячейки и форматирование, которое необходимо к ним применить.'
+          type:
+            - 'any[]'
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.setFormatsAsync_1
+    summary: Задает форматирование для указанных элементов и данных в таблице.
+    remarks: |-
+      **Указание параметра cellFormat**
+
+      Используйте параметр cellFormat, чтобы задать или изменить значения форматирования ячейки, такие как ширина, высота, шрифт, фон, выравнивание и т. д. Значение, передаваемое в качестве параметра cellFormat, представляет собой массив, содержащий список из одного или нескольких объектов JavaScript, которые указывают, какие целевые ячейки (`cells:`<!-- -->) и форматы (`format:`<!-- -->), которые необходимо применить к ним.
+
+      Каждый объект JavaScript в массиве cellFormat имеет следующую форму:`{cells:{ cell_range }, format:{ format_definition }}`
+
+      `cells:` Свойство указывает диапазон, который необходимо отформатировать, используя одно из следующих значений:
+
+      **Поддерживаемые диапазоны в свойстве ячеек**
+
+      <table> <tr> <th>параметры диапазона ячеек</th> <th>Описание</th> </tr> <tr> <td>`{row: n}`</td> <td>Задает диапазон данных, отменяющий строку данных с отсчетом от нуля в таблице.</td> </tr> <tr> <td>`{column: n}`</td> <td>Задает диапазон данных, который является столбцом n (от нуля) данных в таблице.</td> </tr> <tr> <td>`{row: i, column: j}`</td> <td>Задает одну ячейку, которая является i-ой строкой и столбцом j таблицы.</td> </tr> <tr> <td>`Office.Table.All`</td> <td>Указывает всю таблицу, включая заголовки столбцов, данные и итоги (если они имеются)</td> </tr> <tr> <td>`Office.Table.Data`</td> <td>Указывает только данные в таблице (без заголовков и итогов).</td> </tr> <tr> <td>`Office.Table.Headers`</td> <td>Указывает только строку заголовков.</td> </tr> </table>
+
+      `format:` Свойство указывает значения, соответствующие подмножеству параметров, доступных в диалоговом окне "Формат ячеек" в Excel (щелкните правой кнопкой &gt; мыши формат ячеек или &gt; ячеек &gt; формата основного формата).
+
+      Значение `format:` свойства задается в виде списка из одной или нескольких пар "имя — значение свойства" в литерале объекта JavaScript. Имя свойства обозначает имя устанавливаемого свойства, а значение — значение этого свойства. Вы можете указать несколько значений формата, например цвет и размер шрифта.
+
+      Ниже приводятся три примера значений свойства `format:`:
+
+      `//Set cells: font color to green and size to 15 points.`
+
+      `format: {fontColor : "green", fontSize : 15}`
+
+      `//Set cells: border to dotted blue.`
+
+      `format: {borderStyle: "dotted", borderColor: "blue"}`
+
+      `//Set cells: background to red and alignment to centered.`
+
+      `format: {backgroundColor: "red", alignHorizontal: "center"}`
+
+      Вы можете указать числовые форматы, указав в `numberFormat:` свойстве строку "код" в формате "код". Строки формата чисел, которые можно указывать, соответствуют параметрам Excel, доступным в категории Дополнительный на вкладке Число диалогового окна Формат ячеек. В этом примере показано, как отформатировать число в виде процентного значения с двумя десятичными знаками:
+
+      `format: {numberFormat:"0.00%"}`
+
+      Дополнительные сведения см. в статье [Создание настраиваемого числового формата](https://support.office.com/article/create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4)<!-- -->.
+
+      Чтобы задать форматирование таблиц при записи данных, используйте необязательные параметры tableOptions и cellFormat для методов `Document.setSelectedDataAsync` или `TableBinding.setDataAsync` .
+
+      Задание форматирования с использованием необязательных параметров `Document.setSelectedDataAsync` методов `TableBinding.setDataAsync` and работает только для установки форматирования при первом написании данных. Чтобы изменить форматирование после записи данных, используйте следующие методы:
+
+      - Чтобы обновить форматирование ячеек, например, цвет и стиль шрифта, используйте `TableBinding.setFormatsAsync` метод (этот метод).
+
+      - Чтобы обновить параметры таблицы, такие как чередующиеся строки и кнопки фильтра, используйте `TableBinding.setTableOptions` метод.
+
+      - Чтобы очистить форматирование, используйте `TableBinding.clearFormats` метод.
+
+      Дополнительные сведения и примеры приведены в статье [Форматирование таблиц в надстройках для Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-tables#format-a-table)<!-- -->.
+    name: 'setFormatsAsync(cellFormat, callback)'
+    fullName: 'setFormatsAsync(cellFormat, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setFormatsAsync(cellFormat: any[], callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cellFormat
+          description: 'Массив, содержащий один или несколько объектов JavaScript, указывающих целевые ячейки и форматирование, которое необходимо к ним применить.'
+          type:
+            - 'any[]'
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.setTableOptionsAsync
+    summary: Обновляет параметры форматирования привязанной таблицы.
+    remarks: |-
+      **Набор**обязательных элементов: [не в наборе](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+      В функции обратного вызова, переданной методу goToByIdAsync, вы можете использовать свойства объекта AsyncResult, чтобы получить следующие сведения.
+
+      <table> <tr> <th>Свойство</th> <th>Назначение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefine, так как данные или объекты, которые можно получить при задании форматов, отсутствуют.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Доступ к объекту Error, который предоставляет сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // The following example shows how to:
+      // 1. Create an object literal that specifies the table formatting options to update on the bound table.
+      // 2. Call setTableOptions on a previously bound table (with an id of myBinding) passing the object
+      //    with formatting setting as the tableOptions parameter.
+      function updateTableFormatting(){
+          var tableOptions = {bandedRows: true, filterButton: false, style: "TableStyleMedium3"}; 
+
+          Office.select("bindings#myBinding").setTableOptionsAsync(tableOptions, function(asyncResult){});
+      }
+      ```
+    name: 'setTableOptionsAsync(tableOptions, options, callback)'
+    fullName: 'setTableOptionsAsync(tableOptions, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setTableOptionsAsync(tableOptions: any, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: tableOptions
+          description: 'Литерал объекта, содержащий список пар "имя-значение" для свойств, определяющих применяемые параметры таблицы.'
+          type:
+            - any
+        - id: options
+          description: Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.setTableOptionsAsync_1
+    summary: Обновляет параметры форматирования привязанной таблицы.
+    remarks: |-
+      **Набор**обязательных элементов: [не в наборе](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+      В функции обратного вызова, переданной методу goToByIdAsync, вы можете использовать свойства объекта AsyncResult, чтобы получить следующие сведения.
+
+      <table> <tr> <th>Свойство</th> <th>Назначение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefine, так как данные или объекты, которые можно получить при задании форматов, отсутствуют.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Доступ к объекту Error, который предоставляет сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>
+    name: 'setTableOptionsAsync(tableOptions, callback)'
+    fullName: 'setTableOptionsAsync(tableOptions, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setTableOptionsAsync(tableOptions: any, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: tableOptions
+          description: 'Литерал объекта, содержащий список пар "имя-значение" для свойств, определяющих применяемые параметры таблицы.'
+          type:
+            - any
+        - id: callback
+          description: 'Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.TableBinding.columnCount
+    summary: Получает количество столбцов в TableBinding в виде целого значения.
+    name: columnCount
+    fullName: columnCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'columnCount: number;'
+      return:
+        type:
+          - number
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          function showBindingColumnCount() {
+              Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+                  write("Column: " + asyncResult.value.columnCount);
+              });
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.TableBinding.hasHeaders
+    summary: 'Значение true, если в таблице есть заголовки; в противном случае — false.'
+    name: hasHeaders
+    fullName: hasHeaders
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'hasHeaders: boolean;'
+      return:
+        type:
+          - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          function showBindingHasHeaders() {
+              Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+                  write("Binding has headers: " + asyncResult.value.hasHeaders);
+              });
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.TableBinding.rowCount
+    summary: Получает количество строк в TableBinding в виде целого значения.
+    remarks: |-
+      Когда вы вставляете пустую таблицу, выбрав одну строку в Excel 2013 и Excel в Интернете (с помощью таблицы на вкладке Вставка), ведущие приложения Office создают одну строку заголовков, а затем одну пустую строку. Тем не менее, если скрипт надстройки создает привязку для новой вставленной таблицы (например, с помощью [привязки Office. bindings).](xref:office.Office.Bindings)<!-- -->метод. addFromSelectionAsync), а затем проверяет значение свойства rowCount, возвращаемое значение будет отличаться в зависимости от того, открыта ли электронная таблица в Excel 2013 или Excel в Интернете.
+
+      - В Excel на рабочем столе количество строк будет возвращать значение 0 (не учитывается пустая строка, следующая после заголовков).
+
+      - В Excel в Интернете количество строк возвратит 1 (подсчитывается пустая строка, следующая после заголовков).
+
+      Чтобы избежать разницы в сценарии, проверьте значение rowCount == 1, если да, проверьте все ли строки являются незаполненными.
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      function showBindingRowCount() {
+          Office.context.document.bindings.getByIdAsync("myBinding", function (asyncResult) {
+              write("Rows: " + asyncResult.value.rowCount);
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: rowCount
+    fullName: rowCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'rowCount: number;'
+      return:
+        type:
+          - number
