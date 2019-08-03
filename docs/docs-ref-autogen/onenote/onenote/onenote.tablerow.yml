@@ -1,0 +1,439 @@
+### YamlMime:UniversalReference
+items:
+  - uid: onenote.OneNote.TableRow
+    summary: |-
+      Представляет строку в таблице.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: OneNote.TableRow
+    fullName: OneNote.TableRow
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: onenote
+    children:
+      - onenote.OneNote.TableRow.cellCount
+      - onenote.OneNote.TableRow.cells
+      - onenote.OneNote.TableRow.clear
+      - onenote.OneNote.TableRow.context
+      - onenote.OneNote.TableRow.id
+      - onenote.OneNote.TableRow.insertRowAsSibling
+      - onenote.OneNote.TableRow.insertRowAsSibling_1
+      - onenote.OneNote.TableRow.load
+      - onenote.OneNote.TableRow.load_1
+      - onenote.OneNote.TableRow.load_2
+      - onenote.OneNote.TableRow.parentTable
+      - onenote.OneNote.TableRow.rowIndex
+      - onenote.OneNote.TableRow.setShadingColor
+      - onenote.OneNote.TableRow.toJSON
+      - onenote.OneNote.TableRow.track
+      - onenote.OneNote.TableRow.untrack
+  - uid: onenote.OneNote.TableRow.cellCount
+    summary: |-
+      Получает количество ячеек в строке. Только для чтения.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: cellCount
+    fullName: cellCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly cellCount: number;'
+      return:
+        type:
+          - number
+  - uid: onenote.OneNote.TableRow.cells
+    summary: |-
+      Получает ячейки в строке. Только для чтения.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: cells
+    fullName: cells
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly cells: OneNote.TableCellCollection;'
+      return:
+        type:
+          - onenote.OneNote.TableCellCollection
+  - uid: onenote.OneNote.TableRow.clear
+    summary: |-
+      Очищает содержимое строки.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: clear()
+    fullName: clear()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: onenote.OneNote.TableRow.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - onenote.OneNote.RequestContext
+  - uid: onenote.OneNote.TableRow.id
+    summary: |-
+      Получает идентификатор строки. Только для чтения.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: onenote.OneNote.TableRow.insertRowAsSibling
+    summary: |-
+      Вставляет строку перед текущей строкой или после нее.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: 'insertRowAsSibling(insertLocation, values)'
+    fullName: 'insertRowAsSibling(insertLocation, values)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertRowAsSibling(insertLocation: OneNote.InsertLocation, values?: string[]): OneNote.TableRow;'
+      return:
+        type:
+          - onenote.OneNote.TableRow
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          OneNote.run(function(ctx) {
+              var app = ctx.application;
+              var outline = app.getActiveOutline();
+              
+              // Queue a command to load outline.paragraphs and their types.
+              ctx.load(outline, "paragraphs, paragraphs/type");
+              
+              // Run the queued commands, and return a promise to indicate task completion.
+              return ctx.sync().then(function () {
+                  var paragraphs = outline.paragraphs;
+                  
+                  // for each table, get table rows.
+                  for (var i = 0; i < paragraphs.items.length; i++) {
+                      var paragraph = paragraphs.items[i];
+                      if (paragraph.type == "Table") {
+                          var table = paragraph.table;
+                          
+                          // Queue a command to load table.rows.
+                          ctx.load(table, "rows");
+                          
+                          // Run the queued commands
+                          return ctx.sync().then(function() {
+                              var rows = table.rows;
+                              rows.items[1].insertRowAsSibling("Before", ["cell0", "cell1"]);
+                              return ctx.sync();
+                          });
+                      }
+                  }
+              })
+          })
+          .catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: insertLocation
+          description: 'Определяет, куда необходимо вставить новые строки относительно текущей строки.'
+          type:
+            - onenote.OneNote.InsertLocation
+        - id: values
+          description: 'Строки, которые необходимо вставить в новую строку, заданные в виде массива. Ячеек в этом параметре не должно быть больше, чем в текущей строке. Необязательный.'
+          type:
+            - 'string[]'
+  - uid: onenote.OneNote.TableRow.insertRowAsSibling_1
+    summary: |-
+      Вставляет строку перед текущей строкой или после нее.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: 'insertRowAsSibling(insertLocationString, values)'
+    fullName: 'insertRowAsSibling(insertLocationString, values)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertRowAsSibling(insertLocationString: "Before" | "After", values?: string[]): OneNote.TableRow;'
+      return:
+        type:
+          - onenote.OneNote.TableRow
+        description: ''
+      parameters:
+        - id: insertLocationString
+          description: 'Определяет, куда необходимо вставить новые строки относительно текущей строки.'
+          type:
+            - '"Before" | "After"'
+        - id: values
+          description: 'Строки, которые необходимо вставить в новую строку, заданные в виде массива. Ячеек в этом параметре не должно быть больше, чем в текущей строке. Необязательный.'
+          type:
+            - 'string[]'
+  - uid: onenote.OneNote.TableRow.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): OneNote.TableRow`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): OneNote.TableRow`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.TableRow`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OneNote.Interfaces.TableRowLoadOptions): OneNote.TableRow;'
+      return:
+        type:
+          - onenote.OneNote.TableRow
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - onenote.OneNote.Interfaces.TableRowLoadOptions
+  - uid: onenote.OneNote.TableRow.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): OneNote.TableRow;'
+      return:
+        type:
+          - onenote.OneNote.TableRow
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          OneNote.run(function(ctx) {
+              var app = ctx.application;
+              var outline = app.getActiveOutline();
+              
+              // Queue a command to load outline.paragraphs and their types.
+              ctx.load(outline, "paragraphs, paragraphs/type");
+              
+              // Run the queued commands, and return a promise to indicate task completion.
+              return ctx.sync().then(function () {
+                  var paragraphs = outline.paragraphs;
+                  
+                  // for each table, get table rows.
+                  for (var i = 0; i < paragraphs.items.length; i++) {
+                      var paragraph = paragraphs.items[i];
+                      if (paragraph.type == "Table") {
+                          var table = paragraph.table;
+                          
+                          // Queue a command to load table.rows.
+                          ctx.load(table, "rows");
+                          return ctx.sync().then(function() {
+                              var rows = table.rows;
+                              
+                              // for each table row, log cell count and row index.
+                              for (var i = 0; i < rows.items.length; i++) {
+                                  console.log("Row " + i + " Id: " + rows.items[i].id);
+                                  console.log("Row " + i + " Cell Count: " + rows.items[i].cellCount);
+                                  console.log("Row " + i + " Row Index: " + rows.items[i].rowIndex);
+                              }
+                              return ctx.sync();
+                          });
+                      }
+                  }
+              })
+          })
+          .catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          OneNote.run(function(ctx) {
+              var app = ctx.application;
+              var outline = app.getActiveOutline();
+              
+              // Queue a command to load outline.paragraphs and their types.
+              ctx.load(outline, "paragraphs, paragraphs/type");
+              
+              // Run the queued commands, and return a promise to indicate task completion.
+              return ctx.sync().then(function () {
+                  var paragraphs = outline.paragraphs;
+                  
+                  // for each table, get table rows.
+                  for (var i = 0; i < paragraphs.items.length; i++) {
+                      var paragraph = paragraphs.items[i];
+                      if (paragraph.type == "Table") {
+                          var table = paragraph.table;
+                          
+                          // Queue a command to load parentTable and cells of each row in the table.
+                          ctx.load(table, "rows/parentTable, rows/cells");
+                          return ctx.sync().then(function() {
+                              var rows = table.rows;
+                              
+                              // for each row, log parentTable and cells
+                              for (var i = 0; i < rows.items.length; i++) {
+                                  console.log("Row " + i + " Parent Table Id: " + rows.items[i].parentTable.id);
+                                  var cells = rows.items[i].cells;
+                                  for (var j = 0 ; j < cells.items.length; j++) {
+                                      console.log("Row " + i + " Cell " + j + " Id: " + cells.items[j].id);
+                                  }
+                              }
+                              return ctx.sync();
+                          });
+                      }
+                  }
+              })
+          })
+          .catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: onenote.OneNote.TableRow.load_2
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.TableRow;'
+      return:
+        type:
+          - onenote.OneNote.TableRow
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: onenote.OneNote.TableRow.parentTable
+    summary: |-
+      Получает родительскую таблицу. Только для чтения.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: parentTable
+    fullName: parentTable
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly parentTable: OneNote.Table;'
+      return:
+        type:
+          - onenote.OneNote.Table
+  - uid: onenote.OneNote.TableRow.rowIndex
+    summary: |-
+      Получает индекс строки в родительской таблице. Только для чтения.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: rowIndex
+    fullName: rowIndex
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly rowIndex: number;'
+      return:
+        type:
+          - number
+  - uid: onenote.OneNote.TableRow.setShadingColor
+    summary: |-
+      Задает цвет заливки всех ячеек в строке. Код цвета, который нужно задать ячейкам.
+
+      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+    name: setShadingColor(colorCode)
+    fullName: setShadingColor(colorCode)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setShadingColor(colorCode: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: colorCode
+          description: ''
+          type:
+            - string
+  - uid: onenote.OneNote.TableRow.toJSON
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект OneNote. TableRow является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`OneNote.Interfaces.TableRowData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): OneNote.Interfaces.TableRowData;'
+      return:
+        type:
+          - onenote.OneNote.Interfaces.TableRowData
+        description: ''
+  - uid: onenote.OneNote.TableRow.track
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): OneNote.TableRow;'
+      return:
+        type:
+          - onenote.OneNote.TableRow
+        description: ''
+  - uid: onenote.OneNote.TableRow.untrack
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): OneNote.TableRow;'
+      return:
+        type:
+          - onenote.OneNote.TableRow
+        description: ''
