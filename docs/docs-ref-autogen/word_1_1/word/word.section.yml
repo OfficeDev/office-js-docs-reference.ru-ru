@@ -1,0 +1,394 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.Section
+    summary: |-
+      Представляет раздел в документе Word.
+
+      \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: Word.Section
+    fullName: Word.Section
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: word
+    children:
+      - word.Word.Section.body
+      - word.Word.Section.context
+      - word.Word.Section.getFooter
+      - word.Word.Section.getFooter_1
+      - word.Word.Section.getHeader
+      - word.Word.Section.getHeader_1
+      - word.Word.Section.load
+      - word.Word.Section.load_1
+      - word.Word.Section.load_2
+      - word.Word.Section.set
+      - word.Word.Section.set_1
+      - word.Word.Section.toJSON
+      - word.Word.Section.track
+      - word.Word.Section.untrack
+  - uid: word.Word.Section.body
+    summary: |-
+      Возвращает объект Body раздела. Сюда не входят метаданные верхнего и нижнего колонтитулов, а также другие метаданные разделов. Только для чтения.
+
+      \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: body
+    fullName: body
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly body: Word.Body;'
+      return:
+        type:
+          - word.Word.Body
+  - uid: word.Word.Section.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - word.Word.RequestContext
+  - uid: word.Word.Section.getFooter
+    summary: |-
+      Возвращает один из нижних колонтитулов раздела.
+
+      \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getFooter(type)
+    fullName: getFooter(type)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFooter(type: Word.HeaderFooterType): Word.Body;'
+      return:
+        type:
+          - word.Word.Body
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Word.run(async (context) => {
+            context.document.sections.getFirst().getFooter("Primary")
+              .insertParagraph("This is a footer", "End");
+
+            await context.sync();
+          });
+          ```
+      parameters:
+        - id: type
+          description: 'Обязательно. Тип нижнего колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "Евенпажес".'
+          type:
+            - word.Word.HeaderFooterType
+  - uid: word.Word.Section.getFooter_1
+    summary: |-
+      Возвращает один из нижних колонтитулов раздела.
+
+      \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getFooter(typeString)
+    fullName: getFooter(typeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFooter(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
+      return:
+        type:
+          - word.Word.Body
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+              
+              // Create a proxy sectionsCollection object.
+              var mySections = context.document.sections;
+              
+              // Queue a commmand to load the sections.
+              context.load(mySections, 'body/style');
+              
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  
+                  // Create a proxy object the primary footer of the first section. 
+                  // Note that the footer is a body object.
+                  var myFooter = mySections.items[0].getFooter("primary");
+                  
+                  // Queue a command to insert text at the end of the footer.
+                  myFooter.insertText("This is a footer.", Word.InsertLocation.end);
+                  
+                  // Queue a command to wrap the header in a content control.
+                  myFooter.insertContentControl();
+                                        
+                  // Synchronize the document state by executing the queued commands, 
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log("Added a footer to the first section.");
+                  });                    
+              });  
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: typeString
+          description: 'Обязательно. Тип нижнего колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "Евенпажес".'
+          type:
+            - '"Primary" | "FirstPage" | "EvenPages"'
+  - uid: word.Word.Section.getHeader
+    summary: |-
+      Возвращает один из верхних колонтитулов раздела.
+
+      \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getHeader(type)
+    fullName: getHeader(type)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getHeader(type: Word.HeaderFooterType): Word.Body;'
+      return:
+        type:
+          - word.Word.Body
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Word.run(async (context) => {
+            context.document.sections.getFirst().getHeader("Primary")
+              .insertParagraph("This is a header", "End");
+
+            await context.sync();
+          });
+          ```
+      parameters:
+        - id: type
+          description: 'Обязательный параметр. Тип колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "Евенпажес".'
+          type:
+            - word.Word.HeaderFooterType
+  - uid: word.Word.Section.getHeader_1
+    summary: |-
+      Возвращает один из верхних колонтитулов раздела.
+
+      \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    name: getHeader(typeString)
+    fullName: getHeader(typeString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getHeader(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
+      return:
+        type:
+          - word.Word.Body
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+              
+              // Create a proxy sectionsCollection object.
+              var mySections = context.document.sections;
+              
+              // Queue a commmand to load the sections.
+              context.load(mySections, 'body/style');
+              
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  
+                  // Create a proxy object the primary header of the first section. 
+                  // Note that the header is a body object.
+                  var myHeader = mySections.items[0].getHeader("primary");
+                  
+                  // Queue a command to insert text at the end of the header.
+                  myHeader.insertText("This is a header.", Word.InsertLocation.end);
+                  
+                  // Queue a command to wrap the header in a content control.
+                  myHeader.insertContentControl();
+                                        
+                  // Synchronize the document state by executing the queued commands, 
+                  // and return a promise to indicate task completion.
+                  return context.sync().then(function () {
+                      console.log("Added a header to the first section.");
+                  });                    
+              });  
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: typeString
+          description: 'Обязательный параметр. Тип колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "Евенпажес".'
+          type:
+            - '"Primary" | "FirstPage" | "EvenPages"'
+  - uid: word.Word.Section.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Word.Section`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Word.Section`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Section`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.SectionLoadOptions): Word.Section;'
+      return:
+        type:
+          - word.Word.Section
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - word.Word.Interfaces.SectionLoadOptions
+  - uid: word.Word.Section.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.Section;'
+      return:
+        type:
+          - word.Word.Section
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: word.Word.Section.load_2
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Section;'
+      return:
+        type:
+          - word.Word.Section
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: word.Word.Section.set
+    summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
+    remarks: |-
+      Этот метод имеет следующую дополнительную подпись:
+
+      `set(properties: Word.Section): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.SectionUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: 'Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.'
+          type:
+            - Interfaces.SectionUpdateData
+        - id: options
+          description: 'Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.'
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: word.Word.Section.set_1
+    summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Word.Section): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - word.Word.Section
+  - uid: word.Word.Section.toJSON
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Section — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.SectionData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.SectionData;'
+      return:
+        type:
+          - word.Word.Interfaces.SectionData
+        description: ''
+  - uid: word.Word.Section.track
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.Section;'
+      return:
+        type:
+          - word.Word.Section
+        description: ''
+  - uid: word.Word.Section.untrack
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.Section;'
+      return:
+        type:
+          - word.Word.Section
+        description: ''

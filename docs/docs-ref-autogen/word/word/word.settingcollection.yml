@@ -1,0 +1,419 @@
+### YamlMime:UniversalReference
+items:
+  - uid: word.Word.SettingCollection
+    summary: |-
+      Содержит коллекцию объектов [Word. Setting](xref:word.Word.Setting) .
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: Word.SettingCollection
+    fullName: Word.SettingCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: word
+    children:
+      - word.Word.SettingCollection.add
+      - word.Word.SettingCollection.context
+      - word.Word.SettingCollection.deleteAll
+      - word.Word.SettingCollection.getCount
+      - word.Word.SettingCollection.getItem
+      - word.Word.SettingCollection.getItemOrNullObject
+      - word.Word.SettingCollection.items
+      - word.Word.SettingCollection.load
+      - word.Word.SettingCollection.load_1
+      - word.Word.SettingCollection.load_2
+      - word.Word.SettingCollection.toJSON
+      - word.Word.SettingCollection.track
+      - word.Word.SettingCollection.untrack
+  - uid: word.Word.SettingCollection.add
+    summary: |-
+      Создает новый параметр или устанавливает существующий параметр.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'add(key, value)'
+    fullName: 'add(key, value)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(key: string, value: any): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: ''
+      parameters:
+        - id: key
+          description: Обязательно. Ключ параметра с учетом регистра.
+          type:
+            - string
+        - id: value
+          description: Обязательно. Значение параметра.
+          type:
+            - any
+  - uid: word.Word.SettingCollection.context
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    isPreview: true
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - word.Word.RequestContext
+  - uid: word.Word.SettingCollection.deleteAll
+    summary: |-
+      Удаляет все параметры в этой надстройке.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: deleteAll()
+    fullName: deleteAll()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteAll(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+
+              // Queue a command to get the count of settings.
+              var count = settings.getCount();
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log(count.value);
+
+                  // Queue a command to delete all settings.
+                  settings.deleteAll();
+
+                  // Queue a command to get the new count of settings.
+                  count = settings.getCount();
+              })
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              .then(context.sync)
+              .then(function () {
+                  console.log(count.value);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.SettingCollection.getCount
+    summary: |-
+      Получает количество параметров.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getCount()
+    fullName: getCount()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCount(): OfficeExtension.ClientResult<number>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<number>
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+
+              // Queue a command to get the count of settings.
+              var count = settings.getCount();
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log(count.value);
+
+                  // Queue a command to delete all settings.
+                  settings.deleteAll();
+
+                  // Queue a command to get the new count of settings.
+                  count = settings.getCount();
+              })
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              .then(context.sync)
+              .then(function () {
+                  console.log(count.value);
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: word.Word.SettingCollection.getItem
+    summary: |-
+      Получает объект Setting по ключу, для которого учитывается регистр. Вызывается, если параметр не существует.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getItem(key)
+    fullName: getItem(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(key: string): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+
+              // Queue a command to retrieve a setting.
+              var startMonth = settings.getItem('startMonth');
+
+              // Queue a command to load the setting.
+              context.load(startMonth);
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  console.log(JSON.stringify(startMonth.value));
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Queue commands add a setting.
+              var settings = context.document.settings;
+              settings.add('startMonth', { month: 'March', year: 1998 });
+              
+              // Queue commands to retrieve settings.
+              var startMonth = settings.getItemOrNullObject('startMonth');
+              var endMonth = settings.getItemOrNullObject('endMonth');
+
+              // Queue commands to load settings.
+              context.load(startMonth);
+              context.load(endMonth);
+
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+                 return context.sync().then(function () {
+                     if (startMonth.isNullObject) {
+                         console.log("No such setting.");
+                     }
+                     else {
+                         console.log(JSON.stringify(startMonth.value));
+                     }
+                      if (endMonth.isNullObject) {
+                         console.log("No such setting.");
+                     }
+                     else {
+                         console.log(JSON.stringify(endMonth.value));
+                     }
+              });
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: key
+          description: 'Ключ, который определяет объект Setting.'
+          type:
+            - string
+  - uid: word.Word.SettingCollection.getItemOrNullObject
+    summary: |-
+      Получает объект Setting по ключу, для которого учитывается регистр. Возвращает нулевой объект, если параметр не существует.
+
+      \[[Набор API: WORDAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getItemOrNullObject(key)
+    fullName: getItemOrNullObject(key)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemOrNullObject(key: string): Word.Setting;'
+      return:
+        type:
+          - word.Word.Setting
+        description: ''
+      parameters:
+        - id: key
+          description: 'Обязательно. Ключ, который определяет объект Setting.'
+          type:
+            - string
+  - uid: word.Word.SettingCollection.items
+    summary: Получает загруженные дочерние элементы в этой коллекции.
+    isPreview: true
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Word.Setting[];'
+      return:
+        type:
+          - 'Word.Setting[]'
+  - uid: word.Word.SettingCollection.load
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Word.SettingCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Word.SettingCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.SettingCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    isPreview: true
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Word.Interfaces.SettingCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.SettingCollection;'
+      return:
+        type:
+          - word.Word.SettingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - Word.Interfaces.SettingCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions
+  - uid: word.Word.SettingCollection.load_1
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    isPreview: true
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.SettingCollection;'
+      return:
+        type:
+          - word.Word.SettingCollection
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: word.Word.SettingCollection.load_2
+    isPreview: true
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: OfficeExtension.LoadOption): Word.SettingCollection;'
+      return:
+        type:
+          - word.Word.SettingCollection
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - OfficeExtension.LoadOption
+  - uid: word.Word.SettingCollection.toJSON
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Word.SettingCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.SettingCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    isPreview: true
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Word.Interfaces.SettingCollectionData;'
+      return:
+        type:
+          - word.Word.Interfaces.SettingCollectionData
+        description: ''
+  - uid: word.Word.SettingCollection.track
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    isPreview: true
+    name: track()
+    fullName: track()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'track(): Word.SettingCollection;'
+      return:
+        type:
+          - word.Word.SettingCollection
+        description: ''
+  - uid: word.Word.SettingCollection.untrack
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    isPreview: true
+    name: untrack()
+    fullName: untrack()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'untrack(): Word.SettingCollection;'
+      return:
+        type:
+          - word.Word.SettingCollection
+        description: ''
