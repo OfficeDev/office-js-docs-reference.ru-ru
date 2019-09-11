@@ -140,7 +140,9 @@ items:
           - string
   - uid: excel.Excel.Range.autoFill
     summary: |-
-      Заполняет конечный диапазон из текущего диапазона. Целевой диапазон должен расширять источник по горизонтали или по вертикали. Несмежные диапазоны не поддерживаются.
+      Заполняет диапазон от текущего диапазона до конечного диапазона, используя указанную логику автозаполнения. Конечный диапазон может иметь значение null или расширять источник как по горизонтали, так и по вертикали. Если конечный диапазон равен null, данные заполняются на основе окружающих ячеек (поведение при двойном щелчке маркера заполнения диапазона пользовательского интерфейса). Несмежные диапазоны не поддерживаются.
+
+      Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillType)'
@@ -165,7 +167,9 @@ items:
             - excel.Excel.AutoFillType
   - uid: excel.Excel.Range.autoFill_1
     summary: |-
-      Заполняет конечный диапазон из текущего диапазона. Целевой диапазон должен расширять источник по горизонтали или по вертикали. Несмежные диапазоны не поддерживаются.
+      Заполняет диапазон от текущего диапазона до конечного диапазона, используя указанную логику автозаполнения. Конечный диапазон может иметь значение null или расширять источник как по горизонтали, так и по вертикали. Если конечный диапазон равен null, данные заполняются на основе окружающих ячеек (поведение при двойном щелчке маркера заполнения диапазона пользовательского интерфейса). Несмежные диапазоны не поддерживаются.
+
+      Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillTypeString)'
@@ -579,9 +583,9 @@ items:
               // NOTE: If no match is found, an ItemNotFound error
               // is thrown when Range.find is evaluated.
               const foundRange = searchRange.find($("#searchText").text(), {
-                  completeMatch: completeMatch,
-                  matchCase: matchCase,
-                  searchDirection: searchDirection
+                  completeMatch: isCompleteMatchToggle,
+                  matchCase: isMatchCaseToggle,
+                  searchDirection: searchDirectionToggle
               });
               
               foundRange.load("address");
@@ -626,9 +630,9 @@ items:
               const table = sheet.tables.getItem("ExpensesTable");
               const searchRange = table.getRange();
               const foundRange = searchRange.findOrNullObject($("#searchText").text(), {
-                  completeMatch: completeMatch,
-                  matchCase: matchCase,
-                  searchDirection: searchDirection
+                  completeMatch: isCompleteMatchToggle,
+                  matchCase: isMatchCaseToggle,
+                  searchDirection: searchDirectionToggle
               });
               
               foundRange.load("address");
