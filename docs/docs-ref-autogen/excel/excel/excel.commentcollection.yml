@@ -30,17 +30,17 @@ items:
       - 'excel!Excel.CommentCollection#toJSON:member(1)'
   - uid: 'excel!Excel.CommentCollection#add:member(1)'
     summary: |-
-      Создает новый комментарий (поток комментариев) с заданным содержимым в заданной ячейке. Если `InvalidArgument` указанный диапазон превышает одну ячейку, возникает ошибка.
+      Создает новое примечание с указанным содержимым в определенной ячейке. Если `InvalidArgument` указанный диапазон превышает одну ячейку, возникает ошибка.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
-    name: 'add(content, cellAddress, contentType)'
-    fullName: 'add(content, cellAddress, contentType)'
+    name: 'add(cellAddress, content, contentType)'
+    fullName: 'add(cellAddress, content, contentType)'
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: string, cellAddress: Range | string, contentType?: Excel.ContentType): Excel.Comment;'
+      content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.Comment;'
       return:
         type:
           - 'excel!Excel.Comment:class'
@@ -59,48 +59,48 @@ items:
           });
           ```
       parameters:
-        - id: content
-          description: Содержимое комментария.
-          type:
-            - string
         - id: cellAddress
           description: 'Ячейка, к которой добавляется комментарий. Это может быть объект Range или строка. Если это строка, она должна содержать полный адрес, включая имя листа. Если `InvalidArgument` указанный диапазон превышает одну ячейку, возникает ошибка.'
           type:
             - 'excel!Excel.CommentCollection#add~0:complex'
+        - id: content
+          description: 'Содержимое комментария. Это может быть объект String или Комментричконтент. Строки используются для обычного текста. Объекты Комментричконтент позволяют использовать другие функции комментариев, например упоминания. \[Набор API: ExcelApi BETA (только ПРЕДВАРИТЕЛЬная версия) для строки, ExcelApi Preview для объекта Комментричконтент\]'
+          type:
+            - 'excel!Excel.CommentCollection#add~1:complex'
         - id: contentType
-          description: Необязательно. Тип содержимого комментария
+          description: 'Необязательно. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum`ContentType.plain`<!-- -->.'
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentCollection#add:member(2)'
     summary: |-
-      Создает новый комментарий (поток комментариев) с заданным содержимым в заданной ячейке. Если `InvalidArgument` указанный диапазон превышает одну ячейку, возникает ошибка.
+      Создает новое примечание с указанным содержимым в определенной ячейке. Если `InvalidArgument` указанный диапазон превышает одну ячейку, возникает ошибка.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
-    name: 'add(content, cellAddress, contentTypeString)'
-    fullName: 'add(content, cellAddress, contentTypeString)'
+    name: 'add(cellAddress, content, contentTypeString)'
+    fullName: 'add(cellAddress, content, contentTypeString)'
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: string, cellAddress: Range | string, contentTypeString?: "Plain"): Excel.Comment;'
+      content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.Comment;'
       return:
         type:
           - 'excel!Excel.Comment:class'
         description: ''
       parameters:
-        - id: content
-          description: Содержимое комментария.
-          type:
-            - string
         - id: cellAddress
           description: 'Ячейка, к которой добавляется комментарий. Это может быть объект Range или строка. Если это строка, она должна содержать полный адрес, включая имя листа. Если `InvalidArgument` указанный диапазон превышает одну ячейку, возникает ошибка.'
           type:
-            - 'excel!Excel.CommentCollection#add~1:complex'
-        - id: contentTypeString
-          description: Необязательно. Тип содержимого комментария
+            - 'excel!Excel.CommentCollection#add~2:complex'
+        - id: content
+          description: 'Содержимое комментария. Это может быть объект String или Комментричконтент. Строки используются для обычного текста. Объекты Комментричконтент позволяют использовать другие функции комментариев, например упоминания. \[Набор API: ExcelApi BETA (только ПРЕДВАРИТЕЛЬная версия) для строки, ExcelApi Preview для объекта Комментричконтент\]'
           type:
-            - '"Plain"'
+            - 'excel!Excel.CommentCollection#add~3:complex'
+        - id: contentTypeString
+          description: 'Необязательно. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum`ContentType.plain`<!-- -->.'
+          type:
+            - '"Plain" | "Mention"'
   - uid: 'excel!Excel.CommentCollection#context:member'
     summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
     isPreview: true
@@ -177,7 +177,7 @@ items:
             - number
   - uid: 'excel!Excel.CommentCollection#getItemByCell:member(1)'
     summary: |-
-      Получает комментарий из указанной ячейки.
+      Получает примечание из указанной ячейки.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -199,7 +199,7 @@ items:
             - 'excel!Excel.CommentCollection#getItemByCell~0:complex'
   - uid: 'excel!Excel.CommentCollection#getItemByReplyId:member(1)'
     summary: |-
-      Возвращает примечание, связанное с идентификатором ответа в коллекции.
+      Получает комментарий, к которому подключен данный ответ.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -233,30 +233,22 @@ items:
         type:
           - 'excel!Excel.CommentCollection#items~0:complex'
   - uid: 'excel!Excel.CommentCollection#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Excel.CommentCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.CommentCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CommentCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.CommentCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentCollection;'
+      content: 'load(options?: Excel.Interfaces.CommentCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentCollection;'
       return:
         type:
           - 'excel!Excel.CommentCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'excel!Excel.CommentCollection#load~0:complex'
   - uid: 'excel!Excel.CommentCollection#load:member(2)'
@@ -279,21 +271,22 @@ items:
           type:
             - 'string | string[]'
   - uid: 'excel!Excel.CommentCollection#load:member(3)'
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: OfficeExtension.LoadOption): Excel.CommentCollection;'
+      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.CommentCollection;'
       return:
         type:
           - 'excel!Excel.CommentCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
             - 'excel!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CommentCollection#toJSON:member(1)'
@@ -324,15 +317,33 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.CommentCollection#add~1:complex'
+    name: CommentRichContent | string
+    fullName: Excel.CommentRichContent | string
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentRichContent:interface'
+        name: CommentRichContent
+        fullName: Excel.CommentRichContent
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'excel!Excel.ContentType:enum'
     name: Excel.ContentType
-  - uid: 'excel!Excel.CommentCollection#add~1:complex'
+  - uid: 'excel!Excel.CommentCollection#add~2:complex'
     name: Range | string
     fullName: Excel.Range | string
     spec.typeScript:
       - uid: 'excel!Excel.Range:class'
         name: Range
         fullName: Excel.Range
+      - name: ' | string'
+        fullName: ' | string'
+  - uid: 'excel!Excel.CommentCollection#add~3:complex'
+    name: CommentRichContent | string
+    fullName: Excel.CommentRichContent | string
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentRichContent:interface'
+        name: CommentRichContent
+        fullName: Excel.CommentRichContent
       - name: ' | string'
         fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'
