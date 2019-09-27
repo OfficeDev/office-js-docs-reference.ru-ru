@@ -807,29 +807,21 @@ items:
         type:
           - string
   - uid: 'excel!Excel.Worksheet#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Excel.Worksheet`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.WorksheetLoadOptions): Excel.Worksheet;'
+      content: 'load(options?: Excel.Interfaces.WorksheetLoadOptions): Excel.Worksheet;'
       return:
         type:
           - 'excel!Excel.Worksheet:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'excel!Excel.Interfaces.WorksheetLoadOptions:interface'
   - uid: 'excel!Excel.Worksheet#load:member(2)'
@@ -892,16 +884,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Worksheet;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Worksheet;
       return:
         type:
           - 'excel!Excel.Worksheet:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Worksheet#name:member'
     summary: |-
       Отображаемое имя листа.
@@ -1027,7 +1027,7 @@ items:
           ```
   - uid: 'excel!Excel.Worksheet#onColumnSorted:member'
     summary: |-
-      Возникает при сортировке по столбцам.
+      Возникает при сортировке одного или нескольких столбцов. Это происходит в результате операции сортировки слева направо.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -1133,7 +1133,7 @@ items:
           - 'excel!Excel.Worksheet#onFormatChanged~0:complex'
   - uid: 'excel!Excel.Worksheet#onRowHiddenChanged:member'
     summary: |-
-      Возникает при изменении скрытого состояния строки на определенном листе.
+      Происходит при изменении скрытого состояния одной или нескольких строк на определенном листе.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -1149,7 +1149,7 @@ items:
           - 'excel!Excel.Worksheet#onRowHiddenChanged~0:complex'
   - uid: 'excel!Excel.Worksheet#onRowSorted:member'
     summary: |-
-      Возникает при сортировке по строкам.
+      Возникает при сортировке одной или нескольких строк. Это происходит в результате операции сортировки "начало сверху вниз".
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
