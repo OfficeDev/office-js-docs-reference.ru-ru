@@ -158,9 +158,7 @@ items:
           - string
   - uid: 'excel!Excel.Range#autoFill:member(1)'
     summary: |-
-      Заполняет диапазон от текущего диапазона до конечного диапазона, используя указанную логику автозаполнения. Конечный диапазон может иметь значение null или расширять источник как по горизонтали, так и по вертикали. Если конечный диапазон равен null, данные заполняются на основе окружающих ячеек (поведение при двойном щелчке маркера заполнения диапазона пользовательского интерфейса).
-
-      Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
+      Заполняет диапазон от текущего диапазона до конечного диапазона, используя указанную логику автозаполнения. Конечный диапазон может иметь значение null или расширять источник как по горизонтали, так и по вертикали. Несмежные диапазоны не поддерживаются. Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Набор API: ExcelApi 1,9, EXCELAPI Beta (только предварительная версия) `destinationRange` для NULL](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillType)'
@@ -173,10 +171,25 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            const sumCell = sheet.getRange("P4");
+            
+            // Copy everything. The formulas will be contextually updated based on their new locations.
+            sumCell.autoFill("P4:P7", Excel.AutoFillType.fillCopy);
+            sumCell.format.autofitColumns();
+            await context.sync();
+          });
+          ```
       parameters:
         - id: destinationRange
-          description: Целевой диапазон для заполнения. Несмежные диапазоны не поддерживаются.
+          description: 'Целевой диапазон для автозаполнения. Если конечный диапазон равен null, данные заполняются на основе окружающих ячеек (поведение при двойном щелчке маркера заполнения диапазона пользовательского интерфейса).'
           type:
             - 'excel!Excel.Range#autoFill~0:complex'
         - id: autoFillType
@@ -185,9 +198,7 @@ items:
             - 'excel!Excel.AutoFillType:enum'
   - uid: 'excel!Excel.Range#autoFill:member(2)'
     summary: |-
-      Заполняет диапазон от текущего диапазона до конечного диапазона, используя указанную логику автозаполнения. Конечный диапазон может иметь значение null или расширять источник как по горизонтали, так и по вертикали. Если конечный диапазон равен null, данные заполняются на основе окружающих ячеек (поведение при двойном щелчке маркера заполнения диапазона пользовательского интерфейса).
-
-      Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
+      Заполняет диапазон от текущего диапазона до конечного диапазона, используя указанную логику автозаполнения. Конечный диапазон может иметь значение null или расширять источник как по горизонтали, так и по вертикали. Несмежные диапазоны не поддерживаются. Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Набор API: ExcelApi 1,9, EXCELAPI Beta (только предварительная версия) `destinationRange` для NULL](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillTypeString)'
@@ -203,7 +214,7 @@ items:
         description: ''
       parameters:
         - id: destinationRange
-          description: Целевой диапазон для заполнения. Несмежные диапазоны не поддерживаются.
+          description: 'Целевой диапазон для автозаполнения. Если конечный диапазон равен null, данные заполняются на основе окружающих ячеек (поведение при двойном щелчке маркера заполнения диапазона пользовательского интерфейса).'
           type:
             - 'excel!Excel.Range#autoFill~1:complex'
         - id: autoFillTypeString
@@ -417,7 +428,7 @@ items:
             - string
   - uid: 'excel!Excel.Range#copyFrom:member(1)'
     summary: |-
-      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий диапазон. Конечный диапазон может иметь разный размер, чем исходный диапазон или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
+      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий диапазон. Конечный диапазон может отличаться от размера исходного диапазона или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
 
       \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copyFrom(sourceRange, copyType, skipBlanks, transpose)'
@@ -449,7 +460,7 @@ items:
           ```
       parameters:
         - id: sourceRange
-          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, он должен быть в форме структуры, которая может быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
+          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, их форма должна быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
           type:
             - 'excel!Excel.Range#copyFrom~0:complex'
         - id: copyType
@@ -466,7 +477,7 @@ items:
             - boolean
   - uid: 'excel!Excel.Range#copyFrom:member(2)'
     summary: |-
-      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий диапазон. Конечный диапазон может иметь разный размер, чем исходный диапазон или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
+      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий диапазон. Конечный диапазон может отличаться от размера исходного диапазона или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
 
       \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)'
@@ -482,7 +493,7 @@ items:
         description: ''
       parameters:
         - id: sourceRange
-          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, он должен быть в форме структуры, которая может быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
+          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, их форма должна быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
           type:
             - 'excel!Excel.Range#copyFrom~1:complex'
         - id: copyTypeString
@@ -588,7 +599,7 @@ items:
         type:
           - 'excel!Excel.Range:class'
         description: |-
-          Диапазон, соответствующий условиям поиска.
+          Объект Range, представляющий первую ячейку, содержащую значение, совпадающее с искомым текстом и условием.
 
           #### <a name="examples"></a>Примеры
 
@@ -1928,7 +1939,26 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              
+              // Group the larger, main level. Note that the outline controls
+              // will be on row 10, meaning 4-9 will collapse and expand.
+              sheet.getRange("4:9").group(Excel.GroupOption.byRows);
+
+              // Group the smaller, sublevels. Note that the outline controls
+              // will be on rows 6 and 9, meaning 4-5 and 7-8 will collapse and expand.
+              sheet.getRange("4:5").group(Excel.GroupOption.byRows);
+              sheet.getRange("7:8").group(Excel.GroupOption.byRows);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: groupOption
           description: 'Указывает, как диапазон может группироваться по строкам или столбцам. `InvalidArgument` Ошибка возникает, `isEntireRow` если параметр Group отличается от `isEntireColumn` значения свойства Range (то есть, `range.isEntireRow` имеет значение true и `groupOption` равно "Биколумнс") или `range.isEntireColumn` имеет значение true и `groupOption` равно "бировс").'
@@ -2216,29 +2246,21 @@ items:
         type:
           - 'excel!Excel.Range#linkedDataTypeState~0:complex'
   - uid: 'excel!Excel.Range#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Excel.Range`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Range`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Range`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.RangeLoadOptions): Excel.Range;'
+      content: 'load(options?: Excel.Interfaces.RangeLoadOptions): Excel.Range;'
       return:
         type:
           - 'excel!Excel.Range:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'excel!Excel.Interfaces.RangeLoadOptions:interface'
   - uid: 'excel!Excel.Range#load:member(2)'
@@ -2328,16 +2350,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Range;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Range;
       return:
         type:
           - 'excel!Excel.Range:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Range#merge:member(1)'
     summary: |-
       Объединяет ячейки диапазона в одну область на листе.
@@ -2539,7 +2569,7 @@ items:
           - number
   - uid: 'excel!Excel.Range#savedAsArray:member'
     summary: |-
-      Указывает, следует ли сохранять все ячейки в виде формулы массива. Возвращает значение true, если все ячейки будут сохранены в виде массива, или false, если все ячейки не будут сохранены как формула массива. Возвращает значение null, если существует смесь ячеек, которые не будут сохранены как формула массива.
+      Указывает, следует ли сохранять все ячейки в виде формулы массива. Возвращает значение true, если все ячейки будут сохранены как формула массива, или false, если все ячейки не будут сохранены как формула массива. Возвращает значение null, если некоторые ячейки были сохранены в виде формулы массива, а другие — нет.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -3009,7 +3039,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во `.sync` время вызовов и вне последовательного выполнения пакета ". Run", а также получаете сообщение об ошибке "инвалидобжектпас" при задании свойства или вызове метода для объекта, необходимо добавить объект в отслеживаемый объект Коллекция при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -3037,7 +3067,24 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              
+              // This removes two levels of groups from the "A1-R10" range.
+              // Any groups at the same level on the same dimension will be removed by a single call.
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byRows);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byRows);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byColumns);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byColumns);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: groupOption
           description: 'Указывает, как диапазон можно разгруппировать по строкам или столбцам.'
@@ -3100,7 +3147,7 @@ items:
           });
           ```
   - uid: 'excel!Excel.Range#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить `context.sync()` , прежде чем будет применен выпуск памяти.'
     name: untrack()
     fullName: untrack()
     langs:

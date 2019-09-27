@@ -143,7 +143,7 @@ items:
         description: ''
   - uid: 'excel!Excel.Slicer#height:member'
     summary: |-
-      Представляет высоту среза (в пунктах). При задании с отрицательным значением или нулем в качестве входных данных создается исключение недопустимого аргумента.
+      Представляет высоту среза (в пунктах). Создает исключение "аргумент является недопустимым или отсутствует или имеет неправильный формат". исключение, если задано отрицательное значение или ноль в качестве входных данных.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -191,7 +191,7 @@ items:
           - boolean
   - uid: 'excel!Excel.Slicer#left:member'
     summary: |-
-      Представляет расстояние в пунктах от левого края среза до левого края листа. При задании с отрицательным значением в качестве входных данных создается исключение недопустимого аргумента.
+      Представляет расстояние в пунктах от левого края среза до левого края листа. Создает исключение "аргумент является недопустимым или отсутствует или имеет неправильный формат". исключение, если в качестве входных данных задано отрицательное значение.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -206,30 +206,22 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Slicer#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Excel.Slicer`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Slicer`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Slicer`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.SlicerLoadOptions): Excel.Slicer;'
+      content: 'load(options?: Excel.Interfaces.SlicerLoadOptions): Excel.Slicer;'
       return:
         type:
           - 'excel!Excel.Slicer:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'excel!Excel.Interfaces.SlicerLoadOptions:interface'
   - uid: 'excel!Excel.Slicer#load:member(2)'
@@ -260,16 +252,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Slicer;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Slicer;
       return:
         type:
           - 'excel!Excel.Slicer:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Slicer#name:member'
     summary: |-
       Представляет имя среза.
@@ -304,7 +304,7 @@ items:
           - string
   - uid: 'excel!Excel.Slicer#selectItems:member(1)'
     summary: |-
-      Выделяет элементы среза на основе их ключей. Предыдущее выделение очищается. Все элементы будут выбраны по умолчанию, если массив пуст.
+      Выбирает элементы срезов на основе их ключей. Предыдущие выбранные элементы очищаются. Все элементы будут выбраны по умолчанию, если массив пуст.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -399,7 +399,7 @@ items:
           - 'excel!Excel.SlicerItemCollection:class'
   - uid: 'excel!Excel.Slicer#sortBy:member'
     summary: |-
-      Представляет порядок сортировки элементов в срезе. Возможные значения: DataSourceOrder, Ascending, Descending.
+      Представляет порядок сортировки элементов в срезе. Возможные значения: "Датасаурцеордер", "Ascending", "Descending".
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -457,7 +457,7 @@ items:
         description: ''
   - uid: 'excel!Excel.Slicer#top:member'
     summary: |-
-      Представляет расстояние в пунктах от верхнего края среза до верхнего края листа. При задании с отрицательным значением в качестве входных данных создается исключение недопустимого аргумента.
+      Представляет расстояние в пунктах от верхнего края среза до верхнего края листа. Создает исключение "аргумент является недопустимым или отсутствует или имеет неправильный формат". исключение, если в качестве входных данных задано отрицательное значение.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -473,7 +473,7 @@ items:
           - number
   - uid: 'excel!Excel.Slicer#width:member'
     summary: |-
-      Представляет ширину среза (в пунктах). При задании с отрицательным значением или нулем в качестве входных данных создается исключение недопустимого аргумента.
+      Представляет ширину среза (в пунктах). Создает исключение "аргумент является недопустимым или отсутствует или имеет неправильный формат". исключение, если задано отрицательное значение или ноль в качестве входных данных.
 
       \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true

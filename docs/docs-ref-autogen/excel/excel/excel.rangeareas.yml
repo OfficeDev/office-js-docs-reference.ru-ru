@@ -258,7 +258,7 @@ items:
             - string
   - uid: 'excel!Excel.RangeAreas#copyFrom:member(1)'
     summary: |-
-      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий объект RangeAreas. Целевой rangeAreas может иметь разный размер, чем исходный диапазон или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
+      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий объект RangeAreas. Целевой rangeAreas может иметь другой размер, чем исходный диапазон или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
 
       \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copyFrom(sourceRange, copyType, skipBlanks, transpose)'
@@ -274,7 +274,7 @@ items:
         description: ''
       parameters:
         - id: sourceRange
-          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, он должен находиться в форме структуры, которая может быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
+          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, их форма должна быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
           type:
             - 'excel!Excel.RangeAreas#copyFrom~0:complex'
         - id: copyType
@@ -291,7 +291,7 @@ items:
             - boolean
   - uid: 'excel!Excel.RangeAreas#copyFrom:member(2)'
     summary: |-
-      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий объект RangeAreas. Целевой rangeAreas может иметь разный размер, чем исходный диапазон или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
+      Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий объект RangeAreas. Целевой rangeAreas может иметь другой размер, чем исходный диапазон или RangeAreas. Назначение будет автоматически развернуто, если оно меньше исходного.
 
       \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)'
@@ -307,7 +307,7 @@ items:
         description: ''
       parameters:
         - id: sourceRange
-          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, он должен находиться в форме структуры, которая может быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
+          description: 'Исходный диапазон или RangeAreas, из которого производится копирование. Если исходный RangeAreas имеет несколько диапазонов, их форма должна быть создана путем удаления полных строк или столбцов из прямоугольного диапазона.'
           type:
             - 'excel!Excel.RangeAreas#copyFrom~1:complex'
         - id: copyTypeString
@@ -663,29 +663,21 @@ items:
         type:
           - boolean
   - uid: 'excel!Excel.RangeAreas#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Excel.RangeAreas`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.RangeAreas`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeAreas`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.RangeAreasLoadOptions): Excel.RangeAreas;'
+      content: 'load(options?: Excel.Interfaces.RangeAreasLoadOptions): Excel.RangeAreas;'
       return:
         type:
           - 'excel!Excel.RangeAreas:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'excel!Excel.Interfaces.RangeAreasLoadOptions:interface'
   - uid: 'excel!Excel.RangeAreas#load:member(2)'
@@ -714,16 +706,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.RangeAreas;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.RangeAreas;
       return:
         type:
           - 'excel!Excel.RangeAreas:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.RangeAreas#set:member(1)'
     summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
     remarks: |-
@@ -813,7 +813,7 @@ items:
           - 'excel!Excel.Interfaces.RangeAreasData:interface'
         description: ''
   - uid: 'excel!Excel.RangeAreas#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во `.sync` время вызовов и вне последовательного выполнения пакета ". Run", а также получаете сообщение об ошибке "инвалидобжектпас" при задании свойства или вызове метода для объекта, необходимо добавить объект в отслеживаемый объект Коллекция при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -826,7 +826,7 @@ items:
           - 'excel!Excel.RangeAreas:class'
         description: ''
   - uid: 'excel!Excel.RangeAreas#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить `context.sync()` , прежде чем будет применен выпуск памяти.'
     name: untrack()
     fullName: untrack()
     langs:
