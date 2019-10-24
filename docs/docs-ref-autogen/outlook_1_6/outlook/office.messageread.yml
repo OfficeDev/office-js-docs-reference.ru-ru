@@ -127,7 +127,7 @@ items:
     summary: |-
       Предоставляет доступ к получателям копии сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.
 
-      Свойство CC возвращает массив, содержащий объект EmailAddressDetails для каждого получателя, указанного в строке "копия" сообщения. Коллекция может включать не более 100 элементов.
+      Свойство CC возвращает массив, содержащий объект EmailAddressDetails для каждого получателя, указанного в строке "копия" сообщения. По умолчанию коллекция ограничена максимум 100 членами. Однако в Windows и Mac вы можете получить максимум 500 членов.
 
       \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -238,7 +238,7 @@ items:
     summary: |-
       Отображает форму ответа, включающую отправителя и всех получателей выбранного сообщения или организатора и всех участников выбранной встречи.
 
-      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении из трех столбцов и всплывающей формы в представлении с 2 или 1 столбца.
+      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении с 3 либо 1 или 2 столбцами.
 
       Если любой строковый параметр превышает их пределы, displayReplyAllForm создает исключение.
 
@@ -336,14 +336,14 @@ items:
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~0:complex'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~1:complex'
   - uid: 'outlook!Office.MessageRead#displayReplyForm:member(1)'
     summary: |-
       Отображает форму ответа, включающую только отправителя выбранного сообщения или организатора выбранной встречи.
 
-      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении из трех столбцов и всплывающей формы в представлении с 2 или 1 столбца.
+      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении с 3 либо 1 или 2 столбцами.
 
       Если любой строковый параметр превышает их пределы, displayReplyForm создает исключение.
 
@@ -441,7 +441,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~0:complex'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~1:complex'
   - uid: 'outlook!Office.MessageRead#from:member'
@@ -513,7 +513,7 @@ items:
       **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
 
       \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>String.</td> <td>Restricted</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String.</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL-адрес</td> <td>String.</td> <td>Restricted</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```"
+    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>String</td> <td>С ограничениями</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>С ограничениями</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>С ограничениями</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```"
     name: getEntitiesByType(entityType)
     fullName: getEntitiesByType(entityType)
     langs:
@@ -903,7 +903,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательно. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
+          description: 'Необязательный параметр. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.MessageRead#normalizedSubject:member'
@@ -1041,7 +1041,7 @@ items:
     summary: |-
       Предоставляет доступ к получателям, указанным в строке Кому сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.
 
-      Свойство to возвращает массив, содержащий объект EmailAddressDetails для каждого получателя, указанного в строке "Кому" сообщения. Коллекция может включать не более 100 элементов.
+      Свойство to возвращает массив, содержащий объект EmailAddressDetails для каждого получателя, указанного в строке "Кому" сообщения. По умолчанию коллекция ограничена максимум 100 членами. Однако в Windows и Mac вы можете получить максимум 500 членов.
 
       \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
