@@ -4,6 +4,10 @@ items:
     summary: |-
       Пространство имен элемента используется для доступа к выбранному в данный момент сообщению, приглашению на собрание или встрече. Тип элемента можно определить с помощью `itemType` свойства.
 
+      Если вы хотите увидеть IntelliSense только для определенного типа, приведите этот элемент к одному из следующих вариантов:
+
+      [итемкомпосе](xref:outlook!Office.ItemCompose:interface)<!-- -->, [ItemRead](xref:outlook!Office.ItemRead:interface)<!-- -->, [Мессажекомпосе](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [Аппоинтменткомпосе](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [Аппоинтментреад](xref:outlook!Office.AppointmentRead:interface)
+
       \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный
@@ -36,7 +40,7 @@ items:
     summary: |-
       Добавляет обработчик для поддерживаемого события. **Note**: события доступны только в области задач.
 
-      В настоящее время поддерживаются типы событий`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, а`Office.EventType.RecurrenceChanged`<!-- -->. В предварительной `Office.EventType.AttachmentsChanged` версии `Office.EventType.EnhancedLocationsChanged` , а также поддерживаются.
+      Чтобы узнать, какие типы событий поддерживаются, `Office.EventType` ознакомьтесь со статьей Подробнее.
 
       \[[Набор API: Mailbox 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -64,18 +68,18 @@ items:
           type:
             - any
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный элемент. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.Item#addHandlerAsync~1:complex'
   - uid: 'outlook!Office.Item#addHandlerAsync:member(2)'
     summary: |-
       Добавляет обработчик для поддерживаемого события. **Note**: события доступны только в области задач.
 
-      В настоящее время поддерживаются типы событий`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, а`Office.EventType.RecurrenceChanged`<!-- -->. В предварительной `Office.EventType.AttachmentsChanged` версии `Office.EventType.EnhancedLocationsChanged` , а также поддерживаются.
+      Чтобы узнать, какие типы событий поддерживаются, `Office.EventType` ознакомьтесь со статьей Подробнее.
 
       \[[Набор API: Mailbox 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -117,7 +121,7 @@ items:
           type:
             - any
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.Item#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.Item#body:member'
@@ -162,7 +166,7 @@ items:
     summary: |-
       Получает объект, предоставляющий методы для управления категориями элемента.
 
-      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
@@ -183,7 +187,6 @@ items:
           }
       });
       ```
-    isPreview: true
     name: categories
     fullName: categories
     langs:
@@ -198,9 +201,9 @@ items:
     summary: |-
       Получает вложение из сообщения или встречи и возвращает его в виде объекта **вложениеимеет содержимое** .
 
-      `getAttachmentContentAsync` Метод получает вложение с указанным идентификатором из элемента. Рекомендуется использовать идентификатор для получения вложения в том же сеансе, когда Аттачментидс был получен с помощью вызова `getAttachmentsAsync` или. `item.attachments` В Outlook в Интернете и мобильных устройствах идентификатор вложения действителен только в рамках одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
+      `getAttachmentContentAsync` Метод получает вложение с указанным идентификатором из элемента. Рекомендуется использовать идентификатор для получения вложения в том же сеансе, когда Аттачментидс был получен с помощью вызова `getAttachmentsAsync` или. `item.attachments` В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
 
-      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
@@ -246,7 +249,6 @@ items:
           }
       }
       ```
-    isPreview: true
     name: 'getAttachmentContentAsync(attachmentId, options, callback)'
     fullName: 'getAttachmentContentAsync(attachmentId, options, callback)'
     langs:
@@ -264,20 +266,20 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный элемент. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Если происходит сбой вызова, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Если происходит сбой вызова, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.Item#getAttachmentContentAsync~0:complex'
   - uid: 'outlook!Office.Item#getAttachmentContentAsync:member(2)'
     summary: |-
       Получает вложение из сообщения или встречи и возвращает его в виде объекта **вложениеимеет содержимое** .
 
-      `getAttachmentContentAsync` Метод получает вложение с указанным идентификатором из элемента. Рекомендуется использовать идентификатор для получения вложения в том же сеансе, когда Аттачментидс был получен с помощью вызова `getAttachmentsAsync` или. `item.attachments` В Outlook в Интернете и мобильных устройствах идентификатор вложения действителен только в рамках одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
+      `getAttachmentContentAsync` Метод получает вложение с указанным идентификатором из элемента. Рекомендуется использовать идентификатор для получения вложения в том же сеансе, когда Аттачментидс был получен с помощью вызова `getAttachmentsAsync` или. `item.attachments` В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
 
-      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
@@ -286,7 +288,6 @@ items:
       **Ошибки**:
 
       - Инвалидаттачментид: идентификатор вложения не существует.
-    isPreview: true
     name: 'getAttachmentContentAsync(attachmentId, callback)'
     fullName: 'getAttachmentContentAsync(attachmentId, callback)'
     langs:
@@ -304,7 +305,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Если происходит сбой вызова, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Если происходит сбой вызова, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.Item#getAttachmentContentAsync~1:complex'
   - uid: 'outlook!Office.Item#getInitializationContextAsync:member(1)'
@@ -332,11 +333,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный элемент. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. При успешном выполнении данные инициализации предоставляются в свойстве asyncResult. Value в виде String. Если контекст инициализации отсутствует, объект asyncResult будет содержать объект Error со свойством Code, равным 9020, а свойству name присвоено значение Женерикреспонсиррор.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. При успешном выполнении данные инициализации предоставляются в свойстве asyncResult. Value в виде String. Если контекст инициализации отсутствует, объект asyncResult будет содержать объект Error со свойством Code, равным 9020, а свойству name присвоено значение Женерикреспонсиррор.'
           type:
             - 'outlook!Office.Item#getInitializationContextAsync~0:complex'
   - uid: 'outlook!Office.Item#getInitializationContextAsync:member(2)'
@@ -390,19 +391,18 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. При успешном выполнении данные инициализации предоставляются в свойстве asyncResult. Value в виде String. Если контекст инициализации отсутствует, объект asyncResult будет содержать объект Error со свойством Code, равным 9020, а свойству name присвоено значение Женерикреспонсиррор.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. При успешном выполнении данные инициализации предоставляются в свойстве asyncResult. Value в виде String. Если контекст инициализации отсутствует, объект asyncResult будет содержать объект Error со свойством Code, равным 9020, а свойству name присвоено значение Женерикреспонсиррор.'
           type:
             - 'outlook!Office.Item#getInitializationContextAsync~1:complex'
   - uid: 'outlook!Office.Item#getSharedPropertiesAsync:member(1)'
     summary: |-
       Получает свойства встречи или сообщения в общей папке, календаре или почтовом ящике.
 
-      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
       ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: "создание" или "чтение"
-    isPreview: true
     name: 'getSharedPropertiesAsync(options, callback)'
     fullName: 'getSharedPropertiesAsync(options, callback)'
     langs:
@@ -427,7 +427,7 @@ items:
     summary: |-
       Получает свойства встречи или сообщения в общей папке, календаре или почтовом ящике.
 
-      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
@@ -443,7 +443,6 @@ items:
           var sharedProperties = asyncResult.value;
       }
       ```
-    isPreview: true
     name: getSharedPropertiesAsync(callback)
     fullName: getSharedPropertiesAsync(callback)
     langs:
@@ -552,7 +551,7 @@ items:
           type:
             - 'outlook!Office.Item#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательно. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
+          description: 'Необязательный элемент. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.Item#notificationMessages:member'
@@ -589,7 +588,7 @@ items:
     summary: |-
       Удаляет обработчиков для поддерживаемого типа события. **Note**: события доступны только в области задач.
 
-      В настоящее время поддерживаются типы событий`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, а`Office.EventType.RecurrenceChanged`<!-- -->. В предварительной `Office.EventType.AttachmentsChanged` версии `Office.EventType.EnhancedLocationsChanged` , а также поддерживаются.
+      Чтобы узнать, какие типы событий поддерживаются, `Office.EventType` ознакомьтесь со статьей Подробнее.
 
       \[[Набор API: Mailbox 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -613,18 +612,18 @@ items:
           type:
             - 'outlook!Office.Item#removeHandlerAsync~0:complex'
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный элемент. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.Item#removeHandlerAsync~1:complex'
   - uid: 'outlook!Office.Item#removeHandlerAsync:member(2)'
     summary: |-
       Удаляет обработчиков для поддерживаемого типа события. **Note**: события доступны только в области задач.
 
-      В настоящее время поддерживаются типы событий`Office.EventType.AppointmentTimeChanged`<!-- -->, `Office.EventType.RecipientsChanged`<!-- -->, а`Office.EventType.RecurrenceChanged`<!-- -->. В предварительной `Office.EventType.AttachmentsChanged` версии `Office.EventType.EnhancedLocationsChanged` , а также поддерживаются.
+      Чтобы узнать, какие типы событий поддерживаются, `Office.EventType` ознакомьтесь со статьей Подробнее.
 
       \[[Набор API: Mailbox 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -648,7 +647,7 @@ items:
           type:
             - 'outlook!Office.Item#removeHandlerAsync~2:complex'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.Item#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.Item#seriesId:member'

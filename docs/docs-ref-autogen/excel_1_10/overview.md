@@ -1,13 +1,13 @@
 ---
 title: Справочник по API JavaScript для Office
 description: Набор требований API JavaScript для Office на узел
-ms.date: 07/25/2019
-ms.openlocfilehash: e4b45370dcaf82a60d39264a97f1e28c0dab543d
-ms.sourcegitcommit: ab859c363c348ddb336dfc7e331cf113a5b76305
+ms.date: 10/24/2019
+ms.openlocfilehash: fb6f228306c6fc5840c2f8b9c9bc46d56b43f50c
+ms.sourcegitcommit: dc57153a05b103a8493370c8aa1bd936f4d5f7c4
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 10/24/2019
-ms.locfileid: "37695886"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "37906210"
 ---
 # <a name="office-javascript-api-reference"></a>Справочник по API JavaScript для Office
 
@@ -21,6 +21,7 @@ API JavaScript для Office позволяет создавать веб-при
 ## <a name="excel"></a>Excel
 
 - [Предварительный просмотр ExcelApi](/javascript/api/excel?view=excel-js-preview)
+- [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
 - [ExcelApi 1.7](/javascript/api/excel?view=excel-js-1.7)
@@ -38,6 +39,7 @@ API JavaScript для Office позволяет создавать веб-при
 ## <a name="outlook"></a>Outlook
 
 - [Предварительный просмотр почтового ящика](/javascript/api/outlook?view=outlook-js-preview)
+- [Почтовый ящик 1,8](/javascript/api/outlook?view=outlook-js-1.8)
 - [Mailbox 1.7](/javascript/api/outlook?view=outlook-js-1.7)
 - [Mailbox 1.6](/javascript/api/outlook?view=outlook-js-1.6)
 - [Mailbox 1.5](/javascript/api/outlook?view=outlook-js-1.5)
