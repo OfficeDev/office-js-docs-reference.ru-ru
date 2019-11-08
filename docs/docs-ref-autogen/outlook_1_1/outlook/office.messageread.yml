@@ -23,6 +23,7 @@ items:
       - 'outlook!Office.MessageRead#dateTimeModified:member'
       - 'outlook!Office.MessageRead#displayReplyAllForm:member(1)'
       - 'outlook!Office.MessageRead#displayReplyForm:member(1)'
+      - 'outlook!Office.MessageRead#end:member'
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getEntities:member(1)'
       - 'outlook!Office.MessageRead#getEntitiesByType:member(1)'
@@ -34,8 +35,10 @@ items:
       - 'outlook!Office.MessageRead#itemId:member'
       - 'outlook!Office.MessageRead#itemType:member'
       - 'outlook!Office.MessageRead#loadCustomPropertiesAsync:member(1)'
+      - 'outlook!Office.MessageRead#location:member'
       - 'outlook!Office.MessageRead#normalizedSubject:member'
       - 'outlook!Office.MessageRead#sender:member'
+      - 'outlook!Office.MessageRead#start:member'
       - 'outlook!Office.MessageRead#subject:member'
       - 'outlook!Office.MessageRead#to:member'
   - uid: 'outlook!Office.MessageRead#attachments:member'
@@ -333,7 +336,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~0:complex'
         - id: callback
-          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~1:complex'
   - uid: 'outlook!Office.MessageRead#displayReplyForm:member(1)'
@@ -438,9 +441,32 @@ items:
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~0:complex'
         - id: callback
-          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~1:complex'
+  - uid: 'outlook!Office.MessageRead#end:member'
+    summary: |-
+      Получает дату и время окончания встречи.
+
+      Свойство End — это объект Date, выраженный как значение даты и времени в формате всемирного координированного времени (UTC). С помощью метода convertToLocalClientTime можно преобразовать значение свойства End в локальную дату и время клиента.
+
+      При использовании метода Time. setAsync для задания времени окончания необходимо использовать метод convertToUtcClientTime, чтобы преобразовать местное время в клиенте на время в формате UTC для сервера.
+
+      \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+
+      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения
+    name: end
+    fullName: end
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'end: Date;'
+      return:
+        type:
+          - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#from:member'
     summary: |-
       Получает электронный адрес отправителя сообщения.
@@ -510,7 +536,7 @@ items:
       **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
 
       \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>Строка</td> <td>С ограничениями</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Строка</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>С ограничениями</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Строка</td> <td>С ограничениями</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```"
+    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>String</td> <td>С ограничениями</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>С ограничениями</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL-адрес</td> <td>String</td> <td>С ограничениями</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```"
     name: getEntitiesByType(entityType)
     fullName: getEntitiesByType(entityType)
     langs:
@@ -721,11 +747,11 @@ items:
           - string
   - uid: 'outlook!Office.MessageRead#itemId:member'
     summary: |-
-      Получает идентификатор элемента веб-служб Exchange для текущего элемента.
+      Получает [идентификатор элемента веб-служб Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange) для текущего элемента.
 
       Свойство itemId недоступно в режиме создания. Если требуется идентификатор элемента, метод saveAsync можно использовать для сохранения элемента в хранилище, которое будет возвращать идентификатор элемента в параметре asyncResult. Value в функции обратного вызова.
 
-      **Note**: идентификатор, возвращаемый свойством ItemId, совпадает с идентификатором элемента веб-служб Exchange. Свойство itemId не совпадает с ИДЕНТИФИКАТОРом записи Outlook или ИДЕНТИФИКАТОРом, используемым REST API Outlook. Прежде чем совершать вызовы REST API, используя это значение, его необходимо преобразовать с помощью Office.context.mailbox.convertToRestId. Дополнительные сведения см. в статье [Использование REST API Outlook из надстройки Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)<!-- -->.
+      **Note**: идентификатор, возвращаемый свойством ItemId, совпадает с [идентификатором элемента веб-служб Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange) .<!-- -->. Свойство itemId не совпадает с ИДЕНТИФИКАТОРом записи Outlook или ИДЕНТИФИКАТОРом, используемым REST API Outlook. Прежде чем совершать вызовы REST API, используя это значение, его необходимо преобразовать с помощью Office.context.mailbox.convertToRestId. Дополнительные сведения см. в статье [Использование REST API Outlook из надстройки Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id)<!-- -->.
 
       \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -818,9 +844,30 @@ items:
           type:
             - 'outlook!Office.MessageRead#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательный элемент. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
+          description: 'Необязательное свойство. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
           type:
             - any
+  - uid: 'outlook!Office.MessageRead#location:member'
+    summary: |-
+      Получает расположение приглашения на собрание.
+
+      Свойство Location возвращает строку, содержащую сведения о месте встречи.
+
+      \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+
+      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения
+    name: location
+    fullName: location
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'location: string;'
+      return:
+        type:
+          - string
   - uid: 'outlook!Office.MessageRead#normalizedSubject:member'
     summary: |-
       Получает тему элемента со всеми удаленными префиксами (включая RE: и FWD:).
@@ -880,6 +927,27 @@ items:
       return:
         type:
           - 'outlook!Office.EmailAddressDetails:interface'
+  - uid: 'outlook!Office.MessageRead#start:member'
+    summary: |-
+      Получает дату и время начала встречи.
+
+      Свойство Start — это объект Date, выраженный как значение даты и времени в формате UTC. Можно использовать метод convertToLocalClientTime для преобразования значения в локальную дату и время клиента.
+
+      \[[Набор API: Mailbox 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+
+      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения
+    name: start
+    fullName: start
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'start: Date;'
+      return:
+        type:
+          - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#subject:member'
     summary: |-
       Получает описание, которое отображается в поле subject элемента.
