@@ -1,13 +1,13 @@
 ---
 title: Справочник по API JavaScript для Office
 description: Набор требований API JavaScript для Office на узел
-ms.date: 10/24/2019
-ms.openlocfilehash: fb6f228306c6fc5840c2f8b9c9bc46d56b43f50c
-ms.sourcegitcommit: dc57153a05b103a8493370c8aa1bd936f4d5f7c4
+ms.date: 11/19/2019
+ms.openlocfilehash: f4072c23cb0d6e0d5375cf79d92b4f6dd9b35f0f
+ms.sourcegitcommit: d37268ff5254061632a886b196ec28f2f4087377
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "37904966"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "38757961"
 ---
 # <a name="office-javascript-api-reference"></a>Справочник по API JavaScript для Office
 
@@ -15,12 +15,15 @@ API JavaScript для Office позволяет создавать веб-при
 
 Ниже приведен список наборов обязательных элементов для конкретных узлов (и общедоступных API с перекрестным узлом). Каждый элемент связан с версией справочной документации по API, которая поддерживается в этом наборе требований (например, в ExcelApi 1,3 показаны API в ExcelApi 1,1, 1,2, 1,3, а также общий API).
 
+`ExcelApiOnline 1.1`является особым набором требований. Он содержит последние API для Excel в Интернете, но эти API могут быть не полностью поддерживаются на всех платформах. Для получения дополнительных сведений обратитесь к разделу [API JavaScript для Excel Online](/office/dev/add-ins/reference/requirement-sets/excel-api-online-requirement-set) .
+
 > [!TIP]
 > Выберите ссылку на этой странице, чтобы просмотреть справочную документацию по API, поддерживаемым указанным набором обязательных элементов, или с помощью раскрывающегося меню отбора фильтра над оглавлением, чтобы изменить набор требований в любое время.
 
 ## <a name="excel"></a>Excel
 
 - [Предварительный просмотр ExcelApi](/javascript/api/excel?view=excel-js-preview)
+- [Ексцелапионлине 1,1](/javascript/api/excel?view=excel-js-online)
 - [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
@@ -39,7 +42,7 @@ API JavaScript для Office позволяет создавать веб-при
 ## <a name="outlook"></a>Outlook
 
 - [Предварительный просмотр почтового ящика](/javascript/api/outlook?view=outlook-js-preview)
-- [Почтовый ящик 1,8](/javascript/api/outlook?view=outlook-js-1.8)
+- [Mailbox 1.8](/javascript/api/outlook?view=outlook-js-1.8)
 - [Mailbox 1.7](/javascript/api/outlook?view=outlook-js-1.7)
 - [Mailbox 1.6](/javascript/api/outlook?view=outlook-js-1.6)
 - [Mailbox 1.5](/javascript/api/outlook?view=outlook-js-1.5)
