@@ -96,11 +96,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. isInline: при значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. isInline: при значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~0:complex'
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(2)'
@@ -145,7 +145,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~2:complex'
   - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(1)'
@@ -212,11 +212,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~0:complex'
   - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(2)'
@@ -259,7 +259,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#body:member'
@@ -370,12 +370,6 @@ items:
       function getCallback(asyncResult) {
           var text = asyncResult.value.data;
           var prop = asyncResult.value.sourceProperty;
-
-          // Handle where Outlook on the web erroneously returns "null" instead of empty string.
-          if (Office.context.mailbox.diagnostics.hostName === 'OutlookWebApp'
-              && asyncResult.value.endPosition === asyncResult.value.startPosition) {
-              text = "";
-          }
 
           console.log("Selected text in " + prop + ": " + text);
       }
@@ -500,7 +494,7 @@ items:
           type:
             - 'outlook!Office.AppointmentCompose#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательное свойство. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
+          description: 'Необязательный. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.AppointmentCompose#location:member'
@@ -608,11 +602,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.AppointmentCompose#removeAttachmentAsync~0:complex'
   - uid: 'outlook!Office.AppointmentCompose#removeAttachmentAsync:member(2)'
@@ -647,7 +641,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.AppointmentCompose#removeAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#requiredAttendees:member'
@@ -717,11 +711,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. coercionType: при тексте текущий стиль применяется в Outlook в Интернете и в Windows. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML и поле поддерживает HTML (тема не используется), текущий стиль применяется в Outlook в Интернете, а в Outlook для настольных компьютеров применяется стиль по умолчанию. Если поле является текстовым полем, возвращается ошибка Инвалиддатаформат. Если параметр coercionType не задан, результат зависит от поля. Если поле содержит HTML, используется HTML. Если поле текстовое, используется обычный текст.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. coercionType: при тексте текущий стиль применяется в Outlook в Интернете и в Windows. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML и поле поддерживает HTML (тема не используется), текущий стиль применяется в Outlook в Интернете, а в Outlook для настольных компьютеров применяется стиль по умолчанию. Если поле является текстовым полем, возвращается ошибка Инвалиддатаформат. Если параметр coercionType не задан, результат зависит от поля. Если поле содержит HTML, используется HTML. Если поле текстовое, используется обычный текст.'
           type:
             - 'outlook!Office.AppointmentCompose#setSelectedDataAsync~0:complex'
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
           type:
             - 'outlook!Office.AppointmentCompose#setSelectedDataAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(2)'
@@ -762,7 +756,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
           type:
             - 'outlook!Office.AppointmentCompose#setSelectedDataAsync~2:complex'
   - uid: 'outlook!Office.AppointmentCompose#start:member'
