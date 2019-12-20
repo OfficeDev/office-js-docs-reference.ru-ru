@@ -65,6 +65,7 @@ items:
       - 'excel!Excel.Range#load:member(2)'
       - 'excel!Excel.Range#load:member(3)'
       - 'excel!Excel.Range#merge:member(1)'
+      - 'excel!Excel.Range#moveTo:member(1)'
       - 'excel!Excel.Range#numberFormat:member'
       - 'excel!Excel.Range#numberFormatLocal:member'
       - 'excel!Excel.Range#rowCount:member'
@@ -964,7 +965,7 @@ items:
                   ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getOffsetRange(-1,4);
               range.load('address');
               return ctx.sync().then(function() {
-                  console.log(range.address); // prints Sheet1!H3:K5
+                  console.log(range.address); // prints Sheet1!H3:J5
               });
           }).catch(function(error) {
               console.log("Error: " + error);
@@ -1607,6 +1608,27 @@ items:
           description: 'Необязательный параметр. Установите значение true, чтобы объединить ячейки в каждой строке заданного диапазона как отдельные объединенные ячейки. Значение по умолчанию — false.'
           type:
             - boolean
+  - uid: 'excel!Excel.Range#moveTo:member(1)'
+    summary: |-
+      Перемещает значения ячеек, форматирование и формулы из текущего диапазона в конечный диапазон, заменяя старые сведения в этих ячейках. Конечный диапазон будет расширен автоматически, если он меньше текущего диапазона. Все ячейки в диапазоне назначения, расположенные вне области исходного диапазона, не меняются.
+
+      \[[Набор API: ексцелапионлине 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: moveTo(destinationRange)
+    fullName: moveTo(destinationRange)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'moveTo(destinationRange: Range | string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: destinationRange
+          description: 'Дестинатионранже указывает диапазон, в который будут перемещены сведения из этого диапазона.'
+          type:
+            - 'excel!Excel.Range#moveTo~0:complex'
   - uid: 'excel!Excel.Range#numberFormat:member'
     summary: |-
       Представляет код числового формата Excel для заданного диапазона. При задании числового формата для диапазона аргументом value может быть одно значение (String) или двухмерный массив. Если аргумент является одиночным значением, он будет применен ко всем ячейкам в диапазоне.
@@ -1923,7 +1945,7 @@ items:
           - 'excel!Excel.Interfaces.RangeData:interface'
         description: ''
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во `.sync` время вызовов и вне последовательного выполнения пакета ". Run", а также получаете сообщение об ошибке "инвалидобжектпас" при задании свойства или вызове метода для объекта, необходимо добавить объект в отслеживаемый объект Коллекция при первом создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во `.sync` время вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -2111,6 +2133,15 @@ references:
     name: Excel.InsertShiftDirection
   - uid: 'excel!Excel.Interfaces.RangeLoadOptions:interface'
     name: Excel.Interfaces.RangeLoadOptions
+  - uid: 'excel!Excel.Range#moveTo~0:complex'
+    name: Range | string
+    fullName: Excel.Range | string
+    spec.typeScript:
+      - uid: 'excel!Excel.Range:class'
+        name: Range
+        fullName: Excel.Range
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'excel!Excel.Interfaces.RangeUpdateData:interface'
     name: Interfaces.RangeUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
