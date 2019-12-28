@@ -10,7 +10,7 @@ items:
 
       - [итемкомпосе](xref:outlook!Office.ItemCompose:interface)
 
-      - [Сообщение](xref:outlook!Office.Message:interface)
+      - [Message](xref:outlook!Office.Message:interface)
     name: Office.MessageCompose
     fullName: Office.MessageCompose
     langs:
@@ -131,11 +131,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. isInline: при значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. isInline: при значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~0:complex'
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(2)'
@@ -180,7 +180,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~2:complex'
   - uid: 'outlook!Office.MessageCompose#addHandlerAsync:member(1)'
@@ -215,11 +215,11 @@ items:
           type:
             - any
         - id: options
-          description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageCompose#addHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#addHandlerAsync:member(2)'
@@ -233,6 +233,20 @@ items:
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
       ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      function myHandlerFunction(eventarg) {
+          if (eventarg.attachmentStatus === Office.MailboxEnums.AttachmentStatus.Added) {
+              var attachment = eventarg.attachmentDetails;
+              console.log("Event Fired and Attachment Added!");
+              getAttachmentContentAsync(attachment.id, options, callback);
+          }
+      }
+
+      Office.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);
+      ```
     name: 'addHandlerAsync(eventType, handler, callback)'
     fullName: 'addHandlerAsync(eventType, handler, callback)'
     langs:
@@ -254,7 +268,7 @@ items:
           type:
             - any
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageCompose#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)'
@@ -321,11 +335,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addItemAttachmentAsync~0:complex'
   - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(2)'
@@ -368,7 +382,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addItemAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#bcc:member'
@@ -678,6 +692,37 @@ items:
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
       ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // The following example shows how to use the loadCustomPropertiesAsync method
+      // to asynchronously load custom properties that are specific to the current item.
+      // The example also shows how to use the saveAsync method to save these properties
+      // back to the server. After loading the custom properties, the example uses the
+      // get method to read the custom property myProp, the set method to write the
+      // custom property otherProp, and then finally calls the saveAsync method to save
+      // the custom properties.
+      Office.initialize = function () {
+          // Checks for the DOM to load using the jQuery ready function.
+          $(document).ready(function () {
+              // After the DOM is loaded, add-in-specific code can run.
+              var mailbox = Office.context.mailbox;
+              mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
+          });
+      };
+
+      function customPropsCallback(asyncResult) {
+          var customProps = asyncResult.value;
+          var myProp = customProps.get("myProp");
+
+          customProps.set("otherProp", "value");
+          customProps.saveAsync(saveCallback);
+      }
+
+      function saveCallback(asyncResult) {
+      }
+      ```
     name: 'loadCustomPropertiesAsync(callback, userContext)'
     fullName: 'loadCustomPropertiesAsync(callback, userContext)'
     langs:
@@ -695,7 +740,7 @@ items:
           type:
             - 'outlook!Office.MessageCompose#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательный атрибут. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
+          description: 'Необязательный. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.MessageCompose#notificationMessages:member'
@@ -774,11 +819,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.MessageCompose#removeAttachmentAsync~0:complex'
   - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync:member(2)'
@@ -813,7 +858,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.MessageCompose#removeAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#removeHandlerAsync:member(1)'
@@ -844,11 +889,11 @@ items:
           type:
             - 'outlook!Office.MessageCompose#removeHandlerAsync~0:complex'
         - id: options
-          description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageCompose#removeHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#removeHandlerAsync:member(2)'
@@ -879,7 +924,7 @@ items:
           type:
             - 'outlook!Office.MessageCompose#removeHandlerAsync~2:complex'
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageCompose#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageCompose#saveAsync:member(1)'
@@ -1064,11 +1109,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. coercionType: Если текст, текущий стиль применяется в Outlook в Интернете и на настольных клиентах. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML и поле поддерживает HTML (тема не используется), текущий стиль применяется в Outlook в Интернете, а в Outlook для настольных компьютеров применяется стиль по умолчанию. Если поле является текстовым полем, возвращается ошибка Инвалиддатаформат. Если параметр coercionType не задан, результат зависит от поля. Если поле содержит HTML, используется HTML. Если поле текстовое, используется обычный текст.'
+          description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. coercionType: Если текст, текущий стиль применяется в Outlook в Интернете и на настольных клиентах. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML и поле поддерживает HTML (тема не используется), текущий стиль применяется в Outlook в Интернете, а в Outlook для настольных компьютеров применяется стиль по умолчанию. Если поле является текстовым полем, возвращается ошибка Инвалиддатаформат. Если параметр coercionType не задан, результат зависит от поля. Если поле содержит HTML, используется HTML. Если поле текстовое, используется обычный текст.'
           type:
             - 'outlook!Office.MessageCompose#setSelectedDataAsync~0:complex'
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageCompose#setSelectedDataAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#setSelectedDataAsync:member(2)'
@@ -1109,7 +1154,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательный атрибут. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
+          description: 'Необязательный. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageCompose#setSelectedDataAsync~2:complex'
   - uid: 'outlook!Office.MessageCompose#subject:member'
