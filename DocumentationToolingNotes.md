@@ -12,21 +12,21 @@
 
 Существует четыре релевантных файла d. TS, которые предоставляют исходное содержимое для разных подразделов документов.
 
-- [Office-JS/index. d. TS](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js/index.d.ts) (Определения выпуска).
+- [Office-JS/index. d. TS](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js/index.d.ts) (определения выпуска).
   - [Excel (выпуск)](https://docs.microsoft.com/javascript/api/excel_release)
   - [OneNote](https://docs.microsoft.com/javascript/api/onenote)
   - [PowerPoint](https://docs.microsoft.com/javascript/api/powerpoint)
   - [Visio](https://docs.microsoft.com/javascript/api/visio)
   - [Word (выпуск)](https://docs.microsoft.com/javascript/api/word_release)
   - [Подраздел Оффицеекстенсионс общего API](https://docs.microsoft.com/javascript/api/office)
-- [Office-JS-Preview/index. d. TS](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js-preview/index.d.ts) (Определения предварительного просмотра).
+- [Office-JS-Preview/index. d. TS](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js-preview/index.d.ts) (определения предварительного просмотра).
   - [Excel (Предварительная версия)](https://docs.microsoft.com/javascript/api/excel)
   - [Outlook (Предварительная версия)](https://docs.microsoft.com/javascript/api/outlook)
   - [Word (Предварительная версия)](https://docs.microsoft.com/javascript/api/word)
   - [Общий API](https://docs.microsoft.com/javascript/api/office)
-- [пользовательские функции — среда выполнения](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts) (Определения среды выполнения пользовательских функций Excel).
+- [Custom-functions-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts)(определения среды выполнения пользовательских функций Excel).
   - [Пользовательские функции](https://docs.microsoft.com/javascript/api/custom-functions-runtime)
-- [Среда выполнения Office](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts) (Определения среды выполнения Office для платформы пользовательских функций.)
+- [Office-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts)(определения среды выполнения Office для платформы пользовательских функций).
   - [Среда выполнения Office](https://docs.microsoft.com/javascript/api/office-runtime)
 
 Более ранние версии API имеют собственные файлы d. TS. Они сохраняются при отпускании новой версии набора обязательных элементов API. Они также могут быть созданы с помощью [средства версии ремовер](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/tools/VersionRemover.ts). Эти старые файлы d. TS поддерживаются таким образом, что в API событий исправлены или изменены, исходное поведение по-прежнему задокументировано. Это полезно, если необходимо ориентироваться на более старую версию API.
@@ -44,21 +44,24 @@
 
 ## <a name="tooling-pipeline"></a>Программный конвейер
 
-![Изображение, которое показывает потоки управления от неопределенного типа, до препроцессора, средства извлечения API, документации API и до препроцессора.](ToolingPipeline.png)
+![Изображение, которое показывает потоки управления от неопределенного типа, до препроцессора, средства извлечения API, мидпроцессор, документации API и до препроцессора.](ToolingPipeline.png)
 
-Между источниками контента и последними страницами содержимое документации проходит через четыре этапа:
+Содержимое документации между источниками контента и последними страницами проходит через пять этапов:
 
 1. [Скрипт препроцессора](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/scripts/preprocessor.ts)
 1. [Средство извлечения API](https://api-extractor.com/)
-1. [Документ API](https://github.com/microsoft/web-build-tools/blob/master/apps/api-documenter/README.md)
+1. [Сценарий мидпроцессор](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/scripts/midprocessor.ts)
+1. [Документ API](https://github.com/microsoft/rushstack/blob/master/apps/api-documenter/README.md)
 1. [Скрипт для препроцессора](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/scripts/postprocessor.ts)
 
 Препроцессор выполняет файлы d. TS и разделяет их на разделы, зависящие от узла. Он выполняет все необходимые средства очистки для правильной обработки данных в последующих средствах.
 
 Средство извлечения API преобразует файлы d. TS в данные JSON. В этом разделе заменяются все данные типа, что позволяет упростить анализ.
 
+Мидпроцессор извлекает фрагменты кода и пары их с соответствующими узлами.
+
 Document API преобразует данные JSON в файлы. yml. Файлы. yml преобразуются в Markdown с помощью открытой системы публикации, которая публикует документы в docs.microsoft.com. Document API также содержит расширение для Office, которое вставляет фрагменты кода.
 
 На этом процессоре выполняется очистка оглавления и перемещение файлов. yml в [папку публикации](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen).
 
-Все четыре из этих действий выполняются при запуске [женератедокс. cmd](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/GenerateDocs.cmd) . Этот скрипт также обрабатывает установку модуля узла и очищает старые наборы файлов.
+Все пять из этих действий выполняются при запуске [женератедокс. cmd](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/GenerateDocs.cmd) . Этот скрипт также обрабатывает установку модуля узла, очищает старые наборы файлов и файлы определений типов версий для каждого набора требований.
