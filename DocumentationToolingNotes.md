@@ -24,12 +24,18 @@
   - [Outlook (Предварительная версия)](https://docs.microsoft.com/javascript/api/outlook)
   - [Word (Предварительная версия)](https://docs.microsoft.com/javascript/api/word)
   - [Общий API](https://docs.microsoft.com/javascript/api/office)
-- [Custom-functions-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts)(определения среды выполнения пользовательских функций Excel).
+- [Custom-Function-Runtime/index. d. TS](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts) (определения среды выполнения пользовательских функций Excel).
   - [Пользовательские функции](https://docs.microsoft.com/javascript/api/custom-functions-runtime)
-- [Office-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts)(определения среды выполнения Office для платформы пользовательских функций).
+- [Office-Runtime/index. d. TS](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts) (определения среды выполнения Office для платформы пользовательских функций).
   - [Среда выполнения Office](https://docs.microsoft.com/javascript/api/office-runtime)
 
 Более ранние версии API имеют собственные файлы d. TS. Они сохраняются при отпускании новой версии набора обязательных элементов API. Они также могут быть созданы с помощью [средства версии ремовер](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/tools/VersionRemover.ts). Эти старые файлы d. TS поддерживаются таким образом, что в API событий исправлены или изменены, исходное поведение по-прежнему задокументировано. Это полезно, если необходимо ориентироваться на более старую версию API.
+
+#### <a name="testing-type-definition-file-changes"></a>Тестирование изменений в файле определений типов
+
+Все изменения документации для API JavaScript для Office выполняются путем изменения четырех файлов d. TS, упомянутых выше. Тем не менее, вы можете протестировать изменения перед отправкой DefinitelyTyped (если необходимо, например, протестировать преобразование форматирования в Markdown), изменив соответствующий файл в разделе [Generate-Files/Script-Inputs](https://github.com/OfficeDev/office-js-docs-reference/tree/master/generate-docs/script-inputs) и запуска [женератедокс. cmd](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/GenerateDocs.cmd). При появлении соответствующего запроса выберите параметр "Локальные файлы".
+
+Если вы помещаете изменения в удаленную ветвь этого репозитория, платформа docs.microsoft.com создает тестовую ветвь. Эта ветвь отображается в review.docs.microsoft.com, который доступен только внутренним сотрудникам Майкрософт. Любой пользователь, просматривающий пр, проверит сайт проверки на точность.
 
 ### <a name="code-snippets"></a>Фрагменты кода
 

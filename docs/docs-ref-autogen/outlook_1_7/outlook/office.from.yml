@@ -44,11 +44,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: 'Необязательный элемент. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Результатом `value` этого свойства является значение from элемента в виде объекта EmailAddressDetails.'
+          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Результатом `value` этого свойства является значение from элемента в виде объекта EmailAddressDetails.'
           type:
             - 'outlook!Office.From#getAsync~0:complex'
   - uid: 'outlook!Office.From#getAsync:member(2)'
@@ -75,6 +75,16 @@ items:
           console.log("From " + from);
       }
       ```
+      ```javascript
+      Office.context.mailbox.item.from.getAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          var msgFrom = asyncResult.value;
+          console.log("Message from: " + msgFrom.displayName + " (" + msgFrom.emailAddress + ")");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
     name: getAsync(callback)
     fullName: getAsync(callback)
     langs:
@@ -88,7 +98,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Необязательный элемент. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Результатом `value` этого свойства является значение from элемента в виде объекта EmailAddressDetails.'
+          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult. Результатом `value` этого свойства является значение from элемента в виде объекта EmailAddressDetails.'
           type:
             - 'outlook!Office.From#getAsync~1:complex'
 references:
