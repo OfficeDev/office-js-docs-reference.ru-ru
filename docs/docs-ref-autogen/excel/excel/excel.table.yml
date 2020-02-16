@@ -461,25 +461,6 @@ items:
               }
           });
           ```
-          ```javascript
-          // Set table style. 
-          Excel.run(function (ctx) { 
-              var tableName = 'Table1';
-              var table = ctx.workbook.tables.getItem(tableName);
-              table.name = 'Table1-Renamed';
-              table.showTotals = false;
-              table.style = 'TableStyleMedium2';
-              table.load('tableStyle');
-              return ctx.sync().then(function() {
-                      console.log(table.style);
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
       parameters:
         - id: propertyNames
           description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
@@ -780,6 +761,30 @@ items:
       return:
         type:
           - string
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Set table style. 
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var table = ctx.workbook.tables.getItem(tableName);
+              table.name = 'Table1-Renamed';
+              table.showTotals = false;
+              table.style = 'TableStyleMedium2';
+              table.load('tableStyle');
+              return ctx.sync().then(function() {
+                      console.log(table.style);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'excel!Excel.Table#toJSON:member(1)'
     summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Table является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.TableData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()

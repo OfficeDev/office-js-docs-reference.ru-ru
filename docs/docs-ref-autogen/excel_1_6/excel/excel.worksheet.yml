@@ -248,7 +248,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 'Необязательный параметр. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getNextOrNullObject:member(1)'
@@ -269,7 +269,7 @@ items:
         description: ''
       parameters:
         - id: visibleOnly
-          description: 'Необязательный параметр. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getPrevious:member(1)'
@@ -316,7 +316,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 'Необязательный параметр. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getPreviousOrNullObject:member(1)'
@@ -337,7 +337,7 @@ items:
         description: ''
       parameters:
         - id: visibleOnly
-          description: 'Необязательный параметр. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getRange:member(1)'
@@ -397,7 +397,7 @@ items:
           ```
       parameters:
         - id: address
-          description: 'Необязательный параметр. Строка, представляющая адрес или имя диапазона. Например, "a1: B2". Если аргумент не указан, возвращается весь диапазон листа.'
+          description: 'Необязательно. Строка, представляющая адрес или имя диапазона. Например, "a1: B2". Если аргумент не указан, возвращается весь диапазон листа.'
           type:
             - string
   - uid: 'excel!Excel.Worksheet#getUsedRange:member(1)'
@@ -438,7 +438,7 @@ items:
           ```
       parameters:
         - id: valuesOnly
-          description: 'Необязательный параметр. Если этот параметр имеет значение true, учитываются только ячейки со значениями в качестве используемых ячеек (игнорируя форматирование). \[Набор API: ExcelApi 1,2\]'
+          description: 'Необязательно. Если этот параметр имеет значение true, учитываются только ячейки со значениями в качестве используемых ячеек (игнорируя форматирование). \[Набор API: ExcelApi 1,2\]'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getUsedRangeOrNullObject:member(1)'
@@ -518,20 +518,6 @@ items:
               return ctx.sync().then(function() {
                       console.log(worksheet.position);
               });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          // Set worksheet position. 
-          Excel.run(function (ctx) { 
-              var wSheetName = 'Sheet1';
-              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
-              worksheet.position = 2;
-              return ctx.sync(); 
           }).catch(function(error) {
               console.log("Error: " + error);
               if (error instanceof OfficeExtension.Error) {
@@ -630,6 +616,25 @@ items:
       return:
         type:
           - number
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Set worksheet position. 
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.position = 2;
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#protection:member'
     summary: |-
       Возвращает объект защиты листа. Только для чтения.
@@ -645,6 +650,43 @@ items:
       return:
         type:
           - 'excel!Excel.WorksheetProtection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function(ctx) {
+            // get a reference to Sheet1
+            var sheet = ctx.workbook.worksheets.getItem("Sheet1");
+
+            // Protect inserting or deleting rows in Sheet1
+            sheet.protection.protect({
+              allowInsertRows: false,
+              allowDeleteRows: false
+            });
+
+            return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Unprotecting a worksheet with unprotect() will remove all 
+          // WorksheetProtectionOptions options applied to a worksheet.
+          // To remove only a subset of WorksheetProtectionOptions use the 
+          // protect() method and set the options you wish to remove to true.
+          Excel.run(function(ctx) {
+            var sheet = ctx.workbook.worksheets.getItem("Sheet1");
+            sheet.protection.protect({
+              allowInsertRows: false, // Protect row insertion
+              allowDeleteRows: true // Unprotect row deletion
+            });
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#set:member(1)'
     summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
     remarks: |-
