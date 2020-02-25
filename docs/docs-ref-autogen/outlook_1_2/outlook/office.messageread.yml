@@ -214,13 +214,14 @@ items:
         type:
           - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#dateTimeModified:member'
-    summary: Получает дату и время последнего изменения элемента.
+    summary: |-
+      Получает дату и время последнего изменения элемента.
+
+      **Примечание**: этот элемент не поддерживается в Outlook на iOS или Android.
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
 
       ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения
-
-      **Примечание**: этот элемент не поддерживается в Outlook на iOS или Android.
 
       #### <a name="examples"></a>Примеры
 
@@ -343,7 +344,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~0:complex'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~1:complex'
   - uid: 'outlook!Office.MessageRead#displayReplyForm:member(1)'
@@ -470,7 +471,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~0:complex'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра asyncResult, который является объектом Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~1:complex'
   - uid: 'outlook!Office.MessageRead#end:member'
@@ -604,7 +605,7 @@ items:
       Получает массив всех сущностей указанного типа, обнаруженных в теле выбранного элемента.
 
       **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
-    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>Строка</td> <td>Restricted</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Строка</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL-адрес</td> <td>Строка</td> <td>Restricted</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```\n```javascript\nconsole.log(Office.context.mailbox.item.getEntitiesByType(Office.MailboxEnums.EntityType.Address));\n```"
+    remarks: "** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ограниченный\n\n** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: чтение сообщения\n\nХотя минимальный уровень разрешений для использования этого метода\_— Restricted, для некоторых типов сущностей требуется доступ на уровне ReadItem, как указано в приведенной ниже таблице.\n\n<table> <tr> <th>Значение entityType</th> <th>Тип объектов в возвращаемом массиве</th> <th>Необходимый уровень разрешений</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Контакт</td> <td>Контакт</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL-адрес</td> <td>String</td> <td>Restricted</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to access an array of strings that represent postal addresses\n// in the current item's body.\n\n// The initialize function is required for all apps.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, app-specific code can run.\n        var item = Office.context.mailbox.item;\n        // Get an array of strings that represent postal addresses in the current item's body.\n        var addresses = item.getEntitiesByType(Office.MailboxEnums.EntityType.Address);\n        // Continue processing the array of addresses.\n    });\n};\n```\n```javascript\nconsole.log(Office.context.mailbox.item.getEntitiesByType(Office.MailboxEnums.EntityType.Address));\n```"
     name: getEntitiesByType(entityType)
     fullName: getEntitiesByType(entityType)
     langs:
@@ -961,7 +962,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательно. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
+          description: 'Необязательное свойство. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.MessageRead#location:member'

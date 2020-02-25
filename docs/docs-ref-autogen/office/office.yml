@@ -11,6 +11,7 @@ items:
       - 'office!Office.AddBindingFromNamedItemOptions:interface'
       - 'office!Office.AddBindingFromPromptOptions:interface'
       - 'office!Office.AddBindingFromSelectionOptions:interface'
+      - 'office!Office.Addin:interface'
       - 'office!Office.AddinCommands.Event:interface'
       - 'office!Office.AddinCommands.EventCompletedOptions:interface'
       - 'office!Office.AddinCommands.Source:interface'
@@ -27,6 +28,7 @@ items:
       - 'office!Office.CoercionType:enum'
       - 'office!Office.Context:interface'
       - 'office!Office.ContextInformation:interface'
+      - 'office!Office.Control:interface'
       - 'office!Office.CustomXmlNode:interface'
       - 'office!Office.CustomXMLNodeType:enum'
       - 'office!Office.CustomXmlPart:interface'
@@ -43,6 +45,7 @@ items:
       - 'office!Office.FileProperties:interface'
       - 'office!Office.FileType:enum'
       - 'office!Office.FilterType:enum'
+      - 'office!Office.Gallery:interface'
       - 'office!Office.GetBindingDataOptions:interface'
       - 'office!Office.GetFileOptions:interface'
       - 'office!Office.GetSelectedDataOptions:interface'
@@ -53,6 +56,7 @@ items:
       - 'office!Office.InitializationReason:enum'
       - 'office!Office.initialize:function(1)'
       - 'office!Office.IPromiseConstructor:interface'
+      - 'office!Office.isSetSupported:function(1)'
       - 'office!Office.MatrixBinding:interface'
       - 'office!Office.NodeDeletedEventArgs:interface'
       - 'office!Office.NodeInsertedEventArgs:interface'
@@ -68,6 +72,8 @@ items:
       - 'office!Office.RangeFormatConfiguration:interface'
       - 'office!Office.RemoveHandlerOptions:interface'
       - 'office!Office.RequirementSetSupport:interface'
+      - 'office!Office.Ribbon:interface'
+      - 'office!Office.RibbonUpdaterData:interface'
       - 'office!Office.SaveSettingsOptions:interface'
       - 'office!Office.select:function(1)'
       - 'office!Office.SelectionMode:enum'
@@ -76,6 +82,8 @@ items:
       - 'office!Office.Settings:interface'
       - 'office!Office.SettingsChangedEventArgs:interface'
       - 'office!Office.Slice:interface'
+      - 'office!Office.StartupBehavior:enum'
+      - 'office!Office.Tab:interface'
       - 'office!Office.Table:enum'
       - 'office!Office.TableBinding:interface'
       - 'office!Office.TableData:class'
@@ -83,6 +91,8 @@ items:
       - 'office!Office.UI:interface'
       - 'office!Office.useShortNamespace:function(1)'
       - 'office!Office.ValueFormat:enum'
+      - 'office!Office.VisibilityMode:enum'
+      - 'office!Office.VisibilityModeChangedMessage:interface'
       - 'office!OfficeExtension.ClientObject:class'
       - 'office!OfficeExtension.ClientRequestContext:class'
       - 'office!OfficeExtension.ClientResult:class'
@@ -102,25 +112,25 @@ items:
       - 'office!OfficeExtension.UpdateOptions:interface'
   - uid: 'office!Office.initialize:function(1)'
     summary: |-
-      <span data-ttu-id="9a882-101">Происходит, когда среда выполнения загружена и надстройка готова начать взаимодействие с приложением и размещенным документом.</span><span class="sxs-lookup"><span data-stu-id="9a882-101">Occurs when the runtime environment is loaded and the add-in is ready to start interacting with the application and hosted document.</span></span>
+      Происходит, когда среда выполнения загружена и надстройка готова начать взаимодействие с приложением и размещенным документом.
 
-      <span data-ttu-id="9a882-102">Параметр Reason функции listener события Initialize возвращает значение `InitializationReason` перечисления, задающее способ инициализации.</span><span class="sxs-lookup"><span data-stu-id="9a882-102">The reason parameter of the initialize event listener function returns an `InitializationReason` enumeration value that specifies how initialization occurred.</span></span> <span data-ttu-id="9a882-103">Надстройку области задач или контентную надстройку можно инициализировать двумя способами:</span><span class="sxs-lookup"><span data-stu-id="9a882-103">A task pane or content add-in can be initialized in two ways:</span></span>
+      Параметр Reason функции listener события Initialize возвращает значение `InitializationReason` перечисления, задающее способ инициализации. Надстройку области задач или контентную надстройку можно инициализировать двумя способами:
 
-      - <span data-ttu-id="9a882-104">Пользователь только что вставил раздел "недавно использовавшиеся надстройки" в раскрывающемся списке надстройки на вкладке "Вставка" ленты в ведущем приложении Office или в диалоговом окне "Вставка надстройки".</span><span class="sxs-lookup"><span data-stu-id="9a882-104">The user just inserted it from Recently Used Add-ins section of the Add-in drop-down list on the Insert tab of the ribbon in the Office host application, or from Insert add-in dialog box.</span></span>
+      - Пользователь только что вставил раздел "недавно использовавшиеся надстройки" в раскрывающемся списке надстройки на вкладке "Вставка" ленты в ведущем приложении Office или в диалоговом окне "Вставка надстройки".
 
-      - <span data-ttu-id="9a882-105">пользователь может открыть документ, который уже содержит надстройку.</span><span class="sxs-lookup"><span data-stu-id="9a882-105">The user opened a document that already contains the add-in.</span></span>
+      - пользователь может открыть документ, который уже содержит надстройку.
 
-      <span data-ttu-id="9a882-106">*Note*: параметр Reason функции listener события Initialize возвращает только значение `InitializationReason` перечисления для надстроек области задач и контентных надстроек. Он не возвращает значения для надстроек Outlook.</span><span class="sxs-lookup"><span data-stu-id="9a882-106">*Note*: The reason parameter of the initialize event listener function only returns an `InitializationReason` enumeration value for task pane and content add-ins. It does not return a value for Outlook add-ins.</span></span>
+      *Note*: параметр Reason функции listener события Initialize возвращает только значение `InitializationReason` перечисления для надстроек области задач и контентных надстроек. Он не возвращает значения для надстроек Outlook.
     remarks: |-
-      <span data-ttu-id="9a882-107">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="9a882-107">**Support details**</span></span>
+      **Сведения о поддержке**
 
-      <span data-ttu-id="9a882-p102">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="9a882-p102">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+      Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.
 
-      <span data-ttu-id="9a882-110">Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span><span class="sxs-lookup"><span data-stu-id="9a882-110">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span></span><!-- --><span data-ttu-id="9a882-111">.</span><span class="sxs-lookup"><span data-stu-id="9a882-111"></span></span>
+      Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
-      <span data-ttu-id="9a882-112">*Поддерживаемые ведущие приложения по платформе*</span><span class="sxs-lookup"><span data-stu-id="9a882-112">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="9a882-113">Office для Windows</span><span class="sxs-lookup"><span data-stu-id="9a882-113">Office on Windows</span></span> </th><th> <span data-ttu-id="9a882-114">Office в веб-браузере</span><span class="sxs-lookup"><span data-stu-id="9a882-114">Office in web browser</span></span> </th><th> <span data-ttu-id="9a882-115">Office на iPad</span><span class="sxs-lookup"><span data-stu-id="9a882-115">Office on iPad</span></span> </th><th> <span data-ttu-id="9a882-116">Outlook на мобильных устройствах</span><span class="sxs-lookup"><span data-stu-id="9a882-116">Outlook on mobile devices</span></span> </th><th> <span data-ttu-id="9a882-117">Office на Mac</span><span class="sxs-lookup"><span data-stu-id="9a882-117">Office on Mac</span></span> </th></tr> <tr><td><span data-ttu-id="9a882-118"><strong>Невозможно</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-118"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="9a882-119">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-119">Y</span></span> </td><td> <span data-ttu-id="9a882-120">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-120">Y</span></span> </td><td> <span data-ttu-id="9a882-121">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-121">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="9a882-122"><strong>Приложению</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-122"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id="9a882-123">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-123">Y</span></span> </td><td> <span data-ttu-id="9a882-124">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-124">Y</span></span> </td><td> </td><td> <span data-ttu-id="9a882-125">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-125">Y</span></span> </td><td> <span data-ttu-id="9a882-126">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-126">Y</span></span> </td></tr> <tr><td><span data-ttu-id="9a882-127"><strong>PowerPoint</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-127"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id="9a882-128">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-128">Y</span></span> </td><td> <span data-ttu-id="9a882-129">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-129">Y</span></span> </td><td> <span data-ttu-id="9a882-130">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-130">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="9a882-131"><strong>Project</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-131"><strong> Project </strong></span></span></td><td> <span data-ttu-id="9a882-132">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-132">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="9a882-133"><strong>Текстовых</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-133"><strong> Word </strong></span></span></td><td> <span data-ttu-id="9a882-134">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-134">Y</span></span> </td><td> <span data-ttu-id="9a882-135">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-135">Y</span></span> </td><td> <span data-ttu-id="9a882-136">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-136">Y</span></span> </td><td> </td><td> </td></tr> </table>
+      *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Приложению</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>
 
-      #### <a name="examples"></a><span data-ttu-id="9a882-137">Примеры</span><span class="sxs-lookup"><span data-stu-id="9a882-137">Examples</span></span>
+      #### <a name="examples"></a>Примеры
 
       ```javascript
       // You can use the value of the InitializationEnumeration to implement different logic for
@@ -158,11 +168,33 @@ items:
         description: ''
       parameters:
         - id: reason
-          description: <span data-ttu-id="9a882-138">Указывает способ инициализации приложения.</span><span class="sxs-lookup"><span data-stu-id="9a882-138">Indicates how the app was initialized.</span></span>
+          description: Указывает способ инициализации приложения.
           type:
             - 'office!Office.InitializationReason:enum'
+  - uid: 'office!Office.isSetSupported:function(1)'
+    summary: 'Проверяет, поддерживается ли указанный набор требований ведущим приложением Office.'
+    name: 'Office.isSetSupported(name, minVersion)'
+    fullName: 'Office.isSetSupported(name, minVersion)'
+    langs:
+      - typeScript
+    type: function
+    syntax:
+      content: 'export function isSetSupported(name: string, minVersion?: string): boolean;'
+      return:
+        type:
+          - boolean
+        description: ''
+      parameters:
+        - id: name
+          description: 'Имя набора; Например, "Матриксбиндингс".'
+          type:
+            - string
+        - id: minVersion
+          description: 'Минимальная требуемая версия; Например, "1,4".'
+          type:
+            - string
   - uid: 'office!Office.onReady:function(1)'
-    summary: '<span data-ttu-id="9a882-139">Гарантирует, что API JavaScript для Office будут готовы вызываться надстройкой.</span><span class="sxs-lookup"><span data-stu-id="9a882-139">Ensures that the Office JavaScript APIs are ready to be called by the add-in.</span></span> <span data-ttu-id="9a882-140">Если платформа еще не инициализирована, обратный вызов или обещание ждет, пока ведущее приложение Office не будет готово к приему вызовов API.</span><span class="sxs-lookup"><span data-stu-id="9a882-140">If the framework hasn''t initialized yet, the callback or promise will wait until the Office host is ready to accept API calls.</span></span> <span data-ttu-id="9a882-141">Обратите внимание, что хотя этот API предназначен для использования в надстройке Office, его также можно использовать за пределами надстройки.</span><span class="sxs-lookup"><span data-stu-id="9a882-141">Note that though this API is intended to be used inside an Office add-in, it can also be used outside the add-in.</span></span> <span data-ttu-id="9a882-142">В этом случае, когда файл Office. js определяет, что он выполняется за пределами ведущего приложения Office, он будет вызывать обратный вызов и разрешать обещание с нулевым значением для узла и платформы.</span><span class="sxs-lookup"><span data-stu-id="9a882-142">In that case, once Office.js determines that it is running outside of an Office host application, it will call the callback and resolve the promise with "null" for both the host and platform.</span></span>'
+    summary: 'Гарантирует, что API JavaScript для Office будут готовы вызываться надстройкой. Если платформа еще не инициализирована, обратный вызов или обещание ждет, пока ведущее приложение Office не будет готово к приему вызовов API. Обратите внимание, что хотя этот API предназначен для использования в надстройке Office, его также можно использовать за пределами надстройки. В этом случае, когда файл Office. js определяет, что он выполняется за пределами ведущего приложения Office, он будет вызывать обратный вызов и разрешать обещание с нулевым значением для узла и платформы.'
     name: Office.onReady(callback)
     fullName: Office.onReady(callback)
     langs:
@@ -173,24 +205,24 @@ items:
       return:
         type:
           - 'office!Office.onReady~0:complex'
-        description: '<span data-ttu-id="9a882-143">Обещание, содержащее сведения об узле и платформе после завершения инициализации.</span><span class="sxs-lookup"><span data-stu-id="9a882-143">A Promise that contains the host and platform info, once initialization is completed.</span></span>'
+        description: 'Обещание, содержащее сведения об узле и платформе после завершения инициализации.'
       parameters:
         - id: callback
-          description: '<span data-ttu-id="9a882-144">Необязательный метод обратного вызова, который получит сведения об узле и платформе.</span><span class="sxs-lookup"><span data-stu-id="9a882-144">An optional callback method, that will receive the host and platform info.</span></span> <span data-ttu-id="9a882-145">Кроме того, вместо обратного вызова надстройка может просто подождать, пока она не будет возвращена функцией для разрешения.</span><span class="sxs-lookup"><span data-stu-id="9a882-145">Alternatively, rather than use a callback, an add-in may simply wait for the Promise returned by the function to resolve.</span></span>'
+          description: 'Необязательный метод обратного вызова, который получит сведения об узле и платформе. Кроме того, вместо обратного вызова надстройка может просто подождать, пока она не будет возвращена функцией для разрешения.'
           type:
             - 'office!Office.onReady~1:complex'
   - uid: 'office!Office.select:function(1)'
-    summary: '<span data-ttu-id="9a882-146">Возвращает обещание объекта, описанного в выражении.</span><span class="sxs-lookup"><span data-stu-id="9a882-146">Returns a promise of an object described in the expression.</span></span> <span data-ttu-id="9a882-147">Функция обратного вызова вызывается только в случае сбоя метода.</span><span class="sxs-lookup"><span data-stu-id="9a882-147">Callback is invoked only if method fails.</span></span>'
+    summary: 'Возвращает обещание объекта, описанного в выражении. Функция обратного вызова вызывается только в случае сбоя метода.'
     remarks: |-
-      <span data-ttu-id="9a882-148">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="9a882-148">**Support details**</span></span>
+      **Сведения о поддержке**
 
-      <span data-ttu-id="9a882-p106">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="9a882-p106">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+      Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.
 
-      <span data-ttu-id="9a882-151">Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span><span class="sxs-lookup"><span data-stu-id="9a882-151">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span></span><!-- --><span data-ttu-id="9a882-152">.</span><span class="sxs-lookup"><span data-stu-id="9a882-152"></span></span>
+      Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
-      <span data-ttu-id="9a882-153">*Поддерживаемые ведущие приложения по платформе*</span><span class="sxs-lookup"><span data-stu-id="9a882-153">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="9a882-154">Office для Windows</span><span class="sxs-lookup"><span data-stu-id="9a882-154">Office on Windows</span></span> </th><th> <span data-ttu-id="9a882-155">Office в веб-браузере</span><span class="sxs-lookup"><span data-stu-id="9a882-155">Office in web browser</span></span> </th><th> <span data-ttu-id="9a882-156">Office на iPad</span><span class="sxs-lookup"><span data-stu-id="9a882-156">Office on iPad</span></span> </th></tr> <tr><td><span data-ttu-id="9a882-157"><strong>Невозможно</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-157"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="9a882-158">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-158">Y</span></span> </td><td> <span data-ttu-id="9a882-159">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-159">Y</span></span> </td><td> <span data-ttu-id="9a882-160">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-160">Y</span></span> </td></tr> <tr><td><span data-ttu-id="9a882-161"><strong>Текстовых</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-161"><strong> Word </strong></span></span></td><td> <span data-ttu-id="9a882-162">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-162">Y</span></span> </td><td> </td><td> <span data-ttu-id="9a882-163">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-163">Y</span></span> </td></tr> </table>
+      *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> </td><td> Да </td></tr> </table>
 
-      #### <a name="examples"></a><span data-ttu-id="9a882-164">Примеры</span><span class="sxs-lookup"><span data-stu-id="9a882-164">Examples</span></span>
+      #### <a name="examples"></a>Примеры
 
       ```javascript
       // The following code example uses the select method to retrieve a binding with the id "cities" from
@@ -216,25 +248,25 @@ items:
         description: ''
       parameters:
         - id: expression
-          description: '<span data-ttu-id="9a882-165">Объект, который требуется получить.</span><span class="sxs-lookup"><span data-stu-id="9a882-165">The object to be retrieved.</span></span> <span data-ttu-id="9a882-166">Пример "Bindings\#биндингнаме", получающий обещание привязки для привязки с именем "биндингнаме"</span><span class="sxs-lookup"><span data-stu-id="9a882-166">Example "bindings\#BindingName", retrieves a binding promise for a binding named ''BindingName''</span></span>'
+          description: 'Объект, который требуется получить. Пример "Bindings\#биндингнаме", получающий обещание привязки для привязки с именем "биндингнаме"'
           type:
             - string
         - id: callback
-          description: '<span data-ttu-id="9a882-167">Необязательно.</span><span class="sxs-lookup"><span data-stu-id="9a882-167">Optional.</span></span> <span data-ttu-id="9a882-168">Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office!Office.AsyncResult:interface)</span><span class="sxs-lookup"><span data-stu-id="9a882-168">A function that is invoked when the callback returns, whose only parameter is of type [Office.AsyncResult](xref:office!Office.AsyncResult:interface)</span></span><!-- --><span data-ttu-id="9a882-169">.</span><span class="sxs-lookup"><span data-stu-id="9a882-169"></span></span>'
+          description: 'Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой имеет тип [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.'
           type:
             - 'office!Office.select~0:complex'
   - uid: 'office!Office.useShortNamespace:function(1)'
-    summary: <span data-ttu-id="9a882-170">Включает и выключает `Office` псевдоним для полного `Microsoft.Office.WebExtension` пространства имен.</span><span class="sxs-lookup"><span data-stu-id="9a882-170">Toggles on and off the `Office` alias for the full `Microsoft.Office.WebExtension` namespace.</span></span>
+    summary: Включает и выключает `Office` псевдоним для полного `Microsoft.Office.WebExtension` пространства имен.
     remarks: |-
-      <span data-ttu-id="9a882-171">**Сведения о поддержке**</span><span class="sxs-lookup"><span data-stu-id="9a882-171">**Support details**</span></span>
+      **Сведения о поддержке**
 
-      <span data-ttu-id="9a882-p109">Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.</span><span class="sxs-lookup"><span data-stu-id="9a882-p109">A capital Y in the following matrix indicates that this method is supported in the corresponding Office host application. An empty cell indicates that the Office host application doesn't support this method.</span></span>
+      Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.
 
-      <span data-ttu-id="9a882-174">Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span><span class="sxs-lookup"><span data-stu-id="9a882-174">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)</span></span><!-- --><span data-ttu-id="9a882-175">.</span><span class="sxs-lookup"><span data-stu-id="9a882-175"></span></span>
+      Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
-      <span data-ttu-id="9a882-176">*Поддерживаемые ведущие приложения по платформе*</span><span class="sxs-lookup"><span data-stu-id="9a882-176">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="9a882-177">Office для Windows</span><span class="sxs-lookup"><span data-stu-id="9a882-177">Office on Windows</span></span> </th><th> <span data-ttu-id="9a882-178">Office в веб-браузере</span><span class="sxs-lookup"><span data-stu-id="9a882-178">Office in web browser</span></span> </th><th> <span data-ttu-id="9a882-179">Office на iPad</span><span class="sxs-lookup"><span data-stu-id="9a882-179">Office on iPad</span></span> </th><th> <span data-ttu-id="9a882-180">Outlook на мобильных устройствах</span><span class="sxs-lookup"><span data-stu-id="9a882-180">Outlook on mobile devices</span></span> </th><th> <span data-ttu-id="9a882-181">Office на Mac</span><span class="sxs-lookup"><span data-stu-id="9a882-181">Office on Mac</span></span> </th></tr> <tr><td><span data-ttu-id="9a882-182"><strong>Невозможно</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-182"><strong> Excel </strong></span></span></td><td> <span data-ttu-id="9a882-183">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-183">Y</span></span> </td><td> <span data-ttu-id="9a882-184">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-184">Y</span></span> </td><td> <span data-ttu-id="9a882-185">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-185">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="9a882-186"><strong>Приложению</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-186"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id="9a882-187">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-187">Y</span></span> </td><td> <span data-ttu-id="9a882-188">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-188">Y</span></span> </td><td> </td><td> <span data-ttu-id="9a882-189">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-189">Y</span></span> </td><td> <span data-ttu-id="9a882-190">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-190">Y</span></span> </td></tr> <tr><td><span data-ttu-id="9a882-191"><strong>PowerPoint</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-191"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id="9a882-192">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-192">Y</span></span> </td><td> <span data-ttu-id="9a882-193">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-193">Y</span></span> </td><td> <span data-ttu-id="9a882-194">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-194">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="9a882-195"><strong>Project</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-195"><strong> Project </strong></span></span></td><td> <span data-ttu-id="9a882-196">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-196">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id="9a882-197"><strong>Текстовых</strong></span><span class="sxs-lookup"><span data-stu-id="9a882-197"><strong> Word </strong></span></span></td><td> <span data-ttu-id="9a882-198">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-198">Y</span></span> </td><td> <span data-ttu-id="9a882-199">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-199">Y</span></span> </td><td> <span data-ttu-id="9a882-200">Да</span><span class="sxs-lookup"><span data-stu-id="9a882-200">Y</span></span> </td><td> </td><td> </td></tr> </table>
+      *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong>Невозможно</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Приложению</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Текстовых</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>
 
-      #### <a name="examples"></a><span data-ttu-id="9a882-201">Примеры</span><span class="sxs-lookup"><span data-stu-id="9a882-201">Examples</span></span>
+      #### <a name="examples"></a>Примеры
 
       ```javascript
       function startUsingShortNamespace() {
@@ -275,7 +307,7 @@ items:
         description: ''
       parameters:
         - id: useShortNamespace
-          description: '<span data-ttu-id="9a882-202">Значение true, чтобы использовать псевдоним ярлыка; в противном случае — false.</span><span class="sxs-lookup"><span data-stu-id="9a882-202">True to use the shortcut alias; otherwise false to disable it.</span></span> <span data-ttu-id="9a882-203">Значение по умолчанию: true.</span><span class="sxs-lookup"><span data-stu-id="9a882-203">The default is true.</span></span>'
+          description: 'Значение true, чтобы использовать псевдоним ярлыка; в противном случае — false. Значение по умолчанию: true.'
           type:
             - boolean
 references:
@@ -287,6 +319,8 @@ references:
     name: Office.AddBindingFromPromptOptions
   - uid: 'office!Office.AddBindingFromSelectionOptions:interface'
     name: Office.AddBindingFromSelectionOptions
+  - uid: 'office!Office.Addin:interface'
+    name: Office.Addin
   - uid: 'office!Office.AddinCommands.Event:interface'
     name: Office.AddinCommands.Event
   - uid: 'office!Office.AddinCommands.EventCompletedOptions:interface'
@@ -319,6 +353,8 @@ references:
     name: Office.Context
   - uid: 'office!Office.ContextInformation:interface'
     name: Office.ContextInformation
+  - uid: 'office!Office.Control:interface'
+    name: Office.Control
   - uid: 'office!Office.CustomXmlNode:interface'
     name: Office.CustomXmlNode
   - uid: 'office!Office.CustomXMLNodeType:enum'
@@ -351,6 +387,8 @@ references:
     name: Office.FileType
   - uid: 'office!Office.FilterType:enum'
     name: Office.FilterType
+  - uid: 'office!Office.Gallery:interface'
+    name: Office.Gallery
   - uid: 'office!Office.GetBindingDataOptions:interface'
     name: Office.GetBindingDataOptions
   - uid: 'office!Office.GetFileOptions:interface'
@@ -432,6 +470,10 @@ references:
     name: Office.RemoveHandlerOptions
   - uid: 'office!Office.RequirementSetSupport:interface'
     name: Office.RequirementSetSupport
+  - uid: 'office!Office.Ribbon:interface'
+    name: Office.Ribbon
+  - uid: 'office!Office.RibbonUpdaterData:interface'
+    name: Office.RibbonUpdaterData
   - uid: 'office!Office.SaveSettingsOptions:interface'
     name: Office.SaveSettingsOptions
   - uid: 'office!Office.select~0:complex'
@@ -457,6 +499,10 @@ references:
     name: Office.SettingsChangedEventArgs
   - uid: 'office!Office.Slice:interface'
     name: Office.Slice
+  - uid: 'office!Office.StartupBehavior:enum'
+    name: Office.StartupBehavior
+  - uid: 'office!Office.Tab:interface'
+    name: Office.Tab
   - uid: 'office!Office.Table:enum'
     name: Office.Table
   - uid: 'office!Office.TableBinding:interface'
@@ -469,6 +515,10 @@ references:
     name: Office.UI
   - uid: 'office!Office.ValueFormat:enum'
     name: Office.ValueFormat
+  - uid: 'office!Office.VisibilityMode:enum'
+    name: Office.VisibilityMode
+  - uid: 'office!Office.VisibilityModeChangedMessage:interface'
+    name: Office.VisibilityModeChangedMessage
   - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'office!OfficeExtension.ClientRequestContext:class'
