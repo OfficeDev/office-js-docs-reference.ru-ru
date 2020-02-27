@@ -4,7 +4,7 @@ items:
     summary: |-
       Режим создания сообщения для [Office. Context. Mailbox. Item](xref:outlook!Office.Item:interface)<!-- -->.
 
-      **Важно!** это внутренний объект Outlook, который не предоставляется напрямую через существующие интерфейсы. Этот режим следует рассматривать как режим Office. Context. Mailbox. Item. Для получения дополнительных сведений обратитесь к странице [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item) .
+      **Важно!** это внутренний объект Outlook, который не предоставляется напрямую через существующие интерфейсы. Вы должны рассматривать этот режим как`Office.context.mailbox.item`<!-- -->. Для получения дополнительных сведений обратитесь к странице [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item) .
 
       Родительские интерфейсы:
 
@@ -39,25 +39,25 @@ items:
     summary: |-
       Добавляет файл в сообщение или встречу в качестве вложения.
 
-      Метод addFileAttachmentAsync передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
+      Метод `addFileAttachmentAsync` передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
 
-      Идентификатор можно последовательно использовать с методом removeAttachmentAsync для удаления вложения, добавленного во время текущего сеанса.
+      Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
 
       **Важно!** в последних сборках Outlook в Windows возникла ошибка, которая ошибочно добавляет `Authorization: Bearer` заголовок к этому действию (независимо от того, используется ли этот API или пользовательский интерфейс Outlook). Чтобы обойти эту проблему, вы можете попробовать использовать API `addFileAttachmentFromBase64` , который появился в наборе требований 1,8.
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadWriteItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       **Ошибки**:
 
-      - Аттачментсизиксцеедед: вложение больше, чем разрешено.
+      - `AttachmentSizeExceeded`<!-- -->: Вложение больше, чем разрешено.
 
-      - Филетипенотсуппортед: вложение имеет недопустимый добавочный номер.
+      - `FileTypeNotSupported`<!-- -->: Вложение имеет недопустимое расширение.
 
-      - NumberOfAttachmentsExceeded: сообщение или встреча имеют слишком много вложений.
+      - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или встреча содержит слишком много вложений.
 
       #### <a name="examples"></a>Примеры
 
@@ -127,36 +127,36 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. isInline: при значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `isInline`<!-- -->: При значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~0:complex'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#addFileAttachmentAsync:member(2)'
     summary: |-
       Добавляет файл в сообщение или встречу в качестве вложения.
 
-      Метод addFileAttachmentAsync передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
+      Метод `addFileAttachmentAsync` передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
 
-      Идентификатор можно последовательно использовать с методом removeAttachmentAsync для удаления вложения, добавленного во время текущего сеанса.
+      Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
 
       **Важно!** в последних сборках Outlook в Windows возникла ошибка, которая ошибочно добавляет `Authorization: Bearer` заголовок к этому действию (независимо от того, используется ли этот API или пользовательский интерфейс Outlook). Чтобы обойти эту проблему, вы можете попробовать использовать API `addFileAttachmentFromBase64` , который появился в наборе требований 1,8.
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadWriteItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       **Ошибки**:
 
-      - Аттачментсизиксцеедед: вложение больше, чем разрешено.
+      - `AttachmentSizeExceeded`<!-- -->: Вложение больше, чем разрешено.
 
-      - Филетипенотсуппортед: вложение имеет недопустимый добавочный номер.
+      - `FileTypeNotSupported`<!-- -->: Вложение имеет недопустимое расширение.
 
-      - NumberOfAttachmentsExceeded: сообщение или встреча имеют слишком много вложений.
+      - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или встреча содержит слишком много вложений.
     name: 'addFileAttachmentAsync(uri, attachmentName, callback)'
     fullName: 'addFileAttachmentAsync(uri, attachmentName, callback)'
     langs:
@@ -178,28 +178,28 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если передать вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addFileAttachmentAsync~2:complex'
   - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)'
     summary: |-
       Добавляет к сообщению элемент Exchange, например сообщение, в виде вложения.
 
-      Метод addItemAttachmentAsync присоединяет элемент с указанным идентификатором Exchange к элементу в форме создания. Если указан метод обратного вызова, этот метод вызывается с помощью параметра asyncResult, который содержит идентификатор вложения или код, указывающий на ошибки, которые произошли при вложении элемента. При необходимости можно использовать параметр options для передачи сведений о состоянии в метод обратного вызова.
+      С помощью метода `addItemAttachmentAsync` можно в элемент формы создания вложить элемент с указанным идентификатором Exchange. Если указан метод обратного вызова, метод вызывается с помощью одного параметра,`asyncResult`<!-- -->, который содержит либо идентификатор вложения, либо код, указывающий на ошибки, возникшие при присоединении элемента. При необходимости можно использовать параметр options для передачи сведений о состоянии в метод обратного вызова.
 
-      Идентификатор можно последовательно использовать с методом removeAttachmentAsync для удаления вложения, добавленного во время текущего сеанса.
+      Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
 
-      Если ваша надстройка Office работает в Outlook в Интернете, метод addItemAttachmentAsync может присоединять элементы к элементам, отличным от редактируемого элемента; Однако это не поддерживается и не рекомендуется.
+      Если ваша надстройка Office выполняется в Outlook в Интернете, метод `addItemAttachmentAsync` обеспечивает вложение элементов в элементы, отличные от редактируемого. Однако это действие не рекомендуется выполнять, так как оно не поддерживается.
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadWriteItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       **Ошибки**:
 
-      - NumberOfAttachmentsExceeded: сообщение или встреча имеют слишком много вложений.
+      - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или встреча содержит слишком много вложений.
 
       #### <a name="examples"></a>Примеры
 
@@ -253,32 +253,32 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addItemAttachmentAsync~0:complex'
   - uid: 'outlook!Office.MessageCompose#addItemAttachmentAsync:member(2)'
     summary: |-
       Добавляет к сообщению элемент Exchange, например сообщение, в виде вложения.
 
-      Метод addItemAttachmentAsync присоединяет элемент с указанным идентификатором Exchange к элементу в форме создания. Если указан метод обратного вызова, этот метод вызывается с помощью параметра asyncResult, который содержит идентификатор вложения или код, указывающий на ошибки, которые произошли при вложении элемента. При необходимости можно использовать параметр options для передачи сведений о состоянии в метод обратного вызова.
+      С помощью метода `addItemAttachmentAsync` можно в элемент формы создания вложить элемент с указанным идентификатором Exchange. Если указан метод обратного вызова, метод вызывается с помощью одного параметра,`asyncResult`<!-- -->, который содержит либо идентификатор вложения, либо код, указывающий на ошибки, возникшие при присоединении элемента. При необходимости можно использовать параметр options для передачи сведений о состоянии в метод обратного вызова.
 
-      Идентификатор можно последовательно использовать с методом removeAttachmentAsync для удаления вложения, добавленного во время текущего сеанса.
+      Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
 
-      Если ваша надстройка Office работает в Outlook в Интернете, метод addItemAttachmentAsync может присоединять элементы к элементам, отличным от редактируемого элемента; Однако это не поддерживается и не рекомендуется.
+      Если ваша надстройка Office выполняется в Outlook в Интернете, метод `addItemAttachmentAsync` обеспечивает вложение элементов в элементы, отличные от редактируемого. Однако это действие не рекомендуется выполнять, так как оно не поддерживается.
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadWriteItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       **Ошибки**:
 
-      - NumberOfAttachmentsExceeded: сообщение или встреча имеют слишком много вложений.
+      - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или встреча содержит слишком много вложений.
     name: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
     fullName: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
     langs:
@@ -300,15 +300,15 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. В случае успешного выполнения идентификатор вложения будет указываться в свойстве asyncResult. Value. Если добавить вложение не удается, объект asyncResult будет содержать объект Error с описанием ошибки.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
           type:
             - 'outlook!Office.MessageCompose#addItemAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#bcc:member'
     summary: "Получает объект, который предоставляет методы для получения или обновления получателей скрытой копии сообщения.\n\nКоллекция может включать не более 100 элементов по умолчанию. Однако для компьютеров с Windows и Mac OS действуют указанные ниже ограничения.\n\n- Максимальное количество элементов — 500.\n\n- Установить ограничение количества элементов на вызов\_— не более 100, общего количества\_— не более 500.\n\n\\[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
@@ -350,9 +350,9 @@ items:
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
@@ -383,11 +383,11 @@ items:
         type:
           - 'outlook!Office.Body:interface'
   - uid: 'outlook!Office.MessageCompose#cc:member'
-    summary: "Предоставляет доступ к получателям копии сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.\n\nСвойство CC возвращает объект [Recipients](xref:outlook!Office.Recipients:interface) , который предоставляет методы для получения или обновления получателей в строке \"копия\" сообщения. Коллекция может включать не более 100 элементов по умолчанию. Однако для компьютеров с Windows и Mac OS действуют указанные ниже ограничения.\n\n- Максимальное количество элементов — 500.\n\n- Установить ограничение количества элементов на вызов\_— не более 100, общего количества\_— не более 500."
+    summary: "Предоставляет доступ к получателям копии сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.\n\n`cc` Свойство возвращает объект [Recipients](xref:outlook!Office.Recipients:interface) , который предоставляет методы для получения или обновления получателей в строке \"копия\" сообщения. Коллекция может включать не более 100 элементов по умолчанию. Однако для компьютеров с Windows и Mac OS действуют указанные ниже ограничения.\n\n- Максимальное количество элементов — 500.\n\n- Установить ограничение количества элементов на вызов\_— не более 100, общего количества\_— не более 500."
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
@@ -429,11 +429,11 @@ items:
 
       Вы можете получить целочисленное значение этого свойства, если ваше почтовое приложение активируется в формах просмотра или формах создания ответов. Если пользователь изменит тему ответа, после его отправки идентификатор беседы будет изменен, и полученное ранее значение будет недействительным.
 
-      Это свойство имеет значение NULL для нового элемента в форме создания. Если пользователь задает тему и сохраняет элемент, свойство conversationId будет возвращать значение.
+      Это свойство имеет значение NULL для нового элемента в форме создания. Свойство `conversationId` вернет значение, если пользователь задаст тему и сохранит элемент.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
@@ -455,11 +455,11 @@ items:
     summary: |-
       Получает тип элемента, который представляет экземпляр.
 
-      Свойство itemType возвращает одно из значений перечисления ItemType, которое указывает, является ли экземпляр объекта Item сообщением или встречей.
+      `itemType` Свойство возвращает одно из значений `ItemType` перечисления, которое указывает, является ли экземпляр объекта Item сообщением или встречей.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
@@ -484,13 +484,13 @@ items:
     summary: |-
       Асинхронно загружает настраиваемые свойства для надстройки для выбранного элемента.
 
-      Настраиваемые свойства сохраняются в виде пар "ключ-значение" для каждого приложения и каждого элемента. Этот метод возвращает объект CustomProperties в обратном вызове, который предоставляет методы для доступа к настраиваемым свойствам, относящимся к текущему элементу и текущей надстройке. Настраиваемые свойства не шифруются для элемента, поэтому этот способ хранения не является безопасным.
+      Настраиваемые свойства сохраняются в виде пар "ключ-значение" для каждого приложения и каждого элемента. Этот метод возвращает объект `CustomProperties` при обратном вызове, который предоставляет методы для доступа к настраиваемым свойствам, характерным для текущего элемента и текущей надстройки. Настраиваемые свойства не шифруются для элемента, поэтому этот способ хранения не является безопасным.
 
-      Настраиваемые свойства предоставляются в виде объекта CustomProperties в свойстве asyncResult. Value. Этот объект позволяет получить, задать и удалить настраиваемые свойства для элемента, а также сохранить изменения, внесенные в набор настраиваемых свойств, на сервере.
+      Настраиваемые свойства предоставляются в виде `CustomProperties` объекта в свойстве asyncResult. Value. Этот объект позволяет получить, задать и удалить настраиваемые свойства для элемента, а также сохранить изменения, внесенные в набор настраиваемых свойств, на сервере.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
@@ -553,28 +553,28 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult.'
+          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.MessageCompose#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательно. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства asyncResult. asyncContext в функции обратного вызова.'
+          description: 'Необязательное свойство. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync:member(1)'
     summary: |-
       Удаляет вложение из сообщения или встречи.
 
-      Метод removeAttachmentAsync удаляет вложение с указанным идентификатором из элемента. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
+      Метод `removeAttachmentAsync` удаляет из элемента вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadWriteItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       **Ошибки**:
 
-      - Инвалидаттачментид: идентификатор вложения не существует.
+      - `InvalidAttachmentId`<!-- -->: Идентификатор вложения не существует.
 
       #### <a name="examples"></a>Примеры
 
@@ -620,28 +620,28 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. asyncContext: разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.'
           type:
             - 'outlook!Office.MessageCompose#removeAttachmentAsync~0:complex'
   - uid: 'outlook!Office.MessageCompose#removeAttachmentAsync:member(2)'
     summary: |-
       Удаляет вложение из сообщения или встречи.
 
-      Метод removeAttachmentAsync удаляет вложение с указанным идентификатором из элемента. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
+      Метод `removeAttachmentAsync` удаляет из элемента вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadWriteItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       **Ошибки**:
 
-      - Инвалидаттачментид: идентификатор вложения не существует.
+      - `InvalidAttachmentId`<!-- -->: Идентификатор вложения не существует.
     name: 'removeAttachmentAsync(attachmentId, callback)'
     fullName: 'removeAttachmentAsync(attachmentId, callback)'
     langs:
@@ -659,20 +659,20 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа Office. AsyncResult. Если не удается удалить вложение, свойство asyncResult. Error будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.'
           type:
             - 'outlook!Office.MessageCompose#removeAttachmentAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#subject:member'
     summary: |-
       Получает или задает описание, которое отображается в поле темы элемента.
 
-      Свойство Subject Возвращает или задает всю тему элемента, как это было отправлено сервером электронной почты.
+      Свойство `subject` получает или задает всю тему элемента для отправки с почтового сервера.
 
-      Свойство Subject возвращает объект subject, предоставляющий методы для получения и задания темы.
+      Свойство `subject` возвращает объект `Subject`, который предоставляет методы для получения и задания темы.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
@@ -694,11 +694,11 @@ items:
         type:
           - 'outlook!Office.Subject:interface'
   - uid: 'outlook!Office.MessageCompose#to:member'
-    summary: "Предоставляет доступ к получателям, указанным в строке Кому сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.\n\nСвойство to возвращает объект Recipients, который предоставляет методы для получения или обновления получателей в строке \"Кому\" сообщения. Коллекция может включать не более 100 элементов по умолчанию. Однако для компьютеров с Windows и Mac OS действуют указанные ниже ограничения.\n\n- Максимальное количество элементов — 500.\n\n- Установить ограничение количества элементов на вызов\_— не более 100, общего количества\_— не более 500."
+    summary: "Предоставляет доступ к получателям, указанным в строке Кому сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.\n\nСвойство `to` возвращает объект `Recipients`, предоставляющий методы для получения или обновления получателей, которые указаны в строке Кому сообщения. Коллекция может включать не более 100 элементов по умолчанию. Однако для компьютеров с Windows и Mac OS действуют указанные ниже ограничения.\n\n- Максимальное количество элементов — 500.\n\n- Установить ограничение количества элементов на вызов\_— не более 100, общего количества\_— не более 500."
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->разрешений**: ReadItem
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->Outlook**: создание сообщения
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)<!-- -->Outlook**: создание сообщения
 
       #### <a name="examples"></a>Примеры
 
