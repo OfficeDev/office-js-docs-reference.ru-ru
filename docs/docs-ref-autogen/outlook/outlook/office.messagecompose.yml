@@ -10,7 +10,7 @@ items:
 
       - [итемкомпосе](xref:outlook!Office.ItemCompose:interface)
 
-      - [message](xref:outlook!Office.Message:interface)
+      - [Сообщение](xref:outlook!Office.Message:interface)
     name: Office.MessageCompose
     fullName: Office.MessageCompose
     langs:
@@ -784,10 +784,11 @@ items:
       Для многофункциональных клиентов Windows и Mac Этот API задает подпись в разделах "создать сообщение" и "ответы на пересылку" для учетной записи отправки в "(нет)", эффективно отключая подпись. Для Outlook в Интернете API должен отключить функцию подписи для новых сообщений, ответов и пересылок. Если выбрана подпись, этот вызов API должен отключить его.
 
       \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-
+    remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
       ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)<!-- -->Outlook**: создание сообщения
+    isPreview: true
     name: 'disableClientSignatureAsync(options, callback)'
     fullName: 'disableClientSignatureAsync(options, callback)'
     langs:
@@ -815,10 +816,24 @@ items:
       Для многофункциональных клиентов Windows и Mac Этот API задает подпись в разделах "создать сообщение" и "ответы на пересылку" для учетной записи отправки в "(нет)", эффективно отключая подпись. Для Outlook в Интернете API должен отключить функцию подписи для новых сообщений, ответов и пересылок. Если выбрана подпись, этот вызов API должен отключить его.
 
       \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-
+    remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadWriteItem`
 
       ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)<!-- -->Outlook**: создание сообщения
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Disable the client signature.
+      Office.context.mailbox.item.disableClientSignatureAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("disableClientSignatureAsync succeeded");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+    isPreview: true
     name: disableClientSignatureAsync(callback)
     fullName: disableClientSignatureAsync(callback)
     langs:
@@ -829,21 +844,7 @@ items:
       return:
         type:
           - void
-        description: |-
-
-
-          #### <a name="examples"></a>Примеры
-
-          ```javascript
-          // Disable the client signature.
-          Office.context.mailbox.item.disableClientSignatureAsync(function(asyncResult) {
-            if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-              console.log("disableClientSignatureAsync succeeded");
-            } else {
-              console.error(asyncResult.error);
-            }
-          });
-          ```
+        description: ''
       parameters:
         - id: callback
           description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
@@ -1141,11 +1142,15 @@ items:
           type:
             - 'outlook!Office.MessageCompose#getAttachmentsAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync:member(1)'
-    summary: Указывает тип создания сообщения и его тип приведения. Сообщение может быть новым или откликом или пересылаемым. Типом приведения может быть HTML или обычный текст.
+    summary: |-
+      Указывает тип создания сообщения и его тип приведения. Сообщение может быть новым или откликом или пересылаемым. Типом приведения может быть HTML или обычный текст.
+
+      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
       ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)<!-- -->Outlook**: создание сообщения
+    isPreview: true
     name: 'getComposeTypeAsync(options, callback)'
     fullName: 'getComposeTypeAsync(options, callback)'
     langs:
@@ -1163,14 +1168,14 @@ items:
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: |-
-            После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. В случае успешного выполнения `asyncResult.value` свойство содержит объект с типом создания элемента и типом приведения.
-
-            \[Набор API: предварительный просмотр почтового ящика\]
+          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. В случае успешного выполнения `asyncResult.value` свойство содержит объект с типом создания элемента и типом приведения.'
           type:
             - 'outlook!Office.MessageCompose#getComposeTypeAsync~0:complex'
   - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync:member(2)'
-    summary: Указывает тип создания сообщения и его тип приведения. Сообщение может быть новым или откликом или пересылаемым. Типом приведения может быть HTML или обычный текст.
+    summary: |-
+      Указывает тип создания сообщения и его тип приведения. Сообщение может быть новым или откликом или пересылаемым. Типом приведения может быть HTML или обычный текст.
+
+      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
@@ -1193,6 +1198,7 @@ items:
         }
       });
       ```
+    isPreview: true
     name: getComposeTypeAsync(callback)
     fullName: getComposeTypeAsync(callback)
     langs:
@@ -1206,10 +1212,7 @@ items:
         description: Объект со `ComposeType` значениями и `CoercionType` перечислением для элемента сообщения.
       parameters:
         - id: callback
-          description: |-
-            После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. В случае успешного выполнения `asyncResult.value` свойство содержит объект с типом создания элемента и типом приведения.
-
-            \[Набор API: предварительный просмотр почтового ящика\]
+          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. В случае успешного выполнения `asyncResult.value` свойство содержит объект с типом создания элемента и типом приведения.'
           type:
             - 'outlook!Office.MessageCompose#getComposeTypeAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#getInitializationContextAsync:member(1)'
@@ -1650,6 +1653,7 @@ items:
       ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)<!-- -->разрешений**:`ReadItem`
 
       ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)<!-- -->Outlook**: создание сообщения
+    isPreview: true
     name: 'isClientSignatureEnabledAsync(options, callback)'
     fullName: 'isClientSignatureEnabledAsync(options, callback)'
     langs:
@@ -1694,6 +1698,7 @@ items:
         }
       });
       ```
+    isPreview: true
     name: isClientSignatureEnabledAsync(callback)
     fullName: isClientSignatureEnabledAsync(callback)
     langs:
