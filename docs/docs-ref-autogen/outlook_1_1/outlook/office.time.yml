@@ -66,13 +66,12 @@ items:
       #### <a name="examples"></a>Примеры
 
       ```javascript
-      Office.context.mailbox.item.start.getAsync(function (asyncResult) {
-          if (asyncResult.status === "failed") {
-              console.log("Action failed with error: " + asyncResult.error.message);
-          }
-          else {
-              console.log("Start date and time: " + asyncResult.value);
-          }
+      Office.context.mailbox.item.start.getAsync((result) => {
+        if (result.status !== Office.AsyncResultStatus.Succeeded) {
+          console.error(`Action failed with message ${result.error.message}`);
+          return;
+        }
+        console.log(`Appointment starts: ${result.value}`);
       });
       ```
     name: getAsync(callback)
@@ -143,11 +142,11 @@ items:
           type:
             - '!Date:interface'
         - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. Если не удается задать дату и время, свойство `asyncResult.error` будет содержать код ошибки.'
+          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. Если не удается задать дату и время, свойство `asyncResult.error` будет содержать код ошибки.'
           type:
             - 'outlook!Office.Time#setAsync~0:complex'
   - uid: 'outlook!Office.Time#setAsync:member(2)'
@@ -167,6 +166,20 @@ items:
       **Ошибки**:
 
       - `InvalidEndTime`<!-- -->: Время окончания встречи предшествует времени начала встречи.
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      var start = new Date(); // Represents current date and time.
+      start.setDate(start.getDate() + 2); // Add 2 days to current date.
+      Office.context.mailbox.item.start.setAsync(start, (result) => {
+        if (result.status !== Office.AsyncResultStatus.Succeeded) {
+          console.error(`Action failed with message ${result.error.message}`);
+          return;
+        }
+        console.log(`Successfully set start date and time to ${start}`);
+      });
+      ```
     name: 'setAsync(dateTime, callback)'
     fullName: 'setAsync(dateTime, callback)'
     langs:
@@ -184,7 +197,7 @@ items:
           type:
             - '!Date:interface'
         - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. Если не удается задать дату и время, свойство `asyncResult.error` будет содержать код ошибки.'
+          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа`Office.AsyncResult`<!-- -->. Если не удается задать дату и время, свойство `asyncResult.error` будет содержать код ошибки.'
           type:
             - 'outlook!Office.Time#setAsync~1:complex'
 references:
