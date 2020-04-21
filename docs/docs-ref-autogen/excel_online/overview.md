@@ -1,13 +1,13 @@
 ---
 title: Справочник по API JavaScript для Office
-description: Набор требований API JavaScript для Office на узел
-ms.date: 11/19/2019
-ms.openlocfilehash: f4072c23cb0d6e0d5375cf79d92b4f6dd9b35f0f
-ms.sourcegitcommit: d37268ff5254061632a886b196ec28f2f4087377
+description: Требования API JavaScript для Office задаются ведущим приложением.
+ms.date: 04/17/2020
+ms.openlocfilehash: 765b2ee6108f6433ffe17d3ca15ba9c68fbd9617
+ms.sourcegitcommit: 6dd770ff4893a67c625e1e4fd06ee197a3992ae0
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "38758577"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "43602286"
 ---
 # <a name="office-javascript-api-reference"></a>Справочник по API JavaScript для Office
 
@@ -75,3 +75,4 @@ API JavaScript для Office позволяет создавать веб-при
 - [Сведения о надстройках Office](/office/dev/add-ins/overview)
 - [Доступность ведущих приложений и платформ для надстроек Office](/office/dev/add-ins/overview/office-add-in-availability)
 - [Версии Office и наборы обязательных элементов](/office/dev/add-ins/develop/office-versions-and-requirement-sets)
+- [Изучение API JavaScript для Office с помощью Script Lab](/office/dev/add-ins/overview/explore-with-script-lab)
