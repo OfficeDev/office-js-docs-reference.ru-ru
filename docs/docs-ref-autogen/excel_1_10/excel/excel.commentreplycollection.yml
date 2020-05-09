@@ -11,7 +11,7 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.CommentReplyCollection#add:member(1)'
@@ -36,7 +36,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.CommentReply;'
+      content: 'add(content: string, contentType?: Excel.ContentType): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
@@ -57,11 +57,11 @@ items:
           ```
       parameters:
         - id: content
-          description: 'Содержимое комментария. Это может быть либо String, либо Interface Комментричконтент (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1,10 для строки, Ексцелапионлине 1,1 для объекта Комментричконтент\]'
+          description: 'Содержимое комментария. Это может быть строка или интерфейс Комментричконтент (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1,10 для строки, 1,11 для объекта Комментричконтент\]'
           type:
-            - 'excel!Excel.CommentReplyCollection#add~0:complex'
+            - string
         - id: contentType
-          description: 'Необязательный параметр. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum`ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для enum ContentType. Plain, Ексцелапионлине 1,1 для enum ContentType. упоминание\]'
+          description: 'Необязательный параметр. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum`ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для перечисления ContentType. Plain, 1,11 для enum ContentType. упоминание\]'
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentReplyCollection#add:member(2)'
@@ -75,18 +75,18 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.CommentReply;'
+      content: 'add(content: string, contentTypeString?: "Plain" | "Mention"): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
         description: ''
       parameters:
         - id: content
-          description: 'Содержимое комментария. Это может быть либо String, либо Interface Комментричконтент (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1,10 для строки, Ексцелапионлине 1,1 для объекта Комментричконтент\]'
+          description: 'Содержимое комментария. Это может быть строка или интерфейс Комментричконтент (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1,10 для строки, 1,11 для объекта Комментричконтент\]'
           type:
-            - 'excel!Excel.CommentReplyCollection#add~1:complex'
+            - string
         - id: contentTypeString
-          description: 'Необязательный параметр. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum`ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для enum ContentType. Plain, Ексцелапионлине 1,1 для enum ContentType. упоминание\]'
+          description: 'Необязательный параметр. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum`ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для перечисления ContentType. Plain, 1,11 для enum ContentType. упоминание\]'
           type:
             - '"Plain" | "Mention"'
   - uid: 'excel!Excel.CommentReplyCollection#context:member'
@@ -119,7 +119,7 @@ items:
         description: ''
   - uid: 'excel!Excel.CommentReplyCollection#getItem:member(1)'
     summary: |-
-      Возвращает ответ на примечание, определенное по идентификатору. Только для чтения.
+      Возвращает ответ на примечание, определенное по идентификатору.
 
       \[[Набор API: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getItem(commentReplyId)
@@ -224,7 +224,7 @@ items:
         - id: propertyNamesAndPaths
           description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - 'excel!OfficeExtension.LoadOption:interface'
+            - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CommentReplyCollection#toJSON:member(1)'
     summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.CommentReplyCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.CommentReplyCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
     name: toJSON()
@@ -239,37 +239,19 @@ items:
           - 'excel!Excel.Interfaces.CommentReplyCollectionData:interface'
         description: ''
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.CommentReply:class'
     name: Excel.CommentReply
-  - uid: 'excel!Excel.CommentReplyCollection#add~0:complex'
-    name: CommentRichContent | string
-    fullName: Excel.CommentRichContent | string
-    spec.typeScript:
-      - uid: 'excel!Excel.CommentRichContent:interface'
-        name: CommentRichContent
-        fullName: Excel.CommentRichContent
-      - name: ' | string'
-        fullName: ' | string'
   - uid: 'excel!Excel.ContentType:enum'
     name: Excel.ContentType
-  - uid: 'excel!Excel.CommentReplyCollection#add~1:complex'
-    name: CommentRichContent | string
-    fullName: Excel.CommentRichContent | string
-    spec.typeScript:
-      - uid: 'excel!Excel.CommentRichContent:interface'
-        name: CommentRichContent
-        fullName: Excel.CommentRichContent
-      - name: ' | string'
-        fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
   - uid: 'excel!Excel.CommentReplyCollection#getCount~0:complex'
     name: OfficeExtension.ClientResult<number>
     fullName: OfficeExtension.ClientResult<number>
     spec.typeScript:
-      - uid: 'excel!OfficeExtension.ClientResult:class'
+      - uid: 'office!OfficeExtension.ClientResult:class'
         name: OfficeExtension.ClientResult
         fullName: OfficeExtension.ClientResult
       - name: <number>
@@ -297,7 +279,7 @@ references:
       - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
         name: Excel.Interfaces.CollectionLoadOptions
         fullName: Excel.Interfaces.CollectionLoadOptions
-  - uid: 'excel!OfficeExtension.LoadOption:interface'
+  - uid: 'office!OfficeExtension.LoadOption:interface'
     name: OfficeExtension.LoadOption
   - uid: 'excel!Excel.Interfaces.CommentReplyCollectionData:interface'
     name: Excel.Interfaces.CommentReplyCollectionData
