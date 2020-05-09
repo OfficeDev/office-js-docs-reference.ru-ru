@@ -12,9 +12,10 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
+      - 'excel!Excel.WorksheetCustomPropertyCollection#add:member(1)'
       - 'excel!Excel.WorksheetCustomPropertyCollection#context:member'
       - 'excel!Excel.WorksheetCustomPropertyCollection#getCount:member(1)'
       - 'excel!Excel.WorksheetCustomPropertyCollection#getItem:member(1)'
@@ -24,6 +25,32 @@ items:
       - 'excel!Excel.WorksheetCustomPropertyCollection#load:member(2)'
       - 'excel!Excel.WorksheetCustomPropertyCollection#load:member(3)'
       - 'excel!Excel.WorksheetCustomPropertyCollection#toJSON:member(1)'
+  - uid: 'excel!Excel.WorksheetCustomPropertyCollection#add:member(1)'
+    summary: |-
+      Добавляет новое настраиваемое свойство, которое сопоставляется с предоставленным ключом. При этом существующие настраиваемые свойства перезаписываются с помощью этого раздела.
+
+      \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: 'add(key, value)'
+    fullName: 'add(key, value)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'add(key: string, value: string): Excel.WorksheetCustomProperty;'
+      return:
+        type:
+          - 'excel!Excel.WorksheetCustomProperty:class'
+        description: ''
+      parameters:
+        - id: key
+          description: 'Ключ, который определяет объект настраиваемого свойства. Он не учитывает регистр.'
+          type:
+            - string
+        - id: value
+          description: Значение этого настраиваемого свойства.
+          type:
+            - string
   - uid: 'excel!Excel.WorksheetCustomPropertyCollection#context:member'
     summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
     isPreview: true
@@ -73,7 +100,7 @@ items:
         description: ''
       parameters:
         - id: key
-          description: 'Ключ, который определяет объект настраиваемого свойства.'
+          description: 'Ключ, который определяет объект настраиваемого свойства. Он не учитывает регистр.'
           type:
             - string
   - uid: 'excel!Excel.WorksheetCustomPropertyCollection#getItemOrNullObject:member(1)'
@@ -95,7 +122,7 @@ items:
         description: ''
       parameters:
         - id: key
-          description: 'Ключ, который определяет объект настраиваемого свойства.'
+          description: 'Ключ, который определяет объект настраиваемого свойства. Он не учитывает регистр.'
           type:
             - string
   - uid: 'excel!Excel.WorksheetCustomPropertyCollection#items:member'
@@ -167,7 +194,7 @@ items:
         - id: propertyNamesAndPaths
           description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - 'excel!OfficeExtension.LoadOption:interface'
+            - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.WorksheetCustomPropertyCollection#toJSON:member(1)'
     summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Excel.WorksheetCustomPropertyCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.WorksheetCustomPropertyCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
     isPreview: true
@@ -183,21 +210,21 @@ items:
           - 'excel!Excel.Interfaces.WorksheetCustomPropertyCollectionData:interface'
         description: ''
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.WorksheetCustomProperty:class'
+    name: Excel.WorksheetCustomProperty
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
   - uid: 'excel!Excel.WorksheetCustomPropertyCollection#getCount~0:complex'
     name: OfficeExtension.ClientResult<number>
     fullName: OfficeExtension.ClientResult<number>
     spec.typeScript:
-      - uid: 'excel!OfficeExtension.ClientResult:class'
+      - uid: 'office!OfficeExtension.ClientResult:class'
         name: OfficeExtension.ClientResult
         fullName: OfficeExtension.ClientResult
       - name: <number>
         fullName: <number>
-  - uid: 'excel!Excel.WorksheetCustomProperty:class'
-    name: Excel.WorksheetCustomProperty
   - uid: 'excel!Excel.WorksheetCustomPropertyCollection#items~0:complex'
     name: 'Excel.WorksheetCustomProperty[]'
     fullName: 'Excel.WorksheetCustomProperty[]'
@@ -221,7 +248,7 @@ references:
       - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
         name: Excel.Interfaces.CollectionLoadOptions
         fullName: Excel.Interfaces.CollectionLoadOptions
-  - uid: 'excel!OfficeExtension.LoadOption:interface'
+  - uid: 'office!OfficeExtension.LoadOption:interface'
     name: OfficeExtension.LoadOption
   - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyCollectionData:interface'
     name: Excel.Interfaces.WorksheetCustomPropertyCollectionData
