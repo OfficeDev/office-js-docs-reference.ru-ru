@@ -1,12 +1,12 @@
 ### YamlMime:UniversalReference
 items:
-  - uid: 'excel!Excel.ChartPointFormat:class'
+  - uid: 'excel!Excel.ChartLegendFormat:class'
     summary: |-
-      Представляет объект форматирования для точек диаграммы.
+      Инкапсулирует свойства формата легенды диаграммы.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: Excel.ChartPointFormat
-    fullName: Excel.ChartPointFormat
+    name: Excel.ChartLegendFormat
+    fullName: Excel.ChartLegendFormat
     langs:
       - typeScript
     type: class
@@ -14,15 +14,32 @@ items:
       - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
-      - 'excel!Excel.ChartPointFormat#context:member'
-      - 'excel!Excel.ChartPointFormat#fill:member'
-      - 'excel!Excel.ChartPointFormat#load:member(1)'
-      - 'excel!Excel.ChartPointFormat#load:member(2)'
-      - 'excel!Excel.ChartPointFormat#load:member(3)'
-      - 'excel!Excel.ChartPointFormat#set:member(1)'
-      - 'excel!Excel.ChartPointFormat#set:member(2)'
-      - 'excel!Excel.ChartPointFormat#toJSON:member(1)'
-  - uid: 'excel!Excel.ChartPointFormat#context:member'
+      - 'excel!Excel.ChartLegendFormat#border:member'
+      - 'excel!Excel.ChartLegendFormat#context:member'
+      - 'excel!Excel.ChartLegendFormat#fill:member'
+      - 'excel!Excel.ChartLegendFormat#font:member'
+      - 'excel!Excel.ChartLegendFormat#load:member(1)'
+      - 'excel!Excel.ChartLegendFormat#load:member(2)'
+      - 'excel!Excel.ChartLegendFormat#load:member(3)'
+      - 'excel!Excel.ChartLegendFormat#set:member(1)'
+      - 'excel!Excel.ChartLegendFormat#set:member(2)'
+      - 'excel!Excel.ChartLegendFormat#toJSON:member(1)'
+  - uid: 'excel!Excel.ChartLegendFormat#border:member'
+    summary: |-
+      Представляет формат границы, включающий цвет, тип линии и толщину.
+
+      \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: border
+    fullName: border
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly border: Excel.ChartBorder;'
+      return:
+        type:
+          - 'excel!Excel.ChartBorder:class'
+  - uid: 'excel!Excel.ChartLegendFormat#context:member'
     summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
     name: context
     fullName: context
@@ -34,9 +51,9 @@ items:
       return:
         type:
           - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.ChartPointFormat#fill:member'
+  - uid: 'excel!Excel.ChartLegendFormat#fill:member'
     summary: |-
-      Представляет формат заливки диаграммы, включающий сведения о форматировании фона.
+      Представляет формат заливки объекта, включая сведения о форматировании фона.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: fill
@@ -49,7 +66,47 @@ items:
       return:
         type:
           - 'excel!Excel.ChartFill:class'
-  - uid: 'excel!Excel.ChartPointFormat#load:member(1)'
+  - uid: 'excel!Excel.ChartLegendFormat#font:member'
+    summary: |-
+      Представляет атрибуты шрифта, такие как имя шрифта, размер шрифта, цвет и т. д., в условных обозначениях диаграммы.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: font
+    fullName: font
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly font: Excel.ChartFont;'
+      return:
+        type:
+          - 'excel!Excel.ChartFont:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/10-chart/chart-legend.yaml
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+
+              let chart = sheet.charts.getItemAt(0);
+              chart.legend.visible = true;
+
+              // Format the legend font.
+              let font = chart.legend.format.font;
+              font.bold = true;
+              font.color = "red";
+              font.italic = true;
+              font.size = 15;
+              font.name = "Calibri";
+              font.underline = "Single";
+
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.ChartLegendFormat#load:member(1)'
     summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
     name: load(options)
     fullName: load(options)
@@ -57,17 +114,17 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(options?: Excel.Interfaces.ChartPointFormatLoadOptions): Excel.ChartPointFormat;'
+      content: 'load(options?: Excel.Interfaces.ChartLegendFormatLoadOptions): Excel.ChartLegendFormat;'
       return:
         type:
-          - 'excel!Excel.ChartPointFormat:class'
+          - 'excel!Excel.ChartLegendFormat:class'
         description: ''
       parameters:
         - id: options
           description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
-            - 'excel!Excel.Interfaces.ChartPointFormatLoadOptions:interface'
-  - uid: 'excel!Excel.ChartPointFormat#load:member(2)'
+            - 'excel!Excel.Interfaces.ChartLegendFormatLoadOptions:interface'
+  - uid: 'excel!Excel.ChartLegendFormat#load:member(2)'
     summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
     name: load(propertyNames)
     fullName: load(propertyNames)
@@ -75,17 +132,17 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.ChartPointFormat;'
+      content: 'load(propertyNames?: string | string[]): Excel.ChartLegendFormat;'
       return:
         type:
-          - 'excel!Excel.ChartPointFormat:class'
+          - 'excel!Excel.ChartLegendFormat:class'
         description: ''
       parameters:
         - id: propertyNames
           description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
           type:
             - 'string | string[]'
-  - uid: 'excel!Excel.ChartPointFormat#load:member(3)'
+  - uid: 'excel!Excel.ChartLegendFormat#load:member(3)'
     summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
     name: load(propertyNamesAndPaths)
     fullName: load(propertyNamesAndPaths)
@@ -97,10 +154,10 @@ items:
         load(propertyNamesAndPaths?: {
                     select?: string;
                     expand?: string;
-                }): Excel.ChartPointFormat;
+                }): Excel.ChartLegendFormat;
       return:
         type:
-          - 'excel!Excel.ChartPointFormat:class'
+          - 'excel!Excel.ChartLegendFormat:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
@@ -111,19 +168,19 @@ items:
                           select?: string;
                           expand?: string;
                       }
-  - uid: 'excel!Excel.ChartPointFormat#set:member(1)'
+  - uid: 'excel!Excel.ChartLegendFormat#set:member(1)'
     summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
     remarks: |-
       Этот метод имеет следующую дополнительную подпись:
 
-      `set(properties: Excel.ChartPointFormat): void`
+      `set(properties: Excel.ChartLegendFormat): void`
     name: 'set(properties, options)'
     fullName: 'set(properties, options)'
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'set(properties: Interfaces.ChartPointFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      content: 'set(properties: Interfaces.ChartLegendFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
       return:
         type:
           - void
@@ -132,12 +189,12 @@ items:
         - id: properties
           description: 'Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.'
           type:
-            - 'excel!Excel.Interfaces.ChartPointFormatUpdateData:interface'
+            - 'excel!Excel.Interfaces.ChartLegendFormatUpdateData:interface'
         - id: options
           description: 'Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.'
           type:
             - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'excel!Excel.ChartPointFormat#set:member(2)'
+  - uid: 'excel!Excel.ChartLegendFormat#set:member(2)'
     summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
     name: set(properties)
     fullName: set(properties)
@@ -145,7 +202,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'set(properties: Excel.ChartPointFormat): void;'
+      content: 'set(properties: Excel.ChartLegendFormat): void;'
       return:
         type:
           - void
@@ -154,34 +211,38 @@ items:
         - id: properties
           description: ''
           type:
-            - 'excel!Excel.ChartPointFormat:class'
-  - uid: 'excel!Excel.ChartPointFormat#toJSON:member(1)'
-    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. ChartPointFormat — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ChartPointFormatData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+            - 'excel!Excel.ChartLegendFormat:class'
+  - uid: 'excel!Excel.ChartLegendFormat#toJSON:member(1)'
+    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. ChartLegendFormat — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ChartLegendFormatData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'toJSON(): Excel.Interfaces.ChartPointFormatData;'
+      content: 'toJSON(): Excel.Interfaces.ChartLegendFormatData;'
       return:
         type:
-          - 'excel!Excel.Interfaces.ChartPointFormatData:interface'
+          - 'excel!Excel.Interfaces.ChartLegendFormatData:interface'
         description: ''
 references:
   - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.ChartBorder:class'
+    name: Excel.ChartBorder
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
   - uid: 'excel!Excel.ChartFill:class'
     name: Excel.ChartFill
-  - uid: 'excel!Excel.ChartPointFormat:class'
-    name: Excel.ChartPointFormat
-  - uid: 'excel!Excel.Interfaces.ChartPointFormatLoadOptions:interface'
-    name: Excel.Interfaces.ChartPointFormatLoadOptions
-  - uid: 'excel!Excel.Interfaces.ChartPointFormatUpdateData:interface'
-    name: Interfaces.ChartPointFormatUpdateData
+  - uid: 'excel!Excel.ChartFont:class'
+    name: Excel.ChartFont
+  - uid: 'excel!Excel.ChartLegendFormat:class'
+    name: Excel.ChartLegendFormat
+  - uid: 'excel!Excel.Interfaces.ChartLegendFormatLoadOptions:interface'
+    name: Excel.Interfaces.ChartLegendFormatLoadOptions
+  - uid: 'excel!Excel.Interfaces.ChartLegendFormatUpdateData:interface'
+    name: Interfaces.ChartLegendFormatUpdateData
   - uid: 'office!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
-  - uid: 'excel!Excel.Interfaces.ChartPointFormatData:interface'
-    name: Excel.Interfaces.ChartPointFormatData
+  - uid: 'excel!Excel.Interfaces.ChartLegendFormatData:interface'
+    name: Excel.Interfaces.ChartLegendFormatData
