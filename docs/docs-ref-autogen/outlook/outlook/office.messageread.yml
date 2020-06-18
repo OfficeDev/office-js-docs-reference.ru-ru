@@ -31,7 +31,9 @@ items:
       - 'outlook!Office.MessageRead#dateTimeCreated:member'
       - 'outlook!Office.MessageRead#dateTimeModified:member'
       - 'outlook!Office.MessageRead#displayReplyAllForm:member(1)'
+      - 'outlook!Office.MessageRead#displayReplyAllFormAsync:member(1)'
       - 'outlook!Office.MessageRead#displayReplyForm:member(1)'
+      - 'outlook!Office.MessageRead#displayReplyFormAsync:member(1)'
       - 'outlook!Office.MessageRead#end:member'
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(1)'
@@ -97,11 +99,11 @@ items:
           type:
             - any
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(2)'
@@ -150,7 +152,7 @@ items:
           type:
             - any
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#attachments:member'
@@ -358,9 +360,9 @@ items:
     summary: |-
       Получает идентификатор разговора по электронной почте, содержащего конкретное сообщение.
 
-      Вы можете получить целочисленное значение этого свойства, если ваше почтовое приложение активируется в формах просмотра или формах создания ответов. Если пользователь изменит тему ответа, после его отправки идентификатор беседы будет изменен, и полученное ранее значение будет недействительным.
+      You can get an integer for this property if your mail app is activated in read forms or responses in compose forms. If subsequently the user changes the subject of the reply message, upon sending the reply, the conversation ID for that message will change and that value you obtained earlier will no longer apply.
 
-      Это свойство имеет значение NULL для нового элемента в форме создания. Свойство `conversationId` вернет значение, если пользователь задаст тему и сохранит элемент.
+      You get null for this property for a new item in a compose form. If the user sets a subject and saves the item, the `conversationId` property will return a value.
     remarks: |-
       ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
 
@@ -435,11 +437,11 @@ items:
     summary: |-
       Отображает форму ответа, включающую отправителя и всех получателей выбранного сообщения или организатора и всех участников выбранной встречи.
 
-      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении с 3 либо 1 или 2 столбцами.
+      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении из трех столбцов и всплывающей формы в представлении с двумя столбцами или 1-столбцов.
 
       Если любой строковый параметр превышает указанные для него ограничения, `displayReplyAllForm` возвращает исключение.
 
-      Если в параметре `formData.attachments` указаны вложения, Outlook в Интернете и классические клиенты пытаются скачать их и вложить в форму ответа. Если какие-либо вложения добавить не удается, в форме отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
+      Если в параметре указаны вложения `formData.attachments` , Outlook пытается скачать все вложения и присоединить их к форме ответа. Если какие-либо вложения добавить не удается, в форме отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
 
       **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
     remarks: |-
@@ -536,15 +538,57 @@ items:
           description: 'Строка, содержащая текст и HTML-код, представляющие собой основной текст формы ответа. Строка ограничена 32 КБ или объектом [реплиформдата](xref:outlook!Office.ReplyFormData:interface) , содержащим данные текста или вложений, а также функцию обратного вызова.'
           type:
             - 'outlook!Office.MessageRead#displayReplyAllForm~0:complex'
+  - uid: 'outlook!Office.MessageRead#displayReplyAllFormAsync:member(1)'
+    summary: |-
+      Отображает форму ответа, включающую отправителя и всех получателей выбранного сообщения или организатора и всех участников выбранной встречи.
+
+      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении из трех столбцов и всплывающей формы в представлении с двумя столбцами или 1-столбцов.
+
+      Если любой строковый параметр превышает указанные для него ограничения, `displayReplyAllFormAsync` возвращает исключение.
+
+      Если в параметре указаны вложения `formData.attachments` , Outlook пытается скачать все вложения и присоединить их к форме ответа. Если какие-либо вложения добавить не удается, в форме отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
+
+      **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+
+      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: чтение сообщения
+    isPreview: true
+    name: 'displayReplyAllFormAsync(formData, options, callback)'
+    fullName: 'displayReplyAllFormAsync(formData, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyAllFormAsync(formData: string | ReplyFormData, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: 'Строка, содержащая текст и HTML-код, представляющие собой основной текст формы ответа. Строка ограничена 32 КБ или объектом [реплиформдата](xref:outlook!Office.ReplyFormData:interface) , содержащим данные текста или вложений, а также функцию обратного вызова.'
+          type:
+            - 'outlook!Office.MessageRead#displayReplyAllFormAsync~0:complex'
+        - id: options
+          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          type:
+            - 'outlook!Office.MessageRead#displayReplyAllFormAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#displayReplyForm:member(1)'
     summary: |-
       Отображает форму ответа, включающую только отправителя выбранного сообщения или организатора выбранной встречи.
 
-      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении с 3 либо 1 или 2 столбцами.
+      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении из трех столбцов и всплывающей формы в представлении с двумя столбцами или 1-столбцов.
 
       Если любой строковый параметр превышает указанные для него ограничения, `displayReplyForm` возвращает исключение.
 
-      Если в параметре `formData.attachments` указаны вложения, Outlook в Интернете и классические клиенты пытаются скачать их и вложить в форму ответа. Если какие-либо вложения добавить не удается, в форме отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
+      Если в параметре указаны вложения `formData.attachments` , Outlook пытается скачать все вложения и присоединить их к форме ответа. Если какие-либо вложения добавить не удается, в форме отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
 
       **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
     remarks: |-
@@ -661,6 +705,48 @@ items:
           description: 'Строка, содержащая текст и HTML-код, представляющие собой основной текст формы ответа. Строка ограничена 32 КБ или объектом [реплиформдата](xref:outlook!Office.ReplyFormData:interface) , содержащим данные текста или вложений, а также функцию обратного вызова.'
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~0:complex'
+  - uid: 'outlook!Office.MessageRead#displayReplyFormAsync:member(1)'
+    summary: |-
+      Отображает форму ответа, включающую только отправителя выбранного сообщения или организатора выбранной встречи.
+
+      В Outlook в Интернете форма ответа отображается в виде всплывающей формы в представлении из трех столбцов и всплывающей формы в представлении с двумя столбцами или 1-столбцов.
+
+      Если любой строковый параметр превышает указанные для него ограничения, `displayReplyFormAsync` возвращает исключение.
+
+      Если в параметре указаны вложения `formData.attachments` , Outlook пытается скачать все вложения и присоединить их к форме ответа. Если какие-либо вложения добавить не удается, в форме отображается сообщение об ошибке. Если сообщения об ошибках не предусмотрены, то они не отображаются.
+
+      **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+
+      \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+
+      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: чтение сообщения
+    isPreview: true
+    name: 'displayReplyFormAsync(formData, options, callback)'
+    fullName: 'displayReplyFormAsync(formData, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyFormAsync(formData: string | ReplyFormData, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: 'Строка, содержащая текст и HTML-код, представляющие собой основной текст формы ответа. Строка ограничена 32 КБ или объектом [реплиформдата](xref:outlook!Office.ReplyFormData:interface) , содержащим данные текста или вложений, а также функцию обратного вызова.'
+          type:
+            - 'outlook!Office.MessageRead#displayReplyFormAsync~0:complex'
+        - id: options
+          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          type:
+            - 'office!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          type:
+            - 'outlook!Office.MessageRead#displayReplyFormAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#end:member'
     summary: |-
       Получает дату и время окончания встречи.
@@ -762,11 +848,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. В случае успеха данные заголовков Интернета предоставляются в `asyncResult.value` свойстве в виде строки. Сведения о форматировании возвращаемого строкового значения приведены в [RFC 2183](https://tools.ietf.org/html/rfc2183) . Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. В случае успеха данные заголовков Интернета предоставляются в `asyncResult.value` свойстве в виде строки. Сведения о форматировании возвращаемого строкового значения приведены в [RFC 2183](https://tools.ietf.org/html/rfc2183) . Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~0:complex'
   - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
@@ -791,7 +877,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. В случае успешного выполнения данные заголовков Интернета предоставляются в свойстве asyncResult. Value в виде String. Сведения о форматировании возвращаемого строкового значения приведены в [RFC 2183](https://tools.ietf.org/html/rfc2183) . Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. В случае успешного выполнения данные заголовков Интернета предоставляются в свойстве asyncResult. Value в виде String. Сведения о форматировании возвращаемого строкового значения приведены в [RFC 2183](https://tools.ietf.org/html/rfc2183) . Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(1)'
@@ -869,11 +955,11 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.MessageRead#getAttachmentContentAsync~0:complex'
   - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(2)'
@@ -910,7 +996,7 @@ items:
           type:
             - string
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. Если происходит сбой вызова, `asyncResult.error` свойство будет содержать код ошибки с причиной сбоя.'
           type:
             - 'outlook!Office.MessageRead#getAttachmentContentAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getEntities:member(1)'
@@ -1077,11 +1163,11 @@ items:
         description: ''
       parameters:
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. При успешном выполнении данные инициализации предоставляются в `asyncResult.value` свойстве в виде строки. Если контекст инициализации отсутствует, `asyncResult` объект будет содержать `Error` объект со `code` свойством, равным 9020, а `name` свойству задано значение`GenericResponseError`<!-- -->.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. При успешном выполнении данные инициализации предоставляются в `asyncResult.value` свойстве в виде строки. Если контекст инициализации отсутствует, `asyncResult` объект будет содержать `Error` объект со `code` свойством, равным 9020, а `name` свойству задано значение`GenericResponseError`<!-- -->.'
           type:
             - 'outlook!Office.MessageRead#getInitializationContextAsync~0:complex'
   - uid: 'outlook!Office.MessageRead#getInitializationContextAsync:member(2)'
@@ -1135,14 +1221,14 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. При успешном выполнении данные инициализации предоставляются в `asyncResult.value` свойстве в виде строки. Если контекст инициализации отсутствует, `asyncResult` объект будет содержать `Error` объект со `code` свойством, равным 9020, а `name` свойству задано значение`GenericResponseError`<!-- -->.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект. При успешном выполнении данные инициализации предоставляются в `asyncResult.value` свойстве в виде строки. Если контекст инициализации отсутствует, `asyncResult` объект будет содержать `Error` объект со `code` свойством, равным 9020, а `name` свойству задано значение`GenericResponseError`<!-- -->.'
           type:
             - 'outlook!Office.MessageRead#getInitializationContextAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getRegExMatches:member(1)'
     summary: |-
       Возвращает строковые значения в выбранном элементе, которые соответствуют регулярным выражениям, определенным в XML-файле манифеста.
 
-      Метод `getRegExMatches` возвращает строки, соответствующие регулярному выражению, которое определяется в каждом элементе правила `ItemHasRegularExpressionMatch` или `ItemHasKnownEntity` в XML-файле манифеста. Для правила `ItemHasRegularExpressionMatch` соответствующую строку должно содержать свойство элемента, указанного этим правилом. Простой тип `PropertyName` определяет поддерживаемые свойства.
+      The `getRegExMatches` method returns the strings that match the regular expression defined in each `ItemHasRegularExpressionMatch` or `ItemHasKnownEntity` rule element in the manifest XML file. For an `ItemHasRegularExpressionMatch` rule, a matching string has to occur in the property of the item that is specified by that rule. The `PropertyName` simple type defines the supported properties.
 
       Если вы указываете правило `ItemHasRegularExpressionMatch` для свойства текста элемента, регулярное выражение должно дальше фильтровать текст, а не пытаться вернуть весь текст элемента. Использование регулярного выражения типа .* для получения всего текста элемента не всегда приносит ожидаемые результаты. Лучше используйте метод `Body.getAsync` для этого.
 
@@ -1192,7 +1278,7 @@ items:
       return:
         type:
           - any
-        description: 'Объект, содержащий массив строк, которые соответствуют регулярным выражениям, определяемым в XML-файле манифеста. Имя каждого массива равно соответствующему значению атрибута `RegExName` подходящего правила `ItemHasRegularExpressionMatch` или атрибута `FilterName` соответствующего правила `ItemHasKnownEntity`.'
+        description: An object that contains arrays of strings that match the regular expressions defined in the manifest XML file. The name of each array is equal to the corresponding value of the `RegExName` attribute of the matching `ItemHasRegularExpressionMatch` rule or the `FilterName` attribute of the matching `ItemHasKnownEntity` rule.
   - uid: 'outlook!Office.MessageRead#getRegExMatchesByName:member(1)'
     summary: |-
       Возвращает строковые значения в выбранном элементе, которые соответствуют именованному регулярному выражению, определенному в XML-файле манифеста.
@@ -1322,7 +1408,7 @@ items:
     summary: |-
       Возвращает строковые значения в выделенном совпадении, которые соответствуют регулярным выражениям, определенным в XML-файле манифеста. Выделенные совпадения применяются к контекстным надстройкам.
 
-      Метод `getSelectedRegExMatches` возвращает строки, соответствующие регулярному выражению, которое определяется в каждом элементе правила `ItemHasRegularExpressionMatch` или `ItemHasKnownEntity` в XML-файле манифеста. Для правила `ItemHasRegularExpressionMatch` соответствующую строку должно содержать свойство элемента, указанного этим правилом. Простой тип `PropertyName` определяет поддерживаемые свойства.
+      The `getSelectedRegExMatches` method returns the strings that match the regular expression defined in each `ItemHasRegularExpressionMatch` or `ItemHasKnownEntity` rule element in the manifest XML file. For an `ItemHasRegularExpressionMatch` rule, a matching string has to occur in the property of the item that is specified by that rule. The `PropertyName` simple type defines the supported properties.
 
       Если вы указываете правило `ItemHasRegularExpressionMatch` для свойства текста элемента, регулярное выражение должно дальше фильтровать текст, а не пытаться вернуть весь текст элемента. Использование регулярного выражения типа .* для получения всего текста элемента не всегда приносит ожидаемые результаты. Лучше используйте метод `Body.getAsync` для этого.
 
@@ -1379,7 +1465,7 @@ items:
       return:
         type:
           - any
-        description: 'Объект, содержащий массив строк, которые соответствуют регулярным выражениям, определяемым в XML-файле манифеста. Имя каждого массива равно соответствующему значению атрибута `RegExName` подходящего правила `ItemHasRegularExpressionMatch` или атрибута `FilterName` соответствующего правила `ItemHasKnownEntity`.'
+        description: An object that contains arrays of strings that match the regular expressions defined in the manifest XML file. The name of each array is equal to the corresponding value of the `RegExName` attribute of the matching `ItemHasRegularExpressionMatch` rule or the `FilterName` attribute of the matching `ItemHasKnownEntity` rule.
   - uid: 'outlook!Office.MessageRead#getSharedPropertiesAsync:member(1)'
     summary: |-
       Получает свойства встречи или сообщения в общей папке, календаре или почтовом ящике.
@@ -1530,7 +1616,7 @@ items:
 
       ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: чтение сообщения
 
-      Свойство `itemClass` указывает класс сообщения выбранного элемента. Ниже приводятся классы сообщения по умолчанию для элемента сообщения или встречи.
+      The `itemClass` property specifies the message class of the selected item. The following are the default message classes for the message or appointment item.
 
       <table> <tr> <th>Тип</th> <th>Описание</th> <th>Класс элемента</th> </tr> <tr> <td>Элементы встречи</td> <td>Это элементы календаря для класса элемента IPM. Встреча или IPM. Встреча. вхождение.</td> <td>Класс. Встреча, IPM. Встреча. вхождение</td> </tr> <tr> <td>Элементы сообщения</td> <td>Сюда входят сообщения электронной почты с классом сообщения по умолчанию IPM.Note, а также приглашения на собрания, ответы на приглашения и отмены собраний, использующие IPM.Schedule.Meeting в качестве базового класса сообщения.</td> <td>Класс. Обратите внимание, что IPM. Schedule. Meeting. Request, IPM. Schedule. Meeting. unof, IPM. Schedule. Meeting. POS, IPM. Schedule. Meeting. домик, IPM. Запланировать собрание. отменено</td> </tr> </table>
 
@@ -1618,7 +1704,7 @@ items:
     summary: |-
       Асинхронно загружает настраиваемые свойства для надстройки для выбранного элемента.
 
-      Настраиваемые свойства сохраняются в виде пар "ключ-значение" для каждого приложения и каждого элемента. Этот метод возвращает объект `CustomProperties` при обратном вызове, который предоставляет методы для доступа к настраиваемым свойствам, характерным для текущего элемента и текущей надстройки. Настраиваемые свойства не шифруются для элемента, поэтому этот способ хранения не является безопасным.
+      Custom properties are stored as key/value pairs on a per-app, per-item basis. This method returns a `CustomProperties` object in the callback, which provides methods to access the custom properties specific to the current item and the current add-in. Custom properties are not encrypted on the item, so this should not be used as secure storage.
 
       Настраиваемые свойства предоставляются в виде объекта `CustomProperties` в свойстве `asyncResult.value`. Этот объект позволяет получить, задать и удалить настраиваемые свойства для элемента, а также сохранить изменения, внесенные в набор настраиваемых свойств, на сервере.
     remarks: |-
@@ -1692,7 +1778,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательно. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.'
+          description: 'Необязательный параметр. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.MessageRead#location:member'
@@ -1893,11 +1979,11 @@ items:
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~0:complex'
         - id: options
-          description: 'Необязательно. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
@@ -1928,7 +2014,7 @@ items:
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~2:complex'
         - id: callback
-          description: 'Необязательно. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#sender:member'
@@ -2164,6 +2250,26 @@ references:
       - uid: 'outlook!Office.ReplyFormData:interface'
         name: ReplyFormData
         fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyAllFormAsync~0:complex'
+    name: string | ReplyFormData
+    fullName: string | Office.ReplyFormData
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'outlook!Office.ReplyFormData:interface'
+        name: ReplyFormData
+        fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyAllFormAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.MessageRead#displayReplyForm~0:complex'
     name: string | ReplyFormData
     fullName: string | Office.ReplyFormData
@@ -2173,6 +2279,26 @@ references:
       - uid: 'outlook!Office.ReplyFormData:interface'
         name: ReplyFormData
         fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyFormAsync~0:complex'
+    name: string | ReplyFormData
+    fullName: string | Office.ReplyFormData
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'outlook!Office.ReplyFormData:interface'
+        name: ReplyFormData
+        fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.MessageRead#displayReplyFormAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'office!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.EmailAddressDetails:interface'
     name: EmailAddressDetails
   - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync~0:complex'
