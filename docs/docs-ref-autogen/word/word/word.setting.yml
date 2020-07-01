@@ -15,7 +15,6 @@ items:
       - 'office!OfficeExtension.ClientObject:class'
     package: word!
     children:
-      - 'word!Word.Setting._replaceDateWithStringDate:member(1)'
       - 'word!Word.Setting#context:member'
       - 'word!Word.Setting#delete:member(1)'
       - 'word!Word.Setting#key:member'
@@ -28,24 +27,6 @@ items:
       - 'word!Word.Setting#track:member(1)'
       - 'word!Word.Setting#untrack:member(1)'
       - 'word!Word.Setting#value:member'
-  - uid: 'word!Word.Setting._replaceDateWithStringDate:member(1)'
-    isPreview: true
-    name: _replaceDateWithStringDate(value)
-    fullName: _replaceDateWithStringDate(value)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'static _replaceDateWithStringDate(value: any): any;'
-      return:
-        type:
-          - any
-        description: ''
-      parameters:
-        - id: value
-          description: ''
-          type:
-            - any
   - uid: 'word!Word.Setting#context:member'
     summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
     isPreview: true
@@ -134,34 +115,26 @@ items:
         type:
           - string
   - uid: 'word!Word.Setting#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Word.Setting`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Word.Setting`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Setting`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.SettingLoadOptions): Word.Setting;'
+      content: 'load(options?: Word.Interfaces.SettingLoadOptions): Word.Setting;'
       return:
         type:
           - 'word!Word.Setting:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'word!Word.Interfaces.SettingLoadOptions:interface'
   - uid: 'word!Word.Setting#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     isPreview: true
     name: load(propertyNames)
     fullName: load(propertyNames)
@@ -180,7 +153,7 @@ items:
           type:
             - 'string | string[]'
   - uid: 'word!Word.Setting#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     isPreview: true
     name: load(propertyNamesAndPaths)
     fullName: load(propertyNamesAndPaths)
@@ -188,16 +161,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Setting;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.Setting;
       return:
         type:
           - 'word!Word.Setting:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.Setting#set:member(1)'
     summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
     remarks: |-
@@ -245,7 +226,7 @@ items:
           type:
             - 'word!Word.Setting:class'
   - uid: 'word!Word.Setting#toJSON:member(1)'
-    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Setting — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.SettingData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Setting — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.SettingData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     isPreview: true
     name: toJSON()
     fullName: toJSON()
@@ -259,7 +240,7 @@ items:
           - 'word!Word.Interfaces.SettingData:interface'
         description: ''
   - uid: 'word!Word.Setting#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время `.sync` вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
     isPreview: true
     name: track()
     fullName: track()
@@ -273,7 +254,7 @@ items:
           - 'word!Word.Setting:class'
         description: ''
   - uid: 'word!Word.Setting#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем будет применен выпуск памяти.'
     isPreview: true
     name: untrack()
     fullName: untrack()
