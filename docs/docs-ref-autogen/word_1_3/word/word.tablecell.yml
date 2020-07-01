@@ -270,7 +270,7 @@ items:
           - 'word!Word.TableCell#horizontalAlignment~0:complex'
   - uid: 'word!Word.TableCell#insertColumns:member(1)'
     summary: |-
-      Добавляет столбцы слева или справа от ячейки, используя столбец этой ячейки в качестве шаблона. Применим к однородным таблицам. Строковые значения (если они указаны) добавляются в новые строки.
+      Adds columns to the left or right of the cell, using the cell's column as a template. This is applicable to uniform tables. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertColumns(insertLocation, columnCount, values)'
@@ -299,7 +299,7 @@ items:
             - 'string[][]'
   - uid: 'word!Word.TableCell#insertColumns:member(2)'
     summary: |-
-      Добавляет столбцы слева или справа от ячейки, используя столбец этой ячейки в качестве шаблона. Применим к однородным таблицам. Строковые значения (если они указаны) добавляются в новые строки.
+      Adds columns to the left or right of the cell, using the cell's column as a template. This is applicable to uniform tables. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertColumns(insertLocationString, columnCount, values)'
@@ -328,7 +328,7 @@ items:
             - 'string[][]'
   - uid: 'word!Word.TableCell#insertRows:member(1)'
     summary: |-
-      Вставляет строки над ячейкой или под ней, используя строку этой ячейки в качестве шаблона. Строковые значения (если они указаны) добавляются в новые строки.
+      Inserts rows above or below the cell, using the cell's row as a template. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertRows(insertLocation, rowCount, values)'
@@ -357,7 +357,7 @@ items:
             - 'string[][]'
   - uid: 'word!Word.TableCell#insertRows:member(2)'
     summary: |-
-      Вставляет строки над ячейкой или под ней, используя строку этой ячейки в качестве шаблона. Строковые значения (если они указаны) добавляются в новые строки.
+      Inserts rows above or below the cell, using the cell's row as a template. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertRows(insertLocationString, rowCount, values)'
@@ -385,33 +385,25 @@ items:
           type:
             - 'string[][]'
   - uid: 'word!Word.TableCell#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Word.TableCell`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Word.TableCell`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.TableCell`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.TableCellLoadOptions): Word.TableCell;'
+      content: 'load(options?: Word.Interfaces.TableCellLoadOptions): Word.TableCell;'
       return:
         type:
           - 'word!Word.TableCell:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'word!Word.Interfaces.TableCellLoadOptions:interface'
   - uid: 'word!Word.TableCell#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNames)
     fullName: load(propertyNames)
     langs:
@@ -429,23 +421,31 @@ items:
           type:
             - 'string | string[]'
   - uid: 'word!Word.TableCell#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNamesAndPaths)
     fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.TableCell;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.TableCell;
       return:
         type:
           - 'word!Word.TableCell:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.TableCell#parentRow:member'
     summary: |-
       Получает родительскую строку ячейки. Только для чтения.
@@ -587,7 +587,7 @@ items:
             - number
   - uid: 'word!Word.TableCell#shadingColor:member'
     summary: |-
-      Возвращает или задает цвет заливки ячейки. Цвет задается в\#формате "RRGGBB" или с помощью имени цвета.
+      Возвращает или задает цвет заливки ячейки. Цвет задается в \# формате "RRGGBB" или с помощью имени цвета.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: shadingColor
@@ -601,7 +601,7 @@ items:
         type:
           - string
   - uid: 'word!Word.TableCell#toJSON:member(1)'
-    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. TableCell — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.TableCellData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. TableCell — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.TableCellData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -614,7 +614,7 @@ items:
           - 'word!Word.Interfaces.TableCellData:interface'
         description: ''
   - uid: 'word!Word.TableCell#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время `.sync` вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -627,7 +627,7 @@ items:
           - 'word!Word.TableCell:class'
         description: ''
   - uid: 'word!Word.TableCell#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем будет применен выпуск памяти.'
     name: untrack()
     fullName: untrack()
     langs:
