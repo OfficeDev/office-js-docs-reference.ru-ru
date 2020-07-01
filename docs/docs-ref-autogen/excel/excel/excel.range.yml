@@ -49,6 +49,7 @@ items:
       - 'excel!Excel.Range#getColumnProperties:member(1)'
       - 'excel!Excel.Range#getColumnsAfter:member(1)'
       - 'excel!Excel.Range#getColumnsBefore:member(1)'
+      - 'excel!Excel.Range#getDirectPrecedents:member(1)'
       - 'excel!Excel.Range#getEntireColumn:member(1)'
       - 'excel!Excel.Range#getEntireRow:member(1)'
       - 'excel!Excel.Range#getImage:member(1)'
@@ -57,8 +58,10 @@ items:
       - 'excel!Excel.Range#getLastCell:member(1)'
       - 'excel!Excel.Range#getLastColumn:member(1)'
       - 'excel!Excel.Range#getLastRow:member(1)'
+      - 'excel!Excel.Range#getMergedAreas:member(1)'
       - 'excel!Excel.Range#getOffsetRange:member(1)'
       - 'excel!Excel.Range#getPivotTables:member(1)'
+      - 'excel!Excel.Range#getPrecedents:member(1)'
       - 'excel!Excel.Range#getResizedRange:member(1)'
       - 'excel!Excel.Range#getRow:member(1)'
       - 'excel!Excel.Range#getRowProperties:member(1)'
@@ -165,7 +168,7 @@ items:
 
       Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
-      \[[Набор API: ExcelApi 1,9, ExcelApi Preview for NULL `destinationRange` ](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Набор API: ExcelApi 1,9, ExcelApi Preview for NULL `destinationRange` <!-- --> ](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillType)'
     fullName: 'autoFill(destinationRange, autoFillType)'
     langs:
@@ -208,7 +211,7 @@ items:
 
       Для получения дополнительных сведений прочитайте об использовании автозаполнения [и мгновенного заполнения](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
-      \[[Набор API: ExcelApi 1,9, ExcelApi Preview for NULL `destinationRange` ](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Набор API: ExcelApi 1,9, ExcelApi Preview for NULL `destinationRange` <!-- --> ](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillTypeString)'
     fullName: 'autoFill(destinationRange, autoFillTypeString)'
     langs:
@@ -742,7 +745,7 @@ items:
           - 'any[][]'
   - uid: 'excel!Excel.Range#formulasLocal:member'
     summary: |-
-      Представляет формулу в формате A1 на языке пользователя и в соответствии с его языковым стандартом. Например, английская формула "=SUM(A1, 1.5)" превратится в "=СУММ(A1;1,5)" на русском языке.
+      Represents the formula in A1-style notation, in the user's language and number-formatting locale. For example, the English "=SUM(A1, 1.5)" formula would become "=SUMME(A1; 1,5)" in German.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: formulasLocal
@@ -1015,7 +1018,7 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Необязательный. Количество столбцов, включаемых в полученный диапазон. Чтобы создать диапазон за пределами текущего диапазона, используйте положительное число. Вы также можете использовать отрицательное число, чтобы создать диапазон в рамках текущего диапазона. Значение по умолчанию — 1.'
+          description: 'Optional. The number of columns to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
   - uid: 'excel!Excel.Range#getColumnsBefore:member(1)'
@@ -1036,12 +1039,29 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Необязательный. Количество столбцов, включаемых в полученный диапазон. Чтобы создать диапазон за пределами текущего диапазона, используйте положительное число. Вы также можете использовать отрицательное число, чтобы создать диапазон в рамках текущего диапазона. Значение по умолчанию — 1.'
+          description: 'Optional. The number of columns to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
+  - uid: 'excel!Excel.Range#getDirectPrecedents:member(1)'
+    summary: |-
+      Возвращает `WorkbookRangeAreas` объект, представляющий диапазон, который содержит все прямые и непосредственные ячейки в ячейке на одном листе или на нескольких листах.
+
+      \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getDirectPrecedents()
+    fullName: getDirectPrecedents()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDirectPrecedents(): Excel.WorkbookRangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.WorkbookRangeAreas:class'
+        description: ''
   - uid: 'excel!Excel.Range#getEntireColumn:member(1)'
     summary: |-
-      Получает объект, представляющий весь столбец диапазона (например, если текущий диапазон представляет ячейки "B4: E11", а `getEntireColumn` — диапазон, представляющий столбцы "б:е").
+      Получает объект, представляющий весь столбец диапазона (например, если текущий диапазон представляет ячейки "B4: E11", `getEntireColumn` а — диапазон, представляющий столбцы "б:е").
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getEntireColumn()
@@ -1080,7 +1100,7 @@ items:
           ```
   - uid: 'excel!Excel.Range#getEntireRow:member(1)'
     summary: |-
-      Получает объект, представляющий всю строку диапазона (например, если текущий диапазон представляет ячейки "B4: E11", а `GetEntireRow` — диапазон, представляющий строки "4:11").
+      Получает объект, представляющий всю строку диапазона (например, если текущий диапазон представляет ячейки "B4: E11", `GetEntireRow` а — диапазон, представляющий строки "4:11").
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getEntireRow()
@@ -1122,7 +1142,7 @@ items:
     summary: |-
       Отрисовывает диапазон в виде PNG-изображения в кодировке Base64.
 
-      **Важно!** в настоящее время этот API не поддерживается в Excel для Mac. Посетите \[OfficeDev/Office-JS Issue \#235\](https://github.com/OfficeDev/office-js/issues/235) для текущего состояния).
+      **Важно!** в настоящее время этот API не поддерживается в Excel для Mac. Посетите \[ OfficeDev/Office-JS Issue \# 235 \] ( https://github.com/OfficeDev/office-js/issues/235) для текущего состояния).
 
       \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getImage()
@@ -1368,9 +1388,26 @@ items:
               }
           });
           ```
+  - uid: 'excel!Excel.Range#getMergedAreas:member(1)'
+    summary: |-
+      Возвращает объект RangeAreas, представляющий Объединенные области в этом диапазоне. Обратите внимание, что если число Объединенных областей в этом диапазоне превышает 512, API не будет возвращать результат.
+
+      \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getMergedAreas()
+    fullName: getMergedAreas()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getMergedAreas(): Excel.RangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.RangeAreas:class'
+        description: ''
   - uid: 'excel!Excel.Range#getOffsetRange:member(1)'
     summary: |-
-      Возвращает объект, представляющий диапазон, который смещен от указанного диапазона. Измерение возвращаемого диапазона будет соответствовать этому диапазону. Если результирующий диапазон выходит за пределы таблицы листа, возникнет ошибка.
+      Gets an object which represents a range that's offset from the specified range. The dimension of the returned range will match this range. If the resulting range is forced outside the bounds of the worksheet grid, an error will be thrown.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'getOffsetRange(rowOffset, columnOffset)'
@@ -1407,11 +1444,11 @@ items:
           ```
       parameters:
         - id: rowOffset
-          description: 'Количество строк (положительное, отрицательное или нулевое), на которое необходимо сместить диапазон. Положительные значения соответствуют смещению вниз, а отрицательные — вверх.'
+          description: 'The number of rows (positive, negative, or 0) by which the range is to be offset. Positive values are offset downward, and negative values are offset upward.'
           type:
             - number
         - id: columnOffset
-          description: 'Количество столбцов (положительное, отрицательное или 0), на который нужно сместить диапазон. Положительные значения соответствуют смещению вправо, а отрицательные — влево.'
+          description: 'The number of columns (positive, negative, or 0) by which the range is to be offset. Positive values are offset to the right, and negative values are offset to the left.'
           type:
             - number
   - uid: 'excel!Excel.Range#getPivotTables:member(1)'
@@ -1435,6 +1472,23 @@ items:
           description: "Если этот параметр имеет значение true, возвращаются только сводные таблицы, полностью содержащиеся в границах диапазона. Значение по умолчанию \x97 false."
           type:
             - boolean
+  - uid: 'excel!Excel.Range#getPrecedents:member(1)'
+    summary: |-
+      Возвращает `WorkbookRangeAreas` объект, представляющий диапазон, содержащий все влияющие ячейки на одном листе или на нескольких листах.
+
+      \[[Набор API: EXCELAPI Beta (только ознакомительная версия)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getPrecedents()
+    fullName: getPrecedents()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPrecedents(): Excel.WorkbookRangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.WorkbookRangeAreas:class'
+        description: ''
   - uid: 'excel!Excel.Range#getResizedRange:member(1)'
     summary: |-
       Возвращает объект Range, подобный текущему объекту Range, но увеличенный (или уменьшенный) на некоторое количество строк и столбцов от правого нижнего угла.
@@ -1453,7 +1507,7 @@ items:
         description: ''
       parameters:
         - id: deltaRows
-          description: 'Количество строк, добавляемых в правый нижний угол, относительно текущего диапазона. Используйте положительное число, чтобы расширить диапазон или отрицательное число, чтобы уменьшить его.'
+          description: 'The number of rows by which to expand the bottom-right corner, relative to the current range. Use a positive number to expand the range, or a negative number to decrease it.'
           type:
             - number
         - id: deltaColumns
@@ -1540,7 +1594,7 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Необязательный. Количество строк, включаемых в полученный диапазон. Чтобы создать диапазон за пределами текущего диапазона, используйте положительное число. Вы также можете использовать отрицательное число, чтобы создать диапазон в рамках текущего диапазона. Значение по умолчанию — 1.'
+          description: 'Optional. The number of rows to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
   - uid: 'excel!Excel.Range#getRowsBelow:member(1)'
@@ -1561,7 +1615,7 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Необязательный. Количество строк, включаемых в полученный диапазон. Чтобы создать диапазон за пределами текущего диапазона, используйте положительное число. Вы также можете использовать отрицательное число, чтобы создать диапазон в рамках текущего диапазона. Значение по умолчанию — 1.'
+          description: 'Optional. The number of rows to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
   - uid: 'excel!Excel.Range#getSpecialCells:member(1)'
@@ -1789,7 +1843,7 @@ items:
             - boolean
   - uid: 'excel!Excel.Range#getUsedRange:member(1)'
     summary: |-
-      Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция выдает ошибку ItemNotFound.
+      Returns the used range of the given range object. If there are no used cells within the range, this function will throw an ItemNotFound error.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getUsedRange(valuesOnly)
@@ -1871,7 +1925,7 @@ items:
             - boolean
   - uid: 'excel!Excel.Range#getUsedRangeOrNullObject:member(1)'
     summary: |-
-      Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция возвращает пустой объект.
+      Returns the used range of the given range object. If there are no used cells within the range, this function will return a null object.
 
       \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getUsedRangeOrNullObject(valuesOnly)
@@ -1983,7 +2037,7 @@ items:
           ```
       parameters:
         - id: groupOption
-          description: 'Указывает, как диапазон может группироваться по строкам или столбцам. `InvalidArgument` Ошибка возникает, `isEntireRow` если параметр Group отличается от `isEntireColumn` значения свойства Range (то есть, `range.isEntireRow` имеет значение true и `groupOption` равно "Биколумнс") или `range.isEntireColumn` имеет значение true и `groupOption` равно "бировс").'
+          description: 'Указывает, как диапазон может группироваться по строкам или столбцам. `InvalidArgument`Ошибка возникает, если параметр Group отличается от `isEntireRow` `isEntireColumn` значения свойства Range (то есть, `range.isEntireRow` имеет значение true и `groupOption` равно "биколумнс") или имеет `range.isEntireColumn` значение true и `groupOption` равно "бировс").'
           type:
             - 'excel!Excel.GroupOption:enum'
   - uid: 'excel!Excel.Range#group:member(2)'
@@ -2004,7 +2058,7 @@ items:
         description: ''
       parameters:
         - id: groupOptionString
-          description: 'Указывает, как диапазон может группироваться по строкам или столбцам. `InvalidArgument` Ошибка возникает, `isEntireRow` если параметр Group отличается от `isEntireColumn` значения свойства Range (то есть, `range.isEntireRow` имеет значение true и `groupOption` равно "Биколумнс") или `range.isEntireColumn` имеет значение true и `groupOption` равно "бировс").'
+          description: 'Указывает, как диапазон может группироваться по строкам или столбцам. `InvalidArgument`Ошибка возникает, если параметр Group отличается от `isEntireRow` `isEntireColumn` значения свойства Range (то есть, `range.isEntireRow` имеет значение true и `groupOption` равно "биколумнс") или имеет `range.isEntireColumn` значение true и `groupOption` равно "бировс").'
           type:
             - '"ByRows" | "ByColumns"'
   - uid: 'excel!Excel.Range#hasSpill:member'
@@ -2144,7 +2198,7 @@ items:
           ```
   - uid: 'excel!Excel.Range#insert:member(1)'
     summary: |-
-      Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект Range в пустом месте.
+      Inserts a cell or a range of cells into the worksheet in place of this range, and shifts the other cells to make space. Returns a new Range object at the now blank space.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: insert(shift)
@@ -2184,7 +2238,7 @@ items:
             - 'excel!Excel.InsertShiftDirection:enum'
   - uid: 'excel!Excel.Range#insert:member(2)'
     summary: |-
-      Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект Range в пустом месте.
+      Inserts a cell or a range of cells into the worksheet in place of this range, and shifts the other cells to make space. Returns a new Range object at the now blank space.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: insert(shiftString)
@@ -2264,7 +2318,7 @@ items:
         type:
           - 'excel!Excel.Range#linkedDataTypeState~0:complex'
   - uid: 'excel!Excel.Range#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(options)
     fullName: load(options)
     langs:
@@ -2282,7 +2336,7 @@ items:
           type:
             - 'excel!Excel.Interfaces.RangeLoadOptions:interface'
   - uid: 'excel!Excel.Range#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNames)
     fullName: load(propertyNames)
     langs:
@@ -2322,7 +2376,7 @@ items:
           type:
             - 'string | string[]'
   - uid: 'excel!Excel.Range#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNamesAndPaths)
     fullName: load(propertyNamesAndPaths)
     langs:
@@ -2340,7 +2394,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для `propertyNamesAndPaths.expand` загрузки и которая представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
             - |-
               {
@@ -2484,7 +2538,7 @@ items:
           - 'excel!Excel.Range#numberFormatCategories~0:complex'
   - uid: 'excel!Excel.Range#numberFormatLocal:member'
     summary: |-
-      Представляет код числового формата Excel для заданного диапазона в соответствии с языковыми параметрами пользователя. При извлечении или задании `numberFormatLocal` свойства Excel не выполняет приведение форматирования. Любой возвращенный текст использует локально отформатированные строки на основе языка, указанного в параметрах системы.
+      Представляет код числового формата Excel для заданного диапазона в соответствии с языковыми параметрами пользователя. При извлечении или задании свойства Excel не выполняет приведение форматирования `numberFormatLocal` . Любой возвращенный текст использует локально отформатированные строки на основе языка, указанного в параметрах системы.
 
       \[[Набор API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: numberFormatLocal
@@ -3047,7 +3101,7 @@ items:
           ```
   - uid: 'excel!Excel.Range#text:member'
     summary: |-
-      Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. Подстановка \# знаков, которая происходит в пользовательском интерфейсе Excel, не влияет на текстовое значение, возвращенное API.
+      Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. \#Подстановка знаков, которая происходит в пользовательском интерфейсе Excel, не влияет на текстовое значение, возвращенное API.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: text
@@ -3061,7 +3115,7 @@ items:
         type:
           - 'string[][]'
   - uid: 'excel!Excel.Range#toJSON:member(1)'
-    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Range является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.RangeData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Range является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.RangeData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -3089,7 +3143,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во `.sync` время вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время `.sync` вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -3196,7 +3250,7 @@ items:
           });
           ```
   - uid: 'excel!Excel.Range#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить `context.sync()` , прежде чем будет применен выпуск памяти.'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем будет применен выпуск памяти.'
     name: untrack()
     fullName: untrack()
     langs:
@@ -3401,6 +3455,8 @@ references:
         fullName: '[]>'
   - uid: 'excel!Excel.ColumnPropertiesLoadOptions:interface'
     name: ColumnPropertiesLoadOptions
+  - uid: 'excel!Excel.WorkbookRangeAreas:class'
+    name: Excel.WorkbookRangeAreas
   - uid: 'excel!Excel.Range#getImage~0:complex'
     name: OfficeExtension.ClientResult<string>
     fullName: OfficeExtension.ClientResult<string>
@@ -3428,6 +3484,8 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.RangeAreas:class'
+    name: Excel.RangeAreas
   - uid: 'excel!Excel.PivotTableScopedCollection:class'
     name: Excel.PivotTableScopedCollection
   - uid: 'excel!Excel.Range#getRowProperties~0:complex'
@@ -3446,8 +3504,6 @@ references:
         fullName: '[]>'
   - uid: 'excel!Excel.RowPropertiesLoadOptions:interface'
     name: RowPropertiesLoadOptions
-  - uid: 'excel!Excel.RangeAreas:class'
-    name: Excel.RangeAreas
   - uid: 'excel!Excel.SpecialCellType:enum'
     name: Excel.SpecialCellType
   - uid: 'excel!Excel.SpecialCellValueType:enum'
