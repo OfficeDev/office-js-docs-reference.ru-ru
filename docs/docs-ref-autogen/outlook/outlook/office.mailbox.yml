@@ -803,7 +803,7 @@ items:
           - string
   - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync:member(1)'
     summary: |-
-      Возвращает строку, содержащую маркер, который используется для вызова интерфейсов REST API или веб-служб Exchange.
+      Получает строку, содержащую маркер, используемый для вызова REST API или веб-служб Exchange (EWS).
 
       The `getCallbackTokenAsync` method makes an asynchronous call to get an opaque token from the Exchange Server that hosts the user's mailbox. The lifetime of the callback token is 5 minutes.
 
@@ -813,9 +813,11 @@ items:
 
       Для вызова `getCallbackTokenAsync` метода в режиме создания необходимо сохранить элемент. `saveAsync`Метод требует наличия минимального уровня разрешений`ReadWriteItem`<!-- -->.
 
+      **Важно!** рекомендации по делегированию или совместному использованию сценариев приведены в статье [Delegate Access](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
+
       *Маркеры REST*
 
-      При запросе маркера REST (`options.isRest` = `true`<!-- -->), полученный маркер не будет работать для проверки подлинности вызовов веб-служб Exchange. Область действия маркера будет ограничена доступом только для чтения к текущему элементу и его вложениям, если в манифесте надстройки не указано разрешение `ReadWriteMailbox`. Если указано разрешение `ReadWriteMailbox`, полученный маркер предоставит доступ на чтение и запись к почте, календарю и контактам, включая возможность отправки почты.
+      При запросе маркера REST (`options.isRest` = `true`<!-- -->), полученный маркер не будет работать для проверки подлинности вызовов EWS. Область действия маркера будет ограничена доступом только для чтения к текущему элементу и его вложениям, если в манифесте надстройки не указано разрешение `ReadWriteMailbox`. Если указано разрешение `ReadWriteMailbox`, полученный маркер предоставит доступ на чтение и запись к почте, календарю и контактам, включая возможность отправки почты.
 
       С помощью свойства `restUrl` надстройка должна определить правильный URL-адрес для вызовов REST API.
 
@@ -905,6 +907,8 @@ items:
       Для вызова `getCallbackTokenAsync` метода в режиме чтения требуется минимальный уровень разрешений`ReadItem`<!-- -->.
 
       Для вызова `getCallbackTokenAsync` метода в режиме создания необходимо сохранить элемент. `saveAsync`Метод требует наличия минимального уровня разрешений`ReadWriteItem`<!-- -->.
+
+      **Важно!** рекомендации по делегированию или совместному использованию сценариев приведены в статье [Delegate Access](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
 
       \[[Набор API: ALL поддерживает режим чтения; В почтовом ящике 1,3 появилась поддержка режима создания](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
