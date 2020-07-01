@@ -2,7 +2,7 @@
 items:
   - uid: 'word!Word.Document:class'
     summary: |-
-      Объект Document — это объект верхнего уровня. Объект Document содержит один или несколько разделов, элементы управления контентом и основной текст с содержанием документа.
+      The Document object is the top level object. A Document object contains one or more sections, content controls, and the body that contains the contents of the document.
 
       \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: Word.Document
@@ -210,67 +210,60 @@ items:
           });
           ```
   - uid: 'word!Word.Document#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Word.Document`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Word.Document`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Document`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-          
-          // Create a proxy object for the document.
-          var thisDocument = context.document;
-          
-          // Queue a command to load content control properties.
-          context.load(thisDocument, 'contentControls/id, contentControls/text, contentControls/tag');
-          
-          // Synchronize the document state by executing the queued commands, 
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              if (thisDocument.contentControls.items.length !== 0) {
-                  for (var i = 0; i < thisDocument.contentControls.items.length; i++) {
-                      console.log(thisDocument.contentControls.items[i].id);
-                      console.log(thisDocument.contentControls.items[i].text);
-                      console.log(thisDocument.contentControls.items[i].tag);
-                  }
-              } else {
-                  console.log('No content controls in this document.');
-              }
-          });  
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.DocumentLoadOptions): Word.Document;'
+      content: 'load(options?: Word.Interfaces.DocumentLoadOptions): Word.Document;'
       return:
         type:
           - 'word!Word.Document:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+              
+              // Create a proxy object for the document.
+              var thisDocument = context.document;
+              
+              // Queue a command to load content control properties.
+              context.load(thisDocument, 'contentControls/id, contentControls/text, contentControls/tag');
+              
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  if (thisDocument.contentControls.items.length !== 0) {
+                      for (var i = 0; i < thisDocument.contentControls.items.length; i++) {
+                          console.log(thisDocument.contentControls.items[i].id);
+                          console.log(thisDocument.contentControls.items[i].text);
+                          console.log(thisDocument.contentControls.items[i].tag);
+                      }
+                  } else {
+                      console.log('No content controls in this document.');
+                  }
+              });  
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'word!Word.Interfaces.DocumentLoadOptions:interface'
   - uid: 'word!Word.Document#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNames)
     fullName: load(propertyNames)
     langs:
@@ -288,23 +281,31 @@ items:
           type:
             - 'string | string[]'
   - uid: 'word!Word.Document#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNamesAndPaths)
     fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Document;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.Document;
       return:
         type:
           - 'word!Word.Document:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.Document#onContentControlAdded:member'
     summary: |-
       Возникает при добавлении элемента управления содержимым. Выполните context. Sync () в обработчике, чтобы получить свойства нового элемента управления содержимым.
@@ -408,7 +409,7 @@ items:
           ```
   - uid: 'word!Word.Document#saved:member'
     summary: |-
-      Указывает, сохранены ли изменения, внесенные в документ. Значение true указывает на то, что с момента последнего сохранения в документ не вносились изменения. Только для чтения.
+      Indicates whether the changes in the document have been saved. A value of true indicates that the document hasn't changed since it was saved. Read-only.
 
       \[[Набор API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: saved
@@ -497,7 +498,7 @@ items:
         type:
           - 'word!Word.SettingCollection:class'
   - uid: 'word!Word.Document#toJSON:member(1)'
-    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Document — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.DocumentData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word.Docумент является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.DocumentData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -510,7 +511,7 @@ items:
           - 'word!Word.Interfaces.DocumentData:interface'
         description: ''
   - uid: 'word!Word.Document#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время `.sync` вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -523,7 +524,7 @@ items:
           - 'word!Word.Document:class'
         description: ''
   - uid: 'word!Word.Document#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем будет применен выпуск памяти.'
     name: untrack()
     fullName: untrack()
     langs:
