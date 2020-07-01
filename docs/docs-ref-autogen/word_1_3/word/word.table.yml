@@ -86,7 +86,7 @@ items:
       - 'word!Word.Table#width:member'
   - uid: 'word!Word.Table#addColumns:member(1)'
     summary: |-
-      Добавляет столбцы в начале или в конце таблицы, используя первый или последний из имеющихся столбцов в качестве шаблона. Применим к однородным таблицам. Строковые значения (если они указаны) добавляются в новые строки.
+      Adds columns to the start or end of the table, using the first or last existing column as a template. This is applicable to uniform tables. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'addColumns(insertLocation, columnCount, values)'
@@ -115,7 +115,7 @@ items:
             - 'string[][]'
   - uid: 'word!Word.Table#addColumns:member(2)'
     summary: |-
-      Добавляет столбцы в начале или в конце таблицы, используя первый или последний из имеющихся столбцов в качестве шаблона. Применим к однородным таблицам. Строковые значения (если они указаны) добавляются в новые строки.
+      Adds columns to the start or end of the table, using the first or last existing column as a template. This is applicable to uniform tables. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'addColumns(insertLocationString, columnCount, values)'
@@ -144,7 +144,7 @@ items:
             - 'string[][]'
   - uid: 'word!Word.Table#addRows:member(1)'
     summary: |-
-      Добавляет строки в начале или в конце таблицы, используя первую или последнюю из имеющихся строк в качестве шаблона. Строковые значения (если они указаны) добавляются в новые строки.
+      Adds rows to the start or end of the table, using the first or last existing row as a template. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'addRows(insertLocation, rowCount, values)'
@@ -173,7 +173,7 @@ items:
             - 'string[][]'
   - uid: 'word!Word.Table#addRows:member(2)'
     summary: |-
-      Добавляет строки в начале или в конце таблицы, используя первую или последнюю из имеющихся строк в качестве шаблона. Строковые значения (если они указаны) добавляются в новые строки.
+      Adds rows to the start or end of the table, using the first or last existing row as a template. The string values, if specified, are set in the newly inserted rows.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'addRows(insertLocationString, rowCount, values)'
@@ -820,33 +820,25 @@ items:
         type:
           - boolean
   - uid: 'word!Word.Table#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Word.Table`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Word.Table`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Table`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.TableLoadOptions): Word.Table;'
+      content: 'load(options?: Word.Interfaces.TableLoadOptions): Word.Table;'
       return:
         type:
           - 'word!Word.Table:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'word!Word.Interfaces.TableLoadOptions:interface'
   - uid: 'word!Word.Table#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNames)
     fullName: load(propertyNames)
     langs:
@@ -864,23 +856,31 @@ items:
           type:
             - 'string | string[]'
   - uid: 'word!Word.Table#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNamesAndPaths)
     fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Table;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.Table;
       return:
         type:
           - 'word!Word.Table:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.Table#nestingLevel:member'
     summary: |-
       Возвращает уровень вложенности таблицы. Таблицам верхнего уровня соответствует значение 1. Только для чтения.
@@ -1203,7 +1203,7 @@ items:
             - number
   - uid: 'word!Word.Table#shadingColor:member'
     summary: |-
-      Возвращает и задает цвет заливки. Цвет задается в\#формате "RRGGBB" или с помощью имени цвета.
+      Возвращает и задает цвет заливки. Цвет задается в \# формате "RRGGBB" или с помощью имени цвета.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: shadingColor
@@ -1218,7 +1218,7 @@ items:
           - string
   - uid: 'word!Word.Table#style:member'
     summary: |-
-      Возвращает или задает имя стиля для таблицы. Используйте это свойство для пользовательских стилей и локализованных имен стилей. Чтобы использовать встроенные стили, поддерживающие несколько языковых стандартов, применяйте свойство styleBuiltIn.
+      Gets or sets the style name for the table. Use this property for custom styles and localized style names. To use the built-in styles that are portable between locales, see the "styleBuiltIn" property.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: style
@@ -1263,7 +1263,7 @@ items:
           - boolean
   - uid: 'word!Word.Table#styleBuiltIn:member'
     summary: |-
-      Возвращает или задает имя встроенного стиля таблицы. Используйте это свойство для встроенных стилей, поддерживающих несколько языковых стандартов. Чтобы использовать пользовательские стили или локализованные имена стилей, применяйте свойство style.
+      Gets or sets the built-in style name for the table. Use this property for built-in styles that are portable between locales. To use custom styles or localized style names, see the "style" property.
 
       \[[Набор API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: styleBuiltIn
@@ -1337,7 +1337,7 @@ items:
         type:
           - 'word!Word.TableCollection:class'
   - uid: 'word!Word.Table#toJSON:member(1)'
-    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Table является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.TableData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Word. Table является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.TableData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -1350,7 +1350,7 @@ items:
           - 'word!Word.Interfaces.TableData:interface'
         description: ''
   - uid: 'word!Word.Table#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время `.sync` вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -1363,7 +1363,7 @@ items:
           - 'word!Word.Table:class'
         description: ''
   - uid: 'word!Word.Table#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем будет применен выпуск памяти.'
     name: untrack()
     fullName: untrack()
     langs:
