@@ -47,65 +47,58 @@ items:
         type:
           - 'word!Word.ParagraphCollection#items~0:complex'
   - uid: 'word!Word.ParagraphCollection#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): Word.ParagraphCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): Word.ParagraphCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ParagraphCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      // This example shows how to get the paragraphs in the Word document
-      // along with their text and font size properties.
-      // 
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-
-          // Create a proxy object for the paragraphs collection.
-          var paragraphs = context.document.body.paragraphs;
-
-          // Queue a command to load the text and font properties.
-          // It is best practice to always specify the property set. Otherwise, all properties are
-          // returned in on the object.
-          context.load(paragraphs, 'text, font/size');
-
-          // Synchronize the document state by executing the queued commands,
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-
-          // Insert code that works with the paragraphs loaded by context.load().
-          })
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.ParagraphCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ParagraphCollection;'
+      content: 'load(options?: Word.Interfaces.ParagraphCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ParagraphCollection;'
       return:
         type:
           - 'word!Word.ParagraphCollection:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          // This example shows how to get the paragraphs in the Word document
+          // along with their text and font size properties.
+          // 
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+
+              // Create a proxy object for the paragraphs collection.
+              var paragraphs = context.document.body.paragraphs;
+
+              // Queue a command to load the text and font properties.
+              // It is best practice to always specify the property set. Otherwise, all properties are
+              // returned in on the object.
+              context.load(paragraphs, 'text, font/size');
+
+              // Synchronize the document state by executing the queued commands,
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+
+              // Insert code that works with the paragraphs loaded by context.load().
+              })
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
           type:
             - 'word!Word.ParagraphCollection#load~0:complex'
   - uid: 'word!Word.ParagraphCollection#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств `context.sync()` необходимо вызвать метод.
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
     name: load(propertyNames)
     fullName: load(propertyNames)
     langs:
@@ -123,24 +116,25 @@ items:
           type:
             - 'string | string[]'
   - uid: 'word!Word.ParagraphCollection#load:member(3)'
-    name: load(option)
-    fullName: load(option)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: OfficeExtension.LoadOption): Word.ParagraphCollection;'
+      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Word.ParagraphCollection;'
       return:
         type:
           - 'word!Word.ParagraphCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
             - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'word!Word.ParagraphCollection#toJSON:member(1)'
-    summary: 'Переопределяет метод `toJSON()` JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как `Word.ParagraphCollection` исходный объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.ParagraphCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный `Word.ParagraphCollection` объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Word.Interfaces.ParagraphCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -153,7 +147,7 @@ items:
           - 'word!Word.Interfaces.ParagraphCollectionData:interface'
         description: ''
   - uid: 'word!Word.ParagraphCollection#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время `.sync` вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -166,7 +160,7 @@ items:
           - 'word!Word.ParagraphCollection:class'
         description: ''
   - uid: 'word!Word.ParagraphCollection#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем будет применен выпуск памяти.'
     name: untrack()
     fullName: untrack()
     langs:
