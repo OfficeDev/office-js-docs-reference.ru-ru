@@ -87,7 +87,7 @@ items:
           ```
       parameters:
         - id: id
-          description: Обязательный. Идентификатор элемента управления контентом.
+          description: Обязательный элемент. Идентификатор элемента управления контентом.
           type:
             - number
   - uid: 'word!Word.ContentControlCollection#getByIdOrNullObject:member(1)'
@@ -139,7 +139,7 @@ items:
           ```
       parameters:
         - id: id
-          description: Обязательный. Идентификатор элемента управления контентом.
+          description: Обязательный элемент. Идентификатор элемента управления контентом.
           type:
             - number
   - uid: 'word!Word.ContentControlCollection#getByTag:member(1)'
@@ -179,7 +179,7 @@ items:
           ```
       parameters:
         - id: tag
-          description: 'Обязательный. Тег, установленный на элемент управления контентом.'
+          description: 'Обязательный элемент. Тег, установленный на элемент управления контентом.'
           type:
             - string
   - uid: 'word!Word.ContentControlCollection#getByTitle:member(1)'
@@ -259,7 +259,7 @@ items:
         description: ''
       parameters:
         - id: types
-          description: Обязательный. Массив типов элементов управления содержимым и/или подтипов.
+          description: Обязательный элемент. Массив типов элементов управления содержимым и/или подтипов.
           type:
             - 'word!Word.ContentControlCollection#getByTypes~0:complex'
   - uid: 'word!Word.ContentControlCollection#getFirst:member(1)'
@@ -359,94 +359,101 @@ items:
         type:
           - 'word!Word.ContentControlCollection#items~0:complex'
   - uid: 'word!Word.ContentControlCollection#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
-    name: load(options)
-    fullName: load(options)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+    remarks: |-
+      В дополнение к этой подписи этот метод имеет следующие подписи:
+
+      `load(option?: string | string[]): Word.ContentControlCollection`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+      `load(option?: { select?: string; expand?: string; }): Word.ContentControlCollection`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ContentControlCollection`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the content controls collection.
+          var contentControls = context.document.contentControls;
+
+          // Queue a command to load the id property for all of the content controls.
+          context.load(contentControls, 'id');
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              if (contentControls.items.length === 0) {
+                  console.log('No content control found.');
+              }
+              else {
+                  // Queue a command to load the properties on the first content control.
+                  contentControls.items[0].load(  'appearance,' +
+                                                  'cannotDelete,' +
+                                                  'cannotEdit,' +
+                                                  'color,' +
+                                                  'id,' +
+                                                  'placeHolderText,' +
+                                                  'removeWhenEdited,' +
+                                                  'title,' +
+                                                  'text,' +
+                                                  'type,' +
+                                                  'style,' +
+                                                  'tag,' +
+                                                  'font/size,' +
+                                                  'font/name,' +
+                                                  'font/color');
+
+                  // Synchronize the document state by executing the queued commands,
+                  // and return a promise to indicate task completion.
+                  return context.sync()
+                      .then(function () {
+                          console.log('Property values of the first content control:' +
+                              '   ----- appearance: ' + contentControls.items[0].appearance +
+                              '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +
+                              '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +
+                              '   ----- color: ' + contentControls.items[0].color +
+                              '   ----- id: ' + contentControls.items[0].id +
+                              '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +
+                              '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +
+                              '   ----- title: ' + contentControls.items[0].title +
+                              '   ----- text: ' + contentControls.items[0].text +
+                              '   ----- type: ' + contentControls.items[0].type +
+                              '   ----- style: ' + contentControls.items[0].style +
+                              '   ----- tag: ' + contentControls.items[0].tag +
+                              '   ----- font size: ' + contentControls.items[0].font.size +
+                              '   ----- font name: ' + contentControls.items[0].font.name +
+                              '   ----- font color: ' + contentControls.items[0].font.color);
+                  });
+              }
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+
+      // The Silly stories add-in sample shows how the load method is used
+      // to load the content control collection with the tag and title properties.
+      // https://aka.ms/sillystorywordaddin
+      ```
+    name: load(option)
+    fullName: load(option)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(options?: Word.Interfaces.ContentControlCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ContentControlCollection;'
+      content: 'load(option?: Word.Interfaces.ContentControlCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ContentControlCollection;'
       return:
         type:
           - 'word!Word.ContentControlCollection:class'
-        description: |-
-
-
-          #### <a name="examples"></a>Примеры
-
-          ```javascript
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-
-              // Create a proxy object for the content controls collection.
-              var contentControls = context.document.contentControls;
-
-              // Queue a command to load the id property for all of the content controls.
-              context.load(contentControls, 'id');
-
-              // Synchronize the document state by executing the queued commands,
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  if (contentControls.items.length === 0) {
-                      console.log('No content control found.');
-                  }
-                  else {
-                      // Queue a command to load the properties on the first content control.
-                      contentControls.items[0].load(  'appearance,' +
-                                                      'cannotDelete,' +
-                                                      'cannotEdit,' +
-                                                      'color,' +
-                                                      'id,' +
-                                                      'placeHolderText,' +
-                                                      'removeWhenEdited,' +
-                                                      'title,' +
-                                                      'text,' +
-                                                      'type,' +
-                                                      'style,' +
-                                                      'tag,' +
-                                                      'font/size,' +
-                                                      'font/name,' +
-                                                      'font/color');
-
-                      // Synchronize the document state by executing the queued commands,
-                      // and return a promise to indicate task completion.
-                      return context.sync()
-                          .then(function () {
-                              console.log('Property values of the first content control:' +
-                                  '   ----- appearance: ' + contentControls.items[0].appearance +
-                                  '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +
-                                  '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +
-                                  '   ----- color: ' + contentControls.items[0].color +
-                                  '   ----- id: ' + contentControls.items[0].id +
-                                  '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +
-                                  '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +
-                                  '   ----- title: ' + contentControls.items[0].title +
-                                  '   ----- text: ' + contentControls.items[0].text +
-                                  '   ----- type: ' + contentControls.items[0].type +
-                                  '   ----- style: ' + contentControls.items[0].style +
-                                  '   ----- tag: ' + contentControls.items[0].tag +
-                                  '   ----- font size: ' + contentControls.items[0].font.size +
-                                  '   ----- font name: ' + contentControls.items[0].font.name +
-                                  '   ----- font color: ' + contentControls.items[0].font.color);
-                      });
-                  }
-              });
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-
-          // The Silly stories add-in sample shows how the load method is used
-          // to load the content control collection with the tag and title properties.
-          // https://aka.ms/sillystorywordaddin
-          ```
+        description: ''
       parameters:
-        - id: options
-          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
+        - id: option
+          description: ''
           type:
             - 'word!Word.ContentControlCollection#load~0:complex'
   - uid: 'word!Word.ContentControlCollection#load:member(2)'
@@ -468,21 +475,20 @@ items:
           type:
             - 'string | string[]'
   - uid: 'word!Word.ContentControlCollection#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. `context.sync()`Перед чтением свойств необходимо вызвать метод.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
+    name: load(option)
+    fullName: load(option)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Word.ContentControlCollection;'
+      content: 'load(option?: OfficeExtension.LoadOption): Word.ContentControlCollection;'
       return:
         type:
           - 'word!Word.ContentControlCollection:class'
         description: ''
       parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+        - id: option
+          description: ''
           type:
             - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'word!Word.ContentControlCollection#toJSON:member(1)'
@@ -499,7 +505,7 @@ items:
           - 'word!Word.Interfaces.ContentControlCollectionData:interface'
         description: ''
   - uid: 'word!Word.ContentControlCollection#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращенной записью для`context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время `.sync` вызовов и вне последовательного выполнения пакета ". Run", а затем получите ошибку "инвалидобжектпас" при настройке свойства или вызове метода для объекта, необходимо добавить объект в коллекцию отслеживаемых объектов при первом создании объекта.'
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
     name: track()
     fullName: track()
     langs:
@@ -512,7 +518,7 @@ items:
           - 'word!Word.ContentControlCollection:class'
         description: ''
   - uid: 'word!Word.ContentControlCollection#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращенной для`context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем будет применен выпуск памяти.'
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
     name: untrack()
     fullName: untrack()
     langs:
