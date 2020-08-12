@@ -345,7 +345,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 'Необязательное. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getNextOrNullObject:member(1)'
@@ -366,7 +366,7 @@ items:
         description: ''
       parameters:
         - id: visibleOnly
-          description: 'Необязательное. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getPrevious:member(1)'
@@ -414,7 +414,7 @@ items:
           ```
       parameters:
         - id: visibleOnly
-          description: 'Необязательное. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getPreviousOrNullObject:member(1)'
@@ -435,7 +435,7 @@ items:
         description: ''
       parameters:
         - id: visibleOnly
-          description: 'Необязательное. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
+          description: 'Необязательно. Если задано значение true, учитываются только видимые листы, пропуская все скрытые.'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getRange:member(1)'
@@ -495,7 +495,7 @@ items:
           ```
       parameters:
         - id: address
-          description: 'Необязательное. Строка, представляющая адрес или имя диапазона. Например, "a1: B2". Если аргумент не указан, возвращается весь диапазон листа.'
+          description: 'Необязательно. Строка, представляющая адрес или имя диапазона. Например, "a1: B2". Если аргумент не указан, возвращается весь диапазон листа.'
           type:
             - string
   - uid: 'excel!Excel.Worksheet#getRangeByIndexes:member(1)'
@@ -569,7 +569,7 @@ items:
           ```
       parameters:
         - id: valuesOnly
-          description: 'Необязательное. Если этот параметр имеет значение true, учитываются только ячейки со значениями в качестве используемых ячеек (игнорируя форматирование). \[Набор API: ExcelApi 1,2\]'
+          description: 'Необязательно. Если этот параметр имеет значение true, учитываются только ячейки со значениями в качестве используемых ячеек (игнорируя форматирование). \[Набор API: ExcelApi 1,2\]'
           type:
             - boolean
   - uid: 'excel!Excel.Worksheet#getUsedRangeOrNullObject:member(1)'
@@ -858,6 +858,26 @@ items:
       return:
         type:
           - 'excel!Excel.PivotTableCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/pivottable-get-pivottables.yaml
+          await Excel.run(async (context) => {
+            // Get the names of all the PivotTables in the current worksheet.
+            const pivotTables = context.workbook.worksheets.getActiveWorksheet().pivotTables;
+            pivotTables.load("name");
+            await context.sync();
+
+            // Display the names in the console.
+            console.log("PivotTables in the current worksheet:")
+            pivotTables.items.forEach((pivotTable) => {
+              console.log(`\t${pivotTable.name}`);
+            });
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#position:member'
     summary: |-
       Положение листа (начиная с нуля) в книге.
