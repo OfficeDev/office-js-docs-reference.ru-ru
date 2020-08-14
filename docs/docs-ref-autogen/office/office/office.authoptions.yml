@@ -1,7 +1,7 @@
 ### YamlMime:UniversalReference
 items:
   - uid: 'office!Office.AuthOptions:interface'
-    summary: 'Предоставляет варианты взаимодействия с пользователем при получении Office маркером доступа к надстройке из AAD v. 2,0 с методом getAccessTokenAsync.'
+    summary: Предоставляет варианты взаимодействия с пользователем при получении Office маркером доступа к надстройке из AAD v. 2.0 с методом `getAccessTokenAsync`.
     name: Office.AuthOptions
     fullName: Office.AuthOptions
     langs:
@@ -9,55 +9,98 @@ items:
     type: interface
     package: office!
     children:
+      - 'office!Office.AuthOptions#allowConsentPrompt:member'
+      - 'office!Office.AuthOptions#allowSignInPrompt:member'
       - 'office!Office.AuthOptions#asyncContext:member'
       - 'office!Office.AuthOptions#authChallenge:member'
       - 'office!Office.AuthOptions#forceAddAccount:member'
       - 'office!Office.AuthOptions#forceConsent:member'
+      - 'office!Office.AuthOptions#forMSGraphAccess:member'
+  - uid: 'office!Office.AuthOptions#allowConsentPrompt:member'
+    summary: 'Разрешает Office получать маркер доступа автоматически или с помощью интерактивного согласия, если он необходим. Значение по умолчанию: `false`<!-- -->. Если задано значение `false`<!-- -->, Office автоматически попытается получить маркер доступа. Если этого не сделать, Office выдаст ошибку с описанием. Если задано значение `true`<!-- -->, Office покажет интерактивный пользовательский интерфейс разрешения, после которого не удается получить маркер доступа без уведомления. Запрос будет иметь только разрешение на доступ к области профиля AAD, а не к областям Microsoft Graph.'
+    name: allowConsentPrompt
+    fullName: allowConsentPrompt
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'allowConsentPrompt?: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'office!Office.AuthOptions#allowSignInPrompt:member'
+    summary: 'Позволяет Office получить маркер доступа, предоставленный без уведомления, или отобразить интерактивный пользовательский интерфейс, чтобы войти в систему пользователя. Значение по умолчанию: `false`<!-- -->. Если задано значение `false`<!-- -->, Office автоматически попытается получить маркер доступа. Если этого не сделать, Office выдаст ошибку с описанием. Если задано значение `true`<!-- -->В Office будет отображаться интерактивный пользовательский интерфейс входа, после которого не удается получить маркер доступа без уведомления.'
+    name: allowSignInPrompt
+    fullName: allowSignInPrompt
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'allowSignInPrompt?: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'office!Office.AuthOptions#asyncContext:member'
-    summary: 'Определяемый пользователем элемент любого типа, который возвращается в неизменном виде в свойстве asyncContext объекта AsyncResult, который передается в обратный вызов.'
+    summary: 'Определяемый пользователем элемент любого типа, который возвращается в качестве значения `asyncContext` свойства `AsyncResult` объекта, переданного в обратный вызов.'
     name: asyncContext
     fullName: asyncContext
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'asyncContext?: any'
+      content: 'asyncContext?: any;'
       return:
         type:
           - any
   - uid: 'office!Office.AuthOptions#authChallenge:member'
-    summary: 'Заставляет Office запрашивать у пользователя дополнительный фактор, если для целевой компании Microsoft Graph требуется многофакторная проверка подлинности. Строковое значение определяет тип дополнительного фактора, который является обязательным. В большинстве случаев вы не узнаете во время разработки, требует ли клиент пользователя дополнительный фактор или что должна быть строка. Таким образом, этот параметр будет использоваться при вызове "второй попытки" в getAccessTokenAsync после того, как Microsoft Graph отправил сообщение об ошибке, запросив дополнительный фактор и содержащее строку, которая должна использоваться с параметром Аусчалленже.'
+    summary: 'Заставляет Office запрашивать у пользователя дополнительный фактор, если для целевой компании Microsoft Graph требуется многофакторная проверка подлинности. Строковое значение определяет тип дополнительного фактора, который является обязательным. В большинстве случаев вы не узнаете во время разработки, требует ли клиент пользователя дополнительный фактор или что должна быть строка. Таким образом, этот параметр будет использоваться при последующей попытке вызова `getAccessTokenAsync` после того, как Microsoft Graph отправил сообщение об ошибке, запросив дополнительный фактор и содержащее строку, которая должна использоваться с `authChallenge` параметром.'
     name: authChallenge
     fullName: authChallenge
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'authChallenge?: string'
+      content: 'authChallenge?: string;'
       return:
         type:
           - string
   - uid: 'office!Office.AuthOptions#forceAddAccount:member'
-    summary: 'Предлагает пользователю добавить свою учетную запись Office (или перейти к ней, если она уже добавлена).'
+    summary: 'Предлагает пользователю добавить свою учетную запись Office (или перейти к ней, если она уже добавлена). Значение по умолчанию: `false`<!-- -->.'
+    deprecated:
+      content: Use `allowSignInPrompt` instead.
     name: forceAddAccount
     fullName: forceAddAccount
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'forceAddAccount?: boolean,'
+      content: 'forceAddAccount?: boolean;'
       return:
         type:
           - boolean
   - uid: 'office!Office.AuthOptions#forceConsent:member'
-    summary: 'Сообщает Office, что нужно показать интерфейс согласия для надстройки. Это полезно, если разрешения Azure изменились или согласие пользователя было отозвано.'
+    summary: 'Сообщает Office, что нужно показать интерфейс согласия для надстройки. Это полезно, если разрешения Azure изменились или согласие пользователя было отозвано. Значение по умолчанию: `false`<!-- -->.'
+    deprecated:
+      content: Use `allowConsentPrompt` instead.
     name: forceConsent
     fullName: forceConsent
     langs:
       - typeScript
     type: property
     syntax:
-      content: 'forceConsent?: boolean,'
+      content: 'forceConsent?: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: 'office!Office.AuthOptions#forMSGraphAccess:member'
+    summary: 'Заставляет Office возвращать сообщение об ошибке, когда надстройка пытается получить доступ к Microsoft Graph, а пользователь или администратор не получил согласие с областями графа. Значение по умолчанию: `false`<!-- -->. Office поддерживает только согласие на области графики при развертывании надстройки администратором клиента. Эта информация не будет доступна во время разработки. Установка этого параметра `true` приведет к тому, что Office будет автоматически уведомлять надстройку (возвращая ошибку с описанием), если произойдет сбой доступа Graph.'
+    name: forMSGraphAccess
+    fullName: forMSGraphAccess
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'forMSGraphAccess?: boolean;'
       return:
         type:
           - boolean

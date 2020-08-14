@@ -289,6 +289,26 @@ items:
       return:
         type:
           - 'excel!Excel.WorksheetCustomPropertyCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/custom-properties.yaml
+          await Excel.run(async (context) => {
+            // Load the keys and values of all custom properties in the current worksheet.
+            const customWorksheetProperties = context.workbook.worksheets.getActiveWorksheet().customProperties;
+            customWorksheetProperties.load(["key", "value"]);
+            await context.sync();
+
+            // Log each custom property to the console.
+            // Note that your document may have more properties than those you have set using this snippet.
+            customWorksheetProperties.items.forEach((property) => {
+              console.log(`${property.key}:${property.value}`);
+            });
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#delete:member(1)'
     summary: |-
       Удаляет лист из книги. Обратите внимание, что если для отображения листа задано значение "Верихидден", операция удаления завершится с `InvalidOperation` исключением. Прежде чем удалять его, необходимо сначала изменить его видимость на скрытую или видимую.
@@ -904,7 +924,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
             - |-
               {
@@ -1728,7 +1748,7 @@ items:
         type:
           - 'excel!Excel.TableCollection:class'
   - uid: 'excel!Excel.Worksheet#toJSON:member(1)'
-    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. лист является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.WorksheetData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. лист является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.WorksheetData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:

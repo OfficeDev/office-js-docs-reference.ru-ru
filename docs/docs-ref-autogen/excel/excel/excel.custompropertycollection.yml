@@ -40,14 +40,34 @@ items:
       return:
         type:
           - 'excel!Excel.CustomProperty:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/custom-properties.yaml
+          await Excel.run(async (context) => {
+            // Get the key/value pair from the task pane.
+            const userKey = $("#key").text();
+            const userValue = $("#value").text();
+
+            // Add the custom property.
+            const customDocProperties = context.workbook.properties.custom;
+            customDocProperties.add(userKey, userValue);
+
+            await context.sync();
+
+            console.log(`Successfully set custom document property ${userKey}:${userValue}.`);
+          });
+          ```
       parameters:
         - id: key
-          description: 'Обязательный. Ключ настраиваемого свойства, в котором регистр не учитывается. Ключ ограничен 255 символами за пределом Excel в Интернете (крупные ключи автоматически обрезаются до 255 символов на других платформах).'
+          description: 'Обязательный элемент. Ключ настраиваемого свойства, в котором регистр не учитывается. Ключ ограничен 255 символами за пределом Excel в Интернете (крупные ключи автоматически обрезаются до 255 символов на других платформах).'
           type:
             - string
         - id: value
-          description: Обязательный. Значение настраиваемого свойства. Значение не может превышать 255 символов вне Excel в Интернете (большие значения автоматически обрезаются до 255 символов на других платформах).
+          description: Обязательный элемент. Значение настраиваемого свойства. Значение не может превышать 255 символов вне Excel в Интернете (большие значения автоматически обрезаются до 255 символов на других платформах).
           type:
             - any
   - uid: 'excel!Excel.CustomPropertyCollection#context:member'
@@ -133,7 +153,7 @@ items:
         description: ''
       parameters:
         - id: key
-          description: 'Обязательный. Ключ, который определяет объект настраиваемого свойства.'
+          description: 'Обязательный элемент. Ключ, который определяет объект настраиваемого свойства.'
           type:
             - string
   - uid: 'excel!Excel.CustomPropertyCollection#items:member'
@@ -199,11 +219,11 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
             - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CustomPropertyCollection#toJSON:member(1)'
-    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный `Excel.CustomPropertyCollection` объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.CustomPropertyCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный `Excel.CustomPropertyCollection` объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.CustomPropertyCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
     name: toJSON()
     fullName: toJSON()
     langs:
