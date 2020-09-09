@@ -127,7 +127,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
             - |-
               {
@@ -229,8 +229,30 @@ items:
       return:
         type:
           - number
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          await Excel.run(async (context) => {
+            // Get a chart named "Sales Chart" from the "Sample" worksheet.
+            const sheet = context.workbook.worksheets.getItem("Sample");
+            let chart = sheet.charts.getItem("Sales Chart");
+
+            // Set the value axis title to "Profits".
+            chart.axes.valueAxis.title.text = "Profits";
+
+            /* Set the value axis text orientation to 0.
+              For charts with a y-axis, this makes the label on the y-axis horizontal, 
+              instead of the default look of rotated-vertically.
+              */ 
+            chart.axes.valueAxis.title.textOrientation = 0;
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.ChartAxisTitle#toJSON:member(1)'
-    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. ChartAxisTitle — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ChartAxisTitleData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. ChartAxisTitle — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.ChartAxisTitleData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
