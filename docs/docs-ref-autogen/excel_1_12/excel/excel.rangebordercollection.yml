@@ -1,0 +1,317 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'excel!Excel.RangeBorderCollection:class'
+    summary: |-
+      Представляет объекты границ, из которых состоит граница диапазона.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.RangeBorderCollection
+    fullName: Excel.RangeBorderCollection
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'office!OfficeExtension.ClientObject:class'
+    package: excel!
+    children:
+      - 'excel!Excel.RangeBorderCollection#context:member'
+      - 'excel!Excel.RangeBorderCollection#count:member'
+      - 'excel!Excel.RangeBorderCollection#getItem:member(1)'
+      - 'excel!Excel.RangeBorderCollection#getItem:member(2)'
+      - 'excel!Excel.RangeBorderCollection#getItemAt:member(1)'
+      - 'excel!Excel.RangeBorderCollection#items:member'
+      - 'excel!Excel.RangeBorderCollection#load:member(1)'
+      - 'excel!Excel.RangeBorderCollection#load:member(2)'
+      - 'excel!Excel.RangeBorderCollection#load:member(3)'
+      - 'excel!Excel.RangeBorderCollection#tintAndShade:member'
+      - 'excel!Excel.RangeBorderCollection#toJSON:member(1)'
+  - uid: 'excel!Excel.RangeBorderCollection#context:member'
+    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.RangeBorderCollection#count:member'
+    summary: |-
+      Количество объектов границы в коллекции.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: count
+    fullName: count
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly count: number;'
+      return:
+        type:
+          - number
+  - uid: 'excel!Excel.RangeBorderCollection#getItem:member(1)'
+    summary: |-
+      Возвращает объект границы по его имени.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(index)
+    fullName: getItem(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(index: Excel.BorderIndex): Excel.RangeBorder;'
+      return:
+        type:
+          - 'excel!Excel.RangeBorder:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var range = worksheet.getRange(rangeAddress);
+              var borderName = 'EdgeTop';
+              var border = range.format.borders.getItem(borderName);
+              border.load('style');
+              return ctx.sync().then(function() {
+                      console.log(border.style);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: Значение индекса получаемого объекта границы. Дополнительные сведения см. в статье Excel. Бордериндекс.
+          type:
+            - 'excel!Excel.BorderIndex:enum'
+  - uid: 'excel!Excel.RangeBorderCollection#getItem:member(2)'
+    summary: |-
+      Возвращает объект границы по его имени.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItem(indexString)
+    fullName: getItem(indexString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItem(indexString: "EdgeTop" | "EdgeBottom" | "EdgeLeft" | "EdgeRight" | "InsideVertical" | "InsideHorizontal" | "DiagonalDown" | "DiagonalUp"): Excel.RangeBorder;'
+      return:
+        type:
+          - 'excel!Excel.RangeBorder:class'
+        description: ''
+      parameters:
+        - id: indexString
+          description: Значение индекса получаемого объекта границы. Дополнительные сведения см. в статье Excel. Бордериндекс.
+          type:
+            - '"EdgeTop" | "EdgeBottom" | "EdgeLeft" | "EdgeRight" | "InsideVertical" | "InsideHorizontal" | "DiagonalDown" | "DiagonalUp"'
+  - uid: 'excel!Excel.RangeBorderCollection#getItemAt:member(1)'
+    summary: |-
+      Возвращает объект границы по его индексу.
+
+      \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getItemAt(index)
+    fullName: getItemAt(index)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemAt(index: number): Excel.RangeBorder;'
+      return:
+        type:
+          - 'excel!Excel.RangeBorder:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var range = worksheet.getRange(rangeAddress);
+              var border = range.format.borders.getItemAt(0);
+              border.load('sideIndex');
+              return ctx.sync().then(function() {
+                  console.log(border.sideIndex);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: index
+          description: Значение индекса получаемого объекта. Используется нулевой индекс.
+          type:
+            - number
+  - uid: 'excel!Excel.RangeBorderCollection#items:member'
+    summary: Получает загруженные дочерние элементы в этой коллекции.
+    name: items
+    fullName: items
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly items: Excel.RangeBorder[];'
+      return:
+        type:
+          - 'excel!Excel.RangeBorderCollection#items~0:complex'
+  - uid: 'excel!Excel.RangeBorderCollection#load:member(1)'
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+    name: load(options)
+    fullName: load(options)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(options?: Excel.Interfaces.RangeBorderCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.RangeBorderCollection;'
+      return:
+        type:
+          - 'excel!Excel.RangeBorderCollection:class'
+        description: ''
+      parameters:
+        - id: options
+          description: 'Предоставляет параметры, для которых загружается свойства объекта.'
+          type:
+            - 'excel!Excel.RangeBorderCollection#load~0:complex'
+  - uid: 'excel!Excel.RangeBorderCollection#load:member(2)'
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.RangeBorderCollection;'
+      return:
+        type:
+          - 'excel!Excel.RangeBorderCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var range = worksheet.getRange(rangeAddress);
+              var borders = range.format.borders;
+              border.load('items');
+              return ctx.sync().then(function() {
+                  console.log(borders.count);
+                  for (var i = 0; i < borders.items.length; i++) {
+                      console.log(borders.items[i].sideIndex);
+                  }
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
+          type:
+            - 'string | string[]'
+  - uid: 'excel!Excel.RangeBorderCollection#load:member(3)'
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.RangeBorderCollection;'
+      return:
+        type:
+          - 'excel!Excel.RangeBorderCollection:class'
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+          type:
+            - 'office!OfficeExtension.LoadOption:interface'
+  - uid: 'excel!Excel.RangeBorderCollection#tintAndShade:member'
+    summary: |-
+      Задает двойное значение, которое осветляет или затемняет цвет границ диапазона, значение находится в диапазоне от-1 (самая темная) и 1 (самое яркое) с 0 для исходного цвета. Значение NULL указывает на то, что в семействе границ для всех семейств границ не задан параметр Тинтандшаде.
+
+      \[[Набор API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: tintAndShade
+    fullName: tintAndShade
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'tintAndShade: number;'
+      return:
+        type:
+          - number
+  - uid: 'excel!Excel.RangeBorderCollection#toJSON:member(1)'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный `Excel.RangeBorderCollection` объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.RangeBorderCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.RangeBorderCollectionData;'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.RangeBorderCollectionData:interface'
+        description: ''
+references:
+  - uid: 'office!OfficeExtension.ClientObject:class'
+    name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.RequestContext:class'
+    name: RequestContext
+  - uid: 'excel!Excel.RangeBorder:class'
+    name: Excel.RangeBorder
+  - uid: 'excel!Excel.BorderIndex:enum'
+    name: Excel.BorderIndex
+  - uid: 'excel!Excel.RangeBorderCollection#items~0:complex'
+    name: 'Excel.RangeBorder[]'
+    fullName: 'Excel.RangeBorder[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.RangeBorder:class'
+        name: Excel.RangeBorder
+        fullName: Excel.RangeBorder
+      - name: '[]'
+        fullName: '[]'
+  - uid: 'excel!Excel.RangeBorderCollection:class'
+    name: Excel.RangeBorderCollection
+  - uid: 'excel!Excel.RangeBorderCollection#load~0:complex'
+    name: Excel.Interfaces.RangeBorderCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+    fullName: Excel.Interfaces.RangeBorderCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+    spec.typeScript:
+      - uid: 'excel!Excel.Interfaces.RangeBorderCollectionLoadOptions:interface'
+        name: Excel.Interfaces.RangeBorderCollectionLoadOptions
+        fullName: Excel.Interfaces.RangeBorderCollectionLoadOptions
+      - name: ' & '
+        fullName: ' & '
+      - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
+        name: Excel.Interfaces.CollectionLoadOptions
+        fullName: Excel.Interfaces.CollectionLoadOptions
+  - uid: 'office!OfficeExtension.LoadOption:interface'
+    name: OfficeExtension.LoadOption
+  - uid: 'excel!Excel.Interfaces.RangeBorderCollectionData:interface'
+    name: Excel.Interfaces.RangeBorderCollectionData
