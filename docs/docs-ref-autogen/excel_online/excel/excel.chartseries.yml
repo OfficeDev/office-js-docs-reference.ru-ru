@@ -28,6 +28,8 @@ items:
       - 'excel!Excel.ChartSeries#firstSliceAngle:member'
       - 'excel!Excel.ChartSeries#format:member'
       - 'excel!Excel.ChartSeries#gapWidth:member'
+      - 'excel!Excel.ChartSeries#getDimensionValues:member(1)'
+      - 'excel!Excel.ChartSeries#getDimensionValues:member(2)'
       - 'excel!Excel.ChartSeries#gradientMaximumColor:member'
       - 'excel!Excel.ChartSeries#gradientMaximumType:member'
       - 'excel!Excel.ChartSeries#gradientMaximumValue:member'
@@ -301,6 +303,48 @@ items:
       return:
         type:
           - number
+  - uid: 'excel!Excel.ChartSeries#getDimensionValues:member(1)'
+    summary: |-
+      Получает значения из одного измерения ряда диаграммы. Это могут быть значения категории или значения данных, в зависимости от указанного измерения и способа сопоставления данных для ряда диаграммы.
+
+      \[[Набор API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getDimensionValues(dimension)
+    fullName: getDimensionValues(dimension)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDimensionValues(dimension: Excel.ChartSeriesDimension): OfficeExtension.ClientResult<string[]>;'
+      return:
+        type:
+          - 'excel!Excel.ChartSeries#getDimensionValues~0:complex'
+        description: ''
+      parameters:
+        - id: dimension
+          description: 'измерение оси, в которой данные из'
+          type:
+            - 'excel!Excel.ChartSeriesDimension:enum'
+  - uid: 'excel!Excel.ChartSeries#getDimensionValues:member(2)'
+    summary: |-
+      Получает значения из одного измерения ряда диаграммы. Это могут быть значения категории или значения данных, в зависимости от указанного измерения и способа сопоставления данных для ряда диаграммы.
+
+      \[[Набор API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getDimensionValues(dimensionString)
+    fullName: getDimensionValues(dimensionString)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDimensionValues(dimensionString: "Categories" | "Values" | "XValues" | "YValues" | "BubbleSizes"): OfficeExtension.ClientResult<string[]>;'
+      return:
+        type:
+          - 'excel!Excel.ChartSeries#getDimensionValues~1:complex'
+        description: ''
+      parameters:
+        - id: dimensionString
+          description: 'измерение оси, в которой данные из'
+          type:
+            - '"Categories" | "Values" | "XValues" | "YValues" | "BubbleSizes"'
   - uid: 'excel!Excel.ChartSeries#gradientMaximumColor:member'
     summary: |-
       Задает цвет для максимального значения ряда диаграммы карты областей.
@@ -570,7 +614,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`— Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+          description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
           type:
             - |-
               {
@@ -794,7 +838,7 @@ items:
           ```
   - uid: 'excel!Excel.ChartSeries#name:member'
     summary: |-
-      Задает имя ряда в диаграмме.
+      Задает имя ряда в диаграмме. Длина имени не должна превышать 255 символов.
 
       \[[Набор API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: name
@@ -1101,7 +1145,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.ChartSeries#toJSON:member(1)'
-    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. ChartSeries — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип`Excel.Interfaces.ChartSeriesData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
+    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. ChartSeries — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.ChartSeriesData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -1204,6 +1248,26 @@ references:
     name: Excel.ChartDataLabels
   - uid: 'excel!Excel.ChartSeriesFormat:class'
     name: Excel.ChartSeriesFormat
+  - uid: 'excel!Excel.ChartSeries#getDimensionValues~0:complex'
+    name: 'OfficeExtension.ClientResult<string[]>'
+    fullName: 'OfficeExtension.ClientResult<string[]>'
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: '<string[]>'
+        fullName: '<string[]>'
+  - uid: 'excel!Excel.ChartSeriesDimension:enum'
+    name: Excel.ChartSeriesDimension
+  - uid: 'excel!Excel.ChartSeries#getDimensionValues~1:complex'
+    name: 'OfficeExtension.ClientResult<string[]>'
+    fullName: 'OfficeExtension.ClientResult<string[]>'
+    spec.typeScript:
+      - uid: 'office!OfficeExtension.ClientResult:class'
+        name: OfficeExtension.ClientResult
+        fullName: OfficeExtension.ClientResult
+      - name: '<string[]>'
+        fullName: '<string[]>'
   - uid: 'excel!Excel.ChartSeries#gradientMaximumType~0:complex'
     name: Excel.ChartGradientStyleType | "ExtremeValue" | "Number" | "Percent"
     fullName: Excel.ChartGradientStyleType | "ExtremeValue" | "Number" | "Percent"
