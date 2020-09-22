@@ -70,7 +70,7 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~1:complex'
         - id: contentType
-          description: 'Необязательный параметр. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для перечисления ContentType. Plain, 1,11 для enum ContentType. упоминание\]'
+          description: 'Необязательно. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для перечисления ContentType. Plain, 1,11 для enum ContentType. упоминание\]'
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentCollection#add:member(2)'
@@ -99,7 +99,7 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~3:complex'
         - id: contentTypeString
-          description: 'Необязательный параметр. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для перечисления ContentType. Plain, 1,11 для enum ContentType. упоминание\]'
+          description: 'Необязательно. Тип контента, содержащегося в комментарии. Значение по умолчанию — enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1,10 для перечисления ContentType. Plain, 1,11 для enum ContentType. упоминание\]'
           type:
             - '"Plain" | "Mention"'
   - uid: 'excel!Excel.CommentCollection#context:member'
@@ -295,6 +295,48 @@ items:
       return:
         type:
           - 'excel!Excel.CommentCollection#onAdded~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml
+          await Excel.run(async (context) => {
+              const comments = context.workbook.worksheets.getActiveWorksheet().comments;
+
+              // Register the onAdded, onChanged, and onDeleted comment event handlers.
+              comments.onAdded.add(commentAdded);
+              comments.onChanged.add(commentChanged);
+              comments.onDeleted.add(commentDeleted);
+
+              await context.sync();
+
+              console.log("Added event handlers for when comments are added, changed, or deleted.");
+          });
+          ```
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml
+          async function commentAdded(event: Excel.CommentAddedEventArgs) {
+              await Excel.run(async (context) => {
+                  // Retrieve the added comment using the comment ID.
+                  // Note: This method assumes only a single comment is added at a time. 
+                  const addedComment = context.workbook.comments.getItem(event.commentDetails[0].commentId);
+
+                  // Load the added comment's data.
+                  addedComment.load(["content", "authorName", "creationDate"]);
+
+                  await context.sync();
+
+                  // Print out the added comment's data.
+                  console.log(`A comment was added:`);
+                  console.log(`    ID: ${event.commentDetails[0].commentId}`);
+                  console.log(`    Comment content:${addedComment.content}`);
+                  console.log(`    Comment author:${addedComment.authorName}`);
+                  console.log(`    Creation date:${addedComment.creationDate}`);
+              });
+          }
+          ```
   - uid: 'excel!Excel.CommentCollection#onChanged:member'
     summary: |-
       Происходит при изменении комментариев или ответов в коллекции комментариев, в том числе при удалении ответов.
@@ -310,6 +352,48 @@ items:
       return:
         type:
           - 'excel!Excel.CommentCollection#onChanged~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml
+          await Excel.run(async (context) => {
+              const comments = context.workbook.worksheets.getActiveWorksheet().comments;
+
+              // Register the onAdded, onChanged, and onDeleted comment event handlers.
+              comments.onAdded.add(commentAdded);
+              comments.onChanged.add(commentChanged);
+              comments.onDeleted.add(commentDeleted);
+
+              await context.sync();
+
+              console.log("Added event handlers for when comments are added, changed, or deleted.");
+          });
+          ```
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml
+          async function commentChanged(event: Excel.CommentChangedEventArgs) {
+              await Excel.run(async (context) => {
+                  // Retrieve the changed comment using the comment ID.
+                  // Note: This method assumes only a single comment is changed at a time. 
+                  const changedComment = context.workbook.comments.getItem(event.commentDetails[0].commentId);
+
+                  // Load the changed comment's data.
+                  changedComment.load(["content", "authorName", "creationDate"]);
+
+                  await context.sync();
+
+                  // Print out the changed comment's data.
+                  console.log(`A comment was changed:`);
+                  console.log(`    ID: ${event.commentDetails[0].commentId}`);
+                  console.log(`    Updated comment content: ${changedComment.content}`);
+                  console.log(`    Comment author: ${changedComment.authorName}`);
+                  console.log(`    Creation date: ${changedComment.creationDate}`);
+              });
+          }
+          ```
   - uid: 'excel!Excel.CommentCollection#onDeleted:member'
     summary: |-
       Возникает при удалении комментариев в коллекции комментариев.
@@ -325,6 +409,37 @@ items:
       return:
         type:
           - 'excel!Excel.CommentCollection#onDeleted~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>Примеры
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml
+          await Excel.run(async (context) => {
+              const comments = context.workbook.worksheets.getActiveWorksheet().comments;
+
+              // Register the onAdded, onChanged, and onDeleted comment event handlers.
+              comments.onAdded.add(commentAdded);
+              comments.onChanged.add(commentChanged);
+              comments.onDeleted.add(commentDeleted);
+
+              await context.sync();
+
+              console.log("Added event handlers for when comments are added, changed, or deleted.");
+          });
+          ```
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/30-events/events-comment-event-handler.yaml
+          async function commentDeleted(event: Excel.CommentDeletedEventArgs) {
+              await Excel.run(async (context) => {
+                  // Print out the deleted comment's ID.
+                  // Note: This method assumes only a single comment is deleted at a time. 
+                  console.log(`A comment was deleted:`);
+                  console.log(`    ID: ${event.commentDetails[0].commentId}`);
+              });
+          }
+          ```
   - uid: 'excel!Excel.CommentCollection#toJSON:member(1)'
     summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный `Excel.CommentCollection` объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.CommentCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.'
     name: toJSON()
