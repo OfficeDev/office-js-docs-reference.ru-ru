@@ -6,7 +6,7 @@ items:
 
       Заголовки Интернета хранятся в виде пар "ключ-значение" для каждого элемента.
 
-      **Note**: этот объект предназначен для задания и получения настраиваемых заголовков для элемента сообщения.
+      **Note** : этот объект предназначен для задания и получения настраиваемых заголовков для элемента сообщения.
 
       \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -20,9 +20,9 @@ items:
 
       - Заголовки имен, чтобы позже можно было повторно использовать и обновлять их значения. Таким образом, не следует заменять именование заголовков (например, на основе вводимых пользователем данных, меток времени и т. д.).
 
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
     name: Office.InternetHeaders
     fullName: Office.InternetHeaders
     langs:
@@ -31,22 +31,30 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.InternetHeaders#getAsync:member(1)'
-      - 'outlook!Office.InternetHeaders#getAsync:member(2)'
       - 'outlook!Office.InternetHeaders#removeAsync:member(1)'
-      - 'outlook!Office.InternetHeaders#removeAsync:member(2)'
       - 'outlook!Office.InternetHeaders#setAsync:member(1)'
-      - 'outlook!Office.InternetHeaders#setAsync:member(2)'
   - uid: 'outlook!Office.InternetHeaders#getAsync:member(1)'
     summary: |-
       Если указан массив имен Интернет заголовков, этот метод возвращает словарь, содержащий эти заголовки Интернета и их значения. Если надстройка запрашивает недоступный x-заголовок, этот x-заголовок не будет возвращен в результатах.
 
-      **Note**: Этот метод предназначен для возврата значений настраиваемых заголовков, заданные с помощью `setAsync` метода.
+      **Note** : Этот метод предназначен для возврата значений настраиваемых заголовков, заданные с помощью `setAsync` метода.
 
       \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      Office.context.mailbox.item.internetHeaders.getAsync(["header1", "header2"], callback);
+
+      function callback(asyncResult) {
+          var dictionary = asyncResult.value;
+          var header1_value = dictionary["header1"];
+      }
+      ```
     name: 'getAsync(names, options, callback)'
     fullName: 'getAsync(names, options, callback)'
     langs:
@@ -64,66 +72,30 @@ items:
           type:
             - 'string[]'
         - id: options
-          description: 'Необязательный параметр. Литерал объекта, содержащий одно или несколько из следующих свойств:`asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательное свойство. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра, `asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
           type:
             - 'outlook!Office.InternetHeaders#getAsync~0:complex'
-  - uid: 'outlook!Office.InternetHeaders#getAsync:member(2)'
-    summary: |-
-      Если указан массив имен Интернет заголовков, этот метод возвращает словарь, содержащий эти заголовки Интернета и их значения. Если надстройка запрашивает недоступный x-заголовок, этот x-заголовок не будет возвращен в результатах.
-
-      **Note**: Этот метод предназначен для возврата значений настраиваемых заголовков, заданные с помощью `setAsync` метода.
-
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      Office.context.mailbox.item.internetHeaders.getAsync(["header1", "header2"], callback);
-
-      function callback(asyncResult) {
-          var dictionary = asyncResult.value;
-          var header1_value = dictionary["header1"];
-      }
-      ```
-    name: 'getAsync(names, callback)'
-    fullName: 'getAsync(names, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(names: string[], callback?: (asyncResult: Office.AsyncResult<InternetHeaders>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: names
-          description: Имена возвращаемых интернетных заголовков.
-          type:
-            - 'string[]'
-        - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
-          type:
-            - 'outlook!Office.InternetHeaders#getAsync~1:complex'
   - uid: 'outlook!Office.InternetHeaders#removeAsync:member(1)'
     summary: |-
       При наличии массива имен Интернет-заголовков этот метод удаляет указанные заголовки из коллекции Интернет-заголовков.
 
-      **Note**: Этот метод предназначен для удаления настраиваемых заголовков, заданные с помощью `setAsync` метода.
+      **Note** : Этот метод предназначен для удаления настраиваемых заголовков, заданные с помощью `setAsync` метода.
 
       \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      Office.context.mailbox.item.internetHeaders.removeAsync(["header1", "header2"]);
+      ```
     name: 'removeAsync(names, options, callback)'
     fullName: 'removeAsync(names, options, callback)'
     langs:
@@ -141,63 +113,32 @@ items:
           type:
             - 'string[]'
         - id: options
-          description: 'Необязательный параметр. Литерал объекта, содержащий одно или несколько из следующих свойств:`asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательное свойство. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра, `asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
           type:
             - 'outlook!Office.InternetHeaders#removeAsync~0:complex'
-  - uid: 'outlook!Office.InternetHeaders#removeAsync:member(2)'
-    summary: |-
-      При наличии массива имен Интернет-заголовков этот метод удаляет указанные заголовки из коллекции Интернет-заголовков.
-
-      **Note**: Этот метод предназначен для удаления настраиваемых заголовков, заданные с помощью `setAsync` метода.
-
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      Office.context.mailbox.item.internetHeaders.removeAsync(["header1", "header2"]);
-      ```
-    name: 'removeAsync(names, callback)'
-    fullName: 'removeAsync(names, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeAsync(names: string[], callback?: (asyncResult: Office.AsyncResult<InternetHeaders>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: names
-          description: Имена удаляемых интернетных заголовков.
-          type:
-            - 'string[]'
-        - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра,`asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.'
-          type:
-            - 'outlook!Office.InternetHeaders#removeAsync~1:complex'
   - uid: 'outlook!Office.InternetHeaders#setAsync:member(1)'
     summary: |-
       Задает указанные значения для заданных заголовков Интернета.
 
       `setAsync`Метод создает новый заголовок, если указанный заголовок еще не существует; в противном случае существующее значение заменяется новым значением.
 
-      **Note**: Этот метод предназначен для задания значений настраиваемых заголовков.
+      **Note** : Этот метод предназначен для задания значений настраиваемых заголовков.
 
       \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      Office.context.mailbox.item.internetHeaders.setAsync({"header1": "value1", "header2": "value2"});
+      ```
     name: 'setAsync(headers, options, callback)'
     fullName: 'setAsync(headers, options, callback)'
     langs:
@@ -215,72 +156,17 @@ items:
           type:
             - '!Object:interface'
         - id: options
-          description: 'Необязательный параметр. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа Office. asyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа Office. asyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.'
           type:
             - 'outlook!Office.InternetHeaders#setAsync~0:complex'
-  - uid: 'outlook!Office.InternetHeaders#setAsync:member(2)'
-    summary: |-
-      Задает указанные значения для заданных заголовков Интернета.
-
-      `setAsync`Метод создает новый заголовок, если указанный заголовок еще не существует; в противном случае существующее значение заменяется новым значением.
-
-      **Note**: Этот метод предназначен для задания значений настраиваемых заголовков.
-
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      Office.context.mailbox.item.internetHeaders.setAsync({"header1": "value1", "header2": "value2"});
-      ```
-    name: 'setAsync(headers, callback)'
-    fullName: 'setAsync(headers, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setAsync(headers: Object, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: headers
-          description: 'Имена и соответствующие значения заголовков, которые необходимо задать. Должен быть объектом Dictionary с ключами в качестве имен заголовков Интернета и значениями, которые являются значениями заголовков Интернета.'
-          type:
-            - '!Object:interface'
-        - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа Office. asyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.'
-          type:
-            - 'outlook!Office.InternetHeaders#setAsync~1:complex'
 references:
   - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.InternetHeaders#getAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<InternetHeaders>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.InternetHeaders>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.InternetHeaders:interface'
-        name: InternetHeaders
-        fullName: Office.InternetHeaders
-      - name: '>) => void'
-        fullName: '>) => void'
-  - uid: 'outlook!Office.InternetHeaders#getAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<InternetHeaders>) => void'
     fullName: '(asyncResult: Office.AsyncResult<Office.InternetHeaders>) => void'
     spec.typeScript:
@@ -312,36 +198,9 @@ references:
         fullName: Office.InternetHeaders
       - name: '>) => void'
         fullName: '>) => void'
-  - uid: 'outlook!Office.InternetHeaders#removeAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<InternetHeaders>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.InternetHeaders>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.InternetHeaders:interface'
-        name: InternetHeaders
-        fullName: Office.InternetHeaders
-      - name: '>) => void'
-        fullName: '>) => void'
   - uid: '!Object:interface'
     name: Object
   - uid: 'outlook!Office.InternetHeaders#setAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.InternetHeaders#setAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:

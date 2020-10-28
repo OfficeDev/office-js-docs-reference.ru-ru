@@ -22,9 +22,7 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(1)'
-      - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(2)'
       - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(1)'
-      - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(2)'
       - 'outlook!Office.AppointmentCompose#body:member'
       - 'outlook!Office.AppointmentCompose#end:member'
       - 'outlook!Office.AppointmentCompose#getSelectedDataAsync:member(1)'
@@ -34,10 +32,8 @@ items:
       - 'outlook!Office.AppointmentCompose#location:member'
       - 'outlook!Office.AppointmentCompose#optionalAttendees:member'
       - 'outlook!Office.AppointmentCompose#removeAttachmentAsync:member(1)'
-      - 'outlook!Office.AppointmentCompose#removeAttachmentAsync:member(2)'
       - 'outlook!Office.AppointmentCompose#requiredAttendees:member'
       - 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(1)'
-      - 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(2)'
       - 'outlook!Office.AppointmentCompose#start:member'
       - 'outlook!Office.AppointmentCompose#subject:member'
   - uid: 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(1)'
@@ -52,11 +48,11 @@ items:
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
-      **Ошибки**:
+      **Ошибки** :
 
       - `AttachmentSizeExceeded`<!-- -->: Вложение больше, чем разрешено.
 
@@ -113,60 +109,13 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `isInline`<!-- -->: При значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `isInline`<!-- -->: При значении true указывает, что вложение будет отображаться встроенным в тексте сообщения и не должно отображаться в списке вложений.'
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~0:complex'
         - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
           type:
             - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~1:complex'
-  - uid: 'outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(2)'
-    summary: |-
-      Добавляет файл в сообщение или встречу в качестве вложения.
-
-      Метод `addFileAttachmentAsync` передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
-
-      Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
-
-      **Важно!** в последних сборках Outlook в Windows возникла ошибка, которая ошибочно добавляет `Authorization: Bearer` заголовок к этому действию (независимо от того, используется ли этот API или пользовательский интерфейс Outlook). Чтобы обойти эту проблему, вы можете попробовать использовать API, который `addFileAttachmentFromBase64` появился в наборе требований 1,8.
-
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
-
-      **Ошибки**:
-
-      - `AttachmentSizeExceeded`<!-- -->: Вложение больше, чем разрешено.
-
-      - `FileTypeNotSupported`<!-- -->: Вложение имеет недопустимое расширение.
-
-      - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или встреча содержит слишком много вложений.
-    name: 'addFileAttachmentAsync(uri, attachmentName, callback)'
-    fullName: 'addFileAttachmentAsync(uri, attachmentName, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: uri
-          description: "Универсальный код ресурса (URI), представляющий расположение файла, который нужно вложить в сообщение или встречу. Максимальная длина\_— 2048 символов."
-          type:
-            - string
-        - id: attachmentName
-          description: "Имя вложения, которое отображается при передаче вложения. Максимальная длина\_— 255 символов."
-          type:
-            - string
-        - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
-          type:
-            - 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~2:complex'
   - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(1)'
     summary: |-
       Добавляет к сообщению элемент Exchange, например сообщение, в виде вложения.
@@ -179,11 +128,11 @@ items:
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
-      **Ошибки**:
+      **Ошибки** :
 
       - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или встреча содержит слишком много вложений.
 
@@ -240,65 +189,22 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
           type:
             - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~0:complex'
-  - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(2)'
-    summary: |-
-      Добавляет к сообщению элемент Exchange, например сообщение, в виде вложения.
-
-      С помощью метода `addItemAttachmentAsync` можно в элемент формы создания вложить элемент с указанным идентификатором Exchange. Если указан метод обратного вызова, метод вызывается с помощью одного параметра, `asyncResult`<!-- -->, который содержит либо идентификатор вложения, либо код, указывающий на ошибки, возникшие при присоединении элемента. При необходимости можно использовать параметр `options` для передачи сведений о состоянии методу обратного вызова.
-
-      Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
-
-      Если ваша надстройка Office выполняется в Outlook в Интернете, метод `addItemAttachmentAsync` обеспечивает вложение элементов в элементы, отличные от редактируемого. Однако это действие не рекомендуется выполнять, так как оно не поддерживается.
-
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
-
-      **Ошибки**:
-
-      - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или встреча содержит слишком много вложений.
-    name: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
-    fullName: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: itemId
-          description: "Идентификатор Exchange для вкладываемого элемента. Максимальная длина\_— 100 символов."
-          type:
-            - any
-        - id: attachmentName
-          description: "Имя вложения, которое отображается при передаче вложения. Максимальная длина\_— 255 символов."
-          type:
-            - string
-        - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.'
-          type:
-            - 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#body:member'
     summary: |-
       Получает объект, предоставляющий методы для работы с основным текстом элемента.
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -338,9 +244,9 @@ items:
 
       **Важно!** в клиенте Windows невозможно использовать это свойство, чтобы обновить конец повторения.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -410,9 +316,9 @@ items:
 
       \[[Набор API: Mailbox 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -463,9 +369,9 @@ items:
 
       \[[Набор API: Mailbox 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -507,9 +413,9 @@ items:
 
       Свойство `itemType` возвращает одно из значений перечисления `ItemType`, которое указывает, является ли экземпляр объекта `item` сообщением или встречей.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -535,9 +441,9 @@ items:
 
       Настраиваемые свойства предоставляются в виде объекта `CustomProperties` в свойстве `asyncResult.value`. Этот объект позволяет получить, задать и удалить настраиваемые свойства для элемента, а также сохранить изменения, внесенные в набор настраиваемых свойств, на сервере.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -605,15 +511,15 @@ items:
           type:
             - 'outlook!Office.AppointmentCompose#loadCustomPropertiesAsync~0:complex'
         - id: userContext
-          description: 'Необязательное. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.'
+          description: 'Необязательное свойство. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.'
           type:
             - any
   - uid: 'outlook!Office.AppointmentCompose#location:member'
     summary: 'Получает или задает место встречи. `location`Свойство возвращает объект [Location](xref:outlook!Office.Location:interface) , предоставляющий методы, которые используются для получения и задания места встречи.'
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -663,9 +569,9 @@ items:
 
       Свойство `optionalAttendees` возвращает объект `Recipients`, который предоставляет методы для получения или обновления необязательных участников собрания. Тем не менее, в зависимости от клиента или платформы (например, Windows, Mac и т. д.), можно установить пределы для количества получателей, которые можно получить или обновить. Для получения дополнительных сведений просмотрите объект [Recipients](xref:outlook!Office.Recipients:interface) .
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -730,11 +636,11 @@ items:
 
       \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
-      **Ошибки**:
+      **Ошибки** :
 
       - `InvalidAttachmentId`<!-- -->: Идентификатор вложения не существует.
 
@@ -783,57 +689,22 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.'
           type:
             - 'outlook!Office.AppointmentCompose#removeAttachmentAsync~0:complex'
-  - uid: 'outlook!Office.AppointmentCompose#removeAttachmentAsync:member(2)'
-    summary: |-
-      Удаляет вложение из сообщения или встречи.
-
-      Метод `removeAttachmentAsync` удаляет из элемента вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс переходит к моменту, когда пользователь закрывает приложение, или если пользователь начинает создание встроенной формы, затем извлекает форму, чтобы продолжить работу в отдельном окне.
-
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
-
-      **Ошибки**:
-
-      - `InvalidAttachmentId`<!-- -->: Идентификатор вложения не существует.
-    name: 'removeAttachmentAsync(attachmentId, callback)'
-    fullName: 'removeAttachmentAsync(attachmentId, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: attachmentId
-          description: Идентификатор удаляемого вложения.
-          type:
-            - string
-        - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.'
-          type:
-            - 'outlook!Office.AppointmentCompose#removeAttachmentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentCompose#requiredAttendees:member'
     summary: |-
       Предоставляет доступ к обязательным участникам события. Тип объекта и уровень доступа зависят от режима текущего элемента.
 
       Свойство `requiredAttendees` возвращает объект `Recipients`, предоставляющий методы, с помощью которых можно получить или обновить сведения об обязательных участниках собрания. Тем не менее, в зависимости от клиента или платформы (например, Windows, Mac и т. д.), можно установить пределы для количества получателей, которые можно получить или обновить. Для получения дополнительных сведений просмотрите объект [Recipients](xref:outlook!Office.Recipients:interface) .
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -899,11 +770,11 @@ items:
 
       \[[Набор API: Mailbox 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
-      **Ошибки**:
+      **Ошибки** :
 
       - `InvalidAttachmentId`<!-- -->: Идентификатор вложения не существует.
 
@@ -911,6 +782,19 @@ items:
 
       ```javascript
       Office.context.mailbox.item.setSelectedDataAsync("<b>Hello World!</b>", { coercionType : "html" });
+      ```
+      ```javascript
+      Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
+      ```
+      ```javascript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/20-item-body/set-selected-data.yaml
+      Office.context.mailbox.item.setSelectedDataAsync("Replaced", function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Selected text has been updated successfully.");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
       ```
     name: 'setSelectedDataAsync(data, options, callback)'
     fullName: 'setSelectedDataAsync(data, options, callback)'
@@ -929,64 +813,13 @@ items:
           type:
             - string
         - id: options
-          description: 'Необязательное. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `coercionType`<!-- -->: Если текст, текущий стиль применяется в Outlook в Интернете и в Windows. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML и поле поддерживает HTML (тема не используется), текущий стиль применяется в Outlook в Интернете, а в Outlook для настольных компьютеров применяется стиль по умолчанию. Если поле является текстовым, возвращается ошибка `InvalidDataFormat`. Если свойство `coercionType` не задано, результат зависит от поля: если поле имеет формат HTML, используется текст в формате HTML, а если поле текстовое, применяется обычный текст.'
+          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `coercionType`<!-- -->: Если текст, текущий стиль применяется в Outlook в Интернете и в Windows. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если HTML и поле поддерживает HTML (тема не используется), текущий стиль применяется в Outlook в Интернете, а в Outlook для настольных компьютеров применяется стиль по умолчанию. Если поле является текстовым, возвращается ошибка `InvalidDataFormat`. Если свойство `coercionType` не задано, результат зависит от поля: если поле имеет формат HTML, используется текст в формате HTML, а если поле текстовое, применяется обычный текст.'
           type:
             - 'outlook!Office.AppointmentCompose#setSelectedDataAsync~0:complex'
         - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.AppointmentCompose#setSelectedDataAsync~1:complex'
-  - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync:member(2)'
-    summary: |-
-      Асинхронно вставляет данные в текст или тему сообщения.
-
-      Метод `setSelectedDataAsync` вставляет указанную строку в местоположение курсора в теме или тексте элемента либо, если текст выделен в редакторе, он заменяет выделенный текст. Если курсор находится вне текста или темы элемента, возвращается ошибка. После вставки курсор помещается в конец вставленного содержимого.
-
-      \[[Набор API: Mailbox 1,2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
-
-      **Ошибки**:
-
-      - `InvalidAttachmentId`<!-- -->: Идентификатор вложения не существует.
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/20-item-body/set-selected-data.yaml
-      Office.context.mailbox.item.setSelectedDataAsync("Replaced", function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Selected text has been updated successfully.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: 'setSelectedDataAsync(data, callback)'
-    fullName: 'setSelectedDataAsync(data, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: data
-          description: "Вставляемые данные. Объем данных не должен превышать 1\_000\_000 символов. Если передано больше 1\_000\_000 символов, возвращается исключение `ArgumentOutOfRange`."
-          type:
-            - string
-        - id: callback
-          description: 'Необязательное. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
-          type:
-            - 'outlook!Office.AppointmentCompose#setSelectedDataAsync~2:complex'
   - uid: 'outlook!Office.AppointmentCompose#start:member'
     summary: |-
       Получает или задает дату и время начала встречи.
@@ -997,9 +830,9 @@ items:
 
       **Важно!** в клиенте Windows невозможно использовать это свойство для обновления начала повторения.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -1043,9 +876,9 @@ items:
 
       Свойство `subject` возвращает объект `Subject`, который предоставляет методы для получения и задания темы.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: организатор встречи
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : организатор встречи
 
       #### <a name="examples"></a>Примеры
 
@@ -1105,31 +938,9 @@ references:
         fullName: Office.AsyncResult
       - name: <string>) => void
         fullName: <string>) => void
-  - uid: 'outlook!Office.AppointmentCompose#addFileAttachmentAsync~2:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
   - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.AppointmentCompose#addItemAttachmentAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<string>) => void'
     fullName: '(asyncResult: Office.AsyncResult<string>) => void'
     spec.typeScript:
@@ -1224,17 +1035,6 @@ references:
         fullName: Office.AsyncResult
       - name: <void>) => void
         fullName: <void>) => void
-  - uid: 'outlook!Office.AppointmentCompose#removeAttachmentAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
   - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync~0:complex'
     name: Office.AsyncContextOptions & CoercionTypeOptions
     fullName: Office.AsyncContextOptions & Office.CoercionTypeOptions
@@ -1248,17 +1048,6 @@ references:
         name: CoercionTypeOptions
         fullName: Office.CoercionTypeOptions
   - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.AppointmentCompose#setSelectedDataAsync~2:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
