@@ -12,9 +12,9 @@ items:
 
       - `userProfile`<!-- -->: Предоставляет сведения о пользователе в надстройке Outlook.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`Restricted`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
     name: Office.Mailbox
     fullName: Office.Mailbox
     langs:
@@ -23,7 +23,6 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.Mailbox#addHandlerAsync:member(1)'
-      - 'outlook!Office.Mailbox#addHandlerAsync:member(2)'
       - 'outlook!Office.Mailbox#convertToEwsId:member(1)'
       - 'outlook!Office.Mailbox#convertToLocalClientTime:member(1)'
       - 'outlook!Office.Mailbox#convertToRestId:member(1)'
@@ -40,20 +39,38 @@ items:
       - 'outlook!Office.Mailbox#item:member'
       - 'outlook!Office.Mailbox#makeEwsRequestAsync:member(1)'
       - 'outlook!Office.Mailbox#removeHandlerAsync:member(1)'
-      - 'outlook!Office.Mailbox#removeHandlerAsync:member(2)'
       - 'outlook!Office.Mailbox#restUrl:member'
       - 'outlook!Office.Mailbox#userProfile:member'
   - uid: 'outlook!Office.Mailbox#addHandlerAsync:member(1)'
     summary: |-
-      Добавляет обработчик для поддерживаемого события. **Note**: события доступны только в области задач.
+      Добавляет обработчик для поддерживаемого события. **Note** : события доступны только в области задач.
 
       Для получения поддерживаемых событий обратитесь к [разделу события](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.6/office.context.mailbox#events) объектной модели почтового ящика.
 
       \[[Набор API: Mailbox 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      Office.initialize = function (reason) {
+          $(document).ready(function () {
+              Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, loadNewItem, function (result) {
+              if (result.status === Office.AsyncResultStatus.Failed) {
+                      // Handle error.
+                  }
+              });
+          });
+      };
+
+      function loadNewItem(eventArgs) {
+          // Load the properties of the newly selected item.
+          loadProps(Office.context.mailbox.item);
+      }
+      ```
     name: 'addHandlerAsync(eventType, handler, options, callback)'
     fullName: 'addHandlerAsync(eventType, handler, options, callback)'
     langs:
@@ -75,80 +92,26 @@ items:
           type:
             - 'outlook!Office.Mailbox#addHandlerAsync~1:complex'
         - id: options
-          description: Необязательный параметр. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          description: Необязательное свойство. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.Mailbox#addHandlerAsync~2:complex'
-  - uid: 'outlook!Office.Mailbox#addHandlerAsync:member(2)'
-    summary: |-
-      Добавляет обработчик для поддерживаемого события. **Note**: события доступны только в области задач.
-
-      Для получения поддерживаемых событий обратитесь к [разделу события](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.6/office.context.mailbox#events) объектной модели почтового ящика.
-
-      \[[Набор API: Mailbox 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      Office.initialize = function (reason) {
-          $(document).ready(function () {
-              Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, loadNewItem, function (result) {
-              if (result.status === Office.AsyncResultStatus.Failed) {
-                      // Handle error.
-                  }
-              });
-          });
-      };
-
-      function loadNewItem(eventArgs) {
-          // Load the properties of the newly selected item.
-          loadProps(Office.context.mailbox.item);
-      }
-      ```
-    name: 'addHandlerAsync(eventType, handler, callback)'
-    fullName: 'addHandlerAsync(eventType, handler, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: 'Событие, которое должно вызвать обработчик.'
-          type:
-            - 'outlook!Office.Mailbox#addHandlerAsync~3:complex'
-        - id: handler
-          description: 'Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство Type для параметра будет сопоставляться `eventType` с параметром, переданным `addHandlerAsync`<!-- -->.'
-          type:
-            - 'outlook!Office.Mailbox#addHandlerAsync~4:complex'
-        - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
-          type:
-            - 'outlook!Office.Mailbox#addHandlerAsync~5:complex'
   - uid: 'outlook!Office.Mailbox#convertToEwsId:member(1)'
     summary: |-
       Преобразовывает идентификатор элемента из формата REST в формат EWS.
 
       Формат идентификаторов, извлекаемых через API REST (например, API Почты Outlook или Microsoft Graph), отличается от формата веб-служб Exchange (EWS). Метод `convertToEwsId` преобразовывает идентификатор в формате REST в формат EWS.
 
-      **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+      **Note** : Этот метод не поддерживается в Outlook на iOS или Android.
 
       \[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`Restricted`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       #### <a name="examples"></a>Примеры
 
@@ -193,9 +156,9 @@ items:
 
       Если почтовое приложение работает в Outlook на настольных клиентах, `convertToLocalClientTime` метод возвратит объект Dictionary со значениями, заданными для часового пояса клиентского компьютера. Если почтовое приложение запущено в Outlook в Интернете, `convertToLocalClientTime` метод возвратит объект Dictionary со значениями, заданными в часовом поясе, заданном в центре администрирования Exchange.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
     name: convertToLocalClientTime(timeValue)
     fullName: convertToLocalClientTime(timeValue)
     langs:
@@ -216,13 +179,13 @@ items:
     summary: |-
       Преобразовывает идентификатор элемента в формате EWS в формат REST.
 
-      **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+      **Note** : Этот метод не поддерживается в Outlook на iOS или Android.
 
       \[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`Restricted`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       Идентификаторы элементов, получаемые с помощью EWS или с помощью `itemId` свойства, используют формат, отличный от формата, используемого REST API (например, [API почты Outlook](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations) или [Microsoft Graph](https://graph.microsoft.io/)<!-- -->. Метод `convertToRestId` преобразовывает идентификатор в формате EWS в формат REST.
 
@@ -284,9 +247,9 @@ items:
 
       `convertToUtcClientTime`Метод преобразует словарь, содержащий локальную дату и время, в `Date` объект с правильными значениями локальной даты и времени.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       #### <a name="examples"></a>Примеры
 
@@ -331,7 +294,7 @@ items:
 
       Содержит следующие элементы:
 
-      - `hostName` (строка): строка, представляющая имя ведущего приложения. Оно должно иметь одно из следующих значений: `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->, или `OutlookAndroid`<!-- -->. **Note**: значение "Outlook" возвращается для клиентов Outlook на настольных компьютерах (например, Windows и Mac).
+      - `hostName` (строка): строка, представляющая имя ведущего приложения. Оно должно иметь одно из следующих значений: `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->, или `OutlookAndroid`<!-- -->. **Note** : значение "Outlook" возвращается для клиентов Outlook на настольных компьютерах (например, Windows и Mac).
 
       - `hostVersion` (строка): строка, представляющая версию ведущего приложения или сервера Exchange (например, "15.0.468.0"). Если почтовая надстройка работает в Outlook на настольных или мобильных клиентах, `hostVersion` свойство возвращает версию ведущего приложения, Outlook. В Outlook в Интернете свойство возвращает версию сервера Exchange.
 
@@ -339,9 +302,9 @@ items:
 
       Дополнительные сведения находятся в разделе [Office. Diagnostics](xref:outlook!Office.Diagnostics:interface)<!-- -->.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
     name: diagnostics
     fullName: diagnostics
     langs:
@@ -364,11 +327,11 @@ items:
 
       Если указанный идентификатор элемента не определяет существующую встречу, на клиентском компьютере или устройстве открывается пустая область, и сообщение об ошибке не возвращается.
 
-      **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+      **Note** : Этот метод не поддерживается в Outlook на iOS или Android.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       #### <a name="examples"></a>Примеры
 
@@ -405,11 +368,11 @@ items:
 
       Не используйте с идентификатором `displayMessageForm` ItemId, представляющим встречу. Используйте метод `displayAppointmentForm`, чтобы отобразить сведения о существующей встрече, а метод `displayNewAppointmentForm`— для отображения формы создания встречи.
 
-      **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+      **Note** : Этот метод не поддерживается в Outlook на iOS или Android.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       #### <a name="examples"></a>Примеры
 
@@ -440,17 +403,17 @@ items:
 
       Метод `displayNewAppointmentForm` открывает форму, в которой пользователь может создать встречу или собрание. Если параметры заданы, поля формы встречи автоматически заполняются их содержимым.
 
-      В Outlook в Интернете этот метод всегда отображает форму с полем участников. Если вы не укажете участников в качестве входных аргументов, метод отображает форму с кнопкой **Сохранить**. Если вы укажете участников, форма будет включать участников и кнопку **Отправить**.
+      В Outlook в Интернете этот метод всегда отображает форму с полем участников. Если вы не укажете участников в качестве входных аргументов, метод отображает форму с кнопкой **Сохранить** . Если вы укажете участников, форма будет включать участников и кнопку **Отправить** .
 
       В расширенном клиенте Outlook и Outlook RT, если вы указали участников или ресурсы в `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->или `resources` параметр, этот метод отображает форму собрания с кнопкой " **Отправить** ". Если не указать получателей, этот метод отображает форму встречи с кнопкой **Сохранить &amp; Закрыть** .
 
       Если параметры превышают указанные ограничения размера или если указано неизвестное имя параметра, вызывается исключение.
 
-      **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+      **Note** : Этот метод не поддерживается в Outlook на iOS или Android.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: чтение
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : чтение
 
       #### <a name="examples"></a>Примеры
 
@@ -497,9 +460,9 @@ items:
 
       \[[Набор API: Mailbox 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: чтение
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : чтение
 
       #### <a name="examples"></a>Примеры
 
@@ -567,11 +530,11 @@ items:
 
       В режиме создания необходимо вызвать метод, `saveAsync` прежде чем можно будет использовать этот `ewsUrl` элемент. У вашего приложения должны быть `ReadWriteItem` разрешения на вызов `saveAsync` метода.
 
-      **Примечание**: этот элемент не поддерживается в Outlook на iOS или Android.
+      **Примечание** : этот элемент не поддерживается в Outlook на iOS или Android.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       Удаленная служба может использовать значение `ewsUrl`, чтобы выполнять вызовы EWS для почтового ящика пользователя. Например, вы можете создать удаленную службу для [получения вложений из выбранного элемента](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
 
@@ -638,15 +601,15 @@ items:
 
       Вы можете передать сторонней системе маркер и идентификатор вложения или элемента. Сторонняя система использует этот маркер как маркер авторизации, чтобы вызвать операцию [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) или [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) веб-служб Exchange для возврата вложения или элемента. Например, вы можете создать удаленную службу для [получения вложений из выбранного элемента](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
 
-      **Примечание**: рекомендуется по возможности использовать API REST вместо веб-служб Exchange.
+      **Примечание** : рекомендуется по возможности использовать API REST вместо веб-служб Exchange.
 
       \[[Набор API: Mailbox 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
-      **Ошибки**:
+      **Ошибки** :
 
       - `HTTPRequestFailure`<!-- -->: Запрос не выполнен. Просмотрите объект диагностики для кода ошибки HTTP.
 
@@ -711,11 +674,11 @@ items:
 
       \[[Набор API: ALL поддерживает режим чтения; В почтовом ящике 1,3 появилась поддержка режима создания](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
-      **Ошибки**:
+      **Ошибки** :
 
       - `HTTPRequestFailure`<!-- -->: Запрос не выполнен. Просмотрите объект диагностики для кода ошибки HTTP.
 
@@ -752,7 +715,7 @@ items:
           type:
             - 'outlook!Office.Mailbox#getCallbackTokenAsync~2:complex'
         - id: userContext
-          description: 'Необязательный параметр. Данные о состоянии, передаваемые в асинхронный метод.'
+          description: 'Необязательное свойство. Данные о состоянии, передаваемые в асинхронный метод.'
           type:
             - any
   - uid: 'outlook!Office.Mailbox#getUserIdentityTokenAsync:member(1)'
@@ -761,13 +724,13 @@ items:
 
       Маркер возвращается в виде строки в `asyncResult.value` свойстве.
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       `getUserIdentityTokenAsync`Метод возвращает маркер, который можно использовать для идентификации и [проверки подлинности надстройки и пользователя с помощью сторонней системы](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
 
-      **Ошибки**:
+      **Ошибки** :
 
       - `HTTPRequestFailure`<!-- -->: Запрос не выполнен. Просмотрите объект диагностики для кода ошибки HTTP.
 
@@ -804,7 +767,7 @@ items:
           type:
             - 'outlook!Office.Mailbox#getUserIdentityTokenAsync~0:complex'
         - id: userContext
-          description: 'Необязательный параметр. Данные о состоянии, передаваемые в асинхронный метод.'
+          description: 'Необязательное свойство. Данные о состоянии, передаваемые в асинхронный метод.'
           type:
             - any
   - uid: 'outlook!Office.Mailbox#item:member'
@@ -823,11 +786,11 @@ items:
         type:
           - 'outlook!Office.Mailbox#item~0:complex'
   - uid: 'outlook!Office.Mailbox#makeEwsRequestAsync:member(1)'
-    summary: "Выполняет асинхронный запрос к службе веб-служб Exchange (EWS) на сервере Exchange, на котором размещается почтовый ящик пользователя.\n\nВ таких случаях надстройка должна использовать REST API для доступа к почтовому ящику пользователя.\n\nМетод `makeEwsRequestAsync` отправляет запрос EWS от имени надстройки в Exchange.\n\nС помощью метода `makeEwsRequestAsync` невозможно запрашивать элементы, связанные с папкой.\n\nВ XML-запросе должна быть указана кодировка UTF-8: `\\<?xml version=\"1.0\" encoding=\"utf-8\"?\\>`<!-- -->.\n\nНадстройка должна иметь `ReadWriteMailbox` разрешение на использование `makeEwsRequestAsync` метода. Сведения об использовании `ReadWriteMailbox` разрешений и операций EWS, которые можно вызывать с помощью `makeEwsRequestAsync` метода, приведены [в разделе Определение разрешений для почтового ящика пользователя с доступом](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) к почтовой надстройке<!-- -->.\n\nРезультат XML вызова EWS указывается в виде строки в свойстве `asyncResult.value`. Если размер результата превышает 1\_МБ, возвращается сообщение об ошибке.\n\n**Примечание**: Этот метод не поддерживается в следующих сценариях:\n\n- В Outlook на iOS или Android.\n\n- Когда надстройка загружается в почтовый ящик Gmail.\n\n**Примечание**: администратор сервера должен установить значение `OAuthAuthentication` в `true` каталоге сервера клиентского доступа EWS, чтобы `makeEwsRequestAsync` метод предпринимать запросы EWS.\n\n*Различия версий*\n\nПри использовании `makeEwsRequestAsync` метода в почтовых приложениях, запущенных в версиях Outlook, предшествующих версии 15.0.4535.1004, необходимо задать для параметра Encoding значение ISO-8859-1.\n\n`<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>`\n\nЗначение кодировки не нужно указывать, если почтовое приложение выполняется в Outlook в Интернете. Вы можете определить, работает ли почтовое приложение в Outlook или Outlook в Интернете с помощью `mailbox.diagnostics.hostName` Свойства. Вы можете определить, какая версия Outlook запущена, используя `mailbox.diagnostics.hostVersion` свойство."
+    summary: "Выполняет асинхронный запрос к службе веб-служб Exchange (EWS) на сервере Exchange, на котором размещается почтовый ящик пользователя.\n\nВ таких случаях надстройка должна использовать REST API для доступа к почтовому ящику пользователя.\n\nМетод `makeEwsRequestAsync` отправляет запрос EWS от имени надстройки в Exchange.\n\nС помощью метода `makeEwsRequestAsync` невозможно запрашивать элементы, связанные с папкой.\n\nВ XML-запросе должна быть указана кодировка UTF-8: `\\<?xml version=\"1.0\" encoding=\"utf-8\"?\\>`<!-- -->.\n\nНадстройка должна иметь `ReadWriteMailbox` разрешение на использование `makeEwsRequestAsync` метода. Сведения об использовании `ReadWriteMailbox` разрешений и операций EWS, которые можно вызывать с помощью `makeEwsRequestAsync` метода, приведены [в разделе Определение разрешений для почтового ящика пользователя с доступом](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) к почтовой надстройке<!-- -->.\n\nРезультат XML вызова EWS указывается в виде строки в свойстве `asyncResult.value`. Если размер результата превышает 1\_МБ, возвращается сообщение об ошибке.\n\n**Примечание** : Этот метод не поддерживается в следующих сценариях:\n\n- В Outlook на iOS или Android.\n\n- Когда надстройка загружается в почтовый ящик Gmail.\n\n**Примечание** : администратор сервера должен установить значение `OAuthAuthentication` в `true` каталоге сервера клиентского доступа EWS, чтобы `makeEwsRequestAsync` метод предпринимать запросы EWS.\n\n*Различия версий*\n\nПри использовании `makeEwsRequestAsync` метода в почтовых приложениях, запущенных в версиях Outlook, предшествующих версии 15.0.4535.1004, необходимо задать для параметра Encoding значение ISO-8859-1.\n\n`<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>`\n\nЗначение кодировки не нужно указывать, если почтовое приложение выполняется в Outlook в Интернете. Вы можете определить, работает ли почтовое приложение в Outlook или Outlook в Интернете с помощью `mailbox.diagnostics.hostName` Свойства. Вы можете определить, какая версия Outlook запущена, используя `mailbox.diagnostics.hostVersion` свойство."
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteMailbox`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteMailbox`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       #### <a name="examples"></a>Примеры
 
@@ -938,20 +901,20 @@ items:
           type:
             - 'outlook!Office.Mailbox#makeEwsRequestAsync~0:complex'
         - id: userContext
-          description: 'Необязательный параметр. Данные о состоянии, передаваемые в асинхронный метод.'
+          description: 'Необязательное свойство. Данные о состоянии, передаваемые в асинхронный метод.'
           type:
             - any
   - uid: 'outlook!Office.Mailbox#removeHandlerAsync:member(1)'
     summary: |-
-      Удаляет обработчиков для поддерживаемого типа события. **Note**: события доступны только в области задач.
+      Удаляет обработчиков для поддерживаемого типа события. **Note** : события доступны только в области задач.
 
       Для получения поддерживаемых событий обратитесь к [разделу события](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.6/office.context.mailbox#events) объектной модели почтового ящика.
 
       \[[Набор API: Mailbox 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
     name: 'removeHandlerAsync(eventType, options, callback)'
     fullName: 'removeHandlerAsync(eventType, options, callback)'
     langs:
@@ -969,44 +932,13 @@ items:
           type:
             - 'outlook!Office.Mailbox#removeHandlerAsync~0:complex'
         - id: options
-          description: Необязательный параметр. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+          description: Необязательное свойство. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
           type:
             - 'office!Office.AsyncContextOptions:interface'
         - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
+          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.Mailbox#removeHandlerAsync~1:complex'
-  - uid: 'outlook!Office.Mailbox#removeHandlerAsync:member(2)'
-    summary: |-
-      Удаляет обработчиков для поддерживаемого типа события. **Note**: события доступны только в области задач.
-
-      Для получения поддерживаемых событий обратитесь к [разделу события](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.6/office.context.mailbox#events) объектной модели почтового ящика.
-
-      \[[Набор API: Mailbox 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
-    name: 'removeHandlerAsync(eventType, callback)'
-    fullName: 'removeHandlerAsync(eventType, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: 'Событие, которое должно отменить обработчик.'
-          type:
-            - 'outlook!Office.Mailbox#removeHandlerAsync~2:complex'
-        - id: callback
-          description: 'Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
-          type:
-            - 'outlook!Office.Mailbox#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.Mailbox#restUrl:member'
     summary: |-
       Возвращает URL-адрес конечной точки REST для этой учетной записи электронной почты.
@@ -1019,9 +951,9 @@ items:
 
       \[[Набор API: Mailbox 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
       С помощью значения `restUrl` можно выполнять вызовы [REST API](https://docs.microsoft.com/outlook/rest/) для почтового ящика пользователя.
 
@@ -1106,37 +1038,6 @@ references:
   - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.Mailbox#addHandlerAsync~2:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.Mailbox#addHandlerAsync~3:complex'
-    name: Office.EventType | string
-    fullName: Office.EventType | string
-    spec.typeScript:
-      - uid: 'office!Office.EventType:enum'
-        name: Office.EventType
-        fullName: Office.EventType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.Mailbox#addHandlerAsync~4:complex'
-    name: '(type: Office.EventType) => void'
-    fullName: '(type: Office.EventType) => void'
-    spec.typeScript:
-      - name: '(type: '
-        fullName: '(type: '
-      - uid: 'office!Office.EventType:enum'
-        name: Office.EventType
-        fullName: Office.EventType
-      - name: ) => void
-        fullName: ) => void
-  - uid: 'outlook!Office.Mailbox#addHandlerAsync~5:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
@@ -1283,26 +1184,6 @@ references:
       - name: ' | string'
         fullName: ' | string'
   - uid: 'outlook!Office.Mailbox#removeHandlerAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.Mailbox#removeHandlerAsync~2:complex'
-    name: Office.EventType | string
-    fullName: Office.EventType | string
-    spec.typeScript:
-      - uid: 'office!Office.EventType:enum'
-        name: Office.EventType
-        fullName: Office.EventType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.Mailbox#removeHandlerAsync~3:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
