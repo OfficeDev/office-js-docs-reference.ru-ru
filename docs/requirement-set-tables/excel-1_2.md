@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[Binding](/javascript/api/excel/excel.binding)|[onDataChanged](/javascript/api/excel/excel.binding#ondatachanged)|Возникает при изменении данных или форматирования в привязке.|
 ||[onSelectionChanged](/javascript/api/excel/excel.binding#onselectionchanged)|Возникает при изменении выбранного содержимого в привязке.|
-|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)|Получает временный `Binding` объект, который содержит идентификатор `Binding` объекта, вызвавшего событие.|
-|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)|Получает временный `Binding` объект, который содержит идентификатор `Binding` объекта, вызвавшего событие.|
+|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)|Получает временный  `Binding`   объект, который содержит идентификатор  `Binding`   объекта, вызвавшего событие.Используйте этот идентификатор `BindingCollection.getItem(id)`   для получения привязки.|
+|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)|Получает временный  `Binding`   объект, который содержит идентификатор  `Binding`   объекта, вызвавшего событие.Используйте этот идентификатор `BindingCollection.getItem(id)`   для получения привязки.|
 ||[Число](/javascript/api/excel/excel.bindingselectionchangedeventargs#columncount)|Получает количество выбранных столбцов.|
 ||[Стро](/javascript/api/excel/excel.bindingselectionchangedeventargs#rowcount)|Получает количество выбранных строк.|
 ||[startColumn](/javascript/api/excel/excel.bindingselectionchangedeventargs#startcolumn)|Получает индекс первого столбца текущего выбора (с отсчетом от нуля).|
