@@ -1,546 +1,323 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'onenote!OneNote.SectionGroup:class'
-    summary: |-
-      Представляет группу разделов OneNote. Объекты SectionGroup могут содержать объекты Section и другие объекты SectionGroup.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: OneNote.SectionGroup
-    fullName: OneNote.SectionGroup
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: onenote!
-    children:
-      - 'onenote!OneNote.SectionGroup#addSection:member(1)'
-      - 'onenote!OneNote.SectionGroup#addSectionGroup:member(1)'
-      - 'onenote!OneNote.SectionGroup#clientUrl:member'
-      - 'onenote!OneNote.SectionGroup#context:member'
-      - 'onenote!OneNote.SectionGroup#getRestApiId:member(1)'
-      - 'onenote!OneNote.SectionGroup#id:member'
-      - 'onenote!OneNote.SectionGroup#load:member(1)'
-      - 'onenote!OneNote.SectionGroup#load:member(2)'
-      - 'onenote!OneNote.SectionGroup#load:member(3)'
-      - 'onenote!OneNote.SectionGroup#name:member'
-      - 'onenote!OneNote.SectionGroup#notebook:member'
-      - 'onenote!OneNote.SectionGroup#parentSectionGroup:member'
-      - 'onenote!OneNote.SectionGroup#parentSectionGroupOrNull:member'
-      - 'onenote!OneNote.SectionGroup#sectionGroups:member'
-      - 'onenote!OneNote.SectionGroup#sections:member'
-      - 'onenote!OneNote.SectionGroup#toJSON:member(1)'
-      - 'onenote!OneNote.SectionGroup#track:member(1)'
-      - 'onenote!OneNote.SectionGroup#untrack:member(1)'
-  - uid: 'onenote!OneNote.SectionGroup#addSection:member(1)'
-    summary: |-
-      Добавляет новый раздел в конец группы разделов.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: addSection(title)
-    fullName: addSection(title)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addSection(title: string): OneNote.Section;'
-      return:
-        type:
-          - 'onenote!OneNote.Section:class'
-        description: |-
+### YamlMime:TSType
+name: OneNote.SectionGroup
+uid: onenote!OneNote.SectionGroup:class
+package: onenote!
+fullName: OneNote.SectionGroup
+summary: >-
+  Представляет группу разделов OneNote. Объекты SectionGroup могут содержать объекты Section и другие объекты SectionGroup.
 
 
-          #### <a name="examples"></a>Примеры
-
-          ```javascript
-          OneNote.run(function (context) {
-
-              // Get the section groups that are direct children of the current notebook.
-              var sectionGroups = context.application.getActiveNotebook().sectionGroups;
-              
-              // Queue a command to load the section groups.
-              // For best performance, request specific properties.
-              sectionGroups.load("id");
-
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      
-                      // Add a section to each section group.
-                      $.each(sectionGroups.items, function(index, sectionGroup) {
-                          sectionGroup.addSection("Agenda");
-                      });
-                      
-                      // Run the queued commands.
-                      return context.sync();
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: title
-          description: Имя нового раздела.
-          type:
-            - string
-  - uid: 'onenote!OneNote.SectionGroup#addSectionGroup:member(1)'
-    summary: |-
-      Добавляет новую группу разделов в конец sectionGroup.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: addSectionGroup(name)
-    fullName: addSectionGroup(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addSectionGroup(name: string): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: |-
+  \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: clientUrl
+  uid: onenote!OneNote.SectionGroup#clientUrl:member
+  package: onenote!
+  fullName: clientUrl
+  summary: >-
+    URL-адрес клиента группы разделов. Только чтение
 
 
-          #### <a name="examples"></a>Примеры
-
-          ```javascript
-          OneNote.run(function (context) {
-              var sectionGroup;
-              var nestedSectionGroup;
-
-              // Gets the active notebook.
-              var notebook = context.application.getActiveNotebook();
-
-              // Queue a command to add a new section group.
-              var sectionGroups = notebook.sectionGroups;
-
-              // Queue a command to load the new section group.
-              sectionGroups.load();
-
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function(){
-                      sectionGroup = sectionGroups.items[0];
-                      sectionGroup.load();
-                      return context.sync();
-                  })
-                  .then(function(){
-                      nestedSectionGroup = sectionGroup.addSectionGroup("Sample nested section group");
-                      nestedSectionGroup.load();
-                      return context.sync();
-                  })
-                  .then(function() {
-                      console.log("New nested section group name is " + nestedSectionGroup.name);
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          }); 
-          ```
-      parameters:
-        - id: name
-          description: Имя нового раздела.
-          type:
-            - string
-  - uid: 'onenote!OneNote.SectionGroup#clientUrl:member'
-    summary: |-
-      URL-адрес клиента группы разделов. Только чтение
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: clientUrl
-    fullName: clientUrl
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly clientUrl: string;'
-      return:
-        type:
-          - string
-  - uid: 'onenote!OneNote.SectionGroup#context:member'
-    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'onenote!OneNote.RequestContext:class'
-  - uid: 'onenote!OneNote.SectionGroup#getRestApiId:member(1)'
-    summary: |-
-      Получает идентификатор API REST.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: getRestApiId()
-    fullName: getRestApiId()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getRestApiId(): OfficeExtension.ClientResult<string>;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup#getRestApiId~0:complex'
-        description: ''
-  - uid: 'onenote!OneNote.SectionGroup#id:member'
-    summary: |-
-      Получает идентификатор объекта SectionGroup. Только для чтения.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: 'onenote!OneNote.SectionGroup#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): OneNote.SectionGroup`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): OneNote.SectionGroup`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionGroup`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.SectionGroupLoadOptions): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - 'onenote!OneNote.Interfaces.SectionGroupLoadOptions:interface'
-  - uid: 'onenote!OneNote.SectionGroup#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: |-
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly clientUrl: string;'
+    return:
+      type: string
+- name: context
+  uid: onenote!OneNote.SectionGroup#context:member
+  package: onenote!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: id
+  uid: onenote!OneNote.SectionGroup#id:member
+  package: onenote!
+  fullName: id
+  summary: >-
+    Получает идентификатор объекта SectionGroup. Только для чтения.
 
 
-          #### <a name="examples"></a>Примеры
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: name
+  uid: onenote!OneNote.SectionGroup#name:member
+  package: onenote!
+  fullName: name
+  summary: >-
+    Имя группы разделов. Только для чтения.
 
-          ```javascript
-          OneNote.run(function (context) {
-                  
-              // Get the parent section group that contains the current section.
-              var sectionGroup = context.application.getActiveSection().parentSectionGroup;
-                      
-              // Queue a command to load the section group. 
-              // For best performance, request specific properties.           
-              sectionGroup.load("id,name");
-                      
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function () {
-                      
-                      // Write the properties.
-                      console.log("Section group name: " + sectionGroup.name);
-                      console.log("Section group ID: " + sectionGroup.id);
-                      
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          OneNote.run(function (context) {
-                  
-              // Get the parent section group that contains the current section.
-              var sectionGroup = context.application.getActiveSection().parentSectionGroup;
-                      
-              // Queue a command to load the section group with the specified properties.           
-              sectionGroup.load("name,notebook/name"); 
-                      
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function () {
 
-                      // Write the properties.
-                      console.log("Section group name: " + sectionGroup.name);
-                      console.log("Parent notebook name: " + sectionGroup.notebook.name);
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          OneNote.run(function (context) {
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly name: string;'
+    return:
+      type: string
+- name: notebook
+  uid: onenote!OneNote.SectionGroup#notebook:member
+  package: onenote!
+  fullName: notebook
+  summary: >-
+    Получает записную книжку, содержащую группу разделов. Только для чтения.
 
-              // Get the section groups that are direct children of the current notebook.
-              var sectionGroups = context.application.getActiveNotebook().sectionGroups;
 
-              // Queue a command to load the section groups.
-              // For best performance, request specific properties.
-              sectionGroups.load("name");
-              
-              // Get the child section groups of the first section group in the notebook.
-              var nestedSectionGroups = sectionGroups._GetItem(0).sectionGroups;
-              
-              // Queue a command to load the ID and name properties of the child section groups.
-              nestedSectionGroups.load("id,name");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      
-                      // Write the properties for each child section group.
-                      $.each(nestedSectionGroups.items, function(index, sectionGroup) {
-                          console.log("Section group name: " + sectionGroup.name);  
-                          console.log("Section group ID: " + sectionGroup.id);  
-                      });
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          OneNote.run(function (context) {
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly notebook: OneNote.Notebook;'
+    return:
+      type: <xref uid="onenote!OneNote.Notebook:class" />
+- name: parentSectionGroup
+  uid: onenote!OneNote.SectionGroup#parentSectionGroup:member
+  package: onenote!
+  fullName: parentSectionGroup
+  summary: >-
+    Получает группу разделов, содержащую другую группу разделов. Возвращает значение ItemNotFound, если групп разделов является прямым потомком записной книжки. Только для чтения.
 
-              // Get the sections that are siblings of the current section.
-              var sections = context.application.getActiveSection().parentSectionGroup.sections;
 
-              // Queue a command to load the section groups.
-              // For best performance, request specific properties.
-              sections.load("id,name");
-              
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function() {
-                      
-                      // Write the properties for each section.
-                      $.each(sections.items, function(index, section) {
-                          console.log("Section name: " + section.name);  
-                          console.log("Section ID: " + section.id);  
-                      });
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
-          type:
-            - 'string | string[]'
-  - uid: 'onenote!OneNote.SectionGroup#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: 'onenote!OneNote.SectionGroup#name:member'
-    summary: |-
-      Имя группы разделов. Только для чтения.
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly parentSectionGroup: OneNote.SectionGroup;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+- name: parentSectionGroupOrNull
+  uid: onenote!OneNote.SectionGroup#parentSectionGroupOrNull:member
+  package: onenote!
+  fullName: parentSectionGroupOrNull
+  summary: >-
+    Получает группу разделов, содержащую другую группу разделов. Возвращает значение null, если объект SectionGroup является прямым потомком объекта Notebook. Только для чтения.
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: name
-    fullName: name
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly name: string;'
-      return:
-        type:
-          - string
-  - uid: 'onenote!OneNote.SectionGroup#notebook:member'
-    summary: |-
-      Получает записную книжку, содержащую группу разделов. Только для чтения.
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: notebook
-    fullName: notebook
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly notebook: OneNote.Notebook;'
-      return:
-        type:
-          - 'onenote!OneNote.Notebook:class'
-  - uid: 'onenote!OneNote.SectionGroup#parentSectionGroup:member'
-    summary: |-
-      Получает группу разделов, содержащую другую группу разделов. Возвращает значение ItemNotFound, если групп разделов является прямым потомком записной книжки. Только для чтения.
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly parentSectionGroupOrNull: OneNote.SectionGroup;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+- name: sectionGroups
+  uid: onenote!OneNote.SectionGroup#sectionGroups:member
+  package: onenote!
+  fullName: sectionGroups
+  summary: >-
+    Коллекция групп разделов в группе разделов. Только чтение
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: parentSectionGroup
-    fullName: parentSectionGroup
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly parentSectionGroup: OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-  - uid: 'onenote!OneNote.SectionGroup#parentSectionGroupOrNull:member'
-    summary: |-
-      Получает группу разделов, содержащую другую группу разделов. Возвращает значение null, если объект SectionGroup является прямым потомком объекта Notebook. Только для чтения.
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: parentSectionGroupOrNull
-    fullName: parentSectionGroupOrNull
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly parentSectionGroupOrNull: OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-  - uid: 'onenote!OneNote.SectionGroup#sectionGroups:member'
-    summary: |-
-      Коллекция групп разделов в группе разделов. Только чтение
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly sectionGroups: OneNote.SectionGroupCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroupCollection:class" />
+- name: sections
+  uid: onenote!OneNote.SectionGroup#sections:member
+  package: onenote!
+  fullName: sections
+  summary: >-
+    Коллекция разделов в группе разделов. Только чтение
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: sectionGroups
-    fullName: sectionGroups
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly sectionGroups: OneNote.SectionGroupCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroupCollection:class'
-  - uid: 'onenote!OneNote.SectionGroup#sections:member'
-    summary: |-
-      Коллекция разделов в группе разделов. Только чтение
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: sections
-    fullName: sections
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly sections: OneNote.SectionCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionCollection:class'
-  - uid: 'onenote!OneNote.SectionGroup#toJSON:member(1)'
-    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект OneNote. SectionGroup является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`OneNote.Interfaces.SectionGroupData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.SectionGroupData;'
-      return:
-        type:
-          - 'onenote!OneNote.Interfaces.SectionGroupData:interface'
-        description: ''
-  - uid: 'onenote!OneNote.SectionGroup#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: ''
-  - uid: 'onenote!OneNote.SectionGroup#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.SectionGroup;'
-      return:
-        type:
-          - 'onenote!OneNote.SectionGroup:class'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'onenote!OneNote.Section:class'
-    name: OneNote.Section
-  - uid: 'onenote!OneNote.SectionGroup:class'
-    name: OneNote.SectionGroup
-  - uid: 'onenote!OneNote.RequestContext:class'
-    name: RequestContext
-  - uid: 'onenote!OneNote.SectionGroup#getRestApiId~0:complex'
-    name: OfficeExtension.ClientResult<string>
-    fullName: OfficeExtension.ClientResult<string>
-    spec.typeScript:
-      - uid: 'office!OfficeExtension.ClientResult:class'
-        name: OfficeExtension.ClientResult
-        fullName: OfficeExtension.ClientResult
-      - name: <string>
-        fullName: <string>
-  - uid: 'onenote!OneNote.Interfaces.SectionGroupLoadOptions:interface'
-    name: OneNote.Interfaces.SectionGroupLoadOptions
-  - uid: 'onenote!OneNote.Notebook:class'
-    name: OneNote.Notebook
-  - uid: 'onenote!OneNote.SectionGroupCollection:class'
-    name: OneNote.SectionGroupCollection
-  - uid: 'onenote!OneNote.SectionCollection:class'
-    name: OneNote.SectionCollection
-  - uid: 'onenote!OneNote.Interfaces.SectionGroupData:interface'
-    name: OneNote.Interfaces.SectionGroupData
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly sections: OneNote.SectionCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionCollection:class" />
+methods:
+- name: addSection(title)
+  uid: onenote!OneNote.SectionGroup#addSection:member(1)
+  package: onenote!
+  fullName: addSection(title)
+  summary: >-
+    Добавляет новый раздел в конец группы разделов.
+
+
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addSection(title: string): OneNote.Section;'
+    parameters:
+    - id: title
+      description: Имя нового раздела.
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.Section:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups that are direct children of the current notebook.\n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n    \n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sectionGroups.load(\"id\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Add a section to each section group.\n            $.each(sectionGroups.items, function(index, sectionGroup) {\n                sectionGroup.addSection(\"Agenda\");\n            });\n            \n            // Run the queued commands.\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: addSectionGroup(name)
+  uid: onenote!OneNote.SectionGroup#addSectionGroup:member(1)
+  package: onenote!
+  fullName: addSectionGroup(name)
+  summary: >-
+    Добавляет новую группу разделов в конец sectionGroup.
+
+
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addSectionGroup(name: string): OneNote.SectionGroup;'
+    parameters:
+    - id: name
+      description: Имя нового раздела.
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n    var sectionGroup;\n    var nestedSectionGroup;\n\n    // Gets the active notebook.\n    var notebook = context.application.getActiveNotebook();\n\n    // Queue a command to add a new section group.\n    var sectionGroups = notebook.sectionGroups;\n\n    // Queue a command to load the new section group.\n    sectionGroups.load();\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function(){\n            sectionGroup = sectionGroups.items[0];\n            sectionGroup.load();\n            return context.sync();\n        })\n        .then(function(){\n            nestedSectionGroup = sectionGroup.addSectionGroup(\"Sample nested section group\");\n            nestedSectionGroup.load();\n            return context.sync();\n        })\n        .then(function() {\n            console.log(\"New nested section group name is \" + nestedSectionGroup.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+- name: getRestApiId()
+  uid: onenote!OneNote.SectionGroup#getRestApiId:member(1)
+  package: onenote!
+  fullName: getRestApiId()
+  summary: >-
+    Получает идентификатор API REST.
+
+
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRestApiId(): OfficeExtension.ClientResult<string>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
+      description: ''
+- name: load(option)
+  uid: onenote!OneNote.SectionGroup#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+  remarks: >-
+    В дополнение к этой подписи этот метод имеет следующие подписи:
+
+
+    `load(option?: string | string[]): OneNote.SectionGroup` -WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.SectionGroup` -WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionGroup` — Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.SectionGroupLoadOptions): OneNote.SectionGroup;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.SectionGroupLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.SectionGroup#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.SectionGroup;'
+    parameters:
+    - id: propertyNames
+      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the parent section group that contains the current section.\n    var sectionGroup = context.application.getActiveSection().parentSectionGroup;\n            \n    // Queue a command to load the section group. \n    // For best performance, request specific properties.           \n    sectionGroup.load(\"id,name\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Write the properties.\n            console.log(\"Section group name: \" + sectionGroup.name);\n            console.log(\"Section group ID: \" + sectionGroup.id);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the parent section group that contains the current section.\n    var sectionGroup = context.application.getActiveSection().parentSectionGroup;\n            \n    // Queue a command to load the section group with the specified properties.           \n    sectionGroup.load(\"name,notebook/name\"); \n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Write the properties.\n            console.log(\"Section group name: \" + sectionGroup.name);\n            console.log(\"Parent notebook name: \" + sectionGroup.notebook.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups that are direct children of the current notebook.\n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n\n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sectionGroups.load(\"name\");\n    \n    // Get the child section groups of the first section group in the notebook.\n    var nestedSectionGroups = sectionGroups._GetItem(0).sectionGroups;\n    \n    // Queue a command to load the ID and name properties of the child section groups.\n    nestedSectionGroups.load(\"id,name\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Write the properties for each child section group.\n            $.each(nestedSectionGroups.items, function(index, sectionGroup) {\n                console.log(\"Section group name: \" + sectionGroup.name);  \n                console.log(\"Section group ID: \" + sectionGroup.id);  \n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the sections that are siblings of the current section.\n    var sections = context.application.getActiveSection().parentSectionGroup.sections;\n\n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sections.load(\"id,name\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Write the properties for each section.\n            $.each(sections.items, function(index, section) {\n                console.log(\"Section name: \" + section.name);  \n                console.log(\"Section ID: \" + section.id);  \n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: onenote!OneNote.SectionGroup#load:member(3)
+  package: onenote!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.SectionGroup;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+      type: '{ select?: string; expand?: string; }'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.SectionGroup#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект OneNote. SectionGroup является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `OneNote.Interfaces.SectionGroupData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.SectionGroupData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.SectionGroupData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.SectionGroup#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.SectionGroup;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.SectionGroup#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.SectionGroup;'
+    return:
+      type: <xref uid="onenote!OneNote.SectionGroup:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 94da95bd2cc2ecef91408bb446dcd7ed696dc3b2
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49136542"
