@@ -1,285 +1,250 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.Categories:interface'
-    summary: |-
-      Представляет категории элемента.
+### YamlMime:TSType
+name: Office.Categories
+uid: outlook!Office.Categories:interface
+package: outlook!
+fullName: Office.Categories
+summary: >-
+  Представляет категории элемента.
 
-      В Outlook пользователь может помечать сообщения и встречи, используя категорию для их цветовых кодов. Пользователь определяет [категории в основном списке](xref:outlook!Office.MasterCategories:interface) на своем почтовом ящике. Затем он может применить одну или несколько категорий к элементу.
 
-      **Важно!** в Outlook в Интернете невозможно использовать API для управления категориями, примененными к сообщению в режиме создания.
+  В Outlook пользователь может помечать сообщения и встречи, используя категорию для их цветовых кодов. Пользователь определяет [категории в основном списке](xref:outlook!Office.MasterCategories:interface) на своем почтовом ящике. Затем он может применить одну или несколько категорий к элементу.
 
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
-    name: Office.Categories
-    fullName: Office.Categories
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.Categories#addAsync:member(1)'
-      - 'outlook!Office.Categories#getAsync:member(1)'
-      - 'outlook!Office.Categories#getAsync:member(2)'
-      - 'outlook!Office.Categories#removeAsync:member(1)'
-  - uid: 'outlook!Office.Categories#addAsync:member(1)'
-    summary: |-
-      Добавляет категории к элементу. Каждая категория должна быть указана в главном списке категории в этом почтовом ящике и иметь уникальное имя, но несколько категорий могут использовать один и тот же цвет.
+  **Важно!** в Outlook в Интернете невозможно использовать API для управления категориями, примененными к сообщению в режиме создания.
 
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
+  \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
 
-      **Ошибки** :
 
-      - `InvalidCategory`<!-- -->: Предоставлены недопустимые категории.
+  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addAsync(categories, options, callback)
+  uid: outlook!Office.Categories#addAsync:member(1)
+  package: outlook!
+  fullName: addAsync(categories, options, callback)
+  summary: >-
+    Добавляет категории к элементу. Каждая категория должна быть указана в главном списке категории в этом почтовом ящике и иметь уникальное имя, но несколько категорий могут использовать один и тот же цвет.
 
-      #### <a name="examples"></a>Примеры
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
-      // Note: In order for you to successfully add a category,
-      // it must be in the mailbox categories master list.
+    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
 
-      Office.context.mailbox.masterCategories.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var masterCategories = asyncResult.value;
-          if (masterCategories && masterCategories.length > 0) {
-            // Grab the first category from the master list.
-            var categoryToAdd = [masterCategories[0].displayName];
-            Office.context.mailbox.item.categories.addAsync(categoryToAdd, function(asyncResult) {
-              if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-                console.log(`Successfully assigned category '${categoryToAdd}' to item.`);
-              } else {
-                console.log("categories.addAsync call failed with error: " + asyncResult.error.message);
-              }
-            });
-          } else {
-            console.log("There are no categories in the master list on this mailbox. You can add categories using Office.context.mailbox.masterCategories.addAsync.");
-          }
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+
+
+    **Ошибки**:
+
+
+    - `InvalidCategory`<!-- -->: Предоставлены недопустимые категории.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
+
+    // Note: In order for you to successfully add a category,
+
+    // it must be in the mailbox categories master list.
+
+
+    Office.context.mailbox.masterCategories.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var masterCategories = asyncResult.value;
+        if (masterCategories && masterCategories.length > 0) {
+          // Grab the first category from the master list.
+          var categoryToAdd = [masterCategories[0].displayName];
+          Office.context.mailbox.item.categories.addAsync(categoryToAdd, function(asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log(`Successfully assigned category '${categoryToAdd}' to item.`);
+            } else {
+              console.log("categories.addAsync call failed with error: " + asyncResult.error.message);
+            }
+          });
         } else {
-          console.error(asyncResult.error);
+          console.log("There are no categories in the master list on this mailbox. You can add categories using Office.context.mailbox.masterCategories.addAsync.");
         }
-      });
-      ```
-    name: 'addAsync(categories, options, callback)'
-    fullName: 'addAsync(categories, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: categories
-          description: 'Категории, добавляемые к элементу.'
-          type:
-            - 'string[]'
-        - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.'
-          type:
-            - 'outlook!Office.Categories#addAsync~0:complex'
-  - uid: 'outlook!Office.Categories#getAsync:member(1)'
-    summary: |-
-      Возвращает категории элемента.
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
 
-      **Важно!** если для элемента нет категорий, `null` или в зависимости от версии Outlook будет возвращен пустой массив, убедитесь, что обрабатываете оба случая.
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Категории, добавляемые к элементу.
+      type: string[]
+    - id: options
+      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(options, callback)
+  uid: outlook!Office.Categories#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Возвращает категории элемента.
 
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
-    name: 'getAsync(options, callback)'
-    fullName: 'getAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если произошел сбой при изходе категорий, `asyncResult.error` свойство будет содержать код ошибки.'
-          type:
-            - 'outlook!Office.Categories#getAsync~0:complex'
-  - uid: 'outlook!Office.Categories#getAsync:member(2)'
-    summary: |-
-      Возвращает категории элемента.
+    **Важно!** если для элемента нет категорий, `null` или в зависимости от версии Outlook будет возвращен пустой массив, убедитесь, что обрабатываете оба случая.
 
-      **Важно!** если для элемента нет категорий, `null` или в зависимости от версии Outlook будет возвращен пустой массив, убедитесь, что обрабатываете оба случая.
 
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
+    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
-      #### <a name="examples"></a>Примеры
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если произошел сбой при изходе категорий, `asyncResult.error` свойство будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.Categories#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Возвращает категории элемента.
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
-      Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var categories = asyncResult.value;
-          if (categories && categories.length > 0) {
-            console.log("Categories assigned to this item:");
-            console.log(JSON.stringify(categories));
-          } else {
-            console.log("There are no categories assigned to this item.");
-          }
+
+    **Важно!** если для элемента нет категорий, `null` или в зависимости от версии Outlook будет возвращен пустой массив, убедитесь, что обрабатываете оба случая.
+
+
+    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
+
+    Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var categories = asyncResult.value;
+        if (categories && categories.length > 0) {
+          console.log("Categories assigned to this item:");
+          console.log(JSON.stringify(categories));
         } else {
-          console.error(asyncResult.error);
+          console.log("There are no categories assigned to this item.");
         }
-      });
-      ```
-    name: getAsync(callback)
-    fullName: getAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если произошел сбой при изходе категорий, `asyncResult.error` свойство будет содержать код ошибки.'
-          type:
-            - 'outlook!Office.Categories#getAsync~1:complex'
-  - uid: 'outlook!Office.Categories#removeAsync:member(1)'
-    summary: |-
-      Удаляет категории из элемента.
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
 
-      \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
+    parameters:
+    - id: callback
+      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если произошел сбой при изходе категорий, `asyncResult.error` свойство будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAsync(categories, options, callback)
+  uid: outlook!Office.Categories#removeAsync:member(1)
+  package: outlook!
+  fullName: removeAsync(categories, options, callback)
+  summary: >-
+    Удаляет категории из элемента.
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : "создание" или "чтение"
 
-      #### <a name="examples"></a>Примеры
+    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
-      Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var categories = asyncResult.value;
-          if (categories && categories.length > 0) {
-            // Grab the first category assigned to this item.
-            var categoryToRemove = [categories[0].displayName];
-            Office.context.mailbox.item.categories.removeAsync(categoryToRemove, function(asyncResult) {
-              if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-                console.log(`Successfully unassigned category '${categoryToRemove}' from this item.`);
-              } else {
-                console.log("categories.removeAsync call failed with error: " + asyncResult.error.message);
-              }
-            });
-          } else {
-            console.log("There are no categories assigned to this item.");
-          }
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-categories.yaml
+
+    Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var categories = asyncResult.value;
+        if (categories && categories.length > 0) {
+          // Grab the first category assigned to this item.
+          var categoryToRemove = [categories[0].displayName];
+          Office.context.mailbox.item.categories.removeAsync(categoryToRemove, function(asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log(`Successfully unassigned category '${categoryToRemove}' from this item.`);
+            } else {
+              console.log("categories.removeAsync call failed with error: " + asyncResult.error.message);
+            }
+          });
         } else {
-          console.error(asyncResult.error);
+          console.log("There are no categories assigned to this item.");
         }
-      });
-      ```
-    name: 'removeAsync(categories, options, callback)'
-    fullName: 'removeAsync(categories, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: categories
-          description: 'Категории, которые необходимо удалить из элемента.'
-          type:
-            - 'string[]'
-        - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если не удается удалить категории, `asyncResult.error` свойство будет содержать код ошибки.'
-          type:
-            - 'outlook!Office.Categories#removeAsync~0:complex'
-references:
-  - uid: 'office!Office.AsyncContextOptions:interface'
-    name: Office.AsyncContextOptions
-  - uid: 'outlook!Office.Categories#addAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.Categories#getAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<CategoryDetails[]>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.CategoryDetails[]>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.CategoryDetails:interface'
-        name: CategoryDetails
-        fullName: Office.CategoryDetails
-      - name: '[]>) => void'
-        fullName: '[]>) => void'
-  - uid: 'outlook!Office.Categories#getAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<CategoryDetails[]>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.CategoryDetails[]>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.CategoryDetails:interface'
-        name: CategoryDetails
-        fullName: Office.CategoryDetails
-      - name: '[]>) => void'
-        fullName: '[]>) => void'
-  - uid: 'outlook!Office.Categories#removeAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: categories
+      description: Категории, которые необходимо удалить из элемента.
+      type: string[]
+    - id: options
+      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если не удается удалить категории, `asyncResult.error` свойство будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: a6e956c8c430b49e270354bfa0d21df9dd5595a9
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49136115"
