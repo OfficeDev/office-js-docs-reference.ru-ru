@@ -1,565 +1,542 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.Recipients:interface'
-    summary: |-
-      Представляет получателей элемента. Только в режиме создания.
+### YamlMime:TSType
+name: Office.Recipients
+uid: outlook!Office.Recipients:interface
+package: outlook!
+fullName: Office.Recipients
+summary: >-
+  Представляет получателей элемента. Только в режиме создания.
 
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
-    name: Office.Recipients
-    fullName: Office.Recipients
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.Recipients#addAsync:member(1)'
-      - 'outlook!Office.Recipients#getAsync:member(1)'
-      - 'outlook!Office.Recipients#getAsync:member(2)'
-      - 'outlook!Office.Recipients#setAsync:member(1)'
-      - 'outlook!Office.Recipients#setAsync:member(2)'
-  - uid: 'outlook!Office.Recipients#addAsync:member(1)'
-    summary: |-
-      Добавляет список получателей к существующим получателям для встречи или сообщения.
+  \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
 
-      Параметр Recipients может быть массивом из одного из следующих вариантов:
 
-      - строки, содержащие электронные адреса SMTP;
+  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addAsync(recipients, options, callback)
+  uid: outlook!Office.Recipients#addAsync:member(1)
+  package: outlook!
+  fullName: addAsync(recipients, options, callback)
+  summary: >-
+    Добавляет список получателей к существующим получателям для встречи или сообщения.
 
-      - Объекты [Свойства emailuser](xref:outlook!Office.EmailUser:interface)
 
-      - Объекты [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+    Параметр Recipients может быть массивом из одного из следующих вариантов:
 
-      Максимальное число, которое можно добавить:
 
-      - Windows: 100 получатели. **Note** : может вызывать API многократно, но максимальное количество получателей в поле Target элемента равно 500 получателям.
+    - строки, содержащие электронные адреса SMTP;
 
-      - Mac, веб-браузер: 100 получателей
 
-      - Другое: без ограничений
+    - Объекты [Свойства emailuser](xref:outlook!Office.EmailUser:interface)
 
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
+    - Объекты [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
 
-      **Ошибки** :
 
-      - `NumberOfRecipientsExceeded`<!-- -->: Количество получателей превысило 100 записей.
+    Максимальное число, которое можно добавить:
 
-      #### <a name="examples"></a>Примеры
 
-      ```javascript
-      // The following example creates an array of EmailUser objects
-      // and adds them to the To recipients of the message.
-      var newRecipients = [
-          {
-              "displayName": "Allie Bellew",
-              "emailAddress": "allieb@contoso.com"
-          },
-          {
-              "displayName": "Alex Darrow",
-              "emailAddress": "alexd@contoso.com"
-          }
-      ];
+    - Windows: 100 получатели. **Note**: может вызывать API многократно, но максимальное количество получателей в поле Target элемента равно 500 получателям.
 
-      Office.context.mailbox.item.to.addAsync(newRecipients, function(result) {
-          if (result.error) {
-              console.log(result.error);
-          } else {
-              console.log("Recipients added");
-          }
-      });
-      ```
-    name: 'addAsync(recipients, options, callback)'
-    fullName: 'addAsync(recipients, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: recipients
-          description: 'Получатели, которых нужно добавить в список получателей.'
-          type:
-            - 'outlook!Office.Recipients#addAsync~0:complex'
-        - id: options
-          description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'Необязательное свойство. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если добавить получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки.'
-          type:
-            - 'outlook!Office.Recipients#addAsync~1:complex'
-  - uid: 'outlook!Office.Recipients#getAsync:member(1)'
-    summary: |-
-      Возвращает список получателей для встречи или сообщения.
 
-      После завершения вызова `asyncResult.value` свойство будет содержать массив объектов [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) . Пределы размера коллекции:
+    - Mac, веб-браузер: 100 получателей
 
-      - Windows, Mac, веб-браузер: 500 членов
 
-      - Другое: без ограничений
+    - Другое: без ограничений
 
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
-    name: 'getAsync(options, callback)'
-    fullName: 'getAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. `value`Свойство Result является массивом `EmailAddressDetails` объектов.'
-          type:
-            - 'outlook!Office.Recipients#getAsync~0:complex'
-  - uid: 'outlook!Office.Recipients#getAsync:member(2)'
-    summary: |-
-      Возвращает список получателей для встречи или сообщения.
+    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
 
-      После завершения вызова `asyncResult.value` свойство будет содержать массив объектов [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) . Пределы размера коллекции:
 
-      - Windows, Mac, веб-браузер: 500 членов
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
 
-      - Другое: без ограничений
 
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadItem`
+    **Ошибки**:
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
 
-      #### <a name="examples"></a>Примеры
+    - `NumberOfRecipientsExceeded`<!-- -->: Количество получателей превысило 100 записей.
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
-      Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var msgBcc = asyncResult.value;
-          console.log("Message being blind-copied to:");
-          for (var i = 0; i < msgBcc.length; i++) {
-            console.log(msgBcc[i].displayName + " (" + msgBcc[i].emailAddress + ")");
-          }
-        } else {
-          console.error(asyncResult.error);
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // The following example creates an array of EmailUser objects
+
+    // and adds them to the To recipients of the message.
+
+    var newRecipients = [
+        {
+            "displayName": "Allie Bellew",
+            "emailAddress": "allieb@contoso.com"
+        },
+        {
+            "displayName": "Alex Darrow",
+            "emailAddress": "alexd@contoso.com"
         }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
-      Office.context.mailbox.item.cc.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var msgCc = asyncResult.value;
-          console.log("Message being copied to:");
-          for (var i = 0; i < msgCc.length; i++) {
-            console.log(msgCc[i].displayName + " (" + msgCc[i].emailAddress + ")");
-          }
+    ];
+
+
+    Office.context.mailbox.item.to.addAsync(newRecipients, function(result) {
+        if (result.error) {
+            console.log(result.error);
         } else {
-          console.error(asyncResult.error);
+            console.log("Recipients added");
         }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
-      Office.context.mailbox.item.optionalAttendees.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var apptOptionalAttendees = asyncResult.value;
-          for (var i = 0; i < apptOptionalAttendees.length; i++) {
-            console.log(
-              "Optional attendees: " +
-                apptOptionalAttendees[i].displayName +
-                " (" +
-                apptOptionalAttendees[i].emailAddress +
-                ") - response: " +
-                apptOptionalAttendees[i].appointmentResponse
-            );
-          }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: recipients
+      description: Получатели, которых нужно добавить в список получателей.
+      type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
+    - id: options
+      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если добавить получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(options, callback)
+  uid: outlook!Office.Recipients#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Возвращает список получателей для встречи или сообщения.
+
+
+    После завершения вызова `asyncResult.value` свойство будет содержать массив объектов [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) . Пределы размера коллекции:
+
+
+    - Windows, Mac, веб-браузер: 500 членов
+
+
+    - Другое: без ограничений
+
+
+    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. `value`Свойство Result является массивом `EmailAddressDetails` объектов.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.Recipients#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Возвращает список получателей для встречи или сообщения.
+
+
+    После завершения вызова `asyncResult.value` свойство будет содержать массив объектов [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) . Пределы размера коллекции:
+
+
+    - Windows, Mac, веб-браузер: 500 членов
+
+
+    - Другое: без ограничений
+
+
+    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
+
+    Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgBcc = asyncResult.value;
+        console.log("Message being blind-copied to:");
+        for (var i = 0; i < msgBcc.length; i++) {
+          console.log(msgBcc[i].displayName + " (" + msgBcc[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
+
+    Office.context.mailbox.item.cc.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgCc = asyncResult.value;
+        console.log("Message being copied to:");
+        for (var i = 0; i < msgCc.length; i++) {
+          console.log(msgCc[i].displayName + " (" + msgCc[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
+
+    Office.context.mailbox.item.optionalAttendees.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var apptOptionalAttendees = asyncResult.value;
+        for (var i = 0; i < apptOptionalAttendees.length; i++) {
+          console.log(
+            "Optional attendees: " +
+              apptOptionalAttendees[i].displayName +
+              " (" +
+              apptOptionalAttendees[i].emailAddress +
+              ") - response: " +
+              apptOptionalAttendees[i].appointmentResponse
+          );
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
+
+    Office.context.mailbox.item.requiredAttendees.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var apptRequiredAttendees = asyncResult.value;
+        for (var i = 0; i < apptRequiredAttendees.length; i++) {
+          console.log(
+            "Required attendees: " +
+              apptRequiredAttendees[i].displayName +
+              " (" +
+              apptRequiredAttendees[i].emailAddress +
+              ") - response: " +
+              apptRequiredAttendees[i].appointmentResponse
+          );
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
+
+    Office.context.mailbox.item.to.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgTo = asyncResult.value;
+        console.log("Message being sent to:");
+        for (var i = 0; i < msgTo.length; i++) {
+          console.log(msgTo[i].displayName + " (" + msgTo[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
+    parameters:
+    - id: callback
+      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. `value`Свойство Result является массивом `EmailAddressDetails` объектов.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(recipients, options, callback)
+  uid: outlook!Office.Recipients#setAsync:member(1)
+  package: outlook!
+  fullName: setAsync(recipients, options, callback)
+  summary: >-
+    Задает список получателей для встречи или сообщения.
+
+
+    Метод `setAsync` перезаписывает текущий список получателей.
+
+
+    Параметр Recipients может быть массивом из одного из следующих вариантов:
+
+
+    - строки, содержащие электронные адреса SMTP;
+
+
+    - Объекты [Свойства emailuser](xref:outlook!Office.EmailUser:interface)
+
+
+    - Объекты [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+
+
+    Максимальное число, которое можно задать:
+
+
+    - Windows, Mac, веб-браузер: 100 получателей
+
+
+    - Другое: без ограничений
+
+
+    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+
+
+    **Ошибки**:
+
+
+    - `NumberOfRecipientsExceeded`<!-- -->: Количество получателей превысило 100 записей.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: recipients
+      description: Получатели, которых нужно добавить в список получателей.
+      type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(recipients, callback)
+  uid: outlook!Office.Recipients#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(recipients, callback)
+  summary: >-
+    Задает список получателей для встречи или сообщения.
+
+
+    Метод `setAsync` перезаписывает текущий список получателей.
+
+
+    Параметр Recipients может быть массивом из одного из следующих вариантов:
+
+
+    - строки, содержащие электронные адреса SMTP;
+
+
+    - Объекты [Свойства emailuser](xref:outlook!Office.EmailUser:interface)
+
+
+    - Объекты [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+
+
+    Максимальное число, которое можно задать:
+
+
+    - Windows, Mac, веб-браузер: 100 получателей
+
+
+    - Другое: без ограничений
+
+
+    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+
+
+    **Ошибки**:
+
+
+    - `NumberOfRecipientsExceeded`<!-- -->: Количество получателей превысило 100 записей.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // The following example creates an array of EmailUser objects and
+
+    // replaces the CC recipients of the message with the array.
+
+    var newRecipients = [
+        {
+            "displayName": "Allie Bellew",
+            "emailAddress": "allieb@contoso.com"
+        },
+        {
+            "displayName": "Alex Darrow",
+            "emailAddress": "alexd@contoso.com"
+        }
+    ];
+
+
+    Office.context.mailbox.item.cc.setAsync(newRecipients, function(result) {
+        if (result.error) {
+            console.log(result.error);
         } else {
-          console.error(asyncResult.error);
+            console.log("Recipients overwritten");
         }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
-      Office.context.mailbox.item.requiredAttendees.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var apptRequiredAttendees = asyncResult.value;
-          for (var i = 0; i < apptRequiredAttendees.length; i++) {
-            console.log(
-              "Required attendees: " +
-                apptRequiredAttendees[i].displayName +
-                " (" +
-                apptRequiredAttendees[i].emailAddress +
-                ") - response: " +
-                apptRequiredAttendees[i].appointmentResponse
-            );
-          }
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
-      Office.context.mailbox.item.to.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var msgTo = asyncResult.value;
-          console.log("Message being sent to:");
-          for (var i = 0; i < msgTo.length; i++) {
-            console.log(msgTo[i].displayName + " (" + msgTo[i].emailAddress + ")");
-          }
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: getAsync(callback)
-    fullName: getAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. `value`Свойство Result является массивом `EmailAddressDetails` объектов.'
-          type:
-            - 'outlook!Office.Recipients#getAsync~1:complex'
-  - uid: 'outlook!Office.Recipients#setAsync:member(1)'
-    summary: |-
-      Задает список получателей для встречи или сообщения.
+    });
 
-      Метод `setAsync` перезаписывает текущий список получателей.
+    ```
 
-      Параметр Recipients может быть массивом из одного из следующих вариантов:
+    ```javascript
 
-      - строки, содержащие электронные адреса SMTP;
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
 
-      - Объекты [Свойства emailuser](xref:outlook!Office.EmailUser:interface)
+    var email = $("#emailBcc")
+      .val()
+      .toString();
+    var emailArray = [email];
 
-      - Объекты [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+    Office.context.mailbox.item.bcc.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting Bcc field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
 
-      Максимальное число, которое можно задать:
+    ```
 
-      - Windows, Mac, веб-браузер: 100 получателей
+    ```javascript
 
-      - Другое: без ограничений
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
 
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
+    var email = $("#emailCc")
+      .val()
+      .toString();
+    var emailArray = [email];
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
+    Office.context.mailbox.item.cc.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting Cc field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
 
-      **Ошибки** :
+    ```
 
-      - `NumberOfRecipientsExceeded`<!-- -->: Количество получателей превысило 100 записей.
-    name: 'setAsync(recipients, options, callback)'
-    fullName: 'setAsync(recipients, options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: recipients
-          description: 'Получатели, которых нужно добавить в список получателей.'
-          type:
-            - 'outlook!Office.Recipients#setAsync~0:complex'
-        - id: options
-          description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.'
-          type:
-            - 'outlook!Office.Recipients#setAsync~1:complex'
-  - uid: 'outlook!Office.Recipients#setAsync:member(2)'
-    summary: |-
-      Задает список получателей для встречи или сообщения.
+    ```javascript
 
-      Метод `setAsync` перезаписывает текущий список получателей.
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
 
-      Параметр Recipients может быть массивом из одного из следующих вариантов:
+    var email = $("#emailOptional")
+      .val()
+      .toString();
+    var emailArray = [email];
 
-      - строки, содержащие электронные адреса SMTP;
+    Office.context.mailbox.item.optionalAttendees.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting optional attendees field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
 
-      - Объекты [Свойства emailuser](xref:outlook!Office.EmailUser:interface)
+    ```
 
-      - Объекты [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+    ```javascript
 
-      Максимальное число, которое можно задать:
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
 
-      - Windows, Mac, веб-браузер: 100 получателей
+    var email = $("#emailRequired")
+      .val()
+      .toString();
+    var emailArray = [email];
 
-      - Другое: без ограничений
+    Office.context.mailbox.item.requiredAttendees.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting required attendees field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
 
-      \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений** :`ReadWriteItem`
+    ```
 
-      **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook** : создание
+    ```javascript
 
-      **Ошибки** :
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
 
-      - `NumberOfRecipientsExceeded`<!-- -->: Количество получателей превысило 100 записей.
+    var email = $("#emailTo")
+      .val()
+      .toString();
+    var emailArray = [email];
 
-      #### <a name="examples"></a>Примеры
+    Office.context.mailbox.item.to.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting To field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
 
-      ```javascript
-      // The following example creates an array of EmailUser objects and
-      // replaces the CC recipients of the message with the array.
-      var newRecipients = [
-          {
-              "displayName": "Allie Bellew",
-              "emailAddress": "allieb@contoso.com"
-          },
-          {
-              "displayName": "Alex Darrow",
-              "emailAddress": "alexd@contoso.com"
-          }
-      ];
-
-      Office.context.mailbox.item.cc.setAsync(newRecipients, function(result) {
-          if (result.error) {
-              console.log(result.error);
-          } else {
-              console.log("Recipients overwritten");
-          }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
-      var email = $("#emailBcc")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.bcc.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting Bcc field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
-      var email = $("#emailCc")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.cc.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting Cc field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-optional-attendees-appointment-organizer.yaml
-      var email = $("#emailOptional")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.optionalAttendees.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting optional attendees field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-required-attendees-appointment-organizer.yaml
-      var email = $("#emailRequired")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.requiredAttendees.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting required attendees field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
-      var email = $("#emailTo")
-        .val()
-        .toString();
-      var emailArray = [email];
-      Office.context.mailbox.item.to.setAsync(emailArray, function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          console.log("Succeeded in setting To field.");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: 'setAsync(recipients, callback)'
-    fullName: 'setAsync(recipients, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'setAsync(recipients: (string | EmailUser | EmailAddressDetails)[], callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: recipients
-          description: 'Получатели, которых нужно добавить в список получателей.'
-          type:
-            - 'outlook!Office.Recipients#setAsync~2:complex'
-        - id: callback
-          description: 'После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.'
-          type:
-            - 'outlook!Office.Recipients#setAsync~3:complex'
-references:
-  - uid: 'outlook!Office.Recipients#addAsync~0:complex'
-    name: '(string | EmailUser | EmailAddressDetails)[]'
-    fullName: '(string | Office.EmailUser | Office.EmailAddressDetails)[]'
-    spec.typeScript:
-      - name: '(string | '
-        fullName: '(string | '
-      - uid: 'outlook!Office.EmailUser:interface'
-        name: EmailUser
-        fullName: Office.EmailUser
-      - name: ' | '
-        fullName: ' | '
-      - uid: 'outlook!Office.EmailAddressDetails:interface'
-        name: EmailAddressDetails
-        fullName: Office.EmailAddressDetails
-      - name: ')[]'
-        fullName: ')[]'
-  - uid: 'office!Office.AsyncContextOptions:interface'
-    name: Office.AsyncContextOptions
-  - uid: 'outlook!Office.Recipients#addAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.Recipients#getAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.EmailAddressDetails[]>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.EmailAddressDetails:interface'
-        name: EmailAddressDetails
-        fullName: Office.EmailAddressDetails
-      - name: '[]>) => void'
-        fullName: '[]>) => void'
-  - uid: 'outlook!Office.Recipients#getAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.EmailAddressDetails[]>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.EmailAddressDetails:interface'
-        name: EmailAddressDetails
-        fullName: Office.EmailAddressDetails
-      - name: '[]>) => void'
-        fullName: '[]>) => void'
-  - uid: 'outlook!Office.Recipients#setAsync~0:complex'
-    name: '(string | EmailUser | EmailAddressDetails)[]'
-    fullName: '(string | Office.EmailUser | Office.EmailAddressDetails)[]'
-    spec.typeScript:
-      - name: '(string | '
-        fullName: '(string | '
-      - uid: 'outlook!Office.EmailUser:interface'
-        name: EmailUser
-        fullName: Office.EmailUser
-      - name: ' | '
-        fullName: ' | '
-      - uid: 'outlook!Office.EmailAddressDetails:interface'
-        name: EmailAddressDetails
-        fullName: Office.EmailAddressDetails
-      - name: ')[]'
-        fullName: ')[]'
-  - uid: 'outlook!Office.Recipients#setAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.Recipients#setAsync~2:complex'
-    name: '(string | EmailUser | EmailAddressDetails)[]'
-    fullName: '(string | Office.EmailUser | Office.EmailAddressDetails)[]'
-    spec.typeScript:
-      - name: '(string | '
-        fullName: '(string | '
-      - uid: 'outlook!Office.EmailUser:interface'
-        name: EmailUser
-        fullName: Office.EmailUser
-      - name: ' | '
-        fullName: ' | '
-      - uid: 'outlook!Office.EmailAddressDetails:interface'
-        name: EmailAddressDetails
-        fullName: Office.EmailAddressDetails
-      - name: ')[]'
-        fullName: ')[]'
-  - uid: 'outlook!Office.Recipients#setAsync~3:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(recipients: (string | EmailUser | EmailAddressDetails)[], callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: recipients
+      description: Получатели, которых нужно добавить в список получателей.
+      type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
+    - id: callback
+      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: e71255ade8b68ceabccf5383204a500feb0a87ba
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49318989"
