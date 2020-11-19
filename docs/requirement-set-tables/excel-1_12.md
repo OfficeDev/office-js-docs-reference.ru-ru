@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[ChartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|[textOrientation](/javascript/api/excel/excel.chartaxistitle#textorientation)|Задает угол, по которому текст будет ориентирован на название оси диаграммы.|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[Жетдименсионвалуес (Dimension: Excel. Чартсериесдименсион)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Получает значения из одного измерения ряда диаграммы.|
-|[Comment](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Получает тип контента комментария.|
-|[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[комментдетаилс](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|Получение массива Комментдетаил, содержащего идентификатор комментария и идентификаторы связанных ответов.|
+|[Примечание](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Получает тип контента комментария.|
+|[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[комментдетаилс](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|Получает `CommentDetail` массив, СОДЕРЖАЩИЙ идентификатор комментария и идентификаторы связанных с ним ответов.|
 ||[source](/javascript/api/excel/excel.commentaddedeventargs#source)|Указывает источник события.|
 ||[type](/javascript/api/excel/excel.commentaddedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.commentaddedeventargs#worksheetid)|Получает идентификатор листа, в котором произошло событие.|
@@ -15,7 +15,7 @@
 |[CommentCollection](/javascript/api/excel/excel.commentcollection)|[onAdded](/javascript/api/excel/excel.commentcollection#onadded)|Возникает при добавлении комментариев.|
 ||[onChanged](/javascript/api/excel/excel.commentcollection#onchanged)|Происходит при изменении комментариев или ответов в коллекции комментариев, в том числе при удалении ответов.|
 ||[onDeleted](/javascript/api/excel/excel.commentcollection#ondeleted)|Возникает при удалении комментариев в коллекции комментариев.|
-|[CommentDeletedEventArgs](/javascript/api/excel/excel.commentdeletedeventargs)|[комментдетаилс](/javascript/api/excel/excel.commentdeletedeventargs#commentdetails)|Получение массива Комментдетаил, содержащего идентификатор комментария и идентификаторы связанных ответов.|
+|[CommentDeletedEventArgs](/javascript/api/excel/excel.commentdeletedeventargs)|[комментдетаилс](/javascript/api/excel/excel.commentdeletedeventargs#commentdetails)|Получает `CommentDetail` массив, СОДЕРЖАЩИЙ идентификатор комментария и идентификаторы связанных с ним ответов.|
 ||[source](/javascript/api/excel/excel.commentdeletedeventargs#source)|Указывает источник события.|
 ||[type](/javascript/api/excel/excel.commentdeletedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.commentdeletedeventargs#worksheetid)|Получает идентификатор листа, в котором произошло событие.|
@@ -47,7 +47,7 @@
 ||[установлен](/javascript/api/excel/excel.pivotlabelfilter#condition)|Задает условие фильтра, которое определяет необходимые критерии фильтрации.|
 ||[применим](/javascript/api/excel/excel.pivotlabelfilter#exclusive)|Если задано значение true, фильтр *исключает* элементы, соответствующие условиям.|
 ||[ловербаунд](/javascript/api/excel/excel.pivotlabelfilter#lowerbound)|Нижняя граница диапазона между условиями фильтра.|
-||[substring](/javascript/api/excel/excel.pivotlabelfilter#substring)|Подстрока, используемая для `BeginsWith` `EndsWith` `Contains` условий фильтра и.|
+||[подстроку](/javascript/api/excel/excel.pivotlabelfilter#substring)|Подстрока, используемая для `BeginsWith` `EndsWith` `Contains` условий фильтра и.|
 ||[уппербаунд](/javascript/api/excel/excel.pivotlabelfilter#upperbound)|Верхняя граница диапазона между условиями фильтра.|
 |[PivotManualFilter](/javascript/api/excel/excel.pivotmanualfilter)|[selectedItems](/javascript/api/excel/excel.pivotmanualfilter#selecteditems)|Список выбранных элементов, которые необходимо фильтровать вручную.|
 |[PivotTable](/javascript/api/excel/excel.pivottable)|[алловмултиплефилтерсперфиелд](/javascript/api/excel/excel.pivottable#allowmultiplefiltersperfield)|Указывает, разрешена ли в сводной таблице возможность применения нескольких PivotFilters к заданному PivotField в таблице.|
@@ -80,7 +80,7 @@
 ||[Жетранжеареасорнуллобжектбишит (Key: строка)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|Возвращает `RangeAreas` объект, основанный на имени листа или идентификаторе в коллекции.|
 ||[addresses](/javascript/api/excel/excel.workbookrangeareas#addresses)|Возвращает массив адресов в стиле a1.|
 ||[areas](/javascript/api/excel/excel.workbookrangeareas#areas)|Возвращает `RangeAreasCollection` объект.|
-||[ячеек](/javascript/api/excel/excel.workbookrangeareas#ranges)|Возвращает диапазоны, составляющие этот объект в `RangeCollection` объекте.|
+||[ячеек](/javascript/api/excel/excel.workbookrangeareas#ranges)|Возвращает диапазоны, составляющие этот объект в  `RangeCollection`   объекте.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customproperties)|Возвращает коллекцию настраиваемых свойств на уровне листа.|
 |[WorksheetCustomProperty](/javascript/api/excel/excel.worksheetcustomproperty)|[delete()](/javascript/api/excel/excel.worksheetcustomproperty#delete--)|Удаляет настраиваемое свойство.|
 ||[key](/javascript/api/excel/excel.worksheetcustomproperty#key)|Возвращает ключ настраиваемого свойства.|
