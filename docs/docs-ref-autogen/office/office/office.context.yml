@@ -1,389 +1,271 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'office!Office.Context:interface'
-    summary: Представляет среду выполнения надстройки и открывает доступ к ключевым объектам API. Текущий контекст существует как свойство Office. Доступ к нему осуществляется с помощью `Office.context`<!-- -->.
-    remarks: '**Hosts**: Excel, Outlook, PowerPoint, Project, Word'
-    name: Office.Context
-    fullName: Office.Context
-    langs:
-      - typeScript
-    type: interface
-    package: office!
-    children:
-      - 'office!Office.Context#auth:member'
-      - 'office!Office.Context#commerceAllowed:member'
-      - 'office!Office.Context#contentLanguage:member'
-      - 'office!Office.Context#diagnostics:member'
-      - 'office!Office.Context#displayLanguage:member'
-      - 'office!Office.Context#document:member'
-      - 'office!Office.Context#host:member'
-      - 'office!Office.Context#license:member'
-      - 'office!Office.Context#mailbox:member'
-      - 'office!Office.Context#officeTheme:member'
-      - 'office!Office.Context#platform:member'
-      - 'office!Office.Context#requirements:member'
-      - 'office!Office.Context#roamingSettings:member'
-      - 'office!Office.Context#touchEnabled:member'
-      - 'office!Office.Context#ui:member'
-  - uid: 'office!Office.Context#auth:member'
-    summary: Предоставляет информацию и доступ вошедшему в систему пользователю.
-    isPreview: true
-    name: auth
-    fullName: auth
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'auth: Auth;'
-      return:
-        type:
-          - 'office!Office.Auth:interface'
-  - uid: 'office!Office.Context#commerceAllowed:member'
-    summary: 'True, если текущая платформа позволяет надстройке отображать пользовательский интерфейс для продажи или обновления; в противном случае возвращает значение false.'
-    remarks: |-
-      **Узлы**: Excel, Word
-
-      `commerceAllowed` поддерживается только в Office на iPad.
-
-      App Store для iOS не поддерживает apps с надстройками, которые предоставляют ссылки на дополнительные системы платежей. Тем не менее, надстройки Office, работающие в Office на настольном компьютере с Windows или в браузере, разрешают такие ссылки. Если вы хотите, чтобы пользовательский интерфейс надстройки предоставил ссылку на внешнюю систему оплаты на платформах, отличных от iOS, вы можете использовать свойство commerceAllowed для управления отображением этой ссылки.
-    name: commerceAllowed
-    fullName: commerceAllowed
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'commerceAllowed: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'office!Office.Context#contentLanguage:member'
-    summary: Получает указанный пользователем языковой стандарт (язык) для редактирования документа или элемента.
-    remarks: |-
-      `contentLanguage`Значение отражает параметр **язык редактирования** , указанный с помощью ** &gt; &gt; языка параметров файлов** в ведущем приложении Office.
-
-      **Сведения о поддержке**
-
-      Заглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.
-
-      Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
-
-      *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong> Невозможно </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong> Приложению </strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong> PowerPoint </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong> Project </strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong> Текстовых </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      function sayHelloWithContentLanguage() {
-          var myContentLanguage = Office.context.contentLanguage;
-          switch (myContentLanguage) {
-              case 'en-US':
-                  write('Hello!');
-                  break;
-              case 'en-NZ':
-                  write('G\'day mate!');
-                  break;
-          }
-      }
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-      ```
-    name: contentLanguage
-    fullName: contentLanguage
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'contentLanguage: string;'
-      return:
-        type:
-          - string
-  - uid: 'office!Office.Context#diagnostics:member'
-    summary: 'Получает сведения о среде, в которой выполняется надстройка.'
-    name: diagnostics
-    fullName: diagnostics
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'diagnostics: ContextInformation;'
-      return:
-        type:
-          - 'office!Office.ContextInformation:interface'
-        description: |-
+### YamlMime:TSType
+name: Office.Context
+uid: office!Office.Context:interface
+package: office!
+fullName: Office.Context
+summary: Представляет среду выполнения надстройки и открывает доступ к ключевым объектам API. Текущий контекст существует как свойство Office. Доступ к нему осуществляется с помощью `Office.context`<!-- -->.
+remarks: '**Hosts**: Excel, Outlook, PowerPoint, Project, Word'
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: auth
+  uid: office!Office.Context#auth:member
+  package: office!
+  fullName: auth
+  summary: Предоставляет информацию и доступ вошедшему в систему пользователю.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'auth: Auth;'
+    return:
+      type: <xref uid="office!Office.Auth:interface" />
+- name: commerceAllowed
+  uid: office!Office.Context#commerceAllowed:member
+  package: office!
+  fullName: commerceAllowed
+  summary: True, если текущая платформа позволяет надстройке отображать пользовательский интерфейс для продажи или обновления; в противном случае возвращает значение false.
+  remarks: >-
+    **Узлы**: Excel, Word
 
 
-          #### <a name="examples"></a>Примеры
-
-          ```javascript
-          var contextInfo = Office.context.diagnostics;
-          console.log("Office application: " + contextInfo.host);
-          console.log("Office version: " + contextInfo.version);
-          console.log("Platform: " + contextInfo.platform);
-          ```
-  - uid: 'office!Office.Context#displayLanguage:member'
-    summary: Получает определенный пользователем языковой стандарт (язык) для пользовательского интерфейса ведущего приложения Office.
-    remarks: |-
-      Возвращаемое значение — это строка в формате языковых тегов RFC 1766, например en-US.
-
-      `displayLanguage`Значение отражает текущий параметр **языка отображения** , указанный с помощью ** &gt; &gt; языка параметров файлов** ведущего приложения Office.
-
-      При использовании в Outlook подходящими режимами является создание или чтение.
-
-      **Сведения о поддержке**
-
-      Заглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.
-
-      Дополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
-
-      *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong> Невозможно </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong> Приложению </strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong> PowerPoint </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong> Project </strong></td><td> Да </td><td> </td><td> </td><td> </td><td> Да </td></tr> <tr><td><strong> Текстовых </strong></td><td> Да </td><td> </td><td> Да </td><td> </td><td> Да </td></tr> </table>
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      function sayHelloWithDisplayLanguage() {
-          var myDisplayLanguage = Office.context.displayLanguage;
-          switch (myDisplayLanguage) {
-              case 'en-US':
-                  write('Hello!');
-                  break;
-              case 'en-NZ':
-                  write('G\'day mate!');
-                  break;
-          }
-      }
-      // Function that writes to a div with id='message' on the page.
-      function write(message){
-          document.getElementById('message').innerText += message; 
-      }
-      ```
-    name: displayLanguage
-    fullName: displayLanguage
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'displayLanguage: string;'
-      return:
-        type:
-          - string
-  - uid: 'office!Office.Context#document:member'
-    summary: 'Получает объект, представляющий документ, с которым взаимодействует контентная надстройка или надстройка области задач.'
-    name: document
-    fullName: document
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'document: Office.Document;'
-      return:
-        type:
-          - 'office!Office.Document:interface'
-        description: |-
+    `commerceAllowed` поддерживается только в Office на iPad.
 
 
-          #### <a name="examples"></a>Примеры
+    App Store для iOS не поддерживает apps с надстройками, которые предоставляют ссылки на дополнительные системы платежей. Тем не менее, надстройки Office, работающие в Office на настольном компьютере с Windows или в браузере, разрешают такие ссылки. Если вы хотите, чтобы пользовательский интерфейс надстройки предоставил ссылку на внешнюю систему оплаты на платформах, отличных от iOS, вы можете использовать свойство commerceAllowed для управления отображением этой ссылки.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'commerceAllowed: boolean;'
+    return:
+      type: boolean
+- name: contentLanguage
+  uid: office!Office.Context#contentLanguage:member
+  package: office!
+  fullName: contentLanguage
+  summary: Получает указанный пользователем языковой стандарт (язык) для редактирования документа или элемента.
+  remarks: "`contentLanguage`Значение отражает параметр **язык редактирования** , указанный с помощью **&gt; &gt; языка параметров файлов** в ведущем приложении Office.\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.\n\nДополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong> Невозможно </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong> Приложению </strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong> PowerPoint </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong> Project </strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong> Текстовых </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction sayHelloWithContentLanguage() {\n    var myContentLanguage = Office.context.contentLanguage;\n    switch (myContentLanguage) {\n        case 'en-US':\n            write('Hello!');\n            break;\n        case 'en-NZ':\n            write('G\\'day mate!');\n            break;\n    }\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'contentLanguage: string;'
+    return:
+      type: string
+- name: diagnostics
+  uid: office!Office.Context#diagnostics:member
+  package: office!
+  fullName: diagnostics
+  summary: Получает сведения о среде, в которой выполняется надстройка.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'diagnostics: ContextInformation;'
+    return:
+      type: <xref uid="office!Office.ContextInformation:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nvar contextInfo = Office.context.diagnostics;\nconsole.log(\"Office application: \" + contextInfo.host);\nconsole.log(\"Office version: \" + contextInfo.version);\nconsole.log(\"Platform: \" + contextInfo.platform);\n```"
+- name: displayLanguage
+  uid: office!Office.Context#displayLanguage:member
+  package: office!
+  fullName: displayLanguage
+  summary: Получает определенный пользователем языковой стандарт (язык) для пользовательского интерфейса ведущего приложения Office.
+  remarks: "Возвращаемое значение — это строка в формате языковых тегов RFC 1766, например en-US.\n\n`displayLanguage`Значение отражает текущий параметр **языка отображения** , указанный с помощью **&gt; &gt; языка параметров файлов** ведущего приложения Office.\n\nПри использовании в Outlook подходящими режимами является создание или чтение.\n\n**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что это свойство поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает это перечисление.\n\nДополнительные сведения о требованиях к ведущему приложению и серверу Office приведены в статье [требования к запуску надстроек Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong> Невозможно </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong> Приложению </strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong> PowerPoint </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong> Project </strong></td><td> Да </td><td> </td><td> </td><td> </td><td> Да </td></tr> <tr><td><strong> Текстовых </strong></td><td> Да </td><td> </td><td> Да </td><td> </td><td> Да </td></tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction sayHelloWithDisplayLanguage() {\n    var myDisplayLanguage = Office.context.displayLanguage;\n    switch (myDisplayLanguage) {\n        case 'en-US':\n            write('Hello!');\n            break;\n        case 'en-NZ':\n            write('G\\'day mate!');\n            break;\n    }\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayLanguage: string;'
+    return:
+      type: string
+- name: document
+  uid: office!Office.Context#document:member
+  package: office!
+  fullName: document
+  summary: Получает объект, представляющий документ, с которым взаимодействует контентная надстройка или надстройка области задач.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'document: Office.Document;'
+    return:
+      type: <xref uid="office!Office.Document:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Extension initialization code.\nvar _document;\n\n// The initialize function is required for all add-ins.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n    // After the DOM is loaded, code specific to the add-in can run.\n    // Initialize instance variables to access API objects.\n    _document = Office.context.document;\n    });\n}\n```"
+- name: host
+  uid: office!Office.Context#host:member
+  package: office!
+  fullName: host
+  summary: Содержит узел приложений Office, в котором работает надстройка.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'host: HostType;'
+    return:
+      type: <xref uid="office!Office.HostType:enum" />
+- name: license
+  uid: office!Office.Context#license:member
+  package: office!
+  fullName: license
+  summary: Получает сведения о лицензии для установки Office пользователя.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'license: string;'
+    return:
+      type: string
+- name: mailbox
+  uid: office!Office.Context#mailbox:member
+  package: office!
+  fullName: mailbox
+  summary: Предоставляет доступ к объектной модели надстройки Microsoft Outlook.
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
 
-          ```javascript
-          // Extension initialization code.
-          var _document;
 
-          // The initialize function is required for all add-ins.
-          Office.initialize = function () {
-              // Checks for the DOM to load using the jQuery ready function.
-              $(document).ready(function () {
-              // After the DOM is loaded, code specific to the add-in can run.
-              // Initialize instance variables to access API objects.
-              _document = Office.context.document;
-              });
-          }
-          ```
-  - uid: 'office!Office.Context#host:member'
-    summary: 'Содержит узел приложений Office, в котором работает надстройка.'
-    name: host
-    fullName: host
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'host: HostType;'
-      return:
-        type:
-          - 'office!Office.HostType:enum'
-  - uid: 'office!Office.Context#license:member'
-    summary: Получает сведения о лицензии для установки Office пользователя.
-    name: license
-    fullName: license
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'license: string;'
-      return:
-        type:
-          - string
-  - uid: 'office!Office.Context#mailbox:member'
-    summary: Предоставляет доступ к объектной модели надстройки Microsoft Outlook.
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
-
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
-
-      **Ключевые свойства**:
-
-      - `diagnostics`<!-- -->: Предоставляет диагностическую информацию для надстройки Outlook.
-
-      - `item`<!-- -->: Предоставляет методы и свойства для доступа к сообщению или встрече в надстройке Outlook.
-
-      - `userProfile`<!-- -->: Предоставляет сведения о пользователе в надстройке Outlook.
-
-      #### <a name="examples"></a>Примеры
-
-      ```javascript
-      // The following line of code access the item object of the JavaScript API for Office.
-      var item = Office.context.mailbox.item;
-      ```
-    name: mailbox
-    fullName: mailbox
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'mailbox: Office.Mailbox;'
-      return:
-        type:
-          - 'outlook!Office.Mailbox:interface'
-  - uid: 'office!Office.Context#officeTheme:member'
-    summary: Предоставляет доступ к свойствам цветов темы Office.
-    name: officeTheme
-    fullName: officeTheme
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'officeTheme: OfficeTheme;'
-      return:
-        type:
-          - 'office!Office.OfficeTheme:interface'
-        description: |-
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
 
 
-          #### <a name="examples"></a>Примеры
+    **Ключевые свойства**:
 
-          ```javascript
-          function applyOfficeTheme(){
-              // Get office theme colors.
-              var bodyBackgroundColor = Office.context.officeTheme.bodyBackgroundColor;
-              var bodyForegroundColor = Office.context.officeTheme.bodyForegroundColor;
-              var controlBackgroundColor = Office.context.officeTheme.controlBackgroundColor;
-              var controlForegroundColor = Office.context.officeTheme.controlForegroundColor;
 
-              // Apply body background color to a CSS class.
-              $('.body').css('background-color', bodyBackgroundColor);
-          }
-          ```
-  - uid: 'office!Office.Context#platform:member'
-    summary: 'Предоставляет платформу, на которой работает надстройка.'
-    name: platform
-    fullName: platform
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'platform: PlatformType;'
-      return:
-        type:
-          - 'office!Office.PlatformType:enum'
-  - uid: 'office!Office.Context#requirements:member'
-    summary: 'Предоставляет метод для определения наборов требований, поддерживаемых на текущем узле и платформе.'
-    name: requirements
-    fullName: requirements
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'requirements: RequirementSetSupport;'
-      return:
-        type:
-          - 'office!Office.RequirementSetSupport:interface'
-  - uid: 'office!Office.Context#roamingSettings:member'
-    summary: |-
-      Получает объект, представляющий настраиваемые параметры или состояние надстройки почты, сохраненное в почтовом ящике пользователя.
+    - `diagnostics`<!-- -->: Предоставляет диагностическую информацию для надстройки Outlook.
 
-      `RoamingSettings`Объект позволяет хранить и получать доступ к данным для почтовой надстройки, хранящейся в почтовом ящике пользователя, поэтому она доступна для этой надстройки при запуске из любого клиентского приложения, используемого для доступа к этому почтовому ящику.
-    remarks: |-
-      ** [Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
 
-      ** [Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    - `item`<!-- -->: Предоставляет методы и свойства для доступа к сообщению или встрече в надстройке Outlook.
 
-      #### <a name="examples"></a>Примеры
 
-      ```javascript
-      // Get the current value of the 'myKey' setting.
-      var value = Office.context.roamingSettings.get('myKey');
-      // Update the value of the 'myKey' setting.
-      Office.context.roamingSettings.set('myKey', 'Hello World!');
-      // Persist the change.
-      Office.context.roamingSettings.saveAsync();
-      ```
-    name: roamingSettings
-    fullName: roamingSettings
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'roamingSettings: Office.RoamingSettings;'
-      return:
-        type:
-          - 'outlook!Office.RoamingSettings:interface'
-  - uid: 'office!Office.Context#touchEnabled:member'
-    summary: 'Указывает, поддерживает ли платформа и устройство взаимодействие сенсорного экрана. Имеет значение true, если надстройка работает на сенсорном устройстве, например iPad; в противном случае — false.'
-    remarks: |-
-      **Hosts**: Excel, PowerPoint, Word
+    - `userProfile`<!-- -->: Предоставляет сведения о пользователе в надстройке Outlook.
 
-      `touchEnabled` поддерживается только в Office на iPad.
 
-      Используйте свойство touchEnabled, чтобы определить, когда надстройка работает на сенсорном устройстве и при необходимости измените тип элементов управления, а также размер и интервал элементов в пользовательском интерфейсе надстройки, чтобы обеспечить поддержку сенсорного взаимодействия.
-    name: touchEnabled
-    fullName: touchEnabled
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'touchEnabled: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'office!Office.Context#ui:member'
-    summary: 'Предоставляет объекты и методы, которые можно использовать для создания компонентов пользовательского интерфейса, например диалоговых окон, и управления ими.'
-    name: ui
-    fullName: ui
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'ui: UI;'
-      return:
-        type:
-          - 'office!Office.UI:interface'
-references:
-  - uid: 'office!Office.Auth:interface'
-    name: Auth
-  - uid: 'office!Office.ContextInformation:interface'
-    name: ContextInformation
-  - uid: 'office!Office.Document:interface'
-    name: Office.Document
-  - uid: 'office!Office.HostType:enum'
-    name: HostType
-  - uid: 'outlook!Office.Mailbox:interface'
-    name: Office.Mailbox
-  - uid: 'office!Office.OfficeTheme:interface'
-    name: OfficeTheme
-  - uid: 'office!Office.PlatformType:enum'
-    name: PlatformType
-  - uid: 'office!Office.RequirementSetSupport:interface'
-    name: RequirementSetSupport
-  - uid: 'outlook!Office.RoamingSettings:interface'
-    name: Office.RoamingSettings
-  - uid: 'office!Office.UI:interface'
-    name: UI
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // The following line of code access the item object of the JavaScript API for Office.
+
+    var item = Office.context.mailbox.item;
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'mailbox: Office.Mailbox;'
+    return:
+      type: <xref uid="outlook!Office.Mailbox:interface" />
+- name: officeTheme
+  uid: office!Office.Context#officeTheme:member
+  package: office!
+  fullName: officeTheme
+  summary: Предоставляет доступ к свойствам цветов темы Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'officeTheme: OfficeTheme;'
+    return:
+      type: <xref uid="office!Office.OfficeTheme:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction applyOfficeTheme(){\n    // Get office theme colors.\n    var bodyBackgroundColor = Office.context.officeTheme.bodyBackgroundColor;\n    var bodyForegroundColor = Office.context.officeTheme.bodyForegroundColor;\n    var controlBackgroundColor = Office.context.officeTheme.controlBackgroundColor;\n    var controlForegroundColor = Office.context.officeTheme.controlForegroundColor;\n\n    // Apply body background color to a CSS class.\n    $('.body').css('background-color', bodyBackgroundColor);\n}\n```"
+- name: platform
+  uid: office!Office.Context#platform:member
+  package: office!
+  fullName: platform
+  summary: Предоставляет платформу, на которой работает надстройка.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'platform: PlatformType;'
+    return:
+      type: <xref uid="office!Office.PlatformType:enum" />
+- name: requirements
+  uid: office!Office.Context#requirements:member
+  package: office!
+  fullName: requirements
+  summary: Предоставляет метод для определения наборов требований, поддерживаемых на текущем узле и платформе.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'requirements: RequirementSetSupport;'
+    return:
+      type: <xref uid="office!Office.RequirementSetSupport:interface" />
+- name: roamingSettings
+  uid: office!Office.Context#roamingSettings:member
+  package: office!
+  fullName: roamingSettings
+  summary: >-
+    Получает объект, представляющий настраиваемые параметры или состояние надстройки почты, сохраненное в почтовом ящике пользователя.
+
+
+    `RoamingSettings`Объект позволяет хранить и получать доступ к данным для почтовой надстройки, хранящейся в почтовом ящике пользователя, поэтому она доступна для этой надстройки при запуске из любого клиентского приложения, используемого для доступа к этому почтовому ящику.
+  remarks: >-
+    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
+
+
+    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Get the current value of the 'myKey' setting.
+
+    var value = Office.context.roamingSettings.get('myKey');
+
+    // Update the value of the 'myKey' setting.
+
+    Office.context.roamingSettings.set('myKey', 'Hello World!');
+
+    // Persist the change.
+
+    Office.context.roamingSettings.saveAsync();
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'roamingSettings: Office.RoamingSettings;'
+    return:
+      type: <xref uid="outlook!Office.RoamingSettings:interface" />
+- name: touchEnabled
+  uid: office!Office.Context#touchEnabled:member
+  package: office!
+  fullName: touchEnabled
+  summary: Указывает, поддерживает ли платформа и устройство взаимодействие сенсорного экрана. Имеет значение true, если надстройка работает на сенсорном устройстве, например iPad; в противном случае — false.
+  remarks: >-
+    **Hosts**: Excel, PowerPoint, Word
+
+
+    `touchEnabled` поддерживается только в Office на iPad.
+
+
+    Используйте свойство touchEnabled, чтобы определить, когда надстройка работает на сенсорном устройстве и при необходимости измените тип элементов управления, а также размер и интервал элементов в пользовательском интерфейсе надстройки, чтобы обеспечить поддержку сенсорного взаимодействия.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'touchEnabled: boolean;'
+    return:
+      type: boolean
+- name: ui
+  uid: office!Office.Context#ui:member
+  package: office!
+  fullName: ui
+  summary: Предоставляет объекты и методы, которые можно использовать для создания компонентов пользовательского интерфейса, например диалоговых окон, и управления ими.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'ui: UI;'
+    return:
+      type: <xref uid="office!Office.UI:interface" />
+metadata:
+  ms.openlocfilehash: 4a366d9ffedfa94f945405fcadd5152703b32ec1
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49329595"
