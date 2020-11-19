@@ -105,8 +105,8 @@
 ||[правила](/javascript/api/excel/excel.presetcriteriaconditionalformat#rule)|Правило условного форматирования.|
 |[Range](/javascript/api/excel/excel.range)|[calculate()](/javascript/api/excel/excel.range#calculate--)|Вычисляет диапазон ячеек на листе.|
 ||[conditionalFormats](/javascript/api/excel/excel.range#conditionalformats)|Коллекция объектов Кондитионалформатс, пересекающих диапазон.|
-|[TextConditionalFormat](/javascript/api/excel/excel.textconditionalformat)|[format](/javascript/api/excel/excel.textconditionalformat#format)|Возвращает объект Format, который инкапсулирует шрифты условного форматирования, заливки, границы и другие свойства.|
+|[TextConditionalFormat](/javascript/api/excel/excel.textconditionalformat)|[format](/javascript/api/excel/excel.textconditionalformat#format)|Возвращает объект Format, инкапсулирующий шрифт, заливку, границы и другие свойства условного форматирования.|
 ||[правила](/javascript/api/excel/excel.textconditionalformat#rule)|Правило условного форматирования.|
-|[TopBottomConditionalFormat](/javascript/api/excel/excel.topbottomconditionalformat)|[format](/javascript/api/excel/excel.topbottomconditionalformat#format)|Возвращает объект Format, который инкапсулирует шрифты условного форматирования, заливки, границы и другие свойства.|
+|[TopBottomConditionalFormat](/javascript/api/excel/excel.topbottomconditionalformat)|[format](/javascript/api/excel/excel.topbottomconditionalformat#format)|Возвращает объект Format, инкапсулирующий шрифт, заливку, границы и другие свойства условного форматирования.|
 ||[правила](/javascript/api/excel/excel.topbottomconditionalformat#rule)|Критерии условного форматирования Top/Bottom.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[Calculate (markAllDirty: Boolean)](/javascript/api/excel/excel.worksheet#calculate-markalldirty-)|Вычисляет все ячейки на листе.|
