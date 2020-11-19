@@ -1,559 +1,323 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'onenote!OneNote.Image:class'
-    summary: |-
-      Представляет изображение. Объект Image может быть прямым потомком объекта PageContent или объекта Paragraph.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: OneNote.Image
-    fullName: OneNote.Image
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: onenote!
-    children:
-      - 'onenote!OneNote.Image#context:member'
-      - 'onenote!OneNote.Image#description:member'
-      - 'onenote!OneNote.Image#getBase64Image:member(1)'
-      - 'onenote!OneNote.Image#height:member'
-      - 'onenote!OneNote.Image#hyperlink:member'
-      - 'onenote!OneNote.Image#id:member'
-      - 'onenote!OneNote.Image#load:member(1)'
-      - 'onenote!OneNote.Image#load:member(2)'
-      - 'onenote!OneNote.Image#load:member(3)'
-      - 'onenote!OneNote.Image#ocrData:member'
-      - 'onenote!OneNote.Image#pageContent:member'
-      - 'onenote!OneNote.Image#paragraph:member'
-      - 'onenote!OneNote.Image#set:member(1)'
-      - 'onenote!OneNote.Image#set:member(2)'
-      - 'onenote!OneNote.Image#toJSON:member(1)'
-      - 'onenote!OneNote.Image#track:member(1)'
-      - 'onenote!OneNote.Image#untrack:member(1)'
-      - 'onenote!OneNote.Image#width:member'
-  - uid: 'onenote!OneNote.Image#context:member'
-    summary: 'Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.'
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'onenote!OneNote.RequestContext:class'
-  - uid: 'onenote!OneNote.Image#description:member'
-    summary: |-
-      Получает или задает описание объекта Image.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: description
-    fullName: description
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'description: string;'
-      return:
-        type:
-          - string
-  - uid: 'onenote!OneNote.Image#getBase64Image:member(1)'
-    summary: |-
-      Получает двоичное представление объекта Image в кодировке Base64. Пример: data: Image/PNG; Base64, iVBORw0KGgoAAAANSUhEUgAAADIA...
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: getBase64Image()
-    fullName: getBase64Image()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getBase64Image(): OfficeExtension.ClientResult<string>;'
-      return:
-        type:
-          - 'onenote!OneNote.Image#getBase64Image~0:complex'
-        description: |-
+### YamlMime:TSType
+name: OneNote.Image
+uid: onenote!OneNote.Image:class
+package: onenote!
+fullName: OneNote.Image
+summary: >-
+  Представляет изображение. Объект Image может быть прямым потомком объекта PageContent или объекта Paragraph.
 
 
-          #### <a name="examples"></a>Примеры
-
-          ```javascript
-
-          var image = null;
-          var imageString;
-
-          OneNote.run(function(ctx){
-              // Get the current outline.         
-              var outline = ctx.application.getActiveOutline();
-              
-              // Queue a command to load paragraphs and their types. 
-              outline.load("paragraphs/type")
-              return ctx.sync().
-                  then(function(){
-                      for (var i=0; i < outline.paragraphs.items.length; i++)
-                      {
-                          var paragraph = outline.paragraphs.items[i];
-                          if (paragraph.type == "Image")
-                          {
-                              image = paragraph.image;
-                          }
-                      }
-                  })
-                  .then(function(){
-                      if (image != null)
-                      {
-                          imageString = image.getBase64Image();
-                          return ctx.sync();
-                      }
-                  })
-                  .then(function(){
-                      console.log(imageString);
-                  });
-          });
-          ```
-  - uid: 'onenote!OneNote.Image#height:member'
-    summary: |-
-      Получает или задает высоту объекта Image.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: height
-    fullName: height
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'height: number;'
-      return:
-        type:
-          - number
-  - uid: 'onenote!OneNote.Image#hyperlink:member'
-    summary: |-
-      Получает или задает гиперссылку для объекта Image.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: hyperlink
-    fullName: hyperlink
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'hyperlink: string;'
-      return:
-        type:
-          - string
-  - uid: 'onenote!OneNote.Image#id:member'
-    summary: |-
-      Получает идентификатор объекта Image. Только для чтения.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly id: string;'
-      return:
-        type:
-          - string
-  - uid: 'onenote!OneNote.Image#load:member(1)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
-    remarks: |-
-      В дополнение к этой подписи этот метод имеет следующие подписи:
-
-      `load(option?: string | string[]): OneNote.Image`-WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
-
-      `load(option?: { select?: string; expand?: string; }): OneNote.Image`-WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Image`— Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.ImageLoadOptions): OneNote.Image;'
-      return:
-        type:
-          - 'onenote!OneNote.Image:class'
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - 'onenote!OneNote.Interfaces.ImageLoadOptions:interface'
-  - uid: 'onenote!OneNote.Image#load:member(2)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.Image;'
-      return:
-        type:
-          - 'onenote!OneNote.Image:class'
-        description: |-
+  \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: onenote!OneNote.Image#context:member
+  package: onenote!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: description
+  uid: onenote!OneNote.Image#description:member
+  package: onenote!
+  fullName: description
+  summary: >-
+    Получает или задает описание объекта Image.
 
 
-          #### <a name="examples"></a>Примеры
-
-          ```javascript
-          OneNote.run(function(ctx){
-              // Get the current outline.         
-              var outline = ctx.application.getActiveOutline();
-              var image = null;
-              
-              // Queue a command to load paragraphs and their types. 
-              outline.load("paragraphs/type")
-              return ctx.sync().
-                  then(function(){
-                      for (var i=0; i < outline.paragraphs.items.length; i++)
-                      {
-                          var paragraph = outline.paragraphs.items[i];
-                          if (paragraph.type == "Image")
-                          {
-                              image = paragraph.image;
-                          }
-                      }
-                  })
-                  .then(function(){
-                      if (image != null)
-                      {
-                          // load every properties and relationships
-                          ctx.load(image);
-                          return ctx.sync();
-                      }
-                  })
-                  .then(function(){
-                      if (image != null)
-                      {                   
-                          console.log("image " + image.id + " width is " + image.width + " height is " + image.height);
-                          console.log("description: " + image.description);                   
-                          console.log("hyperlink: " + image.hyperlink);
-                      }
-                  });
-          });
-          ```
-          ```javascript
-          var image = null;
-
-          OneNote.run(function(ctx){
-              // Get the current outline.
-              var outline = ctx.application.getActiveOutline();
-
-              // Queue a command to load paragraphs and their types.
-              outline.load("paragraphs")
-              return ctx.sync().
-                  then(function(){
-                      for (var i=0; i < outline.paragraphs.items.length; i++)
-                      {
-                          var paragraph = outline.paragraphs.items[i];
-                          if (paragraph.type == "Image")
-                          {
-                              image = paragraph.image;
-                          }
-                      }
-                      if (image != null)
-                      {
-                         image.load("ocrData");
-                      }
-                      return ctx.sync();
-                  })
-                  .then(function(){
-                      console.log(image.ocrData);
-                  });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-          ```javascript
-          OneNote.run(function(ctx){
-              // Get the current outline.         
-              var outline = ctx.application.getActiveOutline();
-              var searchedParagraph = null;
-              
-              // Queue a command to load paragraphs and their types. 
-              outline.load("paragraphs/type")
-              return ctx.sync().
-                  then(function() {
-                      for (var i=0; i < outline.paragraphs.items.length; i++)
-                      {
-                          var paragraph = outline.paragraphs.items[i];
-                          if (paragraph.type == "Image")
-                          {
-                              searchedParagraph = paragraph;
-                              break;
-                          }
-                      }
-                  })
-                  .then(function() {
-                      if (searchedParagraph != null)
-                      {
-                          // load every properties and relationships
-                          searchedParagraph.image.load('paragraph');
-                          return ctx.sync();
-                      }
-                  })
-                  .then(function() {
-                      if (searchedParagraph != null)
-                      {                   
-                          if (searchedParagraph.id != searchedParagraph.image.paragraph.id)
-                          {
-                              console.log("id must match");
-                          }
-                      }
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          }); 
-          ```
-      parameters:
-        - id: propertyNames
-          description: 'Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.'
-          type:
-            - 'string | string[]'
-  - uid: 'onenote!OneNote.Image#load:member(3)'
-    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Image;'
-      return:
-        type:
-          - 'onenote!OneNote.Image:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: 'Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.'
-          type:
-            - '{ select?: string; expand?: string; }'
-  - uid: 'onenote!OneNote.Image#ocrData:member'
-    summary: |-
-      Получает данные, собранные с помощью распознавания текста (OCR) для этого объекта Image, например текст и язык.
-
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: ocrData
-    fullName: ocrData
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly ocrData: OneNote.ImageOcrData;'
-      return:
-        type:
-          - 'onenote!OneNote.ImageOcrData:interface'
-        description: |-
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'description: string;'
+    return:
+      type: string
+- name: height
+  uid: onenote!OneNote.Image#height:member
+  package: onenote!
+  fullName: height
+  summary: >-
+    Получает или задает высоту объекта Image.
 
 
-          #### <a name="examples"></a>Примеры
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'height: number;'
+    return:
+      type: number
+- name: hyperlink
+  uid: onenote!OneNote.Image#hyperlink:member
+  package: onenote!
+  fullName: hyperlink
+  summary: >-
+    Получает или задает гиперссылку для объекта Image.
 
-          ```javascript
-          var image = null;
 
-          OneNote.run(function(ctx){
-              // Get the current outline.
-              var outline = ctx.application.getActiveOutline();
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'hyperlink: string;'
+    return:
+      type: string
+- name: id
+  uid: onenote!OneNote.Image#id:member
+  package: onenote!
+  fullName: id
+  summary: >-
+    Получает идентификатор объекта Image. Только для чтения.
 
-              // Queue a command to load paragraphs and their types.
-              outline.load("paragraphs")
-              return ctx.sync().
-                  then(function(){
-                      for (var i=0; i < outline.paragraphs.items.length; i++)
-                      {
-                          var paragraph = outline.paragraphs.items[i];
-                          if (paragraph.type == "Image")
-                          {
-                              image = paragraph.image;
-                          }
-                      }
-                      if (image != null)
-                      {
-                         image.load("ocrData");
-                      }
-                      return ctx.sync();
-                  })
-                  .then(function(){
-                      
-                      // Log ocrText and ocrLanguageId
-                      console.log(image.ocrData.ocrText);
-                      console.log(image.ocrData.ocrLanguageId);
-                  });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-  - uid: 'onenote!OneNote.Image#pageContent:member'
-    summary: |-
-      Получает объект PageContent, содержащий объект Image. Выдает исключение, если объект Image не является непосредственным дочерним элементом для объекта PageContent. Этот объект определяет положение объекта Image на странице. Только для чтения.
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: pageContent
-    fullName: pageContent
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly pageContent: OneNote.PageContent;'
-      return:
-        type:
-          - 'onenote!OneNote.PageContent:class'
-  - uid: 'onenote!OneNote.Image#paragraph:member'
-    summary: |-
-      Получает объект Paragraph, содержащий объект Image. Выдает исключение, если объект Image не является непосредственным дочерним элементом для объекта Paragraph. Только для чтения.
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: ocrData
+  uid: onenote!OneNote.Image#ocrData:member
+  package: onenote!
+  fullName: ocrData
+  summary: >-
+    Получает данные, собранные с помощью распознавания текста (OCR) для этого объекта Image, например текст и язык.
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: paragraph
-    fullName: paragraph
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly paragraph: OneNote.Paragraph;'
-      return:
-        type:
-          - 'onenote!OneNote.Paragraph:class'
-  - uid: 'onenote!OneNote.Image#set:member(1)'
-    summary: 'Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.'
-    remarks: |-
-      Этот метод имеет следующую дополнительную подпись:
 
-      `set(properties: OneNote.Image): void`
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.ImageUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: 'Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.'
-          type:
-            - 'onenote!OneNote.Interfaces.ImageUpdateData:interface'
-        - id: options
-          description: 'Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.'
-          type:
-            - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'onenote!OneNote.Image#set:member(2)'
-    summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: OneNote.Image): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - 'onenote!OneNote.Image:class'
-  - uid: 'onenote!OneNote.Image#toJSON:member(1)'
-    summary: 'Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект OneNote. Image является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип`OneNote.Interfaces.ImageData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.ImageData;'
-      return:
-        type:
-          - 'onenote!OneNote.Interfaces.ImageData:interface'
-        description: ''
-  - uid: 'onenote!OneNote.Image#track:member(1)'
-    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.'
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.Image;'
-      return:
-        type:
-          - 'onenote!OneNote.Image:class'
-        description: ''
-  - uid: 'onenote!OneNote.Image#untrack:member(1)'
-    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().'
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.Image;'
-      return:
-        type:
-          - 'onenote!OneNote.Image:class'
-        description: ''
-  - uid: 'onenote!OneNote.Image#width:member'
-    summary: |-
-      Получает или задает ширину объекта Image.
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly ocrData: OneNote.ImageOcrData;'
+    return:
+      type: <xref uid="onenote!OneNote.ImageOcrData:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nvar image = null;\n\nOneNote.run(function(ctx){\n    // Get the current outline.\n    var outline = ctx.application.getActiveOutline();\n\n    // Queue a command to load paragraphs and their types.\n    outline.load(\"paragraphs\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n            if (image != null)\n            {\n               image.load(\"ocrData\");\n            }\n            return ctx.sync();\n        })\n        .then(function(){\n            \n            // Log ocrText and ocrLanguageId\n            console.log(image.ocrData.ocrText);\n            console.log(image.ocrData.ocrLanguageId);\n        });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: pageContent
+  uid: onenote!OneNote.Image#pageContent:member
+  package: onenote!
+  fullName: pageContent
+  summary: >-
+    Получает объект PageContent, содержащий объект Image. Выдает исключение, если объект Image не является непосредственным дочерним элементом для объекта PageContent. Этот объект определяет положение объекта Image на странице. Только для чтения.
 
-      \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: width
-    fullName: width
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'width: number;'
-      return:
-        type:
-          - number
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'onenote!OneNote.RequestContext:class'
-    name: RequestContext
-  - uid: 'onenote!OneNote.Image#getBase64Image~0:complex'
-    name: OfficeExtension.ClientResult<string>
-    fullName: OfficeExtension.ClientResult<string>
-    spec.typeScript:
-      - uid: 'office!OfficeExtension.ClientResult:class'
-        name: OfficeExtension.ClientResult
-        fullName: OfficeExtension.ClientResult
-      - name: <string>
-        fullName: <string>
-  - uid: 'onenote!OneNote.Image:class'
-    name: OneNote.Image
-  - uid: 'onenote!OneNote.Interfaces.ImageLoadOptions:interface'
-    name: OneNote.Interfaces.ImageLoadOptions
-  - uid: 'onenote!OneNote.ImageOcrData:interface'
-    name: OneNote.ImageOcrData
-  - uid: 'onenote!OneNote.PageContent:class'
-    name: OneNote.PageContent
-  - uid: 'onenote!OneNote.Paragraph:class'
-    name: OneNote.Paragraph
-  - uid: 'onenote!OneNote.Interfaces.ImageUpdateData:interface'
-    name: Interfaces.ImageUpdateData
-  - uid: 'office!OfficeExtension.UpdateOptions:interface'
-    name: OfficeExtension.UpdateOptions
-  - uid: 'onenote!OneNote.Interfaces.ImageData:interface'
-    name: OneNote.Interfaces.ImageData
+
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly pageContent: OneNote.PageContent;'
+    return:
+      type: <xref uid="onenote!OneNote.PageContent:class" />
+- name: paragraph
+  uid: onenote!OneNote.Image#paragraph:member
+  package: onenote!
+  fullName: paragraph
+  summary: >-
+    Получает объект Paragraph, содержащий объект Image. Выдает исключение, если объект Image не является непосредственным дочерним элементом для объекта Paragraph. Только для чтения.
+
+
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly paragraph: OneNote.Paragraph;'
+    return:
+      type: <xref uid="onenote!OneNote.Paragraph:class" />
+- name: width
+  uid: onenote!OneNote.Image#width:member
+  package: onenote!
+  fullName: width
+  summary: >-
+    Получает или задает ширину объекта Image.
+
+
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'width: number;'
+    return:
+      type: number
+methods:
+- name: getBase64Image()
+  uid: onenote!OneNote.Image#getBase64Image:member(1)
+  package: onenote!
+  fullName: getBase64Image()
+  summary: >-
+    Получает двоичное представление объекта Image в кодировке Base64. Пример: data: Image/PNG; Base64, iVBORw0KGgoAAAANSUhEUgAAADIA...
+
+
+    \[[Набор API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getBase64Image(): OfficeExtension.ClientResult<string>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n\nvar image = null;\nvar imageString;\n\nOneNote.run(function(ctx){\n    // Get the current outline.         \n    var outline = ctx.application.getActiveOutline();\n    \n    // Queue a command to load paragraphs and their types. \n    outline.load(\"paragraphs/type\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n        })\n        .then(function(){\n            if (image != null)\n            {\n                imageString = image.getBase64Image();\n                return ctx.sync();\n            }\n        })\n        .then(function(){\n            console.log(imageString);\n        });\n});\n```"
+- name: load(option)
+  uid: onenote!OneNote.Image#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств необходимо вызвать метод context.sync().
+  remarks: >-
+    В дополнение к этой подписи этот метод имеет следующие подписи:
+
+
+    `load(option?: string | string[]): OneNote.Image` -WHERE — это строка с разделителями-запятыми или массив строк, указывающий свойства для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.Image` -WHERE. Select — это строка с разделителями-запятыми, указывающая свойства для загрузки и параметры. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Image` — Доступно только для типов коллекций. Он аналогичен предыдущей подписи. Option. Top указывает максимальное количество элементов коллекции, которые можно включить в результат. Option. skip указывает количество элементов, которые будут пропущены и не включены в результат. Если указан параметр Option. Top, результирующий набор начнется после пропуска указанного числа элементов.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.ImageLoadOptions): OneNote.Image;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.ImageLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.Image:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.Image#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.Image;'
+    parameters:
+    - id: propertyNames
+      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.Image:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function(ctx){\n    // Get the current outline.         \n    var outline = ctx.application.getActiveOutline();\n    var image = null;\n    \n    // Queue a command to load paragraphs and their types. \n    outline.load(\"paragraphs/type\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n        })\n        .then(function(){\n            if (image != null)\n            {\n                // load every properties and relationships\n                ctx.load(image);\n                return ctx.sync();\n            }\n        })\n        .then(function(){\n            if (image != null)\n            {                   \n                console.log(\"image \" + image.id + \" width is \" + image.width + \" height is \" + image.height);\n                console.log(\"description: \" + image.description);                   \n                console.log(\"hyperlink: \" + image.hyperlink);\n            }\n        });\n});\n```\n```javascript\nvar image = null;\n\nOneNote.run(function(ctx){\n    // Get the current outline.\n    var outline = ctx.application.getActiveOutline();\n\n    // Queue a command to load paragraphs and their types.\n    outline.load(\"paragraphs\")\n    return ctx.sync().\n        then(function(){\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    image = paragraph.image;\n                }\n            }\n            if (image != null)\n            {\n               image.load(\"ocrData\");\n            }\n            return ctx.sync();\n        })\n        .then(function(){\n            console.log(image.ocrData);\n        });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function(ctx){\n    // Get the current outline.         \n    var outline = ctx.application.getActiveOutline();\n    var searchedParagraph = null;\n    \n    // Queue a command to load paragraphs and their types. \n    outline.load(\"paragraphs/type\")\n    return ctx.sync().\n        then(function() {\n            for (var i=0; i < outline.paragraphs.items.length; i++)\n            {\n                var paragraph = outline.paragraphs.items[i];\n                if (paragraph.type == \"Image\")\n                {\n                    searchedParagraph = paragraph;\n                    break;\n                }\n            }\n        })\n        .then(function() {\n            if (searchedParagraph != null)\n            {\n                // load every properties and relationships\n                searchedParagraph.image.load('paragraph');\n                return ctx.sync();\n            }\n        })\n        .then(function() {\n            if (searchedParagraph != null)\n            {                   \n                if (searchedParagraph.id != searchedParagraph.image.paragraph.id)\n                {\n                    console.log(\"id must match\");\n                }\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+- name: load(propertyNamesAndPaths)
+  uid: onenote!OneNote.Image#load:member(3)
+  package: onenote!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Image;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Где Пропертинамесандпасс. Select — это строка с разделителями-запятыми, задающая свойства для загрузки, и Пропертинамесандпасс. Expand — это строка с разделителями-запятыми, указывающая свойства навигации для загрузки.
+      type: '{ select?: string; expand?: string; }'
+    return:
+      type: <xref uid="onenote!OneNote.Image:class" />
+      description: ''
+- name: set(properties, options)
+  uid: onenote!OneNote.Image#set:member(1)
+  package: onenote!
+  fullName: set(properties, options)
+  summary: Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.
+  remarks: >-
+    Этот метод имеет следующую дополнительную подпись:
+
+
+    `set(properties: OneNote.Image): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.ImageUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.
+      type: <xref uid="onenote!OneNote.Interfaces.ImageUpdateData:interface" />
+    - id: options
+      description: Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: onenote!OneNote.Image#set:member(2)
+  package: onenote!
+  fullName: set(properties)
+  summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: OneNote.Image): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="onenote!OneNote.Image:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.Image#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект OneNote. Image является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `OneNote.Interfaces.ImageData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.ImageData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.ImageData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.Image#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является сокращением для context.trackedObjects.add(thisObject). Если этот объект используется в вызовах .sync и вне последовательного выполнения пакета .run с возникновением ошибки InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в коллекцию отслеживаемых объектов при первоначальном создании объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.Image;'
+    return:
+      type: <xref uid="onenote!OneNote.Image:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.Image#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является сокращением для context.trackedObjects.remove(thisObject). Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед фактическим освобождением памяти потребуется вызвать метод context.sync().
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.Image;'
+    return:
+      type: <xref uid="onenote!OneNote.Image:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: d0f18d562938c63676acedcce389a3530106b87a
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49183064"
