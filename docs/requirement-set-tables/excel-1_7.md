@@ -197,7 +197,7 @@
 ||[Жетранжебиндексес (startRow: число, startColumn: число, rowCount: число, columnCount: число)](/javascript/api/excel/excel.worksheet#getrangebyindexes-startrow--startcolumn--rowcount--columncount-)|Получает объект диапазона, начинающегося с определенных строки и столбца и занимающего определенное количество строк и столбцов.|
 ||[freezePanes](/javascript/api/excel/excel.worksheet#freezepanes)|Получает объект, который можно использовать для работы с замороженными областями на листе.|
 ||[onActivated](/javascript/api/excel/excel.worksheet#onactivated)|Возникает при активации листа.|
-||[onChanged](/javascript/api/excel/excel.worksheet#onchanged)|Происходит при изменении данных на конкретном листе.|
+||[onChanged](/javascript/api/excel/excel.worksheet#onchanged)|Происходит при изменении данных на определенном листе.|
 ||[onDeactivated](/javascript/api/excel/excel.worksheet#ondeactivated)|Возникает при отключении рабочего листа.|
 ||[onSelectionChanged](/javascript/api/excel/excel.worksheet#onselectionchanged)|Возникает при изменении выделенного фрагмента на определенном листе.|
 ||[standardHeight](/javascript/api/excel/excel.worksheet#standardheight)|Возвращает стандартную (по умолчанию) высоту всех строк на листе (в пунктах).|
@@ -223,8 +223,8 @@
 ||[type](/javascript/api/excel/excel.worksheetdeletedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetdeletedeventargs#worksheetid)|Получает идентификатор листа, удаляемого из книги.|
 |[WorksheetFreezePanes](/javascript/api/excel/excel.worksheetfreezepanes)|[Фризеат (Фрозенранже: \| строка Range)](/javascript/api/excel/excel.worksheetfreezepanes#freezeat-frozenrange-)|Задает закрепленные ячейки в представлении активного листа.|
-||[Фризеколумнс (Count?: число)](/javascript/api/excel/excel.worksheetfreezepanes#freezecolumns-count-)|Закрепляет первый столбец (или столбцы) листа на месте.|
-||[Фризеровс (Count?: число)](/javascript/api/excel/excel.worksheetfreezepanes#freezerows-count-)|Закрепляет верхнюю строку (или строки) листа на месте.|
+||[Фризеколумнс (Count?: число)](/javascript/api/excel/excel.worksheetfreezepanes#freezecolumns-count-)|Закрепление первого столбца или столбцов листа на месте.|
+||[Фризеровс (Count?: число)](/javascript/api/excel/excel.worksheetfreezepanes#freezerows-count-)|Закрепите верхнюю строку или строки листа на месте.|
 ||[getLocation()](/javascript/api/excel/excel.worksheetfreezepanes#getlocation--)|Получает диапазон, описывающий закрепленные ячейки в представлении активного листа.|
 ||[Жетлокатионорнуллобжект ()](/javascript/api/excel/excel.worksheetfreezepanes#getlocationornullobject--)|Получает диапазон, описывающий закрепленные ячейки в представлении активного листа.|
 ||[разморозить ()](/javascript/api/excel/excel.worksheetfreezepanes#unfreeze--)|Удаляет все закрепленные области в листе.|
