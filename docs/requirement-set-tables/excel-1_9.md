@@ -280,7 +280,7 @@
 |[RangeFill](/javascript/api/excel/excel.rangefill)|[pattern](/javascript/api/excel/excel.rangefill#pattern)|Шаблон диапазона.|
 ||[patternColor](/javascript/api/excel/excel.rangefill#patterncolor)|HTML-код цвета, представляющий цвет шаблона диапазона, для #RRGGBB формы (например, "FFA500") или в виде именованного цвета HTML (например, "Апельсин").|
 ||[patternTintAndShade](/javascript/api/excel/excel.rangefill#patterntintandshade)|Задает двойное значение, которое осветляет или затемняет цвет узора для заливки диапазона, значение находится в пределах от-1 (самая темная) и 1 (самое яркое) с 0 для исходного цвета.|
-||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|Задает двойное значение, которое осветляет или затемняет цвет заливки диапазона, значение находится в диапазоне от-1 (самая темная) и 1 (самое яркое) с 0 для исходного цвета.|
+||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|Задает значение типа Double, которое осветляет или затемняет цвет заливки диапазона.|
 |[RangeFont](/javascript/api/excel/excel.rangefont)|[strikethrough](/javascript/api/excel/excel.rangefont#strikethrough)|Указывает состояние зачеркивания шрифта.|
 ||[subscript](/javascript/api/excel/excel.rangefont#subscript)|Задает состояние подстрочного шрифта.|
 ||[superscript](/javascript/api/excel/excel.rangefont#superscript)|Задает состояние шрифта в виде надстрочного знака.|
