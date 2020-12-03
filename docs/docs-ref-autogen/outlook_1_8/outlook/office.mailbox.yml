@@ -123,7 +123,7 @@ properties:
     Элемент почтового ящика. В зависимости от контекста, в котором открыта надстройка, тип элемента может отличаться. Если вы хотите увидеть IntelliSense только для определенного типа или режима, приведите этот элемент к одному из следующих вариантов:
 
 
-    [MessageCompose](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [Аппоинтменткомпосе](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [Аппоинтментреад](xref:outlook!Office.AppointmentRead:interface)
+    [мессажекомпосе](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [Аппоинтменткомпосе](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [Аппоинтментреад](xref:outlook!Office.AppointmentRead:interface)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -282,18 +282,27 @@ methods:
 
     Office.initialize = function (reason) {
         $(document).ready(function () {
-            Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, loadNewItem, function (result) {
-            if (result.status === Office.AsyncResultStatus.Failed) {
-                    // Handle error.
-                }
-            });
+            Office.context.mailbox.addHandlerAsync(
+                Office.EventType.ItemChanged,
+                loadNewItem,
+                function (result) {
+                    if (result.status === Office.AsyncResultStatus.Failed) {
+                        // Handle error.
+                    }
+                });
         });
     };
 
 
     function loadNewItem(eventArgs) {
-        // Load the properties of the newly selected item.
-        loadProps(Office.context.mailbox.item);
+        var item = Office.context.mailbox.item;
+
+        // Check that item is not null.
+        if (item !== null) {
+            // Work with item, e.g., define and call function that
+            // loads the properties of the newly selected item.
+            loadProps(item);
+        }
     }
 
     ```
@@ -309,10 +318,10 @@ methods:
       description: Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство Type для параметра будет сопоставляться `eventType` с параметром, переданным `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
-      description: Необязательный атрибут. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+      description: Необязательный параметр. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      description: Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -896,7 +905,7 @@ methods:
       description: После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Маркер возвращается в виде строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательный атрибут. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательный параметр. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -957,7 +966,7 @@ methods:
       description: После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Маркер возвращается в виде строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательный атрибут. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательный параметр. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -1131,7 +1140,7 @@ methods:
       description: После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. `value`Свойство Result представляет собой XML-код запроса EWS, предоставленный в виде строки. Если размер результата превышает 1 МБ, возвращается сообщение об ошибке.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательный атрибут. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательный параметр. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -1162,18 +1171,18 @@ methods:
       description: Событие, которое должно отменить обработчик.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: Необязательный атрибут. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
+      description: Необязательный параметр. Предоставляет параметр для сохранения данных контекста любого типа без изменений для использования при обратном вызове.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      description: Необязательный параметр. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 7bf1c8fd6712d68e1fc9201a0fdc2865d88b3d65
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: a2d685f75752d85f16c771bf07fd214e09ef5231
+  ms.sourcegitcommit: a6ecbc9abca2ab5c82af4c869e3e2d72c999a4c1
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49150423"
+  ms.lasthandoff: 12/02/2020
+  ms.locfileid: "49542691"
