@@ -7,12 +7,12 @@ summary: >-
   Массив объектов `NotificationMessageDetails`, возвращаемых методом `NotificationMessages.getAllAsync`.
 
 
-  \[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Набор API: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 isPreview: false
 isDeprecated: false
 type: interface
@@ -22,11 +22,14 @@ properties:
   package: outlook!
   fullName: actions
   summary: >-
-    Задает действия для сообщения. Ограничения: 1 действие. Это число не учитывает действие "прекратить", которое включено по умолчанию. Применяется только в том случае, если тип `InsightMessage`<!-- -->. При указании этого свойства для неподдерживаемого типа или при включении слишком большого количества действий возникает ошибка.
+    Указывает действия для сообщения. Ограничение: 1 действие. Это ограничение не учитывает действие "Dismiss", которое включено по умолчанию. Применимо только в том случае, если тип `InsightMessage`<!-- -->. Если указать это свойство для неподключенного типа или указать слишком много действий, будет выявить ошибку.
+
+
+    **Важно!** В современном Outlook в Интернете свойство доступно только в `actions` режиме составить.
 
 
     \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: '**[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание'
+  remarks: '**[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать'
   isPreview: true
   isDeprecated: false
   syntax:
@@ -38,10 +41,10 @@ properties:
   package: outlook!
   fullName: icon
   summary: >-
-    Ссылка на значок, определенный в манифесте в разделе `Resources`. Он появляется на информационной панели. Применяется только в том случае, если тип `InformationalMessage`<!-- -->. Если указать для этого параметра неподдерживаемый тип, будет возвращено исключение.
+    Ссылка на значок, определенный в манифесте в разделе `Resources`. Он появляется на информационной панели. Это применимо, только если тип `InformationalMessage`<!-- -->. Если указать для этого параметра неподдерживаемый тип, будет возвращено исключение.
 
 
-    **Примечание**. в настоящее время пользовательский значок отображается только в Outlook в Windows, а не на других клиентах (например, Mac, веб-браузере).
+    **Примечание.** В настоящее время пользовательский значок отображается только в Outlook для Windows, а не на других клиентах (например, Mac, веб-браузере).
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -77,7 +80,7 @@ properties:
   uid: outlook!Office.NotificationMessageDetails#persistent:member
   package: outlook!
   fullName: persistent
-  summary: Указывает, должно ли сообщение быть постоянным. Применяется только в том случае, если тип — `InformationalMessage`<!-- -->. Если задано значение true, сообщение остается до тех пор, пока эта надстройка не будет удалена или закрыта пользователем. Если false, оно удаляется при переходе к другому элементу. Что касается уведомлений об ошибках, сообщение сохраняется, пока пользователь не увидит его. Если указать для этого параметра неподдерживаемый тип, будет возвращено исключение.
+  summary: Указывает, должно ли сообщение быть постоянным. Применимо только при типе `InformationalMessage`<!-- -->. Если засвещение равно true, сообщение остается, пока не будет удалено этой надстройки или не будет отклонено пользователем. Если false, оно удаляется при переходе к другому элементу. Что касается уведомлений об ошибках, сообщение сохраняется, пока пользователь не увидит его. Если указать для этого параметра неподдерживаемый тип, будет возвращено исключение.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -90,13 +93,13 @@ properties:
   package: outlook!
   fullName: type
   summary: >-
-    Задает `ItemNotificationMessageType` сообщение.
+    Указывает `ItemNotificationMessageType` сообщение.
 
 
-    Если тип — `ProgressIndicator` или `ErrorMessage`<!-- -->автоматически предоставляется значок, а сообщение не является постоянным. Поэтому значок и сохраняемые свойства недопустимы для этих типов сообщений. В результате чего будет вычислено значение `ArgumentException`<!-- -->.
+    Тип `ProgressIndicator``ErrorMessage`<!-- -->, автоматически предоставляется значок, и сообщение не является постоянным. Поэтому значок и сохраняемые свойства недопустимы для этих типов сообщений. Их включит в результаты `ArgumentException`<!-- -->.
 
 
-    Если тип — `ProgressIndicator`<!-- -->разработчик должен удалять или заменять индикатор хода выполнения по завершении действия.
+    Если тип `ProgressIndicator`<!-- -->, разработчик должен удалить или заменить индикатор хода выполнения после завершения действия.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -105,9 +108,9 @@ properties:
     return:
       type: <xref uid="outlook!Office.MailboxEnums.ItemNotificationMessageType:enum" /> | string
 metadata:
-  ms.openlocfilehash: 627ec1652fa0c7e86bda54aaaf846cbc5efc612d
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: c154e5b6a9a4be70bec6fd805121617648296bae
+  ms.sourcegitcommit: 6702d1aafaf1d8114bcf5e5eeb5d7833c108d56a
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49329287"
+  ms.lasthandoff: 12/10/2020
+  ms.locfileid: "49623295"
