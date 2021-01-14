@@ -174,7 +174,7 @@ properties:
   package: word!
   fullName: onDataChanged
   summary: >-
-    Возникает при смене данных в пределах управления содержимым. Чтобы получить новый текст, загрузим этот контроль содержимого в обработчике. Чтобы получить старый текст, не загружать его.
+    Возникает при смене данных в пределах управления содержимым. Чтобы получить новый текст, загрузим этот контроль содержимого в обработчик. Чтобы получить старый текст, не загружать его.
 
 
     \[[Набор API: Бета-версия WordApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -190,7 +190,7 @@ properties:
   package: word!
   fullName: onDeleted
   summary: >-
-    Возникает при удалении управления содержимым. Не загружайте этот объект управления содержимым в обработчик, в противном случае вы не сможете получить его исходные свойства.
+    Возникает при удалении управления содержимым. Не загружайте этот контроль содержимого в обработчик, в противном случае вы не сможете получить его исходные свойства.
 
 
     \[[Набор API: Бета-версия WordApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -460,7 +460,7 @@ properties:
     content: 'tag: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/10-content-controls/insert-and-change-content-controls.yaml\n// Traverses each paragraph of the document and wraps a content control on each with either a even or odd tags.\nawait Word.run(async (context) => {\n  let paragraphs = context.document.body.paragraphs;\n  paragraphs.load(\"$none\"); // Don't need any properties; just wrap each paragraph with a content control.\n\n  await context.sync();\n\n  for (let i = 0; i < paragraphs.items.length; i++) {\n    let contentControl = paragraphs.items[i].insertContentControl();\n    // For even, tag \"even\".\n    if (i % 2 === 0) {\n      contentControl.tag = \"even\";\n    } else {\n      contentControl.tag = \"odd\";\n    }\n  }\n  console.log(\"Content controls inserted: \" + paragraphs.items.length);\n\n  await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/10-content-controls/insert-and-change-content-controls.yaml\n// Traverses each paragraph of the document and wraps a content control on each with either a even or odd tags.\nawait Word.run(async (context) => {\n  let paragraphs = context.document.body.paragraphs;\n  paragraphs.load(\"$none\"); // Don't need any properties; just wrap each paragraph with a content control.\n\n  await context.sync();\n\n  for (let i = 0; i < paragraphs.items.length; i++) {\n    let contentControl = paragraphs.items[i].insertContentControl();\n    // For even, tag \"even\".\n    if (i % 2 === 0) {\n      contentControl.tag = \"even\";\n    } else {\n      contentControl.tag = \"odd\";\n    }\n  }\n  console.log(\"Content controls inserted: \" + paragraphs.items.length);\n\n  await context.sync();\n});\n```"
 - name: text
   uid: word!Word.ContentControl#text:member
   package: word!
@@ -598,7 +598,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательно. Расположение диапазона может быть целым, before, Start, End, After и Content.
+      description: Необязательный. Расположение диапазона может быть целым, before, Start, End, After и Content.
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -619,7 +619,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательно. Расположение диапазона может быть целым, before, Start, End, After и Content.
+      description: Необязательный. Расположение диапазона может быть целым, before, Start, End, After и Content.
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -643,7 +643,7 @@ methods:
       description: Обязательный. Знаки препинания и/или другие знаки окончания в качестве массива строк.
       type: string[]
     - id: trimSpacing
-      description: Необязательно. Указывает, следует ли обрезать пробелы (пробелы, вкладки, разрывы столбцов и конечные знаки абзаца) от начала и конца диапазонов, возвращаемого в коллекции диапазонов. Значение по умолчанию — false, которое указывает, что знаки интервала в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательный. Указывает, следует ли обрезать пробелы (пробелы, вкладки, разрывы столбцов и знаки конца абзаца) от начала и конца диапазонов, возвращаемого в коллекции диапазонов. Значение по умолчанию — false, которое указывает, что символы интервала в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1204,7 +1204,7 @@ methods:
 
     ```typescript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/10-content-controls/insert-and-change-content-controls.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/10-content-controls/insert-and-change-content-controls.yaml
 
     // Adds title and colors to odd and even content controls and changes their appearance.
 
@@ -1247,7 +1247,7 @@ methods:
     content: 'set(properties: Interfaces.ContentControlUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
+      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
       type: <xref uid="word!Word.Interfaces.ContentControlUpdateData:interface" />
     - id: options
       description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
@@ -1288,16 +1288,16 @@ methods:
     content: 'split(delimiters: string[], multiParagraphs?: boolean, trimDelimiters?: boolean, trimSpacing?: boolean): Word.RangeCollection;'
     parameters:
     - id: delimiters
-      description: Обязательный. Эти точки заметивы в качестве массива строк.
+      description: Обязательный. Делегаторы в качестве массива строк.
       type: string[]
     - id: multiParagraphs
-      description: Необязательно. Указывает, может ли возвращенный диапазон охватывать несколько абзацев. Значение по умолчанию — false, что указывает на то, что границы абзаца также используются в качестве разграничельщиков.
+      description: Необязательный. Указывает, может ли возвращенный диапазон охватывать несколько абзацев. Значение по умолчанию — false, что указывает на то, что границы абзаца также используются в качестве разграничельщиков.
       type: boolean
     - id: trimDelimiters
-      description: Необязательно. Указывает, следует ли обрезать отделицы от диапазонов в коллекции диапазонов. Значение по умолчанию — false, которое указывает на то, что эти значения включены в диапазоны, возвращаемую в коллекцию диапазонов.
+      description: Необязательный. Указывает, следует ли обрезать отделицы от диапазонов в коллекции диапазонов. Значение по умолчанию — false, которое указывает на то, что эти значения включены в диапазоны, возвращаемую в коллекцию диапазонов.
       type: boolean
     - id: trimSpacing
-      description: Необязательно. Указывает, следует ли обрезать пробелы (пробелы, вкладки, разрывы столбцов и конечные знаки абзаца) от начала и конца диапазонов, возвращаемого в коллекции диапазонов. Значение по умолчанию — false, которое указывает, что знаки интервала в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательный. Указывает, следует ли обрезать пробелы (пробелы, вкладки, разрывы столбцов и знаки конца абзаца) от начала и конца диапазонов, возвращаемого в коллекции диапазонов. Значение по умолчанию — false, которое указывает, что символы интервала в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1306,7 +1306,7 @@ methods:
   uid: word!Word.ContentControl#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Word.ContentControl является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Word.Interfaces.ContentControlData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Word.ContentControl является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Word.Interfaces.ContentControlData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1332,7 +1332,7 @@ methods:
   uid: word!Word.ContentControl#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед тем как выпуск памяти вступает в силу, `context.sync()` необходимо будет вызвать этот вызов.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1343,9 +1343,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 8ba204678cc39e7defae06d15ee2b09077183b6e
-  ms.sourcegitcommit: 6702d1aafaf1d8114bcf5e5eeb5d7833c108d56a
+  ms.openlocfilehash: 4144e1009eab01053e552e9808742d1bc4f4e52a
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 12/10/2020
-  ms.locfileid: "49623449"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49859560"
