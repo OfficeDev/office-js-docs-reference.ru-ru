@@ -4,15 +4,15 @@ uid: outlook!Office.Body:interface
 package: outlook!
 fullName: Office.Body
 summary: >-
-  Объект Body предоставляет методы для добавления и обновления содержимого сообщения или встречи. Он возвращается в свойстве body выбранного элемента.
+  Объект body предоставляет методы для добавления и обновления содержимого сообщения или встречи. Он возвращается в свойстве body выбранного элемента.
 
 
-  \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 isPreview: false
 isDeprecated: false
 type: interface
@@ -22,36 +22,36 @@ methods:
   package: outlook!
   fullName: appendOnSendAsync(data, options, callback)
   summary: >-
-    Добавляется к отправке указанного содержимого в конец тела элемента после любой подписи.
+    При отправке указанного содержимого в конец тела элемента после любой подписи.
 
 
-    Если пользователь запускает надстройки, реализующие [функцию on-Send, с помощью \` ItemSend \` в манифесте](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->, дополните присоединение при отправке перед функцией on – Send.
+    Если пользователь выполняет надстройки, реализуют функцию при отправке [с помощью \` ItemSend \` в манифесте](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->, приложение при отправке выполняется перед функцией при отправке.
 
 
-    **Важно!** если надстройка реализует функцию on-Send и вызывается `appendOnSendAsync` в `ItemSend` обработчике, `appendOnSendAsync` вызов возвращает ошибку, так как этот сценарий не поддерживается.
+    **Важно!** Если надстройка реализует функцию при отправке и вызывает обработитель, вызов возвращает ошибку, так как этот сценарий `appendOnSendAsync` `ItemSend` не `appendOnSendAsync` поддерживается.
 
 
-    **Важно!** для использования `appendOnSendAsync`<!-- -->`ExtendedPermissions`узел манифеста должен включать `AppendOnSend` расширенное разрешение.
+    **Важно!** Чтобы использовать `appendOnSendAsync`<!-- -->, узел `ExtendedPermissions` манифеста должен включать `AppendOnSend` расширенное разрешение.
 
 
-    **Note**: чтобы очистить данные из предыдущего `appendOnSendAsync` вызова, можно снова вызвать его, указав `data` для параметра значение `null`<!-- -->.
+    **Примечание.** Чтобы очистить данные из предыдущего вызова, вы можете вызвать его еще раз, `appendOnSendAsync` заданный `data` для параметра `null`<!-- -->.
 
 
-    \[[Набор API: Mailbox 1,9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
-    - `DataExceedsMaximumSize`<!-- -->: `data` Длина параметра превышает 5 000 символов.
+    - `DataExceedsMaximumSize`<!-- -->: `data` этот параметр длиннее 5000 символов.
 
 
-    - `InvalidFormatError`<!-- -->: `options.coercionType` Для параметра задано значение, `Office.CoercionType.Html` но текст сообщения отображается в виде обычного текста.
+    - `InvalidFormatError`<!-- -->: `options.coercionType` задан параметр, `Office.CoercionType.Html` но текст сообщения находится в обычном тексте.
 
 
     #### <a name="examples"></a>Примеры
@@ -76,13 +76,13 @@ methods:
     content: 'appendOnSendAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
-      description: Строка, которую необходимо добавить в конец тела. Длина строки ограничена 5 000 символами.
+      description: Строка, добавляемая в конец тела. Строка может быть ограничена 5000 символов.
       type: string
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `coercionType`<!-- -->: Требуемый формат для добавляемых данных. Строка в параметре `data` будет преобразована в этот формат.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback. `coercionType`<!-- -->: желаемый формат для данных, которые необходимо в нее в формате. Строка в параметре `data` будет преобразована в этот формат.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -95,18 +95,18 @@ methods:
     Возвращает текущий текст в указанном формате.
 
 
-    Этот метод возвращает весь текущий текст в формате, заданном параметром `coercionType`<!-- -->.
+    Этот метод возвращает весь текущий тело в формате, указанном `coercionType`<!-- -->.
 
 
-    При работе с текстом в формате HTML важно отметить, что `Body.getAsync` `Body.setAsync` методы и не идемпотентного. Значение, возвращаемое `getAsync` методом, не обязательно должно совпадать со значением, переданным в `setAsync` методе ранее. Клиент может изменить значение, передаваемое, чтобы `setAsync` обеспечить эффективное отображение его обработчиком визуализации.
+    При работе с телами в формате HTML важно отметить, что методы и методы не являются `Body.getAsync` `Body.setAsync` демипотентными. Значение, возвращаемого методом, не обязательно будет точно совпадать со значением, переданным `getAsync` в `setAsync` методе ранее. Клиент может изменить переданное значение, чтобы обеспечить эффективную отрисовку с `setAsync` помощью обработать его.
 
 
-    \[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -141,10 +141,10 @@ methods:
       description: Формат возвращаемого текста.
       type: <xref uid="office!Office.CoercionType:enum" /> | string
     - id: options
-      description: 'Необязательный атрибут. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа Office. asyncResult. Текст предоставляется в запрошенном формате в `asyncResult.value` свойстве.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с одним параметром `callback` типа Office.AsyncResult. Тело предоставляется в запрашиваемом формате в `asyncResult.value` свойстве.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -157,12 +157,12 @@ methods:
     Получает значение, указывающее формат содержимого: HTML или текст.
 
 
-    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
     #### <a name="examples"></a>Примеры
@@ -185,10 +185,10 @@ methods:
     content: 'getTypeAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
     parameters:
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Тип контента возвращается в виде одного из `CoercionType` значений в `asyncResult.value` свойстве.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Тип контента возвращается как одно из `CoercionType` значений в `asyncResult.value` свойстве.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
     return:
       type: void
@@ -204,24 +204,24 @@ methods:
     Метод `prependAsync` вставляет указанную строку в начало текста элемента. После вставки курсор возвращается в исходное место относительно вставленного содержимого.
 
 
-    При работе с текстами в формате HTML важно отметить, что клиент может изменить значение, передаваемое `prependAsync` в целях эффективного отображения его обработчиком визуализации. Это означает, что значение, возвращенное при последующем вызове `Body.getAsync` метода, не обязательно должно содержать значение, переданное в `prependAsync` методе ранее.
+    При работе с телами в формате HTML важно отметить, что клиент может изменить переданное значение, чтобы обеспечить эффективную отрисовку с помощью `prependAsync` обработания. Это означает, что значение, возвращаемого при последующем вызове метода, необязательно будет содержать точное значение, переданные `Body.getAsync` в `prependAsync` методе ранее.
 
 
-    Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав `id` атрибут для привязки (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) до "Лпнолп" (пример в разделе " **примеры** ").
+    Включив ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, установив атрибут на `id` привязке (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP"  (пример см. в разделе "Примеры").
 
 
-    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
-    - `DataExceedsMaximumSize`<!-- -->: Параметр data имеет более 1 000 000 символов.
+    - `DataExceedsMaximumSize`<!-- -->: параметр данных длиннее 1 000 000 символов.
 
 
     #### <a name="examples"></a>Примеры
@@ -247,10 +247,10 @@ methods:
       description: Строка, добавляемая в начало основного текста. Максимальная длина — 1 000 000 символов.
       type: string
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `coercionType`<!-- -->: Требуемый формат основного текста. Строка в параметре `data` будет преобразована в этот формат.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback. `coercionType`<!-- -->: желаемый формат для тела. Строка в параметре `data` будет преобразована в этот формат.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -263,27 +263,27 @@ methods:
     Заменяет весь текст указанным текстом.
 
 
-    При работе с текстом в формате HTML важно отметить, что `Body.getAsync` `Body.setAsync` методы и не идемпотентного. Значение, возвращаемое `getAsync` методом, не обязательно должно совпадать со значением, переданным в `setAsync` методе ранее. Клиент может изменить значение, передаваемое, чтобы `setAsync` обеспечить эффективное отображение его обработчиком визуализации.
+    При работе с телами в формате HTML важно отметить, что методы и методы не являются `Body.getAsync` `Body.setAsync` демипотентными. Значение, возвращаемого методом, не обязательно будет точно совпадать со значением, переданным `getAsync` в `setAsync` методе ранее. Клиент может изменить переданное значение, чтобы обеспечить эффективную отрисовку с `setAsync` помощью обработать его.
 
 
-    Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав `id` атрибут для привязки (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) до "Лпнолп" (пример в разделе " **примеры** ").
+    Включив ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, установив атрибут `id` на привязке (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP"  (пример см. в разделе "Примеры").
 
 
-    \[[Набор API: Mailbox 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
-    - `DataExceedsMaximumSize`<!-- -->: Параметр data имеет более 1 000 000 символов.
+    - `DataExceedsMaximumSize`<!-- -->: параметр данных длиннее 1 000 000 символов.
 
 
-    - `InvalidFormatError`<!-- -->: `options.coercionType` Для параметра задано значение `Office.CoercionType.Html` , а текст сообщения отображается в виде обычного текста.
+    - `InvalidFormatError`<!-- -->: `options.coercionType` задан параметр, `Office.CoercionType.Html` а текст сообщения — в виде обычного текста.
 
 
     #### <a name="examples"></a>Примеры
@@ -325,10 +325,10 @@ methods:
       description: Строка, которая заменяет существующий текст. Максимальная длина — 1 000 000 символов.
       type: string
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `coercionType`<!-- -->: Требуемый формат основного текста. Строка в параметре `data` будет преобразована в этот формат.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback. `coercionType`<!-- -->: желаемый формат для тела. Строка в параметре `data` будет преобразована в этот формат.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа Office. asyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с одним параметром `callback` типа Office.AsyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -341,27 +341,27 @@ methods:
     Заменяет выделенный фрагмент в основном тексте на заданный текст.
 
 
-    `setSelectedDataAsync`Метод вставляет указанную строку в позицию курсора в тексте элемента, или, если текст выбран в редакторе, он заменяет выделенный текст. Если указатель не появлялся в основном тексте элемента, или элемент потерял фокус в интерфейсе, строка вставляется в начало основного текста. После вставки курсор помещается в конец вставленного содержимого.
+    Метод вставляет указанную строку в расположение курсора в тексте элемента или, если текст выбран в редакторе, он заменяет `setSelectedDataAsync` выбранный текст. Если указатель не появлялся в основном тексте элемента, или элемент потерял фокус в интерфейсе, строка вставляется в начало основного текста. После вставки курсор помещается в конец вставляемого содержимого.
 
 
-    Когда вы включаете ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут ID для привязки (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) до "Лпнолп" (пример в разделе " **примеры** ").
+    Включив ссылки в разметку HTML, вы можете отключить предварительный просмотр ссылок в Интернете, задав атрибут id в привязке (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP"  (пример см. в разделе "Примеры").
 
 
-    \[[Набор API: Mailbox 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
-    - `DataExceedsMaximumSize`<!-- -->: `data` Длина параметра превышает 1 000 000 символов.
+    - `DataExceedsMaximumSize`<!-- -->: `data` этот параметр длиннее 1 000 000 символов.
 
 
-    - `InvalidFormatError`<!-- -->: `options.coercionType` Для параметра задано значение `Office.CoercionType.Html` , а текст сообщения отображается в виде обычного текста.
+    - `InvalidFormatError`<!-- -->: `options.coercionType` задан параметр, `Office.CoercionType.Html` а текст сообщения — в виде обычного текста.
 
 
     #### <a name="examples"></a>Примеры
@@ -387,10 +387,10 @@ methods:
       description: Строка, которая заменяет существующий текст. Максимальная длина — 1 000 000 символов.
       type: string
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `coercionType`<!-- -->: Требуемый формат основного текста. Строка в параметре `data` будет преобразована в этот формат.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback. `coercionType`<!-- -->: желаемый формат для тела. Строка в параметре `data` будет преобразована в этот формат.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -403,30 +403,30 @@ methods:
     Добавляет или заменяет подпись тела элемента.
 
 
-    **Важно!** в Outlook в Интернете `setSignatureAsync` работает только с сообщениями.
+    **Важно!** В Outlook в Интернете работает только `setSignatureAsync` с сообщениями.
 
 
-    **Важно!** если надстройка реализует [функцию активации на основе событий с помощью \` лаунчевент \` в манифесте](https://docs.microsoft.com/office/dev/add-ins/outlook/autolaunch)<!-- -->, а также вызовы `setSignatureAsync` в обработчике событий применяются следующие правила.
+    **Важно!** Если надстройка реализует функцию активации на основе событий [с помощью \` LaunchEvent \` в манифесте](https://docs.microsoft.com/office/dev/add-ins/outlook/autolaunch)<!-- -->и `setSignatureAsync` вызовы в обработнике событий, применяется следующее поведение.
 
 
-    - Когда пользователь создает новый элемент (в том числе ответить или переслать), подпись задается, но не изменяет форму. Это означает, что если пользователь закрывает форму без внесения других изменений, он не будет предлагать сохранить изменения.
+    - Когда пользователь составляет новый элемент (включая ответ или переадстройку), подпись задается, но не приводит к изменению формы. Это означает, что если пользователь закрывает форму, не внося другие изменения, он не получает запрос на сохранение изменений.
 
 
     \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
-    - `DataExceedsMaximumSize`<!-- -->: `data` Длина параметра превышает 30 000 символов.
+    - `DataExceedsMaximumSize`<!-- -->: `data` этот параметр длиннее 30 000 символов.
 
 
-    - `InvalidFormatError`<!-- -->: `options.coercionType` Для параметра задано значение `Office.CoercionType.Html` , а текст сообщения отображается в виде обычного текста.
+    - `InvalidFormatError`<!-- -->: `options.coercionType` задан параметр, `Office.CoercionType.Html` а текст сообщения — в виде обычного текста.
 
 
     #### <a name="examples"></a>Примеры
@@ -434,7 +434,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/99-preview-apis/work-with-client-signatures.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/99-preview-apis/work-with-client-signatures.yaml
 
     // Set the signature for the current item with inline image.
 
@@ -466,7 +466,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/99-preview-apis/work-with-client-signatures.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/99-preview-apis/work-with-client-signatures.yaml
 
     // Set the signature for the current item.
 
@@ -489,21 +489,21 @@ methods:
     content: 'setSignatureAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
-      description: Строка, представляющая подпись, которая задается в тексте сообщения. Эта строка ограничена 30 000 символами.
+      description: Строка, представляютив подпись, которую необходимо установить в теле сообщения. Эта строка может быть ограничена 30 000 символов.
       type: string
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова. `coercionType`<!-- -->: Формат, в котором должна быть задана подпись. Если текст, метод задает для подписи обычный текст, удаляя все присутствующие теги HTML. При наличии HTML-кода метод задает для подписи значение HTML.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback. `coercionType`<!-- -->: формат подписи. Если используется текст, метод задает подпись в виде обычного текста, удаляя все присутствующие HTML-теги. Если используется html, метод устанавливает для подписи HTML-код.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 90e1d5b3a6d5a5966df2f6ba19a4d2c85b687fa8
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 15cab161a60d645ff88719f8a7164b3b6bda8dad
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49136507"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49856235"

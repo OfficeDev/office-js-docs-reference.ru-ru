@@ -4,15 +4,15 @@ uid: outlook!Office.IsAllDayEvent:interface
 package: outlook!
 fullName: Office.IsAllDayEvent
 summary: >-
-  Предоставляет методы для получения и задания состояния события "целый день" собрания в надстройке Outlook.
+  Предоставляет методы для получения и добавления состояния события на весь день собрания в надстройки Outlook.
 
 
   \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 isPreview: true
 isDeprecated: false
 type: interface
@@ -22,25 +22,25 @@ methods:
   package: outlook!
   fullName: getAsync(options, callback)
   summary: >-
-    Получает логическое значение, указывающее, является ли событие ежедневным или нет.
+    Получает значение, указывающее, является ли событие событием весь день или нет.
 
 
     \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
   isPreview: true
   isDeprecated: false
   syntax:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<boolean>) => void): void;'
     parameters:
     - id: options
-      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;boolean&gt;) =&gt; void'
     return:
       type: void
@@ -50,15 +50,15 @@ methods:
   package: outlook!
   fullName: getAsync(callback)
   summary: >-
-    Получает логическое значение, указывающее, является ли событие ежедневным или нет.
+    Получает значение, указывающее, является ли событие событием весь день или нет.
 
 
     \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
     #### <a name="examples"></a>Примеры
@@ -66,7 +66,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/99-preview-apis/calendar-properties-apis.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/99-preview-apis/calendar-properties-apis.yaml
 
     Office.context.mailbox.item.isAllDayEvent.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -83,7 +83,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<boolean>) => void): void;'
     parameters:
     - id: callback
-      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;boolean&gt;) =&gt; void'
     return:
       type: void
@@ -93,18 +93,18 @@ methods:
   package: outlook!
   fullName: setAsync(isAllDayEvent, options, callback)
   summary: >-
-    Задает состояние события "целый день" для встречи.
+    Задает состояние события встречи на весь день.
 
 
     \[[Набор API: предварительный просмотр почтового ящика](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    Если встреча помечена как событие на целый день: начальное и конечное время будут помечены как 12:00 AM (как в пользовательском интерфейсе Outlook). Время начала будет возвращать 12:00 AM и End, что будет 12:00 на следующий день.
+    Если встреча помечена как событие на весь день: — время начала и окончания будет помечено как 12:00 (как в пользовательском интерфейсе Outlook). Время начала возвращается в 12:00, а время окончания — 12:00 следующего дня.
 
 
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
     #### <a name="examples"></a>Примеры
@@ -112,7 +112,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/99-preview-apis/calendar-properties-apis.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/99-preview-apis/calendar-properties-apis.yaml
 
     Office.context.mailbox.item.isAllDayEvent.setAsync(true, function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
@@ -129,21 +129,21 @@ methods:
     content: 'setAsync(isAllDayEvent: boolean, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: isAllDayEvent
-      description: Логическое значение для задания состояния события "целый день".
+      description: boolean value to set the all day event status.
       type: boolean
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра, `asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана `callback` с помощью одного параметра. `asyncResult`<!-- -->, который является `Office.AsyncResult` объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: d205b00d3f27936ce4a869fde98d28cc35d6e83b
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: dd35b999eb2da213c172ad753a4c4bef5f2ec822
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49210972"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49857579"
