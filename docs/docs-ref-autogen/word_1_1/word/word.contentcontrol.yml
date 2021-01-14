@@ -252,7 +252,7 @@ properties:
     content: 'tag: string;'
     return:
       type: string
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/10-content-controls/insert-and-change-content-controls.yaml\n// Traverses each paragraph of the document and wraps a content control on each with either a even or odd tags.\nawait Word.run(async (context) => {\n  let paragraphs = context.document.body.paragraphs;\n  paragraphs.load(\"$none\"); // Don't need any properties; just wrap each paragraph with a content control.\n\n  await context.sync();\n\n  for (let i = 0; i < paragraphs.items.length; i++) {\n    let contentControl = paragraphs.items[i].insertContentControl();\n    // For even, tag \"even\".\n    if (i % 2 === 0) {\n      contentControl.tag = \"even\";\n    } else {\n      contentControl.tag = \"odd\";\n    }\n  }\n  console.log(\"Content controls inserted: \" + paragraphs.items.length);\n\n  await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/10-content-controls/insert-and-change-content-controls.yaml\n// Traverses each paragraph of the document and wraps a content control on each with either a even or odd tags.\nawait Word.run(async (context) => {\n  let paragraphs = context.document.body.paragraphs;\n  paragraphs.load(\"$none\"); // Don't need any properties; just wrap each paragraph with a content control.\n\n  await context.sync();\n\n  for (let i = 0; i < paragraphs.items.length; i++) {\n    let contentControl = paragraphs.items[i].insertContentControl();\n    // For even, tag \"even\".\n    if (i % 2 === 0) {\n      contentControl.tag = \"even\";\n    } else {\n      contentControl.tag = \"odd\";\n    }\n  }\n  console.log(\"Content controls inserted: \" + paragraphs.items.length);\n\n  await context.sync();\n});\n```"
 - name: text
   uid: word!Word.ContentControl#text:member
   package: word!
@@ -822,7 +822,7 @@ methods:
 
     ```typescript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/10-content-controls/insert-and-change-content-controls.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/10-content-controls/insert-and-change-content-controls.yaml
 
     // Adds title and colors to odd and even content controls and changes their appearance.
 
@@ -865,7 +865,7 @@ methods:
     content: 'set(properties: Interfaces.ContentControlUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
       type: <xref uid="word!Word.Interfaces.ContentControlUpdateData:interface" />
     - id: options
       description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
@@ -907,7 +907,7 @@ methods:
   uid: word!Word.ContentControl#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если этот объект используется во всех вызовах и вне последовательного выполнения пакета ".run" и при установке свойства или вызове метода для объекта вы получаете ошибку InvalidObjectPath, то при первом создании объекта необходимо добавить объект в отслеживаемую коллекцию `.sync` объектов.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во всех вызовах и вне последовательного выполнения пакета ".run" и получаете ошибку InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -920,7 +920,7 @@ methods:
   uid: word!Word.ContentControl#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед тем как выпуск памяти вступает в силу, `context.sync()` необходимо будет вызвать этот вызов.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -931,9 +931,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 1e84b55bf22a6d3166c9149da2c5fb00c1f41e5d
-  ms.sourcegitcommit: 6702d1aafaf1d8114bcf5e5eeb5d7833c108d56a
+  ms.openlocfilehash: adc66e8f3ab2088d71589649b405550b72b1b7d6
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 12/10/2020
-  ms.locfileid: "49623281"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49850642"
