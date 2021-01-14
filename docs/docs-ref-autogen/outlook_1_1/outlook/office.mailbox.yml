@@ -10,18 +10,18 @@ summary: >-
   Ключевые свойства:
 
 
-  - `diagnostics`<!-- -->: Предоставляет диагностическую информацию для надстройки Outlook.
+  - `diagnostics`<!-- -->: Предоставляет диагностические сведения для надстройки Outlook.
 
 
-  - `item`<!-- -->: Предоставляет методы и свойства для доступа к сообщению или встрече в надстройке Outlook.
+  - `item`<!-- -->: предоставляет методы и свойства для доступа к сообщению или встрече в надстройки Outlook.
 
 
-  - `userProfile`<!-- -->: Предоставляет сведения о пользователе в надстройке Outlook.
+  - `userProfile`<!-- -->: Предоставляет сведения о пользователе в надстройки Outlook.
 remarks: >-
-  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`Restricted`
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
 
 
-  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 isPreview: false
 isDeprecated: false
 type: interface
@@ -34,24 +34,24 @@ properties:
     Предоставляет надстройке Outlook диагностические сведения.
 
 
-    Содержит следующие элементы:
+    Содержит следующие члены:
 
 
-    - `hostName` (строка): строка, представляющая имя ведущего приложения. Оно должно иметь одно из следующих значений: `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->, или `OutlookAndroid`<!-- -->. **Note**: значение "Outlook" возвращается для клиентов Outlook на настольных компьютерах (например, Windows и Mac).
+    - `hostName` (string): строка, представляющая имя ведущего приложения. Это должно быть одно из следующих значений: `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->, или `OutlookAndroid`<!-- -->. **Примечание.** Значение "Outlook" возвращается для классических клиентов Outlook (например, Windows и Mac).
 
 
-    - `hostVersion` (строка): строка, представляющая версию ведущего приложения или сервера Exchange (например, "15.0.468.0"). Если почтовая надстройка работает в Outlook на настольных или мобильных клиентах, `hostVersion` свойство возвращает версию ведущего приложения, Outlook. В Outlook в Интернете свойство возвращает версию сервера Exchange.
+    - `hostVersion` (string): строка, представляющая версию ведущего приложения или Exchange Server (например, "15.0.468.0"). Если почтовая надстройка работает в Outlook для настольных компьютеров или мобильных клиентов, свойство возвращает версию ведущего приложения `hostVersion` Outlook. В Outlook в Интернете свойство возвращает версию Exchange Server.
 
 
-    - `OWAView` ( `MailboxEnums.OWAView` или String): перечисление (или строковый литерал), представляющее текущее представление Outlook в Интернете. Если ведущее приложение не является Outlook в Интернете, при доступе к этому свойству будет получено неопределенное значение. В Outlook в Интернете имеется три представления (— отображаются, когда растр является узким, отображается, когда экран размещается в ширину) и отображается, когда экран размещается в ширину экрана, а также `OneColumn` `TwoColumns` `ThreeColumns` количество столбцов, которые могут быть отображены.
+    - `OWAView` ( `MailboxEnums.OWAView` или строка): enum (или строковый литерал), который представляет текущее представление Outlook в Интернете. Если ведущим приложением не является Outlook в Интернете, доступ к этому свойству приводит к неопределенным результатам. В Outlook в Интернете имеется три представления ( отображаются, когда экран узкий, — отображаются, когда экран шире, и — отображаются, когда экран широкий), которые соответствуют ширине экрана и окна, а также числу столбцов, которые могут `OneColumn` `TwoColumns` `ThreeColumns` отображаться.
 
 
-    Дополнительные сведения находятся в разделе [Office. Diagnostics](xref:outlook!Office.Diagnostics:interface)<!-- -->.
+    Дополнительные сведения находятся в [статье Office.Diagnostics](xref:outlook!Office.Diagnostics:interface)<!-- -->.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
   isPreview: false
   isDeprecated: false
   syntax:
@@ -66,21 +66,21 @@ properties:
     Получает URL-адрес конечной точки веб-служб Exchange (EWS) для этой учетной записи электронной почты. Только в режиме чтения.
 
 
-    `ReadItem`Для вызова `ewsUrl` члена в режиме чтения ваше приложение должно иметь разрешение, указанное в его манифесте.
+    Приложение должно иметь разрешение, указанное в манифесте, для вызова `ReadItem` `ewsUrl` участника в режиме чтения.
 
 
-    В режиме создания необходимо вызвать метод, `saveAsync` прежде чем можно будет использовать этот `ewsUrl` элемент. У вашего приложения должны быть `ReadWriteItem` разрешения на вызов `saveAsync` метода.
+    В режиме составить необходимо вызвать `saveAsync` метод, прежде чем можно будет использовать `ewsUrl` член. Приложение должно иметь `ReadWriteItem` разрешения на вызов `saveAsync` метода.
 
 
-    **Примечание**: этот элемент не поддерживается в Outlook на iOS или Android.
+    **Примечание.** Этот член не поддерживается в Outlook для iOS или Android.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
-    Удаленная служба может использовать значение `ewsUrl`, чтобы выполнять вызовы EWS для почтового ящика пользователя. Например, вы можете создать удаленную службу для [получения вложений из выбранного элемента](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
+    Удаленная служба может использовать значение `ewsUrl`, чтобы выполнять вызовы EWS для почтового ящика пользователя. Например, можно создать удаленную службу для получения вложений [из выбранного элемента](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item)<!-- -->.
 
 
     #### <a name="examples"></a>Примеры
@@ -88,7 +88,7 @@ properties:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
 
     console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
 
@@ -120,10 +120,10 @@ properties:
   package: outlook!
   fullName: item
   summary: >-
-    Элемент почтового ящика. В зависимости от контекста, в котором открыта надстройка, тип элемента может отличаться. Если вы хотите увидеть IntelliSense только для определенного типа или режима, приведите этот элемент к одному из следующих вариантов:
+    Элемент почтового ящика. В зависимости от контекста, в котором открыта надстройка, тип элемента может отличаться. Если вы хотите, чтобы IntelliSense только для определенного типа или режима, приведите этот элемент к одному из следующих элементов:
 
 
-    [MessageCompose](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [Аппоинтменткомпосе](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [Аппоинтментреад](xref:outlook!Office.AppointmentRead:interface)
+    [MessageCompose](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [AppointmentCompose](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [AppointmentRead](xref:outlook!Office.AppointmentRead:interface)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -136,10 +136,10 @@ properties:
   package: outlook!
   fullName: userProfile
   summary: >-
-    Сведения о пользователе, связанном с почтовым ящиком. К ним относятся тип учетной записи, отображаемое имя, адрес электронной почты и часовой пояс.
+    Сведения о пользователе, связанном с почтовым ящиком. К ним относятся тип учетной записи, отображаемая имя, адрес электронной почты и часовой пояс.
 
 
-    Дополнительные сведения находятся в [пакете Office. UserProfile](xref:outlook!Office.UserProfile:interface)
+    Дополнительные сведения находятся в [статье Office.UserProfile](xref:outlook!Office.UserProfile:interface)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -156,15 +156,15 @@ methods:
     Получает словарь, содержащий сведения о локальном времени клиента.
 
 
-    Даты и времена, используемые почтовым приложением для Outlook в Интернете или на настольных клиентах, могут использовать различные часовые пояса. Outlook использует часовой пояс клиентского компьютера; В Outlook в Интернете используется часовой пояс, установленный в центре администрирования Exchange. Значения даты и времени должны обрабатываться таким образом, чтобы значения, отображаемые в интерфейсе пользователя, всегда согласовывались с часовым поясом, ожидаемым пользователем.
+    Даты и время, используемые почтовым приложением для клиентов Outlook в Интернете или на настольных компьютерах, могут использовать разные часовые пояса. Outlook использует часовой пояс клиентского компьютера; Outlook в Интернете использует часовой пояс, установленный в Центре администрирования Exchange (EAC). Значения даты и времени должны обрабатываться таким образом, чтобы значения, отображаемые в интерфейсе пользователя, всегда согласовывались с часовым поясом, ожидаемым пользователем.
 
 
-    Если почтовое приложение работает в Outlook на настольных клиентах, `convertToLocalClientTime` метод возвратит объект Dictionary со значениями, заданными для часового пояса клиентского компьютера. Если почтовое приложение запущено в Outlook в Интернете, `convertToLocalClientTime` метод возвратит объект Dictionary со значениями, заданными в часовом поясе, заданном в центре администрирования Exchange.
+    Если почтовое приложение работает в классических клиентах Outlook, метод возвращает объект словаря со значениями часового пояса `convertToLocalClientTime` клиентского компьютера. Если почтовое приложение работает в Outlook в Интернете, метод возвращает объект словаря со значениями часового пояса, указанного `convertToLocalClientTime` в EAC.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
   isPreview: false
   isDeprecated: false
   syntax:
@@ -181,15 +181,15 @@ methods:
   package: outlook!
   fullName: convertToUtcClientTime(input)
   summary: >-
-    Возвращает `Date` объект из словаря, содержащего сведения о времени.
+    Получает объект `Date` из словаря, содержащего сведения о времени.
 
 
-    `convertToUtcClientTime`Метод преобразует словарь, содержащий локальную дату и время, в `Date` объект с правильными значениями локальной даты и времени.
+    Метод преобразует словарь с локальной датой и временем в объект с правильными значениями для локальной `convertToUtcClientTime` `Date` даты и времени.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -243,21 +243,21 @@ methods:
     Метод `displayAppointmentForm` открывает новое окно на компьютере или диалоговое окно на мобильном устройстве, содержащее сведения календаря о существующей встрече.
 
 
-    В Outlook на Mac Этот метод можно использовать для отображения одной встречи, которая не является частью повторяющегося ряда, или главной встречи повторяющегося ряда. Однако невозможно отобразить экземпляр ряда, так как вы не можете получить доступ к свойствам (включая идентификатор элемента) повторяющихся рядов.
+    В Outlook для Mac этот метод можно использовать для отображения одной встречи, которая не является частью повторяющегося ряда, или эталовременной встречи повторяющегося ряда. Однако вы не можете отобразить экземпляр ряда, так как вы не можете получить доступ к свойствам (включая ид элемента) экземпляров повторяющегося ряда.
 
 
-    В Outlook в Интернете этот метод открывает указанную форму только в том случае, если длина текста формы не превышает 32 000 символов.
+    В Outlook в Интернете этот метод открывает указанную форму, только если ее тело не превышает 32 000 символов.
 
 
-    Если указанный идентификатор элемента не определяет существующую встречу, на клиентском компьютере или устройстве открывается пустая область, и сообщение об ошибке не возвращается.
+    Если указанный идентификатор элемента не идентифицирует существующую встречу, на клиентского компьютера или устройстве открывается пустая области, и сообщение об ошибке не возвращается.
 
 
-    **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+    **Примечание.** Этот метод не поддерживается в Outlook для iOS или Android.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -265,7 +265,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-appointment.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/55-display-items/display-existing-appointment.yaml
 
     var itemId = $("#itemId").val();
 
@@ -294,21 +294,21 @@ methods:
     Метод `displayMessageForm` открывает новое окно на компьютере или диалоговое окно на мобильном устройстве, содержащее существующее сообщение.
 
 
-    В Outlook в Интернете этот метод открывает указанную форму только в том случае, если длина текста формы не превышает 32 000 символов.
+    В Outlook в Интернете этот метод открывает указанную форму, только если ее тело не превышает 32 000 символов.
 
 
-    Если указанный идентификатор элемента не определяет существующее сообщение, на клиентском компьютере не отображается сообщение об ошибке, и сообщение об ошибке не возвращается.
+    Если указанный идентификатор элемента не идентифицирует существующее сообщение, на клиентский компьютер не будет отображаться сообщение об ошибке.
 
 
-    Не используйте с идентификатором `displayMessageForm` ItemId, представляющим встречу. Используйте метод `displayAppointmentForm`, чтобы отобразить сведения о существующей встрече, а метод `displayNewAppointmentForm`— для отображения формы создания встречи.
+    Не используйте элемент `displayMessageForm` с itemId, который представляет встречу. Используйте метод `displayAppointmentForm`, чтобы отобразить сведения о существующей встрече, а метод `displayNewAppointmentForm`— для отображения формы создания встречи.
 
 
-    **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+    **Примечание.** Этот метод не поддерживается в Outlook для iOS или Android.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -316,7 +316,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-message.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/55-display-items/display-existing-message.yaml
 
     var itemId = $("#itemId").val();
 
@@ -348,18 +348,18 @@ methods:
     В Outlook в Интернете этот метод всегда отображает форму с полем участников. Если вы не укажете участников в качестве входных аргументов, метод отображает форму с кнопкой **Сохранить**. Если вы укажете участников, форма будет включать участников и кнопку **Отправить**.
 
 
-    В расширенном клиенте Outlook и Outlook RT, если вы указали участников или ресурсы в `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->или `resources` параметр, этот метод отображает форму собрания с кнопкой " **Отправить** ". Если не указать получателей, этот метод отображает форму встречи с кнопкой **Сохранить &amp; Закрыть** .
+    В клиенте Outlook с богатыми ресурсами и Outlook RT, если вы указываете участников или ресурсы в `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->, или `resources` параметр, этот метод отображает форму собрания с кнопкой **отправки.** Если получатели не указаны, этот метод отображает форму встречи с кнопкой **"Сохранить &amp; закрыть".**
 
 
     Если параметры превышают указанные ограничения размера или если указано неизвестное имя параметра, вызывается исключение.
 
 
-    **Note**: Этот метод не поддерживается в Outlook на iOS или Android.
+    **Примечание.** Этот метод не поддерживается в Outlook для iOS или Android.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: чтение
+    **[Применимый режим Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->**: чтение
 
 
     #### <a name="examples"></a>Примеры
@@ -367,7 +367,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-new-appointment.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/55-display-items/display-new-appointment.yaml
 
     var start = new Date();
 
@@ -394,7 +394,7 @@ methods:
     content: 'displayNewAppointmentForm(parameters: AppointmentForm): void;'
     parameters:
     - id: parameters
-      description: '`AppointmentForm`Описание новой встречи. Все свойства являются необязательными.'
+      description: Описание `AppointmentForm` новой встречи. Все свойства являются необязательными.
       type: <xref uid="outlook!Office.AppointmentForm:interface" />
     return:
       type: void
@@ -410,33 +410,33 @@ methods:
     Метод `getCallbackTokenAsync` совершает асинхронный вызов, чтобы получить непрозрачный маркер с сервера Exchange Server, на котором размещен почтовый ящик пользователя. Время существования маркера обратного вызова составляет 5 минут.
 
 
-    Маркер возвращается в виде строки в `asyncResult.value` свойстве.
+    Маркер возвращается в качестве строки в `asyncResult.value` свойстве.
 
 
-    Вы можете передать сторонней системе маркер и идентификатор вложения или элемента. Сторонняя система использует этот маркер как маркер авторизации, чтобы вызвать операцию [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) или [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) веб-служб Exchange для возврата вложения или элемента. Например, вы можете создать удаленную службу для [получения вложений из выбранного элемента](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
+    Вы можете передать сторонней системе маркер и идентификатор вложения или элемента. Сторонняя система использует этот маркер как маркер авторизации, чтобы вызвать операцию [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) или [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) веб-служб Exchange для возврата вложения или элемента. Например, можно создать удаленную службу для получения вложений [из выбранного элемента](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item)<!-- -->.
 
 
     Для вызова `getCallbackTokenAsync` метода в режиме чтения требуется минимальный уровень разрешений `ReadItem`<!-- -->.
 
 
-    Для вызова `getCallbackTokenAsync` метода в режиме создания необходимо сохранить элемент. `saveAsync`Метод требует наличия минимального уровня разрешений`ReadWriteItem`<!-- -->.
+    Для вызова `getCallbackTokenAsync` метода в режиме составить необходимо сохранить элемент. Для `saveAsync` этого метода требуется минимальный уровень разрешений `ReadWriteItem`<!-- -->.
 
 
-    **Важно!** рекомендации по делегированию или совместному использованию сценариев приведены в статье [Delegate Access](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
+    **Важно!** Рекомендации по сценариям делегирования или общего доступа см. в статье о [делегирование доступа.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
 
 
-    \[[Набор API: ALL поддерживает режим чтения; В почтовом ящике 1,3 появилась поддержка режима создания](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "**[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`\n\n**[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: \"создание\" или \"чтение\"\n\n**Ошибки**:\n\n- `HTTPRequestFailure`<!-- -->: Запрос не выполнен. Просмотрите объект диагностики для кода ошибки HTTP.\n\n- `InternalServerError`<!-- -->: Сервер Exchange возвратил ошибку. Для получения дополнительных сведений просмотрите объект диагностики.\n\n- `NetworkError`<!-- -->: Пользователь больше не подключен к сети. Проверьте сетевое подключение и повторите попытку.\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```"
+    \[[Набор API: все поддерживают режим чтения; В почтовом ящике 1.3 представлена поддержка режима составить](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "**[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`\n\n**[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать\n\n**Ошибки:**\n\n- `HTTPRequestFailure`<!-- -->: Запрос не удалось. Просмотрите объект диагностики для кода ошибки HTTP.\n\n- `InternalServerError`<!-- -->: Сервер Exchange Server возвратил ошибку. Для получения дополнительных сведений просмотрите объект диагностики.\n\n- `NetworkError`<!-- -->: пользователь больше не подключен к сети. Проверьте сетевое подключение и повторите попытку.\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getCallbackTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
     parameters:
     - id: callback
-      description: После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Маркер возвращается в виде строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
+      description: После завершения работы метода функция, переданная в параметре callback, будет вызываться с одним параметром типа `Office.AsyncResult`<!-- -->. Маркер возвращается в качестве строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательный атрибут. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательный. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -449,27 +449,27 @@ methods:
     Получает маркер, идентифицирующий пользователя и надстройку Office.
 
 
-    Маркер возвращается в виде строки в `asyncResult.value` свойстве.
+    Маркер возвращается в качестве строки в `asyncResult.value` свойстве.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
-    `getUserIdentityTokenAsync`Метод возвращает маркер, который можно использовать для идентификации и [проверки подлинности надстройки и пользователя с помощью сторонней системы](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
+    Метод возвращает маркер, который можно использовать для идентификации и проверки подлинности надстройки и пользователя в `getUserIdentityTokenAsync` [стороной системе](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication)<!-- -->.
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
-    - `HTTPRequestFailure`<!-- -->: Запрос не выполнен. Просмотрите объект диагностики для кода ошибки HTTP.
+    - `HTTPRequestFailure`<!-- -->: Запрос не удалось. Просмотрите объект диагностики для кода ошибки HTTP.
 
 
-    - `InternalServerError`<!-- -->: Сервер Exchange возвратил ошибку. Для получения дополнительных сведений просмотрите объект диагностики.
+    - `InternalServerError`<!-- -->: Сервер Exchange Server возвратил ошибку. Для получения дополнительных сведений просмотрите объект диагностики.
 
 
-    - `NetworkError`<!-- -->: Пользователь больше не подключен к сети. Проверьте сетевое подключение и повторите попытку.
+    - `NetworkError`<!-- -->: пользователь больше не подключен к сети. Проверьте сетевое подключение и повторите попытку.
 
 
     #### <a name="examples"></a>Примеры
@@ -477,7 +477,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/user-identity-token.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/user-identity-token.yaml
 
     Office.context.mailbox.getUserIdentityTokenAsync(function (result) {
         if (result.status !== Office.AsyncResultStatus.Succeeded) {
@@ -494,10 +494,10 @@ methods:
     content: 'getUserIdentityTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
     parameters:
     - id: callback
-      description: После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Маркер возвращается в виде строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
+      description: После завершения работы метода функция, переданная в параметре callback, будет вызываться с одним параметром типа `Office.AsyncResult`<!-- -->. Маркер возвращается в качестве строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательный атрибут. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательный. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -507,7 +507,7 @@ methods:
   package: outlook!
   fullName: makeEwsRequestAsync(data, callback, userContext)
   summary: >-
-    Выполняет асинхронный запрос к службе веб-служб Exchange (EWS) на сервере Exchange, на котором размещается почтовый ящик пользователя.
+    Делает асинхронный запрос к службе веб-служб Exchange (EWS) на сервере Exchange, на котором размещен почтовый ящик пользователя.
 
 
     В таких случаях надстройка должна использовать REST API для доступа к почтовому ящику пользователя.
@@ -519,42 +519,42 @@ methods:
     С помощью метода `makeEwsRequestAsync` невозможно запрашивать элементы, связанные с папкой.
 
 
-    В XML-запросе должна быть указана кодировка UTF-8: `\<?xml version="1.0" encoding="utf-8"?\>`<!-- -->.
+    XML-запрос должен указывать кодику UTF-8: `\<?xml version="1.0" encoding="utf-8"?\>`<!-- -->.
 
 
-    Надстройка должна иметь `ReadWriteMailbox` разрешение на использование `makeEwsRequestAsync` метода. Сведения об использовании `ReadWriteMailbox` разрешений и операций EWS, которые можно вызывать с помощью `makeEwsRequestAsync` метода, приведены [в разделе Определение разрешений для почтового ящика пользователя с доступом](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) к почтовой надстройке<!-- -->.
+    Надстройка должна иметь `ReadWriteMailbox` разрешение на использование `makeEwsRequestAsync` метода. Сведения об использовании разрешения и операций EWS, которые можно вызвать с помощью `ReadWriteMailbox` `makeEwsRequestAsync` метода, [](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) см. в подстройке "Указание разрешений на доступ к почтовому ящику пользователя"<!-- -->.
 
 
     Результат XML вызова EWS указывается в виде строки в свойстве `asyncResult.value`. Если размер результата превышает 1 МБ, возвращается сообщение об ошибке.
 
 
-    **Примечание**: Этот метод не поддерживается в следующих сценариях:
+    **Примечание.** Этот метод не поддерживается в следующих сценариях:
 
 
-    - В Outlook на iOS или Android.
+    - В Outlook для iOS или Android.
 
 
     - Когда надстройка загружается в почтовый ящик Gmail.
 
 
-    **Примечание**: администратор сервера должен установить значение `OAuthAuthentication` в `true` каталоге сервера клиентского доступа EWS, чтобы `makeEwsRequestAsync` метод предпринимать запросы EWS.
+    **Примечание.** Администратор сервера должен установить в каталоге EWS сервера клиентского доступа, чтобы включить метод для `OAuthAuthentication` `true` запросов `makeEwsRequestAsync` EWS.
 
 
     *Различия версий*
 
 
-    При использовании `makeEwsRequestAsync` метода в почтовых приложениях, запущенных в версиях Outlook, предшествующих версии 15.0.4535.1004, необходимо задать для параметра Encoding значение ISO-8859-1.
+    При использовании метода в почтовых приложениях, работающих в версиях Outlook более ранних версий, чем `makeEwsRequestAsync` 15.0.4535.1004, следует установить значение кодивной кодиры ISO-8859-1.
 
 
     `<?xml version="1.0" encoding="iso-8859-1"?>`
 
 
-    Значение кодировки не нужно указывать, если почтовое приложение выполняется в Outlook в Интернете. Вы можете определить, работает ли почтовое приложение в Outlook или Outlook в Интернете с помощью `mailbox.diagnostics.hostName` Свойства. Вы можете определить, какая версия Outlook запущена, используя `mailbox.diagnostics.hostVersion` свойство.
+    Значение кодировки не нужно указывать, если почтовое приложение выполняется в Outlook в Интернете. С помощью свойства можно определить, работает ли ваше почтовое приложение в Outlook или Outlook в `mailbox.diagnostics.hostName` Интернете. С помощью свойства можно определить, какая версия Outlook `mailbox.diagnostics.hostVersion` запущена.
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteMailbox`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteMailbox`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -608,7 +608,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/make-ews-request-async.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/make-ews-request-async.yaml
 
     var ewsId = Office.context.mailbox.item.itemId;
 
@@ -634,7 +634,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/send-message-using-make-ews-request-async.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/send-message-using-make-ews-request-async.yaml
 
     var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
         '  <soap:Header><t:RequestServerVersion Version="Exchange2010" /></soap:Header>'+
@@ -668,18 +668,18 @@ methods:
       description: Запрос EWS.
       type: any
     - id: callback
-      description: После выполнения метода функция, переданная в параметре callback, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. `value`Свойство Result представляет собой XML-код запроса EWS, предоставленный в виде строки. Если размер результата превышает 1 МБ, возвращается сообщение об ошибке.
+      description: После завершения работы метода функция, переданная в параметре callback, будет вызываться с одним параметром типа `Office.AsyncResult`<!-- -->. Свойством `value` результата является XML-запрос EWS, предоставленный в качестве строки. Если размер результата превышает 1 МБ, возвращается сообщение об ошибке.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательный атрибут. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательный. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 7b4ba17c87fb7f1e3db3ffe474f8890aba349d58
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 31e77018757ddd46897fef12742a788e401ad889
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49193700"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49859623"
