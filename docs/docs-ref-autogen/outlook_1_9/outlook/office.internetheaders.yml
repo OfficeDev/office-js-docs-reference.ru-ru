@@ -4,36 +4,36 @@ uid: outlook!Office.InternetHeaders:interface
 package: outlook!
 fullName: Office.InternetHeaders
 summary: >-
-  `InternetHeaders`Объект представляет настраиваемые заголовки Интернета, которые сохраняются после того, как элемент сообщения оставляет Exchange и преобразуется в MIME-сообщение. Эти заголовки хранятся в виде x заголовков в сообщении MIME.
+  Объект `InternetHeaders` представляет настраиваемые интернет-headers, которые сохраняются после того, как элемент сообщения покидает Exchange и преобразуется в сообщение MIME. Эти заготки хранятся в сообщении MIME в x-загонах.
 
 
-  Заголовки Интернета хранятся в виде пар "ключ-значение" для каждого элемента.
+  Интернет-headers are stored as key/value pairs on a per-item basis.
 
 
-  **Note**: этот объект предназначен для задания и получения настраиваемых заголовков для элемента сообщения.
+  **Примечание.** Этот объект предназначен для настройки и получения настраиваемой области в элементе сообщения. Чтобы узнать больше, см. статью "Просмотр и настройка интернет-headers" в сообщении [в надстройки Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/internet-headers)<!-- -->.
 
 
-  \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
   **Рекомендации**
 
 
-  В настоящее время заголовки Интернета являются ограниченным ресурсом в почтовом ящике пользователя. Когда квота исчерпана, вы не можете создать дополнительные заголовки Интернета в этом почтовом ящике, что может привести к неожиданному поведению клиентов, использующих эту функцию.
+  В настоящее время интернет-загоры являются конечным ресурсом в почтовом ящике пользователя. Когда квота будет исчерпана, вы не сможете создать дополнительные интернет-заголовки в этом почтовом ящике, что может привести к неожиданному поведению клиентов, которые используют эту функцию.
 
 
-  При создании заголовков Интернета в надстройке следуйте приведенным ниже рекомендациям.
+  Следуйте следующим рекомендациям при создании в надстройки интернет-headers.
 
 
-  - Создайте минимальное необходимое количество заголовков.
+  - Создайте минимальное количество необходимых загодеров.
 
 
-  - Заголовки имен, чтобы позже можно было повторно использовать и обновлять их значения. Таким образом, не следует заменять именование заголовков (например, на основе вводимых пользователем данных, меток времени и т. д.).
+  - Заглавные имена для повторного использования и обновления их значений позже. Таким образом, избегайте именования headers переменным образом (например, на основе ввода пользователем, точки времени и т. д.).
 
 
-  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 isPreview: false
 isDeprecated: false
 type: interface
@@ -43,18 +43,18 @@ methods:
   package: outlook!
   fullName: getAsync(names, options, callback)
   summary: >-
-    Если указан массив имен Интернет заголовков, этот метод возвращает словарь, содержащий эти заголовки Интернета и их значения. Если надстройка запрашивает недоступный x-заголовок, этот x-заголовок не будет возвращен в результатах.
+    С учетом массива имен интернет-названий, этот метод возвращает словарь, содержащий эти интернет-загоны и их значения. Если надстройка запрашивает недоступный x-заголок, он не будет возвращен в результатах.
 
 
-    **Note**: Этот метод предназначен для возврата значений настраиваемых заголовков, заданные с помощью `setAsync` метода.
+    **Примечание.** Этот метод предназначен для возврата значений настраиваемого загона, заданной с помощью `setAsync` метода.
 
 
-    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
     #### <a name="examples"></a>Примеры
@@ -62,13 +62,18 @@ methods:
 
     ```javascript
 
-    Office.context.mailbox.item.internetHeaders.getAsync(["header1", "header2"], callback);
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/70-mime-headers/manage-custom-internet-headers-message-compose.yaml
 
-
-    function callback(asyncResult) {
-        var dictionary = asyncResult.value;
-        var header1_value = dictionary["header1"];
-    }
+    Office.context.mailbox.item.internetHeaders.getAsync(
+      ["x-preferred-fruit", "x-preferred-vegetable", "x-best-vegetable", "x-nonexistent-header"],
+      function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Selected headers: " + JSON.stringify(asyncResult.value));
+        } else {
+          console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+    );
 
     ```
   isPreview: false
@@ -77,13 +82,13 @@ methods:
     content: 'getAsync(names: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<InternetHeaders>) => void): void;'
     parameters:
     - id: names
-      description: Имена возвращаемых интернетных заголовков.
+      description: Имена возвращаемого интернет-headers.
       type: string[]
     - id: options
-      description: 'Необязательный атрибут. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра, `asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана `callback` с помощью одного параметра. `asyncResult`<!-- -->, который является `Office.AsyncResult` объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.InternetHeaders:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -93,18 +98,18 @@ methods:
   package: outlook!
   fullName: removeAsync(names, options, callback)
   summary: >-
-    При наличии массива имен Интернет-заголовков этот метод удаляет указанные заголовки из коллекции Интернет-заголовков.
+    С учетом массива имен интернет-названий, этот метод удаляет указанные headers из коллекции загодеров Интернета.
 
 
-    **Note**: Этот метод предназначен для удаления настраиваемых заголовков, заданные с помощью `setAsync` метода.
+    **Примечание.** Этот метод предназначен для удаления настраиваемого загона, заданной с помощью `setAsync` метода.
 
 
-    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
     #### <a name="examples"></a>Примеры
@@ -112,7 +117,18 @@ methods:
 
     ```javascript
 
-    Office.context.mailbox.item.internetHeaders.removeAsync(["header1", "header2"]);
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/70-mime-headers/manage-custom-internet-headers-message-compose.yaml
+
+    Office.context.mailbox.item.internetHeaders.removeAsync(
+      ["x-best-vegetable", "x-nonexistent-header"],
+      function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Successfully removed selected headers");
+        } else {
+          console.log("Error removing selected headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+    );
 
     ```
   isPreview: false
@@ -121,13 +137,13 @@ methods:
     content: 'removeAsync(names: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<InternetHeaders>) => void): void;'
     parameters:
     - id: names
-      description: Имена удаляемых интернетных заголовков.
+      description: Имена удаляемого интернет-headers.
       type: string[]
     - id: options
-      description: 'Необязательный атрибут. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметр, вызывается с помощью одного параметра, `asyncResult`<!-- -->, представляющий собой `Office.AsyncResult` объект.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана `callback` с помощью одного параметра. `asyncResult`<!-- -->, который является `Office.AsyncResult` объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.InternetHeaders:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -137,21 +153,21 @@ methods:
   package: outlook!
   fullName: setAsync(headers, options, callback)
   summary: >-
-    Задает указанные значения для заданных заголовков Интернета.
+    Задает указанные интернет-заготки указанным значениям.
 
 
-    `setAsync`Метод создает новый заголовок, если указанный заголовок еще не существует; в противном случае существующее значение заменяется новым значением.
+    Метод создает новый заголок, если указанный загодер еще не существует; в противном случае существующее значение заменяется `setAsync` новым значением.
 
 
-    **Note**: Этот метод предназначен для задания значений настраиваемых заголовков.
+    **Примечание.** Этот метод предназначен для настройки значений настраиваемого загона.
 
 
-    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteItem`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: создание
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
 
 
     #### <a name="examples"></a>Примеры
@@ -159,7 +175,19 @@ methods:
 
     ```javascript
 
-    Office.context.mailbox.item.internetHeaders.setAsync({"header1": "value1", "header2": "value2"});
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/70-mime-headers/manage-custom-internet-headers-message-compose.yaml
+
+    Office.context.mailbox.item.internetHeaders.setAsync(
+      { "x-preferred-fruit": "orange", "x-preferred-vegetable": "broccoli", "x-best-vegetable": "spinach" },
+      function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Successfully set headers");
+        } else {
+          console.log("Error setting headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+
+    );
 
     ```
   isPreview: false
@@ -168,21 +196,21 @@ methods:
     content: 'setAsync(headers: Object, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: headers
-      description: Имена и соответствующие значения заголовков, которые необходимо задать. Должен быть объектом Dictionary с ключами в качестве имен заголовков Интернета и значениями, которые являются значениями заголовков Интернета.
+      description: Имена и соответствующие значения устанавливаемого headers. Должен быть объектом словаря, где ключи — это имена интернет-названий, а значения — значениями интернет-названий.
       type: Object
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа Office. asyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с одним параметром `callback` типа Office.AsyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: c26c15caa645c162148936a6906c64a22903a0b7
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: e666b64587a4509d9d2d850231902c4d8b9ebca4
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49264004"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49855367"
