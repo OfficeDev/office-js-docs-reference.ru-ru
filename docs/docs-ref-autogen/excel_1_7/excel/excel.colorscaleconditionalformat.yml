@@ -4,10 +4,10 @@ uid: excel!Excel.ColorScaleConditionalFormat:class
 package: excel!
 fullName: Excel.ColorScaleConditionalFormat
 summary: >-
-  Представляет критерии цветовой шкалы для условного форматирования.
+  Представляет условия ColorScale для условного форматирования.
 
 
-  \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.ColorScaleConditionalFormat#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,10 +30,10 @@ properties:
   package: excel!
   fullName: criteria
   summary: >-
-    Критерии цветовой шкалы. При использовании цветовой шкалы с двумя координатами средняя точка является необязательной.
+    Критерии цветовой шкалы. Midpoint is optional when using a two point color scale.
 
 
-    \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -41,16 +41,16 @@ properties:
     content: 'criteria: Excel.ConditionalColorScaleCriteria;'
     return:
       type: <xref uid="excel!Excel.ConditionalColorScaleCriteria:interface" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
 - name: threeColorScale
   uid: excel!Excel.ColorScaleConditionalFormat#threeColorScale:member
   package: excel!
   fullName: threeColorScale
   summary: >-
-    Если задано значение true, цветовая шкала будет иметь три точки (минимальная, средняя, максимальная), в противном случае будет существовать два (минимум, максимум).
+    Если значение имеет значение true, цветовая шкала будет иметь три точки (минимальная, midpoint, максимальная), в противном случае она будет иметь две (минимальная, максимальная).
 
 
-    \[[Набор API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -71,7 +71,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.ColorScaleConditionalFormatLoadOptions): Excel.ColorScaleConditionalFormat;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружается свойства объекта.
+      description: Предоставляет параметры, для которых загружаются свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.ColorScaleConditionalFormatLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.ColorScaleConditionalFormat:class" />
@@ -88,7 +88,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.ColorScaleConditionalFormat;'
     parameters:
     - id: propertyNames
-      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
+      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.ColorScaleConditionalFormat:class" />
@@ -109,7 +109,7 @@ methods:
               }): Excel.ColorScaleConditionalFormat;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -122,7 +122,7 @@ methods:
   uid: excel!Excel.ColorScaleConditionalFormat#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.
+  summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
   remarks: >-
     Этот метод имеет следующую дополнительную подпись:
 
@@ -134,10 +134,10 @@ methods:
     content: 'set(properties: Interfaces.ColorScaleConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.
+      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
       type: <xref uid="excel!Excel.Interfaces.ColorScaleConditionalFormatUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -146,7 +146,7 @@ methods:
   uid: excel!Excel.ColorScaleConditionalFormat#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
+  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -163,7 +163,7 @@ methods:
   uid: excel!Excel.ColorScaleConditionalFormat#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Колорскалекондитионалформат — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.ColorScaleConditionalFormatData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.ColorScaleConditionalFormat является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.ColorScaleConditionalFormatData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -174,9 +174,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 95a2aea21c96e11a63994f729de51ad72355bc83
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 775e3e2cf4622211970b10ed7665d3b5e24bc122
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49272964"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49860449"

@@ -4,21 +4,21 @@ uid: outlook!Office.MasterCategories:interface
 package: outlook!
 fullName: Office.MasterCategories
 summary: >-
-  Представляет главный список категорий в почтовом ящике.
+  Представляет список хозяинов категорий в почтовом ящике.
 
 
-  В Outlook пользователь может помечать сообщения и встречи, используя категорию для их цветовых кодов. Пользователь определяет категории в главном списке своего почтового ящика. Затем он может применить одну или несколько категорий к элементу.
+  В Outlook пользователь может пометить сообщения и встречи с помощью категории, чтобы закодировать их цветом. Пользователь определяет категории в главном списке своего почтового ящика. Затем он может применить одну или несколько категорий к элементу.
 
 
-  **Важно!** в случае делегатов или общих сценариев делегат может получать категории из основного списка, но не может добавлять или удалять категории.
+  **Важно!** В сценариях делегирования или общего использования делегат может получить категории в этом списке, но не может добавлять или удалять категории.
 
 
-  \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteMailbox`
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteMailbox`
 
 
-  **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 isPreview: false
 isDeprecated: false
 type: interface
@@ -28,21 +28,21 @@ methods:
   package: outlook!
   fullName: addAsync(categories, options, callback)
   summary: >-
-    Добавляет категории в главный список в почтовом ящике. Каждая категория должна иметь уникальное имя, но несколько категорий могут использовать один и тот же цвет.
+    Добавляет категории в список для почтового ящика. Каждая категория должна иметь уникальное имя, но несколько категорий могут использовать один и тот же цвет.
 
 
-    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteMailbox`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteMailbox`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
-    - `DuplicateCategory`<!-- -->: Одна из указанных категорий уже находится в главном списке категорий.
+    - `DuplicateCategory`<!-- -->: одна из предоставленных категорий уже есть в списке категорий "Хозяин".
 
 
     - `PermissionDenied`<!-- -->: У пользователя нет разрешения на выполнение этого действия.
@@ -53,7 +53,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-master-categories.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-master-categories.yaml
 
     var masterCategoriesToAdd = [
       {
@@ -78,13 +78,13 @@ methods:
     content: 'addAsync(categories: CategoryDetails[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: Категории, добавляемые в главный список в почтовом ящике.
+      description: Категории, добавляемые в список хозяина почтового ящика.
       type: <xref uid="outlook!Office.CategoryDetails:interface" />[]
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -94,25 +94,25 @@ methods:
   package: outlook!
   fullName: getAsync(options, callback)
   summary: >-
-    Получает главный список категорий в почтовом ящике.
+    Получает список категорий для почтового ящика.
 
 
-    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteMailbox`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteMailbox`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если добавление категорий завершается с ошибкой, `asyncResult.error` свойство будет содержать код ошибки.
+      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Если добавление категорий не удастся, `asyncResult.error` свойство будет содержать код ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -122,15 +122,15 @@ methods:
   package: outlook!
   fullName: getAsync(callback)
   summary: >-
-    Получает главный список категорий в почтовом ящике.
+    Получает список категорий для почтового ящика.
 
 
-    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteMailbox`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteMailbox`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -138,7 +138,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-master-categories.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-master-categories.yaml
 
     Office.context.mailbox.masterCategories.getAsync(function(asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
@@ -161,7 +161,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<CategoryDetails[]>) => void): void;'
     parameters:
     - id: callback
-      description: После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->.
+      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CategoryDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -171,18 +171,18 @@ methods:
   package: outlook!
   fullName: removeAsync(categories, options, callback)
   summary: >-
-    Удаляет категории из главного списка в почтовом ящике.
+    Удаляет категории из списка хозяина почтового ящика.
 
 
-    \[[Набор API: Mailbox 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Минимальный уровень](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- --> разрешений**:`ReadWriteMailbox`
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteMailbox`
 
 
-    **[Соответствующий режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook**: "создание" или "чтение"
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
 
 
-    **Ошибки**:
+    **Ошибки:**
 
 
     - `PermissionDenied`<!-- -->: У пользователя нет разрешения на выполнение этого действия.
@@ -193,7 +193,7 @@ methods:
 
     ```javascript
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/45-categories/work-with-master-categories.yaml
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-master-categories.yaml
 
     var masterCategoriesToRemove = ["TestCategory"];
 
@@ -213,21 +213,21 @@ methods:
     content: 'removeAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: categories
-      description: Категории, которые необходимо удалить из главного списка в почтовом ящике.
+      description: Категории, удаляемые из списка хозяина почтового ящика.
       type: string[]
     - id: options
-      description: 'Необязательный атрибут. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к которому необходимо получить доступ, в методе обратного вызова.'
+      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный атрибут. После выполнения метода функция, переданная в `callback` параметре, вызывается с помощью одного параметра типа `Office.AsyncResult`<!-- -->. Если не удается удалить категории, `asyncResult.error` свойство будет содержать код ошибки.
+      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Если удаление категорий не удастся, свойство `asyncResult.error` будет содержать код ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 02b0b9dea225181dbbd5fb44396d355ede54f29a
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 232f4ce3bc8df1a101d8a73565e8218a993a3dc3
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49182742"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49859917"

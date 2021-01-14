@@ -7,7 +7,7 @@ summary: >-
   Представляет защиту объекта листа.
 
 
-  \[[Набор API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.WorksheetProtection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,10 +30,10 @@ properties:
   package: excel!
   fullName: options
   summary: >-
-    Задает параметры защиты для листа.
+    Указывает параметры защиты для этого таблицы.
 
 
-    \[[Набор API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -46,10 +46,10 @@ properties:
   package: excel!
   fullName: protected
   summary: >-
-    Указывает, защищен ли лист.
+    Указывает, защищен ли этот таблица.
 
 
-    \[[Набор API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -70,7 +70,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.WorksheetProtectionLoadOptions): Excel.WorksheetProtection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружается свойства объекта.
+      description: Предоставляет параметры, для которых загружаются свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.WorksheetProtectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.WorksheetProtection:class" />
@@ -87,7 +87,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.WorksheetProtection;'
     parameters:
     - id: propertyNames
-      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
+      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.WorksheetProtection:class" />
@@ -108,7 +108,7 @@ methods:
               }): Excel.WorksheetProtection;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -122,10 +122,10 @@ methods:
   package: excel!
   fullName: protect(options, password)
   summary: >-
-    Защищает лист. Завершается с ошибкой, если лист уже защищен.
+    Защищает лист. Если таблица уже защищена, происходит сбой.
 
 
-    \[[Набор API: ExcelApi 1,2 для параметров; 1,7 для пароля](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.2 для параметров; 1,7 для пароля](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -133,19 +133,19 @@ methods:
     content: 'protect(options?: Excel.WorksheetProtectionOptions, password?: string): void;'
     parameters:
     - id: options
-      description: Необязательный атрибут. Параметры защиты листа.
+      description: Необязательный. Параметры защиты листа.
       type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
     - id: password
-      description: Необязательный атрибут. Пароль защиты листа.
+      description: Необязательный. Пароль защиты листа.
       type: string
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect();\n    }\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect(null, password);\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect();\n    }\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect(null, password);\n    }\n});\n```"
 - name: toJSON()
   uid: excel!Excel.WorksheetProtection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. WorksheetProtection — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.WorksheetProtectionData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.WorksheetProtection является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.WorksheetProtectionData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -156,9 +156,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d0f45f218195043ce982f8f5f8f0e61a7ba244ea
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: f924168b3139e3ebbc0bc18d080c67ad30e7b1eb
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49156919"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49860064"

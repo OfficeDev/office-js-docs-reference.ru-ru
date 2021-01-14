@@ -4,10 +4,10 @@ uid: excel!Excel.Setting:class
 package: excel!
 fullName: Excel.Setting
 summary: >-
-  Представляет собой значение, заданное параметром "ключ-значение" для параметра, хранимого в документе (на файл в надстройке). Эти дополнительные сведения о состоянии и жизненном цикле могут использоваться для хранения сведений о состоянии или жизненном цикле, необходимых для надстройки контент или область задач. Обратите внимание, что параметры сохраняются в документе и поэтому не хранят конфиденциальные или защищенные сведения, такие как сведения о пользователе и пароль.
+  Параметр представляет пару "ключ-значение" параметра, сохраняемого в документе (для каждого файла надстройки). Эти настраиваемые пары "ключ-значение" можно использовать для хранения сведений о состоянии или жизненном цикле, необходимых контентной надстройке или надстройке области задач. Обратите внимание, что параметры сохраняются в документе, поэтому хранить конфиденциальную или защищенную информацию, например сведения о пользователе и пароль, не нужно.
 
 
-  \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.Setting#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,10 +30,10 @@ properties:
   package: excel!
   fullName: key
   summary: >-
-    Ключ, представляющий идентификатор параметра.
+    Ключ, который представляет собой ид параметра.
 
 
-    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -49,7 +49,7 @@ properties:
     Представляет значение, сохраненное для этого параметра.
 
 
-    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -66,7 +66,7 @@ methods:
     Удаляет параметр.
 
 
-    \[[Набор API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -74,7 +74,7 @@ methods:
     content: 'delete(): void;'
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/50-workbook/create-get-change-delete-settings.yaml\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        console.log(\"The setting has been deleted\");\n    } else {\n        console.log(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/create-get-change-delete-settings.yaml\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        console.log(\"The setting has been deleted\");\n    } else {\n        console.log(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
 - name: load(options)
   uid: excel!Excel.Setting#load:member(1)
   package: excel!
@@ -87,7 +87,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружается свойства объекта.
+      description: Предоставляет параметры, для которых загружаются свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.SettingLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.Setting:class" />
@@ -104,7 +104,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.Setting;'
     parameters:
     - id: propertyNames
-      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
+      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Setting:class" />
@@ -125,7 +125,7 @@ methods:
               }): Excel.Setting;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -138,7 +138,7 @@ methods:
   uid: excel!Excel.Setting#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Задает одновременно несколько свойств объекта. Можно передать либо простой объект с соответствующими свойствами, либо другой объект API того же типа.
+  summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
   remarks: >-
     Этот метод имеет следующую дополнительную подпись:
 
@@ -150,10 +150,10 @@ methods:
     content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со свойствами, которые структурированы исоморфикалли к свойствам объекта, для которого вызывается метод.
+      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
       type: <xref uid="excel!Excel.Interfaces.SettingUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавлять ошибки, если объект Properties пытается задать любые свойства, предназначенные только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -162,7 +162,7 @@ methods:
   uid: excel!Excel.Setting#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: Задает одновременно несколько свойств объекта на основе существующего загруженного объекта.
+  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -179,7 +179,7 @@ methods:
   uid: excel!Excel.Setting#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный объект Excel. Setting — это объект API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.SettingData`<!-- -->), который содержит неполные копии загруженных дочерних свойств из исходного объекта.
+  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Setting является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.SettingData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.'
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -190,9 +190,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 98622d7d9f7c55063b574b02fbfbaee259f21b5d
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 022c46b71118a8b53112bb1ba48f2db0b76bf0c2
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49184947"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49861002"
