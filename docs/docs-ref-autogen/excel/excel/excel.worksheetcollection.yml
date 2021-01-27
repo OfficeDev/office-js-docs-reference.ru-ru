@@ -184,6 +184,22 @@ properties:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.WorksheetCollection#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    Возникает, когда одна или несколько формул меняются на любом из таблиц этой коллекции. Это событие происходит при изменениях самой формулы, а не значения данных, полученных в результате вычисления формулы.
+
+
+    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.WorksheetCollection#onRowHiddenChanged:member
   package: excel!
@@ -237,7 +253,7 @@ properties:
   package: excel!
   fullName: onSingleClicked
   summary: >-
-    Происходит, когда в коллекции таблицы происходит операция нажатия левой кнопкой мыши или нажатием. Это событие не будет ищите при нажатии в следующих случаях: - Пользователь перетаскивать мышь для выбора нескольких. - Пользователь выбирает ячейку в режиме, когда аргументы ячейки выбраны для ссылок на формулы.
+    Происходит при нажатии левой кнопкой мыши или нажатии в коллекции таблиц. Это событие не будет ищите при нажатии в следующих случаях: - Пользователь перетаскивать мышь для выбора нескольких. - Пользователь выбирает ячейку в режиме, когда аргументы ячейки выбраны для ссылок на формулы.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -292,17 +308,17 @@ methods:
       description: Обязательный. Строка в коде base64, представляющая исходный файл книги.
       type: string
     - id: sheetNamesToInsert
-      description: Необязательный. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
+      description: Необязательный параметр. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
       type: string[]
     - id: positionType
-      description: Необязательный. В текущей книге будут вставлены новые таблицы. Подробные сведения см. в excel.WorksheetPositionType. Значение по умолчанию — Start.
+      description: Необязательный параметр. В текущей книге будут вставлены новые таблицы. Подробные сведения см. в excel.WorksheetPositionType. Значение по умолчанию — Start.
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
-      description: Необязательный. Таблица в текущей книге, на которую ссылается параметр positionType. Значение по умолчанию — null, и в зависимости от positionType вставляется таблица в начале или конце текущей книги.
+      description: Необязательный параметр. Таблица в текущей книге, на которую ссылается параметр positionType. Значение по умолчанию — null, и в зависимости от positionType вставляется таблица в начале или конце текущей книги.
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
-      description: "Массив id, соответствующий каждому вновь вставленным таблицам.\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/workbook-insert-external-worksheets.yaml\nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n        // strip off the metadata before the base64-encoded string\n        const startIndex = reader.result.toString().indexOf(\"base64,\");\n        const workbookContents = reader.result.toString().substr(startIndex + 7);\n\n        const sheets = context.workbook.worksheets;\n        sheets.addFromBase64(\n            workbookContents,\n            null, // get all the worksheets \n            Excel.WorksheetPositionType.end // insert them after the current workbook's worksheets\n            );\n        return context.sync();\n    });\n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
+      description: "Массив id, соответствующий каждому вновь вставленного таблицы.\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/workbook-insert-external-worksheets.yaml\nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n        // strip off the metadata before the base64-encoded string\n        const startIndex = reader.result.toString().indexOf(\"base64,\");\n        const workbookContents = reader.result.toString().substr(startIndex + 7);\n\n        const sheets = context.workbook.worksheets;\n        sheets.addFromBase64(\n            workbookContents,\n            null, // get all the worksheets \n            Excel.WorksheetPositionType.end // insert them after the current workbook's worksheets\n            );\n        return context.sync();\n    });\n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
 - name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
   uid: excel!Excel.WorksheetCollection#addFromBase64:member(2)
   package: excel!
@@ -325,17 +341,17 @@ methods:
       description: Обязательный. Строка в коде base64, представляющая исходный файл книги.
       type: string
     - id: sheetNamesToInsert
-      description: Необязательный. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
+      description: Необязательный параметр. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
       type: string[]
     - id: positionTypeString
-      description: Необязательный. В текущей книге будут вставлены новые таблицы. Подробные сведения см. в excel.WorksheetPositionType. Значение по умолчанию — Start.
+      description: Необязательный параметр. В текущей книге будут вставлены новые таблицы. Подробные сведения см. в excel.WorksheetPositionType. Значение по умолчанию — Start.
       type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
-      description: Необязательный. Таблица в текущей книге, на которую ссылается параметр positionType. Значение по умолчанию — null, и в зависимости от positionType вставляется таблица в начале или конце текущей книги.
+      description: Необязательный параметр. Таблица в текущей книге, на которую ссылается параметр positionType. Значение по умолчанию — null, и в зависимости от positionType вставляется таблица в начале или конце текущей книги.
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
-      description: Массив id, соответствующий каждому вновь вставленным таблицам.
+      description: Массив id, соответствующий каждому вновь вставленного таблицы.
 - name: getActiveWorksheet()
   uid: excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)
   package: excel!
@@ -369,7 +385,7 @@ methods:
     content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -390,7 +406,7 @@ methods:
     content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -421,7 +437,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(key)
   summary: >-
-    Получает объект листа по его имени или ИД. Если лист не существует, возвращает пустой объект.
+    Получает объект листа по его имени или ИД. Если таблица не существует, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -453,7 +469,7 @@ methods:
     content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -524,9 +540,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6e173b5561f5a7449831e945832092c47b89e98a
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 217115c6457c6b3150849309c2eff8be4d1cfe79
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852224"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991648"

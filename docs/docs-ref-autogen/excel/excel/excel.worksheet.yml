@@ -96,7 +96,7 @@ properties:
   package: excel!
   fullName: enableCalculation
   summary: >-
-    Определяет, следует ли Excel при необходимости пересчитать таблицу. True, если Excel при необходимости пересчитает таблицу. False, если Excel не пересчитает лист.
+    Определяет, следует ли в Excel при необходимости пересчитать таблицу. True, если Excel при необходимости пересчитает таблицу. False, если Excel не пересчитает лист.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -320,6 +320,22 @@ properties:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.Worksheet#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    Возникает при смене одной или более формул на этом таблице. Это событие происходит при изменениях самой формулы, а не значения данных, полученных в результате вычисления формулы.
+
+
+    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.Worksheet#onRowHiddenChanged:member
   package: excel!
@@ -382,7 +398,7 @@ properties:
     - Пользователь перетаскивать мышь для выбора нескольких.
 
 
-    - Пользователь выбирает ячейку в режиме, когда аргументы ячейки выбираются для ссылок на формулы.
+    - Пользователь выбирает ячейку в режиме, если для ссылок на формулы выбраны аргументы ячейки.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -564,7 +580,7 @@ properties:
   package: excel!
   fullName: tabColor
   summary: >-
-    Цвет вкладки для таблицы. При искомом цвете вкладки, если таблица невидима, значение будет иметь значение null. Если таблица видна, но для цвета вкладки установлен автоматический цвет, возвращается пустая строка. В противном случае свойству будет назначен цвет в формате "123456" при установке цвета с помощью пустой строки, чтобы установить "автоматический" цвет, или реальный цвет в противном \# случае.
+    Цвет вкладки для таблицы. При искомом цвете вкладки, если таблица невидима, значение будет иметь значение null. Если таблица видна, но для цвета вкладки установлено автоматическое, возвращается пустая строка. В противном случае свойству будет назначен цвет в формате "123456" при установке цвета с помощью пустой строки, чтобы установить "автоматический" цвет, или реальный цвет в противном \# случае.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -757,7 +773,7 @@ methods:
   package: excel!
   fullName: delete()
   summary: >-
-    Удаляет лист из книги. Обратите внимание, что если для видимости таблицы установлено "VeryHidden", операция удаления будет неудачной за `InvalidOperation` исключением. Перед удалением необходимо изменить его видимость на скрытую или видимую.
+    Удаляет лист из книги. Обратите внимание, что если для видимости на этом лине установлено "VeryHidden", операция удаления будет неудачной за `InvalidOperation` исключением. Перед удалением необходимо изменить его видимость на скрытую или видимую.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -817,7 +833,7 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: >-
-        Объект RangeArea, состоящий из одного или нескольких прямоугольных диапазонов, который соответствует условиям поиска. Если совпадений нет, эта функция возвращает объект null.
+        Объект RangeArea, состоящий из одного или нескольких прямоугольных диапазонов, который соответствует условиям поиска. Если совпадений нет, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах [ \* и свойствах OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
         #### <a name="examples"></a>Примеры
@@ -884,7 +900,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -894,7 +910,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    Получает таблицу, которая следует за этой. Если после этого нет таблиц, этот метод возвращает объект null.
+    Получает таблицу, которая следует за этой. Если после этого нет таблиц, этот метод возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -905,7 +921,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -926,7 +942,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -947,7 +963,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -968,7 +984,7 @@ methods:
     content: 'getRange(address?: string): Excel.Range;'
     parameters:
     - id: address
-      description: Необязательный. Строка, представляющая адрес или имя диапазона. Например, "A1:B2". Если аргумент не указан, возвращается весь диапазон листа.
+      description: Необязательный параметр. Строка, представляющая адрес или имя диапазона. Например, "A1:B2". Если аргумент не указан, возвращается весь диапазон листа.
       type: string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1019,7 +1035,7 @@ methods:
     content: 'getRanges(address?: string): Excel.RangeAreas;'
     parameters:
     - id: address
-      description: Необязательный. Строка, содержащая разделенные запятой адреса или имена отдельных диапазонов. Например, "A1:B2, A5:B5". Если не указано, возвращается объект RangeArea для всего таблицы.
+      description: Необязательный параметр. Строка, содержащая разделенные запятой адреса или имена отдельных диапазонов. Например, "A1:B2, A5:B5". Если не указано, возвращается объект RangeArea для всего таблицы.
       type: string
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1040,7 +1056,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: 'Необязательный. Если имеет значение true, в качестве используемых ячеек рассматриваются только ячейки со значениями (без форматирования). \[Набор API: ExcelApi 1.2\]'
+      description: 'Необязательный параметр. Если имеет значение true, в качестве используемых ячеек рассматриваются только ячейки со значениями (без форматирования). \[Набор API: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1050,7 +1066,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    Используемый диапазон — это наименьший диапазон, включающий в себя все ячейки, которые содержат значение или форматирование. Если весь лист пустой, эта функция возвращает пустой объект.
+    Используемый диапазон — это наименьший диапазон, включающий в себя все ячейки с определенным значением или форматированием. Если весь лист пустой, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1168,7 +1184,7 @@ methods:
     content: 'set(properties: Interfaces.WorksheetUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
       type: <xref uid="excel!Excel.Interfaces.WorksheetUpdateData:interface" />
     - id: options
       description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
@@ -1221,7 +1237,7 @@ methods:
   uid: excel!Excel.Worksheet#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Worksheet является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.WorksheetData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.'
+  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Worksheet является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.WorksheetData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.'
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1232,9 +1248,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a97fdcf6e4247d09689f105aec02889963a125f9
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: b7f3b4e06e50b3a7d27b2010a07cc6b888de7506
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852210"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991676"

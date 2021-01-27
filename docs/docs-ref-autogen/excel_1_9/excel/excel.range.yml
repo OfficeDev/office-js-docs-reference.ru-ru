@@ -174,7 +174,7 @@ properties:
   package: excel!
   fullName: formulas
   summary: >-
-    Представляет формулу в формате A1. Если в ячейке нет формулы, возвращается ее значение.
+    Представляет формулу в формате A1. Если ячейка не имеет формулы, возвращается ее значение.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -190,7 +190,7 @@ properties:
   package: excel!
   fullName: formulasLocal
   summary: >-
-    Представляет формулу в нотации стиля A1 на языке пользователя и в соответствии с его языковым стандартом. Например, английская формула =SUM(A1, 1.5) превратится в "=СУММ(A1; 1,5)" на русском языке. Если в ячейке нет формулы, возвращается ее значение.
+    Представляет формулу в нотации стиля A1 на языке пользователя и в соответствии с его языковым стандартом. Например, английская формула =SUM(A1, 1.5) превратится в "=СУММ(A1; 1,5)" на русском языке. Если ячейка не имеет формулы, возвращается ее значение.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -206,7 +206,7 @@ properties:
   package: excel!
   fullName: formulasR1C1
   summary: >-
-    Представляет формулу в формате R1C1. Если в ячейке нет формулы, возвращается ее значение.
+    Представляет формулу в формате R1C1. Если ячейка не имеет формулы, возвращается ее значение.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -418,7 +418,7 @@ properties:
   package: excel!
   fullName: text
   summary: >-
-    Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. Замена знака, которая происходит в пользовательском интерфейсе Excel, не повлияет на текстовое \# значение, возвращаемую API.
+    Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. Замена знака, которая происходит в пользовательском интерфейсе Excel, не повлияет на текстовое значение, \# возвращаемую API.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -524,7 +524,7 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillTypeString?: "FillDefault" | "FillCopy" | "FillSeries" | "FillFormats" | "FillValues" | "FillDays" | "FillWeekdays" | "FillMonths" | "FillYears" | "LinearTrend" | "GrowthTrend" | "FlashFill"): void;'
     parameters:
     - id: destinationRange
-      description: Диапазон назначения для автозаполнеия. Если диапазон назначения имеет null, данные заполняются на основе окружающей ячейки (что поведение при двойном щелчке по окну заливки диапазона пользовательского интерфейса).
+      description: Диапазон назначения для автозаполнеия. Если диапазон назначения имеет null, данные заполняются в зависимости от окружающей ячейки (это поведение при двойном щелчке по окну заливки диапазона пользовательского интерфейса).
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillTypeString
       description: Тип автозаполнеия. Указывает, как должен заполняться диапазон назначения в зависимости от содержимого текущего диапазона. Значение по умолчанию — FillDefault.
@@ -624,7 +624,7 @@ methods:
     content: 'convertToLinkedDataType(serviceID: number, languageCulture: string): void;'
     parameters:
     - id: serviceID
-      description: ИД службы, которая будет использоваться для запроса данных.
+      description: ИД службы, который будет использоваться для запроса данных.
       type: number
     - id: languageCulture
       description: Язык и язык для запроса в службу.
@@ -1047,7 +1047,7 @@ methods:
   package: excel!
   fullName: getImage()
   summary: >-
-    Отрисовка диапазона в качестве изображения png в коде base64. *Important**: This API is currently unsupported in Excel for Mac. Чтобы [получить текущее состояние, посетите сайт OfficeDev/office-js Issue \# 235.](https://github.com/OfficeDev/office-js/issues/235)
+    Отрисовка диапазона в качестве изображения png в коде base64. **Важно!** Этот API в настоящее время не работает в Excel для Mac. Чтобы получить текущее состояние, посетите сайт [OfficeDev/office-js Issue \# 235.](https://github.com/OfficeDev/office-js/issues/235)
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1679,7 +1679,7 @@ methods:
     content: 'set(properties: Interfaces.RangeUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
+      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
       type: <xref uid="excel!Excel.Interfaces.RangeUpdateData:interface" />
     - id: options
       description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
@@ -1848,7 +1848,7 @@ methods:
   uid: excel!Excel.Range#untrack:member(1)
   package: excel!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед тем как выпуск памяти вступает в силу, `context.sync()` необходимо будет вызвать этот вызов.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1859,9 +1859,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: fb5e71e1ae810723ee57c532e93cb455d8752e53
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 8f9efda43b277428fe0cd7431f2f4edd5e071813
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49857880"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49992137"

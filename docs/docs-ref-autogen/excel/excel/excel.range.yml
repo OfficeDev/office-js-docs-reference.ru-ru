@@ -206,7 +206,7 @@ properties:
   package: excel!
   fullName: formulasR1C1
   summary: >-
-    Представляет формулу в формате R1C1. Если в ячейке нет формулы, возвращается ее значение.
+    Представляет формулу в формате R1C1. Если ячейка не имеет формулы, возвращается ее значение.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -222,7 +222,7 @@ properties:
   package: excel!
   fullName: hasSpill
   summary: >-
-    Указывает, есть ли во всех ячейках граница переноса. Возвращает true, если у всех ячеек есть граница утечки, или false, если у всех ячеек нет границы утечки. Возвращает null, если в диапазоне есть ячейки как с границами, так и без них.
+    Указывает, есть ли во всех ячейках граница переноса. Возвращает true, если все ячейки имеют границу утечки, или false, если все ячейки не имеют границу утечки. Возвращает null, если в диапазоне есть ячейки как с границами, так и без них.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -636,7 +636,7 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillTypeString?: "FillDefault" | "FillCopy" | "FillSeries" | "FillFormats" | "FillValues" | "FillDays" | "FillWeekdays" | "FillMonths" | "FillYears" | "LinearTrend" | "GrowthTrend" | "FlashFill"): void;'
     parameters:
     - id: destinationRange
-      description: Диапазон назначения для автозаполнеия. Если диапазон назначения имеет null, данные заполняются в зависимости от окружающей ячейки (это поведение при двойном щелчке по окну заливки диапазона пользовательского интерфейса).
+      description: Диапазон назначения для автозаполнеия. Если диапазон назначения имеет null, данные заполняются на основе окружающей ячейки (что поведение при двойном щелчке по окну заливки диапазона пользовательского интерфейса).
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillTypeString
       description: Тип автозаполнеия. Указывает, как должен заполняться диапазон назначения в зависимости от содержимого текущего диапазона. Значение по умолчанию — FillDefault.
@@ -875,7 +875,7 @@ methods:
   package: excel!
   fullName: findOrNullObject(text, criteria)
   summary: >-
-    Находит определенную строку на основе указанных условий. Если текущий диапазон больше одной ячейки, поиск будет ограничен этим диапазоном, иначе поиск будет охватывать весь лист, начиная с этой ячейки. Если совпадений нет, эта функция возвращает объект null.
+    Находит определенную строку на основе указанных условий. Если текущий диапазон больше одной ячейки, поиск будет ограничен этим диапазоном, иначе поиск будет охватывать весь лист, начиная с этой ячейки. Если совпадений нет, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1001,7 +1001,7 @@ methods:
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;<xref uid="excel!Excel.CellProperties:interface" />[][]&gt;
       description: >-
-        Двухмерный массив, где каждый элемент представляет запрашиваемую ячейку.
+        Двухмерный массив, где каждый элемент представляет запрашиваются свойства соответствующей ячейки.
 
 
         #### <a name="examples"></a>Примеры
@@ -1214,7 +1214,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    Возвращает объект диапазона, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не найдено, возвращает пустой объект.
+    Возвращает объект диапазона, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не найдено, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1521,7 +1521,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellType, cellValueType)
   summary: >-
-    Получает объект RangeAreas, состоящий из одного или нескольких диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если специальные ячейки не найдены, возвращается объект null.
+    Получает объект RangeAreas, состоящий из одного или нескольких диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если специальные ячейки не найдены, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1545,7 +1545,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellTypeString, cellValueType)
   summary: >-
-    Получает объект RangeAreas, состоящий из одного или нескольких диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если специальные ячейки не найдены, возвращается объект null.
+    Получает объект RangeAreas, состоящий из одного или нескольких диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если специальные ячейки не найдены, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1586,7 +1586,7 @@ methods:
   package: excel!
   fullName: getSpillingToRangeOrNullObject()
   summary: >-
-    Получает объект range, содержащий диапазон переноса при вызове для базовой ячейки. Если диапазон не является ячейкой привязки или диапазон утечки не найден, возвращается объект null.
+    Получает объект range, содержащий диапазон переноса при вызове для базовой ячейки. Если диапазон не является ячейкой привязки или не найден диапазон утечки, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1620,7 +1620,7 @@ methods:
   package: excel!
   fullName: getSpillParentOrNullObject()
   summary: >-
-    Получает объект диапазона, содержащий базовую ячейку для переносимой ячейки. Если ячейка не является ячейкой утечки или она передается более одного раза, возвращается объект null.
+    Получает объект диапазона, содержащий ячейку привязки для влияемой ячейки. Если это не пролилась ячейка или задано более одной ячейки, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1696,7 +1696,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция возвращает пустой объект.
+    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1951,7 +1951,7 @@ methods:
     content: 'moveTo(destinationRange: Range | string): void;'
     parameters:
     - id: destinationRange
-      description: destinationRange указывает диапазон, в который будут перемещены сведения в этом диапазоне.
+      description: destinationRange указывает диапазон, в который будут перемещены сведения из этого диапазона.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: void
@@ -2217,7 +2217,7 @@ methods:
   uid: excel!Excel.Range#track:member(1)
   package: excel!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во всех вызовах и вне последовательного выполнения пакета ".run" и получаете ошибку InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если этот объект используется во всех вызовах и вне последовательного выполнения пакета ".run" и при установке свойства или вызове метода для объекта вы получаете ошибку InvalidObjectPath, то при первом создании объекта необходимо добавить объект в отслеживаемую коллекцию `.sync` объектов.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -2300,9 +2300,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c818bbad52319cb4bdc2c25504763ebf6f21707a
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: a0f95db6649eb00a46f3d7ce692c6e895c0c3e28
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49851174"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991991"
