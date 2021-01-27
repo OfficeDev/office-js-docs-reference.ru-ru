@@ -4,10 +4,10 @@ uid: excel!Excel.PivotHierarchyCollection:class
 package: excel!
 fullName: Excel.PivotHierarchyCollection
 summary: >-
-  Представляет коллекцию всех Пивосиерарчиес, входящих в состав сводной таблицы.
+  Представляет коллекцию всех pivotHierarchies, которые являются частью pivotTable.
 
 
-  \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.PivotHierarchyCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это подсоединяет процесс надстройки к процессу ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -46,7 +46,7 @@ methods:
     Получает количество иерархий сводного объекта в коллекции.
 
 
-    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -63,7 +63,7 @@ methods:
     Получает PivotHierarchy по имени или идентификатору.
 
 
-    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -71,7 +71,7 @@ methods:
     content: 'getItem(name: string): Excel.PivotHierarchy;'
     parameters:
     - id: name
-      description: Имя извлекаемого PivotHierarchy.
+      description: Имя извлекаемой pivotHierarchy.
       type: string
     return:
       type: <xref uid="excel!Excel.PivotHierarchy:class" />
@@ -81,10 +81,10 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(name)
   summary: >-
-    Получает PivotHierarchy по имени. Если PivotHierarchy не существует, возвращает пустой объект.
+    Получает PivotHierarchy по имени. Если PivotHierarchy не существует, эта функция возвращает объект со своим `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
-    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -92,7 +92,7 @@ methods:
     content: 'getItemOrNullObject(name: string): Excel.PivotHierarchy;'
     parameters:
     - id: name
-      description: Имя извлекаемого PivotHierarchy.
+      description: Имя извлекаемой pivotHierarchy.
       type: string
     return:
       type: <xref uid="excel!Excel.PivotHierarchy:class" />
@@ -109,7 +109,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.PivotHierarchyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotHierarchyCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружается свойства объекта.
+      description: Предоставляет параметры, для которых загружаются свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.PivotHierarchyCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.PivotHierarchyCollection:class" />
@@ -126,7 +126,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.PivotHierarchyCollection;'
     parameters:
     - id: propertyNames
-      description: Строка, разделенная запятыми, или массив строк, указывающий свойства для загрузки.
+      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.PivotHierarchyCollection:class" />
@@ -143,7 +143,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.PivotHierarchyCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — Это строка с разделителями-запятыми, задающая свойства для загрузки и которая `propertyNamesAndPaths.expand` представляет собой строку с разделителями-запятыми, указывающую свойства навигации для загрузки.'
+      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.PivotHierarchyCollection:class" />
@@ -152,7 +152,7 @@ methods:
   uid: excel!Excel.PivotHierarchyCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет `toJSON()` метод JavaScript для предоставления более удобного вывода при передаче объекта API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный `Excel.PivotHierarchyCollection` объект является объектом API, `toJSON` метод возвращает простой объект JavaScript (тип `Excel.Interfaces.PivotHierarchyCollectionData`<!-- -->), содержащий массив "Items" с неполноми копиями загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.PivotHierarchyCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.PivotHierarchyCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -163,9 +163,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 624e34ca6cce105be3c9900065b1760004a377f6
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: c7ef84a816d8373de6312def01053fdd363cb4f4
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49316994"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991537"

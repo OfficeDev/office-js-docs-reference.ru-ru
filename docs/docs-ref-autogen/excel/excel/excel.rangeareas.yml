@@ -311,7 +311,7 @@ methods:
     content: 'convertToLinkedDataType(serviceID: number, languageCulture: string): void;'
     parameters:
     - id: serviceID
-      description: ИД службы, которая будет использоваться для запроса данных.
+      description: ИД службы, который будет использоваться для запроса данных.
       type: number
     - id: languageCulture
       description: Язык и язык для запроса в службу.
@@ -368,7 +368,7 @@ methods:
       description: Исходный диапазон или RangeAreas для копирования. Если исходный rangeAreas имеет несколько диапазонов, их форму необходимо создать, удалив полные строки или столбцы из прямоугольного диапазона.
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     - id: copyTypeString
-      description: Тип данных ячейки или форматирования для копирования. Значение по умолчанию— "All".
+      description: Тип данных ячейки или форматирование для копирования. Значение по умолчанию— "All".
       type: "\"All\" | \"Formulas\" | \"Values\" | \"Formats\""
     - id: skipBlanks
       description: 'True, если пропускать пустые ячейки в диапазоне источника или RangeAreas. Значение по умолчанию: false.'
@@ -439,7 +439,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    Возвращает объект RangeAreas, представляющий пересечение заданных диапазонов или RangeAreas. Если пересечение не найдено, возвращается пустой объект.
+    Возвращает объект RangeAreas, представляющий пересечение заданных диапазонов или RangeAreas. Если пересечение не найдено, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -471,7 +471,7 @@ methods:
     content: 'getOffsetRangeAreas(rowOffset: number, columnOffset: number): Excel.RangeAreas;'
     parameters:
     - id: rowOffset
-      description: Число строк (положительное, отрицательное или 0), на которое должно быть смещено rangeAreas. Положительные значения соответствуют смещению вниз, а отрицательные — вверх.
+      description: Количество строк (положительное, отрицательное или 0), на которое должно быть смещено rangeAreas. Положительные значения соответствуют смещению вниз, а отрицательные — вверх.
       type: number
     - id: columnOffset
       description: Число столбцов (положительное, отрицательное или 0), на которое должно быть смещено rangeAreas. Положительные значения соответствуют смещению вправо, а отрицательные — влево.
@@ -606,7 +606,7 @@ methods:
   package: excel!
   fullName: getUsedRangeAreasOrNullObject(valuesOnly)
   summary: >-
-    Возвращает использованный объект RangeAreas, включающий все использованные области отдельных прямоугольных диапазонов в объекте RangeAreas. Если в объекте RangeAreas нет используемых ячеек, возвращается объект null.
+    Возвращает использованный объект RangeAreas, включающий все использованные области отдельных прямоугольных диапазонов в объекте RangeAreas. Если в объекте RangeAreas нет используемых ячеек, эта функция возвращает объект со `isNullObject` своим свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -697,7 +697,7 @@ methods:
     content: 'set(properties: Interfaces.RangeAreasUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
       type: <xref uid="excel!Excel.Interfaces.RangeAreasUpdateData:interface" />
     - id: options
       description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
@@ -756,7 +756,7 @@ methods:
   uid: excel!Excel.RangeAreas#track:member(1)
   package: excel!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во всех вызовах и вне последовательного выполнения пакета ".run" и получаете ошибку InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если этот объект используется во всех вызовах и вне последовательного выполнения пакета ".run" и при установке свойства или вызове метода для объекта вы получаете ошибку InvalidObjectPath, то при первом создании объекта необходимо добавить объект в отслеживаемую коллекцию `.sync` объектов.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -769,7 +769,7 @@ methods:
   uid: excel!Excel.RangeAreas#untrack:member(1)
   package: excel!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед тем как выпуск памяти вступает в силу, `context.sync()` необходимо будет вызвать этот вызов.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -780,9 +780,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 2f0a114f19f3ff6621bbb19a92901a42ee81f722
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: d348ca04a29eb6dbbe8b815462c7384bd83172d4
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852308"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991515"

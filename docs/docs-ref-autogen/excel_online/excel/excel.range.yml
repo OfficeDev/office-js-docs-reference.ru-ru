@@ -174,7 +174,7 @@ properties:
   package: excel!
   fullName: formulas
   summary: >-
-    Представляет формулу в формате A1. Если в ячейке нет формулы, возвращается ее значение.
+    Представляет формулу в формате A1. Если ячейка не имеет формулы, возвращается ее значение.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -222,7 +222,7 @@ properties:
   package: excel!
   fullName: hasSpill
   summary: >-
-    Указывает, есть ли во всех ячейках граница переноса. Возвращает true, если у всех ячеек есть граница утечки, или false, если у всех ячеек нет границы утечки. Возвращает null, если в диапазоне есть ячейки как с границами, так и без них.
+    Указывает, есть ли во всех ячейках граница переноса. Возвращает true, если все ячейки имеют границу утечки, или false, если все ячейки не имеют границу утечки. Возвращает null, если в диапазоне есть ячейки как с границами, так и без них.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -609,7 +609,7 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillType?: Excel.AutoFillType): void;'
     parameters:
     - id: destinationRange
-      description: Диапазон назначения для автозаполнеия. Если диапазон назначения имеет null, данные заполняются в зависимости от окружающей ячейки (это поведение при двойном щелчке по окну заливки диапазона пользовательского интерфейса).
+      description: Диапазон назначения для автозаполнеия. Если диапазон назначения имеет null, данные заполняются на основе окружающей ячейки (что поведение при двойном щелчке по окну заливки диапазона пользовательского интерфейса).
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillType
       description: Тип автозаполнеия. Указывает, как должен заполняться диапазон назначения в зависимости от содержимого текущего диапазона. Значение по умолчанию — FillDefault.
@@ -736,7 +736,7 @@ methods:
     content: 'convertToLinkedDataType(serviceID: number, languageCulture: string): void;'
     parameters:
     - id: serviceID
-      description: ИД службы, которая будет использоваться для запроса данных.
+      description: ИД службы, который будет использоваться для запроса данных.
       type: number
     - id: languageCulture
       description: Язык и язык для запроса в службу.
@@ -1176,7 +1176,7 @@ methods:
   package: excel!
   fullName: getImage()
   summary: >-
-    Отрисовка диапазона в качестве изображения png в коде base64. *Important**: This API is currently unsupported in Excel for Mac. Чтобы получить текущее состояние, посетите сайт [OfficeDev/office-js Issue \# 235.](https://github.com/OfficeDev/office-js/issues/235)
+    Отрисовка диапазона в качестве изображения png в коде base64. **Важно!** Этот API в настоящее время не работает в Excel для Mac. Чтобы получить текущее состояние, посетите сайт [OfficeDev/office-js Issue \# 235.](https://github.com/OfficeDev/office-js/issues/235)
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1327,7 +1327,7 @@ methods:
   package: excel!
   fullName: getPivotTables(fullyContained)
   summary: >-
-    Получает коллекцию с затеняемых областей с помощью совмессов, перекрывающих диапазон.
+    Получает коллекцию с затеняемых областей с помощью совмесс, перекрывающихся с диапазоном.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1603,7 +1603,7 @@ methods:
   package: excel!
   fullName: getSpillParentOrNullObject()
   summary: >-
-    Получает объект диапазона, содержащий базовую ячейку для переносимой ячейки. Если ячейка не является ячейкой утечки или она передается более одного раза, возвращается объект null.
+    Получает объект диапазона, содержащий базовую ячейку для переносимой ячейки. Если ячейка не является ячейкой утечки или ей выдаются более одного раза, возвращается объект null.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1749,7 +1749,7 @@ methods:
     content: 'group(groupOptionString: "ByRows" | "ByColumns"): void;'
     parameters:
     - id: groupOptionString
-      description: Указывает, как диапазон можно сгруппить по строкам или столбцам. Ошибка происходит, когда параметр группы отличается от свойства или диапазона (например, имеет true и имеет свойство ByColumns или true и имеет свойство `InvalidArgument` `isEntireRow` `isEntireColumn` `range.isEntireRow` `groupOption` `range.isEntireColumn` `groupOption` ByRows).
+      description: Указывает, как диапазон можно сгруппить по строкам или столбцам. Ошибка происходит, когда параметр группы отличается от свойства или диапазона (то есть имеет true и имеет `InvalidArgument` `isEntireRow` `isEntireColumn` `range.isEntireRow` `groupOption` "ByColumns" или true `range.isEntireColumn` и `groupOption` имеет "ByRows").
       type: "\"ByRows\" | \"ByColumns\""
     return:
       type: void
@@ -1923,7 +1923,7 @@ methods:
   package: excel!
   fullName: moveTo(destinationRange)
   summary: >-
-    Перемещает значения, форматирование и формулы ячеек из текущего диапазона в диапазон назначения, заменяя старую информацию в этих ячейках. Диапазон назначения будет расширяться автоматически, если он меньше текущего диапазона. Ячейки в конечном диапазоне, которые находятся за пределами исходного диапазона, не меняются.
+    Перемещает значения, форматирование и формулы ячеек из текущего диапазона в диапазон назначения, заменяя старую информацию в этих ячейках. Диапазон назначения будет расширен автоматически, если он меньше текущего диапазона. Ячейки в конечном диапазоне, которые находятся за пределами исходного диапазона, не меняются.
 
 
     \[[Набор API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1934,7 +1934,7 @@ methods:
     content: 'moveTo(destinationRange: Range | string): void;'
     parameters:
     - id: destinationRange
-      description: destinationRange указывает диапазон, в который будут перемещены сведения в этом диапазоне.
+      description: destinationRange указывает диапазон, в который будут перемещены сведения из этого диапазона.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: void
@@ -2019,7 +2019,7 @@ methods:
     content: 'set(properties: Interfaces.RangeUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
       type: <xref uid="excel!Excel.Interfaces.RangeUpdateData:interface" />
     - id: options
       description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
@@ -2187,7 +2187,7 @@ methods:
   uid: excel!Excel.Range#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Range является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.RangeData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.'
+  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Range является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.RangeData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.'
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -2272,7 +2272,7 @@ methods:
   uid: excel!Excel.Range#untrack:member(1)
   package: excel!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед тем как выпуск памяти вступает в силу, `context.sync()` необходимо будет вызвать этот вызов.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -2283,9 +2283,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c4fb2f9f8249e6658f585cff42dd990c0e85af56
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: e799d904d761ef871eb4cd900cda6361c7f647c6
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49851349"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49992159"
