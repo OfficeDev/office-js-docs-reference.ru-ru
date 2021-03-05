@@ -3,8 +3,8 @@ name: Office.Dialog
 uid: office!Office.Dialog:interface
 package: office!
 fullName: Office.Dialog
-summary: Объект, который возвращается при `UI.displayDialogAsync` вызове. Он предоставляет методы для регистрации обработчиков событий и закрытия диалогового окна.
-remarks: '**Набор требований**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
+summary: Объект, возвращаемый при `UI.displayDialogAsync` призвании. Он предоставляет методы регистрации обработчиков событий и закрытия диалогов.
+remarks: '**Набор требований:** [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -28,10 +28,10 @@ methods:
     content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
     parameters:
     - id: eventType
-      description: Значение должно быть Диалогмессажерецеивед или Диаложевентрецеивед.
+      description: Должен быть либо DialogMessageReceived, либо DialogEventReceived.
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: Функция, которая принимает объект со `message` свойством, если EventType имеет значение диалогмессажерецеивед, или объект со `error` свойством, если EventType имеет значение диаложевентрецеивед.
+      description: Функция, которая принимает объект с свойством, если eventType является `message` DialogMessageReceived, или объект с свойством, если eventType является `error` DialogEventReceived.
       type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
     return:
       type: void
@@ -40,7 +40,11 @@ methods:
   uid: office!Office.Dialog#close:member(1)
   package: office!
   fullName: close()
-  summary: Вызывается с родительской страницы, чтобы закрыть соответствующее диалоговое окно.
+  summary: >-
+    Вызывается с родительской страницы, чтобы закрыть соответствующее диалоговое окно.
+
+
+    Этот метод является асинхронным. Он не принимает параметр обратного вызова и не возвращает объект Promise, поэтому его нельзя ожидать ни с ключевым словом, ни `await` с `then` функцией. Дополнительные сведения см. в этом примере: [открытие другого диалоговое окно сразу после его закрытия.](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-best-practices#opening-another-dialog-immediately-after-closing-one)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -53,15 +57,15 @@ methods:
   uid: office!Office.Dialog#messageChild:member(1)
   package: office!
   fullName: messageChild(message)
-  summary: Доставляет сообщение со страницы узла, например область задач или файл функции без пользовательского интерфейса, в диалоговое окно, открытое на странице.
+  summary: Доставляет сообщение с хост-страницы, например области задач или файла функций без пользовательского интерфейса, в диалоговое окно, открытое со страницы.
   remarks: >-
-    **Hosts**: Excel, Outlook (минимальный набор обязательных элементов: Mailbox 1,9), PowerPoint, Word
+    **Хосты:** Excel, Outlook (минимальный набор требований: почтовый ящик 1.9), PowerPoint, Word
 
 
-    **Наборы требований**:
+    **Наборы требований:**
 
 
-    - [DialogAPI 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+    - [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
 
 
     - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
@@ -71,7 +75,7 @@ methods:
     content: 'messageChild(message: string): void;'
     parameters:
     - id: message
-      description: Принимает сообщение от главной страницы для доставки в диалоговое окно. Можно отправлять любые данные, которые могут быть сериализованы в строку, включая JSON и XML.
+      description: Принимает сообщение с хост-страницы для доставки в диалоговое окно. Все, что можно отправить в строку, включая JSON и XML, можно отправить.
       type: string
     return:
       type: void
@@ -80,7 +84,7 @@ methods:
   uid: office!Office.Dialog#sendMessage:member(1)
   package: office!
   fullName: sendMessage(name)
-  summary: ТОЛЬКО ДЛЯ ВНУТРЕННЕГО ИСПОЛЬЗОВАНИЯ. НЕ ВЫЗЫВАЙТЕ КОД.
+  summary: ТОЛЬКО ДЛЯ ВНУТРЕННЕГО ИСПОЛЬЗОВАНИЯ. НЕ ВЫЗЫВАЙ КОД.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -94,9 +98,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: c007533112e45e4ffec29b45883add8161532d6c
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: f328302115888d80b8d95f5b7d97d4331e0cc2b1
+  ms.sourcegitcommit: f55d2bbeba2a20abb522cbf742e727b82bcf73ee
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49183366"
+  ms.lasthandoff: 03/05/2021
+  ms.locfileid: "50463387"
