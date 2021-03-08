@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.Binding#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -63,10 +63,10 @@ properties:
   package: excel!
   fullName: onSelectionChanged
   summary: >-
-    Возникает при смене выбранного содержимого в привязке.
+    Возникает при смене выбранного контента в привязке.
 
 
-    *Note***: If multiple, discontiguous cells are selected, `Binding.onSelectionChanged` only reports row and column information for one selection. Используется `Worksheet.onSelectionChanged` для нескольких выбранных диапазонов.
+    *Примечание**: Если выбрано несколько дисконтных ячеек, для одного выбора будут сообщаться только сведения о строках `Binding.onSelectionChanged` и столбцах. Используйте `Worksheet.onSelectionChanged` для нескольких выбранных диапазонов.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -82,7 +82,7 @@ properties:
   package: excel!
   fullName: type
   summary: >-
-    Возвращает тип привязки. Подробные сведения см. в excel.BindingType.
+    Возвращает тип привязки. Подробные `Excel.BindingType` сведения см. в материале.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -116,7 +116,7 @@ methods:
   package: excel!
   fullName: getRange()
   summary: >-
-    Возвращает представленный привязкой диапазон. Если тип привязки неправильный, выдается ошибка.
+    Возвращает представленный привязкой диапазон. Будет выбрасывать ошибку, если привязка не является правильным типом.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -133,7 +133,7 @@ methods:
   package: excel!
   fullName: getTable()
   summary: >-
-    Возвращает представленную привязкой таблицу. Если тип привязки неправильный, выдается ошибка.
+    Возвращает представленную привязкой таблицу. Будет выбрасывать ошибку, если привязка не является правильным типом.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -150,7 +150,7 @@ methods:
   package: excel!
   fullName: getText()
   summary: >-
-    Возвращает представленный привязкой текст. Если тип привязки неправильный, выдается ошибка.
+    Возвращает представленный привязкой текст. Будет выбрасывать ошибку, если привязка не является правильным типом.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -174,7 +174,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.BindingLoadOptions): Excel.Binding;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.BindingLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.Binding:class" />
@@ -191,7 +191,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.Binding;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Binding:class" />
@@ -212,7 +212,7 @@ methods:
               }): Excel.Binding;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -225,7 +225,7 @@ methods:
   uid: excel!Excel.Binding#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Binding является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.BindingData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.'
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.Binding — это объект API, метод возвращает простой `toJSON` объект JavaScript (введите как `Excel.Interfaces.BindingData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -236,9 +236,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 19e2da4f371dd65fe7d32117159fa990dccb57f8
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: dce521beb7b72577da5c636408db838abeae40c0
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49850208"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50538130"

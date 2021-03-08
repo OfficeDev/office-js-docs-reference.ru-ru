@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.TableColumnCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -62,7 +62,7 @@ methods:
     Добавляет новый столбец в таблицу.
 
 
-    \[Набор [API: Для ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) требуется индекс меньше, чем общее число столбцов; 1,4 позволяет индексу быть необязательным (null или -1) и будет дописывать столбец в конце; 1,4 разрешает параметр name во время создания. \]
+    \[Набор [API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) требует индекса меньше общего количества столбцов; 1.4 позволяет индексу быть необязательным (null или -1) и будет примесить столбец в конце; 1.4 позволяет параметр имени во время создания. \]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -73,10 +73,10 @@ methods:
       description: Необязательный. Определяет относительную позицию нового столбца. Если задано значение null или -1, столбец добавляется в конце. Столбцы с более высокими значениями индекса смещаются в сторону. Используется нулевой индекс.
       type: number
     - id: values
-      description: Необязательный параметр. Двухмерный массив неформатированных значений столбца таблицы.
+      description: Необязательный. 2D-массив неформатных значений столбца таблицы.
       type: Array&lt;Array&lt;boolean | string | number&gt;&gt; | boolean | string | number
     - id: name
-      description: Необязательный параметр. Задает имя нового столбца. Если значение пустое, используется имя по умолчанию.
+      description: Необязательный параметр. Задает имя нового столбца. Если `null`<!-- -->по умолчанию будет использоваться имя.
       type: string
     return:
       type: <xref uid="excel!Excel.TableColumn:class" />
@@ -103,7 +103,7 @@ methods:
   package: excel!
   fullName: getItem(key)
   summary: >-
-    Возвращает объект column по имени или идентификатору.
+    Возвращает объект столбца по имени или идентификатору.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -114,7 +114,7 @@ methods:
     content: 'getItem(key: number | string): Excel.TableColumn;'
     parameters:
     - id: key
-      description: Имя или ИД столбца.
+      description: Имя столбца или ID.
       type: number | string
     return:
       type: <xref uid="excel!Excel.TableColumn:class" />
@@ -145,7 +145,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(key)
   summary: >-
-    Возвращает объект column по имени или идентификатору. Если столбец не существует, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Возвращает объект столбца по имени или идентификатору. Если столбец не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -156,7 +156,7 @@ methods:
     content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
     parameters:
     - id: key
-      description: Имя или ИД столбца.
+      description: Имя столбца или ID.
       type: number | string
     return:
       type: <xref uid="excel!Excel.TableColumn:class" />
@@ -173,7 +173,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.TableColumnCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.TableColumnCollection:class" />
@@ -190,7 +190,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.TableColumnCollection:class" />
@@ -207,7 +207,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.TableColumnCollection:class" />
@@ -216,7 +216,7 @@ methods:
   uid: excel!Excel.TableColumnCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.TableColumnCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.TableColumnCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.TableColumnCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.TableColumnCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -227,9 +227,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: fda6122cccf35dafb401ae2151ef85776974d06b
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: b4be1520fe8972205c172b1b5b7fc61482b819f7
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991655"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50538263"

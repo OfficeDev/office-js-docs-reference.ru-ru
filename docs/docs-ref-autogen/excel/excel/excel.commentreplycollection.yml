@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.CommentReplyCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: add(content, contentType)
   summary: >-
-    Создает ответ на примечание.
+    Создает ответ на комментарий для комментария.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -54,10 +54,10 @@ methods:
     content: 'add(content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.CommentReply;'
     parameters:
     - id: content
-      description: 'Содержимое комментария. Это может быть строка или интерфейс CommentRichContent (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1.10 для строки, 1.11 для объекта CommentRichContent\]'
+      description: 'Содержимое комментария. Это может быть строка или `CommentRichContent` объект (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1.10 для строки, 1.11 для объекта CommentRichContent\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentType
-      description: 'Необязательный. Тип контента, содержаногося в комментарии. Значение по умолчанию — enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1.10 для Enum ContentType.Plain, 1.11 для Enum ContentType.Mention\]'
+      description: 'Необязательное. Тип контента, содержатого в комментарии. Значение по умолчанию — это enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1.10 для Enum ContentType.Plain, 1.11 для Enum ContentType.Mention\]'
       type: <xref uid="excel!Excel.ContentType:enum" />
     return:
       type: <xref uid="excel!Excel.CommentReply:class" />
@@ -67,7 +67,7 @@ methods:
   package: excel!
   fullName: add(content, contentTypeString)
   summary: >-
-    Создает ответ на примечание.
+    Создает ответ на комментарий для комментария.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -78,10 +78,10 @@ methods:
     content: 'add(content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.CommentReply;'
     parameters:
     - id: content
-      description: 'Содержимое комментария. Это может быть строка или интерфейс CommentRichContent (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1.10 для строки, 1.11 для объекта CommentRichContent\]'
+      description: 'Содержимое комментария. Это может быть строка или `CommentRichContent` объект (например, для комментариев с упоминаниями). \[Набор API: ExcelApi 1.10 для строки, 1.11 для объекта CommentRichContent\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentTypeString
-      description: 'Необязательный. Тип контента, содержаногося в комментарии. Значение по умолчанию — enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1.10 для Enum ContentType.Plain, 1.11 для Enum ContentType.Mention\]'
+      description: 'Необязательное. Тип контента, содержатого в комментарии. Значение по умолчанию — это enum `ContentType.Plain`<!-- -->. \[Набор API: ExcelApi 1.10 для Enum ContentType.Plain, 1.11 для Enum ContentType.Mention\]'
       type: "\"Plain\" | \"Mention\""
     return:
       type: <xref uid="excel!Excel.CommentReply:class" />
@@ -140,8 +140,29 @@ methods:
     content: 'getItemAt(index: number): Excel.CommentReply;'
     parameters:
     - id: index
-      description: Значение индекса ответа на комментарий, который требуется получить. В коллекции используется индексация с нуля.
+      description: Значение индекса ответа на комментарий, который будет получен. В коллекции используется нулевая индексация.
       type: number
+    return:
+      type: <xref uid="excel!Excel.CommentReply:class" />
+      description: ''
+- name: getItemOrNullObject(commentReplyId)
+  uid: excel!Excel.CommentReplyCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(commentReplyId)
+  summary: >-
+    Возвращает ответ на примечание, определенное по идентификатору. Если объекта ответа на комментарии не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(commentReplyId: string): Excel.CommentReply;'
+    parameters:
+    - id: commentReplyId
+      description: Идентификатор ответа на комментарий
+      type: string
     return:
       type: <xref uid="excel!Excel.CommentReply:class" />
       description: ''
@@ -157,7 +178,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.CommentReplyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentReplyCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.CommentReplyCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.CommentReplyCollection:class" />
@@ -174,7 +195,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.CommentReplyCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.CommentReplyCollection:class" />
@@ -191,7 +212,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.CommentReplyCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.CommentReplyCollection:class" />
@@ -200,7 +221,7 @@ methods:
   uid: excel!Excel.CommentReplyCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.CommentReplyCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.CommentReplyCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.CommentReplyCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.CommentReplyCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -211,9 +232,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: aaac2a24a89c95829723a69eb70047fe8e38ba15
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: f9605106e7cc7145e6dbc2e4b0f14d7c9824a841
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49850838"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50538809"
