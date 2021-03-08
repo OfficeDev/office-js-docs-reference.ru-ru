@@ -4,7 +4,7 @@ uid: excel!Excel.AutoFilter:class
 package: excel!
 fullName: Excel.AutoFilter
 summary: >-
-  Представляет объект AutoFilter. Автофильтр превращает значения в столбце Excel в определенные фильтры на основе содержимого ячейки.
+  Представляет `AutoFilter` объект. AutoFilter превращает значения в столбце Excel в определенные фильтры, основанные на содержимом ячейки.
 
 
   \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.AutoFilter#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -46,7 +46,7 @@ properties:
   package: excel!
   fullName: enabled
   summary: >-
-    Указывает, включен ли автофилтер.
+    Указывает, включен ли autoFilter.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -62,7 +62,7 @@ properties:
   package: excel!
   fullName: isDataFiltered
   summary: >-
-    Указывает, есть ли у автофильтра условия фильтрации.
+    Указывает, есть ли у autoFilter критерии фильтрации.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -90,10 +90,10 @@ methods:
     content: 'apply(range: Range | string, columnIndex?: number, criteria?: Excel.FilterCriteria): void;'
     parameters:
     - id: range
-      description: Диапазон, к которому применяется автофайл.
+      description: Диапазон, на который будет применяться autoFilter.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: columnIndex
-      description: Индекс столбца с нуля, к которому применяется автофайлтер.
+      description: Индекс столбца с нулевой базой, к которому применяется AutoFilter.
       type: number
     - id: criteria
       description: Критерии фильтрации.
@@ -101,6 +101,27 @@ methods:
     return:
       type: void
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const farmData = sheet.getUsedRange();\n\n    // This filter will only show the rows with the top 25% of values in column 3.\n    sheet.autoFilter.apply(farmData, 3, { criterion1: \"25\", filterOn: Excel.FilterOn.topPercent });\n    await context.sync();\n});\n```"
+- name: clearColumnCriteria(columnIndex)
+  uid: excel!Excel.AutoFilter#clearColumnCriteria:member(1)
+  package: excel!
+  fullName: clearColumnCriteria(columnIndex)
+  summary: >-
+    Очищает условия фильтрации автофильтра.
+
+
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'clearColumnCriteria(columnIndex: number): void;'
+    parameters:
+    - id: columnIndex
+      description: Индекс столбцов с нулевой базой, который представляет, какой фильтр столбцов необходимо очистить. Если значение индекса не поддерживается (например, если значение отрицательное или если значение больше количества доступных столбцов в диапазоне), то будет выброшено `InvalidArgument` исключение.
+      type: number
+    return:
+      type: void
+      description: ''
 - name: clearCriteria()
   uid: excel!Excel.AutoFilter#clearCriteria:member(1)
   package: excel!
@@ -123,7 +144,7 @@ methods:
   package: excel!
   fullName: getRange()
   summary: >-
-    Возвращает объект Range, представляющий диапазон, к которому применяется автофильтр.
+    Возвращает объект, который представляет диапазон, к которому `Range` применяется AutoFilter.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -140,7 +161,7 @@ methods:
   package: excel!
   fullName: getRangeOrNullObject()
   summary: >-
-    Возвращает `Range` объект, который представляет диапазон, к которому `AutoFilter` применяется. Если с `Range` объектом, связанным с объектом, не связан `AutoFilter`<!-- -->, затем этот метод возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Возвращает объект, который представляет диапазон, к которому `Range` применяется AutoFilter. Если нет объекта, связанного с autoFilter, этот метод возвращает объект с его `Range` `isNullObject` свойством, задаваемой `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -164,7 +185,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.AutoFilterLoadOptions): Excel.AutoFilter;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.AutoFilterLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.AutoFilter:class" />
@@ -181,7 +202,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.AutoFilter;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.AutoFilter:class" />
@@ -202,7 +223,7 @@ methods:
               }): Excel.AutoFilter;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -249,7 +270,7 @@ methods:
   uid: excel!Excel.AutoFilter#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.AutoFilter является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.AutoFilterData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.AutoFilter является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.AutoFilterData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -260,9 +281,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0007599fa27b2247c73798735f0d34b67192811a
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: ce09c071d21c03ad8c48d68beb3ef0f5d22f4e58
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991844"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50537990"
