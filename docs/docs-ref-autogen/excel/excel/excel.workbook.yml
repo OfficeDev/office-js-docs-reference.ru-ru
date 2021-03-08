@@ -4,7 +4,7 @@ uid: excel!Excel.Workbook:class
 package: excel!
 fullName: Excel.Workbook
 summary: >-
-  Книга — это объект верхнего уровня, содержащий связанные объекты книг, такие как таблицы, таблицы, диапазоны и т. д. Чтобы узнать больше об объектной модели книги, прочитайте "Работа с книгами" с [помощью API JavaScript для Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
+  Книга — это объект верхнего уровня, содержащий связанные объекты книги, такие как таблицы, таблицы и диапазоны. Дополнительные новости об объектной модели книг читайте в материале Работа с книгами [с помощью API JavaScript Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
 
 
   \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -34,7 +34,7 @@ properties:
   package: excel!
   fullName: autoSave
   summary: >-
-    Указывает, находится ли книга в режиме автосения.
+    Указывает, находится ли книга в режиме AutoSave.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -98,7 +98,7 @@ properties:
   package: excel!
   fullName: comments
   summary: >-
-    Представляет коллекцию примечаний, связанных с книгой.
+    Представляет коллекцию комментариев, связанных с книгой.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -113,7 +113,7 @@ properties:
   uid: excel!Excel.Workbook#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -126,7 +126,7 @@ properties:
   package: excel!
   fullName: customXmlParts
   summary: >-
-    Представляет коллекцию пользовательских XML-частей, содержащихся в этой книге.
+    Представляет коллекцию пользовательских частей XML, содержащихся в этой книге.
 
 
     \[[Набор API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -158,7 +158,7 @@ properties:
   package: excel!
   fullName: functions
   summary: >-
-    Представляет коллекцию функций таблиц, которые можно использовать для вычисления.
+    Представляет коллекцию функций таблицы, которые можно использовать для вычислений.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -174,7 +174,7 @@ properties:
   package: excel!
   fullName: isDirty
   summary: >-
-    Указывает, были ли внесены изменения с момента последнего с сохранения книги. Это свойство можно установить в true, если вы хотите закрыть измененную книгу без сохранения или запроса на сохранение.
+    Указывает, были ли внесены изменения с момента последнего сберегаемого книги. Вы можете настроить это свойство, если вы хотите закрыть измененную книгу без ее сохранения или `true` запроса на ее сохранение.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -193,7 +193,7 @@ properties:
     Возвращает коллекцию связанных типов данных, которые являются частью книги.
 
 
-    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -222,7 +222,7 @@ properties:
   package: excel!
   fullName: names
   summary: >-
-    Представляет коллекцию именованных элементов в книге (именованные диапазоны и константы).
+    Представляет коллекцию именных элементов с именами книг (именуемого диапазона и констант).
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -233,12 +233,28 @@ properties:
     content: 'readonly names: Excel.NamedItemCollection;'
     return:
       type: <xref uid="excel!Excel.NamedItemCollection:class" />
+- name: onActivated
+  uid: excel!Excel.Workbook#onActivated:member
+  package: excel!
+  fullName: onActivated
+  summary: >-
+    Возникает при активации книги. Примечание. Это событие не будет открываться при открываемой книге.
+
+
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorkbookActivatedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorkbookActivatedEventArgs:interface" />&gt;
 - name: onAutoSaveSettingChanged
   uid: excel!Excel.Workbook#onAutoSaveSettingChanged:member
   package: excel!
   fullName: onAutoSaveSettingChanged
   summary: >-
-    Возникает при изменении параметра автосохранения для книги.
+    Возникает при смене параметра AutoSave в книге.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -303,7 +319,7 @@ properties:
   package: excel!
   fullName: previouslySaved
   summary: >-
-    Указывает, была ли книга сохранена локально или в сети.
+    Указывает, была ли книга сохранена локально или в Интернете.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -352,7 +368,7 @@ properties:
   package: excel!
   fullName: readOnly
   summary: >-
-    Значение true, если книга открыта в режиме только для чтения.
+    `true`Возвращается, если книга открыта в режиме только для чтения.
 
 
     \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -368,7 +384,7 @@ properties:
   package: excel!
   fullName: settings
   summary: >-
-    Представляет коллекцию параметров, сопоставленных с книгой.
+    Представляет коллекцию параметров, связанных с книгой.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -384,10 +400,10 @@ properties:
   package: excel!
   fullName: showPivotFieldList
   summary: >-
-    Указывает, отображается ли область списка полей в pivotTable на уровне книги.
+    Указывает, отображается ли область списка полей PivotTable на уровне книги.
 
 
-    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -484,14 +500,14 @@ properties:
     Возвращает коллекцию задач, присутствующих в книге.
 
 
-    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'readonly tasks: Excel.TaskCollection;'
+    content: 'readonly tasks: Excel.DocumentTaskCollection;'
     return:
-      type: <xref uid="excel!Excel.TaskCollection:class" />
+      type: <xref uid="excel!Excel.DocumentTaskCollection:class" />
 - name: timelineStyles
   uid: excel!Excel.Workbook#timelineStyles:member
   package: excel!
@@ -516,7 +532,7 @@ properties:
     Значение true, если в книге используется система дат 1904.
 
 
-    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -529,7 +545,7 @@ properties:
   package: excel!
   fullName: usePrecisionAsDisplayed
   summary: >-
-    Значение true, если вычисления в книге выполняются только с той точностью чисел, с которой они отображаются. Данные навсегда потеряют точность при переключении этого свойства с false на true.
+    Значение true, если вычисления в книге выполняются только с той точностью чисел, с которой они отображаются. Данные будут постоянно терять точность при переходе этого свойства `false` из `true`<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -573,7 +589,7 @@ methods:
     content: 'close(closeBehavior?: Excel.CloseBehavior): void;'
     parameters:
     - id: closeBehavior
-      description: поведение закрытия книги.
+      description: тесное поведение книги.
       type: <xref uid="excel!Excel.CloseBehavior:enum" />
     return:
       type: void
@@ -594,7 +610,7 @@ methods:
     content: 'close(closeBehaviorString?: "Save" | "SkipSave"): void;'
     parameters:
     - id: closeBehaviorString
-      description: поведение закрытия книги.
+      description: тесное поведение книги.
       type: "\"Save\" | \"SkipSave\""
     return:
       type: void
@@ -621,7 +637,7 @@ methods:
   package: excel!
   fullName: getActiveChart()
   summary: >-
-    Получает текущую активную диаграмму в книге. Если активная диаграмма не активна, `ItemNotFound` высылается исключение.
+    Получает текущую активную диаграмму в книге. Если нет активной диаграммы, `ItemNotFound` будет отброшено исключение.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -638,7 +654,7 @@ methods:
   package: excel!
   fullName: getActiveChartOrNullObject()
   summary: >-
-    Получает текущую активную диаграмму в книге. Если активная диаграмма не существует, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Получает текущую активную диаграмму в книге. Если нет активной диаграммы, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -655,7 +671,7 @@ methods:
   package: excel!
   fullName: getActiveSlicer()
   summary: >-
-    Получает текущий активный срез в книге. Если активный срез не существует, `ItemNotFound` высылается исключение.
+    Получает текущий активный срез в книге. Если активного среза нет, `ItemNotFound` выброшено исключение.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -672,7 +688,7 @@ methods:
   package: excel!
   fullName: getActiveSlicerOrNullObject()
   summary: >-
-    Получает текущий активный срез в книге. Если активный срез не существует, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Получает текущий активный срез в книге. Если нет активного среза, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -689,7 +705,7 @@ methods:
   package: excel!
   fullName: getIsActiveCollabSession()
   summary: >-
-    Значение true, если книга редактируется несколькими пользователями (совместное редактирование). Обратите внимание, что между изменением состояния книги и отражением изменений в результате работы метода может возникнуть задержка.
+    `true`Возвращается, если книга редактирована несколькими пользователями (с помощью соавторов). Обратите внимание, что может возникнуть задержка между изменением состояния книги и отражением изменений в результате метода.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -706,7 +722,7 @@ methods:
   package: excel!
   fullName: getSelectedRange()
   summary: >-
-    Получает текущий выбранный диапазон из книги. Если выбрано несколько диапазонов, этот метод вырлает ошибку.
+    Получает выбранный в настоящее время отдельный диапазон из книги. Если выбрано несколько диапазонов, этот метод выкинуть ошибку.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -723,7 +739,7 @@ methods:
   package: excel!
   fullName: getSelectedRanges()
   summary: >-
-    Получает текущий выделенный диапазон (один или несколько) в книге. В отличие от getSelectedRange() этот метод возвращает объект RangeAreas, представляющий все выделенные диапазоны.
+    Получает текущий выделенный диапазон (один или несколько) в книге. В отличие от `getSelectedRange()`<!-- -->, этот метод возвращает `RangeAreas` объект, который представляет все выбранные диапазоны.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -735,6 +751,33 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-areas.yaml\nawait Excel.run(async (context) => {\n\n    const selectedRanges = context.workbook.getSelectedRanges();\n    selectedRanges.format.fill.color = \"lightblue\";\n\n    await context.sync();\n})\n```"
+- name: insertWorksheetsFromBase64(base64File, options)
+  uid: excel!Excel.Workbook#insertWorksheetsFromBase64:member(1)
+  package: excel!
+  fullName: insertWorksheetsFromBase64(base64File, options)
+  summary: >-
+    Вставляет указанные таблицы из источника книги в текущую книгу.
+
+
+    *Примечание**: Этот API в настоящее время поддерживается только для Office на Windows, Mac и Online.
+
+
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions): OfficeExtension.ClientResult<string[]>;'
+    parameters:
+    - id: base64File
+      description: Обязательный атрибут. Строка с кодом base64, представляющая исходный файл книги.
+      type: string
+    - id: options
+      description: Необязательное. Параметры, которые определяют, какие таблицы вставить и где в книге будут вставлены новые таблицы. По умолчанию все таблицы из книги источника вставляются в конце текущей книги.
+      type: <xref uid="excel!Excel.InsertWorksheetOptions:interface" />
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
+      description: Массив ids, соответствующий каждому недавно вставленной таблице.
 - name: load(options)
   uid: excel!Excel.Workbook#load:member(1)
   package: excel!
@@ -747,7 +790,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.WorkbookLoadOptions): Excel.Workbook;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.WorkbookLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.Workbook:class" />
@@ -764,7 +807,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.Workbook;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Workbook:class" />
@@ -785,7 +828,7 @@ methods:
               }): Excel.Workbook;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -810,7 +853,7 @@ methods:
     content: 'save(saveBehavior?: Excel.SaveBehavior): void;'
     parameters:
     - id: saveBehavior
-      description: поведение при сохранения книги;
+      description: Сохранение поведения в книге.
       type: <xref uid="excel!Excel.SaveBehavior:enum" />
     return:
       type: void
@@ -831,7 +874,7 @@ methods:
     content: 'save(saveBehaviorString?: "Save" | "Prompt"): void;'
     parameters:
     - id: saveBehaviorString
-      description: поведение при экономии книги;
+      description: Сохранение поведения в книге.
       type: "\"Save\" | \"Prompt\""
     return:
       type: void
@@ -852,10 +895,10 @@ methods:
     content: 'set(properties: Interfaces.WorkbookUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="excel!Excel.Interfaces.WorkbookUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -864,7 +907,7 @@ methods:
   uid: excel!Excel.Workbook#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -881,7 +924,7 @@ methods:
   uid: excel!Excel.Workbook#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Workbook является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.WorkbookData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.'
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.Workbook — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorkbookData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -892,9 +935,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 290ffa4398d248dd68ea5b12e851158b09235a76
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: f1bff832afa7ed5cafd48a50c93539767475c5d3
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991984"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50540531"

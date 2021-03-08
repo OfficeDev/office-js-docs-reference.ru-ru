@@ -4,7 +4,7 @@ uid: excel!Excel.PivotTableScopedCollection:class
 package: excel!
 fullName: Excel.PivotTableScopedCollection
 summary: >-
-  Представляет коллекцию скайблей с за областью действия. СvotTables are sorted based on the location of the PivotTable's top-left corner. Они упорядочены сверху вниз, а затем слева направо.
+  Представляет собой объемную коллекцию pivotTables. PivotTables сортируются в зависимости от расположения верхнего левого угла pivotTable. Они заказать сверху вниз, а затем слева направо.
 
 
   \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.PivotTableScopedCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: getCount()
   summary: >-
-    Получает количество список в коллекции.
+    Получает число pivotTables в коллекции.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -60,7 +60,7 @@ methods:
   package: excel!
   fullName: getFirst()
   summary: >-
-    Получает первую pivotTable в коллекции. СvotTables in the collection are sorted top to bottom and left to right, such that top-left table is the first PivotTable in the collection.
+    Получает первый pivotTable в коллекции. PivotTables в коллекции сортироваться сверху вниз и слева направо, так что верхняя левая таблица является первым pivotTable в коллекции.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -69,6 +69,23 @@ methods:
   isDeprecated: false
   syntax:
     content: 'getFirst(): Excel.PivotTable;'
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: getFirstOrNullObject()
+  uid: excel!Excel.PivotTableScopedCollection#getFirstOrNullObject:member(1)
+  package: excel!
+  fullName: getFirstOrNullObject()
+  summary: >-
+    Получает первый pivotTable в коллекции. PivotTables в коллекции сортироваться сверху вниз и слева направо, так что верхняя левая таблица является первым pivotTable в коллекции. Если коллекция пуста, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getFirstOrNullObject(): Excel.PivotTable;'
     return:
       type: <xref uid="excel!Excel.PivotTable:class" />
       description: ''
@@ -98,7 +115,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(name)
   summary: >-
-    Получает сводную таблицу по имени. Если pivotTable не существует, эта функция возвращает объект со своим `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Получает сводную таблицу по имени. Если pivotTable не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -126,7 +143,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.PivotTableScopedCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotTableScopedCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.PivotTableScopedCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.PivotTableScopedCollection:class" />
@@ -143,7 +160,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.PivotTableScopedCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.PivotTableScopedCollection:class" />
@@ -160,7 +177,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.PivotTableScopedCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.PivotTableScopedCollection:class" />
@@ -169,7 +186,7 @@ methods:
   uid: excel!Excel.PivotTableScopedCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.PivotTableScopedCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.PivotTableScopedCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.PivotTableScopedCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.PivotTableScopedCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -180,9 +197,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 02daceb130e81067e7d456284a547673f47f99f8
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: 3bcc714d505d53418258e5f480d1a3e46fadfc7f
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991543"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50541847"

@@ -4,7 +4,7 @@ uid: excel!Excel.SettingCollection:class
 package: excel!
 fullName: Excel.SettingCollection
 summary: >-
-  Представляет коллекцию объектов параметров пары "ключ-значение", которые являются частью книги. Область ограничена для каждого файла и комбинации надстройки (области задач или содержимого).
+  Представляет коллекцию параметров пар с ключевым значением, которые являются частью книги. Область ограничена комбинацией файла и надстройки (области задач или контента).
 
 
   \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.SettingCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -42,7 +42,7 @@ properties:
   package: excel!
   fullName: onSettingsChanged
   summary: >-
-    Возникает при изменении параметров в документе.
+    Возникает при смене параметров документа.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -74,7 +74,7 @@ methods:
       description: Ключ нового параметра.
       type: string
     - id: value
-      description: Значение нового параметра.
+      description: Значение для нового параметра.
       type: string | number | boolean | Date | Array&lt;any&gt; | any
     return:
       type: <xref uid="excel!Excel.Setting:class" />
@@ -101,7 +101,7 @@ methods:
   package: excel!
   fullName: getItem(key)
   summary: >-
-    Получает запись Setting по ключу.
+    Получает запись параметра с помощью ключа.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -122,7 +122,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(key)
   summary: >-
-    Получает запись Setting по ключу. Если параметр не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Получает запись параметра с помощью ключа. Если параметра не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -150,7 +150,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.SettingCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.SettingCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.SettingCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.SettingCollection:class" />
@@ -167,7 +167,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.SettingCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.SettingCollection:class" />
@@ -184,7 +184,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.SettingCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.SettingCollection:class" />
@@ -193,7 +193,7 @@ methods:
   uid: excel!Excel.SettingCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.SettingCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.SettingCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.SettingCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.SettingCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -204,9 +204,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: f08410e4f7c2a2b71bdb0c230a28b92c67af4bac
-  ms.sourcegitcommit: abafd55d959d3f9a6a2bd96e774c704fd3dcd961
+  ms.openlocfilehash: 059be470a00eb100bfaa52d7522a8c48c5cede61
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 02/05/2021
-  ms.locfileid: "50115072"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50541581"

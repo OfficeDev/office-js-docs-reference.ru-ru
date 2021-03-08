@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.WorksheetCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -124,7 +124,7 @@ properties:
   package: excel!
   fullName: onDeactivated
   summary: >-
-    Возникает, когда любой рабочий день в книге деактивирован.
+    Происходит при отключке любой таблицы в книге.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -160,7 +160,7 @@ properties:
     Возникает при применении любого фильтра листа в книге.
 
 
-    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -173,7 +173,7 @@ properties:
   package: excel!
   fullName: onFormatChanged
   summary: >-
-    Возникает при изменении формата любого листа в книге.
+    Возникает при смене формата любого таблицы в книге.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -189,10 +189,10 @@ properties:
   package: excel!
   fullName: onFormulaChanged
   summary: >-
-    Возникает, когда одна или несколько формул меняются на любом из таблиц этой коллекции. Это событие происходит при изменениях самой формулы, а не значения данных, полученных в результате вычисления формулы.
+    Возникает, когда одна или несколько формул меняются в любом таблице этой коллекции. Это событие происходит при изменениях самой формулы, а не значения данных, полученных в результате вычисления формулы.
 
 
-    \[[Набор API: Бета-версия ExcelApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -205,7 +205,7 @@ properties:
   package: excel!
   fullName: onRowHiddenChanged
   summary: >-
-    Возникает, когда скрытое состояние одной или более строк изменилось на определенном сайте.
+    Происходит, когда скрытое состояние одной или более строк изменилось на определенной таблице.
 
 
     \[[Набор API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -253,7 +253,7 @@ properties:
   package: excel!
   fullName: onSingleClicked
   summary: >-
-    Происходит при нажатии левой кнопкой мыши или нажатии в коллекции таблиц. Это событие не будет ищите при нажатии в следующих случаях: - Пользователь перетаскивать мышь для выбора нескольких. - Пользователь выбирает ячейку в режиме, когда аргументы ячейки выбраны для ссылок на формулы.
+    Происходит, когда в коллекции таблицы происходит операция нажатием левой кнопкой мыши или нажатием на нее. Это событие не будет уволено при нажатии в следующих случаях: — пользователь перетаскивать мышь для нескольких выборов. - Пользователь выбирает ячейку в режиме, когда для ссылок на формулу выбираются аргументы ячейки.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -270,7 +270,7 @@ methods:
   package: excel!
   fullName: add(name)
   summary: >-
-    Добавляет новый лист в книгу. Лист будет добавлен в конец набора имеющихся листов. Если вы хотите активировать только что добавленный лист, вызовите команду .activate().
+    Добавляет новый лист в книгу. Лист будет добавлен после существующих листов. Если вы хотите активировать только что добавленный таблицу, `.activate()` позвоните по ней.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -281,7 +281,7 @@ methods:
     content: 'add(name?: string): Excel.Worksheet;'
     parameters:
     - id: name
-      description: Необязательный параметр. Имя добавляемого листа. Если параметр используется, имя должно быть уникальным. В противном случае Excel определяет имя нового листа.
+      description: Необязательный параметр. Имя добавляемого листа. Если указано, имя должно быть уникальным. В противном случае Excel определяет имя нового листа.
       type: string
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -294,10 +294,10 @@ methods:
     Вставляет указанные листы книги в текущую книгу.
 
 
-    *Примечание**. В настоящее время этот API поддерживается только для Office для Windows и Mac.
+    *Примечание**: Этот API в настоящее время поддерживается только для Office на Windows и Mac. И она была обесценив, пожалуйста, используйте `Workbook.insertWorksheetFromBase64` вместо этого.
 
 
-    \[[Набор API: ExcelApiAddFromBase64String 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -305,20 +305,20 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Обязательный. Строка в коде base64, представляющая исходный файл книги.
+      description: Обязательный атрибут. Строка с кодом base64, представляющая исходный файл книги.
       type: string
     - id: sheetNamesToInsert
-      description: Необязательный параметр. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
+      description: Необязательное. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
       type: string[]
     - id: positionType
-      description: Необязательный параметр. В текущей книге будут вставлены новые таблицы. Подробные сведения см. в excel.WorksheetPositionType. Значение по умолчанию — Start.
+      description: Необязательное. Где в текущей книге будут вставлены новые таблицы. Подробные `Excel.WorksheetPositionType` сведения см. в материале. По умолчанию это "Начните".
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
-      description: Необязательный параметр. Таблица в текущей книге, на которую ссылается параметр positionType. Значение по умолчанию — null, и в зависимости от positionType вставляется таблица в начале или конце текущей книги.
+      description: Необязательное. Таблица в текущей книге, которая ссылается на `positionType` параметр. По умолчанию `null` и на основе `positionType`<!-- -->он будет вставлять таблицы в начале или конце текущей книги.
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
-      description: "Массив id, соответствующий каждому вновь вставленного таблицы.\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/workbook-insert-external-worksheets.yaml\nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n        // strip off the metadata before the base64-encoded string\n        const startIndex = reader.result.toString().indexOf(\"base64,\");\n        const workbookContents = reader.result.toString().substr(startIndex + 7);\n\n        const sheets = context.workbook.worksheets;\n        sheets.addFromBase64(\n            workbookContents,\n            null, // get all the worksheets \n            Excel.WorksheetPositionType.end // insert them after the current workbook's worksheets\n            );\n        return context.sync();\n    });\n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
+      description: "Массив ID, соответствующий каждому недавно вставленному таблицу.\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/workbook-insert-external-worksheets.yaml\nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    Excel.run((context) => {\n        // strip off the metadata before the base64-encoded string\n        const startIndex = reader.result.toString().indexOf(\"base64,\");\n        const workbookContents = reader.result.toString().substr(startIndex + 7);\n\n        const sheets = context.workbook.worksheets;\n        sheets.addFromBase64(\n            workbookContents,\n            null, // get all the worksheets \n            Excel.WorksheetPositionType.end // insert them after the current workbook's worksheets\n            );\n        return context.sync();\n    });\n};\n\n// read in the file as a data URL so we can parse the base64-encoded string\nreader.readAsDataURL(myFile.files[0]);\n```"
 - name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
   uid: excel!Excel.WorksheetCollection#addFromBase64:member(2)
   package: excel!
@@ -327,10 +327,10 @@ methods:
     Вставляет указанные листы книги в текущую книгу.
 
 
-    *Примечание**. В настоящее время этот API поддерживается только для Office для Windows и Mac.
+    *Примечание**: Этот API в настоящее время поддерживается только для Office на Windows и Mac. И она была обесценив, пожалуйста, используйте `Workbook.insertWorksheetFromBase64` вместо этого.
 
 
-    \[[Набор API: ExcelApiAddFromBase64String 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -338,20 +338,20 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Обязательный. Строка в коде base64, представляющая исходный файл книги.
+      description: Обязательный атрибут. Строка с кодом base64, представляющая исходный файл книги.
       type: string
     - id: sheetNamesToInsert
-      description: Необязательный параметр. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
+      description: Необязательное. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
       type: string[]
     - id: positionTypeString
-      description: Необязательный параметр. В текущей книге будут вставлены новые таблицы. Подробные сведения см. в excel.WorksheetPositionType. Значение по умолчанию — Start.
+      description: Необязательное. Где в текущей книге будут вставлены новые таблицы. Подробные `Excel.WorksheetPositionType` сведения см. в материале. По умолчанию это "Начните".
       type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
-      description: Необязательный параметр. Таблица в текущей книге, на которую ссылается параметр positionType. Значение по умолчанию — null, и в зависимости от positionType вставляется таблица в начале или конце текущей книги.
+      description: Необязательное. Таблица в текущей книге, которая ссылается на `positionType` параметр. По умолчанию `null` и на основе `positionType`<!-- -->он будет вставлять таблицы в начале или конце текущей книги.
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
-      description: Массив id, соответствующий каждому вновь вставленного таблицы.
+      description: Массив ID, соответствующий каждому недавно вставленному таблицу.
 - name: getActiveWorksheet()
   uid: excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)
   package: excel!
@@ -385,7 +385,7 @@ methods:
     content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: visibleOnly
-      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательное. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -406,7 +406,7 @@ methods:
     content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательное. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -427,7 +427,7 @@ methods:
     content: 'getItem(key: string): Excel.Worksheet;'
     parameters:
     - id: key
-      description: Имя или ИД листа.
+      description: Имя или ID таблицы.
       type: string
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -437,7 +437,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(key)
   summary: >-
-    Получает объект листа по его имени или ИД. Если таблица не существует, эта функция возвращает объект с `isNullObject` его свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Получает объект листа по его имени или ИД. Если таблицы не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -448,7 +448,7 @@ methods:
     content: 'getItemOrNullObject(key: string): Excel.Worksheet;'
     parameters:
     - id: key
-      description: Имя или ИД листа.
+      description: Имя или ID таблицы.
       type: string
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -469,7 +469,7 @@ methods:
     content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный параметр. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательное. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -486,7 +486,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.WorksheetCollection:class" />
@@ -503,7 +503,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.WorksheetCollection:class" />
@@ -520,7 +520,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.WorksheetCollection:class" />
@@ -529,7 +529,7 @@ methods:
   uid: excel!Excel.WorksheetCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.WorksheetCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.WorksheetCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.WorksheetCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorksheetCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -540,9 +540,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 217115c6457c6b3150849309c2eff8be4d1cfe79
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: 4faa340672a3607f9720f352711f6bff729b1d5d
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991648"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50540405"

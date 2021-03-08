@@ -4,7 +4,7 @@ uid: excel!Excel.PivotItemCollection:class
 package: excel!
 fullName: Excel.PivotItemCollection
 summary: >-
-  Представляет коллекцию всех pivotItems, связанных с родительским pivotField.
+  Представляет коллекцию всех pivotItems, связанных с родительским PivotField.
 
 
   \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.PivotItemCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: getCount()
   summary: >-
-    Получает количество pivotItems в коллекции.
+    Получает число pivotItems в коллекции.
 
 
     \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -60,7 +60,7 @@ methods:
   package: excel!
   fullName: getItem(name)
   summary: >-
-    Получает pivotItem по имени или ид.
+    Получает PivotItem по имени или ID.
 
 
     \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -71,7 +71,7 @@ methods:
     content: 'getItem(name: string): Excel.PivotItem;'
     parameters:
     - id: name
-      description: Имя извлекаемой pivotItem.
+      description: Имя извлекаемого PivotItem.
       type: string
     return:
       type: <xref uid="excel!Excel.PivotItem:class" />
@@ -81,7 +81,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(name)
   summary: >-
-    Получает pivotItem по имени. Если pivotItem не существует, эта функция возвращает объект со своим `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Получает PivotItem по имени. Если pivotItem не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -92,7 +92,7 @@ methods:
     content: 'getItemOrNullObject(name: string): Excel.PivotItem;'
     parameters:
     - id: name
-      description: Имя извлекаемой pivotItem.
+      description: Имя извлекаемого PivotItem.
       type: string
     return:
       type: <xref uid="excel!Excel.PivotItem:class" />
@@ -109,7 +109,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.PivotItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotItemCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.PivotItemCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
@@ -126,7 +126,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.PivotItemCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
@@ -143,7 +143,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.PivotItemCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
@@ -152,7 +152,7 @@ methods:
   uid: excel!Excel.PivotItemCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.PivotItemCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.PivotItemCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.PivotItemCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.PivotItemCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -163,9 +163,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 7c82b138fbea6c3020182deb64dcf8a846fbfb6e
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: b1e6067f46484cbd9289c357c872fcbdf955d597
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991550"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50541882"
