@@ -17,7 +17,7 @@ properties:
   uid: powerpoint!PowerPoint.SlideCollection#context:member
   package: powerpoint!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,10 +43,10 @@ methods:
   package: powerpoint!
   fullName: add(options)
   summary: >-
-    Добавляет новый слайд в конец коллекции.
+    Добавляет новый слайд в конце коллекции.
 
 
-    \[[Набор API: Бета-версия PowerPointApi (ТОЛЬКО ПРЕДВАРИТЕЛЬНАЯ ВЕРСИЯ)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+    \[[API set: PowerPointApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -54,11 +54,11 @@ methods:
     content: 'add(options?: PowerPoint.AddSlideOptions): void;'
     parameters:
     - id: options
-      description: Параметры, определяя тему нового слайда.
+      description: Параметры, которые определяют тему нового слайда.
       type: <xref uid="powerpoint!PowerPoint.AddSlideOptions:interface" />
     return:
       type: void
-      description: ''
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/add-slides.yaml\nconst chosenMaster = $(\"#master-id\").val() as string;\nconst chosenLayout = $(\"#layout-id\").val() as string;\n\nawait PowerPoint.run(async function(context) {\n  context.presentation.slides.add({\n    slideMasterId: chosenMaster,\n    layoutId: chosenLayout\n  });\n  await context.sync();\n});\n```"
 - name: getCount()
   uid: powerpoint!PowerPoint.SlideCollection#getCount:member(1)
   package: powerpoint!
@@ -81,7 +81,7 @@ methods:
   package: powerpoint!
   fullName: getItem(key)
   summary: >-
-    Получает слайд с использованием уникального ИД.
+    Получает слайд с помощью уникального ID.
 
 
     \[[Набор API: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
@@ -92,17 +92,17 @@ methods:
     content: 'getItem(key: string): PowerPoint.Slide;'
     parameters:
     - id: key
-      description: ИД слайда.
+      description: ID слайда.
       type: string
     return:
       type: <xref uid="powerpoint!PowerPoint.Slide:class" />
-      description: Слайд с уникальным ИД. Если такой слайд не существует, высылается ошибка.
+      description: Слайд с уникальным ИД. Если такого слайда не существует, выброшена ошибка.
 - name: getItemAt(index)
   uid: powerpoint!PowerPoint.SlideCollection#getItemAt:member(1)
   package: powerpoint!
   fullName: getItemAt(index)
   summary: >-
-    Получает слайд с помощью индекса на основе нуля в коллекции. Слайды хранятся в том же порядке, в который они показаны в презентации.
+    Получает слайд с использованием нулевого индекса в коллекции. Слайды хранятся в том же порядке, что и в презентации.
 
 
     \[[Набор API: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
@@ -117,13 +117,13 @@ methods:
       type: number
     return:
       type: <xref uid="powerpoint!PowerPoint.Slide:class" />
-      description: Слайд по заданным индексам. Если индекс находится вне диапазона, будет выброшена ошибка.
+      description: Слайд в заданный индекс. Ошибка выброшена, если индекс находится вне диапазона.
 - name: getItemOrNullObject(id)
   uid: powerpoint!PowerPoint.SlideCollection#getItemOrNullObject:member(1)
   package: powerpoint!
   fullName: getItemOrNullObject(id)
   summary: >-
-    Получает слайд с использованием уникального ИД. Если такой слайд не существует, возвращается объект со свойством `isNullObject` true. Дополнительные сведения см. в сведениях о методах и свойствах [*OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Получает слайд с помощью уникального ID. Если такого слайда не существует, возвращается объект с свойством `isNullObject` true. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
@@ -134,7 +134,7 @@ methods:
     content: 'getItemOrNullObject(id: string): PowerPoint.Slide;'
     parameters:
     - id: id
-      description: ИД слайда.
+      description: ID слайда.
       type: string
     return:
       type: <xref uid="powerpoint!PowerPoint.Slide:class" />
@@ -151,7 +151,7 @@ methods:
     content: 'load(options?: PowerPoint.Interfaces.SlideCollectionLoadOptions & PowerPoint.Interfaces.CollectionLoadOptions): PowerPoint.SlideCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="powerpoint!PowerPoint.Interfaces.SlideCollectionLoadOptions:interface" /> & <xref uid="powerpoint!PowerPoint.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="powerpoint!PowerPoint.SlideCollection:class" />
@@ -168,7 +168,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): PowerPoint.SlideCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="powerpoint!PowerPoint.SlideCollection:class" />
@@ -185,7 +185,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): PowerPoint.SlideCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="powerpoint!PowerPoint.SlideCollection:class" />
@@ -194,7 +194,7 @@ methods:
   uid: powerpoint!PowerPoint.SlideCollection#toJSON:member(1)
   package: powerpoint!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `PowerPoint.SlideCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `PowerPoint.Interfaces.SlideCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `PowerPoint.SlideCollection` `toJSON` объект JavaScript (введите как `PowerPoint.Interfaces.SlideCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -205,9 +205,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6ffa34673d190204091c6128f8b8cfd40ea6fdd1
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: 4577a34c2b2858fdd385b86722b7bf3886ad9c3c
+  ms.sourcegitcommit: 7a78c85d4a5378180c50442becb98dd816065c5c
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49992306"
+  ms.lasthandoff: 03/10/2021
+  ms.locfileid: "50607601"
