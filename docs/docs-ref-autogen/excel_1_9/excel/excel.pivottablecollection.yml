@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.PivotTableCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: add(name, source, destination)
   summary: >-
-    Добавьте совуюttable на основе указанных исходных данных и вставьте ее в верхней левой ячейке конечного диапазона.
+    Добавьте pivotTable на основе указанных исходных данных и вставьте его в верхней левой ячейке диапазона назначения.
 
 
     \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -54,18 +54,18 @@ methods:
     content: 'add(name: string, source: Range | string | Table, destination: Range | string): Excel.PivotTable;'
     parameters:
     - id: name
-      description: Имя новой pivotTable.
+      description: Имя нового pivotTable.
       type: string
     - id: source
-      description: Исходные данные для новой таблицы могут быть диапазоном (или адресом строки, включая имя таблицы) или таблицей.
+      description: Исходными данными для нового pivotTable могут быть диапазон (или адрес строки, включая имя таблицы) или таблица.
       type: <xref uid="excel!Excel.Range:class" /> | string | <xref uid="excel!Excel.Table:class" />
     - id: destination
-      description: Ячейка в левом верхнем углу конечного диапазона отчета pivotTable (диапазон на странице, где будет размещаться итоговой отчет).
+      description: Ячейка в верхнем левом углу диапазона назначения отчетов PivotTable (диапазон на таблице, где будет размещен итоговой отчет).
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.PivotTable:class" />
       description: >-
-        Возвращает только что вставленную списоную.
+        Возвращает недавно вставленную pivotTable.
 
 
         #### <a name="examples"></a>Примеры
@@ -155,7 +155,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.PivotTableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotTableCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.PivotTableCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.PivotTableCollection:class" />
@@ -172,7 +172,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.PivotTableCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.PivotTableCollection:class" />
@@ -189,7 +189,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.PivotTableCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.PivotTableCollection:class" />
@@ -215,7 +215,7 @@ methods:
   uid: excel!Excel.PivotTableCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.PivotTableCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.PivotTableCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.PivotTableCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.PivotTableCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -226,9 +226,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: f8dcaa29dd3281dc5400fec55bcf04c0f34bf8e5
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: c56cb5ec2fa0325601f66617ec2a701005a9c517
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49861359"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51227003"
