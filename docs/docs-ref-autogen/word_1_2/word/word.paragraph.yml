@@ -35,7 +35,7 @@ properties:
   package: word!
   fullName: contentControls
   summary: >-
-    Получает коллекцию объектов управления содержимым в абзаце. Только для чтения.
+    Получает коллекцию объектов управления контентом в абзаце. Только для чтения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -50,7 +50,7 @@ properties:
   uid: word!Word.Paragraph#context:member
   package: word!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -145,7 +145,7 @@ properties:
   package: word!
   fullName: lineUnitAfter
   summary: >-
-    Получает или задает интервал между строками сетки после абзаца.
+    Получает или задает количество интервалов в строках сетки после абзаца.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -193,7 +193,7 @@ properties:
   package: word!
   fullName: parentContentControl
   summary: >-
-    Возвращает элемент управления содержимым, содержащий абзац. Если родительского управления содержимым не существует, высылается ошибка. Только для чтения.
+    Возвращает элемент управления содержимым, содержащий абзац. Если нет родительского управления контентом, ошибка. Только для чтения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -258,7 +258,7 @@ properties:
   package: word!
   fullName: style
   summary: >-
-    Получает или задает имя стиля абзаца. Используйте это свойство для пользовательских стилей и локализованных имен стилей. Чтобы использовать встроенные стили, поддерживающие несколько языковых стандартов, применяйте свойство styleBuiltIn.
+    Получает или задает имя стиля для абзаца. Используйте это свойство для пользовательских стилей и локализованных имен стилей. Чтобы использовать встроенные стили, поддерживающие несколько языковых стандартов, применяйте свойство styleBuiltIn.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -326,7 +326,7 @@ methods:
   package: word!
   fullName: getHtml()
   summary: >-
-    Получает HTML-представление объекта абзаца. При отрисовке на веб-странице или в htmL-представлении форматирование будет близко, но не точно, совпадает с форматированием документа. Этот метод не возвращает точно такой же HTML-код для одного и того же документа на различных платформах (Windows, Mac, Word в Интернете и т. д.). Если вам нужна точную точности или согласованность на разных платформах, используйте и преобразуем `Paragraph.getOoxml()` возвращенный XML-код в HTML.
+    Получает ПРЕДСТАВЛЕНИЕ HTML объекта абзаца. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, используйте и преобразуем возвращенный `Paragraph.getOoxml()` XML в HTML.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -436,7 +436,7 @@ methods:
     content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: base64File
-      description: Обязательный. Содержимое DOCX-файла в кодированном коде base64.
+      description: Обязательное. Кодированное содержимое файла .docx base64.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -460,7 +460,7 @@ methods:
     content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: base64File
-      description: Обязательный. Содержимое DOCX-файла в кодированном коде base64.
+      description: Обязательное. Кодированное содержимое файла .docx base64.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -532,7 +532,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательный. Изображение в коде base64, которое необходимо вставить.
+      description: Обязательное. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -556,7 +556,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательный. Изображение в коде base64, которое необходимо вставить.
+      description: Обязательное. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -580,7 +580,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательный. OOXML, который необходимо вставить в абзац.
+      description: Обязательное. OOXML, который будет вставлен в абзаце.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -604,7 +604,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательный. OOXML, который необходимо вставить в абзац.
+      description: Обязательное. OOXML, который будет вставлен в абзаце.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -720,7 +720,7 @@ methods:
     content: 'load(options?: Word.Interfaces.ParagraphLoadOptions): Word.Paragraph;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="word!Word.Interfaces.ParagraphLoadOptions:interface" />
     return:
       type: <xref uid="word!Word.Paragraph:class" />
@@ -737,7 +737,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Word.Paragraph;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="word!Word.Paragraph:class" />
@@ -758,7 +758,7 @@ methods:
               }): Word.Paragraph;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -772,7 +772,7 @@ methods:
   package: word!
   fullName: search(searchText, searchOptions)
   summary: >-
-    Выполняет поиск с указанным Объектом SearchOptions в области объекта абзаца. Результат поиска — это коллекция объектов диапазона.
+    Выполняет поиск с указанными SearchOptions в области объекта абзаца. Результат поиска — это коллекция объектов диапазона.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -908,10 +908,10 @@ methods:
     content: 'set(properties: Interfaces.ParagraphUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="word!Word.Interfaces.ParagraphUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -920,7 +920,7 @@ methods:
   uid: word!Word.Paragraph#set:member(2)
   package: word!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -937,7 +937,7 @@ methods:
   uid: word!Word.Paragraph#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Word.Paragraph является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Word.Interfaces.ParagraphData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.Paragraph является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Word.Interfaces.ParagraphData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -950,7 +950,7 @@ methods:
   uid: word!Word.Paragraph#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во всех вызовах и вне последовательного выполнения пакета ".run" и получаете ошибку InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -963,7 +963,7 @@ methods:
   uid: word!Word.Paragraph#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -974,9 +974,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 148283d4712bced65021abdb9273c093824aa8db
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: fb7c5789afca266abb0723fca352789f8a32e3c9
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49856634"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51223370"

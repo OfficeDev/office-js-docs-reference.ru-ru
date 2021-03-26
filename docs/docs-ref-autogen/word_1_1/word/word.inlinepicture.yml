@@ -18,7 +18,7 @@ properties:
   package: word!
   fullName: altTextDescription
   summary: >-
-    Получает или задает строку, представляюную альтернативный текст, связанный со строкой изображения.
+    Получает или задает строку, представляюную альтернативный текст, связанный с изображением в строке.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -49,7 +49,7 @@ properties:
   uid: word!Word.InlinePicture#context:member
   package: word!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -78,7 +78,7 @@ properties:
   package: word!
   fullName: hyperlink
   summary: >-
-    Получает или задает гиперссылки на изображении. Используйте \# '', чтобы отделить часть адреса от необязательной части расположения.
+    Получает или задает гиперссылку на изображении. Используйте \# ', чтобы отделить адресную часть от необязательной части расположения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -110,7 +110,7 @@ properties:
   package: word!
   fullName: parentContentControl
   summary: >-
-    Возвращает элемент управления содержимым, который содержит встроенный рисунок. Если родительского управления содержимым не существует, высылается ошибка. Только для чтения.
+    Возвращает элемент управления содержимым, который содержит встроенный рисунок. Если нет родительского управления контентом, ошибка. Только для чтения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -184,7 +184,7 @@ methods:
     content: 'load(options?: Word.Interfaces.InlinePictureLoadOptions): Word.InlinePicture;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="word!Word.Interfaces.InlinePictureLoadOptions:interface" />
     return:
       type: <xref uid="word!Word.InlinePicture:class" />
@@ -201,7 +201,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Word.InlinePicture;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="word!Word.InlinePicture:class" />
@@ -222,7 +222,7 @@ methods:
               }): Word.InlinePicture;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -247,10 +247,10 @@ methods:
     content: 'set(properties: Interfaces.InlinePictureUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="word!Word.Interfaces.InlinePictureUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -259,7 +259,7 @@ methods:
   uid: word!Word.InlinePicture#set:member(2)
   package: word!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -276,7 +276,7 @@ methods:
   uid: word!Word.InlinePicture#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Word.InlinePicture является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Word.Interfaces.InlinePictureData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.'
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.InlinePicture является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Word.Interfaces.InlinePictureData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -289,7 +289,7 @@ methods:
   uid: word!Word.InlinePicture#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если этот объект используется во всех вызовах и вне последовательного выполнения пакета ".run" и при установке свойства или вызове метода для объекта вы получаете ошибку InvalidObjectPath, то при первом создании объекта необходимо добавить объект в отслеживаемую коллекцию `.sync` объектов.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -302,7 +302,7 @@ methods:
   uid: word!Word.InlinePicture#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -313,9 +313,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0a69e9053a68a378551b9fb8a502f38ae8b426d6
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 270dc77dd5b623fb1974bd6251a15e4bbe7ac892
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49854513"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51224028"
