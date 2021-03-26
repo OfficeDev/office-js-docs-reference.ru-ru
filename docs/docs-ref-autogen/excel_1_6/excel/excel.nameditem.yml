@@ -4,7 +4,7 @@ uid: excel!Excel.NamedItem:class
 package: excel!
 fullName: Excel.NamedItem
 summary: >-
-  Представляет определенное имя для диапазона ячеек или значения. Имена могут быть примитивными именуемами объектами (как по видно в приведенном ниже типе), объектом диапазона или ссылкой на диапазон. Этот объект может использоваться для получения объекта диапазона, связанного с именами.
+  Представляет определенное имя для диапазона ячеек или значения. Имена могут быть примитивными объектами с именем (как по видно в приведенном ниже типу), объектом диапазона или ссылкой на диапазон. Этот объект может использоваться для получения объекта диапазона, связанного с именами.
 
 
   \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -33,7 +33,7 @@ properties:
   uid: excel!Excel.NamedItem#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -62,7 +62,7 @@ properties:
   package: excel!
   fullName: scope
   summary: >-
-    Указывает, является ли имя областью действия книги или определенного таблицы. Возможные значения: Worksheet, Workbook.
+    Указывает, задано ли имя в книге или в определенной таблице. Возможные значения: таблица, книга.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -78,10 +78,10 @@ properties:
   package: excel!
   fullName: type
   summary: >-
-    Указывает тип значения, возвращаемого формулой имени. Подробные сведения см. в excel.NamedItemType.
+    Указывает тип значения, возвращаемого по формуле имени. Подробные сведения см. в excel.NamedItemType.
 
 
-    \[[Набор API: ExcelApi 1.1 для String,Integer,Double,Boolean,Range,Error; 1.7 для массива](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.1 для String, Integer, Double, Boolean, Range,Error; 1.7 для Array](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -110,7 +110,7 @@ properties:
   package: excel!
   fullName: visible
   summary: >-
-    Указывает, отображается ли объект.
+    Указывает, виден ли объект.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -126,7 +126,7 @@ properties:
   package: excel!
   fullName: worksheet
   summary: >-
-    Возвращает лист, к которому относится именованный элемент. Если областью действия элемента является книга, выдает сообщение об ошибке.
+    Возвращает лист, к которому относится именованный элемент. Если элемент имеет область действия в книге, то при этом будет допущена ошибка.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -217,7 +217,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.NamedItemLoadOptions): Excel.NamedItem;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.NamedItemLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.NamedItem:class" />
@@ -234,7 +234,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.NamedItem;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.NamedItem:class" />
@@ -255,7 +255,7 @@ methods:
               }): Excel.NamedItem;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -280,10 +280,10 @@ methods:
     content: 'set(properties: Interfaces.NamedItemUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="excel!Excel.Interfaces.NamedItemUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -292,7 +292,7 @@ methods:
   uid: excel!Excel.NamedItem#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -309,7 +309,7 @@ methods:
   uid: excel!Excel.NamedItem#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.NamedItem является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.NamedItemData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.NamedItem является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.NamedItemData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -320,9 +320,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: cd34077dbfb56b44dc34c1f601931c8ba0d9db31
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 1afc324f6f017edc0e711da1ae23fd2c813dbe7e
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49860519"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51228956"
