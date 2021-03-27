@@ -13,7 +13,7 @@ properties:
   uid: excel!Excel.WorksheetFreezePanes#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -27,7 +27,7 @@ methods:
   package: excel!
   fullName: freezeAt(frozenRange)
   summary: >-
-    Задает закрепленные ячейки в представлении активного листа. Предоставленный диапазон соответствует ячейкам, которые будут заблокированы в верхней и левой области.
+    Задает закрепленные ячейки в представлении активного листа. Предоставленный диапазон соответствует ячейкам, которые будут заморожены в верхней и левой области.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -38,7 +38,7 @@ methods:
     content: 'freezeAt(frozenRange: Range | string): void;'
     parameters:
     - id: frozenRange
-      description: Диапазон, представляюший ячейки, которые необходимо застыть, или null для удаления всех заблокированных сканд.
+      description: Диапазон, представляюший замороженные ячейки, или null для удаления всех замороженных стетей.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: void
@@ -48,7 +48,7 @@ methods:
   package: excel!
   fullName: freezeColumns(count)
   summary: >-
-    Зависает первый столбец или столбцы на месте.
+    Замораживание первого столбца или столбцов таблицы на месте.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -59,7 +59,7 @@ methods:
     content: 'freezeColumns(count?: number): void;'
     parameters:
     - id: count
-      description: Необязательное число столбцов для зависания или ноль для разморозки всех столбцов
+      description: Необязательный номер столбцов для замораживания или нулевой разморозки всех столбцов
       type: number
     return:
       type: void
@@ -69,7 +69,7 @@ methods:
   package: excel!
   fullName: freezeRows(count)
   summary: >-
-    Зависает верхняя строка или строки на месте.
+    Замораживание верхней строки или строки таблицы на месте.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -80,7 +80,7 @@ methods:
     content: 'freezeRows(count?: number): void;'
     parameters:
     - id: count
-      description: Необязательное число строк для зависания или ноль для разморозки всех строк
+      description: Необязательное количество строк для замораживания или нулевое, чтобы разморозить все строки
       type: number
     return:
       type: void
@@ -90,7 +90,7 @@ methods:
   package: excel!
   fullName: getLocation()
   summary: >-
-    Получает диапазон, описывающий закрепленные ячейки в представлении активного листа. Застывшие диапазоны соответствуют ячейкам, которые застыли в верхней и левой области.
+    Получает диапазон, описывающий закрепленные ячейки в представлении активного листа. Замороженный диапазон соответствует ячейкам, замороженным в области верхнего и левого ряда.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -107,7 +107,7 @@ methods:
   package: excel!
   fullName: getLocationOrNullObject()
   summary: >-
-    Получает диапазон, описывающий закрепленные ячейки в представлении активного листа. Застывшие диапазоны соответствуют ячейкам, которые застыли в верхней и левой области. Если заблокированной области нет, возвращается объект null.
+    Получает диапазон, описывающий закрепленные ячейки в представлении активного листа. Замороженный диапазон соответствует ячейкам, замороженным в области верхнего и левого ряда. Если нет замороженной области, возвращается объект null.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -123,7 +123,7 @@ methods:
   uid: excel!Excel.WorksheetFreezePanes#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.WorksheetFreezePanes является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.WorksheetFreezePanesData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.WorksheetFreezePanes является объектом API, метод возвращает простой объект `toJSON` JavaScript (введите как `Excel.Interfaces.WorksheetFreezePanesData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -157,9 +157,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-freeze-panes.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    sheet.freezePanes.unfreeze();\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 2e6632671787c79d72cfd413ed437c2ac56b03aa
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: bc64c839635e7993041802b5f7f0a387b080f068
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49854128"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51236187"
