@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.ChartTitle#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -46,7 +46,7 @@ properties:
   package: excel!
   fullName: height
   summary: >-
-    Возвращает высоту заголовка диаграммы (в пунктах). NULL, если заголовок диаграммы не виден.
+    Возвращает высоту заголовка диаграммы (в пунктах). Null, если заголовок диаграммы не виден.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -78,7 +78,7 @@ properties:
   package: excel!
   fullName: left
   summary: >-
-    Указывает расстояние (в пунктах) от левого края заголовка диаграммы до левого края области диаграммы. NULL, если заголовок диаграммы не виден.
+    Указывает расстояние в точках от левого края заголовка диаграммы до левого края области диаграммы. Null, если заголовок диаграммы не виден.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -158,7 +158,7 @@ properties:
   package: excel!
   fullName: textOrientation
   summary: >-
-    Указывает угол, на который ориентирован текст для заголовка диаграммы. Значением должно быть либо значение от -90 до 90, либо 180 для вертикально-ориентированного текста.
+    Указывает угол, на который ориентирован текст для заголовка диаграммы. Значение должно быть либо в целом от -90 до 90, либо в целом 180 для вертикально ориентированного текста.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -175,7 +175,7 @@ properties:
   package: excel!
   fullName: top
   summary: >-
-    Указывает расстояние (в пунктах) от верхнего края заголовка диаграммы до верхнего края области диаграммы. NULL, если заголовок диаграммы не виден.
+    Указывает расстояние в точках от верхнего края заголовка диаграммы до верхней части области диаграммы. Null, если заголовок диаграммы не виден.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -223,7 +223,7 @@ properties:
   package: excel!
   fullName: width
   summary: >-
-    Указывает ширину заголовка диаграммы (в пунктах). NULL, если заголовок диаграммы не виден.
+    Указывает ширину в точках заголовка диаграммы. Null, если заголовок диаграммы не виден.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -240,7 +240,7 @@ methods:
   package: excel!
   fullName: getSubstring(start, length)
   summary: >-
-    Получите подстроку заголовка диаграммы. Разрыв строки '<!-- -->\\<!-- -->n' также учитывает один символ.
+    Получите подстройку заголовка диаграммы. Разрыв строки '<!-- -->\\<!-- -->n' также подсчитываю один символ.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -251,10 +251,10 @@ methods:
     content: 'getSubstring(start: number, length: number): Excel.ChartFormatString;'
     parameters:
     - id: start
-      description: Положение начала подстроки для извлечения. Позиция начинается с 0.
+      description: Начало позиции подстройки, которая должна быть извлечена. Положение начинается с 0.
       type: number
     - id: length
-      description: Длина извлекаемой подстроки.
+      description: Длина подстройки, которая должна быть извлечена.
       type: number
     return:
       type: <xref uid="excel!Excel.ChartFormatString:class" />
@@ -271,7 +271,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.ChartTitleLoadOptions): Excel.ChartTitle;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.ChartTitleLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.ChartTitle:class" />
@@ -288,7 +288,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.ChartTitle;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.ChartTitle:class" />
@@ -309,7 +309,7 @@ methods:
               }): Excel.ChartTitle;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -334,10 +334,10 @@ methods:
     content: 'set(properties: Interfaces.ChartTitleUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="excel!Excel.Interfaces.ChartTitleUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -346,7 +346,7 @@ methods:
   uid: excel!Excel.ChartTitle#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -375,7 +375,7 @@ methods:
     content: 'setFormula(formula: string): void;'
     parameters:
     - id: formula
-      description: Строка, представляютив формулу, которую необходимо установить.
+      description: Строка, представляютив формулу для набора.
       type: string
     return:
       type: void
@@ -384,7 +384,7 @@ methods:
   uid: excel!Excel.ChartTitle#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.ChartTitle является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.ChartTitleData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.ChartTitle является объектом API, метод возвращает простой объект `toJSON` JavaScript (введите как `Excel.Interfaces.ChartTitleData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -395,9 +395,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: bb4866904e0d57dbeb3e144525f1fb96e749a38e
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: ef253c080e9d6301f1d078209de86b2a18bbd66e
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49851972"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51244461"
