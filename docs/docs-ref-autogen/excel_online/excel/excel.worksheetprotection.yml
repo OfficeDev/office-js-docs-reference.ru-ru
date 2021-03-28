@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.WorksheetProtection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -30,7 +30,7 @@ properties:
   package: excel!
   fullName: options
   summary: >-
-    Указывает параметры защиты для этого таблицы.
+    Указывает параметры защиты для таблицы.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -46,7 +46,7 @@ properties:
   package: excel!
   fullName: protected
   summary: >-
-    Указывает, защищен ли этот таблица.
+    Указывает, защищена ли таблица.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -70,7 +70,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.WorksheetProtectionLoadOptions): Excel.WorksheetProtection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.WorksheetProtectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.WorksheetProtection:class" />
@@ -87,7 +87,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.WorksheetProtection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.WorksheetProtection:class" />
@@ -108,7 +108,7 @@ methods:
               }): Excel.WorksheetProtection;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -122,10 +122,10 @@ methods:
   package: excel!
   fullName: protect(options, password)
   summary: >-
-    Защищает лист. Если таблица уже защищена, происходит сбой.
+    Защищает лист. Сбой, если таблица уже защищена.
 
 
-    \[[Набор API: ExcelApi 1.2 для параметров; 1,7 для пароля](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[API set: ExcelApi 1.2 for options; 1.7 for password](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -133,10 +133,10 @@ methods:
     content: 'protect(options?: Excel.WorksheetProtectionOptions, password?: string): void;'
     parameters:
     - id: options
-      description: Необязательный. Параметры защиты листа.
+      description: Необязательное свойство. Параметры защиты листа.
       type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
     - id: password
-      description: Необязательный. Пароль защиты листа.
+      description: Необязательное свойство. Пароль защиты листа.
       type: string
     return:
       type: void
@@ -145,7 +145,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.WorksheetProtection является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.WorksheetProtectionData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.WorksheetProtection является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorksheetProtectionData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -170,16 +170,16 @@ methods:
     content: 'unprotect(password?: string): void;'
     parameters:
     - id: password
-      description: пароль защиты листа.
+      description: Пароль защиты листа.
       type: string
     return:
       type: void
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.protection.unprotect();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.protection.unprotect(password);\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 12c45781d458db7b093ea0a0162750c4dcad4add
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: a4dbf22a0ec3baff724c2e50b0b4ac67d9492be9
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852784"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51278326"
