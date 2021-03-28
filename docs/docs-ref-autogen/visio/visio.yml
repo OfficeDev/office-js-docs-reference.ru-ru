@@ -87,7 +87,7 @@ functions:
 - name: Visio.run(batch)
   uid: visio!Visio.run:function(1)
   package: visio!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Visio, используя новый контекст запроса. При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный сценарий, который выполняет действия в объектной модели Visio с помощью нового контекста запроса. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -95,7 +95,7 @@ functions:
     content: 'export function run<T>(batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: Функция, которая принимается в файле Visio. RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). Параметр context упрощает запросы к приложению Visio. Так как надстройка Office и приложение Visio выполняются в двух различных процессах, контекст запроса необходим для получения доступа к объектной модели Visio из надстройки.
+      description: Функция, которая принимает в Visio.RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр context облегчает запросы в приложении Visio. Так как надстройка Office и приложение Visio работают в двух разных процессах, требуется контекст запроса, чтобы получить доступ к объектной модели Visio из надстройки.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -103,7 +103,7 @@ functions:
 - name: Visio.run(object, batch)
   uid: visio!Visio.run:function(2)
   package: visio!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Visio, используя контекст запроса ранее созданного объекта API.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Visio с помощью контекста запроса ранее созданного объекта API.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -111,10 +111,10 @@ functions:
     content: 'export function run<T>(object: OfficeExtension.ClientObject | OfficeExtension.EmbeddedSession, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: object
-      description: Ранее созданный объект API. В пакете будет использоваться тот же контекст запроса, что и в переданном объекте, что означает, что все изменения, примененные к объекту, будут забираться по запросу "Context. Sync ()".
+      description: Ранее созданный объект API. Пакет будет использовать тот же контекст запроса, что и переданный объект, что означает, что любые изменения, примененные к объекту, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" /> | <xref uid="office!OfficeExtension.EmbeddedSession:class" />
     - id: batch
-      description: Функция, которая принимается в файле Visio. RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+      description: Функция, которая принимает в Visio.RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -122,7 +122,7 @@ functions:
 - name: Visio.run(objects, batch)
   uid: visio!Visio.run:function(3)
   package: visio!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Visio, используя контекст запроса ранее созданных объектов API.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Visio с помощью контекста запросов ранее созданных объектов API.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -130,10 +130,10 @@ functions:
     content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: objects
-      description: Массив ранее созданных объектов API. Массив будет проверен, чтобы убедиться, что все объекты имеют один и тот же контекст. Пакет будет использовать этот контекст общего запроса, что означает, что все изменения, примененные к этим объектам, будут отбираться по запросу "Context. Sync ()".
+      description: Массив ранее созданных объектов API. Массив будет проверен, чтобы убедиться, что все объекты имеют одинаковый контекст. Пакет будет использовать этот общий контекст запроса, что означает, что любые изменения, примененные к этим объектам, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: Функция, которая принимается в файле Visio. RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+      description: Функция, которая принимает visio.RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -141,9 +141,9 @@ functions:
 - name: Visio.run(contextObject, batch)
   uid: visio!Visio.run:function(4)
   package: visio!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Visio, используя RequestContext ранее созданного объекта. При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Visio с помощью requestContext ранее созданного объекта. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: >-
-    Кроме этой подписи, метод также имеет следующие подписи:
+    В дополнение к этой подписи метод также имеет следующие подписи:
 
 
     `run<T>(batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;`
@@ -159,18 +159,18 @@ functions:
     content: 'export function run<T>(contextObject: OfficeExtension.ClientRequestContext, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: contextObject
-      description: Ранее созданный элемент Visio. RequestContext. Этот контекст будет повторно использован пакетной функцией (вместо создания нового контекста). Это означает, что пакет будет иметь возможность выбора изменений, внесенных в существующие объекты API, если эти объекты были получены из этого же контекста.
+      description: Ранее созданный Visio.RequestContext. Этот контекст будет повторно использоваться пакетной функцией (вместо создания нового контекста). Это означает, что пакет сможет получить изменения, внесенные в существующие объекты API, если эти объекты были получены из этого же контекста.
       type: <xref uid="office!OfficeExtension.ClientRequestContext:class" />
     - id: batch
-      description: Функция, которая принимает значение RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). Параметр context упрощает запросы к приложению Visio. Так как надстройка Office и приложение Visio выполняются в двух различных процессах, необходимо получить доступ к объектной модели Visio из надстройки с помощью RequestContext.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр context облегчает запросы в приложении Visio. Так как надстройка Office и приложение Visio работают в двух разных процессах, requestContext должен получить доступ к объектной модели Visio из надстройки.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 628e9290512b94ba1e9d8aefd6a1fa556297a078
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 160a87f9afd1fc59da3c920487e71135a46c79a0
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49142828"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51277367"

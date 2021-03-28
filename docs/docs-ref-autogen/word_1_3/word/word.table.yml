@@ -18,7 +18,7 @@ properties:
   package: word!
   fullName: alignment
   summary: >-
-    Возвращает или задает выравнивание таблицы со столбцом страницы. Значением может быть "Left", "Centered" или "Right".
+    Получает или задает выравнивание таблицы со столбцом страницы. Значение может быть "Left", "Centered" или "Right".
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -33,7 +33,7 @@ properties:
   uid: word!Word.Table#context:member
   package: word!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -78,7 +78,7 @@ properties:
   package: word!
   fullName: horizontalAlignment
   summary: >-
-    Возвращает и задает горизонтальное выравнивание для каждой ячейки в таблице. Значением может быть "Left", "Centered", "Right" или "Justified".
+    Возвращает и задает горизонтальное выравнивание для каждой ячейки в таблице. Значение может быть "Left", "Centered", "Right" или "Justified".
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -142,7 +142,7 @@ properties:
   package: word!
   fullName: parentContentControl
   summary: >-
-    Возвращает элемент управления содержимым, содержащий таблицу. Если родительского управления содержимым не существует, высылается ошибка. Только для чтения.
+    Возвращает элемент управления содержимым, содержащий таблицу. Если нет родительского управления контентом, ошибка. Только для чтения.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -158,7 +158,7 @@ properties:
   package: word!
   fullName: parentContentControlOrNullObject
   summary: >-
-    Возвращает элемент управления содержимым, содержащий таблицу. Возвращает объект null, если родительского управления содержимым нет. Только для чтения.
+    Возвращает элемент управления содержимым, содержащий таблицу. Возвращает объект null, если нет родительского управления контентом. Только для чтения.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -174,7 +174,7 @@ properties:
   package: word!
   fullName: parentTable
   summary: >-
-    Возвращает таблицу, которая содержит данную таблицу. Если она не содержится в таблице, высылается ошибка. Только для чтения.
+    Возвращает таблицу, которая содержит данную таблицу. Если ошибка не содержится в таблице, ошибка. Только для чтения.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -190,7 +190,7 @@ properties:
   package: word!
   fullName: parentTableCell
   summary: >-
-    Возвращает ячейку таблицы, содержащую данную таблицу. Если она не содержится в ячейке таблицы, вы ошибку. Только для чтения.
+    Возвращает ячейку таблицы, содержащую данную таблицу. Если ошибка не содержится в ячейке таблицы, ошибка. Только для чтения.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -270,7 +270,7 @@ properties:
   package: word!
   fullName: shadingColor
   summary: >-
-    Возвращает и задает цвет заливки. Цвет указывается в формате \# "RRGGBB" или с помощью имени цвета.
+    Возвращает и задает цвет заливки. Цвет указывается в формате \# RRGGBB или с помощью имени цвета.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -430,7 +430,7 @@ properties:
   package: word!
   fullName: verticalAlignment
   summary: >-
-    Возвращает и задает вертикальное выравнивание для каждой ячейки в таблице. Значением может быть "Top", "Center" или "Bottom".
+    Возвращает и задает вертикальное выравнивание для каждой ячейки в таблице. Значение может быть "Top", "Center" или "Bottom".
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -474,10 +474,10 @@ methods:
     content: 'addColumns(insertLocation: Word.InsertLocation, columnCount: number, values?: string[][]): void;'
     parameters:
     - id: insertLocation
-      description: Обязательный. Это может быть start или End, соответствующие соответствующей стороне таблицы.
+      description: Обязательное. Это может быть "Начало" или "Конец", соответствующие соответствующей стороне таблицы.
       type: <xref uid="word!Word.InsertLocation:enum" />
     - id: columnCount
-      description: Обязательный. Количество столбцов, которые необходимо добавить.
+      description: Обязательное. Количество столбцов для добавления.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -501,10 +501,10 @@ methods:
     content: 'addColumns(insertLocationString: "Before" | "After" | "Start" | "End" | "Replace", columnCount: number, values?: string[][]): void;'
     parameters:
     - id: insertLocationString
-      description: Обязательный. Это может быть start или End, соответствующие соответствующей стороне таблицы.
+      description: Обязательное. Это может быть "Начало" или "Конец", соответствующие соответствующей стороне таблицы.
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     - id: columnCount
-      description: Обязательный. Количество столбцов, которые необходимо добавить.
+      description: Обязательное. Количество столбцов для добавления.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -528,10 +528,10 @@ methods:
     content: 'addRows(insertLocation: Word.InsertLocation, rowCount: number, values?: string[][]): Word.TableRowCollection;'
     parameters:
     - id: insertLocation
-      description: Обязательный. Это может быть " Start" или "End".
+      description: Обязательное. Это может быть "Начало" или "Конец".
       type: <xref uid="word!Word.InsertLocation:enum" />
     - id: rowCount
-      description: Обязательный. Количество строк для добавления.
+      description: Обязательное. Количество строк, которые нужно добавить.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -555,10 +555,10 @@ methods:
     content: 'addRows(insertLocationString: "Before" | "After" | "Start" | "End" | "Replace", rowCount: number, values?: string[][]): Word.TableRowCollection;'
     parameters:
     - id: insertLocationString
-      description: Обязательный. Это может быть " Start" или "End".
+      description: Обязательное. Это может быть "Начало" или "Конец".
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     - id: rowCount
-      description: Обязательный. Количество добавляемой строки.
+      description: Обязательное. Количество строк, которые нужно добавить.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -633,10 +633,10 @@ methods:
     content: 'deleteColumns(columnIndex: number, columnCount?: number): void;'
     parameters:
     - id: columnIndex
-      description: Обязательный. Первый столбец, который нужно удалить.
+      description: Обязательное. Первый столбец для удаления.
       type: number
     - id: columnCount
-      description: Необязательный. Количество столбцов, которые необходимо удалить. Значение по умолчанию 1.
+      description: Необязательное свойство. Количество столбцов, которые необходимо удалить. По умолчанию 1.
       type: number
     return:
       type: void
@@ -657,10 +657,10 @@ methods:
     content: 'deleteRows(rowIndex: number, rowCount?: number): void;'
     parameters:
     - id: rowIndex
-      description: Обязательный. Первая удаляемая строка.
+      description: Обязательное. Первая строка для удаления.
       type: number
     - id: rowCount
-      description: Необязательный. Количество строк, которые необходимо удалить. Значение по умолчанию 1.
+      description: Необязательное свойство. Количество строк, которые необходимо удалить. По умолчанию 1.
       type: number
     return:
       type: void
@@ -698,7 +698,7 @@ methods:
     content: 'getBorder(borderLocation: Word.BorderLocation): Word.TableBorder;'
     parameters:
     - id: borderLocation
-      description: Обязательный. Расположение границы.
+      description: Обязательное. Расположение границы.
       type: <xref uid="word!Word.BorderLocation:enum" />
     return:
       type: <xref uid="word!Word.TableBorder:class" />
@@ -719,7 +719,7 @@ methods:
     content: 'getBorder(borderLocationString: "Top" | "Left" | "Bottom" | "Right" | "InsideHorizontal" | "InsideVertical" | "Inside" | "Outside" | "All"): Word.TableBorder;'
     parameters:
     - id: borderLocationString
-      description: Обязательный. Расположение границы.
+      description: Обязательное. Расположение границы.
       type: "\"Top\" | \"Left\" | \"Bottom\" | \"Right\" | \"InsideHorizontal\" | \"InsideVertical\" | \"Inside\" | \"Outside\" | \"All\""
     return:
       type: <xref uid="word!Word.TableBorder:class" />
@@ -729,7 +729,7 @@ methods:
   package: word!
   fullName: getCell(rowIndex, cellIndex)
   summary: >-
-    Возвращает ячейку таблицы в указанной строке и указанном столбце. Если указанная ячейка таблицы не существует, происходит ошибка.
+    Возвращает ячейку таблицы в указанной строке и указанном столбце. Если указанной ячейки таблицы не существует, ошибка.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -740,10 +740,10 @@ methods:
     content: 'getCell(rowIndex: number, cellIndex: number): Word.TableCell;'
     parameters:
     - id: rowIndex
-      description: Обязательный. Индекс строки.
+      description: Обязательное. Индекс строки.
       type: number
     - id: cellIndex
-      description: Обязательный. Индекс ячейки в строке.
+      description: Обязательное. Индекс ячейки в строке.
       type: number
     return:
       type: <xref uid="word!Word.TableCell:class" />
@@ -753,7 +753,7 @@ methods:
   package: word!
   fullName: getCellOrNullObject(rowIndex, cellIndex)
   summary: >-
-    Возвращает ячейку таблицы в указанной строке и указанном столбце. Возвращает объект null, если указанная ячейка таблицы не существует.
+    Возвращает ячейку таблицы в указанной строке и указанном столбце. Возвращает объект null, если указанной ячейки таблицы не существует.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -764,10 +764,10 @@ methods:
     content: 'getCellOrNullObject(rowIndex: number, cellIndex: number): Word.TableCell;'
     parameters:
     - id: rowIndex
-      description: Обязательный. Индекс строки.
+      description: Обязательное. Индекс строки.
       type: number
     - id: cellIndex
-      description: Обязательный. Индекс ячейки в строке.
+      description: Обязательное. Индекс ячейки в строке.
       type: number
     return:
       type: <xref uid="word!Word.TableCell:class" />
@@ -788,7 +788,7 @@ methods:
     content: 'getCellPadding(cellPaddingLocation: Word.CellPaddingLocation): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: cellPaddingLocation
-      description: Обязательный. Расположение заполнения ячейки может быть "Top", "Left", "Bottom" или "Right".
+      description: Обязательное. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
       type: <xref uid="word!Word.CellPaddingLocation:enum" />
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -809,7 +809,7 @@ methods:
     content: 'getCellPadding(cellPaddingLocationString: "Top" | "Left" | "Bottom" | "Right"): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: cellPaddingLocationString
-      description: Обязательный. Расположение заполнения ячейки может быть "Top", "Left", "Bottom" или "Right".
+      description: Обязательное. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
       type: "\"Top\" | \"Left\" | \"Bottom\" | \"Right\""
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -819,7 +819,7 @@ methods:
   package: word!
   fullName: getNext()
   summary: >-
-    Возвращает следующую таблицу. Если эта таблица является последней, будет выявить ошибку.
+    Возвращает следующую таблицу. Если эта таблица является последней, высылается ошибка.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -853,7 +853,7 @@ methods:
   package: word!
   fullName: getParagraphAfter()
   summary: >-
-    Возвращает абзац после таблицы. Если после таблицы нет абзаца, будет вы сообщение об ошибке.
+    Возвращает абзац после таблицы. Бросает ошибку, если после таблицы нет абзаца.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -887,7 +887,7 @@ methods:
   package: word!
   fullName: getParagraphBefore()
   summary: >-
-    Возвращает абзац перед таблицей. Если перед таблицей нет абзаца, высылается ошибка.
+    Возвращает абзац перед таблицей. Если перед таблицей нет абзаца, будет допущена ошибка.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -932,7 +932,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательный. Расположение диапазона может быть целым, началом, окончанием или после.
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End" или "After".
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -953,7 +953,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательный. Расположение диапазона может быть целым, началом, окончанием или после.
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End" или "After".
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -1095,7 +1095,7 @@ methods:
     content: 'load(options?: Word.Interfaces.TableLoadOptions): Word.Table;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="word!Word.Interfaces.TableLoadOptions:interface" />
     return:
       type: <xref uid="word!Word.Table:class" />
@@ -1112,7 +1112,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Word.Table;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="word!Word.Table:class" />
@@ -1133,7 +1133,7 @@ methods:
               }): Word.Table;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -1147,7 +1147,7 @@ methods:
   package: word!
   fullName: search(searchText, searchOptions)
   summary: >-
-    Выполняет поиск с указанным Объектом SearchOptions в области объекта таблицы. Результат поиска — это коллекция объектов диапазона.
+    Выполняет поиск с указанными SearchOptions в области объекта таблицы. Результат поиска — это коллекция объектов диапазона.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -1242,10 +1242,10 @@ methods:
     content: 'set(properties: Interfaces.TableUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="word!Word.Interfaces.TableUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -1254,7 +1254,7 @@ methods:
   uid: word!Word.Table#set:member(2)
   package: word!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1283,10 +1283,10 @@ methods:
     content: 'setCellPadding(cellPaddingLocation: Word.CellPaddingLocation, cellPadding: number): void;'
     parameters:
     - id: cellPaddingLocation
-      description: Обязательный. Расположение заполнения ячейки может быть "Top", "Left", "Bottom" или "Right".
+      description: Обязательное. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
       type: <xref uid="word!Word.CellPaddingLocation:enum" />
     - id: cellPadding
-      description: Обязательный. Заполнение ячейки.
+      description: Обязательное. Обивка ячейки.
       type: number
     return:
       type: void
@@ -1307,10 +1307,10 @@ methods:
     content: 'setCellPadding(cellPaddingLocationString: "Top" | "Left" | "Bottom" | "Right", cellPadding: number): void;'
     parameters:
     - id: cellPaddingLocationString
-      description: Обязательный. Расположение заполнения ячейки может быть "Top", "Left", "Bottom" или "Right".
+      description: Обязательное. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
       type: "\"Top\" | \"Left\" | \"Bottom\" | \"Right\""
     - id: cellPadding
-      description: Обязательный. Заполнение ячейки.
+      description: Обязательное. Обивка ячейки.
       type: number
     return:
       type: void
@@ -1319,7 +1319,7 @@ methods:
   uid: word!Word.Table#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Word.Table является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Word.Interfaces.TableData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.Table является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Word.Interfaces.TableData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1332,7 +1332,7 @@ methods:
   uid: word!Word.Table#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если этот объект используется во всех вызовах и вне последовательного выполнения пакета ".run" и при установке свойства или вызове метода для объекта вы получаете ошибку InvalidObjectPath, то при первом создании объекта необходимо добавить объект в отслеживаемую коллекцию `.sync` объектов.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1345,7 +1345,7 @@ methods:
   uid: word!Word.Table#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1356,9 +1356,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: bb17c0e84346e539bfe3a7b96416d8d1ee8429e8
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 5af9aa4486fa7e109d545d2cb368deeda2525737
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49854926"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51276513"

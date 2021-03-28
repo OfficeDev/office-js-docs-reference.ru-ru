@@ -18,7 +18,7 @@ properties:
   package: word!
   fullName: body
   summary: >-
-    Получает объект body раздела. Это не включает в себя заглавный или footer и другие метаданные раздела. Только для чтения.
+    Получает объект тела раздела. Это не включает в себя заглавную/подставку и другие метаданные раздела. Только для чтения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -33,7 +33,7 @@ properties:
   uid: word!Word.Section#context:member
   package: word!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -58,7 +58,7 @@ methods:
     content: 'getFooter(type: Word.HeaderFooterType): Word.Body;'
     parameters:
     - id: type
-      description: 'Обязательный параметр. Тип нижнего колонтитула, который необходимо возвратить. Это значение может быть: Primary, FirstPage или EvenPages.'
+      description: 'Обязательный параметр. Тип нижнего колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "EvenPages".'
       type: <xref uid="word!Word.HeaderFooterType:enum" />
     return:
       type: <xref uid="word!Word.Body:class" />
@@ -79,7 +79,7 @@ methods:
     content: 'getFooter(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
     parameters:
     - id: typeString
-      description: 'Обязательный параметр. Тип нижнего колонтитула, который необходимо возвратить. Это значение может быть: Primary, FirstPage или EvenPages.'
+      description: 'Обязательный параметр. Тип нижнего колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "EvenPages".'
       type: "\"Primary\" | \"FirstPage\" | \"EvenPages\""
     return:
       type: <xref uid="word!Word.Body:class" />
@@ -100,7 +100,7 @@ methods:
     content: 'getHeader(type: Word.HeaderFooterType): Word.Body;'
     parameters:
     - id: type
-      description: 'Обязательный параметр. Тип колонтитула, который необходимо возвратить. Это значение может быть: Primary, FirstPage или EvenPages.'
+      description: 'Обязательный параметр. Тип колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "EvenPages".'
       type: <xref uid="word!Word.HeaderFooterType:enum" />
     return:
       type: <xref uid="word!Word.Body:class" />
@@ -121,7 +121,7 @@ methods:
     content: 'getHeader(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
     parameters:
     - id: typeString
-      description: 'Обязательный параметр. Тип колонтитула, который необходимо возвратить. Это значение может быть: Primary, FirstPage или EvenPages.'
+      description: 'Обязательный параметр. Тип колонтитула, который необходимо возвратить. Это значение может быть: "Primary", "FirstPage" или "EvenPages".'
       type: "\"Primary\" | \"FirstPage\" | \"EvenPages\""
     return:
       type: <xref uid="word!Word.Body:class" />
@@ -131,7 +131,7 @@ methods:
   package: word!
   fullName: getNext()
   summary: >-
-    Возвращает следующий раздел. Если этот раздел является последним, то при этом будет вы сообщение об ошибке.
+    Возвращает следующий раздел. Если этот раздел является последним, высылает ошибку.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -172,7 +172,7 @@ methods:
     content: 'load(options?: Word.Interfaces.SectionLoadOptions): Word.Section;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="word!Word.Interfaces.SectionLoadOptions:interface" />
     return:
       type: <xref uid="word!Word.Section:class" />
@@ -189,7 +189,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Word.Section;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="word!Word.Section:class" />
@@ -210,7 +210,7 @@ methods:
               }): Word.Section;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -235,10 +235,10 @@ methods:
     content: 'set(properties: Interfaces.SectionUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="word!Word.Interfaces.SectionUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -247,7 +247,7 @@ methods:
   uid: word!Word.Section#set:member(2)
   package: word!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -264,7 +264,7 @@ methods:
   uid: word!Word.Section#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Word.Section является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Word.Interfaces.SectionData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.'
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.Section является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Word.Interfaces.SectionData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -277,7 +277,7 @@ methods:
   uid: word!Word.Section#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во всех вызовах и вне последовательного выполнения пакета ".run" и получаете ошибку InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -290,7 +290,7 @@ methods:
   uid: word!Word.Section#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -301,9 +301,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 9cc1db251945137ee1490e65b6c4620803e4e2a8
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: c7ff5fa550879cd1896f38730f7cbc5dd06c3b68
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49861079"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51276520"
