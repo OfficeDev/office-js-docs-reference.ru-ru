@@ -701,7 +701,7 @@ functions:
     Создает и открывает новую книгу. При желании книгу можно предварительно заполнить с помощью XLSX-файла в кодировке base64.
 
 
-    \[[Набор API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -752,7 +752,7 @@ functions:
 - name: Excel.run(batch)
   uid: excel!Excel.run:function(1)
   package: excel!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Excel, используя новый RequestContext. При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Excel с помощью нового requestContext. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -760,7 +760,7 @@ functions:
     content: 'export function run<T>(batch: (context: Excel.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: Функция, которая принимает значение RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). Параметр context упрощает запросы к приложению Excel. Так как надстройка Office и приложение Excel выполняются в двух различных процессах, RequestContext необходим для получения доступа к объектной модели Excel из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение Excel. Так как надстройка Office и приложение Excel работают в двух разных процессах, для получения доступа к объектной модели Excel из надстройки требуется requestContext.
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -768,7 +768,7 @@ functions:
 - name: Excel.run(object, batch)
   uid: excel!Excel.run:function(2)
   package: excel!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Excel, используя RequestContext ранее созданного объекта API. При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Excel с помощью объекта RequestContext ранее созданного API. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -776,10 +776,10 @@ functions:
     content: 'export function run<T>(object: OfficeExtension.ClientObject, batch: (context: Excel.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: object
-      description: Ранее созданный объект API. Пакет будет использовать тот же RequestContext, что и переданный объект, что означает, что все изменения, примененные к объекту, будут забираться по имени "Context. Sync ()".
+      description: Ранее созданный объект API. Пакет будет использовать тот же Объект RequestContext, что и переданный объект, что означает, что любые изменения, примененные к объекту, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />
     - id: batch
-      description: Функция, которая принимает значение RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). Параметр context упрощает запросы к приложению Excel. Так как надстройка Office и приложение Excel выполняются в двух различных процессах, RequestContext необходим для получения доступа к объектной модели Excel из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение Excel. Так как надстройка Office и приложение Excel работают в двух разных процессах, для получения доступа к объектной модели Excel из надстройки требуется requestContext.
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -787,7 +787,7 @@ functions:
 - name: Excel.run(objects, batch)
   uid: excel!Excel.run:function(3)
   package: excel!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Excel, используя RequestContext ранее созданных объектов API.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Excel с помощью объекта RequestContext ранее созданных объектов API.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -795,10 +795,10 @@ functions:
     content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Excel.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: objects
-      description: Массив ранее созданных объектов API. Массив будет проверен, чтобы убедиться, что все объекты имеют один и тот же контекст. Пакет будет использовать этот общий RequestContext RequestContext, что означает, что все изменения, примененные к этим объектам, будут отбираться по "Context. Sync ()".
+      description: Массив ранее созданных объектов API. Массив будет проверен, чтобы убедиться, что все объекты имеют одинаковый контекст. Пакет будет использовать этот общий requestContext, что означает, что любые изменения, примененные к этим объектам, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: Функция, которая принимает значение RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). Параметр context упрощает запросы к приложению Excel. Так как надстройка Office и приложение Excel выполняются в двух различных процессах, RequestContext необходим для получения доступа к объектной модели Excel из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение Excel. Так как надстройка Office и приложение Excel работают в двух разных процессах, для получения доступа к объектной модели Excel из надстройки требуется requestContext.
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -806,7 +806,7 @@ functions:
 - name: Excel.run(options, batch)
   uid: excel!Excel.run:function(4)
   package: excel!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Excel, используя RequestContext ранее созданного объекта API. При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Excel с помощью объекта RequestContext ранее созданного API. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -814,10 +814,10 @@ functions:
     content: 'export function run<T>(options: Excel.RunOptions, batch: (context: Excel.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: options
-      description: Дополнительные параметры для этого Excel. Run, задающие предыдущие объекты, следует ли откладывать запрос на редактирование ячеек, сведения о сеансе и т. д.
+      description: Дополнительные параметры для этого Excel.run, которые указывают предыдущие объекты, откладывать ли запрос на изменение ячейки, сведения о сеансе и т.д.
       type: <xref uid="excel!Excel.RunOptions:interface" />
     - id: batch
-      description: Функция, которая принимает значение RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). Параметр context упрощает запросы к приложению Excel. Так как надстройка Office и приложение Excel выполняются в двух различных процессах, RequestContext необходим для получения доступа к объектной модели Excel из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение Excel. Так как надстройка Office и приложение Excel работают в двух разных процессах, для получения доступа к объектной модели Excel из надстройки требуется requestContext.
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -825,7 +825,7 @@ functions:
 - name: Excel.run(context, batch)
   uid: excel!Excel.run:function(5)
   package: excel!
-  summary: Выполняет пакетный скрипт, который выполняет действия с объектной моделью Excel, используя RequestContext ранее созданного объекта. При разрешении обещания все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели Excel с помощью requestContext ранее созданного объекта. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -833,18 +833,18 @@ functions:
     content: 'export function run<T>(context: OfficeExtension.ClientRequestContext, batch: (context: Excel.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: context
-      description: Ранее созданный объект. Пакет будет использовать тот же RequestContext, что и переданный объект, что означает, что все изменения, примененные к объекту, будут забираться по имени "Context. Sync ()".
+      description: Ранее созданный объект. Пакет будет использовать тот же Объект RequestContext, что и переданный объект, что означает, что любые изменения, примененные к объекту, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientRequestContext:class" />
     - id: batch
-      description: Функция, которая принимает значение RequestContext и возвращает обещание (как правило, только результат "Context. Sync ()"). Параметр context упрощает запросы к приложению Excel. Так как надстройка Office и приложение Excel выполняются в двух различных процессах, RequestContext необходим для получения доступа к объектной модели Excel из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение Excel. Так как надстройка Office и приложение Excel работают в двух разных процессах, для получения доступа к объектной модели Excel из надстройки требуется requestContext.
       type: '(context: <xref uid="excel!Excel.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 916a7004de4f3b1f5dee940db3f2584bd0816db7
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: ac52c44f4b41def8da86f03cdf35f92de53fc3aa
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49154210"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51257418"
