@@ -4,7 +4,7 @@ uid: word!Word.ContentControlCollection:class
 package: word!
 fullName: Word.ContentControlCollection
 summary: >-
-  Содержит коллекцию объектов [Word.ContentControl.](xref:word!Word.ContentControl:class) Элементы управления контентом — это связанные и, возможно, помеченные фрагменты документа, выполняющие роль контейнеров для определенных типов содержимого. Отдельные элементы управления контентом могут содержать изображения, таблицы или абзацы форматированного текста. На данный момент поддерживаются только элементы управления содержимым "форматированный текст".
+  Содержит коллекцию [объектов Word.ContentControl.](xref:word!Word.ContentControl:class) Элементы управления контентом — это связанные и, возможно, помеченные фрагменты документа, выполняющие роль контейнеров для определенных типов содержимого. Отдельные элементы управления контентом могут содержать изображения, таблицы или абзацы форматированного текста. На данный момент поддерживаются только элементы управления содержимым "форматированный текст".
 
 
   \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: word!Word.ContentControlCollection#context:member
   package: word!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,7 +43,7 @@ methods:
   package: word!
   fullName: getById(id)
   summary: >-
-    Возвращает элемент управления содержимым по его идентификатору. Если в коллекции нет управления содержимым с идентификатором, будет выявить сообщение об ошибке.
+    Возвращает элемент управления содержимым по его идентификатору. Если в этой коллекции нет управления контентом с идентификатором, вы можете сделать ошибку.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -64,7 +64,7 @@ methods:
   package: word!
   fullName: getByIdOrNullObject(id)
   summary: >-
-    Возвращает элемент управления содержимым по его идентификатору. Возвращает объект null, если в коллекции нет управления содержимым с идентификатором.
+    Возвращает элемент управления содержимым по его идентификатору. Возвращает объект null, если в этой коллекции нет управления контентом с идентификатором.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -127,7 +127,7 @@ methods:
   package: word!
   fullName: getByTypes(types)
   summary: >-
-    Получает элементы управления содержимым, которые имеют указанные типы и/или подтипы.
+    Получает элементы управления контентом, которые имеют указанные типы и/или подтипы.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -138,7 +138,7 @@ methods:
     content: 'getByTypes(types: Word.ContentControlType[]): Word.ContentControlCollection;'
     parameters:
     - id: types
-      description: Обязательный. Массив типов и подтипов управления содержимым.
+      description: Обязательное. Массив типов и(или) подтипов управления контентом.
       type: <xref uid="word!Word.ContentControlType:enum" />[]
     return:
       type: <xref uid="word!Word.ContentControlCollection:class" />
@@ -148,7 +148,7 @@ methods:
   package: word!
   fullName: getFirst()
   summary: >-
-    Возвращает первый элемент управления содержимым в коллекции. Если эта коллекция пуста, будет выявить ошибку.
+    Возвращает первый элемент управления содержимым в коллекции. Бросает ошибку, если эта коллекция пуста.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -165,7 +165,7 @@ methods:
   package: word!
   fullName: getFirstOrNullObject()
   summary: >-
-    Возвращает первый элемент управления содержимым в коллекции. Возвращает пустой объект, если эта коллекция пуста.
+    Возвращает первый элемент управления содержимым в коллекции. Возвращает объект null, если эта коллекция пуста.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -182,7 +182,7 @@ methods:
   package: word!
   fullName: getItem(index)
   summary: >-
-    Получает управление содержимым по индексу в коллекции.
+    Получает управление контентом по индексу в коллекции.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -210,7 +210,7 @@ methods:
     content: 'load(options?: Word.Interfaces.ContentControlCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ContentControlCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="word!Word.Interfaces.ContentControlCollectionLoadOptions:interface" /> & <xref uid="word!Word.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="word!Word.ContentControlCollection:class" />
@@ -227,7 +227,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Word.ContentControlCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="word!Word.ContentControlCollection:class" />
@@ -244,7 +244,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Word.ContentControlCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="word!Word.ContentControlCollection:class" />
@@ -253,7 +253,7 @@ methods:
   uid: word!Word.ContentControlCollection#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Word.ContentControlCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Word.Interfaces.ContentControlCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Word.ContentControlCollection` `toJSON` объект JavaScript (введите как `Word.Interfaces.ContentControlCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -266,7 +266,7 @@ methods:
   uid: word!Word.ContentControlCollection#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если этот объект используется во всех вызовах и вне последовательного выполнения пакета ".run" и при установке свойства или вызове метода для объекта вы получаете ошибку InvalidObjectPath, то при первом создании объекта необходимо добавить объект в отслеживаемую коллекцию `.sync` объектов.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -279,7 +279,7 @@ methods:
   uid: word!Word.ContentControlCollection#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед тем как выпуск памяти вступает в силу, `context.sync()` необходимо будет вызвать этот вызов.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -290,9 +290,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a74d0a7bba001f39ddeb86fd8659ccecc64cf1cc
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 4ab55ace34274dc209b88aa971194a1b8e177887
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49858475"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51306490"

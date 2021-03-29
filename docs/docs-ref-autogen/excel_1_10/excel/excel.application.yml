@@ -34,10 +34,10 @@ properties:
   package: excel!
   fullName: calculationMode
   summary: >-
-    Возвращает режим вычисления, используемый в книге, как определено константами в Excel.CalculationMode. Возможные значения: `Automatic`<!-- -->, где Excel управляет пересчетом; `AutomaticExceptTables`<!-- -->, где Excel управляет пересчетом, но игнорирует изменения в таблицах; `Manual`<!-- -->, где вычисление происходит, когда пользователь запрашивает его.
+    Возвращает режим вычислений, используемый в книге, как это определено константами в Excel.CalculationMode. Возможные значения: `Automatic`<!-- -->, где Excel контролирует пересчет; `AutomaticExceptTables`<!-- -->, где Excel контролирует пересчет, но игнорирует изменения в таблицах; `Manual`<!-- -->, где вычисление делается, когда пользователь запрашивает его.
 
 
-    \[[Набор API: ExcelApi 1.1 для получения, 1,8 для набора](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Набор API: ExcelApi 1.1 для получения, 1.8 для набора](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -65,7 +65,7 @@ properties:
   uid: excel!Excel.Application#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -78,7 +78,7 @@ properties:
   package: excel!
   fullName: iterativeCalculation
   summary: >-
-    Возвращает параметры итеративных вычислений. В Excel для Windows и Mac параметры будут применяться к приложению Excel. В Excel в Интернете и на других платформах параметры будут применяться к активной книге.
+    Возвращает параметры итеративных вычислений. В Excel на Windows и Mac параметры будут применяться к приложению Excel. В Excel на веб-и других платформах параметры будут применяться к активной книге.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -144,7 +144,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.ApplicationLoadOptions): Excel.Application;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.ApplicationLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.Application:class" />
@@ -161,7 +161,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.Application;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Application:class" />
@@ -182,7 +182,7 @@ methods:
               }): Excel.Application;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -207,10 +207,10 @@ methods:
     content: 'set(properties: Interfaces.ApplicationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами аморфически перенастройно к свойствам объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="excel!Excel.Interfaces.ApplicationUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -219,7 +219,7 @@ methods:
   uid: excel!Excel.Application#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -257,7 +257,7 @@ methods:
     Приостанавливать обновление экрана до `context.sync()` следующего.
 
 
-    *Note***: Don't call `suspendScreenUpdatingUntilNextSync` repeatedly (such as in a loop). Повторяющийся вызов приведет к мерцаниям окна Excel.
+    *Примечание**: Не звони `suspendScreenUpdatingUntilNextSync` несколько раз (например, в цикле). Повторные вызовы вызывают мерцание окна Excel.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -273,7 +273,7 @@ methods:
   uid: excel!Excel.Application#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Application является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.ApplicationData`<!-- -->) содержит поверхностные копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.Application является объектом API, метод возвращает простой объект `toJSON` JavaScript (введите как `Excel.Interfaces.ApplicationData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -284,9 +284,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: f5375e45ad67a0ce50c41b91c9fe13041ed8d267
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 609e45205f401aaa3afaefeb99b56d0e24f78955
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49853400"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51306294"
