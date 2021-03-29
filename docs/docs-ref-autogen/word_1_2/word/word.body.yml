@@ -18,7 +18,7 @@ properties:
   package: word!
   fullName: contentControls
   summary: >-
-    Получает коллекцию объектов управления содержимым "Rich Text" в теле. Только для чтения.
+    Получает коллекцию объектов управления текстовым контентом в теле. Только для чтения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -33,7 +33,7 @@ properties:
   uid: word!Word.Body#context:member
   package: word!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -46,7 +46,7 @@ properties:
   package: word!
   fullName: font
   summary: >-
-    Получает формат текста, указанный для содержимого документа или раздела. Используйте его для получения и применения имени, размера, цвета и других свойств шрифта. Только для чтения.
+    Получает формат текста, указанный для содержимого документа или раздела. Используйте это для получения и набора имени шрифта, размера, цвета и других свойств. Только для чтения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -96,7 +96,7 @@ properties:
   package: word!
   fullName: parentContentControl
   summary: >-
-    Получает элемент управления содержимым, содержащий документ или раздел. Если родительского управления содержимым не существует, высылается ошибка. Только для чтения.
+    Получает элемент управления содержимым, содержащий документ или раздел. Если нет родительского управления контентом, ошибка. Только для чтения.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -163,7 +163,7 @@ methods:
   package: word!
   fullName: getHtml()
   summary: >-
-    Получает HTML-представление объекта body. При отрисовке на веб-странице или в htmL-представлении форматирование будет близко, но не точно, совпадает с форматированием документа. Этот метод не возвращает точно такой же HTML-код для одного и того же документа на различных платформах (Windows, Mac, Word в Интернете и т. д.). Если вам нужна точную точности или согласованность на разных платформах, используйте и преобразуем `Body.getOoxml()` возвращенный XML-код в HTML.
+    Получает HTML-представление объекта тела. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, используйте и преобразуем возвращенный `Body.getOoxml()` XML в HTML.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -273,7 +273,7 @@ methods:
     content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: base64File
-      description: Обязательный. Содержимое DOCX-файла в кодированном коде base64.
+      description: Обязательное. Кодированное содержимое файла .docx base64.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -297,7 +297,7 @@ methods:
     content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: base64File
-      description: Обязательный. Содержимое DOCX-файла в кодированном коде base64.
+      description: Обязательное. Кодированное содержимое файла .docx base64.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -557,7 +557,7 @@ methods:
     content: 'load(options?: Word.Interfaces.BodyLoadOptions): Word.Body;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="word!Word.Interfaces.BodyLoadOptions:interface" />
     return:
       type: <xref uid="word!Word.Body:class" />
@@ -574,7 +574,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Word.Body;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="word!Word.Body:class" />
@@ -595,7 +595,7 @@ methods:
               }): Word.Body;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -609,7 +609,7 @@ methods:
   package: word!
   fullName: search(searchText, searchOptions)
   summary: >-
-    Выполняет поиск с указанным Объектом SearchOptions в области объекта body. Результат поиска — это коллекция объектов диапазона.
+    Выполняет поиск с указанными SearchOptions в области объекта тела. Результат поиска — это коллекция объектов диапазона.
 
 
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -704,10 +704,10 @@ methods:
     content: 'set(properties: Interfaces.BodyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="word!Word.Interfaces.BodyUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -716,7 +716,7 @@ methods:
   uid: word!Word.Body#set:member(2)
   package: word!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -733,7 +733,7 @@ methods:
   uid: word!Word.Body#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Word.Body является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Word.Interfaces.BodyData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.Body является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Word.Interfaces.BodyData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -746,7 +746,7 @@ methods:
   uid: word!Word.Body#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во всех вызовах и вне последовательного выполнения пакета ".run" и получаете ошибку InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -759,7 +759,7 @@ methods:
   uid: word!Word.Body#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить, `context.sync()` прежде чем выпуск памяти вступает в силу.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -770,9 +770,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: bd5022e1c2e607d5ab5a066a5258dbce06e06212
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: faf94bf81ed9e1056e4a835f3f721870ded71041
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49855535"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51318727"
