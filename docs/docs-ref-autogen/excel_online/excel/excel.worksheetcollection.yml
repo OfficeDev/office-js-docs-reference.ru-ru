@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.WorksheetCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -124,7 +124,7 @@ properties:
   package: excel!
   fullName: onDeactivated
   summary: >-
-    Возникает, когда любой рабочий день в книге деактивирован.
+    Происходит при отключке любой таблицы в книге.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -173,7 +173,7 @@ properties:
   package: excel!
   fullName: onRowHiddenChanged
   summary: >-
-    Возникает, когда скрытое состояние одной или более строк изменилось на определенном сайте.
+    Происходит, когда скрытое состояние одной или более строк изменилось на определенной таблице.
 
 
     \[[Набор API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -221,7 +221,7 @@ properties:
   package: excel!
   fullName: onSingleClicked
   summary: >-
-    Происходит, когда в коллекции таблицы происходит операция нажатия левой кнопкой мыши или нажатием. Это событие не будет ищите при нажатии в следующих случаях: - Пользователь перетаскивать мышь для выбора нескольких. - Пользователь выбирает ячейку в режиме, если для ссылок на формулы выбраны аргументы ячейки.
+    Происходит, когда в коллекции таблицы происходит операция нажатием левой кнопкой мыши или нажатием на нее. Это событие не будет уволено при нажатии в следующих случаях: — пользователь перетаскивать мышь для нескольких выборов. - Пользователь выбирает ячейку в режиме, когда для ссылок на формулу выбираются аргументы ячейки.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -287,7 +287,7 @@ methods:
     content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательное свойство. Если верно, рассматриваются только видимые таблицы, пропускающие все скрытые.
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -308,7 +308,7 @@ methods:
     content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательное свойство. Если верно, рассматриваются только видимые таблицы, пропускающие все скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -371,7 +371,7 @@ methods:
     content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательный. Если заметен true, рассматриваются только видимые таблицы, пропускающие любые скрытые.
+      description: Необязательное свойство. Если верно, рассматриваются только видимые таблицы, пропускающие все скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -388,7 +388,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.WorksheetCollection:class" />
@@ -405,7 +405,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.WorksheetCollection:class" />
@@ -422,7 +422,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.WorksheetCollection:class" />
@@ -431,7 +431,7 @@ methods:
   uid: excel!Excel.WorksheetCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.WorksheetCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.WorksheetCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.WorksheetCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorksheetCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -442,9 +442,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c49485f48032c6e9effccee8169018ea27f7423b
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 0e29d0c77badea41e30731d8c2f8c6724475c090
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49853680"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51307330"
