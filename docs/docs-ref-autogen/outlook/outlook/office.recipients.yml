@@ -7,12 +7,12 @@ summary: >-
   Представляет получателей элемента. Только в режиме создания.
 
 
-  \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
   **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+  **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 isPreview: false
 isDeprecated: false
 type: interface
@@ -25,7 +25,7 @@ methods:
     Добавляет список получателей к существующим получателям для встречи или сообщения.
 
 
-    Параметр recipients может быть массивом из одного из следующих параметров:
+    Параметр получателей может быть массивом одного из следующих:
 
 
     - строки, содержащие электронные адреса SMTP;
@@ -40,27 +40,27 @@ methods:
     Максимальное число, которое можно добавить:
 
 
-    - Windows: 100 получателей. **Примечание.** Может вызывать API несколько раз, но максимальное количество получателей в целевом поле элемента — 500 получателей.
+    - Windows: 100 получателей. **Примечание.** Можно вызывать API неоднократно, но максимальное число получателей в целевом поле элемента — 500 получателей.
 
 
     - Mac, веб-браузер: 100 получателей
 
 
-    - Другое: без ограничений
+    - Другое: нет ограничений
 
 
-    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 
 
     **Ошибки:**
 
 
-    - `NumberOfRecipientsExceeded`<!-- -->: количество получателей превысило 100 записей.
+    - `NumberOfRecipientsExceeded`<!-- -->: Число получателей превысило 100 записей.
 
 
     #### <a name="examples"></a>Примеры
@@ -102,10 +102,10 @@ methods:
       description: Получатели, которых нужно добавить в список получателей.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: options
-      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
+      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Если добавить получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки.
+      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если добавить получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -118,31 +118,31 @@ methods:
     Возвращает список получателей для встречи или сообщения.
 
 
-    После завершения вызова свойство будет содержать массив объектов `asyncResult.value` [EmailAddressDetails.](xref:outlook!Office.EmailAddressDetails:interface) Ограничения на размер коллекции:
+    После завершения вызова свойство будет содержать массив объектов `asyncResult.value` [EmailAddressDetails.](xref:outlook!Office.EmailAddressDetails:interface) Ограничения размера коллекции:
 
 
     - Windows, Mac, веб-браузер: 500 участников
 
 
-    - Другое: без ограничений
+    - Другое: нет ограничений
 
 
-    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
     parameters:
     - id: options
-      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Свойством `value` результата является массив `EmailAddressDetails` объектов.
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Свойством `value` результата является массив `EmailAddressDetails` объектов.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -155,21 +155,21 @@ methods:
     Возвращает список получателей для встречи или сообщения.
 
 
-    После завершения вызова свойство будет содержать массив объектов `asyncResult.value` [EmailAddressDetails.](xref:outlook!Office.EmailAddressDetails:interface) Ограничения на размер коллекции:
+    После завершения вызова свойство будет содержать массив объектов `asyncResult.value` [EmailAddressDetails.](xref:outlook!Office.EmailAddressDetails:interface) Ограничения размера коллекции:
 
 
     - Windows, Mac, веб-браузер: 500 участников
 
 
-    - Другое: без ограничений
+    - Другое: нет ограничений
 
 
-    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 
 
     #### <a name="examples"></a>Примеры
@@ -282,7 +282,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<EmailAddressDetails[]>) => void): void;'
     parameters:
     - id: callback
-      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Свойством `value` результата является массив `EmailAddressDetails` объектов.
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Свойством `value` результата является массив `EmailAddressDetails` объектов.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -298,7 +298,7 @@ methods:
     Метод `setAsync` перезаписывает текущий список получателей.
 
 
-    Параметр recipients может быть массивом из одного из следующих параметров:
+    Параметр получателей может быть массивом одного из следующих:
 
 
     - строки, содержащие электронные адреса SMTP;
@@ -316,21 +316,21 @@ methods:
     - Windows, Mac, веб-браузер: 100 получателей
 
 
-    - Другое: без ограничений
+    - Другое: нет ограничений
 
 
-    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 
 
     **Ошибки:**
 
 
-    - `NumberOfRecipientsExceeded`<!-- -->: количество получателей превысило 100 записей.
+    - `NumberOfRecipientsExceeded`<!-- -->: Число получателей превысило 100 записей.
   isPreview: false
   isDeprecated: false
   syntax:
@@ -340,10 +340,10 @@ methods:
       description: Получатели, которых нужно добавить в список получателей.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: options
-      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -359,7 +359,7 @@ methods:
     Метод `setAsync` перезаписывает текущий список получателей.
 
 
-    Параметр recipients может быть массивом из одного из следующих параметров:
+    Параметр получателей может быть массивом одного из следующих:
 
 
     - строки, содержащие электронные адреса SMTP;
@@ -377,21 +377,21 @@ methods:
     - Windows, Mac, веб-браузер: 100 получателей
 
 
-    - Другое: без ограничений
+    - Другое: нет ограничений
 
 
-    \[[Набор API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 
 
     **Ошибки:**
 
 
-    - `NumberOfRecipientsExceeded`<!-- -->: количество получателей превысило 100 записей.
+    - `NumberOfRecipientsExceeded`<!-- -->: Число получателей превысило 100 записей.
 
 
     #### <a name="examples"></a>Примеры
@@ -528,15 +528,15 @@ methods:
       description: Получатели, которых нужно добавить в список получателей.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: callback
-      description: После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если задать получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки, произошедшей при добавлении данных.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 64d2d140d07a166308c37722b2d165adbe77e225
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 6c556fbfaee8862a8db41b08606f9b82ffdf9a86
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49855934"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51339883"
