@@ -4,36 +4,36 @@ uid: outlook!Office.InternetHeaders:interface
 package: outlook!
 fullName: Office.InternetHeaders
 summary: >-
-  Объект `InternetHeaders` представляет настраиваемые интернет-headers, которые сохраняются после того, как элемент сообщения покидает Exchange и преобразуется в сообщение MIME. Эти заготки хранятся в сообщении MIME в x-загонах.
+  Объект `InternetHeaders` представляет настраиваемые интернет-заготки, которые сохраняются после того, как элемент сообщения покидает Exchange и преобразуется в сообщение MIME. Эти заготки хранятся в качестве x-headers в сообщении MIME.
 
 
-  Интернет-headers are stored as key/value pairs on a per-item basis.
+  Интернет-заготки хранятся в качестве пар ключей и значений на основе каждого элемента.
 
 
-  **Примечание.** Этот объект предназначен для настройки и получения настраиваемой области в элементе сообщения. Чтобы узнать больше, см. статью "Просмотр и настройка интернет-headers" в сообщении [в надстройки Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/internet-headers)<!-- -->.
+  **Примечание.** Этот объект предназначен для настройки и получения настраиваемой загонки элемента сообщения. Дополнительные дополнительные сообщения см. в [статью Get and set internet headers on a message in an Outlook add-in](https://docs.microsoft.com/office/dev/add-ins/outlook/internet-headers)<!-- -->.
 
 
-  \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
   **Рекомендации**
 
 
-  В настоящее время интернет-загоры являются конечным ресурсом в почтовом ящике пользователя. Когда квота будет исчерпана, вы не сможете создать дополнительные интернет-заголовки в этом почтовом ящике, что может привести к неожиданному поведению клиентов, которые используют эту функцию.
+  В настоящее время интернет-заготки являются конечным ресурсом в почтовом ящике пользователя. Когда квота исчерпана, вы не сможете создать в этом почтовом ящике больше интернет-заголовок, что может привести к неожиданному поведению клиентов, которые полагаются на это, чтобы функционировать.
 
 
-  При создании в надстройки интернет-headers следуйте следующим рекомендациям.
+  При создании надстройки в интернете при создании надстройки применяются следующие рекомендации.
 
 
   - Создайте минимальное количество необходимых загодеров.
 
 
-  - Заглавные имена для повторного использования и обновления их значений позже. Таким образом, избегайте именования headers переменным образом (например, на основе ввода пользователем, точки времени и т. д.).
+  - Заглавные имена, чтобы можно было повторно использовать и обновлять их значения позже. Таким образом, избегайте именования заглавных имен в переменной (например, на основе ввода пользователя, timestamp и т.д.).
 
 
   **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+  **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 isPreview: false
 isDeprecated: false
 type: interface
@@ -43,18 +43,18 @@ methods:
   package: outlook!
   fullName: getAsync(names, options, callback)
   summary: >-
-    С учетом массива имен интернет-названий, этот метод возвращает словарь, содержащий эти интернет-загоны и их значения. Если надстройка запрашивает недоступный x-заголок, он не будет возвращен в результатах.
+    С учетом массива имен интернет-загона этот метод возвращает словарь, содержащий эти интернет-загоны и их значения. Если надстройка запрашивает недоступный x-header, этот x-header не будет возвращен в результатах.
 
 
     **Примечание.** Этот метод предназначен для возврата значений настраиваемого загона, заданной с помощью `setAsync` метода.
 
 
-    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 
 
     #### <a name="examples"></a>Примеры
@@ -82,13 +82,13 @@ methods:
     content: 'getAsync(names: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<InternetHeaders>) => void): void;'
     parameters:
     - id: names
-      description: Имена возвращаемого интернет-headers.
+      description: Имена возвращаемого интернет-загона.
       type: string[]
     - id: options
-      description: 'Необязательный. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
+      description: 'Необязательное свойство. Объект литеральный, содержащий одно или несколько следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана `callback` с помощью одного параметра. `asyncResult`<!-- -->, который является `Office.AsyncResult` объектом.
+      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.InternetHeaders:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -98,18 +98,18 @@ methods:
   package: outlook!
   fullName: removeAsync(names, options, callback)
   summary: >-
-    С учетом массива имен интернет-названий, этот метод удаляет указанные заглавные имена из коллекции загона интернета.
+    С учетом массива имен интернет-загона этот метод удаляет указанные заглавные главы из коллекции загона интернета.
 
 
     **Примечание.** Этот метод предназначен для удаления настраиваемого загона, заданной с помощью `setAsync` метода.
 
 
-    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 
 
     #### <a name="examples"></a>Примеры
@@ -137,13 +137,13 @@ methods:
     content: 'removeAsync(names: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<InternetHeaders>) => void): void;'
     parameters:
     - id: names
-      description: Имена удаляемого интернет-headers.
+      description: Имена удаляемого интернет-загона.
       type: string[]
     - id: options
-      description: 'Необязательный. Литерал объекта, содержащий одно или несколько из следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
+      description: 'Необязательное свойство. Объект литеральный, содержащий одно или несколько следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана `callback` с помощью одного параметра. `asyncResult`<!-- -->, который является `Office.AsyncResult` объектом.
+      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.InternetHeaders:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -153,21 +153,21 @@ methods:
   package: outlook!
   fullName: setAsync(headers, options, callback)
   summary: >-
-    Задает указанные интернет-заготки указанным значениям.
+    Задает указанные интернет-заготки к указанным значениям.
 
 
-    Метод создает новый заголок, если указанный загодер еще не существует; в противном случае существующее значение заменяется `setAsync` новым значением.
+    Метод создает новый загодер, если указанное заглавное заглавное значение еще не существует; в противном случае существующее значение заменяется `setAsync` новым значением.
 
 
     **Примечание.** Этот метод предназначен для настройки значений настраиваемого загона.
 
 
-    \[[Набор API: Mailbox 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** compose
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
 
 
     #### <a name="examples"></a>Примеры
@@ -196,21 +196,21 @@ methods:
     content: 'setAsync(headers: Object, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: headers
-      description: Имена и соответствующие значения устанавливаемого headers. Должен быть объектом словаря, где ключи — это имена интернет-названий, а значения — значениями интернет-названий.
+      description: Имена и соответствующие значения заочная. Должен быть объектом словаря с ключами именами интернет-заготчиков и значениями значений в загонах Интернета.
       type: Object
     - id: options
-      description: 'Необязательный. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ, в методе callback.'
+      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с одним параметром `callback` типа Office.AsyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      description: Необязательное свойство. После завершения метода функция, переданная в параметре, называется с одним параметром `callback` типа Office.AsyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: e666b64587a4509d9d2d850231902c4d8b9ebca4
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: ea3ea93bb176663c086c4478e98984430c6c47a7
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49861296"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51358412"
