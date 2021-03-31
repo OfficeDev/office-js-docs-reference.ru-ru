@@ -4,7 +4,7 @@ uid: word!Word.CustomPropertyCollection:class
 package: word!
 fullName: Word.CustomPropertyCollection
 summary: >-
-  Содержит коллекцию объектов [Word.CustomProperty.](xref:word!Word.CustomProperty:class)
+  Содержит коллекцию [объектов Word.CustomProperty.](xref:word!Word.CustomProperty:class)
 
 
   \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: word!Word.CustomPropertyCollection#context:member
   package: word!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -55,10 +55,10 @@ methods:
     content: 'add(key: string, value: any): Word.CustomProperty;'
     parameters:
     - id: key
-      description: Обязательный. Ключ настраиваемого свойства, нечувствительный к делу.
+      description: Обязательное. Ключ настраиваемого свойства, который является нечувствительным к делу.
       type: string
     - id: value
-      description: Обязательный. Значение настраиваемой свойства.
+      description: Обязательное. Значение настраиваемой свойства.
       type: any
     return:
       type: <xref uid="word!Word.CustomProperty:class" />
@@ -102,7 +102,7 @@ methods:
   package: word!
   fullName: getItem(key)
   summary: >-
-    Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Если настраиваемая свойство не существует, происходит ошибка.
+    Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Если настраиваемая собственность не существует, высылает ошибку.
 
 
     \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
@@ -134,7 +134,7 @@ methods:
     content: 'getItemOrNullObject(key: string): Word.CustomProperty;'
     parameters:
     - id: key
-      description: Обязательный. Ключ, определяемый объектом настраиваемой свойства.
+      description: Обязательное. Ключ, определяемый объектом настраиваемой свойства.
       type: string
     return:
       type: <xref uid="word!Word.CustomProperty:class" />
@@ -151,7 +151,7 @@ methods:
     content: 'load(options?: Word.Interfaces.CustomPropertyCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.CustomPropertyCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="word!Word.Interfaces.CustomPropertyCollectionLoadOptions:interface" /> & <xref uid="word!Word.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="word!Word.CustomPropertyCollection:class" />
@@ -168,7 +168,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Word.CustomPropertyCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="word!Word.CustomPropertyCollection:class" />
@@ -185,7 +185,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Word.CustomPropertyCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="word!Word.CustomPropertyCollection:class" />
@@ -194,7 +194,7 @@ methods:
   uid: word!Word.CustomPropertyCollection#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Word.CustomPropertyCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Word.Interfaces.CustomPropertyCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Word.CustomPropertyCollection` `toJSON` объект JavaScript (введите как `Word.Interfaces.CustomPropertyCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -207,7 +207,7 @@ methods:
   uid: word!Word.CustomPropertyCollection#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во всех вызовах и вне последовательного выполнения пакета ".run" и получаете ошибку InvalidObjectPath при установке свойства или вызове метода для объекта, необходимо было добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -220,7 +220,7 @@ methods:
   uid: word!Word.CustomPropertyCollection#untrack:member(1)
   package: word!
   fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является кратким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Перед тем как выпуск памяти вступает в силу, `context.sync()` необходимо будет вызвать этот вызов.
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -231,9 +231,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 7ea4f08169752a8f083f783659d8331462eedff5
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 5816ae46ee3ece7fb916bffa8fd53960f9ceaa9e
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49854674"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51352175"
