@@ -4,7 +4,7 @@ uid: excel!Excel.AutoFilter:class
 package: excel!
 fullName: Excel.AutoFilter
 summary: >-
-  Представляет объект AutoFilter. Автофильтр превращает значения в столбце Excel в определенные фильтры на основе содержимого ячейки.
+  Представляет объект AutoFilter. AutoFilter превращает значения в столбце Excel в определенные фильтры, основанные на содержимом ячейки.
 
 
   \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.AutoFilter#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -46,7 +46,7 @@ properties:
   package: excel!
   fullName: enabled
   summary: >-
-    Указывает, включен ли автофайл.
+    Указывает, включен ли autoFilter.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -62,7 +62,7 @@ properties:
   package: excel!
   fullName: isDataFiltered
   summary: >-
-    Указывает, есть ли у автофильтра условия фильтрации.
+    Указывает, есть ли у autoFilter критерии фильтрации.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -90,10 +90,10 @@ methods:
     content: 'apply(range: Range | string, columnIndex?: number, criteria?: Excel.FilterCriteria): void;'
     parameters:
     - id: range
-      description: Диапазон, к которому применяется автофайл.
+      description: Диапазон, на который будет применяться autoFilter.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: columnIndex
-      description: Индекс столбца с нуля, к которому применяется автофайлтер.
+      description: Индекс столбца с нулевой базой, к которому применяется AutoFilter.
       type: number
     - id: criteria
       description: Критерии фильтрации.
@@ -140,7 +140,7 @@ methods:
   package: excel!
   fullName: getRangeOrNullObject()
   summary: >-
-    Возвращает объект Range, представляющий диапазон, к которому применяется автофильтр. Если с автофайлтером не связан объект Range, этот метод возвращает объект null.
+    Возвращает объект Range, представляющий диапазон, к которому применяется автофильтр. Если нет объекта Range, связанного с autoFilter, этот метод возвращает объект null.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -164,7 +164,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.AutoFilterLoadOptions): Excel.AutoFilter;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.AutoFilterLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.AutoFilter:class" />
@@ -181,7 +181,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.AutoFilter;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.AutoFilter:class" />
@@ -202,7 +202,7 @@ methods:
               }): Excel.AutoFilter;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -249,7 +249,7 @@ methods:
   uid: excel!Excel.AutoFilter#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.AutoFilter является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.AutoFilterData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.AutoFilter является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.AutoFilterData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -260,9 +260,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c56f98ea8691083783a6794e731aa0d752a8d985
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 4053b85eb5b94e29dd49b3511e14ad11e9c20fe8
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49861233"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51371476"
