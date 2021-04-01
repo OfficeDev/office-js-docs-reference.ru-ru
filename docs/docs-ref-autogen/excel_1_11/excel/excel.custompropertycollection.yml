@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.CustomPropertyCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -54,10 +54,10 @@ methods:
     content: 'add(key: string, value: any): Excel.CustomProperty;'
     parameters:
     - id: key
-      description: Обязательный. Ключ настраиваемого свойства, нечувствительный к делу. За пределами Excel в Интернете клавиша может быть ограничена 255 символами (на других платформах крупные ключи автоматически обрезаются до 255 символов).
+      description: Обязательное. Ключ настраиваемого свойства, который является нечувствительным к делу. Клавиша ограничена 255 символами за пределами Excel в Интернете (более крупные клавиши автоматически обрезаются до 255 символов на других платформах).
       type: string
     - id: value
-      description: Обязательный. Значение настраиваемой свойства. Это значение ограничено 255 символами за пределами Excel в Интернете (большие значения автоматически обрезаются до 255 символов на других платформах).
+      description: Обязательное. Значение настраиваемой свойства. Значение ограничивается 255 символами за пределами Excel в Интернете (более крупные значения автоматически обрезаются до 255 символов на других платформах).
       type: any
     return:
       type: <xref uid="excel!Excel.CustomProperty:class" />
@@ -101,7 +101,7 @@ methods:
   package: excel!
   fullName: getItem(key)
   summary: >-
-    Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Высылает, если настраиваемая свойство не существует.
+    Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Бросает, если настраиваемая свойство не существует.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -133,7 +133,7 @@ methods:
     content: 'getItemOrNullObject(key: string): Excel.CustomProperty;'
     parameters:
     - id: key
-      description: Обязательный. Ключ, определяемый объектом настраиваемой свойства.
+      description: Обязательное. Ключ, определяемый объектом настраиваемой свойства.
       type: string
     return:
       type: <xref uid="excel!Excel.CustomProperty:class" />
@@ -150,7 +150,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.CustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CustomPropertyCollection;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.CustomPropertyCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.CustomPropertyCollection:class" />
@@ -167,7 +167,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.CustomPropertyCollection;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.CustomPropertyCollection:class" />
@@ -184,7 +184,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.CustomPropertyCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.CustomPropertyCollection:class" />
@@ -193,7 +193,7 @@ methods:
   uid: excel!Excel.CustomPropertyCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время `Excel.CustomPropertyCollection` как исходный объект является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип `Excel.Interfaces.CustomPropertyCollectionData`<!-- -->), содержащий массив "items" с неглубокими копиями всех загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.CustomPropertyCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.CustomPropertyCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -204,9 +204,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: fdabf3748dd738249f95ffd0eaa0b818f5ecf7ce
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: f7322a54723bfbd3629ac2b55f083b5fc77faa1b
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49856074"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51377492"
