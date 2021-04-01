@@ -15,8 +15,8 @@
 
 * Чтобы внести небольшие изменения в статью, [внося вклад с помощью GitHub](#contribute-using-github).
 * Чтобы внести большие изменения или изменения, которые связаны с кодом, [внести свой вклад с помощью Git](#contribute-using-git).
-* Сообщение об ошибках документации с помощью проблем GitHub.
-* Запрос новой документации в [Microsoft 365 на сайте Q&A.](https://docs.microsoft.com/answers/products/m365)
+* Сообщайте об ошибках документации, переехав в  раздел **Отзыв** в нижней части затронутой статьи, а затем выберите эту страницу для создания проблемы GitHub. Если это не доступно, создайте новую проблему непосредственно на [GitHub.](https://github.com/OfficeDev/office-js-docs-reference/issues)
+* Запрос новой документации с [помощью проблем GitHub.](https://github.com/OfficeDev/office-js-docs-reference/issues)
 
 ## <a name="contribute-using-github"></a>Внесение изменений с помощью GitHub
 

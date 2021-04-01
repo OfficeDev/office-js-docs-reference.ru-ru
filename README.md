@@ -14,7 +14,7 @@
 
     > **ВАЖНО.** Не изменять файлы в [папке /docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) этого репозитория. Все файлы в этой папке автогенерированы, поэтому их невозможно обновить с помощью запроса на вытягивать. Чтобы запросить изменение любого из файлов в [папке /docs/docs-ref-autogen,](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) отправьте проблему [в](https://github.com/OfficeDev/office-js-docs-reference/issues) этом репозитории. Подробнее о том, как работает инструментарий в этом репозитории, можно узнать [здесь.](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)
 
-* Чтобы узнать о вашем опыте программирования, то, что вы хотели бы видеть в будущих версиях, примерах кода и так далее, введите свои предложения и идеи в [Microsoft 365](https://docs.microsoft.com/answers/products/m365)на Q&A .
+* Чтобы узнать о вашем опыте программирования, о том, что вы хотели бы видеть в будущих версиях, примерах кода и так далее, введите свои предложения и идеи в [Microsoft 365](https://docs.microsoft.com/answers/products/m365)на Q&A .
 
 ## <a name="join-the-microsoft-365-developer-program"></a>Присоединяйтесь к программе разработчиков Microsoft 365
 
