@@ -113,7 +113,7 @@ properties:
   uid: excel!Excel.Line#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом ведущего приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -206,7 +206,7 @@ properties:
   package: excel!
   fullName: id
   summary: >-
-    Указывает идентификатор фигуры.
+    Указывает идентификатор формы.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -222,7 +222,7 @@ properties:
   package: excel!
   fullName: isBeginConnected
   summary: >-
-    Указывает, подключено ли начало указанной линии к фигуре.
+    Указывает, подключено ли начало указанной строки к фигуре.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -238,7 +238,7 @@ properties:
   package: excel!
   fullName: isEndConnected
   summary: >-
-    Указывает, подключен ли конец указанной линии к фигуре.
+    Указывает, подключен ли конец указанной строки к фигуре.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -285,7 +285,7 @@ methods:
       description: Фигура для подключения.
       type: <xref uid="excel!Excel.Shape:class" />
     - id: connectionSite
-      description: Сайт подключения в фигуре, к которой прикреплено начало соединителя. Должно быть integer между 0 (включительно) и количеством сайта подключения указанной фигуры (монопольной).
+      description: Сайт подключения в форме, к которой присоединено начало соединителя. Должна быть вмеха между 0 (включительно) и количеством подключений-сайтов указанной формы (эксклюзив).
       type: number
     return:
       type: void
@@ -309,7 +309,7 @@ methods:
       description: Фигура для подключения.
       type: <xref uid="excel!Excel.Shape:class" />
     - id: connectionSite
-      description: Сайт подключения в фигуре, к которой присоединен конец соединителя. Должно быть integer между 0 (включительно) и количеством сайта подключения указанной фигуры (монопольной).
+      description: Сайт подключения в форме, к которой присоединен конец соединителя. Должна быть вмеха между 0 (включительно) и количеством подключений-сайтов указанной формы (эксклюзив).
       type: number
     return:
       type: void
@@ -360,7 +360,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.LineLoadOptions): Excel.Line;'
     parameters:
     - id: options
-      description: Предоставляет параметры, для которых загружаются свойства объекта.
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
       type: <xref uid="excel!Excel.Interfaces.LineLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.Line:class" />
@@ -377,7 +377,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.Line;'
     parameters:
     - id: propertyNames
-      description: Строка с делегировкой запятой или массив строк, которые указывают свойства для загрузки.
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Line:class" />
@@ -398,7 +398,7 @@ methods:
               }): Excel.Line;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` — это строка с делегировкой запятой, которая указывает свойства для загрузки и является строкой с делегировкой запятой, которая определяет свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
       type: >-
         {
                     select?: string;
@@ -423,10 +423,10 @@ methods:
     content: 'set(properties: Interfaces.LineUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Объект JavaScript со структурированными свойствами изоморфически перенастройно со свойствами объекта, для которого вызван метод.
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
       type: <xref uid="excel!Excel.Interfaces.LineUpdateData:interface" />
     - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить свойства только для чтения.
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
       type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
     return:
       type: void
@@ -435,7 +435,7 @@ methods:
   uid: excel!Excel.Line#set:member(2)
   package: excel!
   fullName: set(properties)
-  summary: Задает несколько свойств объекта одновременно на основе существующего загруженного объекта.
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -452,7 +452,7 @@ methods:
   uid: excel!Excel.Line#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: 'Переопределяет метод JavaScript, чтобы обеспечить более полезные выходные данные при передании объекта `toJSON()` API `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, `toJSON` который передается ему.) В то время как исходный объект Excel.Line является объектом API, метод возвращает обычный объект `toJSON` JavaScript (тип: `Excel.Interfaces.LineData`<!-- -->), который содержит неглубокие копии всех загруженных свойств из исходного объекта.'
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.Line является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.LineData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -463,9 +463,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 3979334c17ea159dc07fb8ac01159cd742b20ae6
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 1602897bc54cf10e33a58e80b60b328812d972b3
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49854702"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51369404"

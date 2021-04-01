@@ -4,15 +4,15 @@ uid: outlook!Office.CustomProperties:interface
 package: outlook!
 fullName: Office.CustomProperties
 summary: >-
-  Объект `CustomProperties` представляет настраиваемые свойства, характерные для конкретного элемента и почтовой надстройки Outlook. Например, может возникнуть необходимость в почтовой надстройке, сохраняющей некоторые данные текущего электронного сообщения, которое активировало надстройку. Если впоследствии пользователь снова откроет это сообщение и активирует почтовую надстройку, она сможет извлечь данные, сохраненные в виде настраиваемых свойств. **Важно!** Максимальная длина объекта `CustomProperties` JSON составляет 2500 символов.
+  Объект `CustomProperties` представляет настраиваемые свойства, характерные для конкретного элемента и почтовой надстройки Outlook. Например, может возникнуть необходимость в почтовой надстройке, сохраняющей некоторые данные текущего электронного сообщения, которое активировало надстройку. Если впоследствии пользователь снова откроет это сообщение и активирует почтовую надстройку, она сможет извлечь данные, сохраненные в виде настраиваемых свойств. **Важно:** максимальная длина объекта `CustomProperties` JSON — 2500 символов.
 
 
-  Так как Outlook для Mac не кэшет настраиваемые свойства, если сеть пользователя выходит из системы, почтовые надстройки не смогут получить доступ к своим настраиваемой свойствам.
+  Так как Outlook на Mac не кэшет настраиваемые свойства, если сеть пользователя выходит из него, почтовые надстройки не могут получить доступ к настраиваемой свойствам.
 remarks: >-
   **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+  **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
 isPreview: false
 isDeprecated: false
 type: interface
@@ -26,7 +26,7 @@ methods:
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -69,7 +69,7 @@ methods:
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -92,7 +92,7 @@ methods:
     content: 'remove(name: string): void;'
     parameters:
     - id: name
-      description: Свойство, `name` удаляемого.
+      description: Свойство, `name` необходимое для удаления.
       type: string
     return:
       type: void
@@ -108,12 +108,12 @@ methods:
     Необходимо вызвать метод `saveAsync`, чтобы сохранить все изменения, внесенные с помощью метода `set` или `remove` объекта `CustomProperties`. Сохранение — асинхронное действие.
 
 
-    Для функции перенаправки вызовов лучше проверять и обрабатывать ошибки `saveAsync`<!-- -->. В частности, надстройка чтения может активироваться, когда подключенный пользователь открыл форму чтения, а затем отключился. Если надстройка вызывает `saveAsync` в отключенном состоянии, `saveAsync` возвращает ошибку. Метод обратного вызова должен обрабатывать эту ошибку соответствующим образом.
+    Это хорошая практика, чтобы проверить функцию вызова и обрабатывать ошибки из `saveAsync`<!-- -->. В частности, надстройка чтения может активироваться, когда подключенный пользователь открыл форму чтения, а затем отключился. Если надстройка вызывает `saveAsync` в отключенном состоянии, `saveAsync` возвращает ошибку. Метод обратного вызова должен обрабатывать эту ошибку соответствующим образом.
   remarks: >-
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -176,10 +176,10 @@ methods:
     content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void, asyncContext?: any): void;'
     parameters:
     - id: callback
-      description: Необязательный. После завершения работы метода функция, переданная в параметре, будет вызвана с `callback` одним параметром типа `Office.AsyncResult`<!-- -->.
+      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     - id: asyncContext
-      description: Необязательный. Данные о состоянии, передаваемые в метод обратного вызова.
+      description: Необязательное свойство. Данные о состоянии, передаваемые в метод обратного вызова.
       type: any
     return:
       type: void
@@ -200,7 +200,7 @@ methods:
     **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
-    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
 
 
     #### <a name="examples"></a>Примеры
@@ -234,9 +234,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 6516b5b5199abd330b9c53246d241c0ce689c529
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: bee6f8552d5d84b0f1001623cbfec0f6e3f5e14e
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852707"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51368816"
