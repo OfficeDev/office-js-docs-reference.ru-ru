@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: address
   summary: >-
-    Указывает ссылку диапазона в стиле A1. Значение адреса будет содержать справочный лист (например, "Sheet1! A1:B4").
+    Указывает ссылку диапазона в стиле A1. Значение адреса содержит ссылку на лист (например, "Sheet1! A1:B4").
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -34,7 +34,7 @@ properties:
   package: excel!
   fullName: addressLocal
   summary: >-
-    Указывает ссылку диапазона для указанного диапазона на языке пользователя.
+    Представляет ссылку диапазона для указанного диапазона на языке пользователя.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -114,7 +114,7 @@ properties:
   package: excel!
   fullName: conditionalFormats
   summary: >-
-    Коллекция условныхформатов, пересекает диапазон.
+    Эта коллекция `ConditionalFormats` пересекает диапазон.
 
 
     \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -401,7 +401,7 @@ properties:
   package: excel!
   fullName: style
   summary: >-
-    Представляет стиль текущего диапазона. Если стили ячеек несовместимы, null возвращается. Для пользовательских стилей будет возвращено имя стиля. Для встроенных стилей будет возвращена строка, представляющая значение в enum BuiltInStyle.
+    Представляет стиль текущего диапазона. Если стили ячеек несовместимы, `null` они будут возвращены. Для пользовательских стилей будет возвращено имя стиля. Для встроенных стилей будет возвращена строка, представляющая значение в `BuiltInStyle` enum.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -418,7 +418,7 @@ properties:
   package: excel!
   fullName: text
   summary: >-
-    Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. Замена знака, которая происходит в пользовательском интерфейсе Excel, не повлияет на текстовое \# значение, возвращаемую API.
+    Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. Замена знака номера () в пользовательском интерфейсе Excel не повлияет на текстовое значение, возвращаемого \# API.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -434,7 +434,7 @@ properties:
   package: excel!
   fullName: values
   summary: >-
-    Представляет необработанные значения указанного диапазона. Могут возвращаться строковые и числовые данные, а также логические значения. Ячейки, содержащие ошибку, вернут строку ошибки.
+    Представляет необработанные значения указанного диапазона. Возвращенные данные могут быть строкой, номером или boolean. Ячейки, содержащие ошибку, вернут строку ошибки. Если возвращенное значение начинается с плюса ("+"), минуса ("-" или равного знака ("="), Excel интерпретирует это значение как формулу.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -483,7 +483,7 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillType)
   summary: >-
-    Заполняет диапазон от текущего диапазона до диапазона назначения с помощью указанной логики AutoFill. Диапазон назначения может быть null или расширять источник горизонтально или вертикально. Дисконтные диапазоны не поддерживаются.
+    Заполняет диапазон от текущего диапазона до диапазона назначения с помощью указанной логики AutoFill. Диапазон назначения может быть `null`<!-- -->, или может расширить источник горизонтально или вертикально. Дисконтные диапазоны не поддерживаются.
 
 
     Дополнительные сведения читайте в [публикации "Использование автозаполненки" и "Заполнение вспышки".](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
@@ -497,10 +497,10 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillType?: Excel.AutoFillType): void;'
     parameters:
     - id: destinationRange
-      description: Диапазон назначения для автозаполнеть. Если диапазон назначения null, данные заполняются на основе окружающих ячеек (это поведение при двойном нажатии ручки заполнения диапазона пользовательского интерфейса).
+      description: Диапазон назначения для AutoFill. Если диапазон назначения `null`<!-- -->, данные заполняются на основе окружающих ячеек (это поведение при двойном нажатии ручки заполнения диапазона пользовательского интерфейса).
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillType
-      description: Тип автозаполнена. Указывает, как должен быть заполнен диапазон назначения в зависимости от содержимого текущего диапазона. По умолчанию это "FillDefault".
+      description: Тип AutoFill. Указывает, как должен быть заполнен диапазон назначения в зависимости от содержимого текущего диапазона. По умолчанию это "FillDefault".
       type: <xref uid="excel!Excel.AutoFillType:enum" />
     return:
       type: void
@@ -510,7 +510,7 @@ methods:
   package: excel!
   fullName: autoFill(destinationRange, autoFillTypeString)
   summary: >-
-    Заполняет диапазон от текущего диапазона до диапазона назначения с помощью указанной логики AutoFill. Диапазон назначения может быть null или расширять источник горизонтально или вертикально. Дисконтные диапазоны не поддерживаются.
+    Заполняет диапазон от текущего диапазона до диапазона назначения с помощью указанной логики AutoFill. Диапазон назначения может быть `null`<!-- -->, или может расширить источник горизонтально или вертикально. Дисконтные диапазоны не поддерживаются.
 
 
     Дополнительные сведения читайте в [публикации "Использование автозаполненки" и "Заполнение вспышки".](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
@@ -524,10 +524,10 @@ methods:
     content: 'autoFill(destinationRange?: Range | string, autoFillTypeString?: "FillDefault" | "FillCopy" | "FillSeries" | "FillFormats" | "FillValues" | "FillDays" | "FillWeekdays" | "FillMonths" | "FillYears" | "LinearTrend" | "GrowthTrend" | "FlashFill"): void;'
     parameters:
     - id: destinationRange
-      description: Диапазон назначения для автозаполнеть. Если диапазон назначения null, данные заполняются на основе окружающих ячеек (это поведение при двойном нажатии ручки заполнения диапазона пользовательского интерфейса).
+      description: Диапазон назначения для AutoFill. Если диапазон назначения `null`<!-- -->, данные заполняются на основе окружающих ячеек (это поведение при двойном нажатии ручки заполнения диапазона пользовательского интерфейса).
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: autoFillTypeString
-      description: Тип автозаполнена. Указывает, как должен быть заполнен диапазон назначения в зависимости от содержимого текущего диапазона. По умолчанию это "FillDefault".
+      description: Тип AutoFill. Указывает, как должен быть заполнен диапазон назначения в зависимости от содержимого текущего диапазона. По умолчанию это "FillDefault".
       type: "\"FillDefault\" | \"FillCopy\" | \"FillSeries\" | \"FillFormats\" | \"FillValues\" | \"FillDays\" | \"FillWeekdays\" | \"FillMonths\" | \"FillYears\" | \"LinearTrend\" | \"GrowthTrend\" | \"FlashFill\""
     return:
       type: void
@@ -565,7 +565,7 @@ methods:
     content: 'clear(applyTo?: Excel.ClearApplyTo): void;'
     parameters:
     - id: applyTo
-      description: Необязательный параметр. Определяет тип действия очистки. Подробные сведения см. в excel.ClearApplyTo.
+      description: Необязательный параметр. Определяет тип действия очистки. Подробные `Excel.ClearApplyTo` сведения см. в материале.
       type: <xref uid="excel!Excel.ClearApplyTo:enum" />
     return:
       type: void
@@ -586,7 +586,7 @@ methods:
     content: 'clear(applyToString?: "All" | "Formats" | "Contents" | "Hyperlinks" | "RemoveHyperlinks"): void;'
     parameters:
     - id: applyToString
-      description: Необязательный параметр. Определяет тип действия очистки. Подробные сведения см. в excel.ClearApplyTo.
+      description: Необязательный параметр. Определяет тип действия очистки. Подробные `Excel.ClearApplyTo` сведения см. в материале.
       type: "\"All\" | \"Formats\" | \"Contents\" | \"Hyperlinks\" | \"RemoveHyperlinks\""
     return:
       type: void
@@ -596,7 +596,7 @@ methods:
   package: excel!
   fullName: convertDataTypeToText()
   summary: >-
-    Преобразует диапазон ячеек с типами данных в текст.
+    Преобразует ячейки диапазона с типами данных в текст.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -613,7 +613,7 @@ methods:
   package: excel!
   fullName: convertToLinkedDataType(serviceID, languageCulture)
   summary: >-
-    Преобразует ячейки диапазона в связанный тип данных на листе.
+    Преобразует ячейки диапазона в связанные типы данных в таблице.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -624,7 +624,7 @@ methods:
     content: 'convertToLinkedDataType(serviceID: number, languageCulture: string): void;'
     parameters:
     - id: serviceID
-      description: Service ID, который будет использоваться для запроса данных.
+      description: ID службы, который будет использоваться для запроса данных.
       type: number
     - id: languageCulture
       description: Языковая культура для запроса службы.
@@ -637,7 +637,7 @@ methods:
   package: excel!
   fullName: copyFrom(sourceRange, copyType, skipBlanks, transpose)
   summary: >-
-    Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий диапазон. Диапазон назначения может быть иным размером, чем исходный диапазон или RangeAreas. Назначение будет расширяться автоматически, если оно меньше источника.
+    Копирует данные ячейки или форматирование из диапазона исходных данных или `RangeAreas` текущего диапазона. Диапазон назначения может быть иным размером, чем исходный диапазон или `RangeAreas`<!-- -->. Назначение будет расширяться автоматически, если оно меньше источника.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -648,7 +648,7 @@ methods:
     content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyType?: Excel.RangeCopyType, skipBlanks?: boolean, transpose?: boolean): void;'
     parameters:
     - id: sourceRange
-      description: Исходный диапазон или RangeAreas для копирования. Если источник RangeAreas имеет несколько диапазонов, их форму необходимо создать, удалив полные ряды или столбцы из прямоугольного диапазона.
+      description: Диапазон источника или `RangeAreas` копирование. Если источник имеет несколько диапазонов, их форму необходимо создать путем удаления полных рядов или столбцов `RangeAreas` из прямоугольного диапазона.
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     - id: copyType
       description: Тип данных ячейки или форматирование для копирования. По умолчанию это "Все".
@@ -667,7 +667,7 @@ methods:
   package: excel!
   fullName: copyFrom(sourceRange, copyTypeString, skipBlanks, transpose)
   summary: >-
-    Копирует данные ячейки или форматирование из исходного диапазона или объекта RangeAreas в текущий диапазон. Диапазон назначения может быть иным размером, чем исходный диапазон или RangeAreas. Назначение будет расширяться автоматически, если оно меньше источника.
+    Копирует данные ячейки или форматирование из диапазона исходных данных или `RangeAreas` текущего диапазона. Диапазон назначения может быть иным размером, чем исходный диапазон или `RangeAreas`<!-- -->. Назначение будет расширяться автоматически, если оно меньше источника.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -678,7 +678,7 @@ methods:
     content: 'copyFrom(sourceRange: Range | RangeAreas | string, copyTypeString?: "All" | "Formulas" | "Values" | "Formats", skipBlanks?: boolean, transpose?: boolean): void;'
     parameters:
     - id: sourceRange
-      description: Исходный диапазон или RangeAreas для копирования. Если источник RangeAreas имеет несколько диапазонов, их форму необходимо создать, удалив полные ряды или столбцы из прямоугольного диапазона.
+      description: Диапазон источника или `RangeAreas` копирование. Если источник имеет несколько диапазонов, их форму необходимо создать путем удаления полных рядов или столбцов `RangeAreas` из прямоугольного диапазона.
       type: <xref uid="excel!Excel.Range:class" /> | <xref uid="excel!Excel.RangeAreas:class" /> | string
     - id: copyTypeString
       description: Тип данных ячейки или форматирование для копирования. По умолчанию это "Все".
@@ -708,7 +708,7 @@ methods:
     content: 'delete(shift: Excel.DeleteShiftDirection): void;'
     parameters:
     - id: shift
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в публикации Excel.DeleteShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.DeleteShiftDirection` сведения см. в материале.
       type: <xref uid="excel!Excel.DeleteShiftDirection:enum" />
     return:
       type: void
@@ -729,7 +729,7 @@ methods:
     content: 'delete(shiftString: "Up" | "Left"): void;'
     parameters:
     - id: shiftString
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в публикации Excel.DeleteShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.DeleteShiftDirection` сведения см. в материале.
       type: "\"Up\" | \"Left\""
     return:
       type: void
@@ -753,17 +753,17 @@ methods:
       description: Строка для поиска.
       type: string
     - id: criteria
-      description: Дополнительные критерии поиска, в том числе направление поиска и соответствие поиска всей ячейке или конфиденциальности.
+      description: Дополнительные критерии поиска, включая направление поиска и соответствие поиска всей ячейке или учет учетных данных.
       type: <xref uid="excel!Excel.SearchCriteria:interface" />
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "Объект Range, представляющий первую ячейку, содержащую значение, совпадающие с текстом и критериями поиска.\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-find.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const table = sheet.tables.getItem(\"ExpensesTable\");\n    const searchRange = table.getRange();\n\n    // NOTE: If no match is found, an ItemNotFound error\n    // is thrown when Range.find is evaluated.\n    const foundRange = searchRange.find($(\"#searchText\").text(), {\n        completeMatch: isCompleteMatchToggle,\n        matchCase: isMatchCaseToggle,\n        searchDirection: searchDirectionToggle\n    });\n    \n    foundRange.load(\"address\");\n    await context.sync();\n\n\n    console.log(foundRange.address);\n});\n```"
+      description: "Объект, `Range` представляющий первую ячейку, содержащую значение, совпадающие с текстом и критериями поиска.\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-find.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const table = sheet.tables.getItem(\"ExpensesTable\");\n    const searchRange = table.getRange();\n\n    // NOTE: If no match is found, an ItemNotFound error\n    // is thrown when Range.find is evaluated.\n    const foundRange = searchRange.find($(\"#searchText\").text(), {\n        completeMatch: isCompleteMatchToggle,\n        matchCase: isMatchCaseToggle,\n        searchDirection: searchDirectionToggle\n    });\n    \n    foundRange.load(\"address\");\n    await context.sync();\n\n\n    console.log(foundRange.address);\n});\n```"
 - name: findOrNullObject(text, criteria)
   uid: excel!Excel.Range#findOrNullObject:member(1)
   package: excel!
   fullName: findOrNullObject(text, criteria)
   summary: >-
-    Находит определенную строку на основе указанных условий. Если текущий диапазон больше одной ячейки, поиск будет ограничен этим диапазоном, иначе поиск будет охватывать весь лист, начиная с этой ячейки. Если совпадений нет, эта функция возвращает объект null.
+    Находит определенную строку на основе указанных условий. Если текущий диапазон больше одной ячейки, поиск будет ограничен этим диапазоном, иначе поиск будет охватывать весь лист, начиная с этой ячейки. Если совпадений нет, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -777,17 +777,17 @@ methods:
       description: Строка для поиска.
       type: string
     - id: criteria
-      description: Дополнительные критерии поиска, в том числе направление поиска и соответствие поиска всей ячейке или конфиденциальности.
+      description: Дополнительные критерии поиска, включая направление поиска и соответствие поиска всей ячейке или учет учетных данных.
       type: <xref uid="excel!Excel.SearchCriteria:interface" />
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "Диапазон, который соответствует критериям поиска.\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-find.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const table = sheet.tables.getItem(\"ExpensesTable\");\n    const searchRange = table.getRange();\n    const foundRange = searchRange.findOrNullObject($(\"#searchText\").text(), {\n        completeMatch: isCompleteMatchToggle,\n        matchCase: isMatchCaseToggle,\n        searchDirection: searchDirectionToggle\n    });\n    \n    foundRange.load(\"address\");\n    await context.sync();\n\n    if (foundRange.isNullObject) {\n        console.log(\"Text not found\");\n    } else {\n        console.log(foundRange.address);\n    }\n});\n```"
+      description: "Тот, `Range` который соответствует критериям поиска.\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-find.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const table = sheet.tables.getItem(\"ExpensesTable\");\n    const searchRange = table.getRange();\n    const foundRange = searchRange.findOrNullObject($(\"#searchText\").text(), {\n        completeMatch: isCompleteMatchToggle,\n        matchCase: isMatchCaseToggle,\n        searchDirection: searchDirectionToggle\n    });\n    \n    foundRange.load(\"address\");\n    await context.sync();\n\n    if (foundRange.isNullObject) {\n        console.log(\"Text not found\");\n    } else {\n        console.log(foundRange.address);\n    }\n});\n```"
 - name: flashFill()
   uid: excel!Excel.Range#flashFill:member(1)
   package: excel!
   fullName: flashFill()
   summary: >-
-    Выполняет мгновенное заполнение текущего диапазона. Функция мгновенного заполнения автоматически подставляет данные, когда обнаруживает закономерность, поэтому диапазон должен состоять из одного столбца со смежными данными, чтобы выявить закономерность.
+    Делает флэш-заполнение для текущего диапазона. Flash Fill автоматически заполняет данные, когда он чувствует шаблон, поэтому диапазон должен быть одним диапазоном столбцов и иметь данные вокруг него, чтобы найти шаблон.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -804,7 +804,7 @@ methods:
   package: excel!
   fullName: getAbsoluteResizedRange(numRows, numColumns)
   summary: >-
-    Получает объект Range с той же верхней левой ячейкой, что и текущий объект Range, но с указанным количеством строк и столбцов.
+    Получает объект с той же верхней левой ячейкой, что и текущий объект, но с указанным числом `Range` `Range` строк и столбцов.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -828,7 +828,7 @@ methods:
   package: excel!
   fullName: getBoundingRect(anotherRange)
   summary: >-
-    Возвращает наименьший объект диапазона, включающий в себя заданные диапазоны. Например, GetBoundingRect для "B2:C5" и "D10:E15" возвращает значение "B2:E15".
+    Возвращает наименьший объект диапазона, включающий в себя заданные диапазоны. Например, `GetBoundingRect` "B2:C5" и "D10:E15" — это "B2:E15".
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -839,7 +839,7 @@ methods:
     content: 'getBoundingRect(anotherRange: Range | string): Excel.Range;'
     parameters:
     - id: anotherRange
-      description: Объект диапазона либо адрес или имя диапазона.
+      description: Имя объекта диапазона, адреса или диапазона.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -971,7 +971,7 @@ methods:
   package: excel!
   fullName: getColumnsAfter(count)
   summary: >-
-    Возвращает определенное количество столбцов справа от текущего объекта Range.
+    Получает определенное количество столбцов справа от текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -992,7 +992,7 @@ methods:
   package: excel!
   fullName: getColumnsBefore(count)
   summary: >-
-    Возвращает определенное количество столбцов слева от текущего объекта Range.
+    Получает определенное количество столбцов слева от текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1047,7 +1047,7 @@ methods:
   package: excel!
   fullName: getImage()
   summary: >-
-    Отрисовка диапазона в качестве изображения png с кодом base64. **Важно.** Этот API в настоящее время неподтверчен в Excel для Mac. Для [текущего состояния посетите OfficeDev/office-js Issue \# 235.](https://github.com/OfficeDev/office-js/issues/235)
+    Отрисовка диапазона в качестве изображения png с кодом base64. *Important**: Этот API в настоящее время неподтверчен в Excel для Mac. Для [текущего состояния посетите OfficeDev/office-js Issue \# 235.](https://github.com/OfficeDev/office-js/issues/235)
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1085,7 +1085,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    Возвращает объект диапазона, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не найдено, возвращает пустой объект.
+    Возвращает объект диапазона, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не обнаружено, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1181,7 +1181,7 @@ methods:
   package: excel!
   fullName: getResizedRange(deltaRows, deltaColumns)
   summary: >-
-    Возвращает объект Range, подобный текущему объекту Range, но увеличенный (или уменьшенный) на некоторое количество строк и столбцов от правого нижнего угла.
+    Получает объект, похожий на текущий объект, но с его нижним правым углом, расширенным (или законтрактованым) рядом строк `Range` `Range` и столбцов.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1226,7 +1226,7 @@ methods:
   package: excel!
   fullName: getRowProperties(rowPropertiesLoadOptions)
   summary: >-
-    Возвращает одномерный массив, в который включены данные для шрифта, заливки, границ, выравнивания и других свойств каждой строки. Для свойств, не являющихся одинаковыми в каждой ячейке определенной строки, возвращается значение null.
+    Возвращает одномерный массив, в который включены данные для шрифта, заливки, границ, выравнивания и других свойств каждой строки. Для свойств, которые не соответствуют каждой ячейке в данной строке, `null` будут возвращены.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1247,7 +1247,7 @@ methods:
   package: excel!
   fullName: getRowsAbove(count)
   summary: >-
-    Возвращает определенное количество строк над текущим объектом Range.
+    Получает определенное количество строк выше текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1268,7 +1268,7 @@ methods:
   package: excel!
   fullName: getRowsBelow(count)
   summary: >-
-    Возвращает определенное количество строк под текущим объектом Range.
+    Получает определенное количество строк ниже текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1289,7 +1289,7 @@ methods:
   package: excel!
   fullName: getSpecialCells(cellType, cellValueType)
   summary: >-
-    Получает объект RangeAreas, состоящий из одного или нескольких прямоугольных диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если не будут найдены специальные ячейки, будет выброшена ошибка ItemNotFound.
+    Получает объект, состоящий из одного или нескольких прямоугольных диапазонов, который представляет все ячейки, которые соответствуют указанному `RangeAreas` типу и значению. Если специальные ячейки не найдены, `ItemNotFound` будет выброшена ошибка.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1303,7 +1303,7 @@ methods:
       description: Тип ячеек, которые необходимо включить.
       type: <xref uid="excel!Excel.SpecialCellType:enum" />
     - id: cellValueType
-      description: Если cellType — это константы или формулы, этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
+      description: Если `cellType` либо, `constants` либо `formulas`<!-- -->Этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
       type: <xref uid="excel!Excel.SpecialCellValueType:enum" />
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1313,7 +1313,7 @@ methods:
   package: excel!
   fullName: getSpecialCells(cellTypeString, cellValueType)
   summary: >-
-    Получает объект RangeAreas, состоящий из одного или нескольких прямоугольных диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если не будут найдены специальные ячейки, будет выброшена ошибка ItemNotFound.
+    Получает объект, состоящий из одного или нескольких прямоугольных диапазонов, который представляет все ячейки, которые соответствуют указанному `RangeAreas` типу и значению. Если специальные ячейки не найдены, `ItemNotFound` будет выброшена ошибка.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1327,7 +1327,7 @@ methods:
       description: Тип ячеек, которые необходимо включить.
       type: "\"ConditionalFormats\" | \"DataValidations\" | \"Blanks\" | \"Constants\" | \"Formulas\" | \"SameConditionalFormat\" | \"SameDataValidation\" | \"Visible\""
     - id: cellValueType
-      description: Если cellType — это константы или формулы, этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
+      description: Если `cellType` либо, `constants` либо `formulas`<!-- -->Этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
       type: "\"All\" | \"Errors\" | \"ErrorsLogical\" | \"ErrorsNumbers\" | \"ErrorsText\" | \"ErrorsLogicalNumber\" | \"ErrorsLogicalText\" | \"ErrorsNumberText\" | \"Logical\" | \"LogicalNumbers\" | \"LogicalText\" | \"LogicalNumbersText\" | \"Numbers\" | \"NumbersText\" | \"Text\""
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1337,7 +1337,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellType, cellValueType)
   summary: >-
-    Получает объект RangeAreas, состоящий из одного или нескольких диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если специальные ячейки не найдены, объект null будет возвращен.
+    Получает объект, состоящий из одного или нескольких диапазонов, который представляет все ячейки, которые соответствуют указанному `RangeAreas` типу и значению. Если специальные ячейки не найдены, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1351,7 +1351,7 @@ methods:
       description: Тип ячеек, которые необходимо включить.
       type: <xref uid="excel!Excel.SpecialCellType:enum" />
     - id: cellValueType
-      description: Если cellType — это константы или формулы, этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
+      description: Если `cellType` либо, `constants` либо `formulas`<!-- -->Этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
       type: <xref uid="excel!Excel.SpecialCellValueType:enum" />
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1361,7 +1361,7 @@ methods:
   package: excel!
   fullName: getSpecialCellsOrNullObject(cellTypeString, cellValueType)
   summary: >-
-    Получает объект RangeAreas, состоящий из одного или нескольких диапазонов, представляющих все ячейки, которые соответствуют указанному типу и значению. Если специальные ячейки не найдены, объект null будет возвращен.
+    Получает объект, состоящий из одного или нескольких диапазонов, который представляет все ячейки, которые соответствуют указанному `RangeAreas` типу и значению. Если специальные ячейки не найдены, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1375,7 +1375,7 @@ methods:
       description: Тип ячеек, которые необходимо включить.
       type: "\"ConditionalFormats\" | \"DataValidations\" | \"Blanks\" | \"Constants\" | \"Formulas\" | \"SameConditionalFormat\" | \"SameDataValidation\" | \"Visible\""
     - id: cellValueType
-      description: Если cellType — это константы или формулы, этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
+      description: Если `cellType` либо, `constants` либо `formulas`<!-- -->Этот аргумент используется для определения типов ячеек, которые необходимо включить в результат. Эти значения можно объединить, чтобы вернуть несколько типов. По умолчанию необходимо выбрать все константы или формулы независимо от типа.
       type: "\"All\" | \"Errors\" | \"ErrorsLogical\" | \"ErrorsNumbers\" | \"ErrorsText\" | \"ErrorsLogicalNumber\" | \"ErrorsLogicalText\" | \"ErrorsNumberText\" | \"Logical\" | \"LogicalNumbers\" | \"LogicalText\" | \"LogicalNumbersText\" | \"Numbers\" | \"NumbersText\" | \"Text\""
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
@@ -1385,7 +1385,7 @@ methods:
   package: excel!
   fullName: getSurroundingRegion()
   summary: >-
-    Возвращает объект Range, представляющий область вокруг верхней левой ячейки в этом диапазоне. Это диапазон, ограниченный любым сочетанием пустых строк и столбцов, относящихся к этому диапазону.
+    Возвращает `Range` объект, который представляет окружающий регион для верхнего левого элемента в этом диапазоне. Это диапазон, ограниченный любым сочетанием пустых строк и столбцов, относящихся к этому диапазону.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1413,7 +1413,7 @@ methods:
     content: 'getTables(fullyContained?: boolean): Excel.TableScopedCollection;'
     parameters:
     - id: fullyContained
-      description: "Если верно, возвращаются только таблицы, полностью содержащиеся в пределах диапазона. Значение по умолчанию \x97 false."
+      description: Если `true`<!-- -->возвращает только таблицы, полностью содержащиеся в пределах диапазона. Значение по умолчанию `false`<!-- -->.
       type: boolean
     return:
       type: <xref uid="excel!Excel.TableScopedCollection:class" />
@@ -1423,7 +1423,7 @@ methods:
   package: excel!
   fullName: getUsedRange(valuesOnly)
   summary: >-
-    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция выдает ошибку ItemNotFound.
+    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция будет выбрасывать `ItemNotFound` ошибку.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1444,7 +1444,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция возвращает пустой объект.
+    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1482,7 +1482,7 @@ methods:
   package: excel!
   fullName: insert(shift)
   summary: >-
-    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект Range в пустом месте.
+    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект `Range` в пустом пространстве.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1493,7 +1493,7 @@ methods:
     content: 'insert(shift: Excel.InsertShiftDirection): Excel.Range;'
     parameters:
     - id: shift
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в excel.InsertShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.InsertShiftDirection` сведения см. в материале.
       type: <xref uid="excel!Excel.InsertShiftDirection:enum" />
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1503,7 +1503,7 @@ methods:
   package: excel!
   fullName: insert(shiftString)
   summary: >-
-    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект Range в пустом месте.
+    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект `Range` в пустом пространстве.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1514,7 +1514,7 @@ methods:
     content: 'insert(shiftString: "Down" | "Right"): Excel.Range;'
     parameters:
     - id: shiftString
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в excel.InsertShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.InsertShiftDirection` сведения см. в материале.
       type: "\"Down\" | \"Right\""
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -1594,7 +1594,7 @@ methods:
     content: 'merge(across?: boolean): void;'
     parameters:
     - id: across
-      description: Необязательный параметр. Установите значение true, чтобы объединить ячейки в каждой строке заданного диапазона как отдельные объединенные ячейки. Значение по умолчанию — false.
+      description: Необязательно. Установите `true` для объединения ячеек в каждом ряду указанного диапазона в качестве отдельных объединенных ячеек. Значение по умолчанию `false`<!-- -->.
       type: boolean
     return:
       type: void
@@ -1642,7 +1642,7 @@ methods:
       description: Строка, чтобы найти.
       type: string
     - id: replacement
-      description: Строка для замены оригинала.
+      description: Строка, которая заменяет исходную строку.
       type: string
     - id: criteria
       description: Дополнительные критерии замены.
@@ -1709,7 +1709,7 @@ methods:
   package: excel!
   fullName: setCellProperties(cellPropertiesData)
   summary: >-
-    Обновляет диапазон на основе двумерного массива свойств ячейки, в который включены такие элементы, как шрифт, заливка, границы, выравнивание и т. д.
+    Обновляет диапазон на основе 2D-массива свойств ячейки, инкапсулируя такие вещи, как шрифт, заливка, границы и выравнивание.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1730,7 +1730,7 @@ methods:
   package: excel!
   fullName: setColumnProperties(columnPropertiesData)
   summary: >-
-    Обновляет диапазон на основе одномерного массива свойств столбца, в который включены такие элементы, как шрифт, заливка, границы, выравнивание и т. д.
+    Обновляет диапазон на основе одномерного массива свойств столбцов, инкапсулируя такие вещи, как шрифт, заливка, границы и выравнивание.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1768,7 +1768,7 @@ methods:
   package: excel!
   fullName: setRowProperties(rowPropertiesData)
   summary: >-
-    Обновляет диапазон на основе одномерного массива свойств строки, в который включены такие элементы, как шрифт, заливка, границы, выравнивание и т. д.
+    Обновляет диапазон на основе одномерного массива свойств строки, инкапсулируя такие вещи, как шрифт, заливка, границы и выравнивание.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1859,9 +1859,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0d8bf237f17de4cdce33b204f1c2d7442de1de01
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: ef3fc4df8fbd824eb6caaca0f2d46e51a40e44c3
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51371056"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51553670"
