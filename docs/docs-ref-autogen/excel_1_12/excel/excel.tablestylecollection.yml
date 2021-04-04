@@ -4,7 +4,7 @@ uid: excel!Excel.TableStyleCollection:class
 package: excel!
 fullName: Excel.TableStyleCollection
 summary: >-
-  Представляет коллекцию TableStyles.
+  Представляет коллекцию стилей таблиц.
 
 
   \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: add(name, makeUniqueName)
   summary: >-
-    Создает пустой объект TableStyle с указанным именем.
+    Создает пробел `TableStyle` с указанным именем.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -54,14 +54,14 @@ methods:
     content: 'add(name: string, makeUniqueName?: boolean): Excel.TableStyle;'
     parameters:
     - id: name
-      description: Уникальное имя для нового TableStyle. Если имя уже используется, будет выбрасывать исключение недействительных аргументов.
+      description: Уникальное имя для нового стиля таблицы. Будет бросать `InvalidArgument` ошибку, если имя уже используется.
       type: string
     - id: makeUniqueName
-      description: Необязательный, по умолчанию ложный. Если это так, при необходимости примеся номера к имени, чтобы сделать его уникальным.
+      description: Необязательно. Значение по умолчанию — `false`.<!-- -->. Если `true`<!-- -->, будет придать номера к имени, чтобы сделать его уникальным, если это необходимо.
       type: boolean
     return:
       type: <xref uid="excel!Excel.TableStyle:class" />
-      description: Недавно созданный TableStyle.
+      description: Вновь созданный `TableStyle`<!-- -->.
 - name: getCount()
   uid: excel!Excel.TableStyleCollection#getCount:member(1)
   package: excel!
@@ -84,7 +84,7 @@ methods:
   package: excel!
   fullName: getDefault()
   summary: >-
-    Получает используемый по умолчанию объект TableStyle для области родительского объекта.
+    Получает стиль таблицы по умолчанию для области родительского объекта.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -95,13 +95,13 @@ methods:
     content: 'getDefault(): Excel.TableStyle;'
     return:
       type: <xref uid="excel!Excel.TableStyle:class" />
-      description: Объект TableStyle, который является текущим по умолчанию TableStyle.
+      description: Объект, `TableStyle` который является текущим стилем таблицы по умолчанию.
 - name: getItem(name)
   uid: excel!Excel.TableStyleCollection#getItem:member(1)
   package: excel!
   fullName: getItem(name)
   summary: >-
-    Получает объект TableStyle по имени.
+    Получает `TableStyle` имя.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -112,17 +112,17 @@ methods:
     content: 'getItem(name: string): Excel.TableStyle;'
     parameters:
     - id: name
-      description: Имя таблицы, которая должна быть извлечена.
+      description: Имя стиля таблицы, который необходимо получить.
       type: string
     return:
       type: <xref uid="excel!Excel.TableStyle:class" />
-      description: Объект TableStyle, имя которого совпадает с входом.
+      description: Объект, `TableStyle` имя которого совпадает с входом.
 - name: getItemOrNullObject(name)
   uid: excel!Excel.TableStyleCollection#getItemOrNullObject:member(1)
   package: excel!
   fullName: getItemOrNullObject(name)
   summary: >-
-    Получает объект TableStyle по имени. Если объект TableStyle не существует, возвращает пустой объект.
+    Получает `TableStyle` имя. Если стиля таблицы не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -133,11 +133,11 @@ methods:
     content: 'getItemOrNullObject(name: string): Excel.TableStyle;'
     parameters:
     - id: name
-      description: Имя таблицы, которая должна быть извлечена.
+      description: Имя стиля таблицы, который необходимо получить.
       type: string
     return:
       type: <xref uid="excel!Excel.TableStyle:class" />
-      description: Объект TableStyle, имя которого совпадает с входом.
+      description: Объект, `TableStyle` имя которого совпадает с входом.
 - name: load(options)
   uid: excel!Excel.TableStyleCollection#load:member(1)
   package: excel!
@@ -194,7 +194,7 @@ methods:
   package: excel!
   fullName: setDefault(newDefaultStyle)
   summary: >-
-    Задает объект TableStyle, используемый по умолчанию в области родительского объекта.
+    Задает стиль таблицы по умолчанию для использования в области родительского объекта.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -205,7 +205,7 @@ methods:
     content: 'setDefault(newDefaultStyle: TableStyle | string): void;'
     parameters:
     - id: newDefaultStyle
-      description: Объект TableStyle или имя объекта TableStyle, который должен быть новым по умолчанию.
+      description: Объект или имя объекта должен быть новым `TableStyle` `TableStyle` по умолчанию.
       type: <xref uid="excel!Excel.TableStyle:class" /> | string
     return:
       type: void
@@ -225,9 +225,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 7004e4d58b4e5c724dedd9284e5b4b031658023b
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 7613cbb85a4622d3307d382eb9e9663b11f119da
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51374549"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51527839"
