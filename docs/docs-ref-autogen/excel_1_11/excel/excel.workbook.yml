@@ -4,7 +4,7 @@ uid: excel!Excel.Workbook:class
 package: excel!
 fullName: Excel.Workbook
 summary: >-
-  Книга — это объект верхнего уровня, содержащий связанные объекты книги, такие как таблицы, таблицы, диапазоны и т. д. Дополнительные новости об объектной модели книг читайте в материале Работа с книгами [с помощью API JavaScript Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
+  Книга — это объект верхнего уровня, содержащий связанные объекты книги, такие как таблицы, таблицы и диапазоны. Дополнительные новости об объектной модели книг читайте в материале Работа с книгами [с помощью API JavaScript Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
 
 
   \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -34,7 +34,7 @@ properties:
   package: excel!
   fullName: autoSave
   summary: >-
-    Указывает, находится ли книга в режиме автосайта.
+    Указывает, находится ли книга в режиме AutoSave.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -98,7 +98,7 @@ properties:
   package: excel!
   fullName: comments
   summary: >-
-    Представляет коллекцию примечаний, связанных с книгой.
+    Представляет коллекцию комментариев, связанных с книгой.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -174,7 +174,7 @@ properties:
   package: excel!
   fullName: isDirty
   summary: >-
-    Указывает, были ли внесены изменения с момента последнего сберегаемого книги. Если вы хотите закрыть измененную книгу, не сэкономив ее или не настроив запрос на ее сохранение, вы можете настроить это свойство на верное.
+    Указывает, были ли внесены изменения с момента последнего сберегаемого книги. Вы можете настроить это свойство, если вы хотите закрыть измененную книгу без ее сохранения или `true` запроса на ее сохранение.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -206,7 +206,7 @@ properties:
   package: excel!
   fullName: names
   summary: >-
-    Представляет коллекцию именованных элементов в книге (именованные диапазоны и константы).
+    Представляет коллекцию именных элементов с именами книг (именуемого диапазона и констант).
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -222,7 +222,7 @@ properties:
   package: excel!
   fullName: onAutoSaveSettingChanged
   summary: >-
-    Возникает при изменении параметра автосохранения для книги.
+    Возникает при смене параметра AutoSave в книге.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -336,7 +336,7 @@ properties:
   package: excel!
   fullName: readOnly
   summary: >-
-    Значение true, если книга открыта в режиме только для чтения.
+    `true`Возвращается, если книга открыта в режиме только для чтения.
 
 
     \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -352,7 +352,7 @@ properties:
   package: excel!
   fullName: settings
   summary: >-
-    Представляет коллекцию параметров, сопоставленных с книгой.
+    Представляет коллекцию параметров, связанных с книгой.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -465,7 +465,7 @@ properties:
   package: excel!
   fullName: usePrecisionAsDisplayed
   summary: >-
-    Значение true, если вычисления в книге выполняются только с той точностью чисел, с которой они отображаются. Данные будут постоянно терять точность при переходе этого свойства с ложного на true.
+    Значение true, если вычисления в книге выполняются только с той точностью чисел, с которой они отображаются. Данные будут постоянно терять точность при переходе этого свойства `false` из `true`<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -574,7 +574,7 @@ methods:
   package: excel!
   fullName: getActiveChartOrNullObject()
   summary: >-
-    Получает текущую активную диаграмму в книге. Если нет активной диаграммы, возвращается объект null.
+    Получает текущую активную диаграмму в книге. Если нет активной диаграммы, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -608,7 +608,7 @@ methods:
   package: excel!
   fullName: getActiveSlicerOrNullObject()
   summary: >-
-    Получает текущий активный срез в книге. Если активный срез отсутствует, возвращается пустой объект.
+    Получает текущий активный срез в книге. Если нет активного среза, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -625,7 +625,7 @@ methods:
   package: excel!
   fullName: getIsActiveCollabSession()
   summary: >-
-    Значение true, если книга редактируется несколькими пользователями (совместное редактирование). Обратите внимание, что может возникнуть задержка между изменением состояния книги и отражением изменений в результате метода.
+    `true`Возвращается, если книга редактирована несколькими пользователями (с помощью соавторов). Обратите внимание, что может возникнуть задержка между изменением состояния книги и отражением изменений в результате метода.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -659,7 +659,7 @@ methods:
   package: excel!
   fullName: getSelectedRanges()
   summary: >-
-    Получает текущий выделенный диапазон (один или несколько) в книге. В отличие от getSelectedRange() этот метод возвращает объект RangeAreas, представляющий все выделенные диапазоны.
+    Получает текущий выделенный диапазон (один или несколько) в книге. В отличие от `getSelectedRange()`<!-- -->, этот метод возвращает `RangeAreas` объект, который представляет все выбранные диапазоны.
 
 
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -746,7 +746,7 @@ methods:
     content: 'save(saveBehavior?: Excel.SaveBehavior): void;'
     parameters:
     - id: saveBehavior
-      description: сохранение поведения в книге.
+      description: Сохранение поведения в книге.
       type: <xref uid="excel!Excel.SaveBehavior:enum" />
     return:
       type: void
@@ -767,7 +767,7 @@ methods:
     content: 'save(saveBehaviorString?: "Save" | "Prompt"): void;'
     parameters:
     - id: saveBehaviorString
-      description: сохранение поведения в книге.
+      description: Сохранение поведения в книге.
       type: "\"Save\" | \"Prompt\""
     return:
       type: void
@@ -828,9 +828,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 4cd712cad24c557b8675c42276e334b1ae80c70a
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: c069d7dcbe15371c989e16208a8213547eba5fc7
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51375914"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51528280"
