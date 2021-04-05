@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: address
   summary: >-
-    Указывает ссылку диапазона в стиле A1. Значение адреса будет содержать справочный лист (например, "Sheet1! A1:B4").
+    Указывает ссылку диапазона в стиле A1. Значение адреса содержит ссылку на лист (например, "Sheet1! A1:B4").
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -34,7 +34,7 @@ properties:
   package: excel!
   fullName: addressLocal
   summary: >-
-    Указывает ссылку диапазона для указанного диапазона на языке пользователя.
+    Представляет ссылку диапазона для указанного диапазона на языке пользователя.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -288,7 +288,7 @@ properties:
   package: excel!
   fullName: text
   summary: >-
-    Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. Замена знака, которая происходит в пользовательском интерфейсе Excel, не повлияет на текстовое \# значение, возвращаемую API.
+    Текстовые значения указанного диапазона. Текстовое значение не зависит от ширины ячейки. Замена знака номера () в пользовательском интерфейсе Excel не повлияет на текстовое значение, возвращаемого \# API.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -304,7 +304,7 @@ properties:
   package: excel!
   fullName: values
   summary: >-
-    Представляет необработанные значения указанного диапазона. Могут возвращаться строковые и числовые данные, а также логические значения. Ячейки, содержащие ошибку, вернут строку ошибки.
+    Представляет необработанные значения указанного диапазона. Возвращенные данные могут быть строкой, номером или boolean. Ячейки, содержащие ошибку, вернут строку ошибки. Если возвращенное значение начинается с плюса ("+"), минуса ("-" или равного знака ("="), Excel интерпретирует это значение как формулу.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -364,7 +364,7 @@ methods:
     content: 'clear(applyTo?: Excel.ClearApplyTo): void;'
     parameters:
     - id: applyTo
-      description: Необязательный параметр. Определяет тип действия очистки. Подробные сведения см. в excel.ClearApplyTo.
+      description: Необязательный параметр. Определяет тип действия очистки. Подробные `Excel.ClearApplyTo` сведения см. в материале.
       type: <xref uid="excel!Excel.ClearApplyTo:enum" />
     return:
       type: void
@@ -385,7 +385,7 @@ methods:
     content: 'clear(applyToString?: "All" | "Formats" | "Contents" | "Hyperlinks" | "RemoveHyperlinks"): void;'
     parameters:
     - id: applyToString
-      description: Необязательный параметр. Определяет тип действия очистки. Подробные сведения см. в excel.ClearApplyTo.
+      description: Необязательный параметр. Определяет тип действия очистки. Подробные `Excel.ClearApplyTo` сведения см. в материале.
       type: "\"All\" | \"Formats\" | \"Contents\" | \"Hyperlinks\" | \"RemoveHyperlinks\""
     return:
       type: void
@@ -406,7 +406,7 @@ methods:
     content: 'delete(shift: Excel.DeleteShiftDirection): void;'
     parameters:
     - id: shift
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в публикации Excel.DeleteShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.DeleteShiftDirection` сведения см. в материале.
       type: <xref uid="excel!Excel.DeleteShiftDirection:enum" />
     return:
       type: void
@@ -427,7 +427,7 @@ methods:
     content: 'delete(shiftString: "Up" | "Left"): void;'
     parameters:
     - id: shiftString
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в публикации Excel.DeleteShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.DeleteShiftDirection` сведения см. в материале.
       type: "\"Up\" | \"Left\""
     return:
       type: void
@@ -437,7 +437,7 @@ methods:
   package: excel!
   fullName: getBoundingRect(anotherRange)
   summary: >-
-    Возвращает наименьший объект диапазона, включающий в себя заданные диапазоны. Например, GetBoundingRect для "B2:C5" и "D10:E15" возвращает значение "B2:E15".
+    Возвращает наименьший объект диапазона, включающий в себя заданные диапазоны. Например, `GetBoundingRect` "B2:C5" и "D10:E15" — это "B2:E15".
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -448,7 +448,7 @@ methods:
     content: 'getBoundingRect(anotherRange: Range | string): Excel.Range;'
     parameters:
     - id: anotherRange
-      description: Объект диапазона либо адрес или имя диапазона.
+      description: Имя объекта диапазона, адреса или диапазона.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -503,7 +503,7 @@ methods:
   package: excel!
   fullName: getColumnsAfter(count)
   summary: >-
-    Возвращает определенное количество столбцов справа от текущего объекта Range.
+    Получает определенное количество столбцов справа от текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -524,7 +524,7 @@ methods:
   package: excel!
   fullName: getColumnsBefore(count)
   summary: >-
-    Возвращает определенное количество столбцов слева от текущего объекта Range.
+    Получает определенное количество столбцов слева от текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -600,7 +600,7 @@ methods:
   package: excel!
   fullName: getIntersectionOrNullObject(anotherRange)
   summary: >-
-    Возвращает объект диапазона, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не найдено, возвращает пустой объект.
+    Возвращает объект диапазона, представляющий прямоугольное пересечение заданных диапазонов. Если пересечение не обнаружено, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -696,7 +696,7 @@ methods:
   package: excel!
   fullName: getResizedRange(deltaRows, deltaColumns)
   summary: >-
-    Возвращает объект Range, подобный текущему объекту Range, но увеличенный (или уменьшенный) на некоторое количество строк и столбцов от правого нижнего угла.
+    Получает объект, похожий на текущий объект, но с его нижним правым углом, расширенным (или законтрактованым) рядом строк `Range` `Range` и столбцов.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -741,7 +741,7 @@ methods:
   package: excel!
   fullName: getRowsAbove(count)
   summary: >-
-    Возвращает определенное количество строк над текущим объектом Range.
+    Получает определенное количество строк выше текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -762,7 +762,7 @@ methods:
   package: excel!
   fullName: getRowsBelow(count)
   summary: >-
-    Возвращает определенное количество строк под текущим объектом Range.
+    Получает определенное количество строк ниже текущего `Range` объекта.
 
 
     \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -783,7 +783,7 @@ methods:
   package: excel!
   fullName: getUsedRange(valuesOnly)
   summary: >-
-    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция выдает ошибку ItemNotFound.
+    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция будет выбрасывать `ItemNotFound` ошибку.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -804,7 +804,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция возвращает пустой объект.
+    Возвращает используемый диапазон заданного объекта диапазона. Если в диапазоне нет используемых ячеек, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -842,7 +842,7 @@ methods:
   package: excel!
   fullName: insert(shift)
   summary: >-
-    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект Range в пустом месте.
+    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект `Range` в пустом пространстве.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -853,7 +853,7 @@ methods:
     content: 'insert(shift: Excel.InsertShiftDirection): Excel.Range;'
     parameters:
     - id: shift
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в excel.InsertShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.InsertShiftDirection` сведения см. в материале.
       type: <xref uid="excel!Excel.InsertShiftDirection:enum" />
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -863,7 +863,7 @@ methods:
   package: excel!
   fullName: insert(shiftString)
   summary: >-
-    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект Range в пустом месте.
+    Вставляет ячейку или диапазон ячеек на лист вместо этого диапазона, а также сдвигает другие ячейки, чтобы освободить место. Возвращает новый объект `Range` в пустом пространстве.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -874,7 +874,7 @@ methods:
     content: 'insert(shiftString: "Down" | "Right"): Excel.Range;'
     parameters:
     - id: shiftString
-      description: Определяет способ сдвига ячеек. Подробные сведения см. в excel.InsertShiftDirection.
+      description: Определяет способ сдвига ячеек. Подробные `Excel.InsertShiftDirection` сведения см. в материале.
       type: "\"Down\" | \"Right\""
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -954,7 +954,7 @@ methods:
     content: 'merge(across?: boolean): void;'
     parameters:
     - id: across
-      description: Необязательный параметр. Установите значение true, чтобы объединить ячейки в каждой строке заданного диапазона как отдельные объединенные ячейки. Значение по умолчанию — false.
+      description: Необязательно. Установите `true` для объединения ячеек в каждом ряду указанного диапазона в качестве отдельных объединенных ячеек. Значение по умолчанию `false`<!-- -->.
       type: boolean
     return:
       type: void
@@ -1071,9 +1071,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: db9e7fde956aceccd6a9115443904b3a671fe6d4
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 17ea418ab57a31280c6cd8439278576a3dd58dc9
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51229887"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51567141"
