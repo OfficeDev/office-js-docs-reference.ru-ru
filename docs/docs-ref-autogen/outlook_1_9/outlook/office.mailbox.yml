@@ -312,7 +312,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Событие, которое должно вызвать обработчик.
@@ -321,10 +321,44 @@ methods:
       description: Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство типа параметра будет соответствовать `eventType` параметру `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
-      description: Необязательное свойство. Предоставляет возможность сохранения контекстных данных любого типа без изменений для использования в вызове.
+      description: Предоставляет возможность сохранения контекстных данных любого типа без изменений для использования в вызове.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.Mailbox#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    Добавляет обработчик для поддерживаемого события. **Примечание.** События доступны только с области задач.
+
+
+    Обратитесь к разделу события событий объектной [модели почтовых ящиков](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) для поддерживаемых событий.
+
+
+    \[[Набор API: почтовый ящик 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство типа параметра будет соответствовать `eventType` параметру `addHandlerAsync`<!-- -->.
+      type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -606,16 +640,59 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayAppointmentFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayAppointmentFormAsync(itemId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: itemId
       description: Идентификатор веб-служб Exchange для существующей встречи в календаре.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayAppointmentFormAsync(itemId, callback)
+  uid: outlook!Office.Mailbox#displayAppointmentFormAsync:member(2)
+  package: outlook!
+  fullName: displayAppointmentFormAsync(itemId, callback)
+  summary: >-
+    Отображает имеющуюся встречу из календаря.
+
+
+    Метод `displayAppointmentFormAsync` открывает новое окно на компьютере или диалоговое окно на мобильном устройстве, содержащее сведения календаря о существующей встрече.
+
+
+    В Outlook on Mac этот метод можно использовать для отображения одной встречи, которая не является частью повторяющейся серии или мастер-назначением повторяющейся серии. Однако вы не можете отобразить экземпляр серии, так как вы не можете получить доступ к свойствам (включая ID элемента) экземпляров повторяющейся серии.
+
+
+    В Outlook в Интернете этот метод открывает указанную форму только в том случае, если тело формы меньше или равно символам 32K.
+
+
+    Если указанный идентификатор элемента не определяет существующую встречу, на клиентом компьютере или устройстве открывается пустая области, и сообщение об ошибке не возвращается.
+
+
+    **Примечание.** Этот метод не поддерживается в Outlook на iOS или Android.
+
+
+    \[[Набор API: почтовый ящик 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayAppointmentFormAsync(itemId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: itemId
+      description: Идентификатор веб-служб Exchange для существующей встречи в календаре.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -724,16 +801,59 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayMessageFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayMessageFormAsync(itemId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: itemId
       description: Идентификатор веб-служб Exchange для существующего сообщения.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayMessageFormAsync(itemId, callback)
+  uid: outlook!Office.Mailbox#displayMessageFormAsync:member(2)
+  package: outlook!
+  fullName: displayMessageFormAsync(itemId, callback)
+  summary: >-
+    Отображает имеющееся сообщение.
+
+
+    Метод `displayMessageFormAsync` открывает новое окно на компьютере или диалоговое окно на мобильном устройстве, содержащее существующее сообщение.
+
+
+    В Outlook в Интернете этот метод открывает указанную форму только в том случае, если тело формы меньше или равно символам 32K.
+
+
+    Если указанный идентификатор элемента не идентифицирует существующее сообщение, сообщение не будет отображаться на клиентом компьютере и сообщение об ошибке не возвращается.
+
+
+    Не используйте метод `displayMessageForm` или метод `displayMessageFormAsync` с itemId, который представляет встречу. Используйте метод `displayAppointmentForm` или метод для отображения существующей встречи, а также для отображения формы `displayAppointmentFormAsync` для создания новой `displayNewAppointmentForm` `displayNewAppointmentFormAsync` встречи.
+
+
+    **Примечание.** Этот метод не поддерживается в Outlook на iOS или Android.
+
+
+    \[[Набор API: почтовый ящик 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayMessageFormAsync(itemId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: itemId
+      description: Идентификатор веб-служб Exchange для существующего сообщения.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -872,16 +992,59 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: parameters
       description: Описание `AppointmentForm` нового назначения. Все свойства необязательны.
       type: <xref uid="outlook!Office.AppointmentForm:interface" />
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayNewAppointmentFormAsync(parameters, callback)
+  uid: outlook!Office.Mailbox#displayNewAppointmentFormAsync:member(2)
+  package: outlook!
+  fullName: displayNewAppointmentFormAsync(parameters, callback)
+  summary: >-
+    Отображает форму для создания новой встречи в календаре.
+
+
+    Метод `displayNewAppointmentFormAsync` открывает форму, в которой пользователь может создать встречу или собрание. Если параметры заданы, поля формы встречи автоматически заполняются их содержимым.
+
+
+    В Outlook в Интернете этот метод всегда отображает форму с полем участников. Если вы не укажете участников в качестве входных аргументов, метод отображает форму с кнопкой **Сохранить**. Если вы укажете участников, форма будет включать участников и кнопку **Отправить**.
+
+
+    В богатом клиенте Outlook и Outlook RT, если указать участников или ресурсы в `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->, или `resources` параметр, этот метод отображает форму собрания с кнопкой **Отправка.** Если вы не указываете получателей, этот метод отображает форму встречи с кнопкой **Сохранить &amp; закрыть.**
+
+
+    Если параметры превышают указанные ограничения размера или если указано неизвестное имя параметра, вызывается исключение.
+
+
+    **Примечание.** Этот метод не поддерживается в Outlook на iOS или Android.
+
+
+    \[[Набор API: почтовый ящик 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Чтение
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: parameters
+      description: Описание `AppointmentForm` нового назначения. Все свойства необязательны.
+      type: <xref uid="outlook!Office.AppointmentForm:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1033,7 +1196,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayNewMessageFormAsync(parameters: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayNewMessageFormAsync(parameters: any, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: parameters
       description: >-
@@ -1073,10 +1236,78 @@ methods:
         `attachments.itemId`<!-- -->: Используется только при наборе типа элемента. ID элемента EWS существующей электронной почты, который необходимо прикрепить к новому сообщению. Это строка длиной до 100 символов.
       type: any
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayNewMessageFormAsync(parameters, callback)
+  uid: outlook!Office.Mailbox#displayNewMessageFormAsync:member(2)
+  package: outlook!
+  fullName: displayNewMessageFormAsync(parameters, callback)
+  summary: >-
+    Отображает форму для создания нового сообщения.
+
+
+    Метод `displayNewMessageFormAsync` открывает форму, которая позволяет пользователю создавать новое сообщение. Если заданы параметры, поля форм сообщений автоматически заполняются содержимым параметров.
+
+
+    Если параметры превышают указанные ограничения размера или если указано неизвестное имя параметра, вызывается исключение.
+
+
+    \[[Набор API: почтовый ящик 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Чтение
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayNewMessageFormAsync(parameters: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: parameters
+      description: >-
+        Словарь, содержащий все значения, которые будут заполнены для пользователя в новой форме. Все параметры необязательны.
+
+
+        `toRecipients`<!-- -->: Массив строк, содержащих адреса электронной почты или массив, содержащий объект [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) для каждого из получателей в **строке To.** Массив может включать не более 100 записей.
+
+
+        `ccRecipients`<!-- -->: Массив строк, содержащих адреса электронной почты или массив, содержащий объект [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) для каждого из получателей в строке **Cc.** Массив может включать не более 100 записей.
+
+
+        `bccRecipients`<!-- -->: Массив строк, содержащих адреса электронной почты или массив, содержащий объект [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) для каждого из получателей в **строке Bcc.** Массив может включать не более 100 записей.
+
+
+        `subject`<!-- -->Строка, содержащая тему сообщения. Максимальное количество символов в строке — 255.
+
+
+        `htmlBody`<!-- -->: HTML-текст сообщения. Максимальный размер содержимого сообщения — 32 КБ.
+
+
+        `attachments`<!-- -->: Массив объектов JSON, которые являются вложениями файлов или элементов.
+
+
+        `attachments.type`<!-- -->: Указывает тип вложения. Должен быть файл для вложения файла или элемента для вложения элемента.
+
+
+        `attachments.name`<!-- -->Строка с именем вложения длиной до 255 символов.
+
+
+        `attachments.url`<!-- -->: Используется только в том случае, если для файла установлен тип. Универсальный код ресурса (URI) расположения файла.
+
+
+        `attachments.isInline`<!-- -->: Используется только в том случае, если для файла установлен тип. Если верно, указывает, что вложение будет отображаться в тексте сообщения и не должно отображаться в списке вложений.
+
+
+        `attachments.itemId`<!-- -->: Используется только при наборе типа элемента. ID элемента EWS существующей электронной почты, который необходимо прикрепить к новому сообщению. Это строка длиной до 100 символов.
+      type: any
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1230,7 +1461,7 @@ methods:
       description: По завершению метода функция, переданная в параметре callback, называется с одним параметром типа `Office.AsyncResult`<!-- -->. Маркер возвращается в качестве строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательное свойство. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательно. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -1291,7 +1522,7 @@ methods:
       description: По завершению метода функция, переданная в параметре callback, называется с одним параметром типа `Office.AsyncResult`<!-- -->. Маркер возвращается в качестве строки в `asyncResult.value` свойстве. При наличии ошибки свойства `asyncResult.error` и `asyncResult.diagnostics` могут предоставлять дополнительные сведения.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательное свойство. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательно. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -1465,7 +1696,7 @@ methods:
       description: По завершению метода функция, переданная в параметре callback, называется с одним параметром типа `Office.AsyncResult`<!-- -->. Свойством результата является XML запроса `value` EWS, предоставленного в качестве строки. Если размер результата превышает 1 МБ, возвращается сообщение об ошибке.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     - id: userContext
-      description: Необязательное свойство. Данные о состоянии, передаваемые в асинхронный метод.
+      description: Необязательно. Данные о состоянии, передаваемые в асинхронный метод.
       type: any
     return:
       type: void
@@ -1490,24 +1721,55 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Событие, которое должно отменить обработчик.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: Необязательное свойство. Предоставляет возможность сохранения контекстных данных любого типа без изменений для использования в вызове.
+      description: Предоставляет возможность сохранения контекстных данных любого типа без изменений для использования в вызове.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.Mailbox#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    Удаляет обработчиков для поддерживаемого типа события. **Примечание.** События доступны только с области задач.
+
+
+    Обратитесь к разделу события событий объектной [модели почтовых ящиков](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox#events) для поддерживаемых событий.
+
+
+    \[[Набор API: почтовый ящик 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** составить или прочитать
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно отменить обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: d4233db73fe9226e389c6aa49f1888e714018ee8
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: e0cc9dbbf79a84b1df777156a9544d5790aec8c2
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51338796"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660528"
