@@ -1030,7 +1030,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: uri
       description: Универсальный код ресурса (URI), представляющий расположение файла, который нужно вложить в сообщение или встречу. Максимальная длина — 2048 символов.
@@ -1039,10 +1039,62 @@ methods:
       description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `isInline`<!-- -->: Если верно, указывает, что вложение будет отображаться в тексте сообщения и не должно отображаться в списке вложений.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `isInline`<!-- -->: Если верно, указывает, что вложение будет отображаться в тексте сообщения и не должно отображаться в списке вложений.'
       type: '<xref uid="office!Office.AsyncContextOptions:interface" /> & { isInline: boolean }'
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addFileAttachmentAsync(uri, attachmentName, callback)
+  uid: outlook!Office.AppointmentCompose#addFileAttachmentAsync:member(2)
+  package: outlook!
+  fullName: addFileAttachmentAsync(uri, attachmentName, callback)
+  summary: >-
+    Добавляет файл в сообщение или встречу в качестве вложения.
+
+
+    Метод `addFileAttachmentAsync` передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    **Важно.** В последних сборках Outlook в Windows была введена ошибка, которая неправильно примыкает к этому действию заголовщика (будь то с помощью этого API или пользовательского интерфейса `Authorization: Bearer` Outlook). Чтобы решить эту проблему, можно попробовать использовать API, введенный с набором требований `addFileAttachmentFromBase64` 1.8.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+
+
+    **Ошибки:**
+
+
+    - `AttachmentSizeExceeded`<!-- -->. Вложение больше разрешенного размера.
+
+
+    - `FileTypeNotSupported`<!-- -->. Вложение имеет расширение, которое не разрешено.
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: uri
+      description: Универсальный код ресурса (URI), представляющий расположение файла, который нужно вложить в сообщение или встречу. Максимальная длина — 2048 символов.
+      type: string
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -1134,7 +1186,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addFileAttachmentFromBase64Async(base64File: string, attachmentName: string, options?: Office.AsyncContextOptions &  { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    content: 'addFileAttachmentFromBase64Async(base64File: string, attachmentName: string, options: Office.AsyncContextOptions &  { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: base64File
       description: Кодированное содержимое изображения или файла base64, которое будет добавлено в электронную почту или событие.
@@ -1143,10 +1195,62 @@ methods:
       description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `isInline`<!-- -->. Если верно, указывает, что вложение будет отображаться в тексте сообщения и не должно отображаться в списке вложений.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `isInline`<!-- -->. Если верно, указывает, что вложение будет отображаться в тексте сообщения и не должно отображаться в списке вложений.'
       type: '<xref uid="office!Office.AsyncContextOptions:interface" /> &  { isInline: boolean }'
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addFileAttachmentFromBase64Async(base64File, attachmentName, callback)
+  uid: outlook!Office.AppointmentCompose#addFileAttachmentFromBase64Async:member(2)
+  package: outlook!
+  fullName: addFileAttachmentFromBase64Async(base64File, attachmentName, callback)
+  summary: >-
+    Добавляет файл в сообщение или встречу в качестве вложения.
+
+
+    Метод `addFileAttachmentFromBase64Async` загружает файл из кодирования base64 и присоединяет его к элементу в форме составить. Этот метод возвращает идентификатор вложения в `asyncResult.value` объекте.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    **Примечание.** Если вы используете API URL-адресов данных (например, `readAsDataURL`<!-- -->), необходимо раздеть префикс URL-адреса данных, а затем отправить остальную строку в этот API. Например, если полная строка представлена `data:image/svg+xml;base64,<rest of base64 string>`<!-- -->, удалить `data:image/svg+xml;base64,`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+
+
+    **Ошибки:**
+
+
+    - `AttachmentSizeExceeded`<!-- -->. Вложение больше разрешенного размера.
+
+
+    - `FileTypeNotSupported`<!-- -->. Вложение имеет расширение, которое не разрешено.
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentFromBase64Async(base64File: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: base64File
+      description: Кодированное содержимое изображения или файла base64, которое будет добавлено в электронную почту или событие.
+      type: string
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -1190,7 +1294,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Событие, которое должно вызвать обработчик.
@@ -1199,10 +1303,44 @@ methods:
       description: Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство типа параметра будет соответствовать `eventType` параметру `addHandlerAsync`<!-- -->.
       type: any
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.AppointmentCompose#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    Добавляет обработчик для поддерживаемого события. **Примечание.** События доступны только с области задач.
+
+
+    Для поддерживаемых событий обратитесь в раздел События [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item#events) Item.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство типа параметра будет соответствовать `eventType` параметру `addHandlerAsync`<!-- -->.
+      type: any
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1283,7 +1421,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: itemId
       description: Идентификатор Exchange для вкладываемого элемента. Максимальная длина — 100 символов.
@@ -1292,10 +1430,56 @@ methods:
       description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре callback, называется с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      description: Необязательно. По завершению метода функция, переданная в параметре callback, называется с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addItemAttachmentAsync(itemId, attachmentName, callback)
+  uid: outlook!Office.AppointmentCompose#addItemAttachmentAsync:member(2)
+  package: outlook!
+  fullName: addItemAttachmentAsync(itemId, attachmentName, callback)
+  summary: >-
+    Добавляет к сообщению элемент Exchange, например сообщение, в виде вложения.
+
+
+    С помощью метода `addItemAttachmentAsync` можно в элемент формы создания вложить элемент с указанным идентификатором Exchange. Если указать метод вызова, метод называется с одним параметром, `asyncResult`<!-- -->, который содержит идентификатор вложения или код, который указывает на любую ошибку, которая произошла при присоединении элемента. При необходимости можно использовать параметр `options` для передачи сведений о состоянии методу обратного вызова.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    Если ваша надстройка Office выполняется в Outlook в Интернете, метод `addItemAttachmentAsync` обеспечивает вложение элементов в элементы, отличные от редактируемого. Однако это действие не рекомендуется выполнять, так как оно не поддерживается.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+
+
+    **Ошибки:**
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: itemId
+      description: Идентификатор Exchange для вкладываемого элемента. Максимальная длина — 100 символов.
+      type: any
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре callback, называется с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -1421,16 +1605,56 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getAttachmentContentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+    content: 'getAttachmentContentAsync(attachmentId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
     parameters:
     - id: attachmentId
       description: Идентификатор вложения, который вы хотите получить.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentContent:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAttachmentContentAsync(attachmentId, callback)
+  uid: outlook!Office.AppointmentCompose#getAttachmentContentAsync:member(2)
+  package: outlook!
+  fullName: getAttachmentContentAsync(attachmentId, callback)
+  summary: >-
+    Получает вложение из сообщения или встречи и возвращает его в качестве `AttachmentContent` объекта.
+
+
+    Метод `getAttachmentContentAsync` получает вложение с указанным идентификатором из элемента. В качестве наилучшей практики необходимо использовать идентификатор для получения вложения в том же сеансе, что и вложения, полученные при вызове `getAttachmentsAsync` или `item.attachments` вызове. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс закрывается, когда пользователь закрывает приложение, или если пользователь начинает сочинять inline-форму, затем выскакивая форму, чтобы продолжить в отдельном окне.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+
+
+    **Ошибки:**
+
+
+    - `AttachmentTypeNotSupported`<!-- -->. Тип вложения не поддерживается. Неподкрепленные типы включают встроенные изображения в формате Rich Text Или типы вложений элементов, кроме элементов электронной почты или календаря (например, контакт или элемент задачи).
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAttachmentContentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: Идентификатор вложения, который вы хотите получить.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentContent:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -1478,13 +1702,38 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getAttachmentsAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentDetailsCompose[]>) => void): void;'
+    content: 'getAttachmentsAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentDetailsCompose[]>) => void): void;'
     parameters:
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentDetailsCompose:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAttachmentsAsync(callback)
+  uid: outlook!Office.AppointmentCompose#getAttachmentsAsync:member(2)
+  package: outlook!
+  fullName: getAttachmentsAsync(callback)
+  summary: >-
+    Получает вложения элемента в виде массива.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAttachmentsAsync(callback?: (asyncResult: Office.AsyncResult<AttachmentDetailsCompose[]>) => void): void;'
+    parameters:
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentDetailsCompose:interface" />[]&gt;) =&gt; void'
     return:
       type: void
@@ -1855,7 +2104,7 @@ methods:
       description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CustomProperties:interface" />&gt;) =&gt; void'
     - id: userContext
-      description: Необязательное свойство. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.
+      description: Необязательно. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.
       type: any
     return:
       type: void
@@ -1924,16 +2173,53 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeAttachmentAsync(attachmentId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: attachmentId
       description: Идентификатор удаляемого вложения. Максимальная длина строки `attachmentId` — 200 символов в Outlook в Интернете и Windows.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAttachmentAsync(attachmentId, callback)
+  uid: outlook!Office.AppointmentCompose#removeAttachmentAsync:member(2)
+  package: outlook!
+  fullName: removeAttachmentAsync(attachmentId, callback)
+  summary: >-
+    Удаляет вложение из сообщения или встречи.
+
+
+    Метод `removeAttachmentAsync` удаляет из элемента вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс закрывается, когда пользователь закрывает приложение, или если пользователь начинает сочинять inline-форму, затем выскакивая форму, чтобы продолжить в отдельном окне.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: Идентификатор удаляемого вложения. Максимальная длина строки `attachmentId` — 200 символов в Outlook в Интернете и Windows.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1958,16 +2244,47 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: Событие, которое должно отменить обработчик.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.AppointmentCompose#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    Удаляет обработчиков для поддерживаемого типа события. **Примечание.** События доступны только с области задач.
+
+
+    Для поддерживаемых событий обратитесь в раздел События [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item#events) Item.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно отменить обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -2164,25 +2481,62 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setSelectedDataAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
       description: Вставляемые данные. Объем данных не должен превышать 1 000 000 символов. Если передано больше 1 000 000 символов, возвращается исключение `ArgumentOutOfRange`.
       type: string
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `coercionType`<!-- -->. Если текст, текущий стиль применяется в Outlook в Интернете и Windows. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если html и поле поддерживают HTML (субъект не поддерживает), текущий стиль применяется в Outlook в Интернете, а стиль по умолчанию применяется в Outlook для настольных клиентов. Если поле является текстовым, возвращается ошибка `InvalidDataFormat`. Если свойство `coercionType` не задано, результат зависит от поля: если поле имеет формат HTML, используется текст в формате HTML, а если поле текстовое, применяется обычный текст.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `coercionType`<!-- -->. Если текст, текущий стиль применяется в Outlook в Интернете и Windows. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если html и поле поддерживают HTML (субъект не поддерживает), текущий стиль применяется в Outlook в Интернете, а стиль по умолчанию применяется в Outlook для настольных клиентов. Если поле является текстовым, возвращается ошибка `InvalidDataFormat`. Если свойство `coercionType` не задано, результат зависит от поля: если поле имеет формат HTML, используется текст в формате HTML, а если поле текстовое, применяется обычный текст.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, callback)
+  uid: outlook!Office.AppointmentCompose#setSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, callback)
+  summary: >-
+    Асинхронно вставляет данные в текст или тему сообщения.
+
+
+    Метод `setSelectedDataAsync` вставляет указанную строку в местоположение курсора в теме или тексте элемента либо, если текст выделен в редакторе, он заменяет выделенный текст. Если курсор находится вне текста или темы элемента, возвращается ошибка. После вставки курсор помещается в конец вставленного содержимого.
+
+
+    \[[Набор API: почтовый ящик 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Организатор встречи
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Вставляемые данные. Объем данных не должен превышать 1 000 000 символов. Если передано больше 1 000 000 символов, возвращается исключение `ArgumentOutOfRange`.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 extends: <xref uid="outlook!Office.Appointment:interface" />
 metadata:
-  ms.openlocfilehash: 33795bd01bd53e457616443393fdda1aa932cb16
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 4af04a3191ac705dff844f17391228fe05ac4351
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51224812"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51658933"
