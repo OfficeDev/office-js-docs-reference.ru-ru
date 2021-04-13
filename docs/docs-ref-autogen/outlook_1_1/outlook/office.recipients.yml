@@ -96,16 +96,74 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: recipients
       description: Получатели, которых нужно добавить в список получателей.
       type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если добавить получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если добавить получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(recipients, callback)
+  uid: outlook!Office.Recipients#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(recipients, callback)
+  summary: >-
+    Добавляет список получателей к существующим получателям для встречи или сообщения.
+
+
+    Параметр получателей может быть массивом одного из следующих:
+
+
+    - строки, содержащие электронные адреса SMTP;
+
+
+    - [Объекты EmailUser](xref:outlook!Office.EmailUser:interface)
+
+
+    - [Объекты EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface)
+
+
+    Максимальное число, которое можно добавить:
+
+
+    - Windows: 100 получателей. **Примечание.** Можно вызывать API неоднократно, но максимальное число получателей в целевом поле элемента — 500 получателей.
+
+
+    - Mac, веб-браузер: 100 получателей
+
+
+    - Другое: нет ограничений
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
+
+
+    **Ошибки:**
+
+
+    - `NumberOfRecipientsExceeded`<!-- -->: Число получателей превысило 100 записей.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(recipients: (string | EmailUser | EmailAddressDetails)[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: recipients
+      description: Получатели, которых нужно добавить в список получателей.
+      type: (string | <xref uid="outlook!Office.EmailUser:interface" /> | <xref uid="outlook!Office.EmailAddressDetails:interface" />)[]
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если добавить получателей не удастся, свойство `asyncResult.error` будет содержать код ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -534,9 +592,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 6c556fbfaee8862a8db41b08606f9b82ffdf9a86
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 4603e7c31afe0a9a0ca208068e379a64fb5af4b0
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51292312"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660500"

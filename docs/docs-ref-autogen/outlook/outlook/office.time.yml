@@ -191,24 +191,67 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setAsync(dateTime: Date, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setAsync(dateTime: Date, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: dateTime
       description: Объект даты и времени в формате UTC.
       type: Date
     - id: options
-      description: 'Необязательное свойство. Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Необязательное свойство. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если не удается задать дату и время, свойство `asyncResult.error` будет содержать код ошибки.
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если не удается задать дату и время, свойство `asyncResult.error` будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(dateTime, callback)
+  uid: outlook!Office.Time#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(dateTime, callback)
+  summary: >-
+    Задает время начала или окончания встречи.
+
+
+    Если метод вызван в свойстве запуска, свойство будет корректироваться для поддержания продолжительности `setAsync` `end` встречи, как было установлено ранее. Если для свойства `setAsync` вызывается метод `end`, продолжительность встречи будет расширена до нового времени окончания.
+
+
+    Время необходимо указать в формате UTC. Правильное время в формате UTC можно получить с помощью метода `convertToUtcClientTime`.
+
+
+    **Важно.** В клиенте Windows эту функцию нельзя использовать для обновления начала или окончания повторения.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый режим](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- --> Outlook:** Compose
+
+
+    **Ошибки:**
+
+
+    - `InvalidEndTime`<!-- -->. Время окончания встречи до начала встречи.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(dateTime: Date, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: dateTime
+      description: Объект даты и времени в формате UTC.
+      type: Date
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если не удается задать дату и время, свойство `asyncResult.error` будет содержать код ошибки.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 5a3d71ca79bd9357f073d4175430343eadc697d1
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 5e283e8dabe220dacaeebb63e68fe9ecc627f27a
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51292539"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51659989"
