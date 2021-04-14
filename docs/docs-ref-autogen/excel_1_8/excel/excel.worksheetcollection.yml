@@ -37,6 +37,215 @@ properties:
     content: 'readonly items: Excel.Worksheet[];'
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />[]
+methods:
+- name: add(name)
+  uid: excel!Excel.WorksheetCollection#add:member(1)
+  package: excel!
+  fullName: add(name)
+  summary: >-
+    Добавляет новый лист в книгу. Лист будет добавлен после существующих листов. Если вы хотите активировать только что добавленный таблицу, `.activate()` позвоните по ней.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(name?: string): Excel.Worksheet;'
+    parameters:
+    - id: name
+      description: Необязательный параметр. Имя добавляемого листа. Если указано, имя должно быть уникальным. В противном случае Excel определяет имя нового листа.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getActiveWorksheet()
+  uid: excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)
+  package: excel!
+  fullName: getActiveWorksheet()
+  summary: >-
+    Получает текущий активный лист в книге.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getActiveWorksheet(): Excel.Worksheet;'
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getCount(visibleOnly)
+  uid: excel!Excel.WorksheetCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount(visibleOnly)
+  summary: >-
+    Получает количество листов в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
+    parameters:
+    - id: visibleOnly
+      description: Необязательно. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
+      type: boolean
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getFirst(visibleOnly)
+  uid: excel!Excel.WorksheetCollection#getFirst:member(1)
+  package: excel!
+  fullName: getFirst(visibleOnly)
+  summary: >-
+    Получает первый лист в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
+    parameters:
+    - id: visibleOnly
+      description: Необязательно. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
+      type: boolean
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+- name: getItem(key)
+  uid: excel!Excel.WorksheetCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    Получает объект листа по его имени или ИД.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Excel.Worksheet;'
+    parameters:
+    - id: key
+      description: Имя или ID таблицы.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: ''
+- name: getItemOrNullObject(key)
+  uid: excel!Excel.WorksheetCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(key)
+  summary: >-
+    Получает объект листа по его имени или ИД. Если таблицы не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.Worksheet;'
+    parameters:
+    - id: key
+      description: Имя или ID таблицы.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: ''
+- name: getLast(visibleOnly)
+  uid: excel!Excel.WorksheetCollection#getLast:member(1)
+  package: excel!
+  fullName: getLast(visibleOnly)
+  summary: >-
+    Получает последний лист в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
+    parameters:
+    - id: visibleOnly
+      description: Необязательно. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
+      type: boolean
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+- name: load(options)
+  uid: excel!Excel.WorksheetCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.WorksheetCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.WorksheetCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.WorksheetCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.WorksheetCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorksheetCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorksheetCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionData:interface" />
+      description: ''
+events:
 - name: onActivated
   uid: excel!Excel.WorksheetCollection#onActivated:member
   package: excel!
@@ -120,219 +329,11 @@ properties:
     content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.WorksheetDeletedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetDeletedEventArgs:interface" />&gt;
-methods:
-- name: add(name)
-  uid: excel!Excel.WorksheetCollection#add:member(1)
-  package: excel!
-  fullName: add(name)
-  summary: >-
-    Добавляет новый лист в книгу. Лист будет добавлен после существующих листов. Если вы хотите активировать только что добавленный таблицу, `.activate()` позвоните по ней.
-
-
-    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'add(name?: string): Excel.Worksheet;'
-    parameters:
-    - id: name
-      description: Необязательный параметр. Имя добавляемого листа. Если указано, имя должно быть уникальным. В противном случае Excel определяет имя нового листа.
-      type: string
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: getActiveWorksheet()
-  uid: excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)
-  package: excel!
-  fullName: getActiveWorksheet()
-  summary: >-
-    Получает текущий активный лист в книге.
-
-
-    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getActiveWorksheet(): Excel.Worksheet;'
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: getCount(visibleOnly)
-  uid: excel!Excel.WorksheetCollection#getCount:member(1)
-  package: excel!
-  fullName: getCount(visibleOnly)
-  summary: >-
-    Получает количество листов в коллекции.
-
-
-    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
-    parameters:
-    - id: visibleOnly
-      description: Необязательное свойство. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
-      type: boolean
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
-      description: ''
-- name: getFirst(visibleOnly)
-  uid: excel!Excel.WorksheetCollection#getFirst:member(1)
-  package: excel!
-  fullName: getFirst(visibleOnly)
-  summary: >-
-    Получает первый лист в коллекции.
-
-
-    \[[Набор API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
-    parameters:
-    - id: visibleOnly
-      description: Необязательное свойство. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
-      type: boolean
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
-- name: getItem(key)
-  uid: excel!Excel.WorksheetCollection#getItem:member(1)
-  package: excel!
-  fullName: getItem(key)
-  summary: >-
-    Получает объект листа по его имени или ИД.
-
-
-    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getItem(key: string): Excel.Worksheet;'
-    parameters:
-    - id: key
-      description: Имя или ID таблицы.
-      type: string
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: ''
-- name: getItemOrNullObject(key)
-  uid: excel!Excel.WorksheetCollection#getItemOrNullObject:member(1)
-  package: excel!
-  fullName: getItemOrNullObject(key)
-  summary: >-
-    Получает объект листа по его имени или ИД. Если таблицы не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getItemOrNullObject(key: string): Excel.Worksheet;'
-    parameters:
-    - id: key
-      description: Имя или ID таблицы.
-      type: string
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: ''
-- name: getLast(visibleOnly)
-  uid: excel!Excel.WorksheetCollection#getLast:member(1)
-  package: excel!
-  fullName: getLast(visibleOnly)
-  summary: >-
-    Получает последний лист в коллекции.
-
-
-    \[[Набор API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
-    parameters:
-    - id: visibleOnly
-      description: Необязательное свойство. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
-      type: boolean
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
-- name: load(options)
-  uid: excel!Excel.WorksheetCollection#load:member(1)
-  package: excel!
-  fullName: load(options)
-  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
-    parameters:
-    - id: options
-      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
-      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
-    return:
-      type: <xref uid="excel!Excel.WorksheetCollection:class" />
-      description: ''
-- name: load(propertyNames)
-  uid: excel!Excel.WorksheetCollection#load:member(2)
-  package: excel!
-  fullName: load(propertyNames)
-  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
-    parameters:
-    - id: propertyNames
-      description: Запятая или массив строк, которые указывают свойства для загрузки.
-      type: string | string[]
-    return:
-      type: <xref uid="excel!Excel.WorksheetCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: load(propertyNamesAndPaths)
-  uid: excel!Excel.WorksheetCollection#load:member(3)
-  package: excel!
-  fullName: load(propertyNamesAndPaths)
-  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
-    parameters:
-    - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
-      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
-    return:
-      type: <xref uid="excel!Excel.WorksheetCollection:class" />
-      description: ''
-- name: toJSON()
-  uid: excel!Excel.WorksheetCollection#toJSON:member(1)
-  package: excel!
-  fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.WorksheetCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorksheetCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.WorksheetCollectionData;'
-    return:
-      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionData:interface" />
-      description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a8f62aaf51383e02b700220a38e12c0f4cba366d
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: 6dbe8e12df4c3cfc79fafbc0e305a36542b63436
+  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51514288"
+  ms.lasthandoff: 04/14/2021
+  ms.locfileid: "51754314"
