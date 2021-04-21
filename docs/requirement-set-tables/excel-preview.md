@@ -55,7 +55,11 @@
 ||[clear()](/javascript/api/excel/excel.identitycollection#clear--)|Удаляет все идентификаторы пользователей из коллекции.|
 ||[getCount()](/javascript/api/excel/excel.identitycollection#getcount--)|Возвращает число элементов в коллекции.|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.identitycollection#getitemat-index-)|Получает удостоверение пользователя документа с помощью индекса в коллекции.|
+||[items](/javascript/api/excel/excel.identitycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 ||[remove(assignee: Identity)](/javascript/api/excel/excel.identitycollection#remove-assignee-)|Удаляет удостоверение пользователя из коллекции.|
+|[IdentityEntity](/javascript/api/excel/excel.identityentity)|[displayName](/javascript/api/excel/excel.identityentity#displayname)|Представляет отображаемое имя пользователя.|
+||[email](/javascript/api/excel/excel.identityentity#email)|Представляет электронный адрес пользователя.|
+||[id](/javascript/api/excel/excel.identityentity#id)|Представляет уникальный ID пользователя.|
 |[InsertWorksheetOptions](/javascript/api/excel/excel.insertworksheetoptions)|[positionType](/javascript/api/excel/excel.insertworksheetoptions#positiontype)|Положение вставки в текущей книге новых таблиц.|
 ||[relativeTo](/javascript/api/excel/excel.insertworksheetoptions#relativeto)|Таблица в текущей книге, которая ссылается на `WorksheetPositionType` параметр.|
 ||[sheetNamesToInsert](/javascript/api/excel/excel.insertworksheetoptions#sheetnamestoinsert)|Имена отдельных таблиц, которые необходимо вставить.|
@@ -129,6 +133,7 @@
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|Возникает, когда в этом таблице изменена одна или несколько формул.|
 ||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Возвращает значение, представляющее этот таблицу, которую можно прочитать в Open Office XML.|
 ||[задачи](/javascript/api/excel/excel.worksheet#tasks)|Возвращает коллекцию задач, присутствующих в таблице.|
+|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|Представляет источник триггера события.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|Вставляет указанные листы книги в текущую книгу.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|Возникает при применении любого фильтра листа в книге.|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onformulachanged)|Возникает, когда одна или несколько формул меняются в любом таблице этой коллекции.|

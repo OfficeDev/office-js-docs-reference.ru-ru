@@ -25,6 +25,18 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.IdentityCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Получает загруженные дочерние элементы в этой коллекции.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.IdentityEntity[];'
+    return:
+      type: <xref uid="excel!Excel.IdentityEntity:class" />[]
 methods:
 - name: add(assignee)
   uid: excel!Excel.IdentityCollection#add:member(1)
@@ -102,6 +114,57 @@ methods:
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;<xref uid="excel!Excel.Identity:interface" />&gt;
       description: Идентификатор пользователя документа в заданный индекс.
+- name: load(options)
+  uid: excel!Excel.IdentityCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.IdentityCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.IdentityCollection;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.IdentityCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.IdentityCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.IdentityCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.IdentityCollection;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.IdentityCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.IdentityCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.IdentityCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.IdentityCollection:class" />
+      description: ''
 - name: remove(assignee)
   uid: excel!Excel.IdentityCollection#remove:member(1)
   package: excel!
@@ -127,26 +190,20 @@ methods:
   uid: excel!Excel.IdentityCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.IdentityCollection является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.IdentityCollectionData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.IdentityCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.IdentityCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: true
   isDeprecated: false
   syntax:
-    content: >-
-      toJSON(): {
-                  [key: string]: string;
-              };
+    content: 'toJSON(): Excel.Interfaces.IdentityCollectionData;'
     return:
-      type: >-
-        {
-                    [key: string]: string;
-                }
+      type: <xref uid="excel!Excel.Interfaces.IdentityCollectionData:interface" />
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: dec4378c4b00296db193dbe6f16ad2eab24c44e2
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: b52c4c26492e584f0c435b373ce3522d50be941c
+  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51275400"
+  ms.lasthandoff: 04/21/2021
+  ms.locfileid: "51911152"
