@@ -4,7 +4,7 @@ uid: excel!Excel.Range:class
 package: excel!
 fullName: Excel.Range
 summary: >-
-  Диапазон представляет собой набор из одной или более состояных ячеек, таких как ячейка, строка, столбец, блок ячеек и т. д. Чтобы узнать больше о том, как диапазоны используются в API, начните с диапазонов в [API JavaScript Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-core-concepts#ranges)<!-- -->.
+  Диапазон представляет собой набор из одной или более состояных ячеек, таких как ячейка, строка, столбец, блок ячеек и т. д. Чтобы узнать больше о том, как диапазоны используются в API, начните с диапазонов в Excel [API JavaScript](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-core-concepts#ranges)<!-- -->.
 
 
   \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -129,7 +129,7 @@ properties:
   uid: excel!Excel.Range#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -351,7 +351,7 @@ properties:
   package: excel!
   fullName: numberFormat
   summary: >-
-    Представляет код формата номеров Excel для данного диапазона.
+    Представляет Excel формата номеров для данного диапазона.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -384,7 +384,7 @@ properties:
   package: excel!
   fullName: numberFormatLocal
   summary: >-
-    Представляет код формата номеров Excel для данного диапазона в зависимости от языковых параметров пользователя. Excel не выполняет принуждение языка или формата при получении или настройке `numberFormatLocal` свойства. Любой возвращенный текст использует локально отформатированные строки на основе языка, указанного в параметрах системы.
+    Представляет Excel формата номера для данного диапазона в зависимости от языковых параметров пользователя. Excel не выполняет принуждение языка или формата при получении или настройке `numberFormatLocal` свойства. Любой возвращенный текст использует локально отформатированные строки на основе языка, указанного в параметрах системы.
 
 
     \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -530,7 +530,7 @@ properties:
   package: excel!
   fullName: values
   summary: >-
-    Представляет необработанные значения указанного диапазона. Возвращенные данные могут быть строкой, номером или boolean. Ячейки, содержащие ошибку, вернут строку ошибки. Если возвращенное значение начинается с плюса ("+"), минуса ("-" или равного знака ("="), Excel интерпретирует это значение как формулу.
+    Представляет необработанные значения указанного диапазона. Возвращенные данные могут быть строкой, номером или boolean. Ячейки, содержащие ошибку, вернут строку ошибки. Если возвращенное значение начинается с плюса ("+"), минуса ("-"), или равного знака ("="), Excel интерпретирует это значение как формулу.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1153,7 +1153,7 @@ methods:
     content: 'getDirectDependents(): Excel.WorkbookRangeAreas;'
     return:
       type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
-      description: ''
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/range-direct-dependents.yaml\nawait Excel.run(async (context) => {\n  // Direct dependents are cells that contain formulas that refer to other cells.\n  let range = context.workbook.getActiveCell();\n  let directDependents = range.getDirectDependents();\n  range.load(\"address\");\n  directDependents.areas.load(\"address\");\n  await context.sync();\n  \n  console.log(`Direct dependent cells of ${range.address}:`);\n  \n  // Use the direct dependents API to loop through direct dependents of the active cell.\n  for (let i = 0; i < directDependents.areas.items.length; i++) {\n    // Highlight and print the address of each dependent cell.\n    directDependents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directDependents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
 - name: getDirectPrecedents()
   uid: excel!Excel.Range#getDirectPrecedents:member(1)
   package: excel!
@@ -1210,7 +1210,7 @@ methods:
   package: excel!
   fullName: getExtendedRange(direction, activeCell)
   summary: >-
-    Возвращает объект диапазона, который включает текущий диапазон и до края диапазона, в зависимости от предоставленного направления. Это соответствует поведению ключа Ctrl+Shift+Arrow в Excel в пользовательском интерфейсе Windows.
+    Возвращает объект диапазона, который включает текущий диапазон и до края диапазона, в зависимости от предоставленного направления. Это соответствует поведению ключа Ctrl+Shift+Arrow в Excel Windows пользовательского интерфейса.
 
 
     \[[Набор API: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1234,7 +1234,7 @@ methods:
   package: excel!
   fullName: getExtendedRange(directionString, activeCell)
   summary: >-
-    Возвращает объект диапазона, который включает текущий диапазон и до края диапазона, в зависимости от предоставленного направления. Это соответствует поведению ключа Ctrl+Shift+Arrow в Excel в пользовательском интерфейсе Windows.
+    Возвращает объект диапазона, который включает текущий диапазон и до края диапазона, в зависимости от предоставленного направления. Это соответствует поведению ключа Ctrl+Shift+Arrow в Excel Windows пользовательского интерфейса.
 
 
     \[[Набор API: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1317,7 +1317,7 @@ methods:
   package: excel!
   fullName: getLastCell()
   summary: >-
-    Возвращает последнюю ячейку в диапазоне. Например, последняя ячейка диапазона B2:D5 — D5.
+    Возвращает последнюю ячейку в диапазоне. Например, последняя ячейка диапазона B2:D5 — D5.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1334,7 +1334,7 @@ methods:
   package: excel!
   fullName: getLastColumn()
   summary: >-
-    Возвращает последний столбец в диапазоне. Например, последний столбец диапазона B2:D5 — D2:D5.
+    Возвращает последний столбец в диапазоне. Например, последний столбец диапазона B2:D5 — D2:D5.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1351,7 +1351,7 @@ methods:
   package: excel!
   fullName: getLastRow()
   summary: >-
-    Возвращает последнюю строку в диапазоне. Например, последняя строка в диапазоне "B2:D5" — "B5:D5".
+    Возвращает последнюю строку в диапазоне. Например, последняя строка в диапазоне "B2:D5" — "B5:D5".
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1464,7 +1464,7 @@ methods:
   package: excel!
   fullName: getRangeEdge(direction, activeCell)
   summary: >-
-    Возвращает объект диапазона, который является краеугольным элементом области данных, соответствующей предоставленной направлению. Это соответствует поведению ключа Ctrl+Arrow в Excel в пользовательском интерфейсе Windows.
+    Возвращает объект диапазона, который является краеугольным элементом области данных, соответствующей предоставленной направлению. Это соответствует поведению ключа Ctrl+Arrow в Excel Windows пользовательского интерфейса.
 
 
     \[[Набор API: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1488,7 +1488,7 @@ methods:
   package: excel!
   fullName: getRangeEdge(directionString, activeCell)
   summary: >-
-    Возвращает объект диапазона, который является краеугольным элементом области данных, соответствующей предоставленной направлению. Это соответствует поведению ключа Ctrl+Arrow в Excel в пользовательском интерфейсе Windows.
+    Возвращает объект диапазона, который является краеугольным элементом области данных, соответствующей предоставленной направлению. Это соответствует поведению ключа Ctrl+Arrow в Excel Windows пользовательского интерфейса.
 
 
     \[[Набор API: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -2351,7 +2351,7 @@ methods:
   uid: excel!Excel.Range#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.Range является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.RangeData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект Range — это объект API, метод возвращает простой `toJSON` объект JavaScript (введите как`Excel.Interfaces.RangeData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -2447,9 +2447,9 @@ methods:
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nExcel.run(async (context) => {\n    const largeRange = context.workbook.getSelectedRange();\n    largeRange.load([\"rowCount\", \"columnCount\"]);\n    await context.sync();\n\n    for (let i = 0; i < largeRange.rowCount; i++) {\n        for (let j = 0; j < largeRange.columnCount; j++) {\n            let cell = largeRange.getCell(i, j);\n            cell.values = [[i *j]];\n\n            // call untrack() to release the range from memory\n            cell.untrack();\n        }\n    }\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 9b43598c4a4d45cd34b958f66174b07796ba0730
-  ms.sourcegitcommit: 66ce950cede0c44d43deef165ca96e9f5875d63f
+  ms.openlocfilehash: 0f2f6c7b1615b1993ba6d768478c290259a43f90
+  ms.sourcegitcommit: 56a0dffed6427e832d8f047f6815dd511e55e1f4
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/21/2021
-  ms.locfileid: "51911320"
+  ms.lasthandoff: 05/19/2021
+  ms.locfileid: "52529415"
