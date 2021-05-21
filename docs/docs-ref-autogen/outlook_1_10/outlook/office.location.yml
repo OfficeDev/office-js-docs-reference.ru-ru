@@ -1,0 +1,218 @@
+### YamlMime:TSType
+name: Office.Location
+uid: outlook!Office.Location:interface
+package: outlook!
+fullName: Office.Location
+summary: >-
+  Предоставляет методы для получения и задания места собрания в надстройке Outlook.
+
+
+  \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+  **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: getAsync(options, callback)
+  uid: outlook!Office.Location#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Получает место встречи.
+
+
+    Метод `getAsync` выполняет асинхронный вызов на сервер Exchange, чтобы получить сведения о месте встречи. Расположение встречи предоставляется в качестве строки в `asyncResult.value` свойстве.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    var userContext = { value : 1 };
+
+    Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
+
+
+    function callback(asyncResult) {
+        var context = asyncResult.context;
+        var location = asyncResult.value;
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.Location#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Получает место встречи.
+
+
+    Метод `getAsync` выполняет асинхронный вызов на сервер Exchange, чтобы получить сведения о месте встречи. Расположение встречи предоставляется в качестве строки в `asyncResult.value` свойстве.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-set-location-appointment-organizer.yaml
+
+    Office.context.mailbox.item.location.getAsync((result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
+      }
+      console.log(`Appointment location: ${result.value}`);
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(location, options, callback)
+  uid: outlook!Office.Location#setAsync:member(1)
+  package: outlook!
+  fullName: setAsync(location, options, callback)
+  summary: >-
+    Задает место встречи.
+
+
+    Метод `setAsync` выполняет асинхронный вызов на сервер Exchange, чтобы задать место встречи. При задании места встречи перезаписывается текущее место.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - DataExceedsMaximumSize: параметр расположения длиннее 255 символов.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-set-location-appointment-organizer.yaml
+
+    var location = "my office";
+
+    Office.context.mailbox.item.location.setAsync(location, (result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
+      }
+      console.log(`Successfully set location to ${location}`);
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(location: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: location
+      description: Место встречи. Строка может содержать до 255 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если не удастся задать место, свойство `asyncResult.error` будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(location, callback)
+  uid: outlook!Office.Location#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(location, callback)
+  summary: >-
+    Задает место встречи.
+
+
+    Метод `setAsync` выполняет асинхронный вызов на сервер Exchange, чтобы задать место встречи. При задании места встречи перезаписывается текущее место.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - DataExceedsMaximumSize: параметр расположения длиннее 255 символов.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(location: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: location
+      description: Место встречи. Строка может содержать до 255 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если не удастся задать место, свойство `asyncResult.error` будет содержать код ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 65a7f310c9fc8ba6e2434f10e0637699cb8f8401
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591786"

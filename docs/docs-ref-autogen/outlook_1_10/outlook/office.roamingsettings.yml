@@ -1,0 +1,198 @@
+### YamlMime:TSType
+name: Office.RoamingSettings
+uid: outlook!Office.RoamingSettings:interface
+package: outlook!
+fullName: Office.RoamingSettings
+summary: >-
+  Параметры, созданные при использовании методов объекта `RoamingSettings`, сохраняются для каждой надстройки и каждого пользователя отдельно. То есть они доступны только созданной надстройке и только из почтового ящика пользователя, в котором они сохраняются.
+
+
+  Хотя API Outlook надстройки ограничивает доступ к этим настройкам только созданной надстройки, эти параметры не следует считать безопасным хранилищем. К ним можно получить доступ с помощью веб-служб Exchange или расширенного MAPI. Их не следует использовать для хранения конфиденциальных сведений, таких как учетные данные пользователя или маркеры безопасности.
+
+
+  Имя параметра — это String, а значение может быть String, Number, Boolean, null, Object или Array.
+
+
+  К объекту `RoamingSettings` можно получить доступ с помощью свойства `roamingSettings` в пространстве имен `Office.context`.
+
+
+  **Важно:**
+
+
+  - Объект `RoamingSettings` инициализируются из сохраняемого хранилища только при первой загрузке надстройки. Для области задач это означает, что она инициализирована только при первом открываемом области задач. Если области задач переходят на другую страницу или перезагружают текущую страницу, объект в памяти сбрасывается до начальных значений, даже если надстройка не меняется. Сохраняемые изменения будут недоступны до тех пор, пока области задач (или элемент в случае надстройок без пользовательского интерфейса) не будут закрыты и вновь открыты.
+
+
+  - При настройке и Outlook на Windows Mac эти параметры отражаются в Outlook интернете только после обновления браузера.
+remarks: >-
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+
+
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: get(name)
+  uid: outlook!Office.RoamingSettings#get:member(1)
+  package: outlook!
+  fullName: get(name)
+  summary: Извлекает указанный параметр.
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+
+
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/10-roaming-settings/roaming-settings.yaml
+
+    var settingName = $("#settingName").val();
+
+    var settingValue = Office.context.roamingSettings.get(settingName);
+
+    $("#settingValue").val(settingValue);
+
+    console.log(`The value of setting "${settingName}" is "${settingValue}".`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'get(name: string): any;'
+    parameters:
+    - id: name
+      description: Имя извлекаемого параметра с учетом регистра.
+      type: string
+    return:
+      type: any
+      description: 'Тип: Массив \| объектов String Number \| Boolean \| \|'
+- name: remove(name)
+  uid: outlook!Office.RoamingSettings#remove:member(1)
+  package: outlook!
+  fullName: remove(name)
+  summary: Удаляет указанный параметр
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+
+
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'remove(name: string): void;'
+    parameters:
+    - id: name
+      description: Имя удаляемого параметра с учетом регистра
+      type: string
+    return:
+      type: void
+      description: ''
+- name: saveAsync(callback)
+  uid: outlook!Office.RoamingSettings#saveAsync:member(1)
+  package: outlook!
+  fullName: saveAsync(callback)
+  summary: >-
+    Сохраняет параметры.
+
+
+    Все параметры, ранее сохраненные надстройкой, загружаются при ее инициализации, поэтому на протяжении всего сеанса можно использовать только методы set и get для работы с копией контейнера свойств в памяти. Если требуется сохранить параметры, чтобы они были доступны при следующем использовании надстройки, воспользуйтесь методом saveAsync.
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+
+
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/10-roaming-settings/roaming-settings.yaml
+
+    // Save settings in the mailbox to make it available in future sessions.
+
+    Office.context.roamingSettings.saveAsync(function(result) {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+      } else {
+        console.log(`Settings saved with status: ${result.status}`);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: set(name, value)
+  uid: outlook!Office.RoamingSettings#set:member(1)
+  package: outlook!
+  fullName: set(name, value)
+  summary: >-
+    Устанавливает или создает указанный параметр.
+
+
+    Метод создает новый параметр указанного имени, если оно еще не существует, или задает существующий параметр `set` указанного имени. Значение сохраняется в документе как сериализованное представление JSON с его типом данных.
+
+
+    Для параметров каждой надстройки доступно не более 32 КБ.
+
+
+    Все изменения, внесенные в параметры с помощью функции набора, не будут сохранены на сервере до тех пор, пока `saveAsync` функция не будет вызвана.
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+
+
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/10-roaming-settings/roaming-settings.yaml
+
+    var settingName = $("#settingName").val();
+
+    var settingValue = $("#settingValue").val();
+
+    Office.context.roamingSettings.set(settingName, settingValue);
+
+    console.log(`Setting "${settingName}" set to value "${settingValue}".`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(name: string, value: any): void;'
+    parameters:
+    - id: name
+      description: Имя устанавливаемого или создаваемого параметра с учетом регистра.
+      type: string
+    - id: value
+      description: Задает сохраняемое значение.
+      type: any
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 988cefdfe1d01f2fa4b6f345b70014b3f31fd344
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591606"
