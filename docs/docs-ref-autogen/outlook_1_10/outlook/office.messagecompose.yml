@@ -1,0 +1,2530 @@
+### YamlMime:TSType
+name: Office.MessageCompose
+uid: outlook!Office.MessageCompose:interface
+package: outlook!
+fullName: Office.MessageCompose
+summary: >-
+  Режим композитации [сообщения Office.context.mailbox.item](xref:outlook!Office.Item:interface)<!-- -->.
+
+
+  **Важно:** это внутренний объект Outlook, не напрямую открытый через существующие интерфейсы. К этому следует относиться как к режиму `Office.context.mailbox.item`<!-- -->. Дополнительные сведения можно получить на странице [Объектная](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.10/office.context.mailbox.item) модель.
+
+
+  Родительские интерфейсы:
+
+
+  - [ItemCompose](xref:outlook!Office.ItemCompose:interface)
+
+
+  - [Сообщение](xref:outlook!Office.Message:interface)
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: bcc
+  uid: outlook!Office.MessageCompose#bcc:member
+  package: outlook!
+  fullName: bcc
+  summary: >-
+    Получает объект, который предоставляет методы получения или обновления получателей в строке **Bcc** (слепая копия углерода) сообщения.
+
+
+    В зависимости от клиента или платформы (например, Windows, Mac и т.д.), ограничения могут применяться к тому, сколько получателей вы можете получить или обновить. Дополнительные сведения см. в объекте [Recipients.](xref:outlook!Office.Recipients:interface)
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.bcc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.bcc.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.bcc.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfBccRecipients = asyncResult.value;
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
+
+    Office.context.mailbox.item.bcc.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgBcc = asyncResult.value;
+        console.log("Message being blind-copied to:");
+        for (var i = 0; i < msgBcc.length; i++) {
+          console.log(msgBcc[i].displayName + " (" + msgBcc[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-bcc-message-compose.yaml
+
+    var email = $("#emailBcc")
+      .val()
+      .toString();
+    var emailArray = [email];
+
+    Office.context.mailbox.item.bcc.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting Bcc field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'bcc: Recipients;'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />
+- name: body
+  uid: outlook!Office.MessageCompose#body:member
+  package: outlook!
+  fullName: body
+  summary: >-
+    Получает объект, предоставляющий методы для работы с основным текстом элемента.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // This example gets the body of the item as plain text.
+
+    Office.context.mailbox.item.body.getAsync(
+        "text",
+        { asyncContext: "This is passed to the callback" },
+        function callback(result) {
+            // Do something with the result.
+        });
+
+    // The following is an example of the result parameter passed to the callback function.
+
+    {
+        "value": "TEXT of whole body (including threads below)",
+        "status": "succeeded",
+        "asyncContext": "This is passed to the callback"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'body: Body;'
+    return:
+      type: <xref uid="outlook!Office.Body:interface" />
+- name: categories
+  uid: outlook!Office.MessageCompose#categories:member
+  package: outlook!
+  fullName: categories
+  summary: >-
+    Получает объект, который предоставляет методы управления категориями элемента.
+
+
+    **Важно:** Outlook веб-сайте нельзя использовать API для управления категориями в сообщении в режиме Compose.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-categories.yaml
+
+    Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var categories = asyncResult.value;
+        if (categories && categories.length > 0) {
+          console.log("Categories assigned to this item:");
+          console.log(JSON.stringify(categories));
+        } else {
+          console.log("There are no categories assigned to this item.");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-categories.yaml
+
+    // Note: In order for you to successfully add a category,
+
+    // it must be in the mailbox categories master list.
+
+
+    Office.context.mailbox.masterCategories.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var masterCategories = asyncResult.value;
+        if (masterCategories && masterCategories.length > 0) {
+          // Grab the first category from the master list.
+          var categoryToAdd = [masterCategories[0].displayName];
+          Office.context.mailbox.item.categories.addAsync(categoryToAdd, function(asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log(`Successfully assigned category '${categoryToAdd}' to item.`);
+            } else {
+              console.log("categories.addAsync call failed with error: " + asyncResult.error.message);
+            }
+          });
+        } else {
+          console.log("There are no categories in the master list on this mailbox. You can add categories using Office.context.mailbox.masterCategories.addAsync.");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/45-categories/work-with-categories.yaml
+
+    Office.context.mailbox.item.categories.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var categories = asyncResult.value;
+        if (categories && categories.length > 0) {
+          // Grab the first category assigned to this item.
+          var categoryToRemove = [categories[0].displayName];
+          Office.context.mailbox.item.categories.removeAsync(categoryToRemove, function(asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+              console.log(`Successfully unassigned category '${categoryToRemove}' from this item.`);
+            } else {
+              console.log("categories.removeAsync call failed with error: " + asyncResult.error.message);
+            }
+          });
+        } else {
+          console.log("There are no categories assigned to this item.");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'categories: Categories;'
+    return:
+      type: <xref uid="outlook!Office.Categories:interface" />
+- name: cc
+  uid: outlook!Office.MessageCompose#cc:member
+  package: outlook!
+  fullName: cc
+  summary: >-
+    Предоставляет доступ к получателям копии сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.
+
+
+    Свойство `cc` возвращает объект `Recipients`, предоставляющий методы для получения или обновления получателей, которые указаны в строке **Копия** сообщения. Однако, в зависимости от клиента или платформы (например, Windows, Mac и т.д.), ограничения могут применяться к тому, сколько получателей вы можете получить или обновить. Дополнительные сведения см. в объекте [Recipients.](xref:outlook!Office.Recipients:interface)
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.cc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.cc.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.cc.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfCcRecipients = asyncResult.value;
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
+
+    Office.context.mailbox.item.cc.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgCc = asyncResult.value;
+        console.log("Message being copied to:");
+        for (var i = 0; i < msgCc.length; i++) {
+          console.log(msgCc[i].displayName + " (" + msgCc[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-cc-message-compose.yaml
+
+    var email = $("#emailCc")
+      .val()
+      .toString();
+    var emailArray = [email];
+
+    Office.context.mailbox.item.cc.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting Cc field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'cc: Recipients;'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />
+- name: conversationId
+  uid: outlook!Office.MessageCompose#conversationId:member
+  package: outlook!
+  fullName: conversationId
+  summary: >-
+    Получает идентификатор разговора по электронной почте, содержащего конкретное сообщение.
+
+
+    Вы можете получить целочисленное значение этого свойства, если ваше почтовое приложение активируется в формах просмотра или формах создания ответов. Если пользователь изменит тему ответа, после его отправки идентификатор беседы будет изменен, и полученное ранее значение будет недействительным.
+
+
+    Это свойство имеет значение NULL для нового элемента в форме создания. Свойство `conversationId` вернет значение, если пользователь задаст тему и сохранит элемент.
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-conversation-id-message.yaml
+
+    console.log(`Conversation ID: ${Office.context.mailbox.item.conversationId}`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'conversationId: string;'
+    return:
+      type: string
+- name: from
+  uid: outlook!Office.MessageCompose#from:member
+  package: outlook!
+  fullName: from
+  summary: >-
+    Получает электронный адрес отправителя сообщения.
+
+
+    Свойство `from` возвращает `From` объект, который предоставляет метод получения значения.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-from-message-compose.yaml
+
+    Office.context.mailbox.item.from.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgFrom = asyncResult.value;
+        console.log("Message from: " + msgFrom.displayName + " (" + msgFrom.emailAddress + ")");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'from: From;'
+    return:
+      type: <xref uid="outlook!Office.From:interface" />
+- name: internetHeaders
+  uid: outlook!Office.MessageCompose#internetHeaders:member
+  package: outlook!
+  fullName: internetHeaders
+  summary: >-
+    Получает или задает настраиваемые интернет-заготки сообщения.
+
+
+    Свойство `internetHeaders` возвращает `InternetHeaders` объект, который предоставляет методы управления интернет-загонами в сообщении.
+
+
+    Дополнительные дополнительные сообщения см. в статью [Get and set internet headers on a message in an Outlook-in](https://docs.microsoft.com/office/dev/add-ins/outlook/internet-headers)<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/70-mime-headers/manage-custom-internet-headers-message-compose.yaml
+
+    Office.context.mailbox.item.internetHeaders.getAsync(
+      ["x-preferred-fruit", "x-preferred-vegetable", "x-best-vegetable", "x-nonexistent-header"],
+      function (asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("Selected headers: " + JSON.stringify(asyncResult.value));
+        } else {
+          console.log("Error getting selected headers: " + JSON.stringify(asyncResult.error));
+        }
+      }
+    );
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'internetHeaders: InternetHeaders;'
+    return:
+      type: <xref uid="outlook!Office.InternetHeaders:interface" />
+- name: itemType
+  uid: outlook!Office.MessageCompose#itemType:member
+  package: outlook!
+  fullName: itemType
+  summary: >-
+    Получает тип элемента, который представляет экземпляр.
+
+
+    Свойство возвращает одно из значений переумерия, указывающее, является ли экземпляр объекта элемента сообщением `itemType` `ItemType` или назначением.
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-item-type.yaml
+
+    console.log(`Item type: ${Office.context.mailbox.item.itemType}`);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'itemType: MailboxEnums.ItemType | string;'
+    return:
+      type: <xref uid="outlook!Office.MailboxEnums.ItemType:enum" /> | string
+- name: notificationMessages
+  uid: outlook!Office.MessageCompose#notificationMessages:member
+  package: outlook!
+  fullName: notificationMessages
+  summary: >-
+    Получает сообщения уведомления для элемента.
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "**[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`\n\n**[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"progressIndicator\",\n    message: \"Progress indicator with id = \" + id\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Non-persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: false\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: true\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nOffice.context.mailbox.item.notificationMessages.getAllAsync(handleResult);          \n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.replaceAsync(\n  id,\n  {\n    type: \"informationalMessage\",\n    message: \"Notification message with id = \" + id + \" has been replaced with an informational message.\",\n    icon: \"icon2\",\n    persistent: false\n  },\n  handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.removeAsync(id, handleResult);\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'notificationMessages: NotificationMessages;'
+    return:
+      type: <xref uid="outlook!Office.NotificationMessages:interface" />
+- name: seriesId
+  uid: outlook!Office.MessageCompose#seriesId:member
+  package: outlook!
+  fullName: seriesId
+  summary: >-
+    Получает ID серии, к которой принадлежит экземпляр.
+
+
+    В Outlook веб-и настольных клиентов возвращается Exchange веб-службы (EWS) родительского (серийного) элемента, к которой относится этот `seriesId` элемент. Однако на iOS и Android seriesId возвращает rest ID родительского элемента.
+
+
+    **Примечание.** Идентификатор, возвращаемый свойством, такой же, как `seriesId` и идентификатор элемента Exchange веб-служб. Свойство `seriesId` не совпадает с Outlook ID, используемым Outlook API REST. Прежде чем делать вызовы API REST с помощью этого значения, его следует преобразовать с помощью `Office.context.mailbox.convertToRestId`<!-- -->. Дополнительные сведения см. в Outlook API REST из [Outlook надстройки](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api)<!-- -->.
+
+
+    Свойство возвращается для элементов, у них нет родительских элементов, таких как одиночные встречи, элементы серии или запросы на собрания, а также возвращается для любых других элементов, которые не являются запросами `seriesId` `null` на `undefined` собрание.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/50-recurrence/get-series-id.yaml
+
+    var seriesId = Office.context.mailbox.item.seriesId;
+
+
+    if (seriesId === undefined) {
+      console.log("This is a message that's not a meeting request.");
+    } else if (seriesId === null) {
+      console.log("This is a single appointment, a parent series, or a meeting request for a series or single meeting.");
+    } else {
+      console.log("This is an instance belonging to series with ID " + seriesId);
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'seriesId: string;'
+    return:
+      type: string
+- name: subject
+  uid: outlook!Office.MessageCompose#subject:member
+  package: outlook!
+  fullName: subject
+  summary: >-
+    Получает или задает описание, которое отображается в поле темы элемента.
+
+
+    Свойство `subject` получает или задает всю тему элемента для отправки с почтового сервера.
+
+
+    Свойство `subject` возвращает объект `Subject`, который предоставляет методы для получения и задания темы.
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-set-subject-compose.yaml
+
+    Office.context.mailbox.item.subject.getAsync((result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
+      }
+      console.log(`Subject: ${result.value}`);
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-set-subject-compose.yaml
+
+    let subject = "Hello World!";
+
+    Office.context.mailbox.item.subject.setAsync(subject, (result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Action failed with message ${result.error.message}`);
+        return;
+      }
+      console.log(`Successfully set subject to ${subject}`);
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'subject: Subject;'
+    return:
+      type: <xref uid="outlook!Office.Subject:interface" />
+- name: to
+  uid: outlook!Office.MessageCompose#to:member
+  package: outlook!
+  fullName: to
+  summary: >-
+    Предоставляет доступ к получателям, указанным в строке **Кому** сообщения. Тип объекта и уровень доступа зависят от режима текущего элемента.
+
+
+    Свойство `to` возвращает объект `Recipients`, предоставляющий методы для получения или обновления получателей, которые указаны в строке **Кому** сообщения. Однако, в зависимости от клиента или платформы (например, Windows, Mac и т.д.), ограничения могут применяться к тому, сколько получателей вы можете получить или обновить. Дополнительные сведения см. в объекте [Recipients.](xref:outlook!Office.Recipients:interface)
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.to.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+
+    Office.context.mailbox.item.to.addAsync( ['jason@contoso.com'] );
+
+    Office.context.mailbox.item.to.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var arrayOfToRecipients = asyncResult.value;
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
+
+    Office.context.mailbox.item.to.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgTo = asyncResult.value;
+        console.log("Message being sent to:");
+        for (var i = 0; i < msgTo.length; i++) {
+          console.log(msgTo[i].displayName + " (" + msgTo[i].emailAddress + ")");
+        }
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/30-recipients-and-attendees/get-set-to-message-compose.yaml
+
+    var email = $("#emailTo")
+      .val()
+      .toString();
+    var emailArray = [email];
+
+    Office.context.mailbox.item.to.setAsync(emailArray, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Succeeded in setting To field.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'to: Recipients;'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />
+methods:
+- name: addFileAttachmentAsync(uri, attachmentName, options, callback)
+  uid: outlook!Office.MessageCompose#addFileAttachmentAsync:member(1)
+  package: outlook!
+  fullName: addFileAttachmentAsync(uri, attachmentName, options, callback)
+  summary: >-
+    Добавляет файл в сообщение или встречу в качестве вложения.
+
+
+    Метод `addFileAttachmentAsync` передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    **Важно.** В последних сборках Outlook на Windows была введена ошибка, которая неправильно привносима заголовку к этому действию (как с помощью этого API, так и `Authorization: Bearer` Outlook пользовательского интерфейса). Чтобы решить эту проблему, можно попробовать использовать API, введенный с набором требований `addFileAttachmentFromBase64` 1.8.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `AttachmentSizeExceeded`<!-- -->. Вложение больше разрешенного размера.
+
+
+    - `FileTypeNotSupported`<!-- -->. Вложение имеет расширение, которое не разрешено.
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    function callback(result) {
+        if (result.error) {
+            console.log(result.error);
+        } else {
+            console.log("Attachment added");
+        }
+    }
+
+
+    function addAttachment() {
+        // The values in asyncContext can be accessed in the callback.
+        var options = { 'asyncContext': { var1: 1, var2: 2 } };
+
+        var attachmentURL = "https://contoso.com/rtm/icon.png";
+        Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);
+    }
+
+    ```
+
+    ```javascript
+
+    // The following example adds an image file as an inline attachment and
+
+    // references the attachment in the message body.
+
+    Office.context.mailbox.item.addFileAttachmentAsync(
+        "http://i.imgur.com/WJXklif.png",
+        "cute_bird.png",
+        {
+            isInline: true
+        },
+        function (asyncResult) {
+            Office.context.mailbox.item.body.setAsync(
+                "<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>",
+                {
+                    "coercionType": "html"
+                },
+                function (asyncResult) {
+                    // Do something here.
+                });
+        });
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/40-attachments/attachments-compose.yaml
+
+    var attachmentUrl = $("#attachmentUrl").val();
+
+    Office.context.mailbox.item.addFileAttachmentAsync(
+        attachmentUrl,
+        getFileName(attachmentUrl),
+        { "asyncContext" : { var1: 1, var2: true } },
+        function(result) { console.log(result); });
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: uri
+      description: Универсальный код ресурса (URI), представляющий расположение файла, который нужно вложить в сообщение или встречу. Максимальная длина — 2048 символов.
+      type: string
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `isInline`<!-- -->: Если верно, указывает, что вложение будет отображаться в тексте сообщения и не должно отображаться в списке вложений.'
+      type: '<xref uid="office!Office.AsyncContextOptions:interface" /> & { isInline: boolean }'
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addFileAttachmentAsync(uri, attachmentName, callback)
+  uid: outlook!Office.MessageCompose#addFileAttachmentAsync:member(2)
+  package: outlook!
+  fullName: addFileAttachmentAsync(uri, attachmentName, callback)
+  summary: >-
+    Добавляет файл в сообщение или встречу в качестве вложения.
+
+
+    Метод `addFileAttachmentAsync` передает файл по указанному универсальному коду ресурса (URI) и вкладывает его в элемент в форме создания.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    **Важно.** В последних сборках Outlook на Windows была введена ошибка, которая неправильно привносима заголовку к этому действию (как с помощью этого API, так и `Authorization: Bearer` Outlook пользовательского интерфейса). Чтобы решить эту проблему, можно попробовать использовать API, введенный с набором требований `addFileAttachmentFromBase64` 1.8.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `AttachmentSizeExceeded`<!-- -->. Вложение больше разрешенного размера.
+
+
+    - `FileTypeNotSupported`<!-- -->. Вложение имеет расширение, которое не разрешено.
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: uri
+      description: Универсальный код ресурса (URI), представляющий расположение файла, который нужно вложить в сообщение или встречу. Максимальная длина — 2048 символов.
+      type: string
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addFileAttachmentFromBase64Async(base64File, attachmentName, options, callback)
+  uid: outlook!Office.MessageCompose#addFileAttachmentFromBase64Async:member(1)
+  package: outlook!
+  fullName: addFileAttachmentFromBase64Async(base64File, attachmentName, options, callback)
+  summary: >-
+    Добавляет файл в сообщение или встречу в качестве вложения.
+
+
+    Метод `addFileAttachmentFromBase64Async` загружает файл из кодирования base64 и присоединяет его к элементу в форме составить. Этот метод возвращает идентификатор вложения в `asyncResult.value` объекте.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    **Примечание.** Если вы используете API URL-адресов данных (например, `readAsDataURL`<!-- -->), необходимо раздеть префикс URL-адреса данных, а затем отправить остальную строку в этот API. Например, если полная строка представлена `data:image/svg+xml;base64,<rest of base64 string>`<!-- -->, удалить `data:image/svg+xml;base64,`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `AttachmentSizeExceeded`<!-- -->. Вложение больше разрешенного размера.
+
+
+    - `FileTypeNotSupported`<!-- -->. Вложение имеет расширение, которое не разрешено.
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/40-attachments/attachments-compose.yaml
+
+    base64String = "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsSAAALEgHS3X78AAACRUlEQVRYw82XzXHbMBCFP2F8tzsQc8Ixyh0zoiuIXIGdCsxUYKqC0B04FdiuwMoM7mGOOIXqQGoAymXhgSX+itJM9kIRFLAP+3YXD5Pdbscx5oxaAIW8Ztr6l2PWmQwF4IyaieP53qdfAqQ8CwBn1JU4vpWhrbxXQA5MZfynANmcDIAzKgcy4FKGXsVJFf3nLgKyBQptfT4KQMRz2N0fcbxqmRMDWXflx0VPnrdArq0vekQ1Dv0UeHZGNebHhwjU8AzwKM43RyZnbAf58Q6ghudeWd0Aus0+5EcMIIRi3beua0D3Nm39BEAx3i7HTK4DEBJn5YxKOnaRA5+ErpMBWMpzDvx1RuXCcxOISlufAjfC7zgAsqsvUvMAD0ApPaEtGi9AIlUzKgJo60tt/SyKRkzLrAXERluf7W1gOICWaMyB386oooOWsIHvXbSoHuUSFovtHqicUVnH3EJoeT0aQEf5/XBGlc6otIOWBXAtPeZkAIJ9Bt6cUU9tZautX2nrk3MACHYr1ZKProKRtDw4o8pzAPjWo+NtpXTTvoteDDg8noDAcwbcRedAkGdFXyk2GEDcegVAFp2gyVDHjRQ4o6q2smoqtR5Hd+qMqtoALCWUUymr1m43QMZfOaMK4C0SrMsDANJ2E5FNcbdbjHC+ENl+H0myJFbLtaq4Rt8dyPBYRQV1E40nMv9rl7xrOw3DGb+Whcqu3i/OM6CUOWvgRlufNmnLYy4m77uJI7AXtdNcTDrU71LEyv7v01/N/ovL6bmu5/8A1tNWZldH0W4AAAAASUVORK5CYII=";
+
+    Office.context.mailbox.item.addFileAttachmentFromBase64Async(
+        base64String,
+        "logo.png",
+        { isInline: false },
+        function(result) { console.log(result); });
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/60-event-based-activation/work-with-client-signatures.yaml
+
+    // Set the signature for the current item with inline image.
+
+    var modIcon1Base64 = "iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpDRDMxMDg1MjBCNDZFMTExODE2MkM1RUI2M0M4MDYxRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFMTUxQjgyRjQ2MEQxMUUxODlFMkQwNTYzQ0YwMTUxMiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFMTUxQjgyRTQ2MEQxMUUxODlFMkQwNTYzQ0YwMTUxMiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkQxMzEwODUyMEI0NkUxMTE4MTYyQzVFQjYzQzgwNjFEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkNEMzEwODUyMEI0NkUxMTE4MTYyQzVFQjYzQzgwNjFEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+uC/WfAAAAehJREFUeNpilCzfwEAEkAbiECA2A2J1IOaHin8E4ptAfBaIVwLxU0IGMRKw0B6IW4DYhoE4cASIK6E0VsCEQ1wUiNcB8QESLGOAqj0MxBuhZhBloS4QnwHiQAbygR/UDF1CFupCXSjHQDmQg5qli8tCUBBsQUoQ1AD8UDNFsVk4n0o+w+bT+egWglKjNymmeGhLkqLcG2oHAwtUoIuQDj5OVgZPLUmwRe5aEmAxqYqNpFgKssOcCeplM0KqdST5GfpDDRm0JfkYrj3/SE7QguyQY4ImYYLgCtAS10kHGMw6dzNsv/qC7OwCClJXYlR++v6b4er3j5QmIFcmaNlIL6AOslCIjhYKMTHQGTBBqxh6gXcgC6/R0cKbIAv30dHCfaAKGJTxHxJSqS3Fz9DkowNmywpyMcgA8fF7b8D8VWcfM6w8+4gYC+VB+RCk8hSh0gaUD4/dewvlvUWRe/z+GzGWgex4BGtiOAHxXhoHpzMoSGHZAhSPW2lo2VZYWkHOh4nEtLrIAE+hZmNUwK+B2BOIv1PRsu9QM1/jatNcBtVZ0IREKXgENesyoVYbzNIdFFi2A5tl+NqlL6BB4QBNzsSCU1A9nlAzMAALAQMOQl0qB23qWwKxIlIrDBQ394H4OBCvISYqAAIMACVibHDqsO7zAAAAAElFTkSuQmCC";
+
+    Office.context.mailbox.item.addFileAttachmentFromBase64Async(
+      modIcon1Base64,
+      "myImage.png",
+      { isInline: true },
+      function(result) {
+        if (result.status == Office.AsyncResultStatus.Succeeded) {
+          var signature = $("#signature").val() + "<img src='cid:myImage.png'>";
+          console.log(`Setting signature to "${signature}".`);
+          Office.context.mailbox.item.body.setSignatureAsync(
+            signature,
+            { coercionType: "html" },
+            function(asyncResult) {
+              console.log(`setSignatureAsync: ${asyncResult.status}`);
+            }
+          );
+        } else {
+          console.error(`addFileAttachmentFromBase64Async: ${result.error}`);
+        }
+      }
+    );
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentFromBase64Async(base64File: string, attachmentName: string, options: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: base64File
+      description: Базовый контент изображения или файла, который будет добавлен в сообщение электронной почты или событие.
+      type: string
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `isInline`<!-- -->. Если верно, указывает, что вложение будет отображаться в тексте сообщения и не должно отображаться в списке вложений.'
+      type: '<xref uid="office!Office.AsyncContextOptions:interface" /> & { isInline: boolean }'
+    - id: callback
+      description: Необязательно. После завершения метода функция, переданная в параметре, называется с одним параметром типа `callback` Office. AsyncResult. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addFileAttachmentFromBase64Async(base64File, attachmentName, callback)
+  uid: outlook!Office.MessageCompose#addFileAttachmentFromBase64Async:member(2)
+  package: outlook!
+  fullName: addFileAttachmentFromBase64Async(base64File, attachmentName, callback)
+  summary: >-
+    Добавляет файл в сообщение или встречу в качестве вложения.
+
+
+    Метод `addFileAttachmentFromBase64Async` загружает файл из кодирования base64 и присоединяет его к элементу в форме составить. Этот метод возвращает идентификатор вложения в `asyncResult.value` объекте.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    **Примечание.** Если вы используете API URL-адресов данных (например, `readAsDataURL`<!-- -->), необходимо раздеть префикс URL-адреса данных, а затем отправить остальную строку в этот API. Например, если полная строка представлена `data:image/svg+xml;base64,<rest of base64 string>`<!-- -->, удалить `data:image/svg+xml;base64,`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `AttachmentSizeExceeded`<!-- -->. Вложение больше разрешенного размера.
+
+
+    - `FileTypeNotSupported`<!-- -->. Вложение имеет расширение, которое не разрешено.
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFileAttachmentFromBase64Async(base64File: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: base64File
+      description: Базовый контент изображения или файла, который будет добавлен в сообщение электронной почты или событие.
+      type: string
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: callback
+      description: Необязательно. После завершения метода функция, переданная в параметре, называется с одним параметром типа `callback` Office. AsyncResult. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, options, callback)
+  uid: outlook!Office.MessageCompose#addHandlerAsync:member(1)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, options, callback)
+  summary: >-
+    Добавляет обработчик для поддерживаемого события. **Примечание.** События доступны только с области задач.
+
+
+    Для поддерживаемых событий обратитесь в раздел События [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.10/office.context.mailbox.item#events) Item.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    function myHandlerFunction(eventarg) {
+        if (eventarg.attachmentStatus === Office.MailboxEnums.AttachmentStatus.Added) {
+            var attachment = eventarg.attachmentDetails;
+            console.log("Event Fired and Attachment Added!");
+            getAttachmentContentAsync(attachment.id, options, callback);
+        }
+    }
+
+
+    Office.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство типа параметра будет соответствовать `eventType` параметру `addHandlerAsync`<!-- -->.
+      type: any
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.MessageCompose#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    Добавляет обработчик для поддерживаемого события. **Примечание.** События доступны только с области задач.
+
+
+    Для поддерживаемых событий обратитесь в раздел События [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.10/office.context.mailbox.item#events) Item.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно вызвать обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: Функция для обработки события. Функция должна принимать один параметр, представляющий собой объектный литерал. Свойство типа параметра будет соответствовать `eventType` параметру `addHandlerAsync`<!-- -->.
+      type: any
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addItemAttachmentAsync(itemId, attachmentName, options, callback)
+  uid: outlook!Office.MessageCompose#addItemAttachmentAsync:member(1)
+  package: outlook!
+  fullName: addItemAttachmentAsync(itemId, attachmentName, options, callback)
+  summary: >-
+    Добавляет к сообщению элемент Exchange, например сообщение, в виде вложения.
+
+
+    С помощью метода `addItemAttachmentAsync` можно в элемент формы создания вложить элемент с указанным идентификатором Exchange. Если указать метод вызова, метод называется с одним параметром, `asyncResult`<!-- -->, который содержит идентификатор вложения или код, который указывает на любую ошибку, которая произошла при присоединении элемента. Параметр параметра options можно использовать для того, чтобы передать сведения о состоянии методу вызова, если это необходимо.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    Если ваша надстройка Office выполняется в Outlook в Интернете, метод `addItemAttachmentAsync` обеспечивает вложение элементов в элементы, отличные от редактируемого. Однако это действие не рекомендуется выполнять, так как оно не поддерживается.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // The following example adds an existing Outlook item as an attachment
+
+    // with the name `My Attachment`.
+
+    function callback(result) {
+        if (result.error) {
+            console.log(result.error);
+        } else {
+            console.log("Attachment added");
+        }
+    }
+
+
+    function addAttachment() {
+        // EWS ID of item to attach (shortened for readability).
+        var itemId = "AAMkADI1...AAA=";
+
+        // The values in asyncContext can be accessed in the callback.
+        var options = { 'asyncContext': { var1: 1, var2: 2 } };
+
+        Office.context.mailbox.item.addItemAttachmentAsync(itemId, "My Attachment", options, callback);
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/40-attachments/attachments-compose.yaml
+
+    var attachmentItemId = $("#attachmentItemId").val();
+
+    Office.context.mailbox.item.addItemAttachmentAsync(
+        attachmentItemId,
+        "My attachment",
+        { "asyncContext" : { var3: 3, var4: false } },
+        function(result) { console.log(result); });
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: itemId
+      description: Идентификатор Exchange для вкладываемого элемента. Максимальная длина — 100 символов.
+      type: any
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addItemAttachmentAsync(itemId, attachmentName, callback)
+  uid: outlook!Office.MessageCompose#addItemAttachmentAsync:member(2)
+  package: outlook!
+  fullName: addItemAttachmentAsync(itemId, attachmentName, callback)
+  summary: >-
+    Добавляет к сообщению элемент Exchange, например сообщение, в виде вложения.
+
+
+    С помощью метода `addItemAttachmentAsync` можно в элемент формы создания вложить элемент с указанным идентификатором Exchange. Если указать метод вызова, метод называется с одним параметром, `asyncResult`<!-- -->, который содержит идентификатор вложения или код, который указывает на любую ошибку, которая произошла при присоединении элемента. Параметр параметра options можно использовать для того, чтобы передать сведения о состоянии методу вызова, если это необходимо.
+
+
+    Идентификатор можно использовать с методом `removeAttachmentAsync`, чтобы удалить вложение, добавленное во время текущего сеанса.
+
+
+    Если ваша надстройка Office выполняется в Outlook в Интернете, метод `addItemAttachmentAsync` обеспечивает вложение элементов в элементы, отличные от редактируемого. Однако это действие не рекомендуется выполнять, так как оно не поддерживается.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `NumberOfAttachmentsExceeded`<!-- -->: Сообщение или назначение имеет слишком много вложений.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: itemId
+      description: Идентификатор Exchange для вкладываемого элемента. Максимальная длина — 100 символов.
+      type: any
+    - id: attachmentName
+      description: Имя вложения, которое отображается при передаче вложения. Максимальная длина — 255 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. После успешного выполнения идентификатор вложения будет представлен в свойстве `asyncResult.value`. Если добавить вложение не удастся, объект `asyncResult` будет содержать объект `Error` с описанием ошибки.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: close()
+  uid: outlook!Office.MessageCompose#close:member(1)
+  package: outlook!
+  fullName: close()
+  summary: >-
+    Закрывает текущий элемент, который составляется
+
+
+    Поведение близкого метода зависит от текущего состояния сочиняемого элемента. Если элемент имеет неоплаченные изменения, клиент подсказает пользователю сохранить, отменить или закрыть действие.
+
+
+    В клиенте Outlook, если сообщение является inline-ответом, близкий метод не влияет.
+
+
+    **Примечание.** В Outlook в Интернете, если элемент является назначением и он был сохранен с помощью`saveAsync`<!-- -->, пользователю предложено сохранить, отменить или отменить, даже если изменения не произошли с момента последнего сохранения элемента.
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/25-item-save-and-close/close.yaml
+
+    Office.context.mailbox.item.close();
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'close(): void;'
+    return:
+      type: void
+      description: ''
+- name: disableClientSignatureAsync(options, callback)
+  uid: outlook!Office.MessageCompose#disableClientSignatureAsync:member(1)
+  package: outlook!
+  fullName: disableClientSignatureAsync(options, callback)
+  summary: >-
+    Отключает Outlook клиента.
+
+
+    Для Windows и Mac богатые клиенты, этот API задает подпись под разделами "Новое сообщение" и "Ответы / Forwards" для отправки учетной записи в "(нет)", эффективно отключение подписи. Для Outlook веб-страницы API должен отключить параметр подписи для новых сообщений, ответов и пересылаемой почты. Если выбрана подпись, этот вызов API должен отключить его.
+
+
+    \[[Набор API: почтовый ящик 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/60-event-based-activation/work-with-client-signatures.yaml
+
+    // Disable the client signature.
+
+    Office.context.mailbox.item.disableClientSignatureAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("disableClientSignatureAsync succeeded");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'disableClientSignatureAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре вызова, называется с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: disableClientSignatureAsync(callback)
+  uid: outlook!Office.MessageCompose#disableClientSignatureAsync:member(2)
+  package: outlook!
+  fullName: disableClientSignatureAsync(callback)
+  summary: >-
+    Отключает Outlook клиента.
+
+
+    Для Windows и Mac богатые клиенты, этот API задает подпись под разделами "Новое сообщение" и "Ответы / Forwards" для отправки учетной записи в "(нет)", эффективно отключение подписи. Для Outlook веб-страницы API должен отключить параметр подписи для новых сообщений, ответов и пересылаемой почты. Если выбрана подпись, этот вызов API должен отключить его.
+
+
+    \[[Набор API: почтовый ящик 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'disableClientSignatureAsync(callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре вызова, называется с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAttachmentContentAsync(attachmentId, options, callback)
+  uid: outlook!Office.MessageCompose#getAttachmentContentAsync:member(1)
+  package: outlook!
+  fullName: getAttachmentContentAsync(attachmentId, options, callback)
+  summary: >-
+    Получает вложение из сообщения или встречи и возвращает его в качестве `AttachmentContent` объекта.
+
+
+    Метод `getAttachmentContentAsync` получает вложение с указанным идентификатором из элемента. В качестве наилучшей практики необходимо использовать идентификатор для получения вложения в том же сеансе, что и идентификаторы вложений, полученные при `getAttachmentsAsync` `item.attachments` вызове или вызове. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс закрывается, когда пользователь закрывает приложение, или если пользователь начинает сочинять inline-форму, затем выскакивая форму, чтобы продолжить в отдельном окне.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `AttachmentTypeNotSupported`<!-- -->. Тип вложения не поддерживается. Неподкрепленные типы включают встроенные изображения в формате Rich Text Или типы вложений элементов, кроме элементов электронной почты или календаря (например, контакт или элемент задачи).
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/40-attachments/get-attachment-content.yaml
+
+    var item = Office.context.mailbox.item;
+
+    var options = {asyncContext: {currentItem: item}};
+
+    item.getAttachmentsAsync(options, callback);
+
+
+    function callback(result) {
+        if (result.value.length > 0) {
+            for (i = 0 ; i < result.value.length ; i++) {
+                result.asyncContext.currentItem.getAttachmentContentAsync(result.value[i].id, handleAttachmentsCallback);
+            }
+        }
+    }
+
+
+    function handleAttachmentsCallback(result) {
+        // Parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file.
+        switch (result.value.format) {
+            case Office.MailboxEnums.AttachmentContentFormat.Base64:
+                // Handle file attachment.
+                console.log(result.value.content);
+                break;
+            case Office.MailboxEnums.AttachmentContentFormat.Eml:
+                // Handle email item attachment.
+                console.log("Attachment is a message.");
+                break;
+            case Office.MailboxEnums.AttachmentContentFormat.ICalendar:
+                // Handle .icalender attachment.
+                console.log("Attachment is a calendar item.");
+                break;
+            case Office.MailboxEnums.AttachmentContentFormat.Url:
+                // Handle cloud attachment.
+                console.log("Attachment is a cloud attachment.");
+                break;
+            default:
+                // Handle attachment formats that are not supported.
+        }
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAttachmentContentAsync(attachmentId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: Идентификатор вложения, который вы хотите получить.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentContent:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAttachmentContentAsync(attachmentId, callback)
+  uid: outlook!Office.MessageCompose#getAttachmentContentAsync:member(2)
+  package: outlook!
+  fullName: getAttachmentContentAsync(attachmentId, callback)
+  summary: >-
+    Получает вложение из сообщения или встречи и возвращает его в качестве `AttachmentContent` объекта.
+
+
+    Метод `getAttachmentContentAsync` получает вложение с указанным идентификатором из элемента. В качестве наилучшей практики необходимо использовать идентификатор для получения вложения в том же сеансе, что и идентификаторы вложений, полученные при `getAttachmentsAsync` `item.attachments` вызове или вызове. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс закрывается, когда пользователь закрывает приложение, или если пользователь начинает сочинять inline-форму, затем выскакивая форму, чтобы продолжить в отдельном окне.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `AttachmentTypeNotSupported`<!-- -->. Тип вложения не поддерживается. Неподкрепленные типы включают встроенные изображения в формате Rich Text Или типы вложений элементов, кроме элементов электронной почты или календаря (например, контакт или элемент задачи).
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAttachmentContentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: Идентификатор вложения, который вы хотите получить.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentContent:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAttachmentsAsync(options, callback)
+  uid: outlook!Office.MessageCompose#getAttachmentsAsync:member(1)
+  package: outlook!
+  fullName: getAttachmentsAsync(options, callback)
+  summary: >-
+    Получает вложения элемента в виде массива.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/40-attachments/attachments-compose.yaml
+
+    Office.context.mailbox.item.getAttachmentsAsync(function (result) {
+        if (result.status !== Office.AsyncResultStatus.Succeeded) {
+            console.error(result.error.message);
+        } else {
+            if (result.value.length > 0) {
+                for (var i = 0; i < result.value.length; i++) {
+                    var attachment = result.value[i];
+                    console.log(`${attachment.id}. Name: ${attachment.name}, size: ${attachment.size}, isInline: ${attachment.isInline}`);
+                }
+            }
+            else {
+                console.log("No attachments on this message.");
+            }
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAttachmentsAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentDetailsCompose[]>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentDetailsCompose:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAttachmentsAsync(callback)
+  uid: outlook!Office.MessageCompose#getAttachmentsAsync:member(2)
+  package: outlook!
+  fullName: getAttachmentsAsync(callback)
+  summary: >-
+    Получает вложения элемента в виде массива.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAttachmentsAsync(callback?: (asyncResult: Office.AsyncResult<AttachmentDetailsCompose[]>) => void): void;'
+    parameters:
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если вызов сбой, свойство будет содержать `asyncResult.error` код ошибки с причиной сбоя.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.AttachmentDetailsCompose:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getComposeTypeAsync(options, callback)
+  uid: outlook!Office.MessageCompose#getComposeTypeAsync:member(1)
+  package: outlook!
+  fullName: getComposeTypeAsync(options, callback)
+  summary: >-
+    Указывает тип композитного сообщения и тип его принуждения. Сообщение может быть новым или ответом или переад. Тип принуждения может быть HTML или простой текст.
+
+
+    \[[Набор API: почтовый ящик 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getComposeTypeAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. При успешном выполнении свойство содержит объект с типом композитного элемента и `asyncResult.value` типом принуждения.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
+    return:
+      type: void
+      description: Объект со `ComposeType` значениями `CoercionType` и переумещением для элемента сообщения.
+- name: getComposeTypeAsync(callback)
+  uid: outlook!Office.MessageCompose#getComposeTypeAsync:member(2)
+  package: outlook!
+  fullName: getComposeTypeAsync(callback)
+  summary: >-
+    Указывает тип композитного сообщения и тип его принуждения. Сообщение может быть новым или ответом или переад. Тип принуждения может быть HTML или простой текст.
+
+
+    \[[Набор API: почтовый ящик 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/60-event-based-activation/work-with-client-signatures.yaml
+
+    // Get the compose type of the current item (mail only).
+
+    Office.context.mailbox.item.getComposeTypeAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log(
+          "getComposeTypeAsync succeeded with composeType: " +
+            asyncResult.value.composeType +
+            " and coercionType: " +
+            asyncResult.value.coercionType
+        );
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getComposeTypeAsync(callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+    parameters:
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. При успешном выполнении свойство содержит объект с типом композитного элемента и `asyncResult.value` типом принуждения.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
+    return:
+      type: void
+      description: Объект со `ComposeType` значениями `CoercionType` и переумещением для элемента сообщения.
+- name: getItemIdAsync(options, callback)
+  uid: outlook!Office.MessageCompose#getItemIdAsync:member(1)
+  package: outlook!
+  fullName: getItemIdAsync(options, callback)
+  summary: >-
+    Асинхронно получает ID сохраненного элемента.
+
+
+    При вызове этот метод возвращает ID элемента с помощью метода обратного вызова.
+
+
+    **Примечание.** Если надстройка вызывает элемент в режиме композитации (например, чтобы использовать его с помощью EWS или API REST), обратите внимание, что если Outlook находится в кэшизированном режиме, может потребоваться некоторое время, прежде чем элемент синхронизируется с `getItemIdAsync` `itemId` сервером. Пока элемент не синхронизирован, элемент не распознается и с его помощью `itemId` возвращается ошибка.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `ItemNotSaved`<!-- -->: Id не может быть извлечен до тех пор, пока элемент не будет сохранен.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemIdAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getItemIdAsync(callback)
+  uid: outlook!Office.MessageCompose#getItemIdAsync:member(2)
+  package: outlook!
+  fullName: getItemIdAsync(callback)
+  summary: >-
+    Асинхронно получает ID сохраненного элемента.
+
+
+    При вызове этот метод возвращает ID элемента с помощью метода обратного вызова.
+
+
+    **Примечание.** Если надстройка вызывает элемент в режиме композитации (например, чтобы использовать его с помощью EWS или API REST), обратите внимание, что если Outlook находится в кэшизированном режиме, может потребоваться некоторое время, прежде чем элемент синхронизируется с `getItemIdAsync` `itemId` сервером. Пока элемент не синхронизирован, элемент не распознается и с его помощью `itemId` возвращается ошибка.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `ItemNotSaved`<!-- -->: Id не может быть извлечен до тех пор, пока элемент не будет сохранен.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/85-tokens-and-service-calls/item-id-compose.yaml
+
+    Office.context.mailbox.item.getItemIdAsync(function (result) {
+        if (result.status !== Office.AsyncResultStatus.Succeeded) {
+            console.error(`getItemIdAsync failed with message: ${result.error.message}`);
+        } else {
+            console.log(result.value);
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemIdAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getSelectedDataAsync(coercionType, options, callback)
+  uid: outlook!Office.MessageCompose#getSelectedDataAsync:member(1)
+  package: outlook!
+  fullName: getSelectedDataAsync(coercionType, options, callback)
+  summary: >-
+    Асинхронно возвращает данные, выбранные в теме или тексте сообщения.
+
+
+    Если выделенный фрагмент отсутствует, но курсор находится в тексте или теме, метод возвращает пустую строку для выбранных данных. Если выбраны не текст и не тема, метод возвращает ошибку `InvalidSelection`.
+
+
+    Чтобы получить доступ к выбранным данным из метода вызова вызова, позвоните `asyncResult.value.data`<!-- -->. Чтобы получить доступ к свойству источника, из которое поступает выбор, позвоните `asyncResult.value.sourceProperty`<!-- -->, который будет либо `body` или `subject`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Get selected data.
+
+    Office.initialize = function () {
+        Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, {}, getCallback);
+    };
+
+
+    function getCallback(asyncResult) {
+        var text = asyncResult.value.data;
+        var prop = asyncResult.value.sourceProperty;
+
+        console.log("Selected text in " + prop + ": " + text);
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getSelectedDataAsync(coercionType: Office.CoercionType | string, options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: Запрашивает формат данных. Если `Text`<!-- -->метод возвращает обычный текст в виде строки, удаляя все присутствующие HTML-теги. Если `Html`<!-- -->метод возвращает выбранный текст, будь то plaintext или HTML.
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
+    return:
+      type: void
+      description: Выбранные данные в виде строки с форматом, определяемой `coercionType`<!-- -->.
+- name: getSelectedDataAsync(coercionType, callback)
+  uid: outlook!Office.MessageCompose#getSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: getSelectedDataAsync(coercionType, callback)
+  summary: >-
+    Асинхронно возвращает данные, выбранные в теме или тексте сообщения.
+
+
+    Если выделенный фрагмент отсутствует, но курсор находится в тексте или теме, метод возвращает пустую строку для выбранных данных. Если выбраны не текст и не тема, метод возвращает ошибку `InvalidSelection`.
+
+
+    Чтобы получить доступ к выбранным данным из метода вызова вызова, позвоните `asyncResult.value.data`<!-- -->. Чтобы получить доступ к свойству источника, из которое поступает выбор, позвоните `asyncResult.value.sourceProperty`<!-- -->, который будет либо `body` или `subject`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/20-item-body/get-selected-data.yaml
+
+    Office.context.mailbox.item.getSelectedDataAsync(Office.CoercionType.Text, function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var text = asyncResult.value.data;
+        var prop = asyncResult.value.sourceProperty;
+        console.log("Selected text in " + prop + ": " + text);
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getSelectedDataAsync(coercionType: Office.CoercionType | string, callback: (asyncResult: Office.AsyncResult<any>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: Запрашивает формат данных. Если `Text`<!-- -->метод возвращает обычный текст в виде строки, удаляя все присутствующие HTML-теги. Если `Html`<!-- -->метод возвращает выбранный текст, будь то plaintext или HTML.
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
+    return:
+      type: void
+      description: Выбранные данные в виде строки с форматом, определяемой `coercionType`<!-- -->.
+- name: getSharedPropertiesAsync(options, callback)
+  uid: outlook!Office.MessageCompose#getSharedPropertiesAsync:member(1)
+  package: outlook!
+  fullName: getSharedPropertiesAsync(options, callback)
+  summary: >-
+    Получает свойства встречи или сообщения в общей папке.
+
+
+    **Важно.** В режиме композитации сообщений этот API не поддерживается в Outlook веб-Windows, если не выполнены следующие условия.
+
+
+    1. Владелец делит с делегатом по крайней мере одну папку почтовых ящиков.
+
+
+    2. Делегат проектирует сообщение в общей папке.
+
+
+    После того как сообщение отправлено, оно обычно находится в папке **отправленных** элементов делегата.
+
+
+    Дополнительные сведения об использовании этого API см. в статье [доступ к делегатам.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
+
+
+    **Примечание.** Этот метод не поддерживается в Outlook на iOS или Android.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/65-delegates-and-shared-folders/get-shared-properties.yaml
+
+    if (!Office.context.mailbox.item.getSharedPropertiesAsync) {
+      console.error("Try this sample on a message from a shared folder.");
+      return;
+    }
+
+
+    Office.context.mailbox.getCallbackTokenAsync({ isRest: true }, function(result) {
+      if (result.status === Office.AsyncResultStatus.Succeeded && result.value !== "") {
+        Office.context.mailbox.item.getSharedPropertiesAsync(
+          {
+            // Pass auth token along.
+            asyncContext: result.value
+          },
+          function(result2) {
+            let sharedProperties = result2.value;
+            let delegatePermissions = sharedProperties.delegatePermissions;
+
+            // Determine if user has the appropriate permission to do the operation.
+            if ((delegatePermissions & Office.MailboxEnums.DelegatePermissions.Read) != 0) {
+              var ewsId = Office.context.mailbox.item.itemId;
+              var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
+              let rest_url =
+                sharedProperties.targetRestUrl + "/v2.0/users/" + sharedProperties.targetMailbox + "/messages/" + restId;
+
+              $.ajax({
+                url: rest_url,
+                dataType: "json",
+                headers: { Authorization: "Bearer " + result2.asyncContext }
+              })
+                .done(function(response) {
+                  console.log(response);
+                })
+                .fail(function(error) {
+                  console.error(error);
+                });
+            }
+          }
+        );
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getSharedPropertiesAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<SharedProperties>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Свойством `value` результата являются свойства общего элемента.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.SharedProperties:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getSharedPropertiesAsync(callback)
+  uid: outlook!Office.MessageCompose#getSharedPropertiesAsync:member(2)
+  package: outlook!
+  fullName: getSharedPropertiesAsync(callback)
+  summary: >-
+    Получает свойства встречи или сообщения в общей папке.
+
+
+    **Важно.** В режиме композитации сообщений этот API не поддерживается в Outlook веб-Windows, если не выполнены следующие условия.
+
+
+    1. Владелец делит с делегатом по крайней мере одну папку почтовых ящиков.
+
+
+    2. Делегат проектирует сообщение в общей папке.
+
+
+    После того как сообщение отправлено, оно обычно находится в папке **отправленных** элементов делегата.
+
+
+    Дополнительные сведения об использовании этого API см. в статье [доступ к делегатам.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
+
+
+    **Примечание.** Этот метод не поддерживается в Outlook на iOS или Android.
+
+
+    \[[Набор API: почтовый ящик 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/65-delegates-and-shared-folders/get-shared-properties.yaml
+
+    if (!Office.context.mailbox.item.getSharedPropertiesAsync) {
+      console.error("Try this sample on an item from a shared folder.");
+      return;
+    }
+
+
+    Office.context.mailbox.item.getSharedPropertiesAsync(function(result) {
+      console.log(result.value);
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getSharedPropertiesAsync(callback: (asyncResult: Office.AsyncResult<SharedProperties>) => void): void;'
+    parameters:
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Свойством `value` результата являются свойства общего элемента.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.SharedProperties:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: isClientSignatureEnabledAsync(options, callback)
+  uid: outlook!Office.MessageCompose#isClientSignatureEnabledAsync:member(1)
+  package: outlook!
+  fullName: isClientSignatureEnabledAsync(options, callback)
+  summary: >-
+    Получает, если включена подпись клиента.
+
+
+    Для Windows и mac-клиентов вызов API должен возвращаться, если подпись по умолчанию для новых сообщений, ответов или пересылается установлена в шаблоне для Outlook `true` учетной записи. Если Outlook в Интернете, вызов API должен возвращаться, если подпись включена `true` для типов композитных данных.`newMail`<!-- -->, `reply`<!-- -->, или `forward`<!-- -->. Если параметры настроены на "(нет)" в Mac или Windows богатых клиентов или отключены Outlook в Интернете, вызов API должен вернуться`false`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/60-event-based-activation/work-with-client-signatures.yaml
+
+    // Check if the client signature is currently enabled.
+
+    Office.context.mailbox.item.isClientSignatureEnabledAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("isClientSignatureEnabledAsync succeeded with result: " + asyncResult.value);
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'isClientSignatureEnabledAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<boolean>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;boolean&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: isClientSignatureEnabledAsync(callback)
+  uid: outlook!Office.MessageCompose#isClientSignatureEnabledAsync:member(2)
+  package: outlook!
+  fullName: isClientSignatureEnabledAsync(callback)
+  summary: >-
+    Получает, если включена подпись клиента.
+
+
+    Для Windows и mac-клиентов вызов API должен возвращаться, если подпись по умолчанию для новых сообщений, ответов или пересылается установлена в шаблоне для Outlook `true` учетной записи. Если Outlook в Интернете, вызов API должен возвращаться, если подпись включена `true` для типов композитных данных.`newMail`<!-- -->, `reply`<!-- -->, или `forward`<!-- -->. Если параметры настроены на "(нет)" в Mac или Windows богатых клиентов или отключены Outlook в Интернете, вызов API должен вернуться`false`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.10](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'isClientSignatureEnabledAsync(callback: (asyncResult: Office.AsyncResult<boolean>) => void): void;'
+    parameters:
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;boolean&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: loadCustomPropertiesAsync(callback, userContext)
+  uid: outlook!Office.MessageCompose#loadCustomPropertiesAsync:member(1)
+  package: outlook!
+  fullName: loadCustomPropertiesAsync(callback, userContext)
+  summary: >-
+    Асинхронно загружает настраиваемые свойства для надстройки для выбранного элемента.
+
+
+    Настраиваемые свойства сохраняются в виде пар "ключ-значение" для каждого приложения и каждого элемента. Этот метод возвращает объект `CustomProperties` при обратном вызове, который предоставляет методы для доступа к настраиваемым свойствам, характерным для текущего элемента и текущей надстройки. Настраиваемые свойства не шифруются для элемента, поэтому этот способ хранения не является безопасным.
+
+
+    Настраиваемые свойства предоставляются в качестве `CustomProperties` объекта в свойстве asyncResult.value. Этот объект позволяет получить, задать и удалить настраиваемые свойства для элемента, а также сохранить изменения, внесенные в набор настраиваемых свойств, на сервере.
+  remarks: "**[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`\n\n**[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// The following example shows how to use the loadCustomPropertiesAsync method\n// to asynchronously load custom properties that are specific to the current item.\n// The example also shows how to use the saveAsync method to save these properties\n// back to the server. After loading the custom properties, the example uses the\n// get method to read the custom property myProp, the set method to write the\n// custom property otherProp, and then finally calls the saveAsync method to save\n// the custom properties.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, add-in-specific code can run.\n        var mailbox = Office.context.mailbox;\n        mailbox.item.loadCustomPropertiesAsync(customPropsCallback);\n    });\n};\n\nfunction customPropsCallback(asyncResult) {\n    var customProps = asyncResult.value;\n    var myProp = customProps.get(\"myProp\");\n\n    customProps.set(\"otherProp\", \"value\");\n    customProps.saveAsync(saveCallback);\n}\n\nfunction saveCallback(asyncResult) {\n}\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/15-item-custom-properties/load-set-get-save.yaml\nOffice.context.mailbox.item.loadCustomPropertiesAsync(function (result) {\n  if (result.status === Office.AsyncResultStatus.Succeeded) {\n    console.log(\"Loaded following custom properties:\");\n    customProps = result.value;\n    var dataKey = Object.keys(customProps)[0];\n    var data = customProps[dataKey];\n    for (var propertyName in data)\n    {\n      var propertyValue = data[propertyName];\n      console.log(`${propertyName}: ${propertyValue}`);\n    }              \n  }\n  else {\n    console.error(`loadCustomPropertiesAsync failed with message ${result.error.message}`);\n  }\n});\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+    parameters:
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.CustomProperties:interface" />&gt;) =&gt; void'
+    - id: userContext
+      description: Необязательно. Разработчики могут указать любой объект, к которому необходимо получить доступ, в функции обратного вызова. Доступ к этому объекту можно получить с помощью свойства `asyncResult.asyncContext` в функции обратного вызова.
+      type: any
+    return:
+      type: void
+      description: ''
+- name: removeAttachmentAsync(attachmentId, options, callback)
+  uid: outlook!Office.MessageCompose#removeAttachmentAsync:member(1)
+  package: outlook!
+  fullName: removeAttachmentAsync(attachmentId, options, callback)
+  summary: >-
+    Удаляет вложение из сообщения или встречи.
+
+
+    Метод `removeAttachmentAsync` удаляет из элемента вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс закрывается, когда пользователь закрывает приложение, или если пользователь начинает сочинять inline-форму, затем выскакивая форму, чтобы продолжить в отдельном окне.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // The following code removes an attachment with an identifier of '0'.
+
+    Office.context.mailbox.item.removeAttachmentAsync(
+        '0',
+        { asyncContext : null },
+        function (asyncResult)
+        {
+            console.log(asyncResult.status);
+        }
+    );
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/40-attachments/attachments-compose.yaml
+
+    Office.context.mailbox.item.removeAttachmentAsync(
+        $("#attachmentId").val(),
+        { asyncContext : null },
+        function(result)
+        {
+            if (result.status !== Office.AsyncResultStatus.Succeeded) {
+                console.error(`${result.error.message}`);
+            } else {
+                console.log(`Attachment removed successfully.`);
+            }
+        }
+    );
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAttachmentAsync(attachmentId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: Идентификатор удаляемого вложения. Максимальная длина строки — 200 символов в Outlook в Интернете и `attachmentId` Windows.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAttachmentAsync(attachmentId, callback)
+  uid: outlook!Office.MessageCompose#removeAttachmentAsync:member(2)
+  package: outlook!
+  fullName: removeAttachmentAsync(attachmentId, callback)
+  summary: >-
+    Удаляет вложение из сообщения или встречи.
+
+
+    Метод `removeAttachmentAsync` удаляет из элемента вложение с указанным идентификатором. Идентификатор вложения рекомендуется использовать для удаления вложения, только если оно добавлено тем же почтовым приложением в ходе текущего сеанса. В Outlook в Интернете и на мобильных устройствах идентификатор вложения действителен только в течение одного сеанса. Сеанс закрывается, когда пользователь закрывает приложение, или если пользователь начинает сочинять inline-форму, затем выскакивая форму, чтобы продолжить в отдельном окне.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: attachmentId
+      description: Идентификатор удаляемого вложения. Максимальная длина строки — 200 символов в Outlook в Интернете и `attachmentId` Windows.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Если удалить вложение не удается, свойство `asyncResult.error` содержит код ошибки с указанием ее причины.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, options, callback)
+  uid: outlook!Office.MessageCompose#removeHandlerAsync:member(1)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, options, callback)
+  summary: >-
+    Удаляет обработчиков для поддерживаемого типа события. **Примечание.** События доступны только с области задач.
+
+
+    Для поддерживаемых событий обратитесь в раздел События [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.10/office.context.mailbox.item#events) Item.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно отменить обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.MessageCompose#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    Удаляет обработчиков для поддерживаемого типа события. **Примечание.** События доступны только с области задач.
+
+
+    Для поддерживаемых событий обратитесь в раздел События [объектной модели](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.10/office.context.mailbox.item#events) Item.
+
+
+    \[[Набор API: почтовый ящик 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: Событие, которое должно отменить обработчик.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром, `asyncResult`<!-- -->, который `Office.AsyncResult` является объектом.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: saveAsync(options, callback)
+  uid: outlook!Office.MessageCompose#saveAsync:member(1)
+  package: outlook!
+  fullName: saveAsync(options, callback)
+  summary: >-
+    Асинхронно сохраняет элемент.
+
+
+    При вызове этот метод сохраняет текущее сообщение в качестве черновика и возвращает ID элемента с помощью метода обратного вызова. В Outlook в Интернете или интерактивном режиме Outlook этот элемент сохраняется на сервере. В Outlook в режиме кэширования этот элемент сохраняется в локальном кэше.
+
+
+    Если метод `saveAsync` вызывается для встречи в режиме создания, она сохраняется как обычная встреча в календаре пользователя, а не как черновик. При сохранении новой встречи приглашения не отправляются. При сохранении существующей встречи уведомления отправляются добавленным или удаленным участникам.
+
+
+    **Примечание.** Если надстройка вызывает элемент в режиме композитации, чтобы получить ID элемента для использования с EWS или API REST, обратите внимание, что, когда Outlook находится в кэшизированном режиме, может потребоваться некоторое время, прежде чем элемент будет фактически синхронизирован с `saveAsync` сервером. До синхронизации элемента с помощью itemId возвращается ошибка.
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: saveAsync(callback)
+  uid: outlook!Office.MessageCompose#saveAsync:member(2)
+  package: outlook!
+  fullName: saveAsync(callback)
+  summary: >-
+    Асинхронно сохраняет элемент.
+
+
+    При вызове этот метод сохраняет текущее сообщение в виде черновика и возвращает идентификатор элемента с помощью метода обратного вызова. В Outlook в Интернете или интерактивном режиме Outlook этот элемент сохраняется на сервере. В Outlook в режиме кэширования этот элемент сохраняется в локальном кэше.
+
+
+    Если метод `saveAsync` вызывается для встречи в режиме создания, она сохраняется как обычная встреча в календаре пользователя, а не как черновик. При сохранении новой встречи приглашения не отправляются. При сохранении существующей встречи уведомления отправляются добавленным или удаленным участникам.
+
+
+    **Примечание.** Если надстройка вызывает элемент в режиме композитации, чтобы получить ID элемента для использования с EWS или API REST, обратите внимание, что, когда Outlook находится в кэшизированном режиме, может потребоваться некоторое время, прежде чем элемент будет фактически синхронизирован с `saveAsync` сервером. До окончания синхронизации элемента применение параметра `itemId` будет приводить к ошибке.
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.saveAsync(
+        function callback(result) {
+            // Process the result.
+        });
+
+    // The following is an example of the
+
+    // `result` parameter passed to the
+
+    // callback function. The `value`
+
+    // property contains the item ID of
+
+    // the item.
+
+    {
+        "value": "AAMkADI5...AAA=",
+        "status": "succeeded"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'saveAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, options, callback)
+  uid: outlook!Office.MessageCompose#setSelectedDataAsync:member(1)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, options, callback)
+  summary: >-
+    Асинхронно вставляет данные в текст или тему сообщения.
+
+
+    Метод `setSelectedDataAsync` вставляет указанную строку в местоположение курсора в теме или тексте элемента либо, если текст выделен в редакторе, он заменяет выделенный текст. Если курсор находится вне текста или темы элемента, возвращается ошибка. После вставки курсор помещается в конец вставленного содержимого.
+
+
+    \[[Набор API: почтовый ящик 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.setSelectedDataAsync("<b>Hello World!</b>", { coercionType : "html" });
+
+    ```
+
+    ```javascript
+
+    Office.context.mailbox.item.setSelectedDataAsync("Hello World!");
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/20-item-body/set-selected-data.yaml
+
+    Office.context.mailbox.item.setSelectedDataAsync("Replaced", function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        console.log("Selected text has been updated successfully.");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Вставляемые данные. Объем данных не должен превышать 1 000 000 символов. Если передано больше 1 000 000 символов, возвращается исключение `ArgumentOutOfRange`.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `coercionType`<!-- -->. Если текст, текущий стиль применяется в Outlook на веб-и настольных клиентах. Если поле представляет собой редактор HTML, вставляются только текстовые данные, даже если они имеют формат HTML. Если html и поле поддерживают HTML (субъект не поддерживает), текущий стиль применяется в Outlook в Интернете, а стиль по умолчанию применяется Outlook на настольных клиентах. Если поле является текстовым, возвращается ошибка `InvalidDataFormat`. Если свойство `coercionType` не задано, результат зависит от поля: если поле имеет формат HTML, используется текст в формате HTML, а если поле текстовое, применяется обычный текст.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, callback)
+  uid: outlook!Office.MessageCompose#setSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, callback)
+  summary: >-
+    Асинхронно вставляет данные в текст или тему сообщения.
+
+
+    Метод `setSelectedDataAsync` вставляет указанную строку в местоположение курсора в теме или тексте элемента либо, если текст выделен в редакторе, он заменяет выделенный текст. Если курсор находится вне текста или темы элемента, возвращается ошибка. После вставки курсор помещается в конец вставленного содержимого.
+
+
+    \[[Набор API: почтовый ящик 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Композит сообщения
+
+
+    **Ошибки:**
+
+
+    - `InvalidAttachmentId`<!-- -->. Идентификатор вложения не существует.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Вставляемые данные. Объем данных не должен превышать 1 000 000 символов. Если передано больше 1 000 000 символов, возвращается исключение `ArgumentOutOfRange`.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+extends: <xref uid="outlook!Office.Message:interface" />
+metadata:
+  ms.openlocfilehash: e6cf9ffa8348fd9e358d43c35a63faa0a5b64458
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591654"

@@ -1,0 +1,641 @@
+### YamlMime:TSType
+name: Office.Body
+uid: outlook!Office.Body:interface
+package: outlook!
+fullName: Office.Body
+summary: >-
+  Объект body предоставляет методы добавления и обновления контента сообщения или встречи. Он возвращается в свойстве body выбранного элемента.
+
+
+  \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+  **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: appendOnSendAsync(data, options, callback)
+  uid: outlook!Office.Body#appendOnSendAsync:member(1)
+  package: outlook!
+  fullName: appendOnSendAsync(data, options, callback)
+  summary: >-
+    Приложения при отправке указанного контента в конец тела элемента после любой подписи.
+
+
+    Если пользователь выполняет надстройки, реализуют функцию отправки с [помощью \` ItemSend \` в манифесте](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->, приложение-на-отправить запускается перед отправкой функции.
+
+
+    **Важно.** Если надстройка реализует функцию отправки и вызывает в обработнике, вызов возвращает ошибку, так как этот сценарий `appendOnSendAsync` `ItemSend` не `appendOnSendAsync` поддерживается.
+
+
+    **Важно:** использование `appendOnSendAsync`<!-- -->узел `ExtendedPermissions` манифеста должен включать `AppendOnSend` расширенное разрешение.
+
+
+    **Примечание.** Чтобы очистить данные от предыдущего вызова, вы можете вызвать его снова `appendOnSendAsync` с заданным `data` параметром `null`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->: `data` Параметр больше 5000 символов.
+
+
+    - `InvalidFormatError`<!-- -->. Параметр `options.coercionType` задан, `Office.CoercionType.Html` но текст сообщения находится в простом тексте.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.body.appendOnSendAsync(
+        "P.S. This text was appended on send.",
+        {coercionType: Office.CoercionType.Html},
+        function (asyncResult) {
+            if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                console.log("Action failed with error: " + asyncResult.error.message);
+            }
+        }
+    );
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendOnSendAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, которая будет добавлена в конец тела. Строка ограничена 5000 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `coercionType`<!-- -->: Желаемый формат для придатки данных. Строка в параметре `data` будет преобразована в этот формат.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: appendOnSendAsync(data, callback)
+  uid: outlook!Office.Body#appendOnSendAsync:member(2)
+  package: outlook!
+  fullName: appendOnSendAsync(data, callback)
+  summary: >-
+    Приложения при отправке указанного контента в конец тела элемента после любой подписи.
+
+
+    Если пользователь выполняет надстройки, реализуют функцию отправки с [помощью \` ItemSend \` в манифесте](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->, приложение-на-отправить запускается перед отправкой функции.
+
+
+    **Важно.** Если надстройка реализует функцию отправки и вызывает в обработнике, вызов возвращает ошибку, так как этот сценарий `appendOnSendAsync` `ItemSend` не `appendOnSendAsync` поддерживается.
+
+
+    **Важно:** использование `appendOnSendAsync`<!-- -->узел `ExtendedPermissions` манифеста должен включать `AppendOnSend` расширенное разрешение.
+
+
+    **Примечание.** Чтобы очистить данные от предыдущего вызова, вы можете вызвать его снова `appendOnSendAsync` с заданным `data` параметром `null`<!-- -->.
+
+
+    \[[Набор API: почтовый ящик 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->: `data` Параметр больше 5000 символов.
+
+
+    - `InvalidFormatError`<!-- -->. Параметр `options.coercionType` задан, `Office.CoercionType.Html` но текст сообщения находится в простом тексте.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'appendOnSendAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, которая будет добавлена в конец тела. Строка ограничена 5000 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(coercionType, options, callback)
+  uid: outlook!Office.Body#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(coercionType, options, callback)
+  summary: >-
+    Возвращает текущий текст в указанном формате.
+
+
+    Этот метод возвращает весь текущий орган в формате, указанном `coercionType`<!-- -->.
+
+
+    При работе с HTML-форматированные органы, важно отметить, что и методы `Body.getAsync` `Body.setAsync` не являются idempotent. Возвращаемая из метода величина не обязательно будет точно такой же, как и значение, которое было передано `getAsync` `setAsync` в методе ранее. Клиент может изменить переданное значение, чтобы эффективно отрисовывать его `setAsync` с помощью его двигателя визуализации.
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // This example gets the body of the item as plain text.
+
+    Office.context.mailbox.item.body.getAsync(
+        "text",
+        { asyncContext: "This is passed to the callback" },
+        function callback(result) {
+            // Do something with the result.
+        });
+
+    // The following is an example of the result parameter passed to the callback function.
+
+    {
+        "value": "TEXT of whole body (including threads below)",
+        "status": "succeeded",
+        "asyncContext": "This is passed to the callback"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(coercionType: Office.CoercionType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: Формат возвращаемого текста.
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: options
+      description: 'Объект литеральный, содержащий одно или несколько следующих свойств: `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. После завершения метода функция, переданная в параметре, называется с одним параметром типа `callback` Office. AsyncResult. Тело предоставляется в запрашиваемом формате в `asyncResult.value` свойстве.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(coercionType, callback)
+  uid: outlook!Office.Body#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(coercionType, callback)
+  summary: >-
+    Возвращает текущий текст в указанном формате.
+
+
+    Этот метод возвращает весь текущий орган в формате, указанном `coercionType`<!-- -->.
+
+
+    При работе с HTML-форматированные органы, важно отметить, что и методы `Body.getAsync` `Body.setAsync` не являются idempotent. Возвращаемая из метода величина не обязательно будет точно такой же, как и значение, которое было передано `getAsync` `setAsync` в методе ранее. Клиент может изменить переданное значение, чтобы эффективно отрисовывать его `setAsync` с помощью его двигателя визуализации.
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый режим Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** составить или прочитать
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(coercionType: Office.CoercionType | string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: Формат возвращаемого текста.
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
+    - id: callback
+      description: Необязательно. После завершения метода функция, переданная в параметре, называется с одним параметром типа `callback` Office. AsyncResult. Тело предоставляется в запрашиваемом формате в `asyncResult.value` свойстве.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getTypeAsync(options, callback)
+  uid: outlook!Office.Body#getTypeAsync:member(1)
+  package: outlook!
+  fullName: getTypeAsync(options, callback)
+  summary: >-
+    Получает значение, указывающее формат содержимого: HTML или текст.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    Office.context.mailbox.item.body.getTypeAsync(function (asyncResult) {
+        if (asyncResult.status === "failed") {
+            console.log("Action failed with error: " + asyncResult.error.message);
+        } else {
+            console.log("Body type: " + asyncResult.value);
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getTypeAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Тип контента возвращается в качестве одного из `CoercionType` значений `asyncResult.value` в свойстве.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getTypeAsync(callback)
+  uid: outlook!Office.Body#getTypeAsync:member(2)
+  package: outlook!
+  fullName: getTypeAsync(callback)
+  summary: >-
+    Получает значение, указывающее формат содержимого: HTML или текст.
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getTypeAsync(callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+    parameters:
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Тип контента возвращается в качестве одного из `CoercionType` значений `asyncResult.value` в свойстве.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: prependAsync(data, options, callback)
+  uid: outlook!Office.Body#prependAsync:member(1)
+  package: outlook!
+  fullName: prependAsync(data, options, callback)
+  summary: >-
+    Добавляет указанное содержимое в начало текста элемента.
+
+
+    Метод `prependAsync` вставляет указанную строку в начало текста элемента. После вставки курсор возвращается на исходное место по отношению к вставляемому содержимому.
+
+
+    При работе с htmL-форматированные органы, важно отметить, что клиент может изменить значение передано, чтобы сделать его эффективно отрисовки с его `prependAsync` движком визуализации. Это означает, что значение, возвращаемого после последующего вызова методу, не обязательно будет точно содержать значение, которое было передано `Body.getAsync` `prependAsync` в методе ранее.
+
+
+    При включив ссылки в HTML-разметку, можно отключить предварительный просмотр онлайн-ссылок, установив атрибут `id` на якоре (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP" (см. раздел **Примеры** для примера).
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->Параметр данных превышает 1 000 000 символов.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // When including links in HTML markup, you can disable online link preview
+
+    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+
+    Office.context.mailbox.item.body.prependAsync(
+        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+        {coercionType: Office.CoercionType.Html},
+        callback);
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'prependAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, добавляемая в начало основного текста. Максимальная длина — 1 000 000 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `coercionType`<!-- -->: Нужный формат для тела. Строка в параметре `data` будет преобразована в этот формат.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: prependAsync(data, callback)
+  uid: outlook!Office.Body#prependAsync:member(2)
+  package: outlook!
+  fullName: prependAsync(data, callback)
+  summary: >-
+    Добавляет указанное содержимое в начало текста элемента.
+
+
+    Метод `prependAsync` вставляет указанную строку в начало текста элемента. После вставки курсор возвращается на исходное место по отношению к вставляемому содержимому.
+
+
+    При работе с htmL-форматированные органы, важно отметить, что клиент может изменить значение передано, чтобы сделать его эффективно отрисовки с его `prependAsync` движком визуализации. Это означает, что значение, возвращаемого после последующего вызова методу, не обязательно будет точно содержать значение, которое было передано `Body.getAsync` `prependAsync` в методе ранее.
+
+
+    При включив ссылки в HTML-разметку, можно отключить предварительный просмотр онлайн-ссылок, установив атрибут `id` на якоре (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP" (см. раздел **Примеры** для примера).
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->Параметр данных превышает 1 000 000 символов.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'prependAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, добавляемая в начало основного текста. Максимальная длина — 1 000 000 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(data, options, callback)
+  uid: outlook!Office.Body#setAsync:member(1)
+  package: outlook!
+  fullName: setAsync(data, options, callback)
+  summary: >-
+    Заменяет весь текст указанным текстом.
+
+
+    При работе с HTML-форматированные органы, важно отметить, что и методы `Body.getAsync` `Body.setAsync` не являются idempotent. Возвращаемая из метода величина не обязательно будет точно такой же, как и значение, которое было передано `getAsync` `setAsync` в методе ранее. Клиент может изменить переданное значение, чтобы эффективно отрисовывать его `setAsync` с помощью его двигателя визуализации.
+
+
+    При включив ссылки в HTML-разметку, можно отключить предварительный просмотр онлайн-ссылок, установив атрибут `id` на якоре (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP" (см. раздел **Примеры** для примера).
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->Параметр данных превышает 1 000 000 символов.
+
+
+    - `InvalidFormatError`<!-- -->. Параметр `options.coercionType` задан, `Office.CoercionType.Html` а текст сообщения находится в простом тексте.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // When including links in HTML markup, you can disable online link preview
+
+    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+
+    Office.context.mailbox.item.body.setAsync(
+        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+        {coercionType: Office.CoercionType.Html},
+        callback);
+    Office.context.mailbox.item.body.setAsync(
+        "<b>(replaces all body, including threads you are replying to that may be on the bottom)</b>",
+        { coercionType: "html", asyncContext: "This is passed to the callback" },
+        function callback(result) {
+            // Process the result.
+    });
+
+
+    // The following is an example of the result parameter passed to the callback function.
+
+    {
+        "value":null,
+        "status": "succeeded",
+        "asyncContext": "This is passed to the callback"
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, которая заменяет существующий текст. Максимальная длина — 1 000 000 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `coercionType`<!-- -->: Нужный формат для тела. Строка в параметре `data` будет преобразована в этот формат.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: Необязательно. После завершения метода функция, переданная в параметре, называется с одним параметром типа `callback` Office. AsyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(data, callback)
+  uid: outlook!Office.Body#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(data, callback)
+  summary: >-
+    Заменяет весь текст указанным текстом.
+
+
+    При работе с HTML-форматированные органы, важно отметить, что и методы `Body.getAsync` `Body.setAsync` не являются idempotent. Возвращаемая из метода величина не обязательно будет точно такой же, как и значение, которое было передано `getAsync` `setAsync` в методе ранее. Клиент может изменить переданное значение, чтобы эффективно отрисовывать его `setAsync` с помощью его двигателя визуализации.
+
+
+    При включив ссылки в HTML-разметку, можно отключить предварительный просмотр онлайн-ссылок, установив атрибут `id` на якоре (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP" (см. раздел **Примеры** для примера).
+
+
+    \[[Набор API: почтовый ящик 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->Параметр данных превышает 1 000 000 символов.
+
+
+    - `InvalidFormatError`<!-- -->. Параметр `options.coercionType` задан, `Office.CoercionType.Html` а текст сообщения находится в простом тексте.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, которая заменяет существующий текст. Максимальная длина — 1 000 000 символов.
+      type: string
+    - id: callback
+      description: Необязательно. После завершения метода функция, переданная в параметре, называется с одним параметром типа `callback` Office. AsyncResult. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, options, callback)
+  uid: outlook!Office.Body#setSelectedDataAsync:member(1)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, options, callback)
+  summary: >-
+    Заменяет выделенный фрагмент в основном тексте на заданный текст.
+
+
+    Метод вставляет указанную строку в расположении курсора в теле элемента или, если текст выбран в редакторе, он заменяет `setSelectedDataAsync` выбранный текст. Если указатель не появлялся в основном тексте элемента, или элемент потерял фокус в интерфейсе, строка вставляется в начало основного текста. После вставки курсор помещается в конце вставленного контента.
+
+
+    Включив ссылки в HTML-разметку, можно отключить предварительный просмотр ссылок в Интернете, установив атрибут id на якоре (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP" (см. раздел **Примеры** для примера).
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->: `data` Параметр больше 1 000 000 символов.
+
+
+    - `InvalidFormatError`<!-- -->. Параметр `options.coercionType` задан, `Office.CoercionType.Html` а текст сообщения находится в простом тексте.
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // When including links in HTML markup, you can disable online link preview
+
+    // by setting the id attribute on the anchor (<a>) to "LPNoLP".
+
+    Office.context.mailbox.item.body.setSelectedDataAsync(
+        '<a id="LPNoLP" href="http://www.contoso.com">Click here!</a>',
+        {coercionType: Office.CoercionType.Html},
+        callback);
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, которая заменяет существующий текст. Максимальная длина — 1 000 000 символов.
+      type: string
+    - id: options
+      description: 'Объектный литерал, содержащий одно или несколько из указанных ниже свойств. `asyncContext`<!-- -->: Разработчики могут предоставить любой объект, к который они хотят получить доступ в методе вызова. `coercionType`<!-- -->: Нужный формат для тела. Строка в параметре `data` будет преобразована в этот формат.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setSelectedDataAsync(data, callback)
+  uid: outlook!Office.Body#setSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, callback)
+  summary: >-
+    Заменяет выделенный фрагмент в основном тексте на заданный текст.
+
+
+    Метод вставляет указанную строку в расположении курсора в теле элемента или, если текст выбран в редакторе, он заменяет `setSelectedDataAsync` выбранный текст. Если указатель не появлялся в основном тексте элемента, или элемент потерял фокус в интерфейсе, строка вставляется в начало основного текста. После вставки курсор помещается в конце вставленного контента.
+
+
+    Включив ссылки в HTML-разметку, можно отключить предварительный просмотр ссылок в Интернете, установив атрибут id на якоре (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) в "LPNoLP" (см. раздел **Примеры** для примера).
+
+
+    \[[Набор API: почтовый ящик 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Минимальный уровень разрешений:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Применимый Outlook:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Compose
+
+
+    **Ошибки:**
+
+
+    - `DataExceedsMaximumSize`<!-- -->: `data` Параметр больше 1 000 000 символов.
+
+
+    - `InvalidFormatError`<!-- -->. Параметр `options.coercionType` задан, `Office.CoercionType.Html` а текст сообщения находится в простом тексте.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Строка, которая заменяет существующий текст. Максимальная длина — 1 000 000 символов.
+      type: string
+    - id: callback
+      description: Необязательно. По завершению метода функция, переданная в параметре, называется `callback` с одним параметром типа `Office.AsyncResult`<!-- -->. Все обнаруженные ошибки будут указаны в свойстве `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 7cfa342c9bd045b38e35e1b0527019f3f0fc834d
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591849"
