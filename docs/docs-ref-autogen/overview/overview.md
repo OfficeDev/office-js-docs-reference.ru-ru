@@ -7,13 +7,13 @@ author: o365devx
 ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
-ms.date: 03/17/2021
-ms.openlocfilehash: 63d2efa4d4b9406208f3227ec96df467ea0d8877
-ms.sourcegitcommit: a5c179dc927ce89d1ada071d388d582191d3fa1e
+ms.date: 05/10/2021
+ms.openlocfilehash: 809b6378e33eca682005396ff07e79cb37f9ff2c
+ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "51183542"
+ms.lasthandoff: 05/21/2021
+ms.locfileid: "52589685"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Справочник по API JavaScript для надстроек Office
 
@@ -21,7 +21,7 @@ API JavaScript для Office позволяет создавать веб-при
 
 Ниже приведен список интерфейсов API для [поддерживаемых ведущих приложений Office](/office/dev/add-ins/overview/office-add-in-availability). По общим ссылкам представлены все API, не относящиеся к определенному ведущему приложению (как описывается в [наборе требований для общих API Office](/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets)). Остальные элементы ссылаются на версию справочной документации по API, связанную с соответствующим ведущим приложением, по набору требований. Версии справочной документации составляются таким образом, что они включали все API до соответствующего набора требований включительно (например, в ExcelApi 1.3 представлены API из ExcelApi 1.1, 1.2, 1.3, а также общие API).
 
-`ExcelApiOnline 1.1` — это особый набор требований. Он содержит новейшие API для Excel в Интернете, но эти API могут еще не полностью поддерживаться на всех платформах. Дополнительные сведения см. в [наборе требований API JavaScript для Excel (только в Интернете)](/office/dev/add-ins/reference/requirement-sets/excel-api-online-requirement-set).
+`ExcelApiOnline 1.1` — это особый набор требований. Он содержит новейшие API для Excel в Интернете, но эти API могут еще не полностью поддерживаться на всех платформах. Дополнительные сведения см. в [наборе требований API JavaScript для Excel (только в Интернете)](/office/dev/add-ins/reference/requirement-sets/excel-api-online-requirement-set).
 
 > [!TIP]
 > Вы можете в любой момент изменить версию справочной страницы с помощью раскрывающегося меню выбора фильтра над оглавлением. Если такой версии страницы не существует, снова откроется текущая версия.
@@ -66,6 +66,7 @@ API JavaScript для Office позволяет создавать веб-при
             <h3>API Outlook</h3>
             <ul>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-preview">Mailbox Preview</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.10">Mailbox 1.10</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.9">Mailbox 1.9</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.8">Mailbox 1.8</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.7">Mailbox 1.7</a></li>
