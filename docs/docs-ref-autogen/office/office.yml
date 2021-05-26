@@ -39,6 +39,7 @@ interfaces:
 - office!Office.GetFileOptions:interface
 - office!Office.GetSelectedDataOptions:interface
 - office!Office.GoToByIdOptions:interface
+- office!Office.Group:interface
 - office!Office.IPromiseConstructor:interface
 - office!Office.MatrixBinding:interface
 - office!Office.NodeDeletedEventArgs:interface
@@ -116,14 +117,14 @@ functions:
     Параметр причины функции инициализации функции прослушиватель событий возвращает значение переумерия, которое `InitializationReason` указывает, как инициализация произошла. Надстройку области задач или контентную надстройку можно инициализировать двумя способами:
 
 
-    - Пользователь только что вставил его из недавно используемого раздела надстройки из списка надстройки на вкладке Вставка ленты в хост-приложении Office или в диалоговом окне Вставка надстройки.
+    - Пользователь только что вставил его из недавно используемого раздела надстройки списка надстройки на вкладке Вставка ленты в хост-приложении Office или из диалогового окна надстройки Insert.
 
 
     - пользователь может открыть документ, который уже содержит надстройку.
 
 
-    *Примечание.* Параметр причины функции инициализации функции прослушиватель событий возвращает значение только для области задач и надстройок `InitializationReason` контента. Оно не возвращает значение для надстройок Outlook.
-  remarks: "**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к хост-приложениям и серверам Office см. в дополнительных сведениях о требованиях [к запуску надстройок Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong> Excel </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong> Outlook </strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong> PowerPoint </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong> Project </strong></td><td> Да </td><td> </td><td> </td><td> </td><td> Да </td></tr> <tr><td><strong> Word </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// You can use the value of the InitializationEnumeration to implement different logic for\n// when the add-in is first inserted versus when it is already part of the document.\n// The following example shows some simple logic that uses the value of the reason parameter\n// to display how the task pane or content add-in was initialized.\nOffice.initialize = function (reason) {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n    // After the DOM is loaded, code specific to the add-in can run.\n    // Display initialization reason.\n    if (reason == \"inserted\")\n    write(\"The add-in was just inserted.\");\n\n    if (reason == \"documentOpened\")\n    write(\"The add-in is already part of the document.\");\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+    *Примечание.* Параметр причины функции инициализации функции прослушиватель событий возвращает значение только для области задач и надстройок `InitializationReason` контента. Он не возвращает значение для Outlook надстройки.
+  remarks: "**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях Office и сервере см. в Office [надстройки](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong>Outlook</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> Да </td></tr> <tr><td><strong> Word </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> Да </td></tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// You can use the value of the InitializationEnumeration to implement different logic for\n// when the add-in is first inserted versus when it is already part of the document.\n// The following example shows some simple logic that uses the value of the reason parameter\n// to display how the task pane or content add-in was initialized.\nOffice.initialize = function (reason) {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n    // After the DOM is loaded, code specific to the add-in can run.\n    // Display initialization reason.\n    if (reason == \"inserted\")\n    write(\"The add-in was just inserted.\");\n\n    if (reason == \"documentOpened\")\n    write(\"The add-in is already part of the document.\");\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -138,7 +139,7 @@ functions:
 - name: Office.isSetSupported(name, minVersion)
   uid: office!Office.isSetSupported:function(1)
   package: office!
-  summary: Проверяет, поддерживается ли указанный набор требований приложением host Office.
+  summary: Проверяет, поддерживается ли указанный набор требований Office приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -157,7 +158,7 @@ functions:
 - name: Office.onReady(callback)
   uid: office!Office.onReady:function(1)
   package: office!
-  summary: Гарантирует, что API JavaScript Office будут готовы быть вызваны надстройка. Если рамки еще не инициализированы, вызов или обещание будут ждать, пока хост Office будет готов принимать вызовы API. Обратите внимание, что, хотя этот API предназначен для использования в надстройки Office, он также может использоваться за пределами надстройки. В этом случае, Office.js определяет, что оно запущено за пределами хост-приложения Office, он будет вызывать вызов и решать обещание с помощью "null" как для хоста, так и для платформы.
+  summary: Гарантирует, что Office API JavaScript будут готовы быть вызваны надстройка. Если рамки еще не инициализированы, вызов или обещание будут ждать, пока Office не будет готов принимать вызовы API. Обратите внимание, что, хотя этот API предназначен для использования Office надстройки, он также может использоваться за пределами надстройки. В этом случае, Office.js определяет, что оно запущено за пределами Office хост-приложения, он будет вызывать вызов и решать обещание с помощью "null" для хоста и платформы.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -181,10 +182,10 @@ functions:
     Заглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.
 
 
-    Дополнительные сведения о требованиях к хост-приложениям и серверам Office см. в дополнительных сведениях о требованиях [к запуску надстройок Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+    Дополнительные сведения о требованиях Office и сервере см. в Office [надстройки](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
 
 
-    *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th></tr> <tr><td><strong> Excel </strong></td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong> Word </strong></td><td> Да </td><td> </td><td> Да </td></tr> </table>
+    *Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> Да </td></tr> <tr><td><strong> Word </strong></td><td> Да </td><td> </td><td> Да </td></tr> </table>
 
 
     #### <a name="examples"></a>Примеры
@@ -215,7 +216,7 @@ functions:
       description: Объект, который будет извлечен. Пример "bindings BindingName", извлекает обязывающее обещание для привязки \# с именем bindingName.
       type: string
     - id: callback
-      description: Необязательное свойство. Функция, вызываемая при возвращении обратного вызова, единственным параметром которой является [тип Office.AsyncResult.](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой — тип [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: <xref uid="office!Office.Binding:interface" />
@@ -224,7 +225,7 @@ functions:
   uid: office!Office.useShortNamespace:function(1)
   package: office!
   summary: Переключается и отключается `Office` псевдоним для полного пространства `Microsoft.Office.WebExtension` имен.
-  remarks: "**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях к хост-приложениям и серверам Office см. в дополнительных сведениях о требованиях [к запуску надстройок Office](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong> Excel </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong> Outlook </strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong> PowerPoint </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong> Project </strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong> Word </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction startUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(true);\n    }\n    else {\n        Office.useShortNamespace(true);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\nfunction stopUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(false);\n    }\n    else {\n        Office.useShortNamespace(false);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  remarks: "**Сведения о поддержке**\n\nЗаглавная буква Y в следующей матрице указывает на то, что этот метод поддерживается в соответствующем ведущем приложении Office. Пустая ячейка означает, что ведущее приложение Office не поддерживает этот метод.\n\nДополнительные сведения о требованиях Office и сервере см. в Office [надстройки](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Поддерживаемые ведущие приложения по платформе* <table> <tr><th> </th><th> Office для Windows </th><th> Office в веб-браузере </th><th> Office для iPad </th><th> Outlook на мобильных устройствах </th><th> Office для Mac </th></tr> <tr><td><strong>Excel</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Outlook</strong></td><td> Да </td><td> Да </td><td> </td><td> Да </td><td> Да </td></tr> <tr><td><strong>PowerPoint</strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> <tr><td><strong>Project</strong></td><td> Да </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong> Word </strong></td><td> Да </td><td> Да </td><td> Да </td><td> </td><td> </td></tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nfunction startUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(true);\n    }\n    else {\n        Office.useShortNamespace(true);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\nfunction stopUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(false);\n    }\n    else {\n        Office.useShortNamespace(false);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -237,9 +238,9 @@ functions:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 16cd978a65fa86da9077efd47b65fb42e2e27d28
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 07fccc1ffd769d68d64b0eba09b7211dfc159e61
+  ms.sourcegitcommit: 5636507f201d29b24a904648908b485512d0ffaf
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51320624"
+  ms.lasthandoff: 05/26/2021
+  ms.locfileid: "52656789"
