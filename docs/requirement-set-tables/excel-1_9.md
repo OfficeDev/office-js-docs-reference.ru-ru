@@ -147,8 +147,8 @@
 ||[id](/javascript/api/excel/excel.image#id)|Указывает идентификатор формы для объекта изображения.|
 ||[shape](/javascript/api/excel/excel.image#shape)|Возвращает `Shape` объект, связанный с изображением.|
 |[IterativeCalculation](/javascript/api/excel/excel.iterativecalculation)|[enabled](/javascript/api/excel/excel.iterativecalculation#enabled)|Значение true, если в Excel используется итерация для разрешения циклических ссылок.|
-||[maxChange](/javascript/api/excel/excel.iterativecalculation#maxchange)|Указывает максимальное количество изменений между каждой итерацией, так как Excel устраняет круговые ссылки.|
-||[maxIteration](/javascript/api/excel/excel.iterativecalculation#maxiteration)|Указывает максимальное количество итераций, которые Excel может использовать для решения круговой ссылки.|
+||[maxChange](/javascript/api/excel/excel.iterativecalculation#maxchange)|Указывает максимальное количество изменений между каждой итерацией, Excel устраняет круговые ссылки.|
+||[maxIteration](/javascript/api/excel/excel.iterativecalculation#maxiteration)|Указывает максимальное количество итераций, Excel можно использовать для решения круговой ссылки.|
 |[Line](/javascript/api/excel/excel.line)|[beginArrowheadLength](/javascript/api/excel/excel.line#beginarrowheadlength)|Представляет длину наконечника в начале указанной линии.|
 ||[beginArrowheadStyle](/javascript/api/excel/excel.line#beginarrowheadstyle)|Представляет стиль наконечника в начале указанной линии.|
 ||[beginArrowheadWidth](/javascript/api/excel/excel.line#beginarrowheadwidth)|Представляет ширину наконечника в начале указанной линии.|
@@ -224,7 +224,7 @@
 ||[setAutoSortOnCell(cell: Range \| string, sortBy: Excel.SortBy)](/javascript/api/excel/excel.pivotlayout#setautosortoncell-cell--sortby-)|Задает для сводной таблицы автоматическую сортировку, используя указанную ячейку, чтобы автоматически выбрать все необходимые условия и контекст.|
 |[PivotTable](/javascript/api/excel/excel.pivottable)|[enableDataValueEditing](/javascript/api/excel/excel.pivottable#enabledatavalueediting)|Указывает, разрешается ли пользователю изменять значения в теле данных.|
 ||[useCustomSortLists](/javascript/api/excel/excel.pivottable#usecustomsortlists)|Указывает, использует ли pivotTable настраиваемые списки при сортировке.|
-|[Range](/javascript/api/excel/excel.range)|[autoFill (destinationRange?: Range \| string, autoFillType?: Excel.AutoFillType)](/javascript/api/excel/excel.range#autofill-destinationrange--autofilltype-)|Заполняет диапазон от текущего диапазона до диапазона назначения с помощью указанной логики AutoFill.|
+|[Range](/javascript/api/excel/excel.range)|[autoFill (destinationRange?: Range \| string, autoFillType?: Excel. AutoFillType)](/javascript/api/excel/excel.range#autofill-destinationrange--autofilltype-)|Заполняет диапазон от текущего диапазона до диапазона назначения с помощью указанной логики AutoFill.|
 ||[convertDataTypeToText()](/javascript/api/excel/excel.range#convertdatatypetotext--)|Преобразует ячейки диапазона с типами данных в текст.|
 ||[convertToLinkedDataType(serviceID: number, languageCulture: string)](/javascript/api/excel/excel.range#converttolinkeddatatype-serviceid--languageculture-)|Преобразует ячейки диапазона в связанные типы данных в таблице.|
 ||[copyFrom(sourceRange: Range \| RangeAreas \| string, copyType?: Excel.RangeCopyType, skipBlanks?: boolean, transpose?: boolean)](/javascript/api/excel/excel.range#copyfrom-sourcerange--copytype--skipblanks--transpose-)|Копирует данные ячейки или форматирование из диапазона исходных данных или `RangeAreas` текущего диапазона.|
@@ -304,8 +304,8 @@
 ||[style](/javascript/api/excel/excel.settablecellproperties#style)|Представляет свойство `style`.|
 |[SettableColumnProperties](/javascript/api/excel/excel.settablecolumnproperties)|[columnHidden](/javascript/api/excel/excel.settablecolumnproperties#columnhidden)|Представляет свойство `columnHidden`.|
 ||[columnWidth](/javascript/api/excel/excel.settablecolumnproperties#columnwidth)||
-||[формат: Excel.CellPropertiesFormat & {columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|Представляет свойство `format`.|
-|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[формат: Excel.CellPropertiesFormat & {rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|Представляет свойство `format`.|
+||[формат: Excel. CellPropertiesFormat & {columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|Представляет свойство `format`.|
+|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[формат: Excel. CellPropertiesFormat & {rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|Представляет свойство `format`.|
 ||[rowHeight](/javascript/api/excel/excel.settablerowproperties#rowheight)||
 ||[rowHidden](/javascript/api/excel/excel.settablerowproperties#rowhidden)|Представляет свойство `rowHidden`.|
 |[Shape](/javascript/api/excel/excel.shape)|[altTextDescription](/javascript/api/excel/excel.shape#alttextdescription)|Указывает альтернативный текст описания `Shape` объекта.|
@@ -427,7 +427,7 @@
 ||[previouslySaved](/javascript/api/excel/excel.workbook#previouslysaved)|Указывает, была ли книга сохранена локально или в Интернете.|
 ||[usePrecisionAsDisplayed](/javascript/api/excel/excel.workbook#useprecisionasdisplayed)|Значение true, если вычисления в книге выполняются только с той точностью чисел, с которой они отображаются.|
 |[WorkbookAutoSaveSettingChangedEventArgs](/javascript/api/excel/excel.workbookautosavesettingchangedeventargs)|[type](/javascript/api/excel/excel.workbookautosavesettingchangedeventargs#type)|Получает тип события.|
-|[Worksheet](/javascript/api/excel/excel.worksheet)|[enableCalculation](/javascript/api/excel/excel.worksheet#enablecalculation)|Определяет, следует ли в Excel пересчитать таблицу при необходимости.|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[enableCalculation](/javascript/api/excel/excel.worksheet#enablecalculation)|Определяет, следует ли Excel при необходимости пересчитать таблицу.|
 ||[findAll(text: string, criteria: Excel.WorksheetSearchCriteria)](/javascript/api/excel/excel.worksheet#findall-text--criteria-)|Находит все вхождения данной строки на основе указанных критериев и возвращает их как объект, состоящий из одного или `RangeAreas` нескольких прямоугольных диапазонов.|
 ||[findAllOrNullObject(text: string, criteria: Excel.WorksheetSearchCriteria)](/javascript/api/excel/excel.worksheet#findallornullobject-text--criteria-)|Находит все вхождения данной строки на основе указанных критериев и возвращает их как объект, состоящий из одного или `RangeAreas` нескольких прямоугольных диапазонов.|
 ||[getRanges(address?: string)](/javascript/api/excel/excel.worksheet#getranges-address-)|Получает объект, представляющий один или несколько блоков прямоугольных диапазонов, указанных `RangeAreas` по адресу или имени.|

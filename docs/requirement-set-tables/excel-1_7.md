@@ -4,7 +4,7 @@
 ||[id](/javascript/api/excel/excel.chart#id)|Уникальный ID диаграммы.|
 ||[showAllFieldButtons](/javascript/api/excel/excel.chart#showallfieldbuttons)|Указывает, следует ли отображать все кнопки поля на сводная диаграмма.|
 |[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[граница](/javascript/api/excel/excel.chartareaformat#border)|Представляет пограничный формат области диаграммы, включаю в себя цвет, литейный стиль и вес.|
-|[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem (тип: Excel.ChartAxisType, группа?: Excel.ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|Возвращает указанную ось, определенную по типу и группе.|
+|[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem (тип: Excel. ChartAxisType, группа?: Excel. ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|Возвращает указанную ось, определенную по типу и группе.|
 |[ChartAxis](/javascript/api/excel/excel.chartaxis)|[baseTimeUnit](/javascript/api/excel/excel.chartaxis#basetimeunit)|Указывает базовый блок для оси указанной категории.|
 ||[categoryType](/javascript/api/excel/excel.chartaxis#categorytype)|Указывает тип оси категории.|
 ||[displayUnit](/javascript/api/excel/excel.chartaxis#displayunit)|Представляет отображаемую единицу измерения оси.|
@@ -20,7 +20,7 @@
 ||[top](/javascript/api/excel/excel.chartaxis#top)|Указывает расстояние в точках от верхнего края оси до верхней области диаграммы.|
 ||[type](/javascript/api/excel/excel.chartaxis#type)|Указывает тип оси.|
 ||[width](/javascript/api/excel/excel.chartaxis#width)|Указывает ширину оси диаграммы в точках.|
-||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reverseplotorder)|Указывает, заданы ли в Excel точки данных от последнего до первого.|
+||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reverseplotorder)|Указывает, Excel заданы точки данных с последнего до первого.|
 ||[scaleType](/javascript/api/excel/excel.chartaxis#scaletype)|Указывает тип шкалы оси значения.|
 ||[setCategoryNames (sourceData: Range)](/javascript/api/excel/excel.chartaxis#setcategorynames-sourcedata-)|Устанавливает все имена категорий для указанной оси.|
 ||[setCustomDisplayUnit (значение: номер)](/javascript/api/excel/excel.chartaxis#setcustomdisplayunit-value-)|Задает отображаемую единицу измерения оси в виде настраиваемого значения.|
@@ -97,7 +97,7 @@
 ||[polynomialOrder](/javascript/api/excel/excel.charttrendline#polynomialorder)|Представляет порядок трендовой линии диаграммы.|
 ||[format](/javascript/api/excel/excel.charttrendline#format)|Представляет форматирование линии тренда диаграммы.|
 ||[type](/javascript/api/excel/excel.charttrendline#type)|Представляет тип линии тренда диаграммы.|
-|[ChartTrendlineCollection](/javascript/api/excel/excel.charttrendlinecollection)|[add(type?: Excel.ChartTrendlineType)](/javascript/api/excel/excel.charttrendlinecollection#add-type-)|Добавляет новую линию тренда в коллекцию линий тренда.|
+|[ChartTrendlineCollection](/javascript/api/excel/excel.charttrendlinecollection)|[add(type?: Excel. ChartTrendlineType)](/javascript/api/excel/excel.charttrendlinecollection#add-type-)|Добавляет новую линию тренда в коллекцию линий тренда.|
 ||[getCount()](/javascript/api/excel/excel.charttrendlinecollection#getcount--)|Возвращает количество линий тренда в коллекции.|
 ||[getItem(index: number)](/javascript/api/excel/excel.charttrendlinecollection#getitem-index-)|Получает объект trendline по индексу, который является порядком вставки в массиве элементов.|
 ||[items](/javascript/api/excel/excel.charttrendlinecollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
@@ -133,7 +133,7 @@
 ||[getImage()](/javascript/api/excel/excel.range#getimage--)|Отрисовка диапазона в качестве изображения png с кодом base64.|
 ||[getSurroundingRegion()](/javascript/api/excel/excel.range#getsurroundingregion--)|Возвращает `Range` объект, который представляет окружающий регион для верхнего левого элемента в этом диапазоне.|
 ||[hyperlink](/javascript/api/excel/excel.range#hyperlink)|Представляет гиперссылку для текущего диапазона.|
-||[numberFormatLocal](/javascript/api/excel/excel.range#numberformatlocal)|Представляет код формата номеров Excel для данного диапазона в зависимости от языковых параметров пользователя.|
+||[numberFormatLocal](/javascript/api/excel/excel.range#numberformatlocal)|Представляет Excel формата номера для данного диапазона в зависимости от языковых параметров пользователя.|
 ||[isEntireColumn](/javascript/api/excel/excel.range#isentirecolumn)|Указывает, является ли текущий диапазон целым столбцом.|
 ||[isEntireRow](/javascript/api/excel/excel.range#isentirerow)|Указывает, является ли текущий диапазон целой строкой.|
 ||[showCard()](/javascript/api/excel/excel.range#showcard--)|Отображает карточку для активной ячейки, если она имеет содержимое c форматированным значением.|
@@ -166,7 +166,7 @@
 ||[name](/javascript/api/excel/excel.style#name)|Имя стиля.|
 ||[shrinkToFit](/javascript/api/excel/excel.style#shrinktofit)|Указывает, если текст автоматически сокращается, чтобы соответствовать ширине доступных столбцов.|
 ||[verticalAlignment](/javascript/api/excel/excel.style#verticalalignment)|Указывает вертикальное выравнивание для стиля.|
-||[wrapText](/javascript/api/excel/excel.style#wraptext)|Указывает, завербует ли Excel текст в объекте.|
+||[wrapText](/javascript/api/excel/excel.style#wraptext)|Указывает, Excel обертывание текста в объекте.|
 |[StyleCollection](/javascript/api/excel/excel.stylecollection)|[add(name: string)](/javascript/api/excel/excel.stylecollection#add-name-)|Добавляет новый стиль в коллекцию.|
 ||[getItem(name: string)](/javascript/api/excel/excel.stylecollection#getitem-name-)|Получает `Style` имя.|
 ||[items](/javascript/api/excel/excel.stylecollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
@@ -193,7 +193,7 @@
 |[WorkbookProtection](/javascript/api/excel/excel.workbookprotection)|[protect(password?: string)](/javascript/api/excel/excel.workbookprotection#protect-password-)|Защищает книгу.|
 ||[защищена](/javascript/api/excel/excel.workbookprotection#protected)|Указывает, защищена ли книга.|
 ||[unprotect(password?: string)](/javascript/api/excel/excel.workbookprotection#unprotect-password-)|Снимает защиту с книги.|
-|[Worksheet](/javascript/api/excel/excel.worksheet)|[copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet)](/javascript/api/excel/excel.worksheet#copy-positiontype--relativeto-)|Копирует таблицу и помещает ее в указанное положение.|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[copy(positionType?: Excel. WorksheetPositionType, relativeTo?: Excel. Таблица)](/javascript/api/excel/excel.worksheet#copy-positiontype--relativeto-)|Копирует таблицу и помещает ее в указанное положение.|
 ||[getRangeByIndexes (startRow: number, startColumn: number, rowCount: number, columnCount: number)](/javascript/api/excel/excel.worksheet#getrangebyindexes-startrow--startcolumn--rowcount--columncount-)|Получает объект, начиная с определенного индекса строки и индекса столбцов, и охватывает определенное количество `Range` строк и столбцов.|
 ||[freezePanes](/javascript/api/excel/excel.worksheet#freezepanes)|Получает объект, который можно использовать для управления замороженными стемнами на таблице.|
 ||[onActivated](/javascript/api/excel/excel.worksheet#onactivated)|Возникает при активации таблицы.|

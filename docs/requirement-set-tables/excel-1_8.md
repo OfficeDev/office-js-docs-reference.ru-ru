@@ -6,7 +6,7 @@
 |[Chart](/javascript/api/excel/excel.chart)|[categoryLabelLevel](/javascript/api/excel/excel.chart#categorylabellevel)|Указывает константу индексации уровня метки категорий диаграммы, ссылаясь на уровень меток исходных категорий.|
 ||[displayBlanksAs](/javascript/api/excel/excel.chart#displayblanksas)|Указывает, как пустые ячейки заданы на диаграмме.|
 ||[plotBy](/javascript/api/excel/excel.chart#plotby)|Определяет способ использования столбцов или строк в качестве рядов данных на диаграмме.|
-||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotvisibleonly)|True, если отображаются только видимые ячейки.False, если отображаются как видимые, так и скрытые ячейки.|
+||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotvisibleonly)|True, если отображаются только видимые ячейки.|
 ||[onActivated](/javascript/api/excel/excel.chart#onactivated)|Возникает при активации диаграммы.|
 ||[onDeactivated](/javascript/api/excel/excel.chart#ondeactivated)|Происходит, когда диаграмма отключена.|
 ||[plotArea](/javascript/api/excel/excel.chart#plotarea)|Представляет область сюжета для диаграммы.|
@@ -84,12 +84,12 @@
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[axisGroup](/javascript/api/excel/excel.chartseries#axisgroup)|Указывает группу для указанной серии.|
 ||[взрыв](/javascript/api/excel/excel.chartseries#explosion)|Указывает значение взрыва для среза круговой диаграммы или пончик-диаграммы.|
 ||[firstSliceAngle](/javascript/api/excel/excel.chartseries#firstsliceangle)|Указывает угол первого среза круговой диаграммы или пончик-диаграммы в градусах (по часовой стрелке от вертикальной).|
-||[invertIfNegative](/javascript/api/excel/excel.chartseries#invertifnegative)|Верно, если Excel инвертит шаблон в элементе, если он соответствует отрицательному номеру.|
+||[invertIfNegative](/javascript/api/excel/excel.chartseries#invertifnegative)|Верно, Excel выверяет шаблон в элементе, если он соответствует отрицательному номеру.|
 ||[перекрытие](/javascript/api/excel/excel.chartseries#overlap)|Указывает на расположение строк и столбцов.|
 ||[dataLabels](/javascript/api/excel/excel.chartseries#datalabels)|Представляет коллекцию всех меток данных в серии.|
 ||[secondPlotSize](/javascript/api/excel/excel.chartseries#secondplotsize)|Указывает размер вторичного раздела диаграммы пирога или диаграммы с круговым пирогом в процентах от размера первичного пирога.|
 ||[splitType](/javascript/api/excel/excel.chartseries#splittype)|Указывает способ разделения двух разделов диаграммы "пирог-пирог" или диаграммы "планка пирога".|
-||[varyByCategories](/javascript/api/excel/excel.chartseries#varybycategories)|True, если Excel назначит каждому маркеру данных другой цвет или шаблон.|
+||[varyByCategories](/javascript/api/excel/excel.chartseries#varybycategories)|True, Excel назначит каждому маркеру данных другой цвет или шаблон.|
 |[ChartTrendline](/javascript/api/excel/excel.charttrendline)|[backwardPeriod](/javascript/api/excel/excel.charttrendline#backwardperiod)|Представляет число периодов, на которые линия тренда расширяется назад.|
 ||[forwardPeriod](/javascript/api/excel/excel.charttrendline#forwardperiod)|Представляет число периодов, на которые линия тренда расширяется вперед.|
 ||[метка](/javascript/api/excel/excel.charttrendline#label)|Представляет метку линии тренда диаграммы.|
@@ -119,12 +119,12 @@
 ||[setToDefault()](/javascript/api/excel/excel.datapivothierarchy#settodefault--)|Сбрасывает DataPivotHierarchy до значений по умолчанию.|
 ||[showAs](/javascript/api/excel/excel.datapivothierarchy#showas)|Указывает, следует ли показывать данные в качестве определенного суммарного вычисления.|
 ||[summarizeBy](/javascript/api/excel/excel.datapivothierarchy#summarizeby)|Указывает, показаны ли все элементы DataPivotHierarchy.|
-|[DataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#add-pivothierarchy-)|Добавляет PivotHierarchy к текущей оси.|
+|[DataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|[add(pivotHierarchy: Excel. PivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#add-pivothierarchy-)|Добавляет PivotHierarchy к текущей оси.|
 ||[getCount()](/javascript/api/excel/excel.datapivothierarchycollection#getcount--)|Получает количество иерархий сводного объекта в коллекции.|
 ||[getItem(name: string)](/javascript/api/excel/excel.datapivothierarchycollection#getitem-name-)|Получает DataPivotHierarchy по имени или ID.|
 ||[getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.datapivothierarchycollection#getitemornullobject-name-)|Получает DataPivotHierarchy по имени.|
 ||[items](/javascript/api/excel/excel.datapivothierarchycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
-||[remove(DataPivotHierarchy: Excel.DataPivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#remove-datapivothierarchy-)|Удаляет PivotHierarchy из текущей оси.|
+||[remove(DataPivotHierarchy: Excel. DataPivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#remove-datapivothierarchy-)|Удаляет PivotHierarchy из текущей оси.|
 |[DataValidation](/javascript/api/excel/excel.datavalidation)|[clear()](/javascript/api/excel/excel.datavalidation#clear--)|Очищает проверку данных из текущего диапазона.|
 ||[errorAlert](/javascript/api/excel/excel.datavalidation#erroralert)|Сообщение об ошибке, когда пользователь вводит недопустимые данные.|
 ||[ignoreBlanks](/javascript/api/excel/excel.datavalidation#ignoreblanks)|Указывает, будет ли проверка данных выполняться на пустых ячейках.|
@@ -155,12 +155,12 @@
 ||[fields](/javascript/api/excel/excel.filterpivothierarchy#fields)|Возвращает сводные поля, связанные с FilterPivotHierarchy.|
 ||[id](/javascript/api/excel/excel.filterpivothierarchy#id)|ID of the FilterPivotHierarchy.|
 ||[setToDefault()](/javascript/api/excel/excel.filterpivothierarchy#settodefault--)|Сбрасывает FilterPivotHierarchy до значений по умолчанию.|
-|[FilterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#add-pivothierarchy-)|Добавляет PivotHierarchy к текущей оси.|
+|[FilterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|[add(pivotHierarchy: Excel. PivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#add-pivothierarchy-)|Добавляет PivotHierarchy к текущей оси.|
 ||[getCount()](/javascript/api/excel/excel.filterpivothierarchycollection#getcount--)|Получает количество иерархий сводного объекта в коллекции.|
 ||[getItem(name: string)](/javascript/api/excel/excel.filterpivothierarchycollection#getitem-name-)|Получает filterPivotHierarchy по имени или ID.|
 ||[getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.filterpivothierarchycollection#getitemornullobject-name-)|Получает FilterPivotHierarchy по имени.|
 ||[items](/javascript/api/excel/excel.filterpivothierarchycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
-||[remove(filterPivotHierarchy: Excel.FilterPivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#remove-filterpivothierarchy-)|Удаляет PivotHierarchy из текущей оси.|
+||[remove(filterPivotHierarchy: Excel. FilterPivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#remove-filterpivothierarchy-)|Удаляет PivotHierarchy из текущей оси.|
 |[ListDataValidation](/javascript/api/excel/excel.listdatavalidation)|[inCellDropDown](/javascript/api/excel/excel.listdatavalidation#incelldropdown)|Указывает, следует ли отображать список в выпадаемой ячейке.|
 ||[source](/javascript/api/excel/excel.listdatavalidation#source)|Источник списка для проверки данных|
 |[PivotField](/javascript/api/excel/excel.pivotfield)|[name](/javascript/api/excel/excel.pivotfield#name)|Имя сводного поля.|
@@ -211,13 +211,13 @@
 ||[fields](/javascript/api/excel/excel.rowcolumnpivothierarchy#fields)|Возвращает сводные поля, связанные с RowColumnPivotHierarchy.|
 ||[id](/javascript/api/excel/excel.rowcolumnpivothierarchy#id)|ID of the RowColumnPivotHierarchy.|
 ||[setToDefault()](/javascript/api/excel/excel.rowcolumnpivothierarchy#settodefault--)|Сбрасывает RowColumnPivotHierarchy до значений по умолчанию.|
-|[RowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#add-pivothierarchy-)|Добавляет PivotHierarchy к текущей оси.|
+|[RowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|[add(pivotHierarchy: Excel. PivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#add-pivothierarchy-)|Добавляет PivotHierarchy к текущей оси.|
 ||[getCount()](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getcount--)|Получает количество иерархий сводного объекта в коллекции.|
 ||[getItem(name: string)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getitem-name-)|Получает RowColumnPivotHierarchy по имени или ID.|
 ||[getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getitemornullobject-name-)|Получает RowColumnPivotHierarchy по имени.|
 ||[items](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
-||[remove(rowColumnPivotHierarchy: Excel.RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove-rowcolumnpivothierarchy-)|Удаляет PivotHierarchy из текущей оси.|
-|[Runtime](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableevents)|Добавление событий JavaScript в текущую области задач или надстройку контента.|
+||[remove (rowColumnPivotHierarchy: Excel. RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove-rowcolumnpivothierarchy-)|Удаляет PivotHierarchy из текущей оси.|
+|[Время выполнения](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableevents)|Добавление событий JavaScript в текущую области задач или надстройку контента.|
 |[ShowAsRule](/javascript/api/excel/excel.showasrule)|[baseField](/javascript/api/excel/excel.showasrule#basefield)|PivotField на основе расчета, если применимо `ShowAs` в соответствии с `ShowAsCalculation` типом, еще `null` .|
 ||[baseItem](/javascript/api/excel/excel.showasrule#baseitem)|Элемент, на основе `ShowAs` расчета, если применимо в соответствии с `ShowAsCalculation` типом, еще `null` .|
 ||[вычисление](/javascript/api/excel/excel.showasrule#calculation)|`ShowAs`Вычисление, используемого для PivotField.|

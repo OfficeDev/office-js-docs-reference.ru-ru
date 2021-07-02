@@ -1,6 +1,8 @@
 | Класс | Поля | Описание |
 |:---|:---|:---|
 |[AutoFilter](/javascript/api/excel/excel.autofilter)|[clearColumnCriteria(columnIndex: number)](/javascript/api/excel/excel.autofilter#clearcolumncriteria-columnindex-)|Очищает условия фильтрации автофильтра.|
+|[ChangeDirectionState](/javascript/api/excel/excel.changedirectionstate)|[deleteShiftDirection](/javascript/api/excel/excel.changedirectionstate#deleteshiftdirection)|Представляет направление (например, вверх или влево), которое остальные ячейки будут смещаться при удалении ячейки или ячейки.|
+||[insertShiftDirection](/javascript/api/excel/excel.changedirectionstate#insertshiftdirection)|Представляет направление (например, вниз или вправо), в которое будут перенесены существующие ячейки при вставке новой ячейки или ячеек.|
 |[Comment](/javascript/api/excel/excel.comment)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.comment#assigntask-assignee-)|Назначает задачу, прикрепленную к комментарию, для данного пользователя в качестве ассимилята.|
 ||[getTask()](/javascript/api/excel/excel.comment#gettask--)|Получает задачу, связанную с этим комментарием.|
 ||[getTaskOrNullObject()](/javascript/api/excel/excel.comment#gettaskornullobject--)|Получает задачу, связанную с этим комментарием.|
@@ -45,8 +47,6 @@
 ||[items](/javascript/api/excel/excel.documenttaskcollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[DocumentTaskSchedule](/javascript/api/excel/excel.documenttaskschedule)|[dueDateTime](/javascript/api/excel/excel.documenttaskschedule#duedatetime)|Получает дату и время, когда должна быть поставлена задача.|
 ||[startDateTime](/javascript/api/excel/excel.documenttaskschedule#startdatetime)|Получает дату и время, которые должна начаться задача.|
-|[FormulaChangedEventDetail](/javascript/api/excel/excel.formulachangedeventdetail)|[cellAddress](/javascript/api/excel/excel.formulachangedeventdetail#celladdress)|Адрес ячейки, содержаной измененную формулу.|
-||[previousFormula](/javascript/api/excel/excel.formulachangedeventdetail#previousformula)|Представляет предыдущую формулу, прежде чем она была изменена.|
 |[GroupShapeCollection](/javascript/api/excel/excel.groupshapecollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.groupshapecollection#getitemornullobject-key-)|Получает фигуру с ее именем или ИД.|
 |[Identity](/javascript/api/excel/excel.identity)|[displayName](/javascript/api/excel/excel.identity#displayname)|Представляет отображаемое имя пользователя.|
 ||[email](/javascript/api/excel/excel.identity#email)|Представляет электронный адрес пользователя.|
@@ -60,9 +60,6 @@
 |[IdentityEntity](/javascript/api/excel/excel.identityentity)|[displayName](/javascript/api/excel/excel.identityentity#displayname)|Представляет отображаемое имя пользователя.|
 ||[email](/javascript/api/excel/excel.identityentity#email)|Представляет электронный адрес пользователя.|
 ||[id](/javascript/api/excel/excel.identityentity#id)|Представляет уникальный ID пользователя.|
-|[InsertWorksheetOptions](/javascript/api/excel/excel.insertworksheetoptions)|[positionType](/javascript/api/excel/excel.insertworksheetoptions#positiontype)|Положение вставки в текущей книге новых таблиц.|
-||[relativeTo](/javascript/api/excel/excel.insertworksheetoptions#relativeto)|Таблица в текущей книге, которая ссылается на `WorksheetPositionType` параметр.|
-||[sheetNamesToInsert](/javascript/api/excel/excel.insertworksheetoptions#sheetnamestoinsert)|Имена отдельных таблиц, которые необходимо вставить.|
 |[LinkedDataType](/javascript/api/excel/excel.linkeddatatype)|[dataProvider](/javascript/api/excel/excel.linkeddatatype#dataprovider)|Имя поставщика данных для связанного типа данных.|
 ||[lastRefreshed](/javascript/api/excel/excel.linkeddatatype#lastrefreshed)|Дата и время локального часового пояса с момента открытия книги при последнем обновлении связанного типа данных.|
 ||[name](/javascript/api/excel/excel.linkeddatatype#name)|Имя связанного типа данных.|
@@ -81,22 +78,21 @@
 ||[getItemOrNullObject(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getitemornullobject-key-)|Получает связанный тип данных по ID.|
 ||[items](/javascript/api/excel/excel.linkeddatatypecollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 ||[requestRefreshAll()](/javascript/api/excel/excel.linkeddatatypecollection#requestrefreshall--)|Делает запрос на обновление всех связанных типов данных в коллекции.|
+|[LinkedWorkbook](/javascript/api/excel/excel.linkedworkbook)|[breakLinks()](/javascript/api/excel/excel.linkedworkbook#breaklinks--)|Делает запрос на разрыв ссылок, указывающих на связанную книгу.|
+||[id](/javascript/api/excel/excel.linkedworkbook#id)|Исходный URL-адрес, указывающий на связанную книгу.|
+||[refresh()](/javascript/api/excel/excel.linkedworkbook#refresh--)|Делает запрос на обновление данных, извлеченных из связанной книги.|
+|[LinkedWorkbookCollection](/javascript/api/excel/excel.linkedworkbookcollection)|[breakAllLinks()](/javascript/api/excel/excel.linkedworkbookcollection#breakalllinks--)|Нарушает все ссылки на связанные книги.|
+||[getItem(key: string)](/javascript/api/excel/excel.linkedworkbookcollection#getitem-key-)|Получает сведения о связанной книге по URL-адресу.|
+||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.linkedworkbookcollection#getitemornullobject-key-)|Получает сведения о связанной книге по URL-адресу.|
+||[items](/javascript/api/excel/excel.linkedworkbookcollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
+||[refreshAll()](/javascript/api/excel/excel.linkedworkbookcollection#refreshall--)|Делает запрос на обновление всех ссылок на книги.|
+||[workbookLinksRefreshMode](/javascript/api/excel/excel.linkedworkbookcollection#workbooklinksrefreshmode)|Представляет режим обновления ссылок на книги.|
 |[NamedSheetViewCollection](/javascript/api/excel/excel.namedsheetviewcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitemornullobject-key-)|Получает представление листа с его именем.|
-|[PivotLayout](/javascript/api/excel/excel.pivotlayout)|[altTextDescription](/javascript/api/excel/excel.pivotlayout#alttextdescription)|The alt text description of the PivotTable.|
-||[altTextTitle](/javascript/api/excel/excel.pivotlayout#alttexttitle)|The alt text title of the PivotTable.|
-||[displayBlankLineAfterEachItem(display: boolean)](/javascript/api/excel/excel.pivotlayout#displayblanklineaftereachitem-display-)|Задает, следует ли отображать пустую строку после каждого элемента.|
-||[emptyCellText](/javascript/api/excel/excel.pivotlayout#emptycelltext)|Текст, который автоматически заполняется в любую пустую ячейку в PivotTable если `fillEmptyCells == true` .|
-||[fillEmptyCells](/javascript/api/excel/excel.pivotlayout#fillemptycells)|Указывает, должны ли пустые ячейки в PivotTable заполняться с `emptyCellText` помощью .|
-||[getCell(dataHierarchy: DataPivotHierarchy \| string, rowItems: Array<PivotItem \| string>, columnItems: Array<PivotItem \| string>)](/javascript/api/excel/excel.pivotlayout#getcell-datahierarchy--rowitems--columnitems-)|Получает уникальную ячейку в сводной таблице на основе иерархии данных и элементов строк и столбцов соответствующих иерархий.|
+|[PivotLayout](/javascript/api/excel/excel.pivotlayout)|[getCell(dataHierarchy: DataPivotHierarchy \| string, rowItems: Array<PivotItem \| string>, columnItems: Array<PivotItem \| string>)](/javascript/api/excel/excel.pivotlayout#getcell-datahierarchy--rowitems--columnitems-)|Получает уникальную ячейку в сводной таблице на основе иерархии данных и элементов строк и столбцов соответствующих иерархий.|
 ||[pivotStyle](/javascript/api/excel/excel.pivotlayout#pivotstyle)|Стиль, примененный к PivotTable.|
-||[repeatAllItemLabels (repeatLabels: boolean)](/javascript/api/excel/excel.pivotlayout#repeatallitemlabels-repeatlabels-)|Задает параметр "Повторите все метки элементов" во всех полях в PivotTable.|
 ||[setStyle(style: string \| PivotTableStyle \| BuiltInPivotTableStyle)](/javascript/api/excel/excel.pivotlayout#setstyle-style-)|Задает стиль, применяемый к PivotTable.|
-||[showFieldHeaders](/javascript/api/excel/excel.pivotlayout#showfieldheaders)|Указывает, отображаются ли в pivotTable полевые заголовок (подписи полей и отфильтровываемые выпадения).|
-|[PivotTable](/javascript/api/excel/excel.pivottable)|[refreshOnOpen](/javascript/api/excel/excel.pivottable#refreshonopen)|Указывает, обновляется ли pivotTable при открываемой книге.|
 |[PivotTableScopedCollection](/javascript/api/excel/excel.pivottablescopedcollection)|[getFirstOrNullObject()](/javascript/api/excel/excel.pivottablescopedcollection#getfirstornullobject--)|Получает первый pivotTable в коллекции.|
 |[Range](/javascript/api/excel/excel.range)|[getDependents()](/javascript/api/excel/excel.range#getdependents--)|Возвращает объект, представляющего диапазон, содержащий все иждивенцы ячейки в одной и той же таблице или `WorkbookRangeAreas` в нескольких таблицах.|
-||[getDirectDependents()](/javascript/api/excel/excel.range#getdirectdependents--)|Возвращает объект, представляющего диапазон, содержащий все прямые иждивенцы ячейки в одной и той же таблице или в нескольких `WorkbookRangeAreas` таблицах.|
-||[getMergedAreasOrNullObject()](/javascript/api/excel/excel.range#getmergedareasornullobject--)|Возвращает объект RangeAreas, который представляет объединенные области в этом диапазоне.|
 ||[getPrecedents()](/javascript/api/excel/excel.range#getprecedents--)|Возвращает объект, представляющего диапазон, содержащий все прецеденты ячейки в одной и той же таблице или `WorkbookRangeAreas` в нескольких таблицах.|
 |[RefreshModeChangedEventArgs](/javascript/api/excel/excel.refreshmodechangedeventargs)|[refreshMode](/javascript/api/excel/excel.refreshmodechangedeventargs#refreshmode)|Режим обновления связанного типа данных.|
 ||[serviceId](/javascript/api/excel/excel.refreshmodechangedeventargs#serviceid)|Уникальный ID объекта, режим обновления которого был изменен.|
@@ -122,29 +118,22 @@
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.tablefilteredeventargs#worksheetid)|Получает ID таблицы, которая содержит таблицу.|
 |[TableScopedCollection](/javascript/api/excel/excel.tablescopedcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.tablescopedcollection#getitemornullobject-key-)|Получает таблицу по имени или ИД.|
-|[Workbook](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel. InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#insertworksheetsfrombase64-base64file--options-)|Вставляет указанные таблицы из источника книги в текущую книгу.|
-||[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|Возвращает коллекцию связанных типов данных, которые являются частью книги.|
-||[onActivated](/javascript/api/excel/excel.workbook#onactivated)|Возникает при активации книги.|
+|[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|Возвращает коллекцию связанных типов данных, которые являются частью книги.|
+||[linkedWorkbooks](/javascript/api/excel/excel.workbook#linkedworkbooks)|Возвращает коллекцию связанных книг.|
 ||[задачи](/javascript/api/excel/excel.workbook#tasks)|Возвращает коллекцию задач, присутствующих в книге.|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showpivotfieldlist)|Указывает, отображается ли область списка полей PivotTable на уровне книги.|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904datesystem)|Значение true, если в книге используется система дат 1904.|
-|[WorkbookActivatedEventArgs](/javascript/api/excel/excel.workbookactivatedeventargs)|[type](/javascript/api/excel/excel.workbookactivatedeventargs#type)|Получает тип события.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|Возникает, когда фильтр применяется на определенном таблице.|
-||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|Возникает, когда в этом таблице изменена одна или несколько формул.|
 ||[onProtectionChanged](/javascript/api/excel/excel.worksheet#onprotectionchanged)|Возникает при смене состояния защиты таблицы.|
 ||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Возвращает значение, представляющее этот таблицу, которую можно прочитать в Open Office XML.|
 ||[задачи](/javascript/api/excel/excel.worksheet#tasks)|Возвращает коллекцию задач, присутствующих в таблице.|
-|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|Представляет источник триггера события.|
+|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[changeDirectionState](/javascript/api/excel/excel.worksheetchangedeventargs#changedirectionstate)|Представляет изменение в направлении, в которое будут сдвигаться ячейки в таблице при удалении или вставке ячейки.|
+||[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|Представляет источник триггера события.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|Вставляет указанные листы книги в текущую книгу.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|Возникает при применении любого фильтра листа в книге.|
-||[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onformulachanged)|Возникает, когда одна или несколько формул меняются в любом таблице этой коллекции.|
 ||[onProtectionChanged](/javascript/api/excel/excel.worksheetcollection#onprotectionchanged)|Возникает при смене состояния защиты таблицы.|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetfilteredeventargs#worksheetid)|Получает ID таблицы, в которой применяется фильтр.|
-|[WorksheetFormulaChangedEventArgs](/javascript/api/excel/excel.worksheetformulachangedeventargs)|[formulaDetails](/javascript/api/excel/excel.worksheetformulachangedeventargs#formuladetails)|Получает массив объектов, содержащих сведения обо всех `FormulaChangedEventDetail` измененных формулах.|
-||[source](/javascript/api/excel/excel.worksheetformulachangedeventargs#source)|Источник события.|
-||[type](/javascript/api/excel/excel.worksheetformulachangedeventargs#type)|Получает тип события.|
-||[worksheetId](/javascript/api/excel/excel.worksheetformulachangedeventargs#worksheetid)|Получает ID таблицы, в которой изменена формула.|
 |[WorksheetProtectionChangedEventArgs](/javascript/api/excel/excel.worksheetprotectionchangedeventargs)|[isProtected](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#isprotected)|Получает текущее состояние защиты таблицы.|
 ||[source](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#source)|Источник события.|
 ||[type](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#type)|Получает тип события.|
