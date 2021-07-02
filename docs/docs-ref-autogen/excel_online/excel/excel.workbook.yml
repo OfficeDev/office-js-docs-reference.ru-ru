@@ -4,7 +4,7 @@ uid: excel!Excel.Workbook:class
 package: excel!
 fullName: Excel.Workbook
 summary: >-
-  Книга — это объект верхнего уровня, содержащий связанные объекты книги, такие как таблицы, таблицы и диапазоны. Дополнительные новости об объектной модели книг читайте в материале Работа с книгами [с помощью API JavaScript Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
+  Книга — это объект верхнего уровня, содержащий связанные объекты книги, такие как таблицы, таблицы и диапазоны. Дополнительные новости об объектной модели книг читайте в материале Работа с книгами с помощью [Excel API JavaScript](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-workbooks)<!-- -->.
 
 
   \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -18,7 +18,7 @@ properties:
   package: excel!
   fullName: application
   summary: >-
-    Представляет экземпляр приложения Excel, содержащий эту книгу.
+    Представляет экземпляр Excel, содержащий эту книгу.
 
 
     \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -113,7 +113,7 @@ properties:
   uid: excel!Excel.Workbook#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -639,6 +639,33 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/range-areas.yaml\nawait Excel.run(async (context) => {\n\n    const selectedRanges = context.workbook.getSelectedRanges();\n    selectedRanges.format.fill.color = \"lightblue\";\n\n    await context.sync();\n})\n```"
+- name: insertWorksheetsFromBase64(base64File, options)
+  uid: excel!Excel.Workbook#insertWorksheetsFromBase64:member(1)
+  package: excel!
+  fullName: insertWorksheetsFromBase64(base64File, options)
+  summary: >-
+    Вставляет указанные таблицы из источника книги в текущую книгу.
+
+
+    *Примечание**: В настоящее время этот API поддерживается только для Office на Windows, Mac и Online.
+
+
+    \[[Набор API: ExcelApi 1.13](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions): OfficeExtension.ClientResult<string[]>;'
+    parameters:
+    - id: base64File
+      description: Обязательный. Строка с кодом base64, представляющая исходный файл книги.
+      type: string
+    - id: options
+      description: Необязательно. Параметры, которые определяют, какие таблицы вставить и где в книге будут вставлены новые таблицы. По умолчанию все таблицы из книги источника вставляются в конце текущей книги.
+      type: <xref uid="excel!Excel.InsertWorksheetOptions:interface" />
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
+      description: "Массив ids, соответствующий каждому недавно вставленной таблице.\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/workbook-insert-external-worksheets.yaml\n// Retrieve the file and set up an HTML FileReader element. \nconst myFile = <HTMLInputElement>document.getElementById(\"file\");\nconst reader = new FileReader();\n\nreader.onload = (event) => {\n    // Remove the metadata before the base64-encoded string.\n    const startIndex = reader.result.toString().indexOf(\"base64,\");\n    externalWorkbook = reader.result.toString().substr(startIndex + 7);\n};\n\n// Read the file as a data URL so that we can parse the base64-encoded string.\nreader.readAsDataURL(myFile.files[0]);\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/workbook-insert-external-worksheets.yaml\nawait Excel.run(async (context) => {\n    // Retrieve the source workbook.\n    const workbook = context.workbook;\n    \n    // Set up the insert options.\n    var options = {\n        sheetNamesToInsert: [], // Insert all the worksheets from the source workbook.\n        positionType: Excel.WorksheetPositionType.after, // Insert after the `relativeTo` sheet.\n        relativeTo: \"Sheet1\" // The sheet relative to which the other worksheets will be inserted. Used with `positionType`.\n    };\n    \n    // Insert the new worksheets.\n    workbook.insertWorksheetsFromBase64(externalWorkbook, options);\n    await context.sync();\n});\n```"
 - name: load(options)
   uid: excel!Excel.Workbook#load:member(1)
   package: excel!
@@ -785,7 +812,7 @@ methods:
   uid: excel!Excel.Workbook#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.Workbook — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorkbookData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект книги — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.WorkbookData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -795,6 +822,23 @@ methods:
       type: <xref uid="excel!Excel.Interfaces.WorkbookData:interface" />
       description: ''
 events:
+- name: onActivated
+  uid: excel!Excel.Workbook#onActivated:member
+  package: excel!
+  fullName: onActivated
+  summary: >-
+    Возникает при активации книги. Примечание. Это событие не будет открываться при открываемой книге.
+
+
+    \[[Набор API: ExcelApi 1.13](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorkbookActivatedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorkbookActivatedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/events-workbook-activated.yaml\nasync function workbookActivated(event: Excel.WorkbookActivatedEventArgs) {\n  await Excel.run(async (context) => {\n    // Callback function for when the workbook is activated.\n    console.log(\"The workbook was activated.\");\n  });\n}\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/85-preview-apis/events-workbook-activated.yaml\nawait Excel.run(async (context) => {\n  const workbook = context.workbook;\n\n  // Register the workbook activated event handler.\n  workbook.onActivated.add(workbookActivated);\n\n  await context.sync();\n  console.log(\"Added event handler for workbook activated.\");\n});\n```"
 - name: onAutoSaveSettingChanged
   uid: excel!Excel.Workbook#onAutoSaveSettingChanged:member
   package: excel!
@@ -829,9 +873,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.SelectionChangedEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 374d4b8df1875c3121e7a2735fccb2a782c28061
-  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
+  ms.openlocfilehash: a123b9574e5bd9c208048daa913bf12e6c589649
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/14/2021
-  ms.locfileid: "51753327"
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53260472"
