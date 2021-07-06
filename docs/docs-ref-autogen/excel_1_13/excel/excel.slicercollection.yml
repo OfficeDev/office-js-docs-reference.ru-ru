@@ -1,0 +1,240 @@
+### YamlMime:TSType
+name: Excel.SlicerCollection
+uid: excel!Excel.SlicerCollection:class
+package: excel!
+fullName: Excel.SlicerCollection
+summary: >-
+  Представляет коллекцию всех объектов среза в книге или в таблице.
+
+
+  \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.SlicerCollection#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.SlicerCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Получает загруженные дочерние элементы в этой коллекции.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.Slicer[];'
+    return:
+      type: <xref uid="excel!Excel.Slicer:class" />[]
+methods:
+- name: add(slicerSource, sourceField, slicerDestination)
+  uid: excel!Excel.SlicerCollection#add:member(1)
+  package: excel!
+  fullName: add(slicerSource, sourceField, slicerDestination)
+  summary: >-
+    Добавляет новый срез в книгу.
+
+
+    \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(slicerSource: string | PivotTable | Table, sourceField: string | PivotField | number | TableColumn, slicerDestination?: string | Worksheet): Excel.Slicer;'
+    parameters:
+    - id: slicerSource
+      description: Источник данных, на основе который будет основан новый срез. Это может быть `PivotTable` объект, `Table` объект или строка. Когда объект PivotTable передается, источником данных является `PivotTable` источник объекта. Когда объект `Table` передается, источником данных является `Table` объект. Когда строка передается, она интерпретируется как имя или ID pivotTable или таблицы.
+      type: string | <xref uid="excel!Excel.PivotTable:class" /> | <xref uid="excel!Excel.Table:class" />
+    - id: sourceField
+      description: Поле в источнике данных для фильтрации. Он может быть `PivotField` объектом, `TableColumn` объектом, ИД или именем или `PivotField` ИД `TableColumn`<!-- -->.
+      type: string | <xref uid="excel!Excel.PivotField:class" /> | number | <xref uid="excel!Excel.TableColumn:class" />
+    - id: slicerDestination
+      description: Необязательно. Таблица, в которой будет создан новый срез. Это может быть объект, имя или `Worksheet` ИД таблицы. Этот параметр может быть опущен, если коллекция срезов будет извлечена из таблицы.
+      type: string | <xref uid="excel!Excel.Worksheet:class" />
+    return:
+      type: <xref uid="excel!Excel.Slicer:class" />
+      description: >-
+        Новый срез.
+
+
+        #### <a name="examples"></a>Примеры
+
+
+        ```typescript
+
+        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml
+
+        await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getItem("Pivot");
+            const slicer = sheet.slicers.add(
+                "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+                "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+            );
+            slicer.name = "Fruit Slicer";
+            await context.sync();
+        });
+
+        ```
+- name: getCount()
+  uid: excel!Excel.SlicerCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    Возвращает количество срезов в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(key)
+  uid: excel!Excel.SlicerCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    Получает объект slicer с его именем или ИД.
+
+
+    \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Excel.Slicer;'
+    parameters:
+    - id: key
+      description: Имя или ID среза.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Slicer:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-slicer.yaml\nawait Excel.run(async (context) => {\n    const slicer = context.workbook.slicers.getItem(\"Fruit Slicer\");\n    slicer.caption = \"Fruit Types\";\n    slicer.left = 395;\n    slicer.top = 15;\n    slicer.height = 135;\n    slicer.width = 150;\n    await context.sync();\n});\n```"
+- name: getItemAt(index)
+  uid: excel!Excel.SlicerCollection#getItemAt:member(1)
+  package: excel!
+  fullName: getItemAt(index)
+  summary: >-
+    Получает срез на основе его позиции в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemAt(index: number): Excel.Slicer;'
+    parameters:
+    - id: index
+      description: Значение индекса получаемого объекта. Используется нулевой индекс.
+      type: number
+    return:
+      type: <xref uid="excel!Excel.Slicer:class" />
+      description: ''
+- name: getItemOrNullObject(key)
+  uid: excel!Excel.SlicerCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(key)
+  summary: >-
+    Получает срез с его именем или ИД. Если среза не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.Slicer;'
+    parameters:
+    - id: key
+      description: Имя или ID среза, который будет извлечен.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Slicer:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.SlicerCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.SlicerCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.SlicerCollection;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.SlicerCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.SlicerCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.SlicerCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.SlicerCollection;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.SlicerCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.SlicerCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.SlicerCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.SlicerCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.SlicerCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.SlicerCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.SlicerCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.SlicerCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.SlicerCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 1227f20e294aca20796d3adb3cc0a66fe202d3ee
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53270912"

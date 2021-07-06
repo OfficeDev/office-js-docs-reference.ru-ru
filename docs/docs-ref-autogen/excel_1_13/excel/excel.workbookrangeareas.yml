@@ -1,0 +1,225 @@
+### YamlMime:TSType
+name: Excel.WorkbookRangeAreas
+uid: excel!Excel.WorkbookRangeAreas:class
+package: excel!
+fullName: Excel.WorkbookRangeAreas
+summary: >-
+  Представляет коллекцию из одного или нескольких прямоугольных диапазонов в нескольких таблицах.
+
+
+  \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: addresses
+  uid: excel!Excel.WorkbookRangeAreas#addresses:member
+  package: excel!
+  fullName: addresses
+  summary: >-
+    Возвращает массив адресов в стиле A1. Значения адресов содержат имя листа для каждого прямоугольного блока ячеек (например, "Sheet1! A1:B4, Sheet1! D1:D4"). Только для чтения.
+
+
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly addresses: string[];'
+    return:
+      type: string[]
+- name: areas
+  uid: excel!Excel.WorkbookRangeAreas#areas:member
+  package: excel!
+  fullName: areas
+  summary: >-
+    Возвращает `RangeAreasCollection` объект. Каждый из них в коллекции представляет один или несколько диапазонов прямоугольника `RangeAreas` в одной таблице.
+
+
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly areas: Excel.RangeAreasCollection;'
+    return:
+      type: <xref uid="excel!Excel.RangeAreasCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/direct-precedents.yaml\nawait Excel.run(async (context) => {\n  // Precedents are cells referenced by the formula in a cell.\n  let range = context.workbook.getActiveCell();\n  let directPrecedents = range.getDirectPrecedents();\n  range.load(\"address\");\n  directPrecedents.areas.load(\"address\");\n  await context.sync();\n\n  console.log(`Direct precedent cells of ${range.address}:`);\n\n  // Use the direct precedents API to loop through precedents of the active cell. \n  for (var i = 0; i < directPrecedents.areas.items.length; i++) {\n    // Highlight and console the address of each precedent cell.\n    directPrecedents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directPrecedents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
+- name: context
+  uid: excel!Excel.WorkbookRangeAreas#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: ranges
+  uid: excel!Excel.WorkbookRangeAreas#ranges:member
+  package: excel!
+  fullName: ranges
+  summary: >-
+    Возвращает диапазоны, составляющие этот объект в `RangeCollection` объекте.
+
+
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly ranges: Excel.RangeCollection;'
+    return:
+      type: <xref uid="excel!Excel.RangeCollection:class" />
+methods:
+- name: getRangeAreasBySheet(key)
+  uid: excel!Excel.WorkbookRangeAreas#getRangeAreasBySheet:member(1)
+  package: excel!
+  fullName: getRangeAreasBySheet(key)
+  summary: >-
+    Возвращает объект на основе ИД или имени таблицы `RangeAreas` в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeAreasBySheet(key: string): Excel.RangeAreas;'
+    parameters:
+    - id: key
+      description: Имя или ID таблицы.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.RangeAreas:class" />
+      description: ''
+- name: getRangeAreasOrNullObjectBySheet(key)
+  uid: excel!Excel.WorkbookRangeAreas#getRangeAreasOrNullObjectBySheet:member(1)
+  package: excel!
+  fullName: getRangeAreasOrNullObjectBySheet(key)
+  summary: >-
+    Возвращает объект на основе имени или ИД таблицы `RangeAreas` в коллекции. Если таблицы не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeAreasOrNullObjectBySheet(key: string): Excel.RangeAreas;'
+    parameters:
+    - id: key
+      description: Имя или ID таблицы.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.RangeAreas:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.WorkbookRangeAreas#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.WorkbookRangeAreasLoadOptions): Excel.WorkbookRangeAreas;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.WorkbookRangeAreasLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.WorkbookRangeAreas#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorkbookRangeAreas;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.WorkbookRangeAreas#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.WorkbookRangeAreas;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.WorkbookRangeAreas#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект WorkbookRangeAreas — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.WorkbookRangeAreasData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorkbookRangeAreasData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.WorkbookRangeAreasData:interface" />
+      description: ''
+- name: track()
+  uid: excel!Excel.WorkbookRangeAreas#track:member(1)
+  package: excel!
+  fullName: track()
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): Excel.WorkbookRangeAreas;'
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+- name: untrack()
+  uid: excel!Excel.WorkbookRangeAreas#untrack:member(1)
+  package: excel!
+  fullName: untrack()
+  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): Excel.WorkbookRangeAreas;'
+    return:
+      type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: bfc39377aa89700c653de4e91d5e9e58b5040b19
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53271098"
