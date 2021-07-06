@@ -1,0 +1,314 @@
+### YamlMime:TSType
+name: Excel.TableColumn
+uid: excel!Excel.TableColumn:class
+package: excel!
+fullName: Excel.TableColumn
+summary: >-
+  Представляет столбец в таблице.
+
+
+  \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.TableColumn#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: filter
+  uid: excel!Excel.TableColumn#filter:member
+  package: excel!
+  fullName: filter
+  summary: >-
+    Извлекает фильтр, примененный к столбце.
+
+
+    \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly filter: Excel.Filter;'
+    return:
+      type: <xref uid="excel!Excel.Filter:class" />
+- name: id
+  uid: excel!Excel.TableColumn#id:member
+  package: excel!
+  fullName: id
+  summary: >-
+    Возвращает уникальный ключ, идентифицирующий столбец в таблице.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: number;'
+    return:
+      type: number
+- name: index
+  uid: excel!Excel.TableColumn#index:member
+  package: excel!
+  fullName: index
+  summary: >-
+    Возвращает номер индекса столбца в коллекции столбцов таблицы. Используется нулевой индекс.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly index: number;'
+    return:
+      type: number
+- name: name
+  uid: excel!Excel.TableColumn#name:member
+  package: excel!
+  fullName: name
+  summary: >-
+    Указывает имя столбца таблицы.
+
+
+    \[[Набор API: ExcelApi 1.1 для получения имени; 1.4 для его настройки.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'name: string;'
+    return:
+      type: string
+- name: values
+  uid: excel!Excel.TableColumn#values:member
+  package: excel!
+  fullName: values
+  summary: >-
+    Представляет необработанные значения указанного диапазона. Возвращенные данные могут быть строкой, номером или boolean. Ячейки, содержащие ошибку, вернут строку ошибки. Если возвращенное значение начинается с плюса ("+"), минуса ("-"), или равного знака ("="), Excel интерпретирует это значение как формулу.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'values: any[][];'
+    return:
+      type: any[][]
+methods:
+- name: delete()
+  uid: excel!Excel.TableColumn#delete:member(1)
+  package: excel!
+  fullName: delete()
+  summary: >-
+    Удаляет столбец из таблицы.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var column = ctx.workbook.tables.getItem(tableName).columns.getItemAt(2);\n    column.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getDataBodyRange()
+  uid: excel!Excel.TableColumn#getDataBodyRange:member(1)
+  package: excel!
+  fullName: getDataBodyRange()
+  summary: >-
+    Получает объект диапазона, связанный с текстом данных столбца.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getDataBodyRange(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var column = ctx.workbook.tables.getItem(tableName).columns.getItemAt(0);\n    var dataBodyRange = column.getDataBodyRange();\n    dataBodyRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(dataBodyRange.address);\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getHeaderRowRange()
+  uid: excel!Excel.TableColumn#getHeaderRowRange:member(1)
+  package: excel!
+  fullName: getHeaderRowRange()
+  summary: >-
+    Получает объект диапазона, связанный со строкой заголовков столбца.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getHeaderRowRange(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var columns = ctx.workbook.tables.getItem(tableName).columns.getItemAt(0);\n    var headerRowRange = columns.getHeaderRowRange();\n    headerRowRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(headerRowRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getRange()
+  uid: excel!Excel.TableColumn#getRange:member(1)
+  package: excel!
+  fullName: getRange()
+  summary: >-
+    Получает объект диапазона, связанный со всем столбцом.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRange(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var columns = ctx.workbook.tables.getItem(tableName).columns.getItemAt(0);\n    var columnRange = columns.getRange();\n    columnRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(columnRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getTotalRowRange()
+  uid: excel!Excel.TableColumn#getTotalRowRange:member(1)
+  package: excel!
+  fullName: getTotalRowRange()
+  summary: >-
+    Получает объект диапазона, связанный со строкой итогов столбца.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getTotalRowRange(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var columns = ctx.workbook.tables.getItem(tableName).columns.getItemAt(0);\n    var totalRowRange = columns.getTotalRowRange();\n    totalRowRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(totalRowRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(options)
+  uid: excel!Excel.TableColumn#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.TableColumnLoadOptions): Excel.TableColumn;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.TableColumnLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.TableColumn#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableColumn;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var column = ctx.workbook.tables.getItem(tableName).columns.getItem(0);\n    column.load('index');\n    return ctx.sync().then(function() {\n        console.log(column.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.TableColumn#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.TableColumn;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.TableColumn#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
+  remarks: >-
+    Этот метод имеет следующую дополнительную подпись:
+
+
+    `set(properties: Excel.TableColumn): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.TableColumnUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
+      type: <xref uid="excel!Excel.Interfaces.TableColumnUpdateData:interface" />
+    - id: options
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.TableColumn#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.TableColumn): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.TableColumn:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.TableColumn#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект TableColumn — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.TableColumnData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableColumnData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.TableColumnData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 9b20c8674518416509e32b1d9ce63e3c534b785c
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53263699"
