@@ -1,7 +1,7 @@
 | Класс | Поля | Описание |
 |:---|:---|:---|
 |[ChartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|[textOrientation](/javascript/api/excel/excel.chartaxistitle#textorientation)|Указывает угол, на который ориентирован текст для заголовка оси диаграммы.|
-|[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues(dimension: Excel.ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Получает значения из одного измерения серии диаграмм.|
+|[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues (размер: Excel. ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Получает значения из одного измерения серии диаграмм.|
 |[Comment](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Получает тип контента комментария.|
 |[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[commentDetails](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|Получает массив, содержащий ID и ID комментариев связанных с ним `CommentDetail` ответов.|
 ||[source](/javascript/api/excel/excel.commentaddedeventargs#source)|Указывает источник события.|
@@ -34,11 +34,11 @@
 ||[lowerBound](/javascript/api/excel/excel.pivotdatefilter#lowerbound)|Нижний предел диапазона для состояния `between` фильтра.|
 ||[upperBound](/javascript/api/excel/excel.pivotdatefilter#upperbound)|Верхний предел диапазона для состояния `between` фильтра.|
 ||[wholeDays](/javascript/api/excel/excel.pivotdatefilter#wholedays)|Для `equals` , , и фильтр `before` `after` `between` условия, указывает, если сравнения должны быть сделаны в течение целых дней.|
-|[PivotField](/javascript/api/excel/excel.pivotfield)|[applyFilter(filter: Excel.PivotFilters)](/javascript/api/excel/excel.pivotfield#applyfilter-filter-)|Задает один или несколько текущих pivotFilters поля и применяет их к полю.|
+|[PivotField](/javascript/api/excel/excel.pivotfield)|[applyFilter(filter: Excel. PivotFilters)](/javascript/api/excel/excel.pivotfield#applyfilter-filter-)|Задает один или несколько текущих pivotFilters поля и применяет их к полю.|
 ||[clearAllFilters()](/javascript/api/excel/excel.pivotfield#clearallfilters--)|Очищает все критерии от всех фильтров поля.|
-||[clearFilter(filterType: Excel.PivotFilterType)](/javascript/api/excel/excel.pivotfield#clearfilter-filtertype-)|Очищает все существующие критерии от фильтра поля данного типа (если он применяется в настоящее время).|
+||[clearFilter(filterType: Excel. PivotFilterType)](/javascript/api/excel/excel.pivotfield#clearfilter-filtertype-)|Очищает все существующие критерии от фильтра поля данного типа (если он применяется в настоящее время).|
 ||[getFilters()](/javascript/api/excel/excel.pivotfield#getfilters--)|Получает все фильтры, применяемые в настоящее время на поле.|
-||[isFiltered(filterType?: Excel.PivotFilterType)](/javascript/api/excel/excel.pivotfield#isfiltered-filtertype-)|Проверяет, есть ли на поле примененные фильтры.|
+||[isFiltered (filterType?: Excel. PivotFilterType)](/javascript/api/excel/excel.pivotfield#isfiltered-filtertype-)|Проверяет, есть ли на поле примененные фильтры.|
 |[PivotFilters](/javascript/api/excel/excel.pivotfilters)|[dateFilter](/javascript/api/excel/excel.pivotfilters#datefilter)|В настоящее время применяется фильтр дат PivotField.|
 ||[labelFilter](/javascript/api/excel/excel.pivotfilters#labelfilter)|Фильтр меток PivotField в настоящее время применяется.|
 ||[manualFilter](/javascript/api/excel/excel.pivotfilters#manualfilter)|В настоящее время применяется ручной фильтр PivotField.|
@@ -80,7 +80,7 @@
 ||[getRangeAreasOrNullObjectBySheet (key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|Возвращает объект на основе имени или ИД таблицы `RangeAreas` в коллекции.|
 ||[addresses](/javascript/api/excel/excel.workbookrangeareas#addresses)|Возвращает массив адресов в стиле A1.|
 ||[areas](/javascript/api/excel/excel.workbookrangeareas#areas)|Возвращает `RangeAreasCollection` объект.|
-||[диапазоны](/javascript/api/excel/excel.workbookrangeareas#ranges)|Возвращает диапазоны, составляющие этот объект в  `RangeCollection`   объекте.|
+||[диапазоны](/javascript/api/excel/excel.workbookrangeareas#ranges)|Возвращает диапазоны, составляющие этот объект в `RangeCollection` объекте.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customproperties)|Получает коллекцию пользовательских свойств на уровне таблицы.|
 |[WorksheetCustomProperty](/javascript/api/excel/excel.worksheetcustomproperty)|[delete()](/javascript/api/excel/excel.worksheetcustomproperty#delete--)|Удаляет настраиваемое свойство.|
 ||[key](/javascript/api/excel/excel.worksheetcustomproperty#key)|Возвращает ключ настраиваемого свойства.|

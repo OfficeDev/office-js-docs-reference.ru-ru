@@ -1,0 +1,268 @@
+### YamlMime:TSType
+name: Excel.AutoFilter
+uid: excel!Excel.AutoFilter:class
+package: excel!
+fullName: Excel.AutoFilter
+summary: >-
+  Представляет `AutoFilter` объект. AutoFilter превращает значения в столбце Excel в определенные фильтры, основанные на содержимом ячейки.
+
+
+  \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.AutoFilter#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: criteria
+  uid: excel!Excel.AutoFilter#criteria:member
+  package: excel!
+  fullName: criteria
+  summary: >-
+    Массив, содержащий все условия фильтрации в диапазоне с примененным автофильтром.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly criteria: Excel.FilterCriteria[];'
+    return:
+      type: <xref uid="excel!Excel.FilterCriteria:interface" />[]
+- name: enabled
+  uid: excel!Excel.AutoFilter#enabled:member
+  package: excel!
+  fullName: enabled
+  summary: >-
+    Указывает, включен ли autoFilter.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly enabled: boolean;'
+    return:
+      type: boolean
+- name: isDataFiltered
+  uid: excel!Excel.AutoFilter#isDataFiltered:member
+  package: excel!
+  fullName: isDataFiltered
+  summary: >-
+    Указывает, есть ли у autoFilter критерии фильтрации.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly isDataFiltered: boolean;'
+    return:
+      type: boolean
+methods:
+- name: apply(range, columnIndex, criteria)
+  uid: excel!Excel.AutoFilter#apply:member(1)
+  package: excel!
+  fullName: apply(range, columnIndex, criteria)
+  summary: >-
+    Применяет автофильтр к диапазону. При этом фильтруется столбец, если указаны индекс столбца и условия фильтрации.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'apply(range: Range | string, columnIndex?: number, criteria?: Excel.FilterCriteria): void;'
+    parameters:
+    - id: range
+      description: Диапазон, на который будет применяться autoFilter.
+      type: <xref uid="excel!Excel.Range:class" /> | string
+    - id: columnIndex
+      description: Индекс столбца с нулевой базой, к которому применяется AutoFilter.
+      type: number
+    - id: criteria
+      description: Критерии фильтрации.
+      type: <xref uid="excel!Excel.FilterCriteria:interface" />
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const farmData = sheet.getUsedRange();\n\n    // This filter will only show the rows with the top 25% of values in column 3.\n    sheet.autoFilter.apply(farmData, 3, { criterion1: \"25\", filterOn: Excel.FilterOn.topPercent });\n    await context.sync();\n});\n```"
+- name: clearCriteria()
+  uid: excel!Excel.AutoFilter#clearCriteria:member(1)
+  package: excel!
+  fullName: clearCriteria()
+  summary: >-
+    Очищает условия фильтрации автофильтра.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clearCriteria(): void;'
+    return:
+      type: void
+      description: ''
+- name: getRange()
+  uid: excel!Excel.AutoFilter#getRange:member(1)
+  package: excel!
+  fullName: getRange()
+  summary: >-
+    Возвращает объект, который представляет диапазон, к которому `Range` применяется AutoFilter.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRange(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+- name: getRangeOrNullObject()
+  uid: excel!Excel.AutoFilter#getRangeOrNullObject:member(1)
+  package: excel!
+  fullName: getRangeOrNullObject()
+  summary: >-
+    Возвращает объект, который представляет диапазон, к которому `Range` применяется AutoFilter. Если нет объекта, связанного с autoFilter, этот метод возвращает объект с его `Range` `isNullObject` свойством, задаваемой `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeOrNullObject(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.AutoFilter#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.AutoFilterLoadOptions): Excel.AutoFilter;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.AutoFilterLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.AutoFilter:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.AutoFilter#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.AutoFilter;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.AutoFilter:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.AutoFilter#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.AutoFilter;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.AutoFilter:class" />
+      description: ''
+- name: reapply()
+  uid: excel!Excel.AutoFilter#reapply:member(1)
+  package: excel!
+  fullName: reapply()
+  summary: >-
+    Применяет указанный объект Autofilter, находящийся в настоящее время в диапазоне.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'reapply(): void;'
+    return:
+      type: void
+      description: ''
+- name: remove()
+  uid: excel!Excel.AutoFilter#remove:member(1)
+  package: excel!
+  fullName: remove()
+  summary: >-
+    Удаляет автофильтр из диапазона.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'remove(): void;'
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.AutoFilter#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект AutoFilter — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.AutoFilterData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.AutoFilterData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.AutoFilterData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 145060d57304e86fb8740e63c2a73a14c34b3c46
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53264122"
