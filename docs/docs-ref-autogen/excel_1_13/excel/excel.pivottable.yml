@@ -1,0 +1,395 @@
+### YamlMime:TSType
+name: Excel.PivotTable
+uid: excel!Excel.PivotTable:class
+package: excel!
+fullName: Excel.PivotTable
+summary: >-
+  Представляет сводную таблицу Excel. Подробнее об объектной модели PivotTable читайте в материале Работа с [pivotTables](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-pivottables) с помощью API Excel JavaScript<!-- -->.
+
+
+  \[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: allowMultipleFiltersPerField
+  uid: excel!Excel.PivotTable#allowMultipleFiltersPerField:member
+  package: excel!
+  fullName: allowMultipleFiltersPerField
+  summary: >-
+    Указывает, разрешает ли pivotTable применение нескольких pivotFilters в заданной pivotField в таблице.
+
+
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'allowMultipleFiltersPerField: boolean;'
+    return:
+      type: boolean
+- name: columnHierarchies
+  uid: excel!Excel.PivotTable#columnHierarchies:member
+  package: excel!
+  fullName: columnHierarchies
+  summary: >-
+    Иерархии сводных столбцов сводной таблицы.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly columnHierarchies: Excel.RowColumnPivotHierarchyCollection;'
+    return:
+      type: <xref uid="excel!Excel.RowColumnPivotHierarchyCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-create-and-modify.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");       \n\n    // check if the PivotTable already has a column\n    const column = pivotTable.columnHierarchies.getItemOrNullObject(\"Farm\");\n    column.load(\"id\");\n    await context.sync();\n\n    if (column.isNullObject) {\n        // adding the farm column to the column hierarchy automatically removes it from the row hierarchy\n        pivotTable.columnHierarchies.add(pivotTable.hierarchies.getItem(\"Farm\"));\n    } else {\n        pivotTable.columnHierarchies.remove(column);\n    }\n\n    await context.sync();\n});\n```"
+- name: context
+  uid: excel!Excel.PivotTable#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: dataHierarchies
+  uid: excel!Excel.PivotTable#dataHierarchies:member
+  package: excel!
+  fullName: dataHierarchies
+  summary: >-
+    Иерархии сводных данных сводной таблицы.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly dataHierarchies: Excel.DataPivotHierarchyCollection;'
+    return:
+      type: <xref uid="excel!Excel.DataPivotHierarchyCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-create-and-modify.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold at Farm\"));\n    pivotTable.dataHierarchies.add(pivotTable.hierarchies.getItem(\"Crates Sold Wholesale\"));\n\n    await context.sync();\n});\n```"
+- name: enableDataValueEditing
+  uid: excel!Excel.PivotTable#enableDataValueEditing:member
+  package: excel!
+  fullName: enableDataValueEditing
+  summary: >-
+    Указывает, разрешается ли пользователю изменять значения в теле данных.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'enableDataValueEditing: boolean;'
+    return:
+      type: boolean
+- name: filterHierarchies
+  uid: excel!Excel.PivotTable#filterHierarchies:member
+  package: excel!
+  fullName: filterHierarchies
+  summary: >-
+    Иерархии сводных фильтров сводной таблицы.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly filterHierarchies: Excel.FilterPivotHierarchyCollection;'
+    return:
+      type: <xref uid="excel!Excel.FilterPivotHierarchyCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-filters-and-summaries.yaml\nasync function filter(functionType: Excel.AggregationFunction) {\n    await Excel.run(async (context) => {\n        const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n        const filters = pivotTable.filterHierarchies;\n        const filter = filters.getItemOrNullObject(\"Classification\");\n        filter.load();\n        await context.sync();\n\n        // add the Classification hierarchy to the filter, if it's not already there\n        if (filter.isNullObject) {\n            filters.add(pivotTable.hierarchies.getItem(\"Classification\"));\n            await context.sync();\n        }\n    });\n}\n```"
+- name: hierarchies
+  uid: excel!Excel.PivotTable#hierarchies:member
+  package: excel!
+  fullName: hierarchies
+  summary: >-
+    Иерархии сводного документа сводной таблицы.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly hierarchies: Excel.PivotHierarchyCollection;'
+    return:
+      type: <xref uid="excel!Excel.PivotHierarchyCollection:class" />
+- name: id
+  uid: excel!Excel.PivotTable#id:member
+  package: excel!
+  fullName: id
+  summary: >-
+    ID of the PivotTable.
+
+
+    \[[Набор API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: layout
+  uid: excel!Excel.PivotTable#layout:member
+  package: excel!
+  fullName: layout
+  summary: >-
+    PivotLayout, описывающий макет и визуальную структуру сводной таблицы.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly layout: Excel.PivotLayout;'
+    return:
+      type: <xref uid="excel!Excel.PivotLayout:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-create-and-modify.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    pivotTable.layout.load(\"layoutType\");\n    await context.sync();\n\n    // cycle between the three layout types\n    if (pivotTable.layout.layoutType === \"Compact\") {\n        pivotTable.layout.layoutType = \"Outline\";\n    } else if (pivotTable.layout.layoutType === \"Outline\") {\n        pivotTable.layout.layoutType = \"Tabular\";\n    } else {\n        pivotTable.layout.layoutType = \"Compact\";\n    }\n    await context.sync();\n    console.log(\"Pivot layout is now \" + pivotTable.layout.layoutType);\n});\n```"
+- name: name
+  uid: excel!Excel.PivotTable#name:member
+  package: excel!
+  fullName: name
+  summary: >-
+    Имя сводной таблицы.
+
+
+    \[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'name: string;'
+    return:
+      type: string
+- name: refreshOnOpen
+  uid: excel!Excel.PivotTable#refreshOnOpen:member
+  package: excel!
+  fullName: refreshOnOpen
+  summary: >-
+    Указывает, обновляется ли pivotTable при открываемой книге. Соответствует параметру "Обновление нагрузки" в пользовательском интерфейсе.
+
+
+    \[[Набор API: ExcelApi 1.13](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'refreshOnOpen: boolean;'
+    return:
+      type: boolean
+- name: rowHierarchies
+  uid: excel!Excel.PivotTable#rowHierarchies:member
+  package: excel!
+  fullName: rowHierarchies
+  summary: >-
+    Иерархии сводных строк сводной таблицы.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly rowHierarchies: Excel.RowColumnPivotHierarchyCollection;'
+    return:
+      type: <xref uid="excel!Excel.RowColumnPivotHierarchyCollection:class" />
+- name: useCustomSortLists
+  uid: excel!Excel.PivotTable#useCustomSortLists:member
+  package: excel!
+  fullName: useCustomSortLists
+  summary: >-
+    Указывает, использует ли pivotTable настраиваемые списки при сортировке.
+
+
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'useCustomSortLists: boolean;'
+    return:
+      type: boolean
+- name: worksheet
+  uid: excel!Excel.PivotTable#worksheet:member
+  package: excel!
+  fullName: worksheet
+  summary: >-
+    Лист, содержащий текущую сводную таблицу.
+
+
+    \[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly worksheet: Excel.Worksheet;'
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+methods:
+- name: delete()
+  uid: excel!Excel.PivotTable#delete:member(1)
+  package: excel!
+  fullName: delete()
+  summary: >-
+    Удаляет сводную таблицу.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-create-and-modify.yaml\nawait Excel.run(async (context) => {\n    context.workbook.worksheets.getItem(\"Pivot\").pivotTables.getItem(\"Farm Sales\").delete();\n\n    await context.sync();\n});\n```"
+- name: load(options)
+  uid: excel!Excel.PivotTable#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.PivotTableLoadOptions): Excel.PivotTable;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.PivotTableLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.PivotTable#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotTable;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.PivotTable#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.PivotTable;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: refresh()
+  uid: excel!Excel.PivotTable#refresh:member(1)
+  package: excel!
+  fullName: refresh()
+  summary: >-
+    Обновляет сводную таблицу.
+
+
+    \[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'refresh(): void;'
+    return:
+      type: void
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.PivotTable#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
+  remarks: >-
+    Этот метод имеет следующую дополнительную подпись:
+
+
+    `set(properties: Excel.PivotTable): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.PivotTableUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
+      type: <xref uid="excel!Excel.Interfaces.PivotTableUpdateData:interface" />
+    - id: options
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.PivotTable#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.PivotTable): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.PivotTable:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.PivotTable#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект PivotTable — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.PivotTableData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.PivotTableData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.PivotTableData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 34d37616b4a9d0408b2086d1e222d5c70427be56
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53272166"
