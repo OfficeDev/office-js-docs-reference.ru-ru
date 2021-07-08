@@ -1,0 +1,234 @@
+### YamlMime:TSType
+name: Excel.PivotTableCollection
+uid: excel!Excel.PivotTableCollection:class
+package: excel!
+fullName: Excel.PivotTableCollection
+summary: >-
+  Представляет коллекцию всех объектов PivotTable, входящих в состав книги или листа.
+
+
+  \[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.PivotTableCollection#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.PivotTableCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Получает загруженные дочерние элементы в этой коллекции.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.PivotTable[];'
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />[]
+methods:
+- name: add(name, source, destination)
+  uid: excel!Excel.PivotTableCollection#add:member(1)
+  package: excel!
+  fullName: add(name, source, destination)
+  summary: >-
+    Добавьте pivotTable на основе указанных исходных данных и вставьте его в верхней левой ячейке диапазона назначения.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(name: string, source: Range | string | Table, destination: Range | string): Excel.PivotTable;'
+    parameters:
+    - id: name
+      description: Имя нового pivotTable.
+      type: string
+    - id: source
+      description: Исходными данными для нового pivotTable могут быть диапазон (или адрес строки, включая имя таблицы) или таблица.
+      type: <xref uid="excel!Excel.Range:class" /> | string | <xref uid="excel!Excel.Table:class" />
+    - id: destination
+      description: Ячейка в верхнем левом углу диапазона назначения отчетов PivotTable (диапазон на таблице, где будет размещен итоговой отчет).
+      type: <xref uid="excel!Excel.Range:class" /> | string
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: >-
+        Возвращает недавно вставленную pivotTable.
+
+
+        #### <a name="examples"></a>Примеры
+
+
+        ```typescript
+
+        // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-create-and-modify.yaml
+
+        await Excel.run(async (context) => {
+            const rangeToAnalyze = context.workbook.worksheets.getItem("Data").getRange("A1:E21");
+            const rangeToPlacePivot = context.workbook.worksheets.getItem("Pivot").getRange("A2");
+            context.workbook.worksheets.getItem("Pivot").pivotTables.add("Farm Sales", rangeToAnalyze, rangeToPlacePivot);
+
+            await context.sync();
+        });
+
+        ```
+- name: getCount()
+  uid: excel!Excel.PivotTableCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    Получает количество сводных таблиц в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(name)
+  uid: excel!Excel.PivotTableCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(name)
+  summary: >-
+    Получает сводную таблицу по имени.
+
+
+    \[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(name: string): Excel.PivotTable;'
+    parameters:
+    - id: name
+      description: Имя получаемой сводной таблицы.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: getItemOrNullObject(name)
+  uid: excel!Excel.PivotTableCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(name)
+  summary: >-
+    Получает сводную таблицу по имени. Если pivotTable не существует, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(name: string): Excel.PivotTable;'
+    parameters:
+    - id: name
+      description: Имя получаемой сводной таблицы.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.PivotTable:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.PivotTableCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.PivotTableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotTableCollection;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.PivotTableCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.PivotTableCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.PivotTableCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotTableCollection;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.PivotTableCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.PivotTableCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.PivotTableCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.PivotTableCollection:class" />
+      description: ''
+- name: refreshAll()
+  uid: excel!Excel.PivotTableCollection#refreshAll:member(1)
+  package: excel!
+  fullName: refreshAll()
+  summary: >-
+    Обновляет все сводные таблицы в коллекции.
+
+
+    \[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'refreshAll(): void;'
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.PivotTableCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.PivotTableCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.PivotTableCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.PivotTableCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.PivotTableCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 1b6b5626e11e185cec3a2d87feb97ee52e76b35d
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53272646"
