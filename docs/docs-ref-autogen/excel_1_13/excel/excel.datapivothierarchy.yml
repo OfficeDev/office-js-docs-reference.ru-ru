@@ -1,0 +1,280 @@
+### YamlMime:TSType
+name: Excel.DataPivotHierarchy
+uid: excel!Excel.DataPivotHierarchy:class
+package: excel!
+fullName: Excel.DataPivotHierarchy
+summary: >-
+  Представляет Excel DataPivotHierarchy.
+
+
+  \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.DataPivotHierarchy#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: field
+  uid: excel!Excel.DataPivotHierarchy#field:member
+  package: excel!
+  fullName: field
+  summary: >-
+    Возвращает сводные поля, связанные с DataPivotHierarchy.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly field: Excel.PivotField;'
+    return:
+      type: <xref uid="excel!Excel.PivotField:class" />
+- name: id
+  uid: excel!Excel.DataPivotHierarchy#id:member
+  package: excel!
+  fullName: id
+  summary: >-
+    ID of the DataPivotHierarchy.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type: string
+- name: name
+  uid: excel!Excel.DataPivotHierarchy#name:member
+  package: excel!
+  fullName: name
+  summary: >-
+    Имя DataPivotHierarchy.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'name: string;'
+    return:
+      type: string
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-create-and-modify.yaml\nawait Excel.run(async (context) => {\n    const dataHierarchies = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\").dataHierarchies\n    dataHierarchies.load(\"no-properties-needed\");\n    await context.sync();\n\n    dataHierarchies.items[0].name = \"Farm Sales\";\n    dataHierarchies.items[1].name = \"Wholesale\";\n    await context.sync();\n});\n```"
+- name: numberFormat
+  uid: excel!Excel.DataPivotHierarchy#numberFormat:member
+  package: excel!
+  fullName: numberFormat
+  summary: >-
+    Числовой формат DataPivotHierarchy.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'numberFormat: string;'
+    return:
+      type: string
+- name: position
+  uid: excel!Excel.DataPivotHierarchy#position:member
+  package: excel!
+  fullName: position
+  summary: >-
+    Положение DataPivotHierarchy.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'position: number;'
+    return:
+      type: number
+- name: showAs
+  uid: excel!Excel.DataPivotHierarchy#showAs:member
+  package: excel!
+  fullName: showAs
+  summary: >-
+    Указывает, следует ли показывать данные в качестве определенного суммарного вычисления.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'showAs: Excel.ShowAsRule;'
+    return:
+      type: <xref uid="excel!Excel.ShowAsRule:interface" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-calculations.yaml\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n    const farmDataHierarchy: Excel.DataPivotHierarchy = pivotTable.dataHierarchies.getItem(\"Sum of Crates Sold at Farm\");        \n    const wholesaleDataHierarchy: Excel.DataPivotHierarchy = pivotTable.dataHierarchies.getItem(\"Sum of Crates Sold Wholesale\");\n\n    farmDataHierarchy.load(\"showAs\");\n    wholesaleDataHierarchy.load(\"showAs\");\n    await context.sync();\n\n    // show the crates of each fruit type sold at the farm as a percentage of the column's total\n    let farmShowAs = farmDataHierarchy.showAs;\n    farmShowAs.calculation = Excel.ShowAsCalculation.percentOfColumnTotal;\n    farmShowAs.baseField = pivotTable.rowHierarchies.getItem(\"Type\").fields.getItem(\"Type\");\n    farmDataHierarchy.showAs = farmShowAs;\n\n    let wholesaleShowAs = wholesaleDataHierarchy.showAs;\n    wholesaleShowAs.calculation = Excel.ShowAsCalculation.percentOfColumnTotal;\n    wholesaleShowAs.baseField = pivotTable.rowHierarchies.getItem(\"Type\").fields.getItem(\"Type\");\n    wholesaleDataHierarchy.showAs = wholesaleShowAs;\n    await context.sync();\n});\n```"
+- name: summarizeBy
+  uid: excel!Excel.DataPivotHierarchy#summarizeBy:member
+  package: excel!
+  fullName: summarizeBy
+  summary: >-
+    Указывает, показаны ли все элементы DataPivotHierarchy.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'summarizeBy: Excel.AggregationFunction | "Unknown" | "Automatic" | "Sum" | "Count" | "Average" | "Max" | "Min" | "Product" | "CountNumbers" | "StandardDeviation" | "StandardDeviationP" | "Variance" | "VarianceP";'
+    return:
+      type: <xref uid="excel!Excel.AggregationFunction:enum" /> | "Unknown" | "Automatic" | "Sum" | "Count" | "Average" | "Max" | "Min" | "Product" | "CountNumbers" | "StandardDeviation" | "StandardDeviationP" | "Variance" | "VarianceP"
+methods:
+- name: load(options)
+  uid: excel!Excel.DataPivotHierarchy#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.DataPivotHierarchyLoadOptions): Excel.DataPivotHierarchy;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.DataPivotHierarchyLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.DataPivotHierarchy:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.DataPivotHierarchy#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.DataPivotHierarchy;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.DataPivotHierarchy:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.DataPivotHierarchy#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.DataPivotHierarchy;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.DataPivotHierarchy:class" />
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.DataPivotHierarchy#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
+  remarks: >-
+    Этот метод имеет следующую дополнительную подпись:
+
+
+    `set(properties: Excel.DataPivotHierarchy): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.DataPivotHierarchyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
+      type: <xref uid="excel!Excel.Interfaces.DataPivotHierarchyUpdateData:interface" />
+    - id: options
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.DataPivotHierarchy#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.DataPivotHierarchy): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.DataPivotHierarchy:class" />
+    return:
+      type: void
+      description: ''
+- name: setToDefault()
+  uid: excel!Excel.DataPivotHierarchy#setToDefault:member(1)
+  package: excel!
+  fullName: setToDefault()
+  summary: >-
+    Сбрасывает DataPivotHierarchy до значений по умолчанию.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setToDefault(): void;'
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.DataPivotHierarchy#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект DataPivotHierarchy — это объект API, метод возвращает простой объект `toJSON` JavaScript (введите как`Excel.Interfaces.DataPivotHierarchyData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.DataPivotHierarchyData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.DataPivotHierarchyData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: f5e8841b16a641c38778b8f1c99bedb4ac95dbf9
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53273942"

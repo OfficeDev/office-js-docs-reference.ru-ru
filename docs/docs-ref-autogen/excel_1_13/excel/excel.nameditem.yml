@@ -1,0 +1,361 @@
+### YamlMime:TSType
+name: Excel.NamedItem
+uid: excel!Excel.NamedItem:class
+package: excel!
+fullName: Excel.NamedItem
+summary: >-
+  Представляет определенное имя для диапазона ячеек или значения. Имена могут быть примитивными объектами с именем (как по видно в приведенном ниже типу), объектом диапазона или ссылкой на диапазон. Этот объект может использоваться для получения объекта диапазона, связанного с именами.
+
+
+  \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: arrayValues
+  uid: excel!Excel.NamedItem#arrayValues:member
+  package: excel!
+  fullName: arrayValues
+  summary: >-
+    Возвращает объект, содержащий значения и типы именованного элемента.
+
+
+    \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly arrayValues: Excel.NamedItemArrayValues;'
+    return:
+      type: <xref uid="excel!Excel.NamedItemArrayValues:class" />
+- name: comment
+  uid: excel!Excel.NamedItem#comment:member
+  package: excel!
+  fullName: comment
+  summary: >-
+    Указывает комментарий, связанный с этим именем.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'comment: string;'
+    return:
+      type: string
+- name: context
+  uid: excel!Excel.NamedItem#context:member
+  package: excel!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: formula
+  uid: excel!Excel.NamedItem#formula:member
+  package: excel!
+  fullName: formula
+  summary: >-
+    Формула названного элемента. Формулы всегда начинаются с равного знака ("=").
+
+
+    \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'formula: any;'
+    return:
+      type: any
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/34-named-item/update-named-item.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    // Get the named item\n    const myNamedItem = sheet.names.getItemOrNullObject(\"MyRange\");\n    myNamedItem.load(\"name, formula\");\n    await context.sync();\n\n    if (myNamedItem.isNullObject) {\n        console.log(`There is no named item. Create it with \"Add named item for a range\" first.`);\n    } else {                    \n        // Update named item to point to the second range\n        myNamedItem.formula = \"=Sample!$B$10:$D$14\";\n        sheet.getRange(\"B10:D14\").select();\n        await context.sync();\n\n        console.log(`Just updated the named item \"${myNamedItem.name}\" -- it's now located here: ${myNamedItem.formula}`);\n    }\n});\n```"
+- name: name
+  uid: excel!Excel.NamedItem#name:member
+  package: excel!
+  fullName: name
+  summary: >-
+    Имя объекта.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly name: string;'
+    return:
+      type: string
+- name: scope
+  uid: excel!Excel.NamedItem#scope:member
+  package: excel!
+  fullName: scope
+  summary: >-
+    Указывает, задано ли имя в книге или в определенной таблице. Возможные значения: таблица, книга.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly scope: Excel.NamedItemScope | "Worksheet" | "Workbook";'
+    return:
+      type: <xref uid="excel!Excel.NamedItemScope:enum" /> | "Worksheet" | "Workbook"
+- name: type
+  uid: excel!Excel.NamedItem#type:member
+  package: excel!
+  fullName: type
+  summary: >-
+    Указывает тип значения, возвращаемого по формуле имени. Подробные `Excel.NamedItemType` сведения см. в материале.
+
+
+    \[[Набор API: ExcelApi 1.1 для String, Integer, Double, Boolean, Range,Error; 1.7 для Array](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly type: Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array";'
+    return:
+      type: <xref uid="excel!Excel.NamedItemType:enum" /> | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array"
+- name: value
+  uid: excel!Excel.NamedItem#value:member
+  package: excel!
+  fullName: value
+  summary: >-
+    Представляет значение, вычисленное по формуле имени. Если задан именованный диапазон, возвращается адрес диапазона.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly value: any;'
+    return:
+      type: any
+- name: visible
+  uid: excel!Excel.NamedItem#visible:member
+  package: excel!
+  fullName: visible
+  summary: >-
+    Указывает, виден ли объект.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'visible: boolean;'
+    return:
+      type: boolean
+- name: worksheet
+  uid: excel!Excel.NamedItem#worksheet:member
+  package: excel!
+  fullName: worksheet
+  summary: >-
+    Возвращает лист, к которому относится именованный элемент. Если элемент имеет область действия в книге, то при этом будет допущена ошибка.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly worksheet: Excel.Worksheet;'
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+- name: worksheetOrNullObject
+  uid: excel!Excel.NamedItem#worksheetOrNullObject:member
+  package: excel!
+  fullName: worksheetOrNullObject
+  summary: >-
+    Возвращает таблицу, в которую область действия именуемой номенклатуры. Если элемент имеет область действия в книге, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly worksheetOrNullObject: Excel.Worksheet;'
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+methods:
+- name: delete()
+  uid: excel!Excel.NamedItem#delete:member(1)
+  package: excel!
+  fullName: delete()
+  summary: >-
+    Удаляет заданное имя.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/34-named-item/create-and-remove-named-item.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const totalName = sheet.names.getItemOrNullObject(\"TotalAmount\");\n    totalName.load();\n    await context.sync();\n\n    if (totalName.value) {\n        totalName.delete();\n\n        // Replace the named item (TotalAmount) with the actual formula for TotalAmount to avoid displaying #NAME in the cell.\n        sheet.getRange(\"D11\").values = [[\"=SUM(ExpensesTable[AMOUNT])\"]];\n    } else {\n        console.log(\"No named item created for the formula.\");\n    }\n\n    await context.sync();\n});\n```"
+- name: getRange()
+  uid: excel!Excel.NamedItem#getRange:member(1)
+  package: excel!
+  fullName: getRange()
+  summary: >-
+    Возвращает объект диапазона, связанный с именем. Выдает ошибку, если именованный элемент не является диапазоном.
+
+
+    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRange(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Returns the Range object that is associated with the name. \n// null if the name is not of the type Range.\n// Note: This API currently supports only the Workbook scoped items.\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var range = names.getItem('MyRange').getRange();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getRangeOrNullObject()
+  uid: excel!Excel.NamedItem#getRangeOrNullObject:member(1)
+  package: excel!
+  fullName: getRangeOrNullObject()
+  summary: >-
+    Возвращает объект Range, сопоставленный с именем. Если тип имени элемента не является диапазоном, эта функция возвращает объект с его `isNullObject` свойством `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Набор API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeOrNullObject(): Excel.Range;'
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.NamedItem#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.NamedItemLoadOptions): Excel.NamedItem;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="excel!Excel.Interfaces.NamedItemLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.NamedItem#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.NamedItem;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var namedItem = names.getItem('MyRange');\n    namedItem.load('type');\n    return ctx.sync().then(function() {\n            console.log(namedItem.type);\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.NamedItem#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.NamedItem;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.NamedItem:class" />
+      description: ''
+- name: set(properties, options)
+  uid: excel!Excel.NamedItem#set:member(1)
+  package: excel!
+  fullName: set(properties, options)
+  summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
+  remarks: >-
+    Этот метод имеет следующую дополнительную подпись:
+
+
+    `set(properties: Excel.NamedItem): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.NamedItemUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
+      type: <xref uid="excel!Excel.Interfaces.NamedItemUpdateData:interface" />
+    - id: options
+      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: excel!Excel.NamedItem#set:member(2)
+  package: excel!
+  fullName: set(properties)
+  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Excel.NamedItem): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="excel!Excel.NamedItem:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.NamedItem#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект NamedItem — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.NamedItemData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.NamedItemData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.NamedItemData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 29f6225f98fd2682db4e651ed161f1b797603c06
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53264673"
