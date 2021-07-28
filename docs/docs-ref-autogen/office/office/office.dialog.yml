@@ -25,14 +25,14 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
+    content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string, origin: string | undefined} | {error: number}) => void): void;'
     parameters:
     - id: eventType
       description: Должен быть либо DialogMessageReceived, либо DialogEventReceived.
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: Функция, которая принимает объект с свойством, если eventType является `message` DialogMessageReceived, или объект с свойством, если eventType является `error` DialogEventReceived.
-      type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
+      description: Функция, которая принимает объект с свойством и `message` `origin` свойством, если `eventType``DialogMessageReceived`<!-- -->или объект с `error` свойством, если `eventType``DialogEventReceived`<!-- -->. Обратите внимание, что свойство находится на клиентах, которые не `origin` `undefined` поддерживают [DialogOrigin 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-origin-requirement-sets)<!-- -->.
+      type: '(args: {message: string, origin: string | undefined} | {error: number}) =&gt; void'
     return:
       type: void
       description: ''
@@ -53,10 +53,10 @@ methods:
     return:
       type: void
       description: ''
-- name: messageChild(message)
+- name: messageChild(message, messageOptions)
   uid: office!Office.Dialog#messageChild:member(1)
   package: office!
-  fullName: messageChild(message)
+  fullName: messageChild(message, messageOptions)
   summary: Доставляет сообщение с хост-страницы, например области задач или файла функций без пользовательского интерфейса, в диалоговое окно, открытое со страницы.
   remarks: >-
     **Хосты:** Excel, Outlook (минимальный набор требований: почтовый ящик 1.9), PowerPoint, Word
@@ -69,14 +69,20 @@ methods:
 
 
     - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+
+    - Если параметр используется, также требуется `messageOptions` [DialogOrigin 1.1.](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-origin-requirement-sets)
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'messageChild(message: string): void;'
+    content: 'messageChild(message: string, messageOptions?: DialogMessageOptions): void;'
     parameters:
     - id: message
       description: Принимает сообщение с хост-страницы для доставки в диалоговое окно. Все, что можно отправить в строку, включая JSON и XML, можно отправить.
       type: string
+    - id: messageOptions
+      description: Необязательно. Предоставляет варианты отправки сообщения.
+      type: <xref uid="office!Office.DialogMessageOptions:interface" />
     return:
       type: void
       description: ''
@@ -98,9 +104,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 52178447972fb3aa4048c0a8f2c72b3d8b17f779
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 283d8bf0325236380c4797756901aaba80b4141a
+  ms.sourcegitcommit: 299ab01d75899a5547557dd4a40728b385dc16f1
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51320484"
+  ms.lasthandoff: 07/22/2021
+  ms.locfileid: "53532748"
