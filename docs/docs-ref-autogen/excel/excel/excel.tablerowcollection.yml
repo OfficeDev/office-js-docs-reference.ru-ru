@@ -20,7 +20,7 @@ properties:
   uid: excel!Excel.TableRowCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -84,6 +84,51 @@ methods:
     return:
       type: <xref uid="excel!Excel.TableRow:class" />
       description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var row = tables.getItem(\"Table1\").rows.add(null, values);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: deleteRows(rows)
+  uid: excel!Excel.TableRowCollection#deleteRows:member(1)
+  package: excel!
+  fullName: deleteRows(rows)
+  summary: >-
+    Удаление нескольких строк из таблицы. Эти строки не должны быть последовательной. Этот метод будет бросать ошибку, если выбранная строка уже удалена или `InvalidArgument` не существует. Этот метод будет бросать ошибку, если в таблице, на которой называется `InsertDeleteConflict` метод, применен фильтр.
+
+
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'deleteRows(rows: number[] | TableRow[]): void;'
+    parameters:
+    - id: rows
+      description: Массив номеров индексов строк или объектов строк, которые необходимо удалить из таблицы.
+      type: number[] | <xref uid="excel!Excel.TableRow:class" />[]
+    return:
+      type: void
+      description: ''
+- name: deleteRowsAt(index, count)
+  uid: excel!Excel.TableRowCollection#deleteRowsAt:member(1)
+  package: excel!
+  fullName: deleteRowsAt(index, count)
+  summary: >-
+    Удаление указанного количества строк из таблицы, начиная с указанного индекса. Этот метод будет бросать ошибку, если в таблице, на которой называется `InsertDeleteConflict` метод, применен фильтр.
+
+
+    \[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'deleteRowsAt(index: number, count?: number): void;'
+    parameters:
+    - id: index
+      description: Значение индекса строки, которая должна быть удалена. Примечание. Индексы строк обновляются при каждом удалении предыдущей строки в таблице после каждой операции удаления. Убедитесь, что индекс строки, которую необходимо удалить, не изменился между временем, когда вы определили значение, и временем запуска операции.
+      type: number
+    - id: count
+      description: Количество строк, которые необходимо удалить. По умолчанию будет удалена одна строка.
+      type: number
+    return:
+      type: void
+      description: ''
 - name: getCount()
   uid: excel!Excel.TableRowCollection#getCount:member(1)
   package: excel!
@@ -191,9 +236,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0ae9246ea76ea7d4af5c4d74bad3973a3aa6ed67
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 56cce7257d77368ea95c7e7a504981be5eb458de
+  ms.sourcegitcommit: c68a3517b8b502139d818d1effefc3e09464dbf1
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51271284"
+  ms.lasthandoff: 07/29/2021
+  ms.locfileid: "53639354"
