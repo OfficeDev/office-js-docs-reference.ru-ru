@@ -8,12 +8,12 @@ ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
 ms.date: 06/30/2021
-ms.openlocfilehash: 67d3d05a4264d8d698f755238c60bff36259b672
-ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+ms.openlocfilehash: b24ce0c4de162150263d689390da6b4e3413dd7b
+ms.sourcegitcommit: 1bb36f6fdb15dc8520d89cf11620aa1f5ae0fb98
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/02/2021
-ms.locfileid: "53265631"
+ms.lasthandoff: 08/13/2021
+ms.locfileid: "58239421"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Справочник по API JavaScript для надстроек Office
 
@@ -38,22 +38,22 @@ API JavaScript для Office позволяет создавать веб-при
         <div class="cardText">
             <h3>API Excel</h3>
             <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-preview">ExcelApi Preview</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-online">ExcelApiOnline 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.13">ExcelApi 1.13</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.12">ExcelApi 1.12</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.11">ExcelApi 1.11</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.10">ExcelApi 1.10</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.9">ExcelApi 1.9</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.8">ExcelApi 1.8</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.7">ExcelApi 1.7</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.6">ExcelApi 1.6</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.5">ExcelApi 1.5</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.4">ExcelApi 1.4</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.3">ExcelApi 1.3</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.2">ExcelApi 1.2</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/excel?view=excel-js-1.1">ExcelApi 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=excel-js-preview">Общие API</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-preview">ExcelApi Preview</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-online">ExcelApiOnline 1.1</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.13">ExcelApi 1.13</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.12">ExcelApi 1.12</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.11">ExcelApi 1.11</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.10">ExcelApi 1.10</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.9">ExcelApi 1.9</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.8">ExcelApi 1.8</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.7">ExcelApi 1.7</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.6">ExcelApi 1.6</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.5">ExcelApi 1.5</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.4">ExcelApi 1.4</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.3">ExcelApi 1.3</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.2">ExcelApi 1.2</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.1">ExcelApi 1.1</a></li>
+                <li><a href="/javascript/api/office?view=excel-js-preview">Общие API</a></li>
             </ul>
         </div>
     </li>
@@ -66,18 +66,18 @@ API JavaScript для Office позволяет создавать веб-при
         <div class="cardText">
             <h3>API Outlook</h3>
             <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-preview">Mailbox Preview</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.10">Mailbox 1.10</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.9">Mailbox 1.9</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.8">Mailbox 1.8</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.7">Mailbox 1.7</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.6">Mailbox 1.6</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.5">Mailbox 1.5</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.4">Mailbox 1.4</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.3">Mailbox 1.3</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.2">Mailbox 1.2</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/outlook?view=outlook-js-1.1">Mailbox 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=outlook-js-preview">Общие API</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-preview">Mailbox Preview</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.10">Mailbox 1.10</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.9">Mailbox 1.9</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.8">Mailbox 1.8</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.7">Mailbox 1.7</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.6">Mailbox 1.6</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.5">Mailbox 1.5</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.4">Mailbox 1.4</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.3">Mailbox 1.3</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.2">Mailbox 1.2</a></li>
+                <li><a href="/javascript/api/outlook?view=outlook-js-1.1">Mailbox 1.1</a></li>
+                <li><a href="/javascript/api/office?view=outlook-js-preview">Общие API</a></li>
             </ul>
         </div>
     </li>
@@ -90,11 +90,11 @@ API JavaScript для Office позволяет создавать веб-при
         <div class="cardText">
             <h3>API Word</h3>
             <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/word?view=word-js-preview">WordApi Preview</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/word?view=word-js-1.3">WordApi 1.3</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/word?view=word-js-1.2">WordApi 1.2</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/word?view=word-js-1.1">WordApi 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=word-js-preview">Общие API</a></li>
+                <li><a href="/javascript/api/word?view=word-js-preview">WordApi Preview</a></li>
+                <li><a href="/javascript/api/word?view=word-js-1.3">WordApi 1.3</a></li>
+                <li><a href="/javascript/api/word?view=word-js-1.2">WordApi 1.2</a></li>
+                <li><a href="/javascript/api/word?view=word-js-1.1">WordApi 1.1</a></li>
+                <li><a href="/javascript/api/office?view=word-js-preview">Общие API</a></li>
             </ul>
         </div>
     </li>
@@ -107,10 +107,10 @@ API JavaScript для Office позволяет создавать веб-при
         <div class="cardText">
             <h3>API PowerPoint</h3>
             <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-preview">Предварительная версия PowerPointApi</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=powerpoint-js-preview">Общие API</a></li>
+                <li><a href="/javascript/api/powerpoint?view=powerpoint-js-preview">Предварительная версия PowerPointApi</a></li>
+                <li><a href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
+                <li><a href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
+                <li><a href="/javascript/api/office?view=powerpoint-js-preview">Общие API</a></li>
             </ul>
         </div>
     </li>
@@ -123,8 +123,8 @@ API JavaScript для Office позволяет создавать веб-при
         <div class="cardText">
             <h3>API OneNote</h3>
             <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/onenote?view=onenote-js-1.1">OneNoteApi 1.1</a></li>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=onenote-js-1.1">Общие API</a></li>
+                <li><a href="/javascript/api/onenote?view=onenote-js-1.1">OneNoteApi 1.1</a></li>
+                <li><a href="/javascript/api/office?view=onenote-js-1.1">Общие API</a></li>
             </ul>
         </div>
     </li>
@@ -137,7 +137,7 @@ API JavaScript для Office позволяет создавать веб-при
         <div class="cardText">
             <h3>API Visio</h3>
             <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/visio?view=visio-js-1.1">VisioApi 1.1</a></li>
+                <li><a href="/javascript/api/visio?view=visio-js-1.1">VisioApi 1.1</a></li>
             </ul>
         </div>
     </li>
@@ -150,7 +150,7 @@ API JavaScript для Office позволяет создавать веб-при
         <div class="cardText">
             <h3>API Project</h3>
             <ul>
-                <li><a style="font-size: 1rem;" href="/javascript/api/office?view=common-js">Только общие API</a></li>
+                <li><a href="/javascript/api/office?view=common-js">Только общие API</a></li>
             </ul>
         </div>
     </li>
