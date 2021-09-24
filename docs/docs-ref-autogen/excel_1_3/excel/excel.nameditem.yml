@@ -3,12 +3,8 @@ name: Excel.NamedItem
 uid: excel!Excel.NamedItem:class
 package: excel!
 fullName: Excel.NamedItem
-summary: >-
-  Представляет определенное имя для диапазона ячеек или значения. Имена могут быть примитивными объектами с именем (как по видно в приведенном ниже типу), объектом диапазона или ссылкой на диапазон. Этот объект может использоваться для получения объекта диапазона, связанного с именами.
-
-
-  \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: Представляет определенное имя для диапазона ячеек или значения. Имена могут быть примитивными объектами с именем (как по видно в приведенном ниже типу), объектом диапазона или ссылкой на диапазон. Этот объект может использоваться для получения объекта диапазона, связанного с именами.
+remarks: '\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,7 +13,7 @@ properties:
   uid: excel!Excel.NamedItem#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -29,12 +25,8 @@ properties:
   uid: excel!Excel.NamedItem#name:member
   package: excel!
   fullName: name
-  summary: >-
-    Имя объекта.
-
-
-    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Имя объекта.
+  remarks: '\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -45,12 +37,8 @@ properties:
   uid: excel!Excel.NamedItem#type:member
   package: excel!
   fullName: type
-  summary: >-
-    Указывает тип значения, возвращаемого по формуле имени. Подробные `Excel.NamedItemType` сведения см. в материале.
-
-
-    \[[Набор API: ExcelApi 1.1 для String, Integer, Double, Boolean, Range,Error; 1.7 для Array](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Указывает тип значения, возвращаемого по формуле имени. Подробные `Excel.NamedItemType` сведения см. в материале.
+  remarks: '\[[Набор API: ExcelApi 1.1 для String, Integer, Double, Boolean, Range,Error; 1.7 для Array](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -61,12 +49,8 @@ properties:
   uid: excel!Excel.NamedItem#value:member
   package: excel!
   fullName: value
-  summary: >-
-    Представляет значение, вычисленное по формуле имени. Если задан именованный диапазон, возвращается адрес диапазона.
-
-
-    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Представляет значение, вычисленное по формуле имени. Если задан именованный диапазон, возвращается адрес диапазона.
+  remarks: '\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -77,12 +61,8 @@ properties:
   uid: excel!Excel.NamedItem#visible:member
   package: excel!
   fullName: visible
-  summary: >-
-    Указывает, виден ли объект.
-
-
-    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Указывает, виден ли объект.
+  remarks: '\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -94,19 +74,15 @@ methods:
   uid: excel!Excel.NamedItem#getRange:member(1)
   package: excel!
   fullName: getRange()
-  summary: >-
-    Возвращает объект диапазона, связанный с именем. Выдает ошибку, если именованный элемент не является диапазоном.
-
-
-    \[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Возвращает объект диапазона, связанный с именем. Выдает ошибку, если именованный элемент не является диапазоном.
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Returns the Range object that is associated with the name. \n// null if the name is not of the type Range.\n// Note: This API currently supports only the Workbook scoped items.\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var range = names.getItem('MyRange').getRange();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getRange(): Excel.Range;'
     return:
       type: <xref uid="excel!Excel.Range:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Returns the Range object that is associated with the name. \n// null if the name is not of the type Range.\n// Note: This API currently supports only the Workbook scoped items.\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var range = names.getItem('MyRange').getRange();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
 - name: load(options)
   uid: excel!Excel.NamedItem#load:member(1)
   package: excel!
@@ -171,11 +147,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
-  remarks: >-
-    Этот метод имеет следующую дополнительную подпись:
-
-
-    `set(properties: Excel.NamedItem): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -211,7 +183,7 @@ methods:
   uid: excel!Excel.NamedItem#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.NamedItem является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.NamedItemData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект NamedItem — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.NamedItemData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -222,9 +194,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: ccd3d831047901f1f7463e617fb7b2c7b332cd42
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: 96b66ca7f3cf51ed700f609a6a54ebb695c07b29
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51556969"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59644469"
