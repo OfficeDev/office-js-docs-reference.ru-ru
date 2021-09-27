@@ -6,14 +6,30 @@ summary: ''
 interfaces:
 - powerpoint!PowerPoint.AddSlideOptions:interface
 - powerpoint!PowerPoint.InsertSlideOptions:interface
+- powerpoint!PowerPoint.Interfaces.BulletFormatData:interface
+- powerpoint!PowerPoint.Interfaces.BulletFormatLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.BulletFormatUpdateData:interface
 - powerpoint!PowerPoint.Interfaces.CollectionLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ParagraphFormatData:interface
+- powerpoint!PowerPoint.Interfaces.ParagraphFormatLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ParagraphFormatUpdateData:interface
 - powerpoint!PowerPoint.Interfaces.PresentationData:interface
 - powerpoint!PowerPoint.Interfaces.PresentationLoadOptions:interface
 - powerpoint!PowerPoint.Interfaces.ShapeCollectionData:interface
 - powerpoint!PowerPoint.Interfaces.ShapeCollectionLoadOptions:interface
 - powerpoint!PowerPoint.Interfaces.ShapeCollectionUpdateData:interface
 - powerpoint!PowerPoint.Interfaces.ShapeData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeFillData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeFillLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ShapeFillUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeFontData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeFontLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ShapeFontUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeLineFormatData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeLineFormatLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ShapeLineFormatUpdateData:interface
 - powerpoint!PowerPoint.Interfaces.ShapeLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ShapeUpdateData:interface
 - powerpoint!PowerPoint.Interfaces.SlideCollectionData:interface
 - powerpoint!PowerPoint.Interfaces.SlideCollectionLoadOptions:interface
 - powerpoint!PowerPoint.Interfaces.SlideCollectionUpdateData:interface
@@ -35,12 +51,24 @@ interfaces:
 - powerpoint!PowerPoint.Interfaces.TagData:interface
 - powerpoint!PowerPoint.Interfaces.TagLoadOptions:interface
 - powerpoint!PowerPoint.Interfaces.TagUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.TextFrameData:interface
+- powerpoint!PowerPoint.Interfaces.TextFrameLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.TextFrameUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.TextRangeData:interface
+- powerpoint!PowerPoint.Interfaces.TextRangeLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.TextRangeUpdateData:interface
+- powerpoint!PowerPoint.ShapeAddOptions:interface
 classes:
 - powerpoint!PowerPoint.Application:class
+- powerpoint!PowerPoint.BulletFormat:class
+- powerpoint!PowerPoint.ParagraphFormat:class
 - powerpoint!PowerPoint.Presentation:class
 - powerpoint!PowerPoint.RequestContext:class
 - powerpoint!PowerPoint.Shape:class
 - powerpoint!PowerPoint.ShapeCollection:class
+- powerpoint!PowerPoint.ShapeFill:class
+- powerpoint!PowerPoint.ShapeFont:class
+- powerpoint!PowerPoint.ShapeLineFormat:class
 - powerpoint!PowerPoint.Slide:class
 - powerpoint!PowerPoint.SlideCollection:class
 - powerpoint!PowerPoint.SlideLayout:class
@@ -49,18 +77,30 @@ classes:
 - powerpoint!PowerPoint.SlideMasterCollection:class
 - powerpoint!PowerPoint.Tag:class
 - powerpoint!PowerPoint.TagCollection:class
+- powerpoint!PowerPoint.TextFrame:class
+- powerpoint!PowerPoint.TextRange:class
 enums:
+- powerpoint!PowerPoint.ConnectorType:enum
 - powerpoint!PowerPoint.ErrorCodes:enum
+- powerpoint!PowerPoint.GeometricShapeType:enum
 - powerpoint!PowerPoint.InsertSlideFormatting:enum
+- powerpoint!PowerPoint.ParagraphHorizontalAlignment:enum
+- powerpoint!PowerPoint.ShapeAutoSize:enum
+- powerpoint!PowerPoint.ShapeFillType:enum
+- powerpoint!PowerPoint.ShapeFontUnderlineStyle:enum
+- powerpoint!PowerPoint.ShapeLineDashStyle:enum
+- powerpoint!PowerPoint.ShapeLineStyle:enum
+- powerpoint!PowerPoint.ShapeType:enum
+- powerpoint!PowerPoint.TextVerticalAlignment:enum
 functions:
 - name: PowerPoint.createPresentation(base64File)
   uid: powerpoint!PowerPoint.createPresentation:function(1)
   package: powerpoint!
   summary: >-
-    Создает и открывает новую презентацию. По желанию презентацию можно предварительно заполнить с помощью файла pptx с кодом base64.
+    Создает и открывает новую презентацию. По желанию презентацию можно предварительно заполнить с помощью файла с .pptx базовым кодом.
 
 
-    \[[Набор API: PowerPointApi 1.1](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+    \[[Набор API: PowerPointApi 1.1](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -68,7 +108,7 @@ functions:
     content: 'export function createPresentation(base64File?: string): Promise<void>;'
     parameters:
     - id: base64File
-      description: Необязательное. Файл pptx с кодом base64. По умолчанию используется значение NULL.
+      description: Необязательное свойство. Файл с кодом base64 .pptx. По умолчанию используется значение NULL.
       type: string
     return:
       type: Promise&lt;void&gt;
@@ -76,7 +116,7 @@ functions:
 - name: PowerPoint.run(batch)
   uid: powerpoint!PowerPoint.run:function(1)
   package: powerpoint!
-  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели PowerPoint с помощью нового RequestContext. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия PowerPoint объектной модели с помощью нового RequestContext. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -84,7 +124,7 @@ functions:
     content: 'export function run<T>(batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение PowerPoint. Так как надстройка Office и приложение PowerPoint работают в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в PowerPoint приложения. Поскольку надстройка Office и приложение PowerPoint запускаются в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
       type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -92,7 +132,7 @@ functions:
 - name: PowerPoint.run(object, batch)
   uid: powerpoint!PowerPoint.run:function(2)
   package: powerpoint!
-  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели PowerPoint с помощью объекта RequestContext ранее созданного объекта API. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия PowerPoint объектной модели с помощью объекта RequestContext ранее созданного объекта API. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -103,7 +143,7 @@ functions:
       description: Ранее созданный объект API. Пакет будет использовать тот же Объект RequestContext, что и переданный объект, что означает, что любые изменения, примененные к объекту, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />
     - id: batch
-      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение PowerPoint. Так как надстройка Office и приложение PowerPoint работают в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в PowerPoint приложения. Поскольку надстройка Office и приложение PowerPoint запускаются в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
       type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -111,7 +151,7 @@ functions:
 - name: PowerPoint.run(objects, batch)
   uid: powerpoint!PowerPoint.run:function(3)
   package: powerpoint!
-  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели PowerPoint с помощью объекта RequestContext ранее созданных объектов API.
+  summary: Выполняет пакетный скрипт, который выполняет действия PowerPoint объектной модели с помощью объекта RequestContext ранее созданных объектов API.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -122,15 +162,15 @@ functions:
       description: Массив ранее созданных объектов API. Массив будет проверен, чтобы убедиться, что все объекты имеют одинаковый контекст. Пакет будет использовать этот общий requestContext, что означает, что любые изменения, примененные к этим объектам, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение PowerPoint. Так как надстройка Office и приложение PowerPoint работают в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в PowerPoint приложения. Поскольку надстройка Office и приложение PowerPoint запускаются в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
       type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 18bc703babfa8f1610f5ea6f2d85f717b5337d07
-  ms.sourcegitcommit: f7c5207ef96c4f6034fcb1b48e1b0036abf4fccc
+  ms.openlocfilehash: 3be80a4f31101a212b05273ba0e62ecb275ae4c4
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/16/2021
-  ms.locfileid: "51877320"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59727541"

@@ -3,12 +3,8 @@ name: Excel.DataValidation
 uid: excel!Excel.DataValidation:class
 package: excel!
 fullName: Excel.DataValidation
-summary: >-
-  Представляет проверку данных, примененную к текущему диапазону. Дополнительные сведения о объектной модели проверки данных читайте в материале Добавление проверки данных [в диапазоны Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-data-validation)<!-- -->.
-
-
-  \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: Представляет проверку данных, примененную к текущему диапазону. Дополнительные сведения об объектной модели проверки данных читайте в материале Добавление проверки данных [в диапазоны Excel данных](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-data-validation)<!-- -->.
+remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,7 +13,7 @@ properties:
   uid: excel!Excel.DataValidation#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -29,29 +25,20 @@ properties:
   uid: excel!Excel.DataValidation#errorAlert:member
   package: excel!
   fullName: errorAlert
-  summary: >-
-    Сообщение об ошибке, когда пользователь вводит недопустимые данные.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Сообщение об ошибке, когда пользователь вводит недопустимые данные.
+  remarks: "\\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'errorAlert: Excel.DataValidationErrorAlert;'
     return:
       type: <xref uid="excel!Excel.DataValidationErrorAlert:interface" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
 - name: ignoreBlanks
   uid: excel!Excel.DataValidation#ignoreBlanks:member
   package: excel!
   fullName: ignoreBlanks
-  summary: >-
-    Указывает, будет ли проверка данных выполняться на пустых ячейках. Значение по умолчанию: `true`<!-- -->.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: 'Указывает, будет ли проверка данных выполняться на пустых ячейках. Значение по умолчанию: `true`<!-- -->.'
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -62,46 +49,75 @@ properties:
   uid: excel!Excel.DataValidation#prompt:member
   package: excel!
   fullName: prompt
-  summary: >-
-    Подсказка, когда пользователи выбирают ячейку.
+  summary: Подсказка, когда пользователи выбирают ячейку.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Decision");
+        const rankingRange = sheet.tables.getItem("NameOptionsTable").columns.getItem("Ranking").getDataBodyRange();
+
+        // When you are developing, it is a good practice to
+        // clear the dataValidation object with each run of your code.
+        rankingRange.dataValidation.clear();
+
+        let greaterThanZeroRule = {
+            wholeNumber: {
+                formula1: 0,
+                operator: Excel.DataValidationOperator.greaterThan
+            }
+        };
+        rankingRange.dataValidation.rule = greaterThanZeroRule;
+
+        rankingRange.dataValidation.prompt = {
+            message: "Please enter a positive number.",
+            showPrompt: true,
+            title: "Positive numbers only."
+        };
+
+        rankingRange.dataValidation.errorAlert = {
+            message: "Sorry, only positive numbers are allowed",
+            showAlert: true,
+            style: "Stop",
+            title: "Negative Number Entered"
+        };
+
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'prompt: Excel.DataValidationPrompt;'
     return:
       type: <xref uid="excel!Excel.DataValidationPrompt:interface" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const rankingRange = sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Ranking\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    rankingRange.dataValidation.clear();\n\n    let greaterThanZeroRule = {\n        wholeNumber: {\n            formula1: 0,\n            operator: Excel.DataValidationOperator.greaterThan\n        }\n    };\n    rankingRange.dataValidation.rule = greaterThanZeroRule;\n\n    rankingRange.dataValidation.prompt = {\n        message: \"Please enter a positive number.\",\n        showPrompt: true,\n        title: \"Positive numbers only.\"\n    };\n\n    rankingRange.dataValidation.errorAlert = {\n        message: \"Sorry, only positive numbers are allowed\",\n        showAlert: true,\n        style: \"Stop\",\n        title: \"Negative Number Entered\"\n    };\n\n    await context.sync();\n});\n```"
 - name: rule
   uid: excel!Excel.DataValidation#rule:member
   package: excel!
   fullName: rule
-  summary: >-
-    Правило проверки данных, которое содержит различные типы критериев проверки данных.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Правило проверки данных, которое содержит различные типы критериев проверки данных.
+  remarks: "\\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const nameRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Baby Name\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    nameRange.dataValidation.clear();\n\n    const nameSourceRange = context.workbook.worksheets.getItem(\"Names\").getRange(\"A1:A3\");\n\n    let approvedListRule = {\n        list: {\n            inCellDropDown: true,\n            source: nameSourceRange\n        }\n    };\n    nameRange.dataValidation.rule = approvedListRule;\n\n    await context.sync();\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'rule: Excel.DataValidationRule;'
     return:
       type: <xref uid="excel!Excel.DataValidationRule:interface" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/22-data-validation/data-validation.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const nameRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Baby Name\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    nameRange.dataValidation.clear();\n\n    const nameSourceRange = context.workbook.worksheets.getItem(\"Names\").getRange(\"A1:A3\");\n\n    let approvedListRule = {\n        list: {\n            inCellDropDown: true,\n            source: nameSourceRange\n        }\n    };\n    nameRange.dataValidation.rule = approvedListRule;\n\n    await context.sync();\n});\n```"
 - name: type
   uid: excel!Excel.DataValidation#type:member
   package: excel!
   fullName: type
-  summary: >-
-    Тип проверки данных см. `Excel.DataValidationType` в подробностях.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Тип проверки данных см. `Excel.DataValidationType` в подробностях.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -112,12 +128,8 @@ properties:
   uid: excel!Excel.DataValidation#valid:member
   package: excel!
   fullName: valid
-  summary: >-
-    Указывает, являются ли все значения ячеек допустимыми в соответствии с правилами проверки данных. Возвращается, если все значения ячейки допустимы, или если все значения `true` `false` ячейки недействительны. Возвращается, если в диапазоне имеются допустимые и недействительные `null` значения ячейки.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Указывает, являются ли все значения ячеек допустимыми в соответствии с правилами проверки данных. Возвращается, если все значения ячейки допустимы, или если все значения `true` `false` ячейки недействительны. Возвращается, если в диапазоне имеются допустимые и недействительные `null` значения ячейки.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -129,12 +141,8 @@ methods:
   uid: excel!Excel.DataValidation#clear:member(1)
   package: excel!
   fullName: clear()
-  summary: >-
-    Очищает проверку данных из текущего диапазона.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Очищает проверку данных из текущего диапазона.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -146,12 +154,8 @@ methods:
   uid: excel!Excel.DataValidation#getInvalidCells:member(1)
   package: excel!
   fullName: getInvalidCells()
-  summary: >-
-    Возвращает объект, состоящий из одного или нескольких прямоугольных `RangeAreas` диапазонов, с недействительными значениями ячейки. Если все значения ячейки допустимы, эта функция будет бросать `ItemNotFound` ошибку.
-
-
-    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Возвращает объект, состоящий из одного или нескольких прямоугольных `RangeAreas` диапазонов, с недействительными значениями ячейки. Если все значения ячейки допустимы, эта функция будет бросать `ItemNotFound` ошибку.
+  remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -163,12 +167,8 @@ methods:
   uid: excel!Excel.DataValidation#getInvalidCellsOrNullObject:member(1)
   package: excel!
   fullName: getInvalidCellsOrNullObject()
-  summary: >-
-    Возвращает объект, состоящий из одного или нескольких прямоугольных `RangeAreas` диапазонов, с недействительными значениями ячейки. Если все значения ячейки допустимы, эта функция возвращается `null`<!-- -->.
-
-
-    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Возвращает объект, состоящий из одного или нескольких прямоугольных `RangeAreas` диапазонов, с недействительными значениями ячейки. Если все значения ячейки допустимы, эта функция возвращается `null`<!-- -->.
+  remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -240,11 +240,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
-  remarks: >-
-    Этот метод имеет следующую дополнительную подпись:
-
-
-    `set(properties: Excel.DataValidation): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -280,7 +276,7 @@ methods:
   uid: excel!Excel.DataValidation#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.DataValidation является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.DataValidationData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект DataValidation — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.DataValidationData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -291,9 +287,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 43ef3f661fab1e5bf42b00a2f9b17b65c7a39dda
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: 84f59712fd460cf19551e950a151a9039f085857
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51555526"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59734731"
