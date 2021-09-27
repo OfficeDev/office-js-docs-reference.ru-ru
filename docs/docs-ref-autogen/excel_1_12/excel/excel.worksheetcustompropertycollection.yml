@@ -3,12 +3,8 @@ name: Excel.WorksheetCustomPropertyCollection
 uid: excel!Excel.WorksheetCustomPropertyCollection:class
 package: excel!
 fullName: Excel.WorksheetCustomPropertyCollection
-summary: >-
-  Содержит коллекцию настраиваемого свойства на уровне таблицы.
-
-
-  \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: Содержит коллекцию настраиваемого свойства на уровне таблицы.
+remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,7 +13,7 @@ properties:
   uid: excel!Excel.WorksheetCustomPropertyCollection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -42,12 +38,33 @@ methods:
   uid: excel!Excel.WorksheetCustomPropertyCollection#add:member(1)
   package: excel!
   fullName: add(key, value)
-  summary: >-
-    Добавляет новое настраиваемую свойство, которое сопополяет с предоставленным ключом. Это переоценка существующих пользовательских свойств с помощью этого ключа.
+  summary: Добавляет новое настраиваемую свойство, которое сопополяет с предоставленным ключом. Это переоценка существующих пользовательских свойств с помощью этого ключа.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/26-document/custom-properties.yaml
+
+    await Excel.run(async (context) => {
+      // Get the key/value pair from the task pane.
+      const userKey = $("#key").text();
+      const userValue = $("#value").text();
+
+      // Add the custom property.
+      const customWorksheetProperties = context.workbook.worksheets.getActiveWorksheet().customProperties;
+      customWorksheetProperties.add(userKey, userValue);
+
+      await context.sync();
+
+      console.log(`Successfully set custom worksheet property ${userKey}:${userValue}.`);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -61,17 +78,13 @@ methods:
       type: string
     return:
       type: <xref uid="excel!Excel.WorksheetCustomProperty:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/26-document/custom-properties.yaml\nawait Excel.run(async (context) => {\n  // Get the key/value pair from the task pane.\n  const userKey = $(\"#key\").text();\n  const userValue = $(\"#value\").text();\n\n  // Add the custom property.\n  const customWorksheetProperties = context.workbook.worksheets.getActiveWorksheet().customProperties;\n  customWorksheetProperties.add(userKey, userValue);\n\n  await context.sync();\n\n  console.log(`Successfully set custom worksheet property ${userKey}:${userValue}.`);\n});\n```"
+      description: ''
 - name: getCount()
   uid: excel!Excel.WorksheetCustomPropertyCollection#getCount:member(1)
   package: excel!
   fullName: getCount()
-  summary: >-
-    Получает количество настраиваемого свойства на этом таблице.
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Получает количество настраиваемого свойства на этом таблице.
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -83,12 +96,8 @@ methods:
   uid: excel!Excel.WorksheetCustomPropertyCollection#getItem:member(1)
   package: excel!
   fullName: getItem(key)
-  summary: >-
-    Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Если настраиваемая собственность не существует, высылает ошибку.
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Если настраиваемая собственность не существует, высылает ошибку.
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -104,12 +113,8 @@ methods:
   uid: excel!Excel.WorksheetCustomPropertyCollection#getItemOrNullObject:member(1)
   package: excel!
   fullName: getItemOrNullObject(key)
-  summary: >-
-    Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Если настраиваемой свойства не существует, эта функция возвращает объект с его `isNullObject` свойством, заданной для `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Возвращает объект настраиваемого свойства по ключу, указываемому без учета регистра. Если настраиваемой свойства не существует, эта функция возвращает объект с его `isNullObject` свойством, заданной для `true`<!-- -->. Дополнительные сведения см. [в методе и свойствах *OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -187,9 +192,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 97f9fa1ec3841ea91c4e8aae239227843b0df3d5
-  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
+  ms.openlocfilehash: 6d9b6a166707f771272bcb6c825c25bdbc5c56e7
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/02/2021
-  ms.locfileid: "51519216"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59730229"
