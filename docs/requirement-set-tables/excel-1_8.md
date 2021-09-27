@@ -132,7 +132,7 @@
 ||[type](/javascript/api/excel/excel.datavalidation#type)|Тип проверки данных см. `Excel.DataValidationType` в подробностях.|
 ||[допустимо](/javascript/api/excel/excel.datavalidation#valid)|Указывает, являются ли все значения ячеек допустимыми в соответствии с правилами проверки данных.|
 ||[правило](/javascript/api/excel/excel.datavalidation#rule)|Правило проверки данных, которое содержит различные типы критериев проверки данных.|
-|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[message](/javascript/api/excel/excel.datavalidationerroralert#message)|Представляет сообщение оповещений об ошибке.|
+|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[сообщение](/javascript/api/excel/excel.datavalidationerroralert#message)|Представляет сообщение оповещений об ошибке.|
 ||[showAlert](/javascript/api/excel/excel.datavalidationerroralert#showAlert)|Указывает, следует ли показывать диалоговое окно оповещения об ошибке при вводе пользователем недействительных данных.|
 ||[style](/javascript/api/excel/excel.datavalidationerroralert#style)|Тип оповещений о проверке данных см. `Excel.DataValidationAlertStyle` в подробной информации.|
 ||[заголовок](/javascript/api/excel/excel.datavalidationerroralert#title)|Представляет название диалоговое окно оповещений об ошибке.|
@@ -141,7 +141,7 @@
 ||[заголовок](/javascript/api/excel/excel.datavalidationprompt#title)|Указывает заголовок для запроса.|
 |[DataValidationRule](/javascript/api/excel/excel.datavalidationrule)|[настраиваемый](/javascript/api/excel/excel.datavalidationrule#custom)|Условия проверки настраиваемых данных.|
 ||[дата](/javascript/api/excel/excel.datavalidationrule#date)|Условия проверки данных даты.|
-||[десятичной](/javascript/api/excel/excel.datavalidationrule#decimal)|Условия проверки десятичных данных.|
+||[decimal](/javascript/api/excel/excel.datavalidationrule#decimal)|Условия проверки десятичных данных.|
 ||[list](/javascript/api/excel/excel.datavalidationrule#list)|Условия проверки данных списка.|
 ||[textLength](/javascript/api/excel/excel.datavalidationrule#textLength)|Критерии проверки данных длины текста.|
 ||[time](/javascript/api/excel/excel.datavalidationrule#time)|Условия проверки данных времени.|
@@ -165,7 +165,7 @@
 ||[source](/javascript/api/excel/excel.listdatavalidation#source)|Источник списка для проверки данных|
 |[PivotField](/javascript/api/excel/excel.pivotfield)|[name](/javascript/api/excel/excel.pivotfield#name)|Имя сводного поля.|
 ||[id](/javascript/api/excel/excel.pivotfield#id)|ID of the PivotField.|
-||[items](/javascript/api/excel/excel.pivotfield#items)|Возвращает сводные поля, связанные со сводным полем.|
+||[items](/javascript/api/excel/excel.pivotfield#items)|Возвращает pivotItems, связанные с PivotField.|
 ||[showAllItems](/javascript/api/excel/excel.pivotfield#showAllItems)|Определяет, следует ли отображать все элементы сводного поля.|
 ||[sortByLabels(sortBy: SortBy)](/javascript/api/excel/excel.pivotfield#sortByLabels_sortBy_)|Сортирует сводное поле.|
 ||[subtotals](/javascript/api/excel/excel.pivotfield#subtotals)|Промежуточные итоги сводного поля.|
@@ -217,7 +217,7 @@
 ||[getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getItemOrNullObject_name_)|Получает RowColumnPivotHierarchy по имени.|
 ||[items](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 ||[remove (rowColumnPivotHierarchy: Excel. RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove_rowColumnPivotHierarchy_)|Удаляет PivotHierarchy из текущей оси.|
-|[Runtime](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableEvents)|Добавление событий JavaScript в текущую области задач или надстройку контента.|
+|[Время выполнения](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableEvents)|Добавление событий JavaScript в текущую области задач или надстройку контента.|
 |[ShowAsRule](/javascript/api/excel/excel.showasrule)|[baseField](/javascript/api/excel/excel.showasrule#baseField)|PivotField на основе расчета, если применимо `ShowAs` в соответствии с `ShowAsCalculation` типом, еще `null` .|
 ||[baseItem](/javascript/api/excel/excel.showasrule#baseItem)|Элемент, на основе `ShowAs` расчета, если применимо в соответствии с `ShowAsCalculation` типом, еще `null` .|
 ||[вычисление](/javascript/api/excel/excel.showasrule#calculation)|`ShowAs`Вычисление, используемого для PivotField.|

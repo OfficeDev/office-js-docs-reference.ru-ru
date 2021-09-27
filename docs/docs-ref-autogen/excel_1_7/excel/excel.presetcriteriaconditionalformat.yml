@@ -3,12 +3,8 @@ name: Excel.PresetCriteriaConditionalFormat
 uid: excel!Excel.PresetCriteriaConditionalFormat:class
 package: excel!
 fullName: Excel.PresetCriteriaConditionalFormat
-summary: >-
-  Представляет условный формат предустановленных критериев, например, выше среднего, ниже среднего, уникальные значения, содержит пустые, неблагодарные, ошибки и noerror.
-
-
-  \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: Представляет условный формат предустановленных критериев, например, выше среднего, ниже среднего, уникальные значения, содержит пустые, неблагодарные, ошибки и noerror.
+remarks: '\[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -17,7 +13,7 @@ properties:
   uid: excel!Excel.PresetCriteriaConditionalFormat#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -29,12 +25,8 @@ properties:
   uid: excel!Excel.PresetCriteriaConditionalFormat#format:member
   package: excel!
   fullName: format
-  summary: >-
-    Возвращает объект формата, инкапсулируя шрифт условных форматов, заполнять, границы и другие свойства.
-
-
-    \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Возвращает объект формата, инкапсулируя шрифт условных форматов, заполнять, границы и другие свойства.
+  remarks: '\[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -45,19 +37,52 @@ properties:
   uid: excel!Excel.PresetCriteriaConditionalFormat#rule:member
   package: excel!
   fullName: rule
-  summary: >-
-    Правило условного форматирования.
+  summary: Правило условного форматирования.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Sample");
+        const range = sheet.getRange("B2:M5");
+        const conditionalFormat = range.conditionalFormats
+            .add(Excel.ConditionalFormatType.presetCriteria);
+        conditionalFormat.preset.format.font.color = "white";
+        conditionalFormat.preset.rule = { criterion: Excel.ConditionalFormatPresetCriterion.oneStdDevAboveAverage };
+
+        await context.sync();
+    });
+
+    ```
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml
+
+    await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getItem("Sample");
+        const range = sheet.getRange("B8:E13");
+        const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);
+        conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT("RC[-1]",0),TRUE)';
+        conditionalFormat.custom.format.font.color = "green";
+
+        await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'rule: Excel.ConditionalPresetCriteriaRule;'
     return:
       type: <xref uid="excel!Excel.ConditionalPresetCriteriaRule:interface" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.presetCriteria);\n    conditionalFormat.preset.format.font.color = \"white\";\n    conditionalFormat.preset.rule = { criterion: Excel.ConditionalFormatPresetCriterion.oneStdDevAboveAverage };\n\n    await context.sync();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);\n    conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT(\"RC[-1]\",0),TRUE)';\n    conditionalFormat.custom.format.font.color = \"green\";\n\n    await context.sync();\n});\n```"
 methods:
 - name: load(options)
   uid: excel!Excel.PresetCriteriaConditionalFormat#load:member(1)
@@ -123,11 +148,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
-  remarks: >-
-    Этот метод имеет следующую дополнительную подпись:
-
-
-    `set(properties: Excel.PresetCriteriaConditionalFormat): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -163,7 +184,7 @@ methods:
   uid: excel!Excel.PresetCriteriaConditionalFormat#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.PresetCriteriaConditionalFormat является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Excel.Interfaces.PresetCriteriaConditionalFormatData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект PresetCriteriaConditionalFormat является объектом API, метод возвращает простой `toJSON` объект JavaScript (введите как`Excel.Interfaces.PresetCriteriaConditionalFormatData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -174,9 +195,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 4c6aae274d7d6f77cba1ed1e73b997ce87e0dc43
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 62dec50995950e5c3b208b832b6161cca6f7e90a
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51361569"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59703941"

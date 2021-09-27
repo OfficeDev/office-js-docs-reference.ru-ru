@@ -3,21 +3,41 @@ name: Excel.WorksheetProtection
 uid: excel!Excel.WorksheetProtection:class
 package: excel!
 fullName: Excel.WorksheetProtection
-summary: >-
-  Представляет защиту объекта листа.
-
-
-  \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: Представляет защиту объекта листа.
+remarks: '\[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
 properties:
+- name: allowEditRanges
+  uid: excel!Excel.WorksheetProtection#allowEditRanges:member
+  package: excel!
+  fullName: allowEditRanges
+  summary: Указывает `AllowEditRangeCollection` найденное в этом документе.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly allowEditRanges: Excel.AllowEditRangeCollection;'
+    return:
+      type: <xref uid="excel!Excel.AllowEditRangeCollection:class" />
+- name: canPauseProtection
+  uid: excel!Excel.WorksheetProtection#canPauseProtection:member
+  package: excel!
+  fullName: canPauseProtection
+  summary: Указывает, можно ли приостановить защиту для этого таблицы.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly canPauseProtection: boolean;'
+    return:
+      type: boolean
 - name: context
   uid: excel!Excel.WorksheetProtection#context:member
   package: excel!
   fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом хост-приложения Office.
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -25,16 +45,36 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="excel!Excel.RequestContext:class" />
+- name: isPasswordProtected
+  uid: excel!Excel.WorksheetProtection#isPasswordProtected:member
+  package: excel!
+  fullName: isPasswordProtected
+  summary: Указывает, защищен ли лист паролем.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly isPasswordProtected: boolean;'
+    return:
+      type: boolean
+- name: isPaused
+  uid: excel!Excel.WorksheetProtection#isPaused:member
+  package: excel!
+  fullName: isPaused
+  summary: Указывает, приостановлена ли защита таблицы.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly isPaused: boolean;'
+    return:
+      type: boolean
 - name: options
   uid: excel!Excel.WorksheetProtection#options:member
   package: excel!
   fullName: options
-  summary: >-
-    Указывает параметры защиты для таблицы.
-
-
-    \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Указывает параметры защиты для таблицы.
+  remarks: '\[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -45,12 +85,8 @@ properties:
   uid: excel!Excel.WorksheetProtection#protected:member
   package: excel!
   fullName: protected
-  summary: >-
-    Указывает, защищена ли таблица.
-
-
-    \[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Указывает, защищена ли таблица.
+  remarks: '\[[Набор API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -58,6 +94,23 @@ properties:
     return:
       type: boolean
 methods:
+- name: checkPassword(password)
+  uid: excel!Excel.WorksheetProtection#checkPassword:member(1)
+  package: excel!
+  fullName: checkPassword(password)
+  summary: Указывает, можно ли использовать пароль для разблокировки защиты таблицы. Этот метод не меняет состояние защиты таблицы.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'checkPassword(password?: string): OfficeExtension.ClientResult<boolean>;'
+    parameters:
+    - id: password
+      description: Пароль, связанный с защищенным таблицой.
+      type: string
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;boolean&gt;
+      description: '`true`Возвращается, если пароль можно использовать для разблокировки защиты таблицы. В противном случае возвращается `false`<!-- -->.'
 - name: load(options)
   uid: excel!Excel.WorksheetProtection#load:member(1)
   package: excel!
@@ -117,16 +170,72 @@ methods:
     return:
       type: <xref uid="excel!Excel.WorksheetProtection:class" />
       description: ''
+- name: pauseProtection(password)
+  uid: excel!Excel.WorksheetProtection#pauseProtection:member(1)
+  package: excel!
+  fullName: pauseProtection(password)
+  summary: Приостановка защиты таблиц для данного объекта таблицы для пользователя в заданном сеансе. Если пароль неправильный, этот метод бросает ошибку и `UnsupportedOperation` не может приостановить защиту. Этот метод не меняет состояние защиты, если защита таблицы не включена или уже приостановлена.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'pauseProtection(password?: string): void;'
+    parameters:
+    - id: password
+      description: Пароль, связанный с защищенным таблицой.
+      type: string
+    return:
+      type: void
+      description: ''
 - name: protect(options, password)
   uid: excel!Excel.WorksheetProtection#protect:member(1)
   package: excel!
   fullName: protect(options, password)
-  summary: >-
-    Защищает лист. Сбой, если таблица уже защищена.
+  summary: Защищает лист. Сбой, если таблица уже защищена.
+  remarks: >-
+    \[[API set: ExcelApi 1.2 for options; 1.7 for password](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[API set: ExcelApi 1.2 for options; 1.7 for password](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.load("protection/protected");
+
+        await context.sync();
+
+        if (!activeSheet.protection.protected) {
+            activeSheet.protection.protect();
+        }
+    });
+
+    ```
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    let password = await passwordHandler();
+
+    passwordHelper(password);
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.load("protection/protected");
+
+        await context.sync();
+
+        if (!activeSheet.protection.protected) {
+            activeSheet.protection.protect(null, password);
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -140,12 +249,42 @@ methods:
       type: string
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect();\n    }\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.load(\"protection/protected\");\n\n    await context.sync();\n\n    if (!activeSheet.protection.protected) {\n        activeSheet.protection.protect(null, password);\n    }\n});\n```"
+      description: ''
+- name: resumeProtection()
+  uid: excel!Excel.WorksheetProtection#resumeProtection:member(1)
+  package: excel!
+  fullName: resumeProtection()
+  summary: Возобновляет защиту таблиц для данного объекта таблицы для пользователя в заданном сеансе. Чтобы этот метод работал, необходимо приостановить защиту таблицы. Если защита таблицы не приостановлена, этот метод не изменит состояние защиты таблицы.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'resumeProtection(): void;'
+    return:
+      type: void
+      description: ''
+- name: setPassword(password)
+  uid: excel!Excel.WorksheetProtection#setPassword:member(1)
+  package: excel!
+  fullName: setPassword(password)
+  summary: Изменяет пароль, связанный с `WorksheetProtection` объектом. Установка пароля в качестве пустой строки ("") или как `null` удаляет защиту паролей от `WorksheetProtection` объекта. Чтобы этот метод работал правильно, необходимо включить и приостановить защиту таблицы. Если защита таблиц отключена, этот метод бросает ошибку и `InvalidOperation` не меняет пароль. Если защита таблиц включена и не приостановлена, этот метод бросает ошибку и не `AccessDenied` меняет пароль.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'setPassword(password?: string): void;'
+    parameters:
+    - id: password
+      description: Пароль, связанный с `WorksheetProtection` объектом.
+      type: string
+    return:
+      type: void
+      description: ''
 - name: toJSON()
   uid: excel!Excel.WorksheetProtection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Excel.WorksheetProtection является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Excel.Interfaces.WorksheetProtectionData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект WorksheetProtection — это объект API, метод возвращает простой `toJSON` объект JavaScript (введите как`Excel.Interfaces.WorksheetProtectionData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -158,12 +297,39 @@ methods:
   uid: excel!Excel.WorksheetProtection#unprotect:member(1)
   package: excel!
   fullName: unprotect(password)
-  summary: >-
-    Снимает защиту с листа.
+  summary: Снимает защиту с листа.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.7 для пароля](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[Набор API: ExcelApi 1.7 для пароля](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.protection.unprotect();
+    });
+
+    ```
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml
+
+    let password = await passwordHandler();
+
+    passwordHelper(password);
+
+    await Excel.run(async (context) => {
+        let activeSheet = context.workbook.worksheets.getActiveWorksheet();
+        activeSheet.protection.unprotect(password);
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -174,12 +340,29 @@ methods:
       type: string
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.protection.unprotect();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/data-protection.yaml\nlet password = await passwordHandler();\npasswordHelper(password);\nawait Excel.run(async (context) => {\n    let activeSheet = context.workbook.worksheets.getActiveWorksheet();\n    activeSheet.protection.unprotect(password);\n});\n```"
+      description: ''
+- name: updateOptions(options)
+  uid: excel!Excel.WorksheetProtection#updateOptions:member(1)
+  package: excel!
+  fullName: updateOptions(options)
+  summary: Измените параметры защиты таблиц, связанные с `WorksheetProtection` объектом. Чтобы этот метод работал должным образом, необходимо отключить или приостановить защиту таблицы. Если защита таблиц включена и не приостановлена, этот метод бросает ошибку и не меняет параметры `AccessDenied` защиты таблицы.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'updateOptions(options: Excel.WorksheetProtectionOptions): void;'
+    parameters:
+    - id: options
+      description: Интерфейс параметров, связанный с `WorksheetProtection` объектом.
+      type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
+    return:
+      type: void
+      description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d234df00a1865d0c7b13169a418c1bc1838efc36
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 284faf27e43366b395cd5a0e76a430575b3656cf
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51247415"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59701705"
