@@ -3,12 +3,8 @@ name: Excel.PivotField
 uid: excel!Excel.PivotField:class
 package: excel!
 fullName: Excel.PivotField
-summary: >-
-  Представляет Excel PivotField.
-
-
-  \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-remarks: ''
+summary: Представляет Excel PivotField.
+remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
 isPreview: false
 isDeprecated: false
 type: class
@@ -29,12 +25,8 @@ properties:
   uid: excel!Excel.PivotField#id:member
   package: excel!
   fullName: id
-  summary: >-
-    ID of the PivotField.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: ID of the PivotField.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -45,12 +37,8 @@ properties:
   uid: excel!Excel.PivotField#items:member
   package: excel!
   fullName: items
-  summary: >-
-    Возвращает сводные поля, связанные со сводным полем.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Возвращает pivotItems, связанные с PivotField.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -61,12 +49,8 @@ properties:
   uid: excel!Excel.PivotField#name:member
   package: excel!
   fullName: name
-  summary: >-
-    Имя сводного поля.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Имя сводного поля.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -77,12 +61,8 @@ properties:
   uid: excel!Excel.PivotField#showAllItems:member
   package: excel!
   fullName: showAllItems
-  summary: >-
-    Определяет, следует ли отображать все элементы сводного поля.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Определяет, следует ли отображать все элементы сводного поля.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -93,12 +73,8 @@ properties:
   uid: excel!Excel.PivotField#subtotals:member
   package: excel!
   fullName: subtotals
-  summary: >-
-    Промежуточные итоги сводного поля.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Промежуточные итоги сводного поля.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -110,12 +86,8 @@ methods:
   uid: excel!Excel.PivotField#applyFilter:member(1)
   package: excel!
   fullName: applyFilter(filter)
-  summary: >-
-    Задает один или несколько текущих pivotFilters поля и применяет их к полю. Если предоставленные фильтры являются недействительными или не могут быть применены, выброшено исключение.
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Задает один или несколько текущих pivotFilters поля и применяет их к полю. Если предоставленные фильтры являются недействительными или не могут быть применены, выброшено исключение.
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -131,29 +103,47 @@ methods:
   uid: excel!Excel.PivotField#clearAllFilters:member(1)
   package: excel!
   fullName: clearAllFilters()
-  summary: >-
-    Очищает все критерии от всех фильтров поля. Это удаляет активную фильтрацию на поле.
+  summary: Очищает все критерии от всех фильтров поля. Это удаляет активную фильтрацию на поле.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
 
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotfilters.yaml
+
+    await Excel.run(async (context) => {
+      // Clear all the PivotFilters.
+
+      // Get the PivotTable.
+      const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");
+      pivotTable.hierarchies.load("name");
+      await context.sync();
+
+      // Clear the filters on each PivotField.
+      pivotTable.hierarchies.items.forEach((hierarchy) => {
+        hierarchy.fields.getItem(hierarchy.name).clearAllFilters();
+      });
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'clearAllFilters(): void;'
     return:
       type: void
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/38-pivottable/pivottable-pivotfilters.yaml\nawait Excel.run(async (context) => {\n  // Clear all the PivotFilters.\n\n  // Get the PivotTable.\n  const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n  pivotTable.hierarchies.load(\"name\");\n  await context.sync();\n\n  // Clear the filters on each PivotField.\n  pivotTable.hierarchies.items.forEach((hierarchy) => {\n    hierarchy.fields.getItem(hierarchy.name).clearAllFilters();\n  });\n  await context.sync();\n});\n```"
+      description: ''
 - name: clearFilter(filterType)
   uid: excel!Excel.PivotField#clearFilter:member(1)
   package: excel!
   fullName: clearFilter(filterType)
-  summary: >-
-    Очищает все существующие критерии от фильтра поля данного типа (если он применяется в настоящее время).
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Очищает все существующие критерии от фильтра поля данного типа (если он применяется в настоящее время).
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -169,12 +159,8 @@ methods:
   uid: excel!Excel.PivotField#clearFilter:member(2)
   package: excel!
   fullName: clearFilter(filterTypeString)
-  summary: >-
-    Очищает все существующие критерии от фильтра поля данного типа (если он применяется в настоящее время).
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Очищает все существующие критерии от фильтра поля данного типа (если он применяется в настоящее время).
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -190,12 +176,8 @@ methods:
   uid: excel!Excel.PivotField#getFilters:member(1)
   package: excel!
   fullName: getFilters()
-  summary: >-
-    Получает все фильтры, применяемые в настоящее время на поле.
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Получает все фильтры, применяемые в настоящее время на поле.
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -207,12 +189,8 @@ methods:
   uid: excel!Excel.PivotField#isFiltered:member(1)
   package: excel!
   fullName: isFiltered(filterType)
-  summary: >-
-    Проверяет, есть ли на поле примененные фильтры.
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Проверяет, есть ли на поле примененные фильтры.
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -228,12 +206,8 @@ methods:
   uid: excel!Excel.PivotField#isFiltered:member(2)
   package: excel!
   fullName: isFiltered(filterTypeString)
-  summary: >-
-    Проверяет, есть ли на поле примененные фильтры.
-
-
-    \[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Проверяет, есть ли на поле примененные фильтры.
+  remarks: '\[[Набор API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -309,11 +283,7 @@ methods:
   package: excel!
   fullName: set(properties, options)
   summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
-  remarks: >-
-    Этот метод имеет следующую дополнительную подпись:
-
-
-    `set(properties: Excel.PivotField): void`
+  remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
@@ -349,12 +319,8 @@ methods:
   uid: excel!Excel.PivotField#sortByLabels:member(1)
   package: excel!
   fullName: sortByLabels(sortBy)
-  summary: >-
-    Сортирует сводное поле. Если указан параметр DataPivotHierarchy, то сортировка будет применяться на его основе, в ином случае сортировка будет основана на самом сводном поле.
-
-
-    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Сортирует сводное поле. Если указан параметр DataPivotHierarchy, то сортировка будет применяться на его основе, в ином случае сортировка будет основана на самом сводном поле.
+  remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -370,12 +336,8 @@ methods:
   uid: excel!Excel.PivotField#sortByValues:member(1)
   package: excel!
   fullName: sortByValues(sortBy, valuesHierarchy, pivotItemScope)
-  summary: >-
-    Сортирует сводную таблицу по указанным значениям в определенной области. Область определяет, какие конкретные значения будут использоваться для сортировки при нескольких значениях из одной и той же DataPivotHierarchy.
-
-
-    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Сортирует сводную таблицу по указанным значениям в определенной области. Область определяет, какие конкретные значения будут использоваться для сортировки при нескольких значениях из одной и той же DataPivotHierarchy.
+  remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -397,12 +359,8 @@ methods:
   uid: excel!Excel.PivotField#sortByValues:member(2)
   package: excel!
   fullName: sortByValues(sortByString, valuesHierarchy, pivotItemScope)
-  summary: >-
-    Сортирует сводную таблицу по указанным значениям в определенной области. Область определяет, какие конкретные значения будут использоваться для сортировки при нескольких значениях из одной и той же DataPivotHierarchy.
-
-
-    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
+  summary: Сортирует сводную таблицу по указанным значениям в определенной области. Область определяет, какие конкретные значения будут использоваться для сортировки при нескольких значениях из одной и той же DataPivotHierarchy.
+  remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -435,9 +393,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 8e53b5351cad0bc1bf3bdadb8c75d8d93afd79ae
-  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.openlocfilehash: 6be6fda1077274425ddd3d187399c3d6b1f3d577
+  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 07/02/2021
-  ms.locfileid: "53272202"
+  ms.lasthandoff: 09/24/2021
+  ms.locfileid: "59669503"
