@@ -68,7 +68,7 @@
 ||[getItem(index: number)](/javascript/api/word/word.contentcontrolcollection#getItem_index_)|Получает управление контентом по индексу в коллекции.|
 ||[items](/javascript/api/word/word.contentcontrolcollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[Document](/javascript/api/word/word.document)|[getSelection()](/javascript/api/word/word.document#getSelection__)|Возвращает текущий выбранный фрагмент документа.|
-||[body](/javascript/api/word/word.document#body)|Получает объект тела документа.|
+||[body](/javascript/api/word/word.document#body)|Получает объект тела основного документа.|
 ||[contentControls](/javascript/api/word/word.document#contentControls)|Получает коллекцию объектов управления контентом в документе.|
 ||[сохранено](/javascript/api/word/word.document#saved)|Указывает, сохранены ли изменения, внесенные в документ.|
 ||[sections](/javascript/api/word/word.document#sections)|Получает коллекцию объектов раздела в документе.|
