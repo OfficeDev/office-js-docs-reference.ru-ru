@@ -1,6 +1,6 @@
 | Класс | Поля | Описание |
 |:---|:---|:---|
-|[AllowEditRange](/javascript/api/excel/excel.alloweditrange)|[address](/javascript/api/excel/excel.alloweditrange#address)|Указывает диапазон, связанный с объектом.|
+|[Объект AllowEditRange](/javascript/api/excel/excel.alloweditrange)|[address](/javascript/api/excel/excel.alloweditrange#address)|Указывает диапазон, связанный с объектом.|
 ||[delete()](/javascript/api/excel/excel.alloweditrange#delete__)|Удаляет этот объект из `AllowEditRangeCollection` .|
 ||[pauseProtection(password?: string)](/javascript/api/excel/excel.alloweditrange#pauseProtection_password_)|Приостановка защиты таблиц для данного `AllowEditRange` объекта для пользователя в заданном сеансе.|
 ||[isPasswordProtected](/javascript/api/excel/excel.alloweditrange#isPasswordProtected)|Указывает, защищен `AllowEditRange` ли пароль.|
@@ -39,28 +39,12 @@
 |[CellValueProviderAttributes](/javascript/api/excel/excel.cellvalueproviderattributes)|[description](/javascript/api/excel/excel.cellvalueproviderattributes#description)|Представляет свойство описания поставщика, используемое в представлении карты, если не указан логотип.|
 ||[logoSourceAddress](/javascript/api/excel/excel.cellvalueproviderattributes#logoSourceAddress)|Представляет URL-адрес, используемый для загрузки изображения, которое будет использоваться в качестве логотипа в представлении карты.|
 ||[logoTargetAddress](/javascript/api/excel/excel.cellvalueproviderattributes#logoTargetAddress)|Представляет URL-адрес, который является объектом навигации, если пользователь щелкает элементом логотипа в представлении карты.|
-|[ChangeDirectionState](/javascript/api/excel/excel.changedirectionstate)|[deleteShiftDirection](/javascript/api/excel/excel.changedirectionstate#deleteShiftDirection)|Представляет направление (например, вверх или влево), которое остальные ячейки будут смещаться при удалении ячейки или ячейки.|
-||[insertShiftDirection](/javascript/api/excel/excel.changedirectionstate#insertShiftDirection)|Представляет направление (например, вниз или вправо), в которое будут перенесены существующие ячейки при вставке новой ячейки или ячеек.|
-|[Chart](/javascript/api/excel/excel.chart)|[getDataTable()](/javascript/api/excel/excel.chart#getDataTable__)|Получает таблицу данных на диаграмме.|
-||[getDataTableOrNullObject()](/javascript/api/excel/excel.chart#getDataTableOrNullObject__)|Получает таблицу данных на диаграмме.|
-|[ChartDataTable](/javascript/api/excel/excel.chartdatatable)|[format](/javascript/api/excel/excel.chartdatatable#format)|Представляет формат таблицы данных диаграммы, которая включает заполняемую таблицу, шрифт и пограничный формат.|
-||[showHorizontalBorder](/javascript/api/excel/excel.chartdatatable#showHorizontalBorder)|Указывает, следует ли отображать горизонтальную границу таблицы данных.|
-||[showLegendKey](/javascript/api/excel/excel.chartdatatable#showLegendKey)|Указывает, следует ли показывать ключ-легенду таблицы данных.|
-||[showOutlineBorder](/javascript/api/excel/excel.chartdatatable#showOutlineBorder)|Указывает, следует ли отображать границу контура таблицы данных.|
-||[showVerticalBorder](/javascript/api/excel/excel.chartdatatable#showVerticalBorder)|Указывает, следует ли отображать вертикальную границу таблицы данных.|
-||[visible](/javascript/api/excel/excel.chartdatatable#visible)|Указывает, следует ли показывать таблицу данных диаграммы.|
-|[ChartDataTableFormat](/javascript/api/excel/excel.chartdatatableformat)|[граница](/javascript/api/excel/excel.chartdatatableformat#border)|Представляет пограничный формат таблицы данных диаграммы, которая включает цвет, стиль строки и вес.|
-||[fill](/javascript/api/excel/excel.chartdatatableformat#fill)|Представляет формат заливки объекта, включая сведения о форматировании фона.|
-||[font](/javascript/api/excel/excel.chartdatatableformat#font)|Представляет атрибуты шрифта (например, имя шрифта, размер шрифта и цвет) для текущего объекта.|
 |[Comment](/javascript/api/excel/excel.comment)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.comment#assignTask_assignee_)|Назначает задачу, прикрепленную к комментарию, для данного пользователя в качестве ассимилята.|
 ||[getTask()](/javascript/api/excel/excel.comment#getTask__)|Получает задачу, связанную с этим комментарием.|
 ||[getTaskOrNullObject()](/javascript/api/excel/excel.comment#getTaskOrNullObject__)|Получает задачу, связанную с этим комментарием.|
-|[CommentCollection](/javascript/api/excel/excel.commentcollection)|[getItemOrNullObject(commentId: string)](/javascript/api/excel/excel.commentcollection#getItemOrNullObject_commentId_)|Получает примечание из коллекции на основе его идентификатора.|
 |[CommentReply](/javascript/api/excel/excel.commentreply)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.commentreply#assignTask_assignee_)|Назначает задачу, прикрепленную к комментарию, для данного пользователя в качестве единственного назначаемой.|
 ||[getTask()](/javascript/api/excel/excel.commentreply#getTask__)|Получает задачу, связанную с потоком ответа на этот комментарий.|
 ||[getTaskOrNullObject()](/javascript/api/excel/excel.commentreply#getTaskOrNullObject__)|Получает задачу, связанную с потоком ответа на этот комментарий.|
-|[CommentReplyCollection](/javascript/api/excel/excel.commentreplycollection)|[getItemOrNullObject(commentReplyId: string)](/javascript/api/excel/excel.commentreplycollection#getItemOrNullObject_commentReplyId_)|Возвращает ответ на примечание, определенное по идентификатору.|
-|[ConditionalFormatCollection](/javascript/api/excel/excel.conditionalformatcollection)|[getItemOrNullObject(id: строка)](/javascript/api/excel/excel.conditionalformatcollection#getItemOrNullObject_id_)|Возвращает условный формат, идентифицированный его ID.|
 |[ConnectErrorCellValue](/javascript/api/excel/excel.connecterrorcellvalue)|[errorSubType](/javascript/api/excel/excel.connecterrorcellvalue#errorSubType)|Представляет тип `ConnectErrorCellValue` .|
 ||[errorType](/javascript/api/excel/excel.connecterrorcellvalue#errorType)|Представляет тип `ErrorCellValue` .|
 ||[примитивный](/javascript/api/excel/excel.connecterrorcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
@@ -124,7 +108,6 @@
 ||[примитивный](/javascript/api/excel/excel.gettingdataerrorcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
 ||[primitiveType](/javascript/api/excel/excel.gettingdataerrorcellvalue#primitiveType)|Представляет значение, которое будет возвращено ячейкой `Range.valueTypes` с этим значением.|
 ||[type](/javascript/api/excel/excel.gettingdataerrorcellvalue#type)|Представляет тип этого значения ячейки.|
-|[GroupShapeCollection](/javascript/api/excel/excel.groupshapecollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.groupshapecollection#getItemOrNullObject_key_)|Получает фигуру с ее именем или ИД.|
 |[Identity](/javascript/api/excel/excel.identity)|[displayName](/javascript/api/excel/excel.identity#displayName)|Представляет отображаемое имя пользователя.|
 ||[email](/javascript/api/excel/excel.identity#email)|Представляет электронный адрес пользователя.|
 ||[id](/javascript/api/excel/excel.identity#id)|Представляет уникальный ID пользователя.|
@@ -147,7 +130,7 @@
 ||[requestRefresh()](/javascript/api/excel/excel.linkeddatatype#requestRefresh__)|Делает запрос на обновление связанного типа данных.|
 ||[requestSetRefreshMode(refreshMode: Excel. LinkedDataTypeRefreshMode)](/javascript/api/excel/excel.linkeddatatype#requestSetRefreshMode_refreshMode_)|Делает запрос на изменение режима обновления для этого связанного типа данных.|
 |[LinkedDataTypeAddedEventArgs](/javascript/api/excel/excel.linkeddatatypeaddedeventargs)|[serviceId](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#serviceId)|Уникальный ID нового типа связанных данных.|
-||[source](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#source)|Получает источник события.|
+||[источник](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#source)|Получает источник события.|
 ||[type](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#type)|Получает тип события.|
 |[LinkedDataTypeCollection](/javascript/api/excel/excel.linkeddatatypecollection)|[getCount()](/javascript/api/excel/excel.linkeddatatypecollection#getCount__)|Получает количество связанных типов данных в коллекции.|
 ||[getItem(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getItem_key_)|Получает связанный тип данных по ID службы.|
@@ -175,18 +158,10 @@
 |[PivotLayout](/javascript/api/excel/excel.pivotlayout)|[getCell(dataHierarchy: DataPivotHierarchy \| string, rowItems: Array<PivotItem \| string>, columnItems: Array<PivotItem \| string>)](/javascript/api/excel/excel.pivotlayout#getCell_dataHierarchy__rowItems__columnItems_)|Получает уникальную ячейку в сводной таблице на основе иерархии данных и элементов строк и столбцов соответствующих иерархий.|
 ||[pivotStyle](/javascript/api/excel/excel.pivotlayout#pivotStyle)|Стиль, примененный к PivotTable.|
 ||[setStyle(style: string \| PivotTableStyle \| BuiltInPivotTableStyle)](/javascript/api/excel/excel.pivotlayout#setStyle_style_)|Задает стиль, применяемый к PivotTable.|
+|[PivotTable](/javascript/api/excel/excel.pivottable)|[getDataSourceString()](/javascript/api/excel/excel.pivottable#getDataSourceString__)|Возвращает представление строк источника данных для PivotTable.|
+||[getDataSourceType()](/javascript/api/excel/excel.pivottable#getDataSourceType__)|Получает тип источника данных для PivotTable.|
 |[PivotTableScopedCollection](/javascript/api/excel/excel.pivottablescopedcollection)|[getFirstOrNullObject()](/javascript/api/excel/excel.pivottablescopedcollection#getFirstOrNullObject__)|Получает первый pivotTable в коллекции.|
-|[Query](/javascript/api/excel/excel.query)|[error](/javascript/api/excel/excel.query#error)|Получает сообщение об ошибке запроса с последнего обновления запроса.|
-||[loadedTo](/javascript/api/excel/excel.query#loadedTo)|Загружает запрос на тип объекта.|
-||[loadedToDataModel](/javascript/api/excel/excel.query#loadedToDataModel)|Указывает, загружен ли запрос в модель данных.|
-||[name](/javascript/api/excel/excel.query#name)|Получает имя запроса.|
-||[refreshDate](/javascript/api/excel/excel.query#refreshDate)|Получает дату и время последнего обновления запроса.|
-||[rowsLoadedCount](/javascript/api/excel/excel.query#rowsLoadedCount)|Получает количество строк, загруженных при последнем обновлении запроса.|
-|[QueryCollection](/javascript/api/excel/excel.querycollection)|[getCount()](/javascript/api/excel/excel.querycollection#getCount__)|Получает количество запросов в книге.|
-||[getItem(key: string)](/javascript/api/excel/excel.querycollection#getItem_key_)|Получает запрос из коллекции на основе его имени.|
-||[items](/javascript/api/excel/excel.querycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[Range](/javascript/api/excel/excel.range)|[getDependents()](/javascript/api/excel/excel.range#getDependents__)|Возвращает объект, представляющего диапазон, содержащий все иждивенцы ячейки в одной и той же таблице или `WorkbookRangeAreas` в нескольких таблицах.|
-||[getPrecedents()](/javascript/api/excel/excel.range#getPrecedents__)|Возвращает объект, представляющего диапазон, содержащий все прецеденты ячейки в одной и той же таблице или `WorkbookRangeAreas` в нескольких таблицах.|
 |[RefErrorCellValue](/javascript/api/excel/excel.referrorcellvalue)|[errorSubType](/javascript/api/excel/excel.referrorcellvalue#errorSubType)|Представляет тип `RefErrorCellValue` .|
 ||[errorType](/javascript/api/excel/excel.referrorcellvalue#errorType)|Представляет тип `ErrorCellValue` .|
 ||[примитивный](/javascript/api/excel/excel.referrorcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
@@ -194,16 +169,15 @@
 ||[type](/javascript/api/excel/excel.referrorcellvalue#type)|Представляет тип этого значения ячейки.|
 |[RefreshModeChangedEventArgs](/javascript/api/excel/excel.refreshmodechangedeventargs)|[refreshMode](/javascript/api/excel/excel.refreshmodechangedeventargs#refreshMode)|Режим обновления связанного типа данных.|
 ||[serviceId](/javascript/api/excel/excel.refreshmodechangedeventargs#serviceId)|Уникальный ID объекта, режим обновления которого был изменен.|
-||[source](/javascript/api/excel/excel.refreshmodechangedeventargs#source)|Получает источник события.|
+||[источник](/javascript/api/excel/excel.refreshmodechangedeventargs#source)|Получает источник события.|
 ||[type](/javascript/api/excel/excel.refreshmodechangedeventargs#type)|Получает тип события.|
 |[RefreshRequestCompletedEventArgs](/javascript/api/excel/excel.refreshrequestcompletedeventargs)|[обновлено](/javascript/api/excel/excel.refreshrequestcompletedeventargs#refreshed)|Указывает, был ли запрос на обновление успешным.|
 ||[serviceId](/javascript/api/excel/excel.refreshrequestcompletedeventargs#serviceId)|Уникальный ID объекта, запрос на обновление которого был завершен.|
-||[source](/javascript/api/excel/excel.refreshrequestcompletedeventargs#source)|Получает источник события.|
+||[источник](/javascript/api/excel/excel.refreshrequestcompletedeventargs#source)|Получает источник события.|
 ||[type](/javascript/api/excel/excel.refreshrequestcompletedeventargs#type)|Получает тип события.|
 ||[предупреждения](/javascript/api/excel/excel.refreshrequestcompletedeventargs#warnings)|Массив, содержащий все предупреждения, созданные из запроса на обновление.|
 |[Shape](/javascript/api/excel/excel.shape)|[displayName](/javascript/api/excel/excel.shape#displayName)|Получает имя отображения фигуры.|
 |[ShapeCollection](/javascript/api/excel/excel.shapecollection)|[addSvg(xml: string)](/javascript/api/excel/excel.shapecollection#addSvg_xml_)|Создает изображение SVG (масштабируемая векторная графика) из строки XML и добавляет его на лист.|
-||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.shapecollection#getItemOrNullObject_key_)|Получает фигуру с ее именем или ИД.|
 |[Slicer](/javascript/api/excel/excel.slicer)|[nameInFormula](/javascript/api/excel/excel.slicer#nameInFormula)|Представляет имя среза, используемое в формуле.|
 ||[slicerStyle](/javascript/api/excel/excel.slicer#slicerStyle)|Стиль, применяемый к срезу.|
 ||[setStyle(style: string \| SlicerStyle \| BuiltInSlicerStyle)](/javascript/api/excel/excel.slicer#setStyle_style_)|Задает стиль, примененный к срезу.|
@@ -211,11 +185,12 @@
 ||[errorType](/javascript/api/excel/excel.spillerrorcellvalue#errorType)|Представляет тип `ErrorCellValue` .|
 ||[примитивный](/javascript/api/excel/excel.spillerrorcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
 ||[primitiveType](/javascript/api/excel/excel.spillerrorcellvalue#primitiveType)|Представляет значение, которое будет возвращено ячейкой `Range.valueTypes` с этим значением.|
+||[spilledColumns](/javascript/api/excel/excel.spillerrorcellvalue#spilledColumns)|Представляет количество столбцов, которые будут разливаться, если бы не было #SPILL! ошибка.|
+||[spilledRows](/javascript/api/excel/excel.spillerrorcellvalue#spilledRows)|Представляет количество строк, которые разлились бы, если бы не было #SPILL! ошибка.|
 ||[type](/javascript/api/excel/excel.spillerrorcellvalue#type)|Представляет тип этого значения ячейки.|
 |[StringCellValue](/javascript/api/excel/excel.stringcellvalue)|[примитивный](/javascript/api/excel/excel.stringcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
 ||[primitiveType](/javascript/api/excel/excel.stringcellvalue#primitiveType)|Представляет значение, которое будет возвращено ячейкой `Range.valueTypes` с этим значением.|
 ||[type](/javascript/api/excel/excel.stringcellvalue#type)|Представляет тип этого значения ячейки.|
-|[StyleCollection](/javascript/api/excel/excel.stylecollection)|[getItemOrNullObject(имя: строка)](/javascript/api/excel/excel.stylecollection#getItemOrNullObject_name_)|Получает стиль по имени.|
 |[Table](/javascript/api/excel/excel.table)|[clearStyle()](/javascript/api/excel/excel.table#clearStyle__)|Изменяет таблицу для использования стиля таблицы по умолчанию.|
 ||[onFiltered](/javascript/api/excel/excel.table#onFiltered)|Возникает, когда фильтр применяется на определенной таблице.|
 ||[tableStyle](/javascript/api/excel/excel.table#tableStyle)|Стиль, примененный к таблице.|
@@ -224,9 +199,6 @@
 |[TableFilteredEventArgs](/javascript/api/excel/excel.tablefilteredeventargs)|[tableId](/javascript/api/excel/excel.tablefilteredeventargs#tableId)|Получает ID таблицы, в которой применяется фильтр.|
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.tablefilteredeventargs#worksheetId)|Получает ID таблицы, которая содержит таблицу.|
-|[TableRowCollection](/javascript/api/excel/excel.tablerowcollection)|[deleteRows(rows: number[] \| TableRow[])](/javascript/api/excel/excel.tablerowcollection#deleteRows_rows_)|Удаление нескольких строк из таблицы.|
-||[deleteRowsAt(index: number, count?: number)](/javascript/api/excel/excel.tablerowcollection#deleteRowsAt_index__count_)|Удаление указанного количества строк из таблицы, начиная с указанного индекса.|
-|[TableScopedCollection](/javascript/api/excel/excel.tablescopedcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.tablescopedcollection#getItemOrNullObject_key_)|Получает таблицу по имени или ИД.|
 |[ValueErrorCellValue](/javascript/api/excel/excel.valueerrorcellvalue)|[errorSubType](/javascript/api/excel/excel.valueerrorcellvalue#errorSubType)|Представляет тип `ValueErrorCellValue` .|
 ||[errorType](/javascript/api/excel/excel.valueerrorcellvalue#errorType)|Представляет тип `ErrorCellValue` .|
 ||[примитивный](/javascript/api/excel/excel.valueerrorcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
@@ -244,36 +216,15 @@
 ||[relatedImagesAddress](/javascript/api/excel/excel.webimagecellvalue#relatedImagesAddress)|Представляет URL-адрес веб-страницы с изображениями, которые считаются связанными с этим `WebImageCellValue` .|
 ||[type](/javascript/api/excel/excel.webimagecellvalue#type)|Представляет тип этого значения ячейки.|
 |[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkedDataTypes)|Возвращает коллекцию связанных типов данных, которые являются частью книги.|
-||[запросы](/javascript/api/excel/excel.workbook#queries)|Возвращает коллекцию запросов Power Query, которые являются частью книги.|
 ||[задачи](/javascript/api/excel/excel.workbook#tasks)|Возвращает коллекцию задач, присутствующих в книге.|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showPivotFieldList)|Указывает, отображается ли область списка полей PivotTable на уровне книги.|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904DateSystem)|Значение true, если в книге используется система дат 1904.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onFiltered)|Возникает, когда фильтр применяется на определенном таблице.|
-||[onNameChanged](/javascript/api/excel/excel.worksheet#onNameChanged)|Возникает при смене имени таблицы.|
-||[onProtectionChanged](/javascript/api/excel/excel.worksheet#onProtectionChanged)|Возникает при смене состояния защиты таблицы.|
-||[onVisibilityChanged](/javascript/api/excel/excel.worksheet#onVisibilityChanged)|Возникает при смене видимости таблицы.|
-||[tabId](/javascript/api/excel/excel.worksheet#tabId)|Возвращает значение, представляющее этот таблицу, которую можно прочитать в Open Office XML.|
 ||[задачи](/javascript/api/excel/excel.worksheet#tasks)|Возвращает коллекцию задач, присутствующих в таблице.|
-|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[changeDirectionState](/javascript/api/excel/excel.worksheetchangedeventargs#changeDirectionState)|Представляет изменение в направлении, в которое будут сдвигаться ячейки в таблице при удалении или вставке ячейки.|
-||[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggerSource)|Представляет источник триггера события.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addFromBase64_base64File__sheetNamesToInsert__positionType__relativeTo_)|Вставляет указанные листы книги в текущую книгу.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onFiltered)|Возникает при применении любого фильтра листа в книге.|
-||[onMoved](/javascript/api/excel/excel.worksheetcollection#onMoved)|Возникает при перемещении таблицы пользователем в книге.|
-||[onNameChanged](/javascript/api/excel/excel.worksheetcollection#onNameChanged)|Возникает при смене имени таблицы в коллекции таблиц.|
-||[onProtectionChanged](/javascript/api/excel/excel.worksheetcollection#onProtectionChanged)|Возникает при смене состояния защиты таблицы.|
-||[onVisibilityChanged](/javascript/api/excel/excel.worksheetcollection#onVisibilityChanged)|Возникает при смене видимости таблицы в коллекции таблиц.|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetfilteredeventargs#worksheetId)|Получает ID таблицы, в которой применяется фильтр.|
-|[WorksheetMovedEventArgs](/javascript/api/excel/excel.worksheetmovedeventargs)|[positionAfter](/javascript/api/excel/excel.worksheetmovedeventargs#positionAfter)|Получает новую позицию таблицы после перемещения.|
-||[positionBefore](/javascript/api/excel/excel.worksheetmovedeventargs#positionBefore)|Получает предыдущую позицию таблицы перед перемещением.|
-||[source](/javascript/api/excel/excel.worksheetmovedeventargs#source)|Источник события.|
-||[type](/javascript/api/excel/excel.worksheetmovedeventargs#type)|Получает тип события.|
-||[worksheetId](/javascript/api/excel/excel.worksheetmovedeventargs#worksheetId)|Получает ID перемещенного таблицы.|
-|[WorksheetNameChangedEventArgs](/javascript/api/excel/excel.worksheetnamechangedeventargs)|[nameAfter](/javascript/api/excel/excel.worksheetnamechangedeventargs#nameAfter)|Получает новое имя таблицы после изменения имени.|
-||[nameBefore](/javascript/api/excel/excel.worksheetnamechangedeventargs#nameBefore)|Получает предыдущее имя таблицы до изменения имени.|
-||[source](/javascript/api/excel/excel.worksheetnamechangedeventargs#source)|Источник события.|
-||[type](/javascript/api/excel/excel.worksheetnamechangedeventargs#type)|Получает тип события.|
-||[worksheetId](/javascript/api/excel/excel.worksheetnamechangedeventargs#worksheetId)|Получает ID таблицы с новым именем.|
 |[WorksheetProtection](/javascript/api/excel/excel.worksheetprotection)|[checkPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#checkPassword_password_)|Указывает, можно ли использовать пароль для разблокировки защиты таблицы.|
 ||[pauseProtection(password?: string)](/javascript/api/excel/excel.worksheetprotection#pauseProtection_password_)|Приостановка защиты таблиц для данного объекта таблицы для пользователя в заданном сеансе.|
 ||[allowEditRanges](/javascript/api/excel/excel.worksheetprotection#allowEditRanges)|Указывает `AllowEditRangeCollection` найденное в этом документе.|
@@ -284,14 +235,5 @@
 ||[setPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#setPassword_password_)|Изменяет пароль, связанный с `WorksheetProtection` объектом.|
 ||[updateOptions (параметры: Excel. WorksheetProtectionOptions)](/javascript/api/excel/excel.worksheetprotection#updateOptions_options_)|Измените параметры защиты таблиц, связанные с `WorksheetProtection` объектом.|
 |[WorksheetProtectionChangedEventArgs](/javascript/api/excel/excel.worksheetprotectionchangedeventargs)|[allowEditRangesChanged](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#allowEditRangesChanged)|Указывает, изменились ли `AllowEditRange` какие-либо объекты.|
-||[isProtected](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#isProtected)|Получает текущее состояние защиты таблицы.|
 ||[protectionOptionsChanged](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#protectionOptionsChanged)|Указывает, `WorksheetProtectionOptions` изменились ли изменения.|
 ||[sheetPasswordChanged](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#sheetPasswordChanged)|Указывает, изменился ли пароль таблицы.|
-||[source](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#source)|Источник события.|
-||[type](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#type)|Получает тип события.|
-||[worksheetId](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#worksheetId)|Получает ID таблицы, в которой изменен статус защиты.|
-|[WorksheetVisibilityChangedEventArgs](/javascript/api/excel/excel.worksheetvisibilitychangedeventargs)|[source](/javascript/api/excel/excel.worksheetvisibilitychangedeventargs#source)|Источник события.|
-||[type](/javascript/api/excel/excel.worksheetvisibilitychangedeventargs#type)|Получает тип события.|
-||[visibilityAfter](/javascript/api/excel/excel.worksheetvisibilitychangedeventargs#visibilityAfter)|Получает новый параметр видимости таблицы после изменения видимости.|
-||[visibilityBefore](/javascript/api/excel/excel.worksheetvisibilitychangedeventargs#visibilityBefore)|Получает предыдущий параметр видимости таблицы перед изменением видимости.|
-||[worksheetId](/javascript/api/excel/excel.worksheetvisibilitychangedeventargs#worksheetId)|Получает ID таблицы, видимость которой изменилась.|

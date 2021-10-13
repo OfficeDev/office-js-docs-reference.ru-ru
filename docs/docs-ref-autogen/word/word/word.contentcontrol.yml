@@ -81,6 +81,18 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="word!Word.RequestContext:class" />
+- name: endnotes
+  uid: word!Word.ContentControl#endnotes:member
+  package: word!
+  fullName: endnotes
+  summary: Получает коллекцию endnotes в contentcontrol. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly endnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: font
   uid: word!Word.ContentControl#font:member
   package: word!
@@ -93,6 +105,18 @@ properties:
     content: 'readonly font: Word.Font;'
     return:
       type: <xref uid="word!Word.Font:class" />
+- name: footnotes
+  uid: word!Word.ContentControl#footnotes:member
+  package: word!
+  fullName: footnotes
+  summary: Получает коллекцию сносок в contentcontrol. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly footnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: id
   uid: word!Word.ContentControl#id:member
   package: word!
@@ -413,6 +437,19 @@ methods:
     return:
       type: void
       description: ''
+- name: getComments()
+  uid: word!Word.ContentControl#getComments:member(1)
+  package: word!
+  fullName: getComments()
+  summary: Получает комментарии, связанные с телом.
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getComments(): Word.CommentCollection;'
+    return:
+      type: <xref uid="word!Word.CommentCollection:class" />
+      description: ''
 - name: getHtml()
   uid: word!Word.ContentControl#getHtml:member(1)
   package: word!
@@ -451,7 +488,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Before", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Before", "Start", "End", "After" или "Content".
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -468,7 +505,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Before", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Before", "Start", "End", "After" или "Content".
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -488,7 +525,7 @@ methods:
       description: Обязательный. Знаки препинания и/или другие знаки окончания в качестве массива строк.
       type: string[]
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -505,10 +542,10 @@ methods:
     content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
     parameters:
     - id: breakType
-      description: Обязательно. Тип перерыва.
+      description: Обязательный. Тип перерыва.
       type: <xref uid="word!Word.BreakType:enum" />
     - id: insertLocation
-      description: Обязательно. Значение может быть "Начало", "Конец", "До" или "После".
+      description: Обязательный. Значение может быть "Начало", "Конец", "До" или "После".
       type: <xref uid="word!Word.InsertLocation:enum" />
     return:
       type: void
@@ -525,10 +562,10 @@ methods:
     content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
     parameters:
     - id: breakTypeString
-      description: Обязательно. Тип перерыва.
+      description: Обязательный. Тип перерыва.
       type: "\"Page\" | \"Next\" | \"SectionNext\" | \"SectionContinuous\" | \"SectionEven\" | \"SectionOdd\" | \"Line\""
     - id: insertLocation
-      description: Обязательно. Значение может быть "Начало", "Конец", "До" или "После".
+      description: Обязательный. Значение может быть "Начало", "Конец", "До" или "После".
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     return:
       type: void
@@ -665,7 +702,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательно. OOXML, который необходимо вставить в управление контентом.
+      description: Обязательный. OOXML, который необходимо вставить в управление контентом.
       type: string
     - id: insertLocation
       description: "Обязательный параметр. Возможные значения: Replace, Start или End. 'Replace' нельзя использовать с помощью элементов управления контентом RichTextTable и RichTextTableRow."
@@ -1005,16 +1042,16 @@ methods:
     content: 'split(delimiters: string[], multiParagraphs?: boolean, trimDelimiters?: boolean, trimSpacing?: boolean): Word.RangeCollection;'
     parameters:
     - id: delimiters
-      description: Обязательно. Делимитеры как массив строк.
+      description: Обязательный. Делимитеры как массив строк.
       type: string[]
     - id: multiParagraphs
-      description: Необязательный параметр. Указывает, может ли возвращенный диапазон детей охватывать несколько абзацев. Значение по умолчанию является ложным, что указывает на то, что границы абзаца также используются в качестве делимитеров.
+      description: Необязательное свойство. Указывает, может ли возвращенный диапазон детей охватывать несколько абзацев. Значение по умолчанию является ложным, что указывает на то, что границы абзаца также используются в качестве делимитеров.
       type: boolean
     - id: trimDelimiters
-      description: Необязательный параметр. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
       type: boolean
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1097,9 +1134,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="word!Word.ContentControlEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: ba1149c1461a099d77e5a292663e4b6aaea96888
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: 9827d399b8bdb9bd6ab41f6a375a14ddd825a118
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60073353"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60310875"

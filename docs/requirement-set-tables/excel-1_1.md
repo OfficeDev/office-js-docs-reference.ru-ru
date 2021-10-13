@@ -18,7 +18,7 @@
 ||[axes](/javascript/api/excel/excel.chart#axes)|Представляет оси диаграммы.|
 ||[dataLabels](/javascript/api/excel/excel.chart#dataLabels)|Представляет метки данных на диаграмме.|
 ||[format](/javascript/api/excel/excel.chart#format)|Инкапсулирует свойства формата для области диаграммы.|
-||[legend](/javascript/api/excel/excel.chart#legend)|Представляет условные обозначения для диаграммы.|
+||[легенда](/javascript/api/excel/excel.chart#legend)|Представляет условные обозначения для диаграммы.|
 ||[series](/javascript/api/excel/excel.chart#series)|Представляет один ряд данных или коллекцию рядов данных в диаграмме.|
 ||[заголовок](/javascript/api/excel/excel.chart#title)|Представляет заголовок указанной диаграммы, включая его текст, видимость, положение и форматирование.|
 ||[setData(sourceData: Range, seriesBy?: Excel. ChartSeriesBy)](/javascript/api/excel/excel.chart#setData_sourceData__seriesBy_)|Сбрасывает исходные данные для диаграммы.|
@@ -164,7 +164,7 @@
 ||[getRange()](/javascript/api/excel/excel.table#getRange__)|Получает объект диапазона, связанный со всей таблицей.|
 ||[getTotalRowRange()](/javascript/api/excel/excel.table#getTotalRowRange__)|Получает объект диапазона, связанный со строкой итогов таблицы.|
 ||[name](/javascript/api/excel/excel.table#name)|Имя таблицы.|
-||[columns](/javascript/api/excel/excel.table#columns)|Представляет коллекцию всех столбцов в таблице.|
+||[столбцы](/javascript/api/excel/excel.table#columns)|Представляет коллекцию всех столбцов в таблице.|
 ||[id](/javascript/api/excel/excel.table#id)|Возвращает значение, однозначно идентифицирующее таблицу в данной книге.|
 ||[строки](/javascript/api/excel/excel.table#rows)|Представляет коллекцию всех строк в таблице.|
 ||[showHeaders](/javascript/api/excel/excel.table#showHeaders)|Указывает, видна ли строка заглавной строки.|
@@ -182,7 +182,7 @@
 ||[getTotalRowRange()](/javascript/api/excel/excel.tablecolumn#getTotalRowRange__)|Получает объект диапазона, связанный со строкой итогов столбца.|
 ||[name](/javascript/api/excel/excel.tablecolumn#name)|Указывает имя столбца таблицы.|
 ||[id](/javascript/api/excel/excel.tablecolumn#id)|Возвращает уникальный ключ, идентифицирующий столбец в таблице.|
-||[index](/javascript/api/excel/excel.tablecolumn#index)|Возвращает номер индекса столбца в коллекции столбцов таблицы.|
+||[индекс](/javascript/api/excel/excel.tablecolumn#index)|Возвращает номер индекса столбца в коллекции столбцов таблицы.|
 ||[values](/javascript/api/excel/excel.tablecolumn#values)|Представляет необработанные значения указанного диапазона.|
 |[TableColumnCollection](/javascript/api/excel/excel.tablecolumncollection)|[add(index?: number, values?: Array<Array<boolean \| string \| number>> \| boolean \| string \| number, name?: string)](/javascript/api/excel/excel.tablecolumncollection#add_index__values__name_)|Добавляет новый столбец в таблицу.|
 ||[getItem(key: number \| string)](/javascript/api/excel/excel.tablecolumncollection#getItem_key_)|Возвращает объект столбца по имени или идентификатору.|
@@ -191,9 +191,9 @@
 ||[items](/javascript/api/excel/excel.tablecolumncollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[TableRow](/javascript/api/excel/excel.tablerow)|[delete()](/javascript/api/excel/excel.tablerow#delete__)|Удаляет строку из таблицы.|
 ||[getRange()](/javascript/api/excel/excel.tablerow#getRange__)|Получает объект диапазона, связанный со всей строкой.|
-||[index](/javascript/api/excel/excel.tablerow#index)|Возвращает номер индекса строки в коллекции строк таблицы.|
+||[индекс](/javascript/api/excel/excel.tablerow#index)|Возвращает номер индекса строки в коллекции строк таблицы.|
 ||[values](/javascript/api/excel/excel.tablerow#values)|Представляет необработанные значения указанного диапазона.|
-|[TableRowCollection](/javascript/api/excel/excel.tablerowcollection)|[add(index?: number, values?: Array<Array<boolean \| string \| number>> \| boolean \| string \| number)](/javascript/api/excel/excel.tablerowcollection#add_index__values_)|Добавляет одну или несколько строк в таблицу.|
+|[TableRowCollection](/javascript/api/excel/excel.tablerowcollection)|[add(index?: number, values?: Array<Array<\| \| boolean string number>> \| boolean \| string \| number, alwaysInsert?: boolean)](/javascript/api/excel/excel.tablerowcollection#add_index__values__alwaysInsert_)|Добавляет одну или несколько строк в таблицу.|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.tablerowcollection#getItemAt_index_)|Получает строку на основании ее позиции в коллекции.|
 ||[count](/javascript/api/excel/excel.tablerowcollection#count)|Возвращает количество строк в таблице.|
 ||[items](/javascript/api/excel/excel.tablerowcollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
@@ -212,7 +212,7 @@
 ||[диаграммы](/javascript/api/excel/excel.worksheet#charts)|Возвращает коллекцию диаграмм, которые являются частью таблицы.|
 ||[id](/javascript/api/excel/excel.worksheet#id)|Возвращает значение, однозначно идентифицирующее лист в данной книге.|
 ||[таблицы](/javascript/api/excel/excel.worksheet#tables)|Коллекция таблиц, имеющихся на листе.|
-||[видимость](/javascript/api/excel/excel.worksheet#visibility)|Видимость листа.|
+||[visibility](/javascript/api/excel/excel.worksheet#visibility)|Видимость листа.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[add(name?: string)](/javascript/api/excel/excel.worksheetcollection#add_name_)|Добавляет новый лист в книгу.|
 ||[getActiveWorksheet()](/javascript/api/excel/excel.worksheetcollection#getActiveWorksheet__)|Получает текущий активный лист в книге.|
 ||[getItem(key: string)](/javascript/api/excel/excel.worksheetcollection#getItem_key_)|Получает объект листа по его имени или ИД.|
