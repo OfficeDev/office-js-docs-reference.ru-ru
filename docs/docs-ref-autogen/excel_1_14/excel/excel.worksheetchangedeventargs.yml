@@ -1,0 +1,180 @@
+### YamlMime:TSType
+name: Excel.WorksheetChangedEventArgs
+uid: excel!Excel.WorksheetChangedEventArgs:interface
+package: excel!
+fullName: Excel.WorksheetChangedEventArgs
+summary: Предоставляет сведения о таблице, которая подняла измененное событие.
+remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: address
+  uid: excel!Excel.WorksheetChangedEventArgs#address:member
+  package: excel!
+  fullName: address
+  summary: Получает адрес диапазона, представляющий измененную область конкретного листа.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'address: string;'
+    return:
+      type: string
+- name: changeDirectionState
+  uid: excel!Excel.WorksheetChangedEventArgs#changeDirectionState:member
+  package: excel!
+  fullName: changeDirectionState
+  summary: Представляет изменение в направлении, в которое будут сдвигаться ячейки в таблице при удалении или вставке ячейки. Это включает в себя следующие два сценария. 1. Направление (например, вниз или вправо), которое существующие ячейки будут смещаться, когда новая ячейка или ячейки будут вставлены в таблицу. 2. Направление (например, вверх или влево), в которое будут смещаться оставшиеся ячейки при удалении ячейки или ячеек из таблицы.
+  remarks: '\[[Набор API: ExcelApi 1.14](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'changeDirectionState: Excel.ChangeDirectionState;'
+    return:
+      type: <xref uid="excel!Excel.ChangeDirectionState:interface" />
+- name: changeType
+  uid: excel!Excel.WorksheetChangedEventArgs#changeType:member
+  package: excel!
+  fullName: changeType
+  summary: Получает тип изменений, который представляет, как запускается измененное событие. Подробные `Excel.DataChangeType` сведения см. в материале.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'changeType: Excel.DataChangeType | "Unknown" | "RangeEdited" | "RowInserted" | "RowDeleted" | "ColumnInserted" | "ColumnDeleted" | "CellInserted" | "CellDeleted";'
+    return:
+      type: <xref uid="excel!Excel.DataChangeType:enum" /> | "Unknown" | "RangeEdited" | "RowInserted" | "RowDeleted" | "ColumnInserted" | "ColumnDeleted" | "CellInserted" | "CellDeleted"
+- name: details
+  uid: excel!Excel.WorksheetChangedEventArgs#details:member
+  package: excel!
+  fullName: details
+  summary: Представляет сведения об изменениях. Это свойство может быть извлечено при запуске измененного события в одной ячейке. Если измененное событие запускается на нескольких ячейках, это свойство невозможно получить.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```javascript
+
+    // This function would be used as an event handler for the Worksheet.onChanged event.
+
+    function onWorksheetChanged(eventArgs) {
+        Excel.run(function (context) {
+            var details = eventArgs.details;
+            var address = eventArgs.address;
+
+            // Print the before and after types and values to the console.
+            console.log(`Change at ${address}: was ${details.valueBefore}(${details.valueTypeBefore}),`
+                + ` now is ${details.valueAfter}(${details.valueTypeAfter})`);
+            return context.sync();
+        });
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'details: Excel.ChangedEventDetail;'
+    return:
+      type: <xref uid="excel!Excel.ChangedEventDetail:interface" />
+- name: source
+  uid: excel!Excel.WorksheetChangedEventArgs#source:member
+  package: excel!
+  fullName: source
+  summary: Получает источник события. Подробные `Excel.EventSource` сведения см. в материале.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'source: Excel.EventSource | "Local" | "Remote";'
+    return:
+      type: <xref uid="excel!Excel.EventSource:enum" /> | "Local" | "Remote"
+- name: triggerSource
+  uid: excel!Excel.WorksheetChangedEventArgs#triggerSource:member
+  package: excel!
+  fullName: triggerSource
+  summary: Представляет источник триггера события. Например, определяет, запускает ли это локальное надстройка событие.
+  remarks: '\[[Набор API: ExcelApi 1.14](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'triggerSource: Excel.EventTriggerSource | "Unknown" | "ThisLocalAddin";'
+    return:
+      type: <xref uid="excel!Excel.EventTriggerSource:enum" /> | "Unknown" | "ThisLocalAddin"
+- name: type
+  uid: excel!Excel.WorksheetChangedEventArgs#type:member
+  package: excel!
+  fullName: type
+  summary: Получает тип события. Подробные `Excel.EventType` сведения см. в материале.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'type: "WorksheetChanged";'
+    return:
+      type: "\"WorksheetChanged\""
+- name: worksheetId
+  uid: excel!Excel.WorksheetChangedEventArgs#worksheetId:member
+  package: excel!
+  fullName: worksheetId
+  summary: Получает ID таблицы, в которой изменились данные.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'worksheetId: string;'
+    return:
+      type: string
+methods:
+- name: getRange(ctx)
+  uid: excel!Excel.WorksheetChangedEventArgs#getRange:member(1)
+  package: excel!
+  fullName: getRange(ctx)
+  summary: >-
+    Получает диапазон, представляющий измененную область конкретного листа.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRange(ctx: Excel.RequestContext): Excel.Range;'
+    parameters:
+    - id: ctx
+      description: ''
+      type: <xref uid="excel!Excel.RequestContext:class" />
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+- name: getRangeOrNullObject(ctx)
+  uid: excel!Excel.WorksheetChangedEventArgs#getRangeOrNullObject:member(1)
+  package: excel!
+  fullName: getRangeOrNullObject(ctx)
+  summary: >-
+    Получает диапазон, представляющий измененную область конкретного листа. Может возвращать пустой объект.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeOrNullObject(ctx: Excel.RequestContext): Excel.Range;'
+    parameters:
+    - id: ctx
+      description: ''
+      type: <xref uid="excel!Excel.RequestContext:class" />
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+metadata:
+  ms.openlocfilehash: 98f72dfa693b7c67adb02a196d01639ac81ce1ab
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60325522"

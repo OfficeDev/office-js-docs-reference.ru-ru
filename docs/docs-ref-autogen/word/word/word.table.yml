@@ -33,6 +33,18 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="word!Word.RequestContext:class" />
+- name: endnotes
+  uid: word!Word.Table#endnotes:member
+  package: word!
+  fullName: endnotes
+  summary: Получает коллекцию endnotes в таблице. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly endnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: font
   uid: word!Word.Table#font:member
   package: word!
@@ -45,6 +57,18 @@ properties:
     content: 'readonly font: Word.Font;'
     return:
       type: <xref uid="word!Word.Font:class" />
+- name: footnotes
+  uid: word!Word.Table#footnotes:member
+  package: word!
+  fullName: footnotes
+  summary: Получает коллекцию сносок в таблице. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly footnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: headerRowCount
   uid: word!Word.Table#headerRowCount:member
   package: word!
@@ -361,7 +385,7 @@ methods:
       description: Обязательно. Это может быть "Начало" или "Конец", соответствующие соответствующей стороне таблицы.
       type: <xref uid="word!Word.InsertLocation:enum" />
     - id: columnCount
-      description: Обязательно. Количество столбцов для добавления.
+      description: Обязательный. Количество столбцов для добавления.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -381,10 +405,10 @@ methods:
     content: 'addColumns(insertLocationString: "Before" | "After" | "Start" | "End" | "Replace", columnCount: number, values?: string[][]): void;'
     parameters:
     - id: insertLocationString
-      description: Обязательно. Это может быть "Начало" или "Конец", соответствующие соответствующей стороне таблицы.
+      description: Обязательный. Это может быть "Начало" или "Конец", соответствующие соответствующей стороне таблицы.
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     - id: columnCount
-      description: Обязательно. Количество столбцов для добавления.
+      description: Обязательный. Количество столбцов для добавления.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -404,10 +428,10 @@ methods:
     content: 'addRows(insertLocation: Word.InsertLocation, rowCount: number, values?: string[][]): Word.TableRowCollection;'
     parameters:
     - id: insertLocation
-      description: Обязательно. Это может быть "Начало" или "Конец".
+      description: Обязательный. Это может быть "Начало" или "Конец".
       type: <xref uid="word!Word.InsertLocation:enum" />
     - id: rowCount
-      description: Обязательно. Количество строк, которые нужно добавить.
+      description: Обязательный. Количество строк, которые нужно добавить.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -430,7 +454,7 @@ methods:
       description: Обязательный. Это может быть "Начало" или "Конец".
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     - id: rowCount
-      description: Обязательно. Количество строк, которые нужно добавить.
+      description: Обязательный. Количество строк, которые нужно добавить.
       type: number
     - id: values
       description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
@@ -489,10 +513,10 @@ methods:
     content: 'deleteColumns(columnIndex: number, columnCount?: number): void;'
     parameters:
     - id: columnIndex
-      description: Обязательно. Первый столбец для удаления.
+      description: Обязательный. Первый столбец для удаления.
       type: number
     - id: columnCount
-      description: Необязательный параметр. Количество столбцов, которые необходимо удалить. По умолчанию 1.
+      description: Необязательное свойство. Количество столбцов, которые необходимо удалить. По умолчанию 1.
       type: number
     return:
       type: void
@@ -512,7 +536,7 @@ methods:
       description: Обязательно. Первая строка для удаления.
       type: number
     - id: rowCount
-      description: Необязательный параметр. Количество строк, которые необходимо удалить. По умолчанию 1.
+      description: Необязательное свойство. Количество строк, которые необходимо удалить. По умолчанию 1.
       type: number
     return:
       type: void
@@ -542,7 +566,7 @@ methods:
     content: 'getBorder(borderLocation: Word.BorderLocation): Word.TableBorder;'
     parameters:
     - id: borderLocation
-      description: Обязательно. Расположение границы.
+      description: Обязательный. Расположение границы.
       type: <xref uid="word!Word.BorderLocation:enum" />
     return:
       type: <xref uid="word!Word.TableBorder:class" />
@@ -559,7 +583,7 @@ methods:
     content: 'getBorder(borderLocationString: "Top" | "Left" | "Bottom" | "Right" | "InsideHorizontal" | "InsideVertical" | "Inside" | "Outside" | "All"): Word.TableBorder;'
     parameters:
     - id: borderLocationString
-      description: Обязательный. Расположение границы.
+      description: Обязательно. Расположение границы.
       type: "\"Top\" | \"Left\" | \"Bottom\" | \"Right\" | \"InsideHorizontal\" | \"InsideVertical\" | \"Inside\" | \"Outside\" | \"All\""
     return:
       type: <xref uid="word!Word.TableBorder:class" />
@@ -595,7 +619,7 @@ methods:
     content: 'getCell(rowIndex: number, cellIndex: number): Word.TableCell;'
     parameters:
     - id: rowIndex
-      description: Обязательный. Индекс строки.
+      description: Обязательно. Индекс строки.
       type: number
     - id: cellIndex
       description: Обязательный. Индекс ячейки в строке.
@@ -618,7 +642,7 @@ methods:
       description: Обязательно. Индекс строки.
       type: number
     - id: cellIndex
-      description: Обязательно. Индекс ячейки в строке.
+      description: Обязательный. Индекс ячейки в строке.
       type: number
     return:
       type: <xref uid="word!Word.TableCell:class" />
@@ -652,7 +676,7 @@ methods:
     content: 'getCellPadding(cellPaddingLocationString: "Top" | "Left" | "Bottom" | "Right"): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: cellPaddingLocationString
-      description: Обязательно. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
+      description: Обязательный. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
       type: "\"Top\" | \"Left\" | \"Bottom\" | \"Right\""
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -747,7 +771,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End" или "After".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End" или "After".
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -764,7 +788,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End" или "After".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End" или "After".
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -954,7 +978,7 @@ methods:
       description: Обязательно. Строка последней ячейки
       type: number
     - id: lastCell
-      description: Обязательно. Индекс последней ячейки в строке
+      description: Обязательный. Индекс последней ячейки в строке
       type: number
     return:
       type: <xref uid="word!Word.TableCell:class" />
@@ -1080,10 +1104,10 @@ methods:
     content: 'setCellPadding(cellPaddingLocation: Word.CellPaddingLocation, cellPadding: number): void;'
     parameters:
     - id: cellPaddingLocation
-      description: Обязательно. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
+      description: Обязательный. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
       type: <xref uid="word!Word.CellPaddingLocation:enum" />
     - id: cellPadding
-      description: Обязательно. Обивка ячейки.
+      description: Обязательный. Обивка ячейки.
       type: number
     return:
       type: void
@@ -1103,7 +1127,7 @@ methods:
       description: Обязательный. Расположение обивки ячейки может быть "Top", "Left", "Bottom" или "Right".
       type: "\"Top\" | \"Left\" | \"Bottom\" | \"Right\""
     - id: cellPadding
-      description: Обязательный. Обивка ячейки.
+      description: Обязательно. Обивка ячейки.
       type: number
     return:
       type: void
@@ -1149,9 +1173,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 78ba0d2ec0c941bcb1f12e767e4af349fd36c3ef
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: 7d2b469f48a2395ba3438c2bc662711656b74c7a
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60072271"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60315544"

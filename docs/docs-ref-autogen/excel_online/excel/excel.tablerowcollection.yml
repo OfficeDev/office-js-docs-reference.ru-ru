@@ -50,10 +50,10 @@ properties:
     return:
       type: <xref uid="excel!Excel.TableRow:class" />[]
 methods:
-- name: add(index, values)
+- name: add(index, values, alwaysInsert)
   uid: excel!Excel.TableRowCollection#add:member(1)
   package: excel!
-  fullName: add(index, values)
+  fullName: add(index, values, alwaysInsert)
   summary: >-
     Добавляет одну или несколько строк в таблицу. Возвращается объект, находящийся над новыми строками.
 
@@ -63,7 +63,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableRow;'
+    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, alwaysInsert?: boolean): Excel.TableRow;'
     parameters:
     - id: index
       description: Необязательный параметр. Определяет относительную позицию новой строки. Если задано значение null или -1, столбец добавляется в конце. Все строки ниже вставляемой строки сдвигаются вниз. Используется нулевой индекс.
@@ -71,8 +71,48 @@ methods:
     - id: values
       description: Необязательный параметр. 2D-массив неформатированные значения строки таблицы.
       type: Array&lt;Array&lt;boolean | string | number&gt;&gt; | boolean | string | number
+    - id: alwaysInsert
+      description: ''
+      type: boolean
     return:
       type: <xref uid="excel!Excel.TableRow:class" />
+      description: ''
+- name: deleteRows(rows)
+  uid: excel!Excel.TableRowCollection#deleteRows:member(1)
+  package: excel!
+  fullName: deleteRows(rows)
+  summary: Удаление нескольких строк из таблицы. Эти строки не должны быть последовательной. Этот метод будет бросать ошибку, если выбранная строка уже удалена или `InvalidArgument` не существует. Этот метод будет бросать ошибку, если в таблице, на которой называется `InsertDeleteConflict` метод, применен фильтр.
+  remarks: '\[[Набор API: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'deleteRows(rows: number[] | TableRow[]): void;'
+    parameters:
+    - id: rows
+      description: Массив номеров индексов строк или объектов строк, которые необходимо удалить из таблицы.
+      type: number[] | <xref uid="excel!Excel.TableRow:class" />[]
+    return:
+      type: void
+      description: ''
+- name: deleteRowsAt(index, count)
+  uid: excel!Excel.TableRowCollection#deleteRowsAt:member(1)
+  package: excel!
+  fullName: deleteRowsAt(index, count)
+  summary: Удаление указанного количества строк из таблицы, начиная с указанного индекса. Этот метод будет бросать ошибку, если в таблице, на которой называется `InsertDeleteConflict` метод, применен фильтр.
+  remarks: '\[[Набор API: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'deleteRowsAt(index: number, count?: number): void;'
+    parameters:
+    - id: index
+      description: Значение индекса строки, которая должна быть удалена. Примечание. Индексы строк обновляются при каждом удалении предыдущей строки в таблице после каждой операции удаления. Убедитесь, что индекс строки, которую необходимо удалить, не изменился между временем, когда вы определили значение, и временем запуска операции.
+      type: number
+    - id: count
+      description: Количество строк, которые необходимо удалить. По умолчанию будет удалена одна строка.
+      type: number
+    return:
+      type: void
       description: ''
 - name: getCount()
   uid: excel!Excel.TableRowCollection#getCount:member(1)
@@ -174,9 +214,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 7e2bea4809d17e3ed55e5ee5acf9d21f56ea36f1
-  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
+  ms.openlocfilehash: f10f0e0604795a160757e4e8277cb3b72b51e3ba
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 09/24/2021
-  ms.locfileid: "59647689"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60316251"
