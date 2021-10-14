@@ -8,12 +8,12 @@ ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
 ms.date: 06/30/2021
-ms.openlocfilehash: b24ce0c4de162150263d689390da6b4e3413dd7b
-ms.sourcegitcommit: 1bb36f6fdb15dc8520d89cf11620aa1f5ae0fb98
+ms.openlocfilehash: cefe01d6c73086044bb95d833f40f5ad02562cad
+ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 08/13/2021
-ms.locfileid: "58239421"
+ms.lasthandoff: 10/13/2021
+ms.locfileid: "60315831"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Справочник по API JavaScript для надстроек Office
 
@@ -40,6 +40,7 @@ API JavaScript для Office позволяет создавать веб-при
             <ul>
                 <li><a href="/javascript/api/excel?view=excel-js-preview">ExcelApi Preview</a></li>
                 <li><a href="/javascript/api/excel?view=excel-js-online">ExcelApiOnline 1.1</a></li>
+                <li><a href="/javascript/api/excel?view=excel-js-1.14">ExcelApi 1.14</a></li>
                 <li><a href="/javascript/api/excel?view=excel-js-1.13">ExcelApi 1.13</a></li>
                 <li><a href="/javascript/api/excel?view=excel-js-1.12">ExcelApi 1.12</a></li>
                 <li><a href="/javascript/api/excel?view=excel-js-1.11">ExcelApi 1.11</a></li>

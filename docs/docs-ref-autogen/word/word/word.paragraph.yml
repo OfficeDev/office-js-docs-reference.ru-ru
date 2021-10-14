@@ -63,6 +63,18 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="word!Word.RequestContext:class" />
+- name: endnotes
+  uid: word!Word.Paragraph#endnotes:member
+  package: word!
+  fullName: endnotes
+  summary: Получает коллекцию endnotes в абзаце. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly endnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: firstLineIndent
   uid: word!Word.Paragraph#firstLineIndent:member
   package: word!
@@ -87,6 +99,18 @@ properties:
     content: 'readonly font: Word.Font;'
     return:
       type: <xref uid="word!Word.Font:class" />
+- name: footnotes
+  uid: word!Word.Paragraph#footnotes:member
+  package: word!
+  fullName: footnotes
+  summary: Получает коллекцию сносок в абзаце. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly footnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: inlinePictures
   uid: word!Word.Paragraph#inlinePictures:member
   package: word!
@@ -486,10 +510,10 @@ methods:
     content: 'attachToList(listId: number, level: number): Word.List;'
     parameters:
     - id: listId
-      description: Обязательно. ID существующего списка.
+      description: Обязательный. ID существующего списка.
       type: number
     - id: level
-      description: Обязательно. Уровень в списке.
+      description: Обязательный. Уровень в списке.
       type: number
     return:
       type: <xref uid="word!Word.List:class" />
@@ -614,6 +638,19 @@ methods:
     content: 'detachFromList(): void;'
     return:
       type: void
+      description: ''
+- name: getComments()
+  uid: word!Word.Paragraph#getComments:member(1)
+  package: word!
+  fullName: getComments()
+  summary: Получает комментарии, связанные с абзацем.
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getComments(): Word.CommentCollection;'
+    return:
+      type: <xref uid="word!Word.CommentCollection:class" />
       description: ''
 - name: getHtml()
   uid: word!Word.Paragraph#getHtml:member(1)
@@ -834,7 +871,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -851,7 +888,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -871,7 +908,7 @@ methods:
       description: Обязательный. Знаки препинания и/или другие знаки окончания в качестве массива строк.
       type: string[]
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1220,7 +1257,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -1240,7 +1277,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -1711,10 +1748,10 @@ methods:
       description: Обязательно. Делимитеры как массив строк.
       type: string[]
     - id: trimDelimiters
-      description: Необязательный параметр. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
       type: boolean
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1807,9 +1844,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0bfc74cf79e4295ab6073c2c05d64c375aadbff2
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: e0c2191e430f9dcee3fb218cdbfd0b050c269939
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60073599"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60328535"

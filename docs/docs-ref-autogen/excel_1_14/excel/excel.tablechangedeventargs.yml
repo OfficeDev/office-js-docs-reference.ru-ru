@@ -1,0 +1,216 @@
+### YamlMime:TSType
+name: Excel.TableChangedEventArgs
+uid: excel!Excel.TableChangedEventArgs:interface
+package: excel!
+fullName: Excel.TableChangedEventArgs
+summary: Предоставляет сведения о таблице, в которую было поднято измененное событие.
+remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: address
+  uid: excel!Excel.TableChangedEventArgs#address:member
+  package: excel!
+  fullName: address
+  summary: Получает адрес, представляющий измененную область таблицы на конкретном листе.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'address: string;'
+    return:
+      type: string
+- name: changeType
+  uid: excel!Excel.TableChangedEventArgs#changeType:member
+  package: excel!
+  fullName: changeType
+  summary: Получает тип изменений, который представляет, как запускается измененное событие. Подробные `Excel.DataChangeType` сведения см. в материале.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'changeType: Excel.DataChangeType | "Unknown" | "RangeEdited" | "RowInserted" | "RowDeleted" | "ColumnInserted" | "ColumnDeleted" | "CellInserted" | "CellDeleted";'
+    return:
+      type: <xref uid="excel!Excel.DataChangeType:enum" /> | "Unknown" | "RangeEdited" | "RowInserted" | "RowDeleted" | "ColumnInserted" | "ColumnDeleted" | "CellInserted" | "CellDeleted"
+- name: details
+  uid: excel!Excel.TableChangedEventArgs#details:member
+  package: excel!
+  fullName: details
+  summary: Получает сведения о деталях изменений. Это свойство может быть извлечено при запуске измененного события в одной ячейке. Если измененное событие запускается на нескольких ячейках, это свойство невозможно получить.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/data-change-event-details.yaml
+
+    async function onTableChanged(eventArgs: Excel.TableChangedEventArgs) {
+        await Excel.run(async (context) => {
+            const details = eventArgs.details;
+            const address = eventArgs.address;
+
+            console.log(`Change at ${address}: was ${details.valueBefore}(${details.valueTypeBefore}),`
+              + ` now is ${details.valueAfter}(${details.valueTypeAfter})`);
+        });
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'details: Excel.ChangedEventDetail;'
+    return:
+      type: <xref uid="excel!Excel.ChangedEventDetail:interface" />
+- name: source
+  uid: excel!Excel.TableChangedEventArgs#source:member
+  package: excel!
+  fullName: source
+  summary: Получает источник события. Подробные `Excel.EventSource` сведения см. в материале.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'source: Excel.EventSource | "Local" | "Remote";'
+    return:
+      type: <xref uid="excel!Excel.EventSource:enum" /> | "Local" | "Remote"
+- name: tableId
+  uid: excel!Excel.TableChangedEventArgs#tableId:member
+  package: excel!
+  fullName: tableId
+  summary: Получает ID таблицы, в которой изменились данные.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-tablecollection-changed.yaml
+
+    async function onChange(event) {
+        await Excel.run(async (context) => {
+            let table = context.workbook.tables.getItem(event.tableId);
+            let worksheet = context.workbook.worksheets.getItem(event.worksheetId);
+            worksheet.load("name");
+
+            await context.sync();
+
+            console.log("Handler for table collection onChanged event has been triggered. Data changed address: " + event.address);
+            console.log("Table Id : " + event.tableId);
+            console.log("Worksheet Id : " + worksheet.name);
+        });
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'tableId: string;'
+    return:
+      type: string
+- name: type
+  uid: excel!Excel.TableChangedEventArgs#type:member
+  package: excel!
+  fullName: type
+  summary: Получает тип события. Подробные `Excel.EventType` сведения см. в материале.
+  remarks: '\[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'type: "TableChanged";'
+    return:
+      type: "\"TableChanged\""
+- name: worksheetId
+  uid: excel!Excel.TableChangedEventArgs#worksheetId:member
+  package: excel!
+  fullName: worksheetId
+  summary: Получает ID таблицы, в которой изменились данные.
+  remarks: >-
+    \[[Набор API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-tablecollection-changed.yaml
+
+    async function onChange(event) {
+        await Excel.run(async (context) => {
+            let table = context.workbook.tables.getItem(event.tableId);
+            let worksheet = context.workbook.worksheets.getItem(event.worksheetId);
+            worksheet.load("name");
+
+            await context.sync();
+
+            console.log("Handler for table collection onChanged event has been triggered. Data changed address: " + event.address);
+            console.log("Table Id : " + event.tableId);
+            console.log("Worksheet Id : " + worksheet.name);
+        });
+    }
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'worksheetId: string;'
+    return:
+      type: string
+methods:
+- name: getRange(ctx)
+  uid: excel!Excel.TableChangedEventArgs#getRange:member(1)
+  package: excel!
+  fullName: getRange(ctx)
+  summary: >-
+    Получает диапазон, который представляет измененную область таблицы на определенном таблице.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRange(ctx: Excel.RequestContext): Excel.Range;'
+    parameters:
+    - id: ctx
+      description: ''
+      type: <xref uid="excel!Excel.RequestContext:class" />
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+- name: getRangeOrNullObject(ctx)
+  uid: excel!Excel.TableChangedEventArgs#getRangeOrNullObject:member(1)
+  package: excel!
+  fullName: getRangeOrNullObject(ctx)
+  summary: >-
+    Получает диапазон, который представляет измененную область таблицы на определенном таблице. Может возвращать пустой объект.
+
+
+    \[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getRangeOrNullObject(ctx: Excel.RequestContext): Excel.Range;'
+    parameters:
+    - id: ctx
+      description: ''
+      type: <xref uid="excel!Excel.RequestContext:class" />
+    return:
+      type: <xref uid="excel!Excel.Range:class" />
+      description: ''
+metadata:
+  ms.openlocfilehash: 32719ac14e7e501868254246cf40eddf46e27b27
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60331402"

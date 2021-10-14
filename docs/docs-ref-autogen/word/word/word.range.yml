@@ -33,6 +33,18 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="word!Word.RequestContext:class" />
+- name: endnotes
+  uid: word!Word.Range#endnotes:member
+  package: word!
+  fullName: endnotes
+  summary: Получает коллекцию endnotes в диапазоне. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly endnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: font
   uid: word!Word.Range#font:member
   package: word!
@@ -45,6 +57,18 @@ properties:
     content: 'readonly font: Word.Font;'
     return:
       type: <xref uid="word!Word.Font:class" />
+- name: footnotes
+  uid: word!Word.Range#footnotes:member
+  package: word!
+  fullName: footnotes
+  summary: Получает коллекцию сносок в диапазоне. Только для чтения
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly footnotes: Word.NoteItemCollection;'
+    return:
+      type: <xref uid="word!Word.NoteItemCollection:class" />
 - name: hyperlink
   uid: word!Word.Range#hyperlink:member
   package: word!
@@ -297,7 +321,7 @@ methods:
     content: 'compareLocationWith(range: Word.Range): OfficeExtension.ClientResult<Word.LocationRelation>;'
     parameters:
     - id: range
-      description: Обязательно. Диапазон для сравнения с этим диапазоном.
+      description: Обязательный. Диапазон для сравнения с этим диапазоном.
       type: <xref uid="word!Word.Range:class" />
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;<xref uid="word!Word.LocationRelation:enum" />&gt;
@@ -361,7 +385,7 @@ methods:
     content: 'expandTo(range: Word.Range): Word.Range;'
     parameters:
     - id: range
-      description: Обязательный. Другой диапазон.
+      description: Обязательно. Другой диапазон.
       type: <xref uid="word!Word.Range:class" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -395,13 +419,26 @@ methods:
     content: 'getBookmarks(includeHidden?: boolean, includeAdjacent?: boolean): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: includeHidden
-      description: Необязательный параметр. Указывает, следует ли включать скрытые закладки. Значение по умолчанию является ложным, что указывает на то, что скрытые закладки исключены.
+      description: Необязательное свойство. Указывает, следует ли включать скрытые закладки. Значение по умолчанию является ложным, что указывает на то, что скрытые закладки исключены.
       type: boolean
     - id: includeAdjacent
-      description: Необязательный параметр. Указывает, следует ли включать закладки, расположенные рядом с диапазоном. Значение по умолчанию является ложным, что указывает на то, что соседние закладки исключены.
+      description: Необязательное свойство. Указывает, следует ли включать закладки, расположенные рядом с диапазоном. Значение по умолчанию является ложным, что указывает на то, что соседние закладки исключены.
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
+      description: ''
+- name: getComments()
+  uid: word!Word.Range#getComments:member(1)
+  package: word!
+  fullName: getComments()
+  summary: Получает комментарии, связанные с диапазоном.
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getComments(): Word.CommentCollection;'
+    return:
+      type: <xref uid="word!Word.CommentCollection:class" />
       description: ''
 - name: getHtml()
   uid: word!Word.Range#getHtml:member(1)
@@ -478,7 +515,7 @@ methods:
       description: Обязательно. Знаки препинания и/или другие знаки окончания в качестве массива строк.
       type: string[]
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца возвращаемого диапазона. Значение по умолчанию является ложным, что указывает на то, что в начале и конце диапазона включены символы интервала.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца возвращаемого диапазона. Значение по умолчанию является ложным, что указывает на то, что в начале и конце диапазона включены символы интервала.
       type: boolean
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -498,7 +535,7 @@ methods:
       description: Обязательно. Знаки препинания и/или другие знаки окончания в качестве массива строк.
       type: string[]
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца возвращаемого диапазона. Значение по умолчанию является ложным, что указывает на то, что в начале и конце диапазона включены символы интервала.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца возвращаемого диапазона. Значение по умолчанию является ложным, что указывает на то, что в начале и конце диапазона включены символы интервала.
       type: boolean
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -562,7 +599,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -579,7 +616,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -633,10 +670,10 @@ methods:
     content: 'getTextRanges(endingMarks: string[], trimSpacing?: boolean): Word.RangeCollection;'
     parameters:
     - id: endingMarks
-      description: Обязательно. Знаки препинания и/или другие знаки окончания в качестве массива строк.
+      description: Обязательный. Знаки препинания и/или другие знаки окончания в качестве массива строк.
       type: string[]
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -653,7 +690,7 @@ methods:
     content: 'insertBookmark(name: string): void;'
     parameters:
     - id: name
-      description: Обязательный. Имя закладки, которое является нечувствительным к делу. Если имя начинается с символа подчеркивать, закладки скрыты.
+      description: Обязательно. Имя закладки, которое является нечувствительным к делу. Если имя начинается с символа подчеркивать, закладки скрыты.
       type: string
     return:
       type: void
@@ -724,7 +761,7 @@ methods:
     content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
     parameters:
     - id: breakTypeString
-      description: Обязательно. Тип перерыва, который нужно добавить.
+      description: Обязательный. Тип перерыва, который нужно добавить.
       type: "\"Page\" | \"Next\" | \"SectionNext\" | \"SectionContinuous\" | \"SectionEven\" | \"SectionOdd\" | \"Line\""
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Before и After.'
@@ -732,6 +769,23 @@ methods:
     return:
       type: void
       description: ''
+- name: insertComment(commentText)
+  uid: word!Word.Range#insertComment:member(1)
+  package: word!
+  fullName: insertComment(commentText)
+  summary: Вставьте комментарий к диапазону.
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertComment(commentText: string): Word.Comment;'
+    parameters:
+    - id: commentText
+      description: Обязательный. Текст комментария.
+      type: string
+    return:
+      type: <xref uid="word!Word.Comment:class" />
+      description: объект комментариев
 - name: insertContentControl()
   uid: word!Word.Range#insertContentControl:member(1)
   package: word!
@@ -744,6 +798,23 @@ methods:
     content: 'insertContentControl(): Word.ContentControl;'
     return:
       type: <xref uid="word!Word.ContentControl:class" />
+      description: ''
+- name: insertEndnote(insertText)
+  uid: word!Word.Range#insertEndnote:member(1)
+  package: word!
+  fullName: insertEndnote(insertText)
+  summary: Вставляет endnote. Ссылка на endnote помещается после диапазона.
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertEndnote(insertText?: string): Word.NoteItem;'
+    parameters:
+    - id: insertText
+      description: ''
+      type: string
+    return:
+      type: <xref uid="word!Word.NoteItem:class" />
       description: ''
 - name: insertFileFromBase64(base64File, insertLocation)
   uid: word!Word.Range#insertFileFromBase64:member(1)
@@ -815,10 +886,27 @@ methods:
       description: Обязательный. Содержимое DOCX-файла в кодировке base64.
       type: string
     - id: insertLocationString
-      description: Обязательный. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
+      description: Обязательно. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     return:
       type: <xref uid="word!Word.Range:class" />
+      description: ''
+- name: insertFootnote(insertText)
+  uid: word!Word.Range#insertFootnote:member(1)
+  package: word!
+  fullName: insertFootnote(insertText)
+  summary: Вставляет сноску. Ссылка на сноску помещается после диапазона.
+  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'insertFootnote(insertText?: string): Word.NoteItem;'
+    parameters:
+    - id: insertText
+      description: ''
+      type: string
+    return:
+      type: <xref uid="word!Word.NoteItem:class" />
       description: ''
 - name: insertHtml(html, insertLocation)
   uid: word!Word.Range#insertHtml:member(1)
@@ -866,10 +954,10 @@ methods:
     content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: html
-      description: Обязательно. Вставляемый HTML.
+      description: Обязательный. Вставляемый HTML.
       type: string
     - id: insertLocation
-      description: Обязательно. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
+      description: Обязательный. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
       type: <xref uid="word!Word.InsertLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -909,7 +997,7 @@ methods:
       description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocation
-      description: Обязательно. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
+      description: Обязательный. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
       type: <xref uid="word!Word.InsertLocation:enum" />
     return:
       type: <xref uid="word!Word.InlinePicture:class" />
@@ -929,7 +1017,7 @@ methods:
       description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocationString
-      description: Обязательно. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
+      description: Обязательный. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     return:
       type: <xref uid="word!Word.InlinePicture:class" />
@@ -1225,7 +1313,7 @@ methods:
     content: 'intersectWith(range: Word.Range): Word.Range;'
     parameters:
     - id: range
-      description: Обязательно. Другой диапазон.
+      description: Обязательный. Другой диапазон.
       type: <xref uid="word!Word.Range:class" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -1467,13 +1555,13 @@ methods:
       description: Обязательно. Делимитеры как массив строк.
       type: string[]
     - id: multiParagraphs
-      description: Необязательный параметр. Указывает, может ли возвращенный диапазон детей охватывать несколько абзацев. Значение по умолчанию является ложным, что указывает на то, что границы абзаца также используются в качестве делимитеров.
+      description: Необязательное свойство. Указывает, может ли возвращенный диапазон детей охватывать несколько абзацев. Значение по умолчанию является ложным, что указывает на то, что границы абзаца также используются в качестве делимитеров.
       type: boolean
     - id: trimDelimiters
-      description: Необязательный параметр. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
       type: boolean
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1519,9 +1607,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d6de34ab115eb3d295bea4cfb9844b6adeb32547
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: 158962c3e5eaee50c2690944bbd3bc8843e69a92
+  ms.sourcegitcommit: 95efa452ba59614b52a8756db5185935b4d44f58
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60050253"
+  ms.lasthandoff: 10/13/2021
+  ms.locfileid: "60316482"
