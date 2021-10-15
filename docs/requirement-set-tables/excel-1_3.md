@@ -5,20 +5,20 @@
 ||[addFromNamedItem (имя: строка, bindingType: Excel. BindingType, id: string)](/javascript/api/excel/excel.bindingcollection#addFromNamedItem_name__bindingType__id_)|Добавляет новую привязку с учетом именованного элемента в книге.|
 ||[addFromSelection(bindingType: Excel. BindingType, id: string)](/javascript/api/excel/excel.bindingcollection#addFromSelection_bindingType__id_)|Добавляет новую привязку с учетом выделенного в настоящий момент фрагмента.|
 |[PivotTable](/javascript/api/excel/excel.pivottable)|[name](/javascript/api/excel/excel.pivottable#name)|Имя сводной таблицы.|
-||[worksheet](/javascript/api/excel/excel.pivottable#worksheet)|Лист, содержащий текущую сводную таблицу.|
 ||[refresh()](/javascript/api/excel/excel.pivottable#refresh__)|Обновляет сводную таблицу.|
+||[worksheet](/javascript/api/excel/excel.pivottable#worksheet)|Лист, содержащий текущую сводную таблицу.|
 |[PivotTableCollection](/javascript/api/excel/excel.pivottablecollection)|[getItem(name: string)](/javascript/api/excel/excel.pivottablecollection#getItem_name_)|Получает сводную таблицу по имени.|
 ||[items](/javascript/api/excel/excel.pivottablecollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 ||[refreshAll()](/javascript/api/excel/excel.pivottablecollection#refreshAll__)|Обновляет все сводные таблицы в коллекции.|
 |[Range](/javascript/api/excel/excel.range)|[getVisibleView()](/javascript/api/excel/excel.range#getVisibleView__)|Представляет видимые строки текущего диапазона.|
-|[RangeView](/javascript/api/excel/excel.rangeview)|[formulas](/javascript/api/excel/excel.rangeview#formulas)|Представляет формулу в формате A1.|
+|[RangeView](/javascript/api/excel/excel.rangeview)|[cellAddresses](/javascript/api/excel/excel.rangeview#cellAddresses)|Представляет адреса ячейки `RangeView` .|
+||[columnCount](/javascript/api/excel/excel.rangeview#columnCount)|Количество видимых столбцов.|
+||[formulas](/javascript/api/excel/excel.rangeview#formulas)|Представляет формулу в формате A1.|
 ||[formulasLocal](/javascript/api/excel/excel.rangeview#formulasLocal)|Представляет формулу в нотации стиля A1 на языке пользователя и в соответствии с его языковым стандартом.|
 ||[formulasR1C1](/javascript/api/excel/excel.rangeview#formulasR1C1)|Представляет формулу в формате R1C1.|
 ||[getRange()](/javascript/api/excel/excel.rangeview#getRange__)|Получает родительский диапазон, связанный с текущим `RangeView` .|
+||[индекс](/javascript/api/excel/excel.rangeview#index)|Возвращает значение, которое представляет индекс `RangeView` индекса .|
 ||[numberFormat](/javascript/api/excel/excel.rangeview#numberFormat)|Представляет код в числовом формате Excel для данной ячейки.|
-||[cellAddresses](/javascript/api/excel/excel.rangeview#cellAddresses)|Представляет адреса ячейки `RangeView` .|
-||[columnCount](/javascript/api/excel/excel.rangeview#columnCount)|Количество видимых столбцов.|
-||[index](/javascript/api/excel/excel.rangeview#index)|Возвращает значение, которое представляет индекс `RangeView` индекса .|
 ||[rowCount](/javascript/api/excel/excel.rangeview#rowCount)|Количество видимых строк.|
 ||[строки](/javascript/api/excel/excel.rangeview#rows)|Представляет коллекцию видимых ячеек в диапазоне, сопоставленных с указанным диапазоном.|
 ||[text](/javascript/api/excel/excel.rangeview#text)|Текстовые значения указанного диапазона.|

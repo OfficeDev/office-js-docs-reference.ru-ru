@@ -448,7 +448,7 @@
 ||[yieldDisc(settlement: number \| string \| boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , зрелость: число \| \| строка boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , pr: номер \| \| строки boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , выкуп: номер \| \| строки boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , основы?: номер \| \| строки boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> )](/javascript/api/excel/excel.functions#yieldDisc_settlement__maturity__pr__redemption__basis_)|Возвращает годовой доход для дисконтной безопасности.|
 ||[yieldMat(settlement: number \| string \| boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , зрелость: число \| \| строка boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , проблема: номер \| \| строки boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , rate: number \| string \| boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , pr: номер \| \| строки boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , основы?: номер \| \| строки boolean \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> )](/javascript/api/excel/excel.functions#yieldMat_settlement__maturity__issue__rate__pr__basis_)|Возвращает годовую доходность безопасности, которая платит проценты по сроку погашения.|
 ||[z_Test(массив: номер \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> , x: номер \| Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult, <any> sigma?: \| номер Excel. Диапазон \| Excel. RangeReference \| Excel. FunctionResult <any> )](/javascript/api/excel/excel.functions#z_Test_array__x__sigma_)|Возвращает однохвостый P-значение z-test.|
-|[Icon](/javascript/api/excel/excel.icon)|[index](/javascript/api/excel/excel.icon#index)|Указывает индекс значка в указанном наборе.|
+|[Icon](/javascript/api/excel/excel.icon)|[индекс](/javascript/api/excel/excel.icon#index)|Указывает индекс значка в указанном наборе.|
 |[IconCollections](/javascript/api/excel/excel.iconcollections)|[fiveArrows](/javascript/api/excel/excel.iconcollections#fiveArrows)||
 ||[fiveArrowsGray](/javascript/api/excel/excel.iconcollections#fiveArrowsGray)||
 ||[fiveBoxes](/javascript/api/excel/excel.iconcollections#fiveBoxes)|[Набор API: ExcelApi 1.2]|
@@ -477,10 +477,10 @@
 ||[getRowsAbove (count?: number)](/javascript/api/excel/excel.range#getRowsAbove_count_)|Получает определенное количество строк выше текущего `Range` объекта.|
 ||[getRowsBelow (count?: number)](/javascript/api/excel/excel.range#getRowsBelow_count_)|Получает определенное количество строк ниже текущего `Range` объекта.|
 ||[getUsedRange (valuesOnly?: boolean)](/javascript/api/excel/excel.range#getUsedRange_valuesOnly_)|Возвращает используемый диапазон заданного объекта диапазона.|
-||[merge(across?: boolean)](/javascript/api/excel/excel.range#merge_across_)|Объединяет ячейки диапазона в одну область на листе.|
 ||[hidden](/javascript/api/excel/excel.range#hidden)|Представляет, скрыты ли все ячейки текущего диапазона.|
-||[sort](/javascript/api/excel/excel.range#sort)|Представляет порядок сортировки текущего диапазона.|
+||[merge(across?: boolean)](/javascript/api/excel/excel.range#merge_across_)|Объединяет ячейки диапазона в одну область на листе.|
 ||[rowHidden](/javascript/api/excel/excel.range#rowHidden)|Представляет, если все строки в текущем диапазоне скрыты.|
+||[sort](/javascript/api/excel/excel.range#sort)|Представляет порядок сортировки текущего диапазона.|
 ||[unmerge()](/javascript/api/excel/excel.range#unmerge__)|Разъединяет ячейки диапазона на отдельные ячейки.|
 |[RangeFormat](/javascript/api/excel/excel.rangeformat)|[autofitColumns()](/javascript/api/excel/excel.rangeformat#autofitColumns__)|Изменяет ширину столбцов текущего диапазона на оптимальную с учетом текущих данных в столбцах.|
 ||[autofitRows()](/javascript/api/excel/excel.rangeformat#autofitRows__)|Изменяет высоту строк текущего диапазона на оптимальную с учетом текущих данных в столбцах.|
@@ -498,9 +498,9 @@
 ||[sortOn](/javascript/api/excel/excel.sortfield#sortOn)|Указывает тип сортировки этого условия.|
 |[Table](/javascript/api/excel/excel.table)|[clearFilters()](/javascript/api/excel/excel.table#clearFilters__)|Удаляет все фильтры, которые применяются к таблице.|
 ||[convertToRange()](/javascript/api/excel/excel.table#convertToRange__)|Преобразовывает таблицу в обычный диапазон ячеек.|
+||[reapplyFilters()](/javascript/api/excel/excel.table#reapplyFilters__)|Повторно применяет все текущие фильтры к таблице.|
 ||[sort](/javascript/api/excel/excel.table#sort)|Представляет сортировку для таблицы.|
 ||[worksheet](/javascript/api/excel/excel.table#worksheet)|Лист, содержащий текущую таблицу.|
-||[reapplyFilters()](/javascript/api/excel/excel.table#reapplyFilters__)|Повторно применяет все текущие фильтры к таблице.|
 |[TableColumn](/javascript/api/excel/excel.tablecolumn)|[filter](/javascript/api/excel/excel.tablecolumn#filter)|Извлекает фильтр, примененный к столбце.|
 |[TableSort](/javascript/api/excel/excel.tablesort)|[apply(fields: Excel. SortField[], matchCase?: boolean, method?: Excel. SortMethod)](/javascript/api/excel/excel.tablesort#apply_fields__matchCase__method_)|Выполняет сортировку.|
 ||[clear()](/javascript/api/excel/excel.tablesort#clear__)|Удаляет текущие параметры сортировки таблицы.|
@@ -542,8 +542,8 @@
 ||[onSelectionChanged](/javascript/api/excel/excel.workbook#onSelectionChanged)|Происходит при изменении выбора в документе.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[getUsedRange (valuesOnly?: boolean)](/javascript/api/excel/excel.worksheet#getUsedRange_valuesOnly_)|Используемый диапазон — это наименьший диапазон, включающий в себя все ячейки с определенным значением или форматированием.|
 ||[protection](/javascript/api/excel/excel.worksheet#protection)|Возвращает объект защиты листа для листа.|
-|[WorksheetProtection](/javascript/api/excel/excel.worksheetprotection)|[protect(options?: Excel. WorksheetProtectionOptions, password?: string)](/javascript/api/excel/excel.worksheetprotection#protect_options__password_)|Защищает лист.|
-||[options](/javascript/api/excel/excel.worksheetprotection#options)|Указывает параметры защиты для таблицы.|
+|[WorksheetProtection](/javascript/api/excel/excel.worksheetprotection)|[options](/javascript/api/excel/excel.worksheetprotection#options)|Указывает параметры защиты для таблицы.|
+||[protect(options?: Excel. WorksheetProtectionOptions, password?: string)](/javascript/api/excel/excel.worksheetprotection#protect_options__password_)|Защищает лист.|
 ||[защищена](/javascript/api/excel/excel.worksheetprotection#protected)|Указывает, защищена ли таблица.|
 |[WorksheetProtectionOptions](/javascript/api/excel/excel.worksheetprotectionoptions)|[allowAutoFilter](/javascript/api/excel/excel.worksheetprotectionoptions#allowAutoFilter)|Представляет параметр защиты таблиц, позволяющий использовать функцию AutoFilter.|
 ||[allowDeleteColumns](/javascript/api/excel/excel.worksheetprotectionoptions#allowDeleteColumns)|Представляет параметр защиты таблиц, позволяющий удалять столбцы.|

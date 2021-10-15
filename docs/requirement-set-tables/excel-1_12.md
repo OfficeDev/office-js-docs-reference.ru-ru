@@ -76,10 +76,10 @@
 |[RangeAreasCollection](/javascript/api/excel/excel.rangeareascollection)|[getCount()](/javascript/api/excel/excel.rangeareascollection#getCount__)|Получает количество объектов `RangeAreas` в этой коллекции.|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.rangeareascollection#getItemAt_index_)|Возвращает объект `RangeAreas` в зависимости от позиции в коллекции.|
 ||[items](/javascript/api/excel/excel.rangeareascollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
-|[WorkbookRangeAreas](/javascript/api/excel/excel.workbookrangeareas)|[getRangeAreasBySheet (клавиша: строка)](/javascript/api/excel/excel.workbookrangeareas#getRangeAreasBySheet_key_)|Возвращает объект на основе ИД или имени таблицы `RangeAreas` в коллекции.|
-||[getRangeAreasOrNullObjectBySheet (key: string)](/javascript/api/excel/excel.workbookrangeareas#getRangeAreasOrNullObjectBySheet_key_)|Возвращает объект на основе имени или ИД таблицы `RangeAreas` в коллекции.|
-||[addresses](/javascript/api/excel/excel.workbookrangeareas#addresses)|Возвращает массив адресов в стиле A1.|
+|[WorkbookRangeAreas](/javascript/api/excel/excel.workbookrangeareas)|[addresses](/javascript/api/excel/excel.workbookrangeareas#addresses)|Возвращает массив адресов в стиле A1.|
 ||[areas](/javascript/api/excel/excel.workbookrangeareas#areas)|Возвращает `RangeAreasCollection` объект.|
+||[getRangeAreasBySheet (клавиша: строка)](/javascript/api/excel/excel.workbookrangeareas#getRangeAreasBySheet_key_)|Возвращает объект на основе ИД или имени таблицы `RangeAreas` в коллекции.|
+||[getRangeAreasOrNullObjectBySheet (key: string)](/javascript/api/excel/excel.workbookrangeareas#getRangeAreasOrNullObjectBySheet_key_)|Возвращает объект на основе имени или ИД таблицы `RangeAreas` в коллекции.|
 ||[диапазоны](/javascript/api/excel/excel.workbookrangeareas#ranges)|Возвращает диапазоны, составляющие этот объект в `RangeCollection` объекте.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customProperties)|Получает коллекцию пользовательских свойств на уровне таблицы.|
 |[WorksheetCustomProperty](/javascript/api/excel/excel.worksheetcustomproperty)|[delete()](/javascript/api/excel/excel.worksheetcustomproperty#delete__)|Удаляет настраиваемое свойство.|

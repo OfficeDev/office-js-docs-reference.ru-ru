@@ -3,21 +3,21 @@
 |[AddSlideOptions](/javascript/api/powerpoint/powerpoint.addslideoptions)|[layoutId](/javascript/api/powerpoint/powerpoint.addslideoptions#layoutId)|Указывает ID макета слайда, который будет использоваться для нового слайда.|
 ||[slideMasterId](/javascript/api/powerpoint/powerpoint.addslideoptions#slideMasterId)|Указывает ID мастера слайдов, который будет использоваться для нового слайда.|
 |[BulletFormat](/javascript/api/powerpoint/powerpoint.bulletformat)|[visible](/javascript/api/powerpoint/powerpoint.bulletformat#visible)|Указывает, видны ли пули в абзаце.|
-|[ParagraphFormat](/javascript/api/powerpoint/powerpoint.paragraphformat)|[horizontalAlignment](/javascript/api/powerpoint/powerpoint.paragraphformat#horizontalAlignment)|Представляет горизонтальное выравнивание абзаца.|
-||[bulletFormat](/javascript/api/powerpoint/powerpoint.paragraphformat#bulletFormat)|Представляет формат пули абзаца.|
+|[ParagraphFormat](/javascript/api/powerpoint/powerpoint.paragraphformat)|[bulletFormat](/javascript/api/powerpoint/powerpoint.paragraphformat#bulletFormat)|Представляет формат пули абзаца.|
+||[horizontalAlignment](/javascript/api/powerpoint/powerpoint.paragraphformat#horizontalAlignment)|Представляет горизонтальное выравнивание абзаца.|
 |[Presentation](/javascript/api/powerpoint/powerpoint.presentation)|[slideMasters](/javascript/api/powerpoint/powerpoint.presentation#slideMasters)|Возвращает коллекцию `SlideMaster` объектов, которые находятся в презентации.|
 ||[tags](/javascript/api/powerpoint/powerpoint.presentation#tags)|Возвращает коллекцию тегов, присоединенных к презентации.|
 |[Shape](/javascript/api/powerpoint/powerpoint.shape)|[delete()](/javascript/api/powerpoint/powerpoint.shape#delete__)|Удаляет фигуру из коллекции фигур.|
-||[height](/javascript/api/powerpoint/powerpoint.shape#height)|Указывает высоту фигуры в точках.|
-||[left](/javascript/api/powerpoint/powerpoint.shape#left)|Расстояние в точках от левой стороны фигуры до левой стороны слайда.|
-||[name](/javascript/api/powerpoint/powerpoint.shape#name)|Указывает имя этой фигуры.|
 ||[fill](/javascript/api/powerpoint/powerpoint.shape#fill)|Возвращает формат заливки фигуры.|
+||[height](/javascript/api/powerpoint/powerpoint.shape#height)|Указывает высоту фигуры в точках.|
 ||[id](/javascript/api/powerpoint/powerpoint.shape#id)|Получает уникальный ID формы.|
+||[left](/javascript/api/powerpoint/powerpoint.shape#left)|Расстояние в точках от левой стороны фигуры до левой стороны слайда.|
 ||[lineFormat](/javascript/api/powerpoint/powerpoint.shape#lineFormat)|Возвращает формат линии для фигуры.|
+||[name](/javascript/api/powerpoint/powerpoint.shape#name)|Указывает имя этой фигуры.|
 ||[tags](/javascript/api/powerpoint/powerpoint.shape#tags)|Возвращает коллекцию тегов в форме.|
 ||[textFrame](/javascript/api/powerpoint/powerpoint.shape#textFrame)|Возвращает объект рамки с текстом для фигуры.|
-||[type](/javascript/api/powerpoint/powerpoint.shape#type)|Возвращает тип фигуры.|
 ||[top](/javascript/api/powerpoint/powerpoint.shape#top)|Расстояние в точках от верхнего края фигуры до верхнего края слайда.|
+||[type](/javascript/api/powerpoint/powerpoint.shape#type)|Возвращает тип фигуры.|
 ||[width](/javascript/api/powerpoint/powerpoint.shape#width)|Указывает ширину в точках формы.|
 |[ShapeAddOptions](/javascript/api/powerpoint/powerpoint.shapeaddoptions)|[height](/javascript/api/powerpoint/powerpoint.shapeaddoptions#height)|Указывает высоту фигуры в точках.|
 ||[left](/javascript/api/powerpoint/powerpoint.shapeaddoptions#left)|Указывает расстояние в точках от левой стороны фигуры до левой стороны слайда.|
@@ -33,9 +33,9 @@
 ||[items](/javascript/api/powerpoint/powerpoint.shapecollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[ShapeFill](/javascript/api/powerpoint/powerpoint.shapefill)|[clear()](/javascript/api/powerpoint/powerpoint.shapefill#clear__)|Очищает формат заливки фигуры.|
 ||[foregroundColor](/javascript/api/powerpoint/powerpoint.shapefill#foregroundColor)|Представляет цвет переднего плана заполнения формы в формате HTML#RRGGBB (например, "FFA500") или в виде htmL-цвета (например, "оранжевый").|
-||[type](/javascript/api/powerpoint/powerpoint.shapefill#type)|Возвращает тип заливки фигуры.|
 ||[setSolidColor(color: string)](/javascript/api/powerpoint/powerpoint.shapefill#setSolidColor_color_)|Задает заливку одним цветом для фигуры.|
 ||[transparency](/javascript/api/powerpoint/powerpoint.shapefill#transparency)|Указывает процент прозрачности заполнения как значение от 0.0 (непрозрачная) до 1.0 (clear).|
+||[type](/javascript/api/powerpoint/powerpoint.shapefill#type)|Возвращает тип заливки фигуры.|
 |[ShapeFont](/javascript/api/powerpoint/powerpoint.shapefont)|[bold](/javascript/api/powerpoint/powerpoint.shapefont#bold)|Указывает, является ли шрифт полужирным.|
 ||[color](/javascript/api/powerpoint/powerpoint.shapefont#color)|Представление цветового кода HTML текстового цвета (например, "#FF0000" представляет красный цвет).|
 ||[italic](/javascript/api/powerpoint/powerpoint.shapefont#italic)|Указывает, применяется ли курсив.|
@@ -82,14 +82,14 @@
 |[TextFrame](/javascript/api/powerpoint/powerpoint.textframe)|[autoSizeSetting](/javascript/api/powerpoint/powerpoint.textframe#autoSizeSetting)|Автоматические параметры размеров для текстового кадра.|
 ||[bottomMargin](/javascript/api/powerpoint/powerpoint.textframe#bottomMargin)|Представляет нижнее поле рамки с текстом (в пунктах).|
 ||[deleteText()](/javascript/api/powerpoint/powerpoint.textframe#deleteText__)|Удаляет весь текст в рамке с текстом.|
-||[leftMargin](/javascript/api/powerpoint/powerpoint.textframe#leftMargin)|Представляет левое поле рамки с текстом (в пунктах).|
 ||[hasText](/javascript/api/powerpoint/powerpoint.textframe#hasText)|Указывает, содержит ли текстовый кадр текст.|
-||[textRange](/javascript/api/powerpoint/powerpoint.textframe#textRange)|Представляет текст, присоединенный к фигуре в текстовой рамке, а также свойства и методы для операций с текстом.|
+||[leftMargin](/javascript/api/powerpoint/powerpoint.textframe#leftMargin)|Представляет левое поле рамки с текстом (в пунктах).|
 ||[rightMargin](/javascript/api/powerpoint/powerpoint.textframe#rightMargin)|Представляет правое поле рамки с текстом (в пунктах).|
+||[textRange](/javascript/api/powerpoint/powerpoint.textframe#textRange)|Представляет текст, присоединенный к фигуре в текстовой рамке, а также свойства и методы для операций с текстом.|
 ||[topMargin](/javascript/api/powerpoint/powerpoint.textframe#topMargin)|Представляет верхнее поле рамки с текстом (в пунктах).|
 ||[verticalAlignment](/javascript/api/powerpoint/powerpoint.textframe#verticalAlignment)|Представляет вертикальное выравнивание для рамки с текстом.|
 ||[wordWrap](/javascript/api/powerpoint/powerpoint.textframe#wordWrap)|Определяет, нарушаются ли строки автоматически, чтобы соответствовать тексту внутри фигуры.|
-|[TextRange](/javascript/api/powerpoint/powerpoint.textrange)|[getSubstring(start: number, length?: number)](/javascript/api/powerpoint/powerpoint.textrange#getSubstring_start__length_)|Возвращает объект `TextRange` для подстройки в заданный диапазон.|
-||[font](/javascript/api/powerpoint/powerpoint.textrange#font)|Возвращает `ShapeFont` объект, который представляет атрибуты шрифта для диапазона текста.|
+|[TextRange](/javascript/api/powerpoint/powerpoint.textrange)|[font](/javascript/api/powerpoint/powerpoint.textrange#font)|Возвращает `ShapeFont` объект, который представляет атрибуты шрифта для диапазона текста.|
+||[getSubstring(start: number, length?: number)](/javascript/api/powerpoint/powerpoint.textrange#getSubstring_start__length_)|Возвращает объект `TextRange` для подстройки в заданный диапазон.|
 ||[paragraphFormat](/javascript/api/powerpoint/powerpoint.textrange#paragraphFormat)|Представляет формат абзаца в текстовом диапазоне.|
 ||[text](/javascript/api/powerpoint/powerpoint.textrange#text)|Представляет содержимое с обычным текстом в диапазоне текста.|

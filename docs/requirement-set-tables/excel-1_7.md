@@ -5,21 +5,18 @@
 ||[showAllFieldButtons](/javascript/api/excel/excel.chart#showAllFieldButtons)|Указывает, следует ли отображать все кнопки поля на сводная диаграмма.|
 |[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[граница](/javascript/api/excel/excel.chartareaformat#border)|Представляет пограничный формат области диаграммы, включаю в себя цвет, литейный стиль и вес.|
 |[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem (тип: Excel. ChartAxisType, группа?: Excel. ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getItem_type__group_)|Возвращает указанную ось, определенную по типу и группе.|
-|[ChartAxis](/javascript/api/excel/excel.chartaxis)|[baseTimeUnit](/javascript/api/excel/excel.chartaxis#baseTimeUnit)|Указывает базовый блок для оси указанной категории.|
+|[ChartAxis](/javascript/api/excel/excel.chartaxis)|[axisGroup](/javascript/api/excel/excel.chartaxis#axisGroup)|Указывает группу для указанной оси.|
+||[baseTimeUnit](/javascript/api/excel/excel.chartaxis#baseTimeUnit)|Указывает базовый блок для оси указанной категории.|
 ||[categoryType](/javascript/api/excel/excel.chartaxis#categoryType)|Указывает тип оси категории.|
+||[customDisplayUnit](/javascript/api/excel/excel.chartaxis#customDisplayUnit)|Указывает пользовательское значение блока отображения оси.|
 ||[displayUnit](/javascript/api/excel/excel.chartaxis#displayUnit)|Представляет отображаемую единицу измерения оси.|
+||[height](/javascript/api/excel/excel.chartaxis#height)|Указывает высоту оси диаграммы в точках.|
+||[left](/javascript/api/excel/excel.chartaxis#left)|Указывает расстояние в точках от левого края оси до левой области диаграммы.|
 ||[logBase](/javascript/api/excel/excel.chartaxis#logBase)|Указывает базу логарифма при использовании логарифмических масштабов.|
 ||[majorTickMark](/javascript/api/excel/excel.chartaxis#majorTickMark)|Указывает тип основных меток для указанной оси.|
 ||[majorTimeUnitScale](/javascript/api/excel/excel.chartaxis#majorTimeUnitScale)|Указывает главное значение масштабирования единицы для оси категории при `categoryType` заданном свойстве `dateAxis` .|
 ||[minorTickMark](/javascript/api/excel/excel.chartaxis#minorTickMark)|Указывает тип незначительной метки галочки для указанной оси.|
 ||[minorTimeUnitScale](/javascript/api/excel/excel.chartaxis#minorTimeUnitScale)|Указывает незначительное значение масштабирования единицы для оси категории при заданном `categoryType` свойстве `dateAxis` .|
-||[axisGroup](/javascript/api/excel/excel.chartaxis#axisGroup)|Указывает группу для указанной оси.|
-||[customDisplayUnit](/javascript/api/excel/excel.chartaxis#customDisplayUnit)|Указывает пользовательское значение блока отображения оси.|
-||[height](/javascript/api/excel/excel.chartaxis#height)|Указывает высоту оси диаграммы в точках.|
-||[left](/javascript/api/excel/excel.chartaxis#left)|Указывает расстояние в точках от левого края оси до левой области диаграммы.|
-||[top](/javascript/api/excel/excel.chartaxis#top)|Указывает расстояние в точках от верхнего края оси до верхней области диаграммы.|
-||[type](/javascript/api/excel/excel.chartaxis#type)|Указывает тип оси.|
-||[width](/javascript/api/excel/excel.chartaxis#width)|Указывает ширину оси диаграммы в точках.|
 ||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reversePlotOrder)|Указывает, Excel заданы точки данных с последнего до первого.|
 ||[scaleType](/javascript/api/excel/excel.chartaxis#scaleType)|Указывает тип шкалы оси значения.|
 ||[setCategoryNames (sourceData: Range)](/javascript/api/excel/excel.chartaxis#setCategoryNames_sourceData_)|Устанавливает все имена категорий для указанной оси.|
@@ -28,7 +25,10 @@
 ||[tickLabelPosition](/javascript/api/excel/excel.chartaxis#tickLabelPosition)|Указывает положение меток меток на указанной оси.|
 ||[tickLabelSpacing](/javascript/api/excel/excel.chartaxis#tickLabelSpacing)|Указывает количество категорий или рядов между меткими метами.|
 ||[tickMarkSpacing](/javascript/api/excel/excel.chartaxis#tickMarkSpacing)|Указывает количество категорий или рядов между метками галочки.|
+||[top](/javascript/api/excel/excel.chartaxis#top)|Указывает расстояние в точках от верхнего края оси до верхней области диаграммы.|
+||[type](/javascript/api/excel/excel.chartaxis#type)|Указывает тип оси.|
 ||[visible](/javascript/api/excel/excel.chartaxis#visible)|Указывает, видна ли ось.|
+||[width](/javascript/api/excel/excel.chartaxis#width)|Указывает ширину оси диаграммы в точках.|
 |[ChartBorder](/javascript/api/excel/excel.chartborder)|[color](/javascript/api/excel/excel.chartborder#color)|HTML-код цвета, представляющий цвет границ в диаграмме.|
 ||[lineStyle](/javascript/api/excel/excel.chartborder#lineStyle)|Представляет тип линии границы.|
 ||[weight](/javascript/api/excel/excel.chartborder#weight)|Представляет толщину границы (в пунктах).|
@@ -53,12 +53,12 @@
 ||[items](/javascript/api/excel/excel.chartlegendentrycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[ChartLineFormat](/javascript/api/excel/excel.chartlineformat)|[lineStyle](/javascript/api/excel/excel.chartlineformat#lineStyle)|Представляет стиль строки.|
 ||[weight](/javascript/api/excel/excel.chartlineformat#weight)|Представляет толщину линии (в пунктах).|
-|[ChartPoint](/javascript/api/excel/excel.chartpoint)|[hasDataLabel](/javascript/api/excel/excel.chartpoint#hasDataLabel)|Представляет, имеет ли точка данных метку данных.|
+|[ChartPoint](/javascript/api/excel/excel.chartpoint)|[dataLabel](/javascript/api/excel/excel.chartpoint#dataLabel)|Возвращает метку данных точки диаграммы.|
+||[hasDataLabel](/javascript/api/excel/excel.chartpoint#hasDataLabel)|Представляет, имеет ли точка данных метку данных.|
 ||[markerBackgroundColor](/javascript/api/excel/excel.chartpoint#markerBackgroundColor)|Представление цветового кода HTML фонового цвета маркера точки данных (например, #FF0000 представляет красный цвет).|
 ||[markerForegroundColor](/javascript/api/excel/excel.chartpoint#markerForegroundColor)|Представление цветового кода HTML маркера переднего плана точки данных (например, #FF0000 представляет красный цвет).|
 ||[markerSize](/javascript/api/excel/excel.chartpoint#markerSize)|Представляет размер маркера точки данных.|
 ||[markerStyle](/javascript/api/excel/excel.chartpoint#markerStyle)|Представляет стиль маркера точки данных диаграммы.|
-||[dataLabel](/javascript/api/excel/excel.chartpoint#dataLabel)|Возвращает метку данных точки диаграммы.|
 |[ChartPointFormat](/javascript/api/excel/excel.chartpointformat)|[граница](/javascript/api/excel/excel.chartpointformat#border)|Представляет пограничный формат точки данных диаграммы, которая включает сведения о цвете, стиле и весе.|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[chartType](/javascript/api/excel/excel.chartseries#chartType)|Представляет тип диаграммы для ряда.|
 ||[delete()](/javascript/api/excel/excel.chartseries#delete__)|Удаляет ряд диаграммы.|
@@ -71,31 +71,31 @@
 ||[markerSize](/javascript/api/excel/excel.chartseries#markerSize)|Указывает размер маркера серии диаграмм.|
 ||[markerStyle](/javascript/api/excel/excel.chartseries#markerStyle)|Указывает стиль маркера серии диаграмм.|
 ||[plotOrder](/javascript/api/excel/excel.chartseries#plotOrder)|Указывает порядок сюжета серии диаграмм в группе диаграмм.|
-||[trendlines](/javascript/api/excel/excel.chartseries#trendlines)|Коллекция трендовых линий в серии.|
 ||[setBubbleSizes(sourceData: Range)](/javascript/api/excel/excel.chartseries#setBubbleSizes_sourceData_)|Задает размеры пузыря для серии диаграмм.|
 ||[setValues(sourceData: Range)](/javascript/api/excel/excel.chartseries#setValues_sourceData_)|Задает значения для серии диаграмм.|
 ||[setXAxisValues(sourceData: Range)](/javascript/api/excel/excel.chartseries#setXAxisValues_sourceData_)|Задает значения x-axis для серии диаграмм.|
 ||[showShadow](/javascript/api/excel/excel.chartseries#showShadow)|Указывает, есть ли в серии тень.|
 ||[гладкая](/javascript/api/excel/excel.chartseries#smooth)|Указывает, является ли серия гладкой.|
+||[trendlines](/javascript/api/excel/excel.chartseries#trendlines)|Коллекция трендовых линий в серии.|
 |[ChartSeriesCollection](/javascript/api/excel/excel.chartseriescollection)|[add(name?: string, index?: number)](/javascript/api/excel/excel.chartseriescollection#add_name__index_)|Добавляет новый ряд в коллекцию.|
 |[ChartTitle](/javascript/api/excel/excel.charttitle)|[getSubstring(start: number, length: number)](/javascript/api/excel/excel.charttitle#getSubstring_start__length_)|Получите подстройку заголовка диаграммы.|
+||[height](/javascript/api/excel/excel.charttitle#height)|Возвращает высоту заголовка диаграммы (в пунктах).|
 ||[horizontalAlignment](/javascript/api/excel/excel.charttitle#horizontalAlignment)|Указывает горизонтальное выравнивание для заголовка диаграммы.|
 ||[left](/javascript/api/excel/excel.charttitle#left)|Указывает расстояние в точках от левого края заголовка диаграммы до левого края области диаграммы.|
 ||[position](/javascript/api/excel/excel.charttitle#position)|Представляет положение заголовка диаграммы.|
-||[height](/javascript/api/excel/excel.charttitle#height)|Возвращает высоту заголовка диаграммы (в пунктах).|
-||[width](/javascript/api/excel/excel.charttitle#width)|Указывает ширину в точках заголовка диаграммы.|
 ||[setFormula(formula: string)](/javascript/api/excel/excel.charttitle#setFormula_formula_)|Задает строковое значение, представляющее формулу заголовка диаграммы с использованием нотации стиля A1.|
 ||[showShadow](/javascript/api/excel/excel.charttitle#showShadow)|Представляет логическое значение, которое определяет, имеет ли заголовок диаграммы тень.|
 ||[textOrientation](/javascript/api/excel/excel.charttitle#textOrientation)|Указывает угол, на который ориентирован текст для заголовка диаграммы.|
 ||[top](/javascript/api/excel/excel.charttitle#top)|Указывает расстояние в точках от верхнего края заголовка диаграммы до верхней части области диаграммы.|
 ||[verticalAlignment](/javascript/api/excel/excel.charttitle#verticalAlignment)|Указывает вертикальное выравнивание заголовка диаграммы.|
+||[width](/javascript/api/excel/excel.charttitle#width)|Указывает ширину в точках заголовка диаграммы.|
 |[ChartTitleFormat](/javascript/api/excel/excel.charttitleformat)|[граница](/javascript/api/excel/excel.charttitleformat#border)|Представляет пограничный формат заголовка диаграммы, который включает цвет, линия и вес.|
 |[ChartTrendline](/javascript/api/excel/excel.charttrendline)|[delete()](/javascript/api/excel/excel.charttrendline#delete__)|Удаляет объект линии тренда.|
+||[format](/javascript/api/excel/excel.charttrendline#format)|Представляет форматирование линии тренда диаграммы.|
 ||[перехват](/javascript/api/excel/excel.charttrendline#intercept)|Представляет значение отсекаемого отрезка линии тренда.|
 ||[movingAveragePeriod](/javascript/api/excel/excel.charttrendline#movingAveragePeriod)|Представляет период трендовой линии диаграммы.|
 ||[name](/javascript/api/excel/excel.charttrendline#name)|Представляет имя линии тренда.|
 ||[polynomialOrder](/javascript/api/excel/excel.charttrendline#polynomialOrder)|Представляет порядок трендовой линии диаграммы.|
-||[format](/javascript/api/excel/excel.charttrendline#format)|Представляет форматирование линии тренда диаграммы.|
 ||[type](/javascript/api/excel/excel.charttrendline#type)|Представляет тип линии тренда диаграммы.|
 |[ChartTrendlineCollection](/javascript/api/excel/excel.charttrendlinecollection)|[add(type?: Excel. ChartTrendlineType)](/javascript/api/excel/excel.charttrendlinecollection#add_type_)|Добавляет новую линию тренда в коллекцию линий тренда.|
 ||[getCount()](/javascript/api/excel/excel.charttrendlinecollection#getCount__)|Возвращает количество линий тренда в коллекции.|
@@ -117,25 +117,25 @@
 ||[категория](/javascript/api/excel/excel.documentproperties#category)|Категория книги.|
 ||[comments](/javascript/api/excel/excel.documentproperties#comments)|Комментарии книги.|
 ||[company](/javascript/api/excel/excel.documentproperties#company)|Компания книги.|
-||[ключевые слова](/javascript/api/excel/excel.documentproperties#keywords)|Ключевые слова книги.|
-||[manager](/javascript/api/excel/excel.documentproperties#manager)|Менеджер книги.|
 ||[creationDate](/javascript/api/excel/excel.documentproperties#creationDate)|Получает дату создания книги.|
 ||[настраиваемый](/javascript/api/excel/excel.documentproperties#custom)|Получает коллекцию настраиваемых свойств книги.|
+||[ключевые слова](/javascript/api/excel/excel.documentproperties#keywords)|Ключевые слова книги.|
 ||[lastAuthor](/javascript/api/excel/excel.documentproperties#lastAuthor)|Получает последнего автора книги.|
+||[manager](/javascript/api/excel/excel.documentproperties#manager)|Менеджер книги.|
 ||[revisionNumber](/javascript/api/excel/excel.documentproperties#revisionNumber)|Получает номер редакции книги.|
 ||[subject](/javascript/api/excel/excel.documentproperties#subject)|Тема книги.|
 ||[заголовок](/javascript/api/excel/excel.documentproperties#title)|Название книги.|
-|[NamedItem](/javascript/api/excel/excel.nameditem)|[formula](/javascript/api/excel/excel.nameditem#formula)|Формула названного элемента.|
-||[arrayValues](/javascript/api/excel/excel.nameditem#arrayValues)|Возвращает объект, содержащий значения и типы именованного элемента.|
+|[NamedItem](/javascript/api/excel/excel.nameditem)|[arrayValues](/javascript/api/excel/excel.nameditem#arrayValues)|Возвращает объект, содержащий значения и типы именованного элемента.|
+||[formula](/javascript/api/excel/excel.nameditem#formula)|Формула названного элемента.|
 |[NamedItemArrayValues](/javascript/api/excel/excel.nameditemarrayvalues)|[types](/javascript/api/excel/excel.nameditemarrayvalues#types)|Представляет типы для каждого элемента в массиве именуемого элемента|
 ||[values](/javascript/api/excel/excel.nameditemarrayvalues#values)|Представляет значения каждого элемента в массиве именованных элементов.|
 |[Range](/javascript/api/excel/excel.range)|[getAbsoluteResizedRange (numRows: number, numColumns: number)](/javascript/api/excel/excel.range#getAbsoluteResizedRange_numRows__numColumns_)|Получает объект с той же верхней левой ячейкой, что и текущий объект, но с указанным числом `Range` `Range` строк и столбцов.|
 ||[getImage()](/javascript/api/excel/excel.range#getImage__)|Отрисовка диапазона в качестве изображения png с кодом base64.|
 ||[getSurroundingRegion()](/javascript/api/excel/excel.range#getSurroundingRegion__)|Возвращает `Range` объект, который представляет окружающий регион для верхнего левого элемента в этом диапазоне.|
 ||[hyperlink](/javascript/api/excel/excel.range#hyperlink)|Представляет гиперссылку для текущего диапазона.|
-||[numberFormatLocal](/javascript/api/excel/excel.range#numberFormatLocal)|Представляет Excel формата номера для данного диапазона в зависимости от языковых параметров пользователя.|
 ||[isEntireColumn](/javascript/api/excel/excel.range#isEntireColumn)|Указывает, является ли текущий диапазон целым столбцом.|
 ||[isEntireRow](/javascript/api/excel/excel.range#isEntireRow)|Указывает, является ли текущий диапазон целой строкой.|
+||[numberFormatLocal](/javascript/api/excel/excel.range#numberFormatLocal)|Представляет Excel формата номера для данного диапазона в зависимости от языковых параметров пользователя.|
 ||[showCard()](/javascript/api/excel/excel.range#showCard__)|Отображает карточку для активной ячейки, если она имеет содержимое c форматированным значением.|
 ||[style](/javascript/api/excel/excel.range#style)|Представляет стиль текущего диапазона.|
 |[RangeFormat](/javascript/api/excel/excel.rangeformat)|[textOrientation](/javascript/api/excel/excel.rangeformat#textOrientation)|Текстовая ориентация всех ячеек в диапазоне.|
@@ -145,7 +145,11 @@
 ||[documentReference](/javascript/api/excel/excel.rangehyperlink#documentReference)|Представляет адресную цель документа для гиперссылки.|
 ||[screenTip](/javascript/api/excel/excel.rangehyperlink#screenTip)|Представляет строку, отображаемую при наведении указателя на гиперссылку.|
 ||[textToDisplay](/javascript/api/excel/excel.rangehyperlink#textToDisplay)|Представляет строку, отображаемую в верхней левой ячейке диапазона.|
-|[Style](/javascript/api/excel/excel.style)|[delete()](/javascript/api/excel/excel.style#delete__)|Удаляет этот стиль.|
+|[Style](/javascript/api/excel/excel.style)|[borders](/javascript/api/excel/excel.style#borders)|Коллекция из четырех пограничных объектов, которые представляют стиль четырех границ.|
+||[builtIn](/javascript/api/excel/excel.style#builtIn)|Указывает, является ли стиль встроенным.|
+||[delete()](/javascript/api/excel/excel.style#delete__)|Удаляет этот стиль.|
+||[fill](/javascript/api/excel/excel.style#fill)|Заполнение стиля.|
+||[font](/javascript/api/excel/excel.style#font)|Объект, `Font` который представляет шрифт стиля.|
 ||[formulaHidden](/javascript/api/excel/excel.style#formulaHidden)|Указывает, будет ли формула скрыта при защите таблицы.|
 ||[horizontalAlignment](/javascript/api/excel/excel.style#horizontalAlignment)|Представляет горизонтальное выравнивание для стиля.|
 ||[includeAlignment](/javascript/api/excel/excel.style#includeAlignment)|Указывает, включает ли стиль свойства автоотступа, горизонтальное выравнивание, вертикальное выравнивание, текст упаковки, уровень отступа и свойства ориентации текста.|
@@ -156,14 +160,10 @@
 ||[includeProtection](/javascript/api/excel/excel.style#includeProtection)|Указывает, включает ли стиль скрытые и заблокированные свойства защиты формулы.|
 ||[indentLevel](/javascript/api/excel/excel.style#indentLevel)|Целое число от 0 до 250, указывающее уровень отступа для стиля.|
 ||[locked](/javascript/api/excel/excel.style#locked)|Указывает, заблокирован ли объект при защите таблицы.|
+||[name](/javascript/api/excel/excel.style#name)|Имя стиля.|
 ||[numberFormat](/javascript/api/excel/excel.style#numberFormat)|Код числового формата для стиля.|
 ||[numberFormatLocal](/javascript/api/excel/excel.style#numberFormatLocal)|Локализованный код числового формата для стиля.|
 ||[readingOrder](/javascript/api/excel/excel.style#readingOrder)|Направление чтения для стиля.|
-||[borders](/javascript/api/excel/excel.style#borders)|Коллекция из четырех пограничных объектов, которые представляют стиль четырех границ.|
-||[builtIn](/javascript/api/excel/excel.style#builtIn)|Указывает, является ли стиль встроенным.|
-||[fill](/javascript/api/excel/excel.style#fill)|Заполнение стиля.|
-||[font](/javascript/api/excel/excel.style#font)|Объект, `Font` который представляет шрифт стиля.|
-||[name](/javascript/api/excel/excel.style#name)|Имя стиля.|
 ||[shrinkToFit](/javascript/api/excel/excel.style#shrinkToFit)|Указывает, если текст автоматически сокращается, чтобы соответствовать ширине доступных столбцов.|
 ||[verticalAlignment](/javascript/api/excel/excel.style#verticalAlignment)|Указывает вертикальное выравнивание для стиля.|
 ||[wrapText](/javascript/api/excel/excel.style#wrapText)|Указывает, Excel обертывание текста в объекте.|
@@ -174,7 +174,7 @@
 ||[onSelectionChanged](/javascript/api/excel/excel.table#onSelectionChanged)|Происходит, когда выбор изменяется на определенной таблице.|
 |[TableChangedEventArgs](/javascript/api/excel/excel.tablechangedeventargs)|[address](/javascript/api/excel/excel.tablechangedeventargs#address)|Получает адрес, представляющий измененную область таблицы на конкретном листе.|
 ||[changeType](/javascript/api/excel/excel.tablechangedeventargs#changeType)|Получает тип изменений, который представляет, как запускается измененное событие.|
-||[source](/javascript/api/excel/excel.tablechangedeventargs#source)|Получает источник события.|
+||[источник](/javascript/api/excel/excel.tablechangedeventargs#source)|Получает источник события.|
 ||[tableId](/javascript/api/excel/excel.tablechangedeventargs#tableId)|Получает ID таблицы, в которой изменились данные.|
 ||[type](/javascript/api/excel/excel.tablechangedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.tablechangedeventargs#worksheetId)|Получает ID таблицы, в которой изменились данные.|
@@ -184,8 +184,8 @@
 ||[tableId](/javascript/api/excel/excel.tableselectionchangedeventargs#tableId)|Получает ID таблицы, в которой изменился выбор.|
 ||[type](/javascript/api/excel/excel.tableselectionchangedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.tableselectionchangedeventargs#worksheetId)|Получает ID таблицы, в которой изменен выбор.|
-|[Workbook](/javascript/api/excel/excel.workbook)|[getActiveCell()](/javascript/api/excel/excel.workbook#getActiveCell__)|Получает текущую активную ячейку из книги.|
-||[dataConnections](/javascript/api/excel/excel.workbook#dataConnections)|Представляет все подключения к данным в книге.|
+|[Workbook](/javascript/api/excel/excel.workbook)|[dataConnections](/javascript/api/excel/excel.workbook#dataConnections)|Представляет все подключения к данным в книге.|
+||[getActiveCell()](/javascript/api/excel/excel.workbook#getActiveCell__)|Получает текущую активную ячейку из книги.|
 ||[name](/javascript/api/excel/excel.workbook#name)|Получает имя книги.|
 ||[properties](/javascript/api/excel/excel.workbook#properties)|Получает свойства книги.|
 ||[protection](/javascript/api/excel/excel.workbook#protection)|Возвращает объект защиты для книги.|
@@ -194,8 +194,8 @@
 ||[защищена](/javascript/api/excel/excel.workbookprotection#protected)|Указывает, защищена ли книга.|
 ||[unprotect(password?: string)](/javascript/api/excel/excel.workbookprotection#unprotect_password_)|Снимает защиту с книги.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[copy(positionType?: Excel. WorksheetPositionType, relativeTo?: Excel. Таблица)](/javascript/api/excel/excel.worksheet#copy_positionType__relativeTo_)|Копирует таблицу и помещает ее в указанное положение.|
-||[getRangeByIndexes (startRow: number, startColumn: number, rowCount: number, columnCount: number)](/javascript/api/excel/excel.worksheet#getRangeByIndexes_startRow__startColumn__rowCount__columnCount_)|Получает объект, начиная с определенного индекса строки и индекса столбцов, и охватывает определенное количество `Range` строк и столбцов.|
 ||[freezePanes](/javascript/api/excel/excel.worksheet#freezePanes)|Получает объект, который можно использовать для управления замороженными стемнами на таблице.|
+||[getRangeByIndexes (startRow: number, startColumn: number, rowCount: number, columnCount: number)](/javascript/api/excel/excel.worksheet#getRangeByIndexes_startRow__startColumn__rowCount__columnCount_)|Получает объект, начиная с определенного индекса строки и индекса столбцов, и охватывает определенное количество `Range` строк и столбцов.|
 ||[onActivated](/javascript/api/excel/excel.worksheet#onActivated)|Возникает при активации таблицы.|
 ||[onChanged](/javascript/api/excel/excel.worksheet#onChanged)|Происходит при изменениях данных в определенном таблице.|
 ||[onDeactivated](/javascript/api/excel/excel.worksheet#onDeactivated)|Происходит при отключке таблицы.|
@@ -205,12 +205,12 @@
 ||[tabColor](/javascript/api/excel/excel.worksheet#tabColor)|Цвет таблицы вкладок.|
 |[WorksheetActivatedEventArgs](/javascript/api/excel/excel.worksheetactivatedeventargs)|[type](/javascript/api/excel/excel.worksheetactivatedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetactivatedeventargs#worksheetId)|Получает ID активированного таблицы.|
-|[WorksheetAddedEventArgs](/javascript/api/excel/excel.worksheetaddedeventargs)|[source](/javascript/api/excel/excel.worksheetaddedeventargs#source)|Получает источник события.|
+|[WorksheetAddedEventArgs](/javascript/api/excel/excel.worksheetaddedeventargs)|[источник](/javascript/api/excel/excel.worksheetaddedeventargs#source)|Получает источник события.|
 ||[type](/javascript/api/excel/excel.worksheetaddedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetaddedeventargs#worksheetId)|Получает ID таблицы, добавляемой в книгу.|
 |[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[address](/javascript/api/excel/excel.worksheetchangedeventargs#address)|Получает адрес диапазона, представляющий измененную область конкретного листа.|
 ||[changeType](/javascript/api/excel/excel.worksheetchangedeventargs#changeType)|Получает тип изменений, который представляет, как запускается измененное событие.|
-||[source](/javascript/api/excel/excel.worksheetchangedeventargs#source)|Получает источник события.|
+||[источник](/javascript/api/excel/excel.worksheetchangedeventargs#source)|Получает источник события.|
 ||[type](/javascript/api/excel/excel.worksheetchangedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetchangedeventargs#worksheetId)|Получает ID таблицы, в которой изменились данные.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[onActivated](/javascript/api/excel/excel.worksheetcollection#onActivated)|Возникает при активации любого таблицы в книге.|
@@ -219,7 +219,7 @@
 ||[onDeleted](/javascript/api/excel/excel.worksheetcollection#onDeleted)|Возникает при удалении таблицы из книги.|
 |[WorksheetDeactivatedEventArgs](/javascript/api/excel/excel.worksheetdeactivatedeventargs)|[type](/javascript/api/excel/excel.worksheetdeactivatedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetdeactivatedeventargs#worksheetId)|Получает ID деактивированной таблицы.|
-|[WorksheetDeletedEventArgs](/javascript/api/excel/excel.worksheetdeletedeventargs)|[source](/javascript/api/excel/excel.worksheetdeletedeventargs#source)|Получает источник события.|
+|[WorksheetDeletedEventArgs](/javascript/api/excel/excel.worksheetdeletedeventargs)|[источник](/javascript/api/excel/excel.worksheetdeletedeventargs#source)|Получает источник события.|
 ||[type](/javascript/api/excel/excel.worksheetdeletedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetdeletedeventargs#worksheetId)|Получает ID таблицы, удаляемой из книги.|
 |[WorksheetFreezePanes](/javascript/api/excel/excel.worksheetfreezepanes)|[freezeAt (frozenRange: Range \| string)](/javascript/api/excel/excel.worksheetfreezepanes#freezeAt_frozenRange_)|Задает закрепленные ячейки в представлении активного листа.|

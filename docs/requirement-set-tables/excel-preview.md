@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[Объект AllowEditRange](/javascript/api/excel/excel.alloweditrange)|[address](/javascript/api/excel/excel.alloweditrange#address)|Указывает диапазон, связанный с объектом.|
 ||[delete()](/javascript/api/excel/excel.alloweditrange#delete__)|Удаляет этот объект из `AllowEditRangeCollection` .|
-||[pauseProtection(password?: string)](/javascript/api/excel/excel.alloweditrange#pauseProtection_password_)|Приостановка защиты таблиц для данного `AllowEditRange` объекта для пользователя в заданном сеансе.|
 ||[isPasswordProtected](/javascript/api/excel/excel.alloweditrange#isPasswordProtected)|Указывает, защищен `AllowEditRange` ли пароль.|
+||[pauseProtection(password?: string)](/javascript/api/excel/excel.alloweditrange#pauseProtection_password_)|Приостановка защиты таблиц для данного `AllowEditRange` объекта для пользователя в заданном сеансе.|
 ||[setPassword(password?: string)](/javascript/api/excel/excel.alloweditrange#setPassword_password_)|Изменяет пароль, связанный с `AllowEditRange` .|
 ||[заголовок](/javascript/api/excel/excel.alloweditrange#title)|Указывает название объекта.|
 |[AllowEditRangeCollection](/javascript/api/excel/excel.alloweditrangecollection)|[add(title: string, rangeAddress: string, options?: Excel. AllowEditRangeOptions)](/javascript/api/excel/excel.alloweditrangecollection#add_title__rangeAddress__options_)|Добавляет объект `AllowEditRange` в коллекцию.|
@@ -11,8 +11,8 @@
 ||[getItem(key: string)](/javascript/api/excel/excel.alloweditrangecollection#getItem_key_)|Получает объект `AllowEditRange` по его названию.|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.alloweditrangecollection#getItemAt_index_)|Возвращает объект `AllowEditRange` по индексу в коллекции.|
 ||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.alloweditrangecollection#getItemOrNullObject_key_)|Получает объект `AllowEditRange` по его названию.|
-||[pauseProtection (пароль: строка)](/javascript/api/excel/excel.alloweditrangecollection#pauseProtection_password_)|Приостановка защиты от таблиц для всех объектов в коллекции с заданным паролем `AllowEditRange` для пользователя в заданном сеансе.|
 ||[items](/javascript/api/excel/excel.alloweditrangecollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
+||[pauseProtection (пароль: строка)](/javascript/api/excel/excel.alloweditrangecollection#pauseProtection_password_)|Приостановка защиты от таблиц для всех объектов в коллекции с заданным паролем `AllowEditRange` для пользователя в заданном сеансе.|
 |[AllowEditRangeOptions](/javascript/api/excel/excel.alloweditrangeoptions)|[password](/javascript/api/excel/excel.alloweditrangeoptions#password)|Пароль, связанный с `AllowEditRange` .|
 |[BlockedErrorCellValue](/javascript/api/excel/excel.blockederrorcellvalue)|[errorSubType](/javascript/api/excel/excel.blockederrorcellvalue#errorSubType)|Представляет тип `BlockedErrorCellValue` .|
 ||[errorType](/javascript/api/excel/excel.blockederrorcellvalue#errorType)|Представляет тип `ErrorCellValue` .|
@@ -54,9 +54,7 @@
 ||[примитивный](/javascript/api/excel/excel.div0errorcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
 ||[primitiveType](/javascript/api/excel/excel.div0errorcellvalue#primitiveType)|Представляет значение, которое будет возвращено ячейкой `Range.valueTypes` с этим значением.|
 ||[type](/javascript/api/excel/excel.div0errorcellvalue#type)|Представляет тип этого значения ячейки.|
-|[DocumentTask](/javascript/api/excel/excel.documenttask)|[percentComplete](/javascript/api/excel/excel.documenttask#percentComplete)|Указывает процент выполнения задачи.|
-||[приоритет](/javascript/api/excel/excel.documenttask#priority)|Указывает приоритет задачи.|
-||[назначение](/javascript/api/excel/excel.documenttask#assignees)|Возвращает коллекцию назначений задачи.|
+|[DocumentTask](/javascript/api/excel/excel.documenttask)|[назначение](/javascript/api/excel/excel.documenttask#assignees)|Возвращает коллекцию назначений задачи.|
 ||[изменения](/javascript/api/excel/excel.documenttask#changes)|Получает записи изменений задачи.|
 ||[comment](/javascript/api/excel/excel.documenttask#comment)|Получает комментарий, связанный с задачей.|
 ||[completedBy](/javascript/api/excel/excel.documenttask#completedBy)|Получает последнего пользователя, который выполнил задачу.|
@@ -64,6 +62,8 @@
 ||[createdBy](/javascript/api/excel/excel.documenttask#createdBy)|Получает пользователя, создавшего задачу.|
 ||[createdDateTime](/javascript/api/excel/excel.documenttask#createdDateTime)|Получает дату и время создания задачи.|
 ||[id](/javascript/api/excel/excel.documenttask#id)|Получает ID задачи.|
+||[percentComplete](/javascript/api/excel/excel.documenttask#percentComplete)|Указывает процент выполнения задачи.|
+||[приоритет](/javascript/api/excel/excel.documenttask#priority)|Указывает приоритет задачи.|
 ||[setStartAndDueDateTime (startDateTime: Date, dueDateTime: Date)](/javascript/api/excel/excel.documenttask#setStartAndDueDateTime_startDateTime__dueDateTime_)|Изменяет даты начала и срока действия задачи.|
 ||[startAndDueDateTime](/javascript/api/excel/excel.documenttask#startAndDueDateTime)|Получает или задает дату и время, когда должна начаться и должна быть поставлена задача.|
 ||[заголовок](/javascript/api/excel/excel.documenttask#title)|Указывает название задачи.|
@@ -125,10 +125,10 @@
 ||[name](/javascript/api/excel/excel.linkeddatatype#name)|Имя связанного типа данных.|
 ||[periodicRefreshInterval](/javascript/api/excel/excel.linkeddatatype#periodicRefreshInterval)|Частота в секундах, при которой тип связанных данных обновляется, если `refreshMode` установлено "Периодическое".|
 ||[refreshMode](/javascript/api/excel/excel.linkeddatatype#refreshMode)|Механизм получения данных для связанного типа данных.|
-||[serviceId](/javascript/api/excel/excel.linkeddatatype#serviceId)|Уникальный ID связанного типа данных.|
-||[supportedRefreshModes](/javascript/api/excel/excel.linkeddatatype#supportedRefreshModes)|Возвращает массив со всеми режимами обновления, поддерживаемыми типом связанных данных.|
 ||[requestRefresh()](/javascript/api/excel/excel.linkeddatatype#requestRefresh__)|Делает запрос на обновление связанного типа данных.|
 ||[requestSetRefreshMode(refreshMode: Excel. LinkedDataTypeRefreshMode)](/javascript/api/excel/excel.linkeddatatype#requestSetRefreshMode_refreshMode_)|Делает запрос на изменение режима обновления для этого связанного типа данных.|
+||[serviceId](/javascript/api/excel/excel.linkeddatatype#serviceId)|Уникальный ID связанного типа данных.|
+||[supportedRefreshModes](/javascript/api/excel/excel.linkeddatatype#supportedRefreshModes)|Возвращает массив со всеми режимами обновления, поддерживаемыми типом связанных данных.|
 |[LinkedDataTypeAddedEventArgs](/javascript/api/excel/excel.linkeddatatypeaddedeventargs)|[serviceId](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#serviceId)|Уникальный ID нового типа связанных данных.|
 ||[источник](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#source)|Получает источник события.|
 ||[type](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#type)|Получает тип события.|
@@ -179,8 +179,8 @@
 |[Shape](/javascript/api/excel/excel.shape)|[displayName](/javascript/api/excel/excel.shape#displayName)|Получает имя отображения фигуры.|
 |[ShapeCollection](/javascript/api/excel/excel.shapecollection)|[addSvg(xml: string)](/javascript/api/excel/excel.shapecollection#addSvg_xml_)|Создает изображение SVG (масштабируемая векторная графика) из строки XML и добавляет его на лист.|
 |[Slicer](/javascript/api/excel/excel.slicer)|[nameInFormula](/javascript/api/excel/excel.slicer#nameInFormula)|Представляет имя среза, используемое в формуле.|
-||[slicerStyle](/javascript/api/excel/excel.slicer#slicerStyle)|Стиль, применяемый к срезу.|
 ||[setStyle(style: string \| SlicerStyle \| BuiltInSlicerStyle)](/javascript/api/excel/excel.slicer#setStyle_style_)|Задает стиль, примененный к срезу.|
+||[slicerStyle](/javascript/api/excel/excel.slicer#slicerStyle)|Стиль, применяемый к срезу.|
 |[SpillErrorCellValue](/javascript/api/excel/excel.spillerrorcellvalue)|[errorSubType](/javascript/api/excel/excel.spillerrorcellvalue#errorSubType)|Представляет тип `SpillErrorCellValue` .|
 ||[errorType](/javascript/api/excel/excel.spillerrorcellvalue#errorType)|Представляет тип `ErrorCellValue` .|
 ||[примитивный](/javascript/api/excel/excel.spillerrorcellvalue#primitive)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
@@ -193,8 +193,8 @@
 ||[type](/javascript/api/excel/excel.stringcellvalue#type)|Представляет тип этого значения ячейки.|
 |[Table](/javascript/api/excel/excel.table)|[clearStyle()](/javascript/api/excel/excel.table#clearStyle__)|Изменяет таблицу для использования стиля таблицы по умолчанию.|
 ||[onFiltered](/javascript/api/excel/excel.table#onFiltered)|Возникает, когда фильтр применяется на определенной таблице.|
-||[tableStyle](/javascript/api/excel/excel.table#tableStyle)|Стиль, примененный к таблице.|
 ||[setStyle(style: string \| TableStyle \| BuiltInTableStyle)](/javascript/api/excel/excel.table#setStyle_style_)|Задает стиль, примененный к таблице.|
+||[tableStyle](/javascript/api/excel/excel.table#tableStyle)|Стиль, примененный к таблице.|
 |[TableCollection](/javascript/api/excel/excel.tablecollection)|[onFiltered](/javascript/api/excel/excel.tablecollection#onFiltered)|Возникает, когда фильтр применяется на любой таблице в книге или в таблице.|
 |[TableFilteredEventArgs](/javascript/api/excel/excel.tablefilteredeventargs)|[tableId](/javascript/api/excel/excel.tablefilteredeventargs#tableId)|Получает ID таблицы, в которой применяется фильтр.|
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#type)|Получает тип события.|
@@ -216,8 +216,8 @@
 ||[relatedImagesAddress](/javascript/api/excel/excel.webimagecellvalue#relatedImagesAddress)|Представляет URL-адрес веб-страницы с изображениями, которые считаются связанными с этим `WebImageCellValue` .|
 ||[type](/javascript/api/excel/excel.webimagecellvalue#type)|Представляет тип этого значения ячейки.|
 |[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkedDataTypes)|Возвращает коллекцию связанных типов данных, которые являются частью книги.|
-||[задачи](/javascript/api/excel/excel.workbook#tasks)|Возвращает коллекцию задач, присутствующих в книге.|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showPivotFieldList)|Указывает, отображается ли область списка полей PivotTable на уровне книги.|
+||[задачи](/javascript/api/excel/excel.workbook#tasks)|Возвращает коллекцию задач, присутствующих в книге.|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904DateSystem)|Значение true, если в книге используется система дат 1904.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onFiltered)|Возникает, когда фильтр применяется на определенном таблице.|
 ||[задачи](/javascript/api/excel/excel.worksheet#tasks)|Возвращает коллекцию задач, присутствующих в таблице.|
@@ -225,12 +225,12 @@
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onFiltered)|Возникает при применении любого фильтра листа в книге.|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetfilteredeventargs#worksheetId)|Получает ID таблицы, в которой применяется фильтр.|
-|[WorksheetProtection](/javascript/api/excel/excel.worksheetprotection)|[checkPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#checkPassword_password_)|Указывает, можно ли использовать пароль для разблокировки защиты таблицы.|
-||[pauseProtection(password?: string)](/javascript/api/excel/excel.worksheetprotection#pauseProtection_password_)|Приостановка защиты таблиц для данного объекта таблицы для пользователя в заданном сеансе.|
-||[allowEditRanges](/javascript/api/excel/excel.worksheetprotection#allowEditRanges)|Указывает `AllowEditRangeCollection` найденное в этом документе.|
+|[WorksheetProtection](/javascript/api/excel/excel.worksheetprotection)|[allowEditRanges](/javascript/api/excel/excel.worksheetprotection#allowEditRanges)|Указывает `AllowEditRangeCollection` найденное в этом документе.|
 ||[canPauseProtection](/javascript/api/excel/excel.worksheetprotection#canPauseProtection)|Указывает, можно ли приостановить защиту для этого таблицы.|
+||[checkPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#checkPassword_password_)|Указывает, можно ли использовать пароль для разблокировки защиты таблицы.|
 ||[isPasswordProtected](/javascript/api/excel/excel.worksheetprotection#isPasswordProtected)|Указывает, защищен ли лист паролем.|
 ||[isPaused](/javascript/api/excel/excel.worksheetprotection#isPaused)|Указывает, приостановлена ли защита таблицы.|
+||[pauseProtection(password?: string)](/javascript/api/excel/excel.worksheetprotection#pauseProtection_password_)|Приостановка защиты таблиц для данного объекта таблицы для пользователя в заданном сеансе.|
 ||[resumeProtection()](/javascript/api/excel/excel.worksheetprotection#resumeProtection__)|Возобновляет защиту таблиц для данного объекта таблицы для пользователя в заданном сеансе.|
 ||[setPassword(password?: string)](/javascript/api/excel/excel.worksheetprotection#setPassword_password_)|Изменяет пароль, связанный с `WorksheetProtection` объектом.|
 ||[updateOptions (параметры: Excel. WorksheetProtectionOptions)](/javascript/api/excel/excel.worksheetprotection#updateOptions_options_)|Измените параметры защиты таблиц, связанные с `WorksheetProtection` объектом.|

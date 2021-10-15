@@ -12,5 +12,5 @@
 ||[insertText(text: string, insertLocation: Word.InsertLocation)](/javascript/api/word/word.inlinepicture#insertText_text__insertLocation_)|Вставляет текст в заданном расположении.|
 ||[paragraph](/javascript/api/word/word.inlinepicture#paragraph)|Возвращает родительский абзац, который содержит встроенный рисунок.|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.inlinepicture#select_selectionMode_)|Выбирает встроенный рисунок.|
-|[Range](/javascript/api/word/word.range)|[insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation)](/javascript/api/word/word.range#insertInlinePictureFromBase64_base64EncodedImage__insertLocation_)|Вставляет рисунок в указанном расположении.|
-||[inlinePictures](/javascript/api/word/word.range#inlinePictures)|Возвращает коллекцию объектов встроенных рисунков в диапазоне.|
+|[Range](/javascript/api/word/word.range)|[inlinePictures](/javascript/api/word/word.range#inlinePictures)|Возвращает коллекцию объектов встроенных рисунков в диапазоне.|
+||[insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation)](/javascript/api/word/word.range#insertInlinePictureFromBase64_base64EncodedImage__insertLocation_)|Вставляет рисунок в указанном расположении.|
