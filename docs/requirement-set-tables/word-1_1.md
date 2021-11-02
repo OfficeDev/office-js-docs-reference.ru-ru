@@ -51,7 +51,7 @@
 ||[matchSuffix](/javascript/api/word/word.contentcontrol#matchSuffix)||
 ||[matchWholeWord](/javascript/api/word/word.contentcontrol#matchWholeWord)||
 ||[matchWildcards](/javascript/api/word/word.contentcontrol#matchWildcards)||
-||[paragraphs](/javascript/api/word/word.contentcontrol#paragraphs)|Получает коллекцию объектов абзацев в элементе управления содержимым.|
+||[paragraphs](/javascript/api/word/word.contentcontrol#paragraphs)|Получает коллекцию объектов абзаца в области управления контентом.|
 ||[parentContentControl](/javascript/api/word/word.contentcontrol#parentContentControl)|Получает элемент управления содержимым, содержащий элемент управления содержимым.|
 ||[placeholderText](/javascript/api/word/word.contentcontrol#placeholderText)|Возвращает или задает замещающий текст элемента управления содержимым.|
 ||[removeWhenEdited](/javascript/api/word/word.contentcontrol#removeWhenEdited)|Возвращает или задает значение, указывающее, удаляется ли элемент управления содержимым после изменения.|

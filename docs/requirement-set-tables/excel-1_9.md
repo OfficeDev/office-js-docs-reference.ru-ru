@@ -304,8 +304,8 @@
 ||[style](/javascript/api/excel/excel.settablecellproperties#style)|Представляет свойство `style`.|
 |[SettableColumnProperties](/javascript/api/excel/excel.settablecolumnproperties)|[columnHidden](/javascript/api/excel/excel.settablecolumnproperties#columnHidden)|Представляет свойство `columnHidden`.|
 ||[columnWidth](/javascript/api/excel/excel.settablecolumnproperties#columnWidth)||
-||[формат: Excel. CellPropertiesFormat & {columnWidth?](/javascript/api/excel/excel.settablecolumnproperties#format)|Представляет свойство `format`.|
-|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[формат: Excel. CellPropertiesFormat & {rowHeight?](/javascript/api/excel/excel.settablerowproperties#format)|Представляет свойство `format`.|
+||[формат: Excel. CellPropertiesFormat & { columnWidth](/javascript/api/excel/excel.settablecolumnproperties#format)|Представляет свойство `format`.|
+|[SettableRowProperties](/javascript/api/excel/excel.settablerowproperties)|[формат: Excel. CellPropertiesFormat & { rowHeight](/javascript/api/excel/excel.settablerowproperties#format)|Представляет свойство `format`.|
 ||[rowHeight](/javascript/api/excel/excel.settablerowproperties#rowHeight)||
 ||[rowHidden](/javascript/api/excel/excel.settablerowproperties#rowHidden)|Представляет свойство `rowHidden`.|
 |[Shape](/javascript/api/excel/excel.shape)|[altTextDescription](/javascript/api/excel/excel.shape#altTextDescription)|Указывает альтернативный текст описания `Shape` объекта.|
