@@ -1,0 +1,90 @@
+### YamlMime:TSType
+name: Office.File
+uid: office!Office.File:interface
+package: office!
+fullName: Office.File
+summary: Представляет файл документа, сопоставленный с надстройкой Office.
+remarks: Доступ к объекту File с свойством AsyncResult.value в функции вызова, переданной методу Document.getFileAsync.
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: size
+  uid: office!Office.File#size:member
+  package: office!
+  fullName: size
+  summary: Получает размер файла в байтах.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'size: number;'
+    return:
+      type: number
+- name: sliceCount
+  uid: office!Office.File#sliceCount:member
+  package: office!
+  fullName: sliceCount
+  summary: Получает число срезов, на которые разделен файл.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'sliceCount: number;'
+    return:
+      type: number
+methods:
+- name: closeAsync(callback)
+  uid: office!Office.File#closeAsync:member(1)
+  package: office!
+  fullName: closeAsync(callback)
+  summary: Закрывает файл документа.
+  remarks: >-
+    **Набор требований:** [Файл](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)
+
+
+    В памяти может храниться не более двух документов; в противном случае произойдет сбой операции Document.getFileAsync. Используйте метод File.closeAsync, чтобы закрыть файл после завершения работы с ним.
+
+
+    В функции обратного вызова, переданной методу closeAsync, вы можете использовать свойства объекта AsyncResult, чтобы получить следующие сведения.
+
+
+    <table> <tr> <th>Свойство</th> <th>Назначение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Всегда возвращает значение undefined, так как нет объекта или данных для извлечения.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Доступ к объекту Error, который предоставляет сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'closeAsync(callback?: (result: AsyncResult<void>) => void): void;'
+    parameters:
+    - id: callback
+      description: Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой — тип [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getSliceAsync(sliceIndex, callback)
+  uid: office!Office.File#getSliceAsync:member(1)
+  package: office!
+  fullName: getSliceAsync(sliceIndex, callback)
+  summary: Возвращает заданный срез.
+  remarks: "**Набор требований:** [Файл](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)\n\nВ функции обратного вызова, переданной в метод getSliceAsync, можно использовать свойства объекта AsyncResult, чтобы возвратить такие сведения:\n\n<table> <tr> <th>Свойство</th> <th>Назначение</th> </tr> <tr> <td>AsyncResult.value</td> <td>Получает доступ к объекту Slice.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Определяет, удалось ли выполнить операцию.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Доступ к объекту Error, который предоставляет сведения об ошибке, если операция завершилась неудачно.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Определяемый пользователем элемент любого типа, который возвращается в объекте AsyncResult без изменения.</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// This sample shows how to get all the slices of a file. \n// The asynchronous operation returns a Promise so it can be awaited.\nprivate getAllSlices(file: any): Promise<any> {\n    var self = this;\n    var isError = false;\n\n    return new Promise(async (resolve, reject) => {\n        var documentFileData = [];\n        for (var sliceIndex = 0; (sliceIndex < file.sliceCount) && !isError; sliceIndex++) {\n            var sliceReadPromise = new Promise((sliceResolve, sliceReject) => {\n                file.getSliceAsync(sliceIndex, (asyncResult) => {\n                    if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {\n                        documentFileData = documentFileData.concat(asyncResult.value.data);\n                        sliceResolve({\n                            IsSuccess: true,\n                            Data: documentFileData\n                        });\n                    } else {\n                        file.closeAsync();\n                        sliceReject({\n                            IsSuccess: false,\n                            ErrorMessage: `Error in reading the slice: ${sliceIndex} of the document`\n                        });\n                    }\n                });\n            });\n            await sliceReadPromise.catch((error) => {\n                isError = true;\n            });\n        }\n\n        if (isError || !documentFileData.length) {\n            reject('Error while reading document. Please try it again.');\n            return;\n        }\n\n        file.closeAsync();\n\n        resolve({\n            IsSuccess: true,\n            Data: documentFileData\n        });\n    });\n}\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getSliceAsync(sliceIndex: number, callback?: (result: AsyncResult<Office.Slice>) => void): void;'
+    parameters:
+    - id: sliceIndex
+      description: Задает индекс с отсчетом от нуля получаемого фрагмента. Обязательный параметр.
+      type: number
+    - id: callback
+      description: Необязательно. Функция, вызываемая при возвращении обратного вызова, единственный параметр которой — тип [Office. AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. Свойством `value` результата является [Office. Объект Slice.](xref:office!Office.Slice:interface)
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.Slice:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 86beb27ff140734a445272a2236e141c12e34263
+  ms.sourcegitcommit: acfa7744e00932ab2537acbc9ce8393108112c18
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 12/03/2021
+  ms.locfileid: "61281361"

@@ -1,0 +1,112 @@
+### YamlMime:TSType
+name: Office.Dialog
+uid: office!Office.Dialog:interface
+package: office!
+fullName: Office.Dialog
+summary: Объект, возвращаемый при `UI.displayDialogAsync` призвании. Он предоставляет методы регистрации обработчиков событий и закрытия диалогов.
+remarks: '**Набор требований:** [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addEventHandler(eventType, handler)
+  uid: office!Office.Dialog#addEventHandler:member(1)
+  package: office!
+  fullName: addEventHandler(eventType, handler)
+  summary: >-
+    Регистрирует обработчик событий. Ниже приведены два поддерживаемых события.
+
+
+    - DialogMessageReceived. Триггер — отправка сообщения из диалогового окна родительской странице.
+
+
+    - DialogEventReceived. Триггер — закрытие диалогового окна или его выгрузка иным способом.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string, origin: string | undefined} | {error: number}) => void): void;'
+    parameters:
+    - id: eventType
+      description: Должен быть либо DialogMessageReceived, либо DialogEventReceived.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: Функция, которая принимает объект с свойством и `message` `origin` свойством, если `eventType``DialogMessageReceived`<!-- -->или объект с `error` свойством, если `eventType``DialogEventReceived`<!-- -->. Обратите внимание, что свойство находится на клиентах, которые не `origin` `undefined` поддерживают [DialogOrigin 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-origin-requirement-sets)<!-- -->.
+      type: '(args: {message: string, origin: string | undefined} | {error: number}) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: close()
+  uid: office!Office.Dialog#close:member(1)
+  package: office!
+  fullName: close()
+  summary: >-
+    Вызывается с родительской страницы, чтобы закрыть соответствующее диалоговое окно.
+
+
+    Этот метод является асинхронным. Он не принимает параметр обратного вызова и не возвращает объект Promise, поэтому его нельзя ожидать ни с ключевым словом, ни `await` с `then` функцией. Дополнительные сведения см. в этом примере: [открытие другого диалоговое окно сразу после его закрытия.](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-best-practices#opening-another-dialog-immediately-after-closing-one)
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'close(): void;'
+    return:
+      type: void
+      description: ''
+- name: messageChild(message, messageOptions)
+  uid: office!Office.Dialog#messageChild:member(1)
+  package: office!
+  fullName: messageChild(message, messageOptions)
+  summary: Доставляет сообщение с хост-страницы, например области задач или файла функций без пользовательского интерфейса, в диалоговое окно, открытое со страницы.
+  remarks: >-
+    **Хосты:** Excel, Outlook (минимальный набор требований: почтовый ящик 1.9), PowerPoint, Word
+
+
+    **Наборы требований:**
+
+
+    - [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+
+
+    - Если параметр используется, также требуется `messageOptions` [DialogOrigin 1.1.](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-origin-requirement-sets)
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'messageChild(message: string, messageOptions?: DialogMessageOptions): void;'
+    parameters:
+    - id: message
+      description: Принимает сообщение с хост-страницы для доставки в диалоговое окно. Все, что можно отправить в строку, включая JSON и XML, можно отправить.
+      type: string
+    - id: messageOptions
+      description: Необязательно. Предоставляет варианты отправки сообщения.
+      type: <xref uid="office!Office.DialogMessageOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: sendMessage(name)
+  uid: office!Office.Dialog#sendMessage:member(1)
+  package: office!
+  fullName: sendMessage(name)
+  summary: ТОЛЬКО ДЛЯ ВНУТРЕННЕГО ИСПОЛЬЗОВАНИЯ. НЕ ВЫЗЫВАЙ КОД.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'sendMessage(name: string): void;'
+    parameters:
+    - id: name
+      description: ''
+      type: string
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 283d8bf0325236380c4797756901aaba80b4141a
+  ms.sourcegitcommit: acfa7744e00932ab2537acbc9ce8393108112c18
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 12/03/2021
+  ms.locfileid: "61280958"
