@@ -1,0 +1,198 @@
+### YamlMime:TSType
+name: PowerPoint.ShapeCollection
+uid: powerpoint!PowerPoint.ShapeCollection:class
+package: powerpoint!
+fullName: PowerPoint.ShapeCollection
+summary: Представляет коллекцию фигур.
+remarks: '\[[Набор API: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: powerpoint!PowerPoint.ShapeCollection#context:member
+  package: powerpoint!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.RequestContext:class" />
+- name: items
+  uid: powerpoint!PowerPoint.ShapeCollection#items:member
+  package: powerpoint!
+  fullName: items
+  summary: Получает загруженные дочерние элементы в этой коллекции.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: PowerPoint.Shape[];'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Shape:class" />[]
+methods:
+- name: getCount()
+  uid: powerpoint!PowerPoint.ShapeCollection#getCount:member(1)
+  package: powerpoint!
+  fullName: getCount()
+  summary: Получает количество фигур в коллекции.
+  remarks: '\[[Набор API: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: Количество фигур в коллекции.
+- name: getItem(key)
+  uid: powerpoint!PowerPoint.ShapeCollection#getItem:member(1)
+  package: powerpoint!
+  fullName: getItem(key)
+  summary: Получает форму с помощью уникального ID. Если фигура не существует, будет выброшена ошибка.
+  remarks: '\[[Набор API: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): PowerPoint.Shape;'
+    parameters:
+    - id: key
+      description: ID формы.
+      type: string
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Shape:class" />
+      description: Форма с уникальным ID. Если такой формы не существует, ошибка будет выброшена.
+- name: getItemAt(index)
+  uid: powerpoint!PowerPoint.ShapeCollection#getItemAt:member(1)
+  package: powerpoint!
+  fullName: getItemAt(index)
+  summary: Получает фигуру с помощью нулевого индекса в коллекции. Ошибка будет выброшена, если индекс находится вне диапазона.
+  remarks: >-
+    \[[Набор API: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/tags.yaml
+
+    await PowerPoint.run(async function(context) {
+      const slide = context.presentation.slides.getItemAt(0);
+      const shape = slide.shapes.getItemAt(0);
+      shape.tags.add("MOUNTAIN", "Denali");
+
+      await context.sync();
+
+      const myShapeTag = shape.tags.getItem("MOUNTAIN");
+      myShapeTag.load("key, value");
+
+      await context.sync();
+
+      console.log("Added key " + JSON.stringify(myShapeTag.key) + " with value " + JSON.stringify(myShapeTag.value));
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemAt(index: number): PowerPoint.Shape;'
+    parameters:
+    - id: index
+      description: Индекс фигуры в коллекции.
+      type: number
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Shape:class" />
+      description: Фигура в заданный индекс. Ошибка выброшена, если индекс находится вне диапазона.
+- name: getItemOrNullObject(id)
+  uid: powerpoint!PowerPoint.ShapeCollection#getItemOrNullObject:member(1)
+  package: powerpoint!
+  fullName: getItemOrNullObject(id)
+  summary: Получает форму с помощью уникального ID. Если такой формы нет, возвращается объект с свойством `isNullObject` true.
+  remarks: '\[[Набор API: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(id: string): PowerPoint.Shape;'
+    parameters:
+    - id: id
+      description: ID формы.
+      type: string
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Shape:class" />
+      description: Форма с уникальным ID. Если такой формы нет, возвращается объект с свойством `isNullObject` true.
+- name: load(options)
+  uid: powerpoint!PowerPoint.ShapeCollection#load:member(1)
+  package: powerpoint!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: PowerPoint.Interfaces.ShapeCollectionLoadOptions & PowerPoint.Interfaces.CollectionLoadOptions): PowerPoint.ShapeCollection;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="powerpoint!PowerPoint.Interfaces.ShapeCollectionLoadOptions:interface" /> & <xref uid="powerpoint!PowerPoint.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="powerpoint!PowerPoint.ShapeCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: powerpoint!PowerPoint.ShapeCollection#load:member(2)
+  package: powerpoint!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): PowerPoint.ShapeCollection;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="powerpoint!PowerPoint.ShapeCollection:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: powerpoint!PowerPoint.ShapeCollection#load:member(3)
+  package: powerpoint!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): PowerPoint.ShapeCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="powerpoint!PowerPoint.ShapeCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: powerpoint!PowerPoint.ShapeCollection#toJSON:member(1)
+  package: powerpoint!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `PowerPoint.ShapeCollection` `toJSON` объект JavaScript (введите как `PowerPoint.Interfaces.ShapeCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): PowerPoint.Interfaces.ShapeCollectionData;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Interfaces.ShapeCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: be7879af1be75e2bdfcaefeff4c1a158344d79e4
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61519653"

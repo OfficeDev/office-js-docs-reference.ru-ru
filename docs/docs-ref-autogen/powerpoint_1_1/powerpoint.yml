@@ -13,18 +13,31 @@ interfaces:
 - powerpoint!PowerPoint.Interfaces.CollectionLoadOptions:interface
 - powerpoint!PowerPoint.Interfaces.PresentationData:interface
 - powerpoint!PowerPoint.Interfaces.PresentationLoadOptions:interface
+- powerpoint!PowerPoint.Interfaces.ShapeCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.ShapeData:interface
 - powerpoint!PowerPoint.Interfaces.SlideCollectionData:interface
 - powerpoint!PowerPoint.Interfaces.SlideCollectionUpdateData:interface
 - powerpoint!PowerPoint.Interfaces.SlideData:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.SlideLayoutData:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.SlideMasterData:interface
+- powerpoint!PowerPoint.Interfaces.TagCollectionData:interface
+- powerpoint!PowerPoint.Interfaces.TagCollectionUpdateData:interface
+- powerpoint!PowerPoint.Interfaces.TagData:interface
+- powerpoint!PowerPoint.Interfaces.TagUpdateData:interface
 functions:
 - name: PowerPoint.createPresentation(base64File)
   uid: powerpoint!PowerPoint.createPresentation:function(1)
   package: powerpoint!
   summary: >-
-    Создает и открывает новую презентацию. По желанию презентацию можно предварительно заполнить с помощью файла pptx с кодом base64.
+    Создает и открывает новую презентацию. По желанию презентацию можно предварительно заполнить с помощью файла с .pptx базовым кодом.
 
 
-    \[[Набор API: PowerPointApi 1.1](/office/dev/add-ins/reference/javascript-api-for-office)\]
+    \[[Набор API: PowerPointApi 1.1](/office/dev/add-ins/reference/javascript-api-for-office) \]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -32,7 +45,7 @@ functions:
     content: 'export function createPresentation(base64File?: string): Promise<void>;'
     parameters:
     - id: base64File
-      description: Необязательное. Файл pptx с кодом base64. По умолчанию используется значение NULL.
+      description: Необязательное свойство. Файл с кодом base64 .pptx. По умолчанию используется значение NULL.
       type: string
     return:
       type: Promise&lt;void&gt;
@@ -40,7 +53,7 @@ functions:
 - name: PowerPoint.run(batch)
   uid: powerpoint!PowerPoint.run:function(1)
   package: powerpoint!
-  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели PowerPoint с помощью нового RequestContext. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия PowerPoint объектной модели с помощью нового RequestContext. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -48,7 +61,7 @@ functions:
     content: 'export function run<T>(batch: (context: PowerPoint.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение PowerPoint. Так как надстройка Office и приложение PowerPoint работают в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в PowerPoint приложения. Поскольку надстройка Office и приложение PowerPoint запускаются в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
       type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -56,7 +69,7 @@ functions:
 - name: PowerPoint.run(object, batch)
   uid: powerpoint!PowerPoint.run:function(2)
   package: powerpoint!
-  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели PowerPoint с помощью объекта RequestContext ранее созданного объекта API. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
+  summary: Выполняет пакетный скрипт, который выполняет действия PowerPoint объектной модели с помощью объекта RequestContext ранее созданного объекта API. Когда обещание будет разрешено, все отслеживаемые объекты, которые были автоматически выделены во время выполнения, будут освобождены.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -67,7 +80,7 @@ functions:
       description: Ранее созданный объект API. Пакет будет использовать тот же Объект RequestContext, что и переданный объект, что означает, что любые изменения, примененные к объекту, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />
     - id: batch
-      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение PowerPoint. Так как надстройка Office и приложение PowerPoint работают в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в PowerPoint приложения. Поскольку надстройка Office и приложение PowerPoint запускаются в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
       type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -75,7 +88,7 @@ functions:
 - name: PowerPoint.run(objects, batch)
   uid: powerpoint!PowerPoint.run:function(3)
   package: powerpoint!
-  summary: Выполняет пакетный скрипт, который выполняет действия в объектной модели PowerPoint с помощью объекта RequestContext ранее созданных объектов API.
+  summary: Выполняет пакетный скрипт, который выполняет действия PowerPoint объектной модели с помощью объекта RequestContext ранее созданных объектов API.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -86,15 +99,15 @@ functions:
       description: Массив ранее созданных объектов API. Массив будет проверен, чтобы убедиться, что все объекты имеют одинаковый контекст. Пакет будет использовать этот общий requestContext, что означает, что любые изменения, примененные к этим объектам, будут подбираться с помощью "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в приложение PowerPoint. Так как надстройка Office и приложение PowerPoint работают в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
+      description: Функция, которая принимает в RequestContext и возвращает обещание (как правило, только в результате "context.sync()"). Параметр контекста облегчает запросы в PowerPoint приложения. Поскольку надстройка Office и приложение PowerPoint запускаются в двух разных процессах, requestContext должен получить доступ к объектной модели PowerPoint из надстройки.
       type: '(context: <xref uid="powerpoint!PowerPoint.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: d861d051ae28d28f7265abea44b31c620518164a
-  ms.sourcegitcommit: f7c5207ef96c4f6034fcb1b48e1b0036abf4fccc
+  ms.openlocfilehash: 604b8e7cc75676e2b076da718060b4d5c30185e8
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 04/16/2021
-  ms.locfileid: "51877264"
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61515284"

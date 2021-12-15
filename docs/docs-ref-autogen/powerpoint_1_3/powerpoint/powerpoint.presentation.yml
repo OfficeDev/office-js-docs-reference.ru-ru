@@ -1,0 +1,193 @@
+### YamlMime:TSType
+name: PowerPoint.Presentation
+uid: powerpoint!PowerPoint.Presentation:class
+package: powerpoint!
+fullName: PowerPoint.Presentation
+summary: ''
+remarks: '\[[Набор API: PowerPointApi 1.0](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: powerpoint!PowerPoint.Presentation#context:member
+  package: powerpoint!
+  fullName: context
+  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.RequestContext:class" />
+- name: slideMasters
+  uid: powerpoint!PowerPoint.Presentation#slideMasters:member
+  package: powerpoint!
+  fullName: slideMasters
+  summary: Возвращает коллекцию `SlideMaster` объектов, которые находятся в презентации.
+  remarks: '\[[Набор API: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly slideMasters: PowerPoint.SlideMasterCollection;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.SlideMasterCollection:class" />
+- name: slides
+  uid: powerpoint!PowerPoint.Presentation#slides:member
+  package: powerpoint!
+  fullName: slides
+  summary: Возвращает упорядоченную коллекцию слайдов в презентации.
+  remarks: '\[[Набор API: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly slides: PowerPoint.SlideCollection;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.SlideCollection:class" />
+- name: tags
+  uid: powerpoint!PowerPoint.Presentation#tags:member
+  package: powerpoint!
+  fullName: tags
+  summary: Возвращает коллекцию тегов, присоединенных к презентации.
+  remarks: '\[[Набор API: PowerPointApi 1.3](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]'
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly tags: PowerPoint.TagCollection;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.TagCollection:class" />
+- name: title
+  uid: powerpoint!PowerPoint.Presentation#title:member
+  package: powerpoint!
+  fullName: title
+  summary: ''
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly title: string;'
+    return:
+      type: string
+methods:
+- name: insertSlidesFromBase64(base64File, options)
+  uid: powerpoint!PowerPoint.Presentation#insertSlidesFromBase64:member(1)
+  package: powerpoint!
+  fullName: insertSlidesFromBase64(base64File, options)
+  summary: Вставляет указанные слайды из презентации в текущую презентацию.
+  remarks: >-
+    \[[Набор API: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/slide-management/insert-slides.yaml
+
+    await PowerPoint.run(async function(context) {
+        const selectedSlideID = await getSelectedSlideID();
+
+        context.presentation.insertSlidesFromBase64(chosenFileBase64, {
+            formatting: PowerPoint.InsertSlideFormatting.useDestinationTheme,
+            targetSlideId: selectedSlideID + "#"
+        });
+        await context.sync();
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'insertSlidesFromBase64(base64File: string, options?: PowerPoint.InsertSlideOptions): void;'
+    parameters:
+    - id: base64File
+      description: Строка с кодом base64, представляющая исходный файл презентации.
+      type: string
+    - id: options
+      description: Параметры, определяющих, какие слайды будут вставлены, куда пойдут новые слайды и какой формат презентации будет использоваться.
+      type: <xref uid="powerpoint!PowerPoint.InsertSlideOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: load(options)
+  uid: powerpoint!PowerPoint.Presentation#load:member(1)
+  package: powerpoint!
+  fullName: load(options)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: PowerPoint.Interfaces.PresentationLoadOptions): PowerPoint.Presentation;'
+    parameters:
+    - id: options
+      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
+      type: <xref uid="powerpoint!PowerPoint.Interfaces.PresentationLoadOptions:interface" />
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Presentation:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: powerpoint!PowerPoint.Presentation#load:member(2)
+  package: powerpoint!
+  fullName: load(propertyNames)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): PowerPoint.Presentation;'
+    parameters:
+    - id: propertyNames
+      description: Запятая или массив строк, которые указывают свойства для загрузки.
+      type: string | string[]
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Presentation:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: powerpoint!PowerPoint.Presentation#load:member(3)
+  package: powerpoint!
+  fullName: load(propertyNamesAndPaths)
+  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): PowerPoint.Presentation;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Presentation:class" />
+      description: ''
+- name: toJSON()
+  uid: powerpoint!PowerPoint.Presentation#toJSON:member(1)
+  package: powerpoint!
+  fullName: toJSON()
+  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный PowerPoint. Объект представления — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`PowerPoint.Interfaces.PresentationData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): PowerPoint.Interfaces.PresentationData;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.Interfaces.PresentationData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 77f126a0241ab5886686947d117bac07d1944157
+  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.translationtype: MT
+  ms.contentlocale: ru-RU
+  ms.lasthandoff: 12/15/2021
+  ms.locfileid: "61520185"

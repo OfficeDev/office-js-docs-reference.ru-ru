@@ -22,7 +22,7 @@
 ||[matchWildcards](/javascript/api/word/word.body#matchWildcards)||
 ||[paragraphs](/javascript/api/word/word.body#paragraphs)|Получает коллекцию объектов абзаца в теле.|
 ||[parentContentControl](/javascript/api/word/word.body#parentContentControl)|Получает элемент управления содержимым, содержащий документ или раздел.|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.body#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|Выполняет поиск с указанными SearchOptions в области объекта тела.|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.body#search_searchText__searchOptions_)|Выполняет поиск с указанными SearchOptions в области объекта тела.|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.body#select_selectionMode_)|Выбирает содержимое и переходит к нему в пользовательском интерфейсе Word.|
 ||[style](/javascript/api/word/word.body#style)|Получает или задает имя стиля для тела.|
 ||[text](/javascript/api/word/word.body#text)|Возвращает текст содержимого.|
@@ -55,7 +55,7 @@
 ||[parentContentControl](/javascript/api/word/word.contentcontrol#parentContentControl)|Получает элемент управления содержимым, содержащий элемент управления содержимым.|
 ||[placeholderText](/javascript/api/word/word.contentcontrol#placeholderText)|Возвращает или задает замещающий текст элемента управления содержимым.|
 ||[removeWhenEdited](/javascript/api/word/word.contentcontrol#removeWhenEdited)|Возвращает или задает значение, указывающее, удаляется ли элемент управления содержимым после изменения.|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.contentcontrol#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|Выполняет поиск с указанными SearchOptions в области объекта управления контентом.|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.contentcontrol#search_searchText__searchOptions_)|Выполняет поиск с указанными SearchOptions в области объекта управления контентом.|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.contentcontrol#select_selectionMode_)|Выбирает элемент управления контентом.|
 ||[style](/javascript/api/word/word.contentcontrol#style)|Получает или задает имя стиля для управления контентом.|
 ||[tag](/javascript/api/word/word.contentcontrol#tag)|Возвращает или задает тег для определения элемента управления содержимым.|
@@ -125,7 +125,7 @@
 ||[outlineLevel](/javascript/api/word/word.paragraph#outlineLevel)|Возвращает или задает уровень структуры абзаца.|
 ||[parentContentControl](/javascript/api/word/word.paragraph#parentContentControl)|Возвращает элемент управления содержимым, содержащий абзац.|
 ||[rightIndent](/javascript/api/word/word.paragraph#rightIndent)|Возвращает или задает значение отступа справа для абзаца (в пунктах).|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.paragraph#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|Выполняет поиск с указанными SearchOptions в области объекта абзаца.|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.paragraph#search_searchText__searchOptions_)|Выполняет поиск с указанными SearchOptions в области объекта абзаца.|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.paragraph#select_selectionMode_)|Выбирает абзац и переходит к нему в пользовательском интерфейсе Word.|
 ||[SpaceAfter](/javascript/api/word/word.paragraph#spaceAfter)|Возвращает или задает междустрочный интервал после абзаца (в пунктах).|
 ||[spaceBefore](/javascript/api/word/word.paragraph#spaceBefore)|Возвращает или задает междустрочный интервал до абзаца (в пунктах).|
@@ -154,7 +154,7 @@
 ||[matchWildcards](/javascript/api/word/word.range#matchWildcards)||
 ||[paragraphs](/javascript/api/word/word.range#paragraphs)|Получает коллекцию объектов абзаца в диапазоне.|
 ||[parentContentControl](/javascript/api/word/word.range#parentContentControl)|Возвращает элемент управления содержимым, содержащий диапазон.|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.range#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|Выполняет поиск с указанными SearchOptions в области объекта диапазона.|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.range#search_searchText__searchOptions_)|Выполняет поиск с указанными SearchOptions в области объекта диапазона.|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.range#select_selectionMode_)|Выбор диапазона и переход к нему в пользовательском интерфейсе Word.|
 ||[style](/javascript/api/word/word.range#style)|Получает или задает имя стиля для диапазона.|
 ||[text](/javascript/api/word/word.range#text)|Возвращает текст диапазона.|

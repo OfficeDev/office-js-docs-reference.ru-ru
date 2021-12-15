@@ -203,7 +203,7 @@
 ||[parentTableOrNullObject](/javascript/api/word/word.table#parentTableOrNullObject)|Возвращает таблицу, которая содержит данную таблицу.|
 ||[rowCount](/javascript/api/word/word.table#rowCount)|Получает количество строк в таблице.|
 ||[строки](/javascript/api/word/word.table#rows)|Возвращает все строки таблицы.|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.table#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|Выполняет поиск с указанными SearchOptions в области объекта таблицы.|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.table#search_searchText__searchOptions_)|Выполняет поиск с указанными SearchOptions в области объекта таблицы.|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.table#select_selectionMode_)|Выбирает таблицу либо позицию в начале или в конце таблицы, а затем переходит к ней в Word.|
 ||[setCellPadding (cellPaddingLocation: Word.CellPaddingLocation, cellPadding: number)](/javascript/api/word/word.table#setCellPadding_cellPaddingLocation__cellPadding_)|Задает размер поля ячейки в точках.|
 ||[shadingColor](/javascript/api/word/word.table#shadingColor)|Возвращает и задает цвет заливки.|
@@ -269,7 +269,7 @@
 ||[parentTable](/javascript/api/word/word.tablerow#parentTable)|Возвращает родительскую таблицу.|
 ||[preferredHeight](/javascript/api/word/word.tablerow#preferredHeight)|Возвращает и задает предпочитаемую высоту строки в точках.|
 ||[rowIndex](/javascript/api/word/word.tablerow#rowIndex)|Получает индекс строки в родительской таблице.|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.tablerow#search_searchText__searchOptions__ignorePunct__ignoreSpace__matchCase__matchPrefix__matchSuffix__matchWholeWord__matchWildcards_)|Выполняет поиск с указанными SearchOptions в области строки.|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.tablerow#search_searchText__searchOptions_)|Выполняет поиск с указанными SearchOptions в области строки.|
 ||[select(selectionMode?: Word.SelectionMode)](/javascript/api/word/word.tablerow#select_selectionMode_)|Выбирает строку и переходит к ней в Word.|
 ||[setCellPadding (cellPaddingLocation: Word.CellPaddingLocation, cellPadding: number)](/javascript/api/word/word.tablerow#setCellPadding_cellPaddingLocation__cellPadding_)|Задает размер поля ячейки в точках.|
 ||[shadingColor](/javascript/api/word/word.tablerow#shadingColor)|Возвращает и задает цвет заливки.|

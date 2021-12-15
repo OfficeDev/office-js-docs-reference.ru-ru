@@ -24,6 +24,6 @@
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFormulaChanged](/javascript/api/excel/excel.worksheet#onFormulaChanged)|Возникает, когда в этом таблице изменена одна или несколько формул.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onFormulaChanged)|Возникает, когда одна или несколько формул меняются в любом таблице этой коллекции.|
 |[WorksheetFormulaChangedEventArgs](/javascript/api/excel/excel.worksheetformulachangedeventargs)|[formulaDetails](/javascript/api/excel/excel.worksheetformulachangedeventargs#formulaDetails)|Получает массив объектов, содержащих сведения обо всех `FormulaChangedEventDetail` измененных формулах.|
-||[source](/javascript/api/excel/excel.worksheetformulachangedeventargs#source)|Источник события.|
+||[источник](/javascript/api/excel/excel.worksheetformulachangedeventargs#source)|Источник события.|
 ||[type](/javascript/api/excel/excel.worksheetformulachangedeventargs#type)|Получает тип события.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetformulachangedeventargs#worksheetId)|Получает ID таблицы, в которой изменена формула.|
