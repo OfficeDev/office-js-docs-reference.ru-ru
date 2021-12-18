@@ -3,6 +3,7 @@
 |[Основной текст](/javascript/api/word/word.body)|[endnotes](/javascript/api/word/word.body#endnotes)|Получает коллекцию endnotes в теле.|
 ||[сноски](/javascript/api/word/word.body#footnotes)|Получает коллекцию сносок в теле.|
 ||[getComments()](/javascript/api/word/word.body#getComments__)|Получает комментарии, связанные с телом.|
+||[getReviewedText (changeTrackingVersion?: Word.ChangeTrackingVersion)](/javascript/api/word/word.body#getReviewedText_changeTrackingVersion_)|Получает рассмотренный текст на основе выбора ChangeTrackingVersion.|
 ||[type](/javascript/api/word/word.body#type)|Возвращает тип основного текста.|
 |[Comment](/javascript/api/word/word.comment)|[authorEmail](/javascript/api/word/word.comment#authorEmail)|Получает электронную почту автора примечания.|
 ||[authorName](/javascript/api/word/word.comment#authorName)|Получает имя автора примечания.|
@@ -32,6 +33,7 @@
 |[ContentControl](/javascript/api/word/word.contentcontrol)|[endnotes](/javascript/api/word/word.contentcontrol#endnotes)|Получает коллекцию endnotes в contentcontrol.|
 ||[сноски](/javascript/api/word/word.contentcontrol#footnotes)|Получает коллекцию сносок в contentcontrol.|
 ||[getComments()](/javascript/api/word/word.contentcontrol#getComments__)|Получает комментарии, связанные с телом.|
+||[getReviewedText (changeTrackingVersion?: Word.ChangeTrackingVersion)](/javascript/api/word/word.contentcontrol#getReviewedText_changeTrackingVersion_)|Получает рассмотренный текст на основе выбора ChangeTrackingVersion.|
 ||[onDataChanged](/javascript/api/word/word.contentcontrol#onDataChanged)|Происходит при смене данных в области управления контентом.|
 ||[onDeleted](/javascript/api/word/word.contentcontrol#onDeleted)|Происходит при удалении управления контентом.|
 ||[onSelectionChanged](/javascript/api/word/word.contentcontrol#onSelectionChanged)|Возникает при смене выбора в области управления контентом.|
@@ -61,12 +63,13 @@
 ||[getOnlyItem()](/javascript/api/word/word.customxmlpartscopedcollection#getOnlyItem__)|Если коллекция содержит ровно один элемент, этот метод возвращает его.|
 ||[getOnlyItemOrNullObject()](/javascript/api/word/word.customxmlpartscopedcollection#getOnlyItemOrNullObject__)|Если коллекция содержит ровно один элемент, этот метод возвращает его.|
 ||[items](/javascript/api/word/word.customxmlpartscopedcollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
-|[Document](/javascript/api/word/word.document)|[customXmlParts](/javascript/api/word/word.document#customXmlParts)|Получает настраиваемые XML-части в документе.|
+|[Document](/javascript/api/word/word.document)|[changeTrackingMode](/javascript/api/word/word.document#changeTrackingMode)|Получает или задает режим ChangeTracking.|
+||[customXmlParts](/javascript/api/word/word.document#customXmlParts)|Получает настраиваемые XML-части в документе.|
 ||[deleteBookmark (имя: строка)](/javascript/api/word/word.document#deleteBookmark_name_)|Удаляет закладки, если она существует, из документа.|
 ||[getBookmarkRange (имя: строка)](/javascript/api/word/word.document#getBookmarkRange_name_)|Получает диапазон закладок.|
 ||[getBookmarkRangeOrNullObject (имя: строка)](/javascript/api/word/word.document#getBookmarkRangeOrNullObject_name_)|Получает диапазон закладок.|
-||[getEndnoteBody()](/javascript/api/word/word.document#getEndnoteBody__)|Получает тело endnotes документа.|
-||[getFootnoteBody()](/javascript/api/word/word.document#getFootnoteBody__)|Получает тело сносок документа.|
+||[getEndnoteBody()](/javascript/api/word/word.document#getEndnoteBody__)|Получает конечные нотки документа в одном теле.|
+||[getFootnoteBody()](/javascript/api/word/word.document#getFootnoteBody__)|Получает сноски документа в одном теле.|
 ||[ignorePunct](/javascript/api/word/word.document#ignorePunct)||
 ||[ignoreSpace](/javascript/api/word/word.document#ignoreSpace)||
 ||[matchCase](/javascript/api/word/word.document#matchCase)||
@@ -75,7 +78,7 @@
 ||[matchWholeWord](/javascript/api/word/word.document#matchWholeWord)||
 ||[matchWildcards](/javascript/api/word/word.document#matchWildcards)||
 ||[onContentControlAdded](/javascript/api/word/word.document#onContentControlAdded)|Возникает при добавлении управления контентом.|
-||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.document#search_searchText__searchOptions_)|Выполняет поиск с указанными SearchOptions в области всего документа.|
+||[search(searchText: string, searchOptions?: Word.SearchOptions \| {ignorePunct?: boolean ignoreSpace?: boolean matchCase?: boolean matchPrefix?: boolean matchSuffix?: boolean matchWholeWord?: boolean matchWildcards?: boolean })](/javascript/api/word/word.document#search_searchText__searchOptions_)|Выполняет поиск с указанными вариантами поиска в области всего документа.|
 ||[settings](/javascript/api/word/word.document#settings)|Получает параметры надстройки в документе.|
 |[DocumentCreated](/javascript/api/word/word.documentcreated)|[customXmlParts](/javascript/api/word/word.documentcreated#customXmlParts)|Получает настраиваемые XML-части в документе.|
 ||[deleteBookmark (имя: строка)](/javascript/api/word/word.documentcreated#deleteBookmark_name_)|Удаляет закладки, если она существует, из документа.|
@@ -91,18 +94,20 @@
 ||[delete()](/javascript/api/word/word.noteitem#delete__)|Удаляет элемент заметки.|
 ||[getNext()](/javascript/api/word/word.noteitem#getNext__)|Получает следующий элемент заметки того же типа.|
 ||[getNextOrNullObject()](/javascript/api/word/word.noteitem#getNextOrNullObject__)|Получает следующий элемент заметки того же типа.|
-||[reference](/javascript/api/word/word.noteitem#reference)|Представляет ссылку сноска/endnote в основном документе.|
-||[type](/javascript/api/word/word.noteitem#type)|Представляете тип элемента примечание: сноска или endnote.|
+||[reference](/javascript/api/word/word.noteitem#reference)|Представляет ссылку сноски или endnote в основном документе.|
+||[type](/javascript/api/word/word.noteitem#type)|Представляет тип элемента примечание: сноска или endnote.|
 |[NoteItemCollection](/javascript/api/word/word.noteitemcollection)|[getFirst()](/javascript/api/word/word.noteitemcollection#getFirst__)|Получает первый элемент заметки в этой коллекции.|
 ||[getFirstOrNullObject()](/javascript/api/word/word.noteitemcollection#getFirstOrNullObject__)|Получает первый элемент заметки в этой коллекции.|
 ||[items](/javascript/api/word/word.noteitemcollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[Paragraph](/javascript/api/word/word.paragraph)|[endnotes](/javascript/api/word/word.paragraph#endnotes)|Получает коллекцию endnotes в абзаце.|
 ||[сноски](/javascript/api/word/word.paragraph#footnotes)|Получает коллекцию сносок в абзаце.|
 ||[getComments()](/javascript/api/word/word.paragraph#getComments__)|Получает комментарии, связанные с абзацем.|
+||[getReviewedText (changeTrackingVersion?: Word.ChangeTrackingVersion)](/javascript/api/word/word.paragraph#getReviewedText_changeTrackingVersion_)|Получает рассмотренный текст на основе выбора ChangeTrackingVersion.|
 |[Range](/javascript/api/word/word.range)|[endnotes](/javascript/api/word/word.range#endnotes)|Получает коллекцию endnotes в диапазоне.|
 ||[сноски](/javascript/api/word/word.range#footnotes)|Получает коллекцию сносок в диапазоне.|
 ||[getBookmarks (includeHidden?: boolean, includeAdjacent?: boolean)](/javascript/api/word/word.range#getBookmarks_includeHidden__includeAdjacent_)|Получает имена всех закладки или перекрывает диапазон.|
 ||[getComments()](/javascript/api/word/word.range#getComments__)|Получает комментарии, связанные с диапазоном.|
+||[getReviewedText (changeTrackingVersion?: Word.ChangeTrackingVersion)](/javascript/api/word/word.range#getReviewedText_changeTrackingVersion_)|Получает рассмотренный текст на основе выбора ChangeTrackingVersion.|
 ||[insertBookmark (имя: строка)](/javascript/api/word/word.range#insertBookmark_name_)|Вставляет закладки в диапазоне.|
 ||[insertComment (commentText: string)](/javascript/api/word/word.range#insertComment_commentText_)|Вставьте комментарий к диапазону.|
 ||[insertEndnote (insertText?: string)](/javascript/api/word/word.range#insertEndnote_insertText_)|Вставляет endnote.|
