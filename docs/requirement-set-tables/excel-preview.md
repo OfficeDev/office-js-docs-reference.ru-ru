@@ -167,6 +167,18 @@
 ||[getItemOrNullObject(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getItemOrNullObject_key_)|Получает связанный тип данных по ID.|
 ||[items](/javascript/api/excel/excel.linkeddatatypecollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 ||[requestRefreshAll()](/javascript/api/excel/excel.linkeddatatypecollection#requestRefreshAll__)|Делает запрос на обновление всех связанных типов данных в коллекции.|
+|[LinkedEntityCellValue](/javascript/api/excel/excel.linkedentitycellvalue)|[basicType](/javascript/api/excel/excel.linkedentitycellvalue#basicType)|Представляет значение, которое будет возвращено ячейкой `Range.valueTypes` с этим значением.|
+||[basicValue](/javascript/api/excel/excel.linkedentitycellvalue#basicValue)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
+||[id](/javascript/api/excel/excel.linkedentitycellvalue#id)|Представляет источник службы, который предоставил сведения в этом значении.|
+||[свойства: { [key: string]: CellValue & { propertyMetadata](/javascript/api/excel/excel.linkedentitycellvalue#properties)|Представляет свойства этого объекта и их метаданные.|
+||[propertyMetadata](/javascript/api/excel/excel.linkedentitycellvalue#propertyMetadata)||
+||[поставщик](/javascript/api/excel/excel.linkedentitycellvalue#provider)|Представляет сведения, описывая службу, которая предоставила изображение.|
+||[text](/javascript/api/excel/excel.linkedentitycellvalue#text)|Представляет текст, показанный при отрисовывии ячейки с этим значением.|
+||[type](/javascript/api/excel/excel.linkedentitycellvalue#type)|Представляет тип этого значения ячейки.|
+|[LinkedEntityId](/javascript/api/excel/excel.linkedentityid)|[культура](/javascript/api/excel/excel.linkedentityid#culture)|Представляет, какая языковая культура была использована для создания этого `CellValue` .|
+||[domainId](/javascript/api/excel/excel.linkedentityid#domainId)|Представляет домен, специфический для службы, используемой для создания `CellValue` .|
+||[entityId](/javascript/api/excel/excel.linkedentityid#entityId)|Представляет идентификатор, специфический для службы, используемой для создания `CellValue` .|
+||[serviceId](/javascript/api/excel/excel.linkedentityid#serviceId)|Представляет, какая служба была использована для создания `CellValue` .|
 |[NameErrorCellValue](/javascript/api/excel/excel.nameerrorcellvalue)|[basicType](/javascript/api/excel/excel.nameerrorcellvalue#basicType)|Представляет значение, которое будет возвращено ячейкой `Range.valueTypes` с этим значением.|
 ||[basicValue](/javascript/api/excel/excel.nameerrorcellvalue#basicValue)|Представляет значение, которое будет возвращено ячейкой `Range.values` с этим значением.|
 ||[errorType](/javascript/api/excel/excel.nameerrorcellvalue#errorType)|Представляет тип `ErrorCellValue` .|
@@ -250,7 +262,8 @@
 ||[поставщик](/javascript/api/excel/excel.webimagecellvalue#provider)|Представляет сведения, описывавшие сущность или физическое лицо, которое предоставило изображение.|
 ||[relatedImagesAddress](/javascript/api/excel/excel.webimagecellvalue#relatedImagesAddress)|Представляет URL-адрес веб-страницы с изображениями, которые считаются связанными с этим `WebImageCellValue` .|
 ||[type](/javascript/api/excel/excel.webimagecellvalue#type)|Представляет тип этого значения ячейки.|
-|[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkedDataTypes)|Возвращает коллекцию связанных типов данных, которые являются частью книги.|
+|[Workbook](/javascript/api/excel/excel.workbook)|[getLinkedEntityCellValue (linkedEntityCellValueId: LinkedEntityId)](/javascript/api/excel/excel.workbook#getLinkedEntityCellValue_linkedEntityCellValueId_)|Возвращает на `LinkedEntityCellValue` основе предоставленного `LinkedEntityId` .|
+||[linkedDataTypes](/javascript/api/excel/excel.workbook#linkedDataTypes)|Возвращает коллекцию связанных типов данных, которые являются частью книги.|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showPivotFieldList)|Указывает, отображается ли область списка полей PivotTable на уровне книги.|
 ||[задачи](/javascript/api/excel/excel.workbook#tasks)|Возвращает коллекцию задач, присутствующих в книге.|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904DateSystem)|Значение true, если в книге используется система дат 1904.|
