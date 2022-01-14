@@ -67,13 +67,13 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Обязательно. Строка с кодом base64, представляющая исходный файл книги.
+      description: Обязательный. Строка с кодом base64, представляющая исходный файл книги.
       type: string
     - id: sheetNamesToInsert
       description: Необязательно. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
       type: string[]
     - id: positionType
-      description: Необязательно. Где в текущей книге будут вставлены новые таблицы. Подробные `Excel.WorksheetPositionType` сведения см. в материале. По умолчанию это "Начните".
+      description: Необязательное свойство. Где в текущей книге будут вставлены новые таблицы. Подробные `Excel.WorksheetPositionType` сведения см. в материале. По умолчанию это "Начните".
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
       description: Необязательно. Таблица в текущей книге, которая ссылается на `positionType` параметр. По умолчанию `null` и на основе `positionType`<!-- -->он будет вставлять таблицы в начале или конце текущей книги.
@@ -97,16 +97,16 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Обязательно. Строка с кодом base64, представляющая исходный файл книги.
+      description: Обязательный. Строка с кодом base64, представляющая исходный файл книги.
       type: string
     - id: sheetNamesToInsert
-      description: Необязательно. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
+      description: Необязательное свойство. Имена отдельных таблиц, которые необходимо вставить. По умолчанию вставляются все таблицы из книги источника.
       type: string[]
     - id: positionTypeString
       description: Необязательно. Где в текущей книге будут вставлены новые таблицы. Подробные `Excel.WorksheetPositionType` сведения см. в материале. По умолчанию это "Начните".
       type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
-      description: Необязательно. Таблица в текущей книге, которая ссылается на `positionType` параметр. По умолчанию `null` и на основе `positionType`<!-- -->он будет вставлять таблицы в начале или конце текущей книги.
+      description: Необязательное свойство. Таблица в текущей книге, которая ссылается на `positionType` параметр. По умолчанию `null` и на основе `positionType`<!-- -->он будет вставлять таблицы в начале или конце текущей книги.
       type: <xref uid="excel!Excel.Worksheet:class" /> | string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
@@ -189,7 +189,7 @@ methods:
     content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательно. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
+      description: Необязательный параметр. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -276,7 +276,7 @@ methods:
     content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Необязательно. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
+      description: Необязательное свойство. Если `true`<!-- -->, рассматривает только видимые таблицы, пропуская все скрытые.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -527,7 +527,7 @@ events:
   uid: excel!Excel.WorksheetCollection#onMoved:member
   package: excel!
   fullName: onMoved
-  summary: Возникает при перемещении таблицы пользователем в книге.
+  summary: Возникает при перемещении таблицы в книгу. Это событие запускается только при непосредственном перемещении таблицы в книгу. Это событие не запускается при косвенном изменении положения таблицы, например при вставке нового таблицы, что приводит к изменению позиций существующих таблиц.
   remarks: '\[[Набор API: ExcelApiOnline 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -621,9 +621,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetVisibilityChangedEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: d9ed8b3a0001719fe9cc76fc83e8c6ffc39ea2a1
-  ms.sourcegitcommit: 5863bf5474de0ab25b54f42a367fbfc02a14e167
+  ms.openlocfilehash: c225a5af389997ae0c53a08c4bcd0b109314df00
+  ms.sourcegitcommit: 6e02b85fb05123b10f85db6c2ac009fa60f24a6f
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 12/08/2021
-  ms.locfileid: "61332409"
+  ms.lasthandoff: 01/14/2022
+  ms.locfileid: "62040469"
