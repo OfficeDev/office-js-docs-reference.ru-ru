@@ -8,26 +8,36 @@
 |[Comment](/javascript/api/word/word.comment)|[authorEmail](/javascript/api/word/word.comment#authorEmail)|Получает электронную почту автора примечания.|
 ||[authorName](/javascript/api/word/word.comment#authorName)|Получает имя автора примечания.|
 ||[content](/javascript/api/word/word.comment#content)|Получает или задает содержимое комментария в виде простого текста.|
+||[contentRange](/javascript/api/word/word.comment#contentRange)|Получает или задает состояние потока комментариев.|
 ||[creationDate](/javascript/api/word/word.comment#creationDate)|Получает дату создания комментария.|
 ||[delete()](/javascript/api/word/word.comment#delete__)|Удаляет комментарий и его ответы.|
 ||[getRange()](/javascript/api/word/word.comment#getRange__)|Получает диапазон в основном документе, в котором находится комментарий.|
-||[id](/javascript/api/word/word.comment#id)|Идентификатор|
+||[id](/javascript/api/word/word.comment#id)|ID|
 ||[replies](/javascript/api/word/word.comment#replies)|Получает коллекцию объектов ответа, связанных с комментарием.|
 ||[reply(replyText: string)](/javascript/api/word/word.comment#reply_replyText_)|Добавляет новый ответ в конец потока комментариев.|
 ||[разрешено](/javascript/api/word/word.comment#resolved)|Получает или задает состояние потока комментариев.|
 |[CommentCollection](/javascript/api/word/word.commentcollection)|[getFirst()](/javascript/api/word/word.commentcollection#getFirst__)|Получает первый комментарий в коллекции.|
-||[getFirstOrNullObject()](/javascript/api/word/word.commentcollection#getFirstOrNullObject__)|Получает первый комментарий или объект null в коллекции.|
+||[getFirstOrNullObject()](/javascript/api/word/word.commentcollection#getFirstOrNullObject__)|Получает первый комментарий в коллекции.|
 ||[getItem(index: number)](/javascript/api/word/word.commentcollection#getItem_index_)|Получает объект комментариев по индексу в коллекции.|
 ||[items](/javascript/api/word/word.commentcollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
+|[CommentContentRange](/javascript/api/word/word.commentcontentrange)|[bold](/javascript/api/word/word.commentcontentrange#bold)|Получает или задает значение, которое указывает, является ли текст комментария смелым.|
+||[hyperlink](/javascript/api/word/word.commentcontentrange#hyperlink)|Возвращает первую гиперссылку в диапазоне или задает для него гиперссылку.|
+||[insertText(text: string, insertLocation: Word.InsertLocation)](/javascript/api/word/word.commentcontentrange#insertText_text__insertLocation_)|Вставляет текст в указанном расположении.|
+||[isEmpty](/javascript/api/word/word.commentcontentrange#isEmpty)|Проверяет, является ли длина диапазона нулевой.|
+||[italic](/javascript/api/word/word.commentcontentrange#italic)|Получает или задает значение, которое указывает, является ли текст комментария italicized.|
+||[strikeThrough](/javascript/api/word/word.commentcontentrange#strikeThrough)|Получает или задает значение, указывающего, есть ли в тексте комментариев забастовка.|
+||[text](/javascript/api/word/word.commentcontentrange#text)|Получает текст диапазона комментариев.|
+||[underline](/javascript/api/word/word.commentcontentrange#underline)|Получает или задает значение, указыва которое указывает на подчеркнутой тип текста комментария.|
 |[CommentReply](/javascript/api/word/word.commentreply)|[authorEmail](/javascript/api/word/word.commentreply#authorEmail)|Получает электронную почту автора ответа на примечание.|
 ||[authorName](/javascript/api/word/word.commentreply#authorName)|Получает имя автора ответа на примечание.|
 ||[content](/javascript/api/word/word.commentreply#content)|Получает или задает содержимое ответа на примечание.|
+||[contentRange](/javascript/api/word/word.commentreply#contentRange)|Получает или задает диапазон контента commentReply.|
 ||[creationDate](/javascript/api/word/word.commentreply#creationDate)|Получает дату создания ответа на комментарий.|
 ||[delete()](/javascript/api/word/word.commentreply#delete__)|Удаляет ответ на примечание.|
-||[id](/javascript/api/word/word.commentreply#id)|Идентификатор|
+||[id](/javascript/api/word/word.commentreply#id)|ID|
 ||[parentComment](/javascript/api/word/word.commentreply#parentComment)|Получает родительский комментарий этого ответа.|
 |[CommentReplyCollection](/javascript/api/word/word.commentreplycollection)|[getFirst()](/javascript/api/word/word.commentreplycollection#getFirst__)|Получает первый ответ комментариев в коллекции.|
-||[getFirstOrNullObject()](/javascript/api/word/word.commentreplycollection#getFirstOrNullObject__)|Получает первый ответ комментария или объект null в коллекции.|
+||[getFirstOrNullObject()](/javascript/api/word/word.commentreplycollection#getFirstOrNullObject__)|Получает первый ответ комментариев в коллекции.|
 ||[getItem(index: number)](/javascript/api/word/word.commentreplycollection#getItem_index_)|Получает объект ответа на комментарии по индексу в коллекции.|
 ||[items](/javascript/api/word/word.commentreplycollection#items)|Получает загруженные дочерние элементы в этой коллекции.|
 |[ContentControl](/javascript/api/word/word.contentcontrol)|[endnotes](/javascript/api/word/word.contentcontrol#endnotes)|Получает коллекцию endnotes в contentcontrol.|

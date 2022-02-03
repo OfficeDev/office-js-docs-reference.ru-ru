@@ -115,11 +115,7 @@ properties:
   uid: word!Word.Body#paragraphs:member
   package: word!
   fullName: paragraphs
-  summary: >-
-    Получает коллекцию объектов Paragraph в содержимом объекта или раздела. Только для чтения.
-
-
-    **Важно.** Абзацы в таблицах не возвращаются для наборов требований 1.1 и 1.2. Из набора требований 1.3 возвращаются абзацы в таблицах.
+  summary: Получает коллекцию объектов абзаца в теле. Только для чтения. **Важно**. Абзацы в таблицах не возвращаются для наборов требований 1.1 и 1.2. Из набора требований 1.3 возвращаются абзацы в таблицах.
   remarks: >-
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
@@ -368,7 +364,7 @@ methods:
   uid: word!Word.Body#getHtml:member(1)
   package: word!
   fullName: getHtml()
-  summary: Получает HTML-представление объекта тела. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, используйте и преобразуем возвращенный `Body.getOoxml()` XML в HTML.
+  summary: Получает HTML-представление объекта тела. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, `Body.getOoxml()` используйте и преобразуем возвращенный XML в HTML.
   remarks: >-
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
@@ -943,7 +939,35 @@ methods:
   package: word!
   fullName: insertParagraph(paragraphText, insertLocationString)
   summary: Вставляет абзац в указанном расположении.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+  remarks: >-
+    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-formatted-text.yaml
+
+    await Word.run(async (context) => {
+      // Second sentence, let's insert it as a paragraph after the previously inserted one.
+      let secondSentence = context.document.body.insertParagraph(
+        "This is the first text with a custom style.",
+        "End"
+      );
+      secondSentence.font.set({
+        bold: false,
+        italic: true,
+        name: "Berlin Sans FB",
+        color: "blue",
+        size: 30
+      });
+
+      await context.sync();
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1157,7 +1181,7 @@ methods:
               }): Word.Body;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -1412,7 +1436,7 @@ methods:
   uid: word!Word.Body#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.Body является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Word.Interfaces.BodyData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект Word.Body является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.BodyData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1425,7 +1449,7 @@ methods:
   uid: word!Word.Body#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1449,9 +1473,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: ea477756fe46cd84a8e44529a701eecd67eb886f
-  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
+  ms.openlocfilehash: de8b5f99f37be23d564742e05e1c4a0c7b3edb46
+  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/02/2021
-  ms.locfileid: "60648523"
+  ms.lasthandoff: 02/02/2022
+  ms.locfileid: "62324676"

@@ -49,7 +49,7 @@ properties:
   uid: word!Word.ContentControl#color:member
   package: word!
   fullName: color
-  summary: Возвращает или задает цвет элемента управления содержимым. Цвет указывается в формате \# RRGGBB или с помощью имени цвета.
+  summary: Возвращает или задает цвет элемента управления содержимым. Цвет указывается в формате\# RRGGBB или с помощью имени цвета.
   remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -121,11 +121,7 @@ properties:
   uid: word!Word.ContentControl#paragraphs:member
   package: word!
   fullName: paragraphs
-  summary: >-
-    Получает коллекцию объектов абзаца в области управления контентом. Только для чтения.
-
-
-    **Важно.** Для наборов требований 1.1 и 1.2 абзацы в таблицах, полностью содержащихся в этом элементе управления контентом, не возвращаются. Из набора требований 1.3 возвращаются абзацы в таких таблицах.
+  summary: Получает коллекцию объектов абзаца в области управления контентом. Только для чтения. **Важно**. Для наборов требований 1.1 и 1.2 абзацы в таблицах, полностью содержащихся в этом элементе управления контентом, не возвращаются. Из набора требований 1.3 возвращаются абзацы в таких таблицах.
   remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -153,7 +149,7 @@ properties:
     Возвращает или задает замещающий текст элемента управления содержимым. Если элемент управления содержимым пуст, отображается затемненный текст.
 
 
-    **Примечание.** Заданной операции для этого свойства не поддерживается в Word в Интернете.
+    **Примечание**. Заданной операции для этого свойства не поддерживается в Word в Интернете.
   remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -301,7 +297,7 @@ methods:
   uid: word!Word.ContentControl#getHtml:member(1)
   package: word!
   fullName: getHtml()
-  summary: Получает ПРЕДСТАВЛЕНИЕ HTML объекта управления контентом. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, используйте и преобразуем возвращенный `ContentControl.getOoxml()` XML в HTML.
+  summary: Получает ПРЕДСТАВЛЕНИЕ HTML объекта управления контентом. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, `ContentControl.getOoxml()` используйте и преобразуем возвращенный XML в HTML.
   remarks: "\\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the content controls collection that contains a specific tag.\n    var contentControlsWithTag = context.document.contentControls.getByTag('Customer-Address');\n    \n    // Queue a command to load the tag property for all of content controls. \n    context.load(contentControlsWithTag, 'tag');\n     \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (contentControlsWithTag.items.length === 0) {\n            console.log('No content control found.');\n        }\n        else {\n            // Queue a command to get the HTML contents of the first content control.\n            var html = contentControlsWithTag.items[0].getHtml();\n        \n            // Synchronize the document state by executing the queued commands, \n            // and return a promise to indicate task completion.\n            return context.sync()\n                .then(function () {\n                    console.log('Content control HTML: ' + html.value);\n            });\n        }\n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   isPreview: false
   isDeprecated: false
@@ -335,7 +331,7 @@ methods:
     content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
     parameters:
     - id: breakType
-      description: Обязательно. Тип перерыва.
+      description: Обязательный. Тип перерыва.
       type: <xref uid="word!Word.BreakType:enum" />
     - id: insertLocation
       description: Обязательный. Значение может быть "Начало", "Конец", "До" или "После".
@@ -455,7 +451,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательно. OOXML, который необходимо вставить в управление контентом.
+      description: Обязательный. OOXML, который необходимо вставить в управление контентом.
       type: string
     - id: insertLocation
       description: "Обязательный параметр. Возможные значения: Replace, Start или End. 'Replace' нельзя использовать с помощью элементов управления контентом RichTextTable и RichTextTableRow."
@@ -475,7 +471,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательно. OOXML, который необходимо вставить в управление контентом.
+      description: Обязательный. OOXML, который необходимо вставить в управление контентом.
       type: string
     - id: insertLocationString
       description: "Обязательный параметр. Возможные значения: Replace, Start или End. 'Replace' нельзя использовать с помощью элементов управления контентом RichTextTable и RichTextTableRow."
@@ -613,7 +609,7 @@ methods:
               }): Word.ContentControl;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -735,7 +731,7 @@ methods:
   uid: word!Word.ContentControl#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.ContentControl является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Word.Interfaces.ContentControlData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект Word.ContentControl является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.ContentControlData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -748,7 +744,7 @@ methods:
   uid: word!Word.ContentControl#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -772,9 +768,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 1d18051ab8fcd52372da0f83547427cb1ed1fad9
-  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
+  ms.openlocfilehash: 7a5f35936403a9418c5c4a8f61bc8df7e2c54979
+  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/02/2021
-  ms.locfileid: "60654067"
+  ms.lasthandoff: 02/02/2022
+  ms.locfileid: "62324270"
