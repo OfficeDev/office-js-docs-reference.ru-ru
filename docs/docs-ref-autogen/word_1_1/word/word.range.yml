@@ -49,11 +49,7 @@ properties:
   uid: word!Word.Range#paragraphs:member
   package: word!
   fullName: paragraphs
-  summary: >-
-    Получает коллекцию объектов абзаца в диапазоне. Только для чтения.
-
-
-    **Важно.** Для наборов требований 1.1 и 1.2 абзацы в таблицах, полностью содержащихся в этом диапазоне, не возвращаются. Из набора требований 1.3 возвращаются абзацы в таких таблицах.
+  summary: Получает коллекцию объектов абзаца в диапазоне. Только для чтения. **Важно**. Для наборов требований 1.1 и 1.2 абзацы в таблицах, полностью содержащихся в этом диапазоне, не возвращаются. Из набора требований 1.3 возвращаются абзацы в таких таблицах.
   remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -196,7 +192,7 @@ methods:
   uid: word!Word.Range#getHtml:member(1)
   package: word!
   fullName: getHtml()
-  summary: Получает HTML-представление объекта диапазона. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, используйте и преобразуем возвращенный `Range.getOoxml()` XML в HTML.
+  summary: Получает HTML-представление объекта диапазона. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, `Range.getOoxml()` используйте и преобразуем возвращенный XML в HTML.
   remarks: >-
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
@@ -298,7 +294,7 @@ methods:
     content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
     parameters:
     - id: breakType
-      description: Обязательно. Тип перерыва, который нужно добавить.
+      description: Обязательный. Тип перерыва, который нужно добавить.
       type: <xref uid="word!Word.BreakType:enum" />
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Before и After.'
@@ -497,7 +493,7 @@ methods:
       description: Обязательный. Вставляемый HTML.
       type: string
     - id: insertLocation
-      description: Обязательно. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
+      description: Обязательный. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
       type: <xref uid="word!Word.InsertLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -514,10 +510,10 @@ methods:
     content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: html
-      description: Обязательно. Вставляемый HTML.
+      description: Обязательный. Вставляемый HTML.
       type: string
     - id: insertLocationString
-      description: Обязательно. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
+      description: Обязательный. Значение может быть "Замените", "Начните", "Конец", "До" или "После".
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -799,7 +795,7 @@ methods:
               }): Word.Range;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -958,7 +954,7 @@ methods:
   uid: word!Word.Range#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.Range — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Word.Interfaces.RangeData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект Word.Range — это объект API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.RangeData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -971,7 +967,7 @@ methods:
   uid: word!Word.Range#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -995,9 +991,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: f4eea6f2d50eeed67b70f2370b3d739f82797011
-  ms.sourcegitcommit: ff54d254f5c60765eedbc5bbebab0a56a0a2699a
+  ms.openlocfilehash: 841cb5bbcda0338516adb44ec3335571684d9e62
+  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/02/2021
-  ms.locfileid: "60665071"
+  ms.lasthandoff: 02/02/2022
+  ms.locfileid: "62323731"

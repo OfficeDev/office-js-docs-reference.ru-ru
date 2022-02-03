@@ -418,7 +418,7 @@ methods:
   uid: word!Word.Paragraph#getHtml:member(1)
   package: word!
   fullName: getHtml()
-  summary: Получает ПРЕДСТАВЛЕНИЕ HTML объекта абзаца. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, используйте и преобразуем возвращенный `Paragraph.getOoxml()` XML в HTML.
+  summary: Получает ПРЕДСТАВЛЕНИЕ HTML объекта абзаца. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, `Paragraph.getOoxml()` используйте и преобразуем возвращенный XML в HTML.
   remarks: >-
     \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
@@ -866,7 +866,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -886,7 +886,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -906,7 +906,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательно. OOXML, который будет вставлен в абзаце.
+      description: Обязательный. OOXML, который будет вставлен в абзаце.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -926,7 +926,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательно. OOXML, который будет вставлен в абзаце.
+      description: Обязательный. OOXML, который будет вставлен в абзаце.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -939,35 +939,7 @@ methods:
   package: word!
   fullName: insertParagraph(paragraphText, insertLocation)
   summary: Вставляет абзац в указанном расположении.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-formatted-text.yaml
-
-    await Word.run(async (context) => {
-      // Second sentence, let's insert it as a paragraph after the previously inserted one.
-      let secondSentence = context.document.body.insertParagraph(
-        "This is the first text with a custom style.",
-        "End"
-      );
-      secondSentence.font.set({
-        bold: false,
-        italic: true,
-        name: "Berlin Sans FB",
-        color: "blue",
-        size: 30
-      });
-
-      await context.sync();
-    });
-
-    ```
+  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1112,7 +1084,7 @@ methods:
               }): Word.Paragraph;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -1265,7 +1237,7 @@ methods:
   uid: word!Word.Paragraph#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.Paragraph является объектом API, метод возвращает обычный `toJSON` объект JavaScript (введите как `Word.Interfaces.ParagraphData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект Word.Paragraph является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.ParagraphData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1278,7 +1250,7 @@ methods:
   uid: word!Word.Paragraph#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1302,9 +1274,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 1802558cfcab8e65e6a47080cc643b9e57c76adc
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: 59a75c49d332805241fda92e6703ced77ef1a919
+  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60069287"
+  ms.lasthandoff: 02/02/2022
+  ms.locfileid: "62323843"
