@@ -1,6 +1,6 @@
 ### YamlMime:TSType
 name: Word.Body
-uid: word!Word.Body:class
+uid: 'word!Word.Body:class'
 package: word!
 fullName: Word.Body
 summary: Представляет содержимое документа или раздела.
@@ -9,1425 +9,1328 @@ isPreview: false
 isDeprecated: false
 type: class
 properties:
-- name: contentControls
-  uid: word!Word.Body#contentControls:member
-  package: word!
-  fullName: contentControls
-  summary: Получает коллекцию из объектов управления форматированным текстом в содержимом документа или раздела. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly contentControls: Word.ContentControlCollection;'
-    return:
-      type: <xref uid="word!Word.ContentControlCollection:class" />
-- name: context
-  uid: word!Word.Body#context:member
-  package: word!
-  fullName: context
-  summary: Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type: <xref uid="word!Word.RequestContext:class" />
-- name: endnotes
-  uid: word!Word.Body#endnotes:member
-  package: word!
-  fullName: endnotes
-  summary: Получает коллекцию endnotes в теле. Только для чтения.
-  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'readonly endnotes: Word.NoteItemCollection;'
-    return:
-      type: <xref uid="word!Word.NoteItemCollection:class" />
-- name: font
-  uid: word!Word.Body#font:member
-  package: word!
-  fullName: font
-  summary: Получает формат текста, указанный для содержимого документа или раздела. Используйте эту связь, чтобы получать и задавать имя, размер, цвет и другие свойства шрифта. Только для чтения.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+  - name: contentControls
+    uid: 'word!Word.Body#contentControls:member'
+    package: word!
+    fullName: contentControls
+    summary: Получает коллекцию из объектов управления форматированным текстом в содержимом документа или раздела. Только для чтения.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly contentControls: Word.ContentControlCollection;'
+      return:
+        type: '<xref uid="word!Word.ContentControlCollection:class" />'
+  - name: context
+    uid: 'word!Word.Body#context:member'
+    package: word!
+    fullName: context
+    summary: 'Контекст запроса, связанный с объектом. Это связывает процесс надстройки с процессом Office хост-приложения.'
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type: '<xref uid="word!Word.RequestContext:class" />'
+  - name: endnotes
+    uid: 'word!Word.Body#endnotes:member'
+    package: word!
+    fullName: endnotes
+    summary: Получает коллекцию endnotes в теле. Только для чтения.
+    remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: true
+    isDeprecated: false
+    syntax:
+      content: 'readonly endnotes: Word.NoteItemCollection;'
+      return:
+        type: '<xref uid="word!Word.NoteItemCollection:class" />'
+  - name: font
+    uid: 'word!Word.Body#font:member'
+    package: word!
+    fullName: font
+    summary: 'Получает формат текста, указанный для содержимого документа или раздела. Используйте эту связь, чтобы получать и задавать имя, размер, цвет и другие свойства шрифта. Только для чтения.'
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
+      #### <a name="examples"></a>Примеры
 
-    #### <a name="examples"></a>Примеры
+      ```javascript
+      // Get the style and the font size, font name, and font color properties on the body object.
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
 
+          // Create a proxy object for the document body.
+          var body = context.document.body;
 
-    ```javascript
+          // Queue a command to load font and style information for the document body.
+          context.load(body, 'font/size, font/name, font/color, style');
 
-    // Get the style and the font size, font name, and font color properties on the body object.
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              // Show the results of the load method. Here we show the
+              // property values on the body object.
+              var results = 'Font size: ' + body.font.size +
+                            '; Font name: ' + body.font.name +
+                            '; Font color: ' + body.font.color +
+                            '; Body style: ' + body.style;
 
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to load font and style information for the document body.
-        context.load(body, 'font/size, font/name, font/color, style');
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            // Show the results of the load method. Here we show the
-            // property values on the body object.
-            var results = 'Font size: ' + body.font.size +
-                          '; Font name: ' + body.font.name +
-                          '; Font color: ' + body.font.color +
-                          '; Body style: ' + body.style;
-
-            console.log(results);
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly font: Word.Font;'
-    return:
-      type: <xref uid="word!Word.Font:class" />
-- name: footnotes
-  uid: word!Word.Body#footnotes:member
-  package: word!
-  fullName: footnotes
-  summary: Получает коллекцию сносок в теле. Только для чтения.
-  remarks: >-
-    \[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-footnotes.yaml
-
-    await Word.run(async (context) => {
-      const footnotes = context.document.body.footnotes;
-      footnotes.load("length");
-      await context.sync();
-
-      console.log("Number of footnotes in the document body: " + footnotes.items.length);
-    });
-
-    ```
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'readonly footnotes: Word.NoteItemCollection;'
-    return:
-      type: <xref uid="word!Word.NoteItemCollection:class" />
-- name: inlinePictures
-  uid: word!Word.Body#inlinePictures:member
-  package: word!
-  fullName: inlinePictures
-  summary: Получает коллекцию объектов InlinePicture в теле. Коллекция не содержит плавающие рисунки. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly inlinePictures: Word.InlinePictureCollection;'
-    return:
-      type: <xref uid="word!Word.InlinePictureCollection:class" />
-- name: lists
-  uid: word!Word.Body#lists:member
-  package: word!
-  fullName: lists
-  summary: Возвращает коллекцию объектов списков в основном тексте. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly lists: Word.ListCollection;'
-    return:
-      type: <xref uid="word!Word.ListCollection:class" />
-- name: paragraphs
-  uid: word!Word.Body#paragraphs:member
-  package: word!
-  fullName: paragraphs
-  summary: Получает коллекцию объектов абзаца в теле. Только для чтения. **Важно**. Абзацы в таблицах не возвращаются для наборов требований 1.1 и 1.2. Из набора требований 1.3 возвращаются абзацы в таблицах.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/get-word-count.yaml
-
-    await Word.run(async (context) => {
-      let paragraphs = context.document.body.paragraphs;
-      paragraphs.load("text");
-      await context.sync();
-
-      let text = [];
-      paragraphs.items.forEach((item) => {
-        let paragraph = item.text.trim();
-        if (paragraph) {
-          paragraph.split(" ").forEach((term) => {
-            let currentTerm = term.trim();
-            if (currentTerm) {
-              text.push(currentTerm);
-            }
+              console.log(results);
           });
-        }
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
       });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly font: Word.Font;'
+      return:
+        type: '<xref uid="word!Word.Font:class" />'
+  - name: footnotes
+    uid: 'word!Word.Body#footnotes:member'
+    package: word!
+    fullName: footnotes
+    summary: Получает коллекцию сносок в теле. Только для чтения.
+    remarks: |-
+      \[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
-      let makeTextDistinct = new Set(text);
-      let distinctText = Array.from(makeTextDistinct);
-      let allSearchResults = [];
+      #### <a name="examples"></a>Примеры
 
-      for (let i = 0; i < distinctText.length; i++) {
-        let results = context.document.body.search(distinctText[i], { matchCase: true, matchWholeWord: true });
-        results.load("text");
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-footnotes.yaml
+      await Word.run(async (context) => {
+        const footnotes = context.document.body.footnotes;
+        footnotes.load("length");
+        await context.sync();
 
-        // Map search term with its results.
-        let correlatedResults = {
-          searchTerm: distinctText[i],
-          hits: results
-        };
-
-        allSearchResults.push(correlatedResults);
-      }
-
-      await context.sync();
-
-      // Display counts.
-      allSearchResults.forEach((result) => {
-        let length = result.hits.items.length;
-
-        console.log("Search term: " + result.searchTerm + " => Count: " + length);
+        console.log("Number of footnotes in the document body: " + footnotes.items.length);
       });
-    });
+      ```
+    isPreview: true
+    isDeprecated: false
+    syntax:
+      content: 'readonly footnotes: Word.NoteItemCollection;'
+      return:
+        type: '<xref uid="word!Word.NoteItemCollection:class" />'
+  - name: inlinePictures
+    uid: 'word!Word.Body#inlinePictures:member'
+    package: word!
+    fullName: inlinePictures
+    summary: Получает коллекцию объектов InlinePicture в теле. Коллекция не содержит плавающие рисунки. Только для чтения.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly inlinePictures: Word.InlinePictureCollection;'
+      return:
+        type: '<xref uid="word!Word.InlinePictureCollection:class" />'
+  - name: lists
+    uid: 'word!Word.Body#lists:member'
+    package: word!
+    fullName: lists
+    summary: Возвращает коллекцию объектов списков в основном тексте. Только для чтения.
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly lists: Word.ListCollection;'
+      return:
+        type: '<xref uid="word!Word.ListCollection:class" />'
+  - name: paragraphs
+    uid: 'word!Word.Body#paragraphs:member'
+    package: word!
+    fullName: paragraphs
+    summary: Получает коллекцию объектов абзаца в теле. Только для чтения. **Важно**. Абзацы в таблицах не возвращаются для наборов требований 1.1 и 1.2. Из набора требований 1.3 возвращаются абзацы в таблицах.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly paragraphs: Word.ParagraphCollection;'
-    return:
-      type: <xref uid="word!Word.ParagraphCollection:class" />
-- name: parentBody
-  uid: word!Word.Body#parentBody:member
-  package: word!
-  fullName: parentBody
-  summary: Возвращает родительский текст основного текста. Например, родительским текстом ячейки таблицы может быть заголовок. Если нет родительского тела, ошибка. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly parentBody: Word.Body;'
-    return:
-      type: <xref uid="word!Word.Body:class" />
-- name: parentBodyOrNullObject
-  uid: word!Word.Body#parentBodyOrNullObject:member
-  package: word!
-  fullName: parentBodyOrNullObject
-  summary: Возвращает родительский текст основного текста. Например, родительским текстом ячейки таблицы может быть заголовок. Возвращает пустой объект, если родительского текста не существует. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly parentBodyOrNullObject: Word.Body;'
-    return:
-      type: <xref uid="word!Word.Body:class" />
-- name: parentContentControl
-  uid: word!Word.Body#parentContentControl:member
-  package: word!
-  fullName: parentContentControl
-  summary: Получает элемент управления содержимым, содержащий документ или раздел. Если нет родительского управления контентом, ошибка. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly parentContentControl: Word.ContentControl;'
-    return:
-      type: <xref uid="word!Word.ContentControl:class" />
-- name: parentContentControlOrNullObject
-  uid: word!Word.Body#parentContentControlOrNullObject:member
-  package: word!
-  fullName: parentContentControlOrNullObject
-  summary: Получает элемент управления содержимым, содержащий документ или раздел. Возвращает пустой объект, если родительского элемента управления содержимым не существует. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly parentContentControlOrNullObject: Word.ContentControl;'
-    return:
-      type: <xref uid="word!Word.ContentControl:class" />
-- name: parentSection
-  uid: word!Word.Body#parentSection:member
-  package: word!
-  fullName: parentSection
-  summary: Возвращает родительский раздел основного текста. Если родительского раздела нет, то ошибка. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly parentSection: Word.Section;'
-    return:
-      type: <xref uid="word!Word.Section:class" />
-- name: parentSectionOrNullObject
-  uid: word!Word.Body#parentSectionOrNullObject:member
-  package: word!
-  fullName: parentSectionOrNullObject
-  summary: Возвращает родительский раздел основного текста. Возвращает пустой объект, если родительского раздела не существует. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly parentSectionOrNullObject: Word.Section;'
-    return:
-      type: <xref uid="word!Word.Section:class" />
-- name: style
-  uid: word!Word.Body#style:member
-  package: word!
-  fullName: style
-  summary: Возвращает или задает имя стиля для основного текста. Используйте это свойство для пользовательских стилей и локализованных имен стилей. Чтобы использовать встроенные стили, поддерживающие несколько языковых стандартов, применяйте свойство styleBuiltIn.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'style: string;'
-    return:
-      type: string
-- name: styleBuiltIn
-  uid: word!Word.Body#styleBuiltIn:member
-  package: word!
-  fullName: styleBuiltIn
-  summary: Возвращает или задает имя встроенного стиля основного текста. Используйте это свойство для встроенных стилей, поддерживающих несколько языковых стандартов. Чтобы использовать пользовательские стили или локализованные имена стилей, применяйте свойство style.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'styleBuiltIn: Word.Style | "Other" | "Normal" | "Heading1" | "Heading2" | "Heading3" | "Heading4" | "Heading5" | "Heading6" | "Heading7" | "Heading8" | "Heading9" | "Toc1" | "Toc2" | "Toc3" | "Toc4" | "Toc5" | "Toc6" | "Toc7" | "Toc8" | "Toc9" | "FootnoteText" | "Header" | "Footer" | "Caption" | "FootnoteReference" | "EndnoteReference" | "EndnoteText" | "Title" | "Subtitle" | "Hyperlink" | "Strong" | "Emphasis" | "NoSpacing" | "ListParagraph" | "Quote" | "IntenseQuote" | "SubtleEmphasis" | "IntenseEmphasis" | "SubtleReference" | "IntenseReference" | "BookTitle" | "Bibliography" | "TocHeading" | "TableGrid" | "PlainTable1" | "PlainTable2" | "PlainTable3" | "PlainTable4" | "PlainTable5" | "TableGridLight" | "GridTable1Light" | "GridTable1Light_Accent1" | "GridTable1Light_Accent2" | "GridTable1Light_Accent3" | "GridTable1Light_Accent4" | "GridTable1Light_Accent5" | "GridTable1Light_Accent6" | "GridTable2" | "GridTable2_Accent1" | "GridTable2_Accent2" | "GridTable2_Accent3" | "GridTable2_Accent4" | "GridTable2_Accent5" | "GridTable2_Accent6" | "GridTable3" | "GridTable3_Accent1" | "GridTable3_Accent2" | "GridTable3_Accent3" | "GridTable3_Accent4" | "GridTable3_Accent5" | "GridTable3_Accent6" | "GridTable4" | "GridTable4_Accent1" | "GridTable4_Accent2" | "GridTable4_Accent3" | "GridTable4_Accent4" | "GridTable4_Accent5" | "GridTable4_Accent6" | "GridTable5Dark" | "GridTable5Dark_Accent1" | "GridTable5Dark_Accent2" | "GridTable5Dark_Accent3" | "GridTable5Dark_Accent4" | "GridTable5Dark_Accent5" | "GridTable5Dark_Accent6" | "GridTable6Colorful" | "GridTable6Colorful_Accent1" | "GridTable6Colorful_Accent2" | "GridTable6Colorful_Accent3" | "GridTable6Colorful_Accent4" | "GridTable6Colorful_Accent5" | "GridTable6Colorful_Accent6" | "GridTable7Colorful" | "GridTable7Colorful_Accent1" | "GridTable7Colorful_Accent2" | "GridTable7Colorful_Accent3" | "GridTable7Colorful_Accent4" | "GridTable7Colorful_Accent5" | "GridTable7Colorful_Accent6" | "ListTable1Light" | "ListTable1Light_Accent1" | "ListTable1Light_Accent2" | "ListTable1Light_Accent3" | "ListTable1Light_Accent4" | "ListTable1Light_Accent5" | "ListTable1Light_Accent6" | "ListTable2" | "ListTable2_Accent1" | "ListTable2_Accent2" | "ListTable2_Accent3" | "ListTable2_Accent4" | "ListTable2_Accent5" | "ListTable2_Accent6" | "ListTable3" | "ListTable3_Accent1" | "ListTable3_Accent2" | "ListTable3_Accent3" | "ListTable3_Accent4" | "ListTable3_Accent5" | "ListTable3_Accent6" | "ListTable4" | "ListTable4_Accent1" | "ListTable4_Accent2" | "ListTable4_Accent3" | "ListTable4_Accent4" | "ListTable4_Accent5" | "ListTable4_Accent6" | "ListTable5Dark" | "ListTable5Dark_Accent1" | "ListTable5Dark_Accent2" | "ListTable5Dark_Accent3" | "ListTable5Dark_Accent4" | "ListTable5Dark_Accent5" | "ListTable5Dark_Accent6" | "ListTable6Colorful" | "ListTable6Colorful_Accent1" | "ListTable6Colorful_Accent2" | "ListTable6Colorful_Accent3" | "ListTable6Colorful_Accent4" | "ListTable6Colorful_Accent5" | "ListTable6Colorful_Accent6" | "ListTable7Colorful" | "ListTable7Colorful_Accent1" | "ListTable7Colorful_Accent2" | "ListTable7Colorful_Accent3" | "ListTable7Colorful_Accent4" | "ListTable7Colorful_Accent5" | "ListTable7Colorful_Accent6";'
-    return:
-      type: <xref uid="word!Word.Style:enum" /> | "Other" | "Normal" | "Heading1" | "Heading2" | "Heading3" | "Heading4" | "Heading5" | "Heading6" | "Heading7" | "Heading8" | "Heading9" | "Toc1" | "Toc2" | "Toc3" | "Toc4" | "Toc5" | "Toc6" | "Toc7" | "Toc8" | "Toc9" | "FootnoteText" | "Header" | "Footer" | "Caption" | "FootnoteReference" | "EndnoteReference" | "EndnoteText" | "Title" | "Subtitle" | "Hyperlink" | "Strong" | "Emphasis" | "NoSpacing" | "ListParagraph" | "Quote" | "IntenseQuote" | "SubtleEmphasis" | "IntenseEmphasis" | "SubtleReference" | "IntenseReference" | "BookTitle" | "Bibliography" | "TocHeading" | "TableGrid" | "PlainTable1" | "PlainTable2" | "PlainTable3" | "PlainTable4" | "PlainTable5" | "TableGridLight" | "GridTable1Light" | "GridTable1Light_Accent1" | "GridTable1Light_Accent2" | "GridTable1Light_Accent3" | "GridTable1Light_Accent4" | "GridTable1Light_Accent5" | "GridTable1Light_Accent6" | "GridTable2" | "GridTable2_Accent1" | "GridTable2_Accent2" | "GridTable2_Accent3" | "GridTable2_Accent4" | "GridTable2_Accent5" | "GridTable2_Accent6" | "GridTable3" | "GridTable3_Accent1" | "GridTable3_Accent2" | "GridTable3_Accent3" | "GridTable3_Accent4" | "GridTable3_Accent5" | "GridTable3_Accent6" | "GridTable4" | "GridTable4_Accent1" | "GridTable4_Accent2" | "GridTable4_Accent3" | "GridTable4_Accent4" | "GridTable4_Accent5" | "GridTable4_Accent6" | "GridTable5Dark" | "GridTable5Dark_Accent1" | "GridTable5Dark_Accent2" | "GridTable5Dark_Accent3" | "GridTable5Dark_Accent4" | "GridTable5Dark_Accent5" | "GridTable5Dark_Accent6" | "GridTable6Colorful" | "GridTable6Colorful_Accent1" | "GridTable6Colorful_Accent2" | "GridTable6Colorful_Accent3" | "GridTable6Colorful_Accent4" | "GridTable6Colorful_Accent5" | "GridTable6Colorful_Accent6" | "GridTable7Colorful" | "GridTable7Colorful_Accent1" | "GridTable7Colorful_Accent2" | "GridTable7Colorful_Accent3" | "GridTable7Colorful_Accent4" | "GridTable7Colorful_Accent5" | "GridTable7Colorful_Accent6" | "ListTable1Light" | "ListTable1Light_Accent1" | "ListTable1Light_Accent2" | "ListTable1Light_Accent3" | "ListTable1Light_Accent4" | "ListTable1Light_Accent5" | "ListTable1Light_Accent6" | "ListTable2" | "ListTable2_Accent1" | "ListTable2_Accent2" | "ListTable2_Accent3" | "ListTable2_Accent4" | "ListTable2_Accent5" | "ListTable2_Accent6" | "ListTable3" | "ListTable3_Accent1" | "ListTable3_Accent2" | "ListTable3_Accent3" | "ListTable3_Accent4" | "ListTable3_Accent5" | "ListTable3_Accent6" | "ListTable4" | "ListTable4_Accent1" | "ListTable4_Accent2" | "ListTable4_Accent3" | "ListTable4_Accent4" | "ListTable4_Accent5" | "ListTable4_Accent6" | "ListTable5Dark" | "ListTable5Dark_Accent1" | "ListTable5Dark_Accent2" | "ListTable5Dark_Accent3" | "ListTable5Dark_Accent4" | "ListTable5Dark_Accent5" | "ListTable5Dark_Accent6" | "ListTable6Colorful" | "ListTable6Colorful_Accent1" | "ListTable6Colorful_Accent2" | "ListTable6Colorful_Accent3" | "ListTable6Colorful_Accent4" | "ListTable6Colorful_Accent5" | "ListTable6Colorful_Accent6" | "ListTable7Colorful" | "ListTable7Colorful_Accent1" | "ListTable7Colorful_Accent2" | "ListTable7Colorful_Accent3" | "ListTable7Colorful_Accent4" | "ListTable7Colorful_Accent5" | "ListTable7Colorful_Accent6"
-- name: tables
-  uid: word!Word.Body#tables:member
-  package: word!
-  fullName: tables
-  summary: Возвращает коллекцию объектов таблиц в основном тексте. Только для чтения.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly tables: Word.TableCollection;'
-    return:
-      type: <xref uid="word!Word.TableCollection:class" />
-- name: text
-  uid: word!Word.Body#text:member
-  package: word!
-  fullName: text
-  summary: Возвращает текст содержимого. Для вставки текста используется метод insertText. Только для чтения.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+      #### <a name="examples"></a>Примеры
 
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/get-word-count.yaml
+      await Word.run(async (context) => {
+        let paragraphs = context.document.body.paragraphs;
+        paragraphs.load("text");
+        await context.sync();
 
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Get the text property on the body object
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to load the text in document body.
-        context.load(body, 'text');
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log("Body contents: " + body.text);
+        let text = [];
+        paragraphs.items.forEach((item) => {
+          let paragraph = item.text.trim();
+          if (paragraph) {
+            paragraph.split(" ").forEach((term) => {
+              let currentTerm = term.trim();
+              if (currentTerm) {
+                text.push(currentTerm);
+              }
+            });
+          }
         });
-    })
 
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        let makeTextDistinct = new Set(text);
+        let distinctText = Array.from(makeTextDistinct);
+        let allSearchResults = [];
+
+        for (let i = 0; i < distinctText.length; i++) {
+          let results = context.document.body.search(distinctText[i], { matchCase: true, matchWholeWord: true });
+          results.load("text");
+
+          // Map search term with its results.
+          let correlatedResults = {
+            searchTerm: distinctText[i],
+            hits: results
+          };
+
+          allSearchResults.push(correlatedResults);
         }
-    });
 
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly text: string;'
-    return:
-      type: string
-- name: type
-  uid: word!Word.Body#type:member
-  package: word!
-  fullName: type
-  summary: 'Возвращает тип основного текста. Поддерживаемые типы: MainDoc, Section, Header, Footer и TableCell. Только для чтения.'
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'readonly type: Word.BodyType | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell" | "Footnote" | "Endnote" | "NoteItem";'
-    return:
-      type: <xref uid="word!Word.BodyType:enum" /> | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell" | "Footnote" | "Endnote" | "NoteItem"
+        await context.sync();
+
+        // Display counts.
+        allSearchResults.forEach((result) => {
+          let length = result.hits.items.length;
+
+          console.log("Search term: " + result.searchTerm + " => Count: " + length);
+        });
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly paragraphs: Word.ParagraphCollection;'
+      return:
+        type: '<xref uid="word!Word.ParagraphCollection:class" />'
+  - name: parentBody
+    uid: 'word!Word.Body#parentBody:member'
+    package: word!
+    fullName: parentBody
+    summary: 'Возвращает родительский текст основного текста. Например, родительским текстом ячейки таблицы может быть заголовок. Если нет родительского тела, ошибка. Только для чтения.'
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly parentBody: Word.Body;'
+      return:
+        type: '<xref uid="word!Word.Body:class" />'
+  - name: parentBodyOrNullObject
+    uid: 'word!Word.Body#parentBodyOrNullObject:member'
+    package: word!
+    fullName: parentBodyOrNullObject
+    summary: 'Возвращает родительский текст основного текста. Например, родительским текстом ячейки таблицы может быть заголовок. Возвращает пустой объект, если родительского текста не существует. Только для чтения.'
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly parentBodyOrNullObject: Word.Body;'
+      return:
+        type: '<xref uid="word!Word.Body:class" />'
+  - name: parentContentControl
+    uid: 'word!Word.Body#parentContentControl:member'
+    package: word!
+    fullName: parentContentControl
+    summary: 'Получает элемент управления содержимым, содержащий документ или раздел. Если нет родительского управления контентом, ошибка. Только для чтения.'
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly parentContentControl: Word.ContentControl;'
+      return:
+        type: '<xref uid="word!Word.ContentControl:class" />'
+  - name: parentContentControlOrNullObject
+    uid: 'word!Word.Body#parentContentControlOrNullObject:member'
+    package: word!
+    fullName: parentContentControlOrNullObject
+    summary: 'Получает элемент управления содержимым, содержащий документ или раздел. Возвращает пустой объект, если родительского элемента управления содержимым не существует. Только для чтения.'
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly parentContentControlOrNullObject: Word.ContentControl;'
+      return:
+        type: '<xref uid="word!Word.ContentControl:class" />'
+  - name: parentSection
+    uid: 'word!Word.Body#parentSection:member'
+    package: word!
+    fullName: parentSection
+    summary: 'Возвращает родительский раздел основного текста. Если родительского раздела нет, то ошибка. Только для чтения.'
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly parentSection: Word.Section;'
+      return:
+        type: '<xref uid="word!Word.Section:class" />'
+  - name: parentSectionOrNullObject
+    uid: 'word!Word.Body#parentSectionOrNullObject:member'
+    package: word!
+    fullName: parentSectionOrNullObject
+    summary: 'Возвращает родительский раздел основного текста. Возвращает пустой объект, если родительского раздела не существует. Только для чтения.'
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly parentSectionOrNullObject: Word.Section;'
+      return:
+        type: '<xref uid="word!Word.Section:class" />'
+  - name: style
+    uid: 'word!Word.Body#style:member'
+    package: word!
+    fullName: style
+    summary: 'Возвращает или задает имя стиля для основного текста. Используйте это свойство для пользовательских стилей и локализованных имен стилей. Чтобы использовать встроенные стили, поддерживающие несколько языковых стандартов, применяйте свойство styleBuiltIn.'
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'style: string;'
+      return:
+        type: string
+  - name: styleBuiltIn
+    uid: 'word!Word.Body#styleBuiltIn:member'
+    package: word!
+    fullName: styleBuiltIn
+    summary: 'Возвращает или задает имя встроенного стиля основного текста. Используйте это свойство для встроенных стилей, поддерживающих несколько языковых стандартов. Чтобы использовать пользовательские стили или локализованные имена стилей, применяйте свойство style.'
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'styleBuiltIn: Word.Style | "Other" | "Normal" | "Heading1" | "Heading2" | "Heading3" | "Heading4" | "Heading5" | "Heading6" | "Heading7" | "Heading8" | "Heading9" | "Toc1" | "Toc2" | "Toc3" | "Toc4" | "Toc5" | "Toc6" | "Toc7" | "Toc8" | "Toc9" | "FootnoteText" | "Header" | "Footer" | "Caption" | "FootnoteReference" | "EndnoteReference" | "EndnoteText" | "Title" | "Subtitle" | "Hyperlink" | "Strong" | "Emphasis" | "NoSpacing" | "ListParagraph" | "Quote" | "IntenseQuote" | "SubtleEmphasis" | "IntenseEmphasis" | "SubtleReference" | "IntenseReference" | "BookTitle" | "Bibliography" | "TocHeading" | "TableGrid" | "PlainTable1" | "PlainTable2" | "PlainTable3" | "PlainTable4" | "PlainTable5" | "TableGridLight" | "GridTable1Light" | "GridTable1Light_Accent1" | "GridTable1Light_Accent2" | "GridTable1Light_Accent3" | "GridTable1Light_Accent4" | "GridTable1Light_Accent5" | "GridTable1Light_Accent6" | "GridTable2" | "GridTable2_Accent1" | "GridTable2_Accent2" | "GridTable2_Accent3" | "GridTable2_Accent4" | "GridTable2_Accent5" | "GridTable2_Accent6" | "GridTable3" | "GridTable3_Accent1" | "GridTable3_Accent2" | "GridTable3_Accent3" | "GridTable3_Accent4" | "GridTable3_Accent5" | "GridTable3_Accent6" | "GridTable4" | "GridTable4_Accent1" | "GridTable4_Accent2" | "GridTable4_Accent3" | "GridTable4_Accent4" | "GridTable4_Accent5" | "GridTable4_Accent6" | "GridTable5Dark" | "GridTable5Dark_Accent1" | "GridTable5Dark_Accent2" | "GridTable5Dark_Accent3" | "GridTable5Dark_Accent4" | "GridTable5Dark_Accent5" | "GridTable5Dark_Accent6" | "GridTable6Colorful" | "GridTable6Colorful_Accent1" | "GridTable6Colorful_Accent2" | "GridTable6Colorful_Accent3" | "GridTable6Colorful_Accent4" | "GridTable6Colorful_Accent5" | "GridTable6Colorful_Accent6" | "GridTable7Colorful" | "GridTable7Colorful_Accent1" | "GridTable7Colorful_Accent2" | "GridTable7Colorful_Accent3" | "GridTable7Colorful_Accent4" | "GridTable7Colorful_Accent5" | "GridTable7Colorful_Accent6" | "ListTable1Light" | "ListTable1Light_Accent1" | "ListTable1Light_Accent2" | "ListTable1Light_Accent3" | "ListTable1Light_Accent4" | "ListTable1Light_Accent5" | "ListTable1Light_Accent6" | "ListTable2" | "ListTable2_Accent1" | "ListTable2_Accent2" | "ListTable2_Accent3" | "ListTable2_Accent4" | "ListTable2_Accent5" | "ListTable2_Accent6" | "ListTable3" | "ListTable3_Accent1" | "ListTable3_Accent2" | "ListTable3_Accent3" | "ListTable3_Accent4" | "ListTable3_Accent5" | "ListTable3_Accent6" | "ListTable4" | "ListTable4_Accent1" | "ListTable4_Accent2" | "ListTable4_Accent3" | "ListTable4_Accent4" | "ListTable4_Accent5" | "ListTable4_Accent6" | "ListTable5Dark" | "ListTable5Dark_Accent1" | "ListTable5Dark_Accent2" | "ListTable5Dark_Accent3" | "ListTable5Dark_Accent4" | "ListTable5Dark_Accent5" | "ListTable5Dark_Accent6" | "ListTable6Colorful" | "ListTable6Colorful_Accent1" | "ListTable6Colorful_Accent2" | "ListTable6Colorful_Accent3" | "ListTable6Colorful_Accent4" | "ListTable6Colorful_Accent5" | "ListTable6Colorful_Accent6" | "ListTable7Colorful" | "ListTable7Colorful_Accent1" | "ListTable7Colorful_Accent2" | "ListTable7Colorful_Accent3" | "ListTable7Colorful_Accent4" | "ListTable7Colorful_Accent5" | "ListTable7Colorful_Accent6";'
+      return:
+        type: '<xref uid="word!Word.Style:enum" /> | "Other" | "Normal" | "Heading1" | "Heading2" | "Heading3" | "Heading4" | "Heading5" | "Heading6" | "Heading7" | "Heading8" | "Heading9" | "Toc1" | "Toc2" | "Toc3" | "Toc4" | "Toc5" | "Toc6" | "Toc7" | "Toc8" | "Toc9" | "FootnoteText" | "Header" | "Footer" | "Caption" | "FootnoteReference" | "EndnoteReference" | "EndnoteText" | "Title" | "Subtitle" | "Hyperlink" | "Strong" | "Emphasis" | "NoSpacing" | "ListParagraph" | "Quote" | "IntenseQuote" | "SubtleEmphasis" | "IntenseEmphasis" | "SubtleReference" | "IntenseReference" | "BookTitle" | "Bibliography" | "TocHeading" | "TableGrid" | "PlainTable1" | "PlainTable2" | "PlainTable3" | "PlainTable4" | "PlainTable5" | "TableGridLight" | "GridTable1Light" | "GridTable1Light_Accent1" | "GridTable1Light_Accent2" | "GridTable1Light_Accent3" | "GridTable1Light_Accent4" | "GridTable1Light_Accent5" | "GridTable1Light_Accent6" | "GridTable2" | "GridTable2_Accent1" | "GridTable2_Accent2" | "GridTable2_Accent3" | "GridTable2_Accent4" | "GridTable2_Accent5" | "GridTable2_Accent6" | "GridTable3" | "GridTable3_Accent1" | "GridTable3_Accent2" | "GridTable3_Accent3" | "GridTable3_Accent4" | "GridTable3_Accent5" | "GridTable3_Accent6" | "GridTable4" | "GridTable4_Accent1" | "GridTable4_Accent2" | "GridTable4_Accent3" | "GridTable4_Accent4" | "GridTable4_Accent5" | "GridTable4_Accent6" | "GridTable5Dark" | "GridTable5Dark_Accent1" | "GridTable5Dark_Accent2" | "GridTable5Dark_Accent3" | "GridTable5Dark_Accent4" | "GridTable5Dark_Accent5" | "GridTable5Dark_Accent6" | "GridTable6Colorful" | "GridTable6Colorful_Accent1" | "GridTable6Colorful_Accent2" | "GridTable6Colorful_Accent3" | "GridTable6Colorful_Accent4" | "GridTable6Colorful_Accent5" | "GridTable6Colorful_Accent6" | "GridTable7Colorful" | "GridTable7Colorful_Accent1" | "GridTable7Colorful_Accent2" | "GridTable7Colorful_Accent3" | "GridTable7Colorful_Accent4" | "GridTable7Colorful_Accent5" | "GridTable7Colorful_Accent6" | "ListTable1Light" | "ListTable1Light_Accent1" | "ListTable1Light_Accent2" | "ListTable1Light_Accent3" | "ListTable1Light_Accent4" | "ListTable1Light_Accent5" | "ListTable1Light_Accent6" | "ListTable2" | "ListTable2_Accent1" | "ListTable2_Accent2" | "ListTable2_Accent3" | "ListTable2_Accent4" | "ListTable2_Accent5" | "ListTable2_Accent6" | "ListTable3" | "ListTable3_Accent1" | "ListTable3_Accent2" | "ListTable3_Accent3" | "ListTable3_Accent4" | "ListTable3_Accent5" | "ListTable3_Accent6" | "ListTable4" | "ListTable4_Accent1" | "ListTable4_Accent2" | "ListTable4_Accent3" | "ListTable4_Accent4" | "ListTable4_Accent5" | "ListTable4_Accent6" | "ListTable5Dark" | "ListTable5Dark_Accent1" | "ListTable5Dark_Accent2" | "ListTable5Dark_Accent3" | "ListTable5Dark_Accent4" | "ListTable5Dark_Accent5" | "ListTable5Dark_Accent6" | "ListTable6Colorful" | "ListTable6Colorful_Accent1" | "ListTable6Colorful_Accent2" | "ListTable6Colorful_Accent3" | "ListTable6Colorful_Accent4" | "ListTable6Colorful_Accent5" | "ListTable6Colorful_Accent6" | "ListTable7Colorful" | "ListTable7Colorful_Accent1" | "ListTable7Colorful_Accent2" | "ListTable7Colorful_Accent3" | "ListTable7Colorful_Accent4" | "ListTable7Colorful_Accent5" | "ListTable7Colorful_Accent6"'
+  - name: tables
+    uid: 'word!Word.Body#tables:member'
+    package: word!
+    fullName: tables
+    summary: Возвращает коллекцию объектов таблиц в основном тексте. Только для чтения.
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly tables: Word.TableCollection;'
+      return:
+        type: '<xref uid="word!Word.TableCollection:class" />'
+  - name: text
+    uid: 'word!Word.Body#text:member'
+    package: word!
+    fullName: text
+    summary: Возвращает текст содержимого. Для вставки текста используется метод insertText. Только для чтения.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Get the text property on the body object
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to load the text in document body.
+          context.load(body, 'text');
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log("Body contents: " + body.text);
+          });
+      })
+      .catch(function (error) {
+          console.log("Error: " + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log("Debug info: " + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly text: string;'
+      return:
+        type: string
+  - name: type
+    uid: 'word!Word.Body#type:member'
+    package: word!
+    fullName: type
+    summary: 'Возвращает тип основного текста. Поддерживаемые типы: MainDoc, Section, Header, Footer и TableCell. Только для чтения.'
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readonly type: Word.BodyType | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell" | "Footnote" | "Endnote" | "NoteItem";'
+      return:
+        type: '<xref uid="word!Word.BodyType:enum" /> | "Unknown" | "MainDoc" | "Section" | "Header" | "Footer" | "TableCell" | "Footnote" | "Endnote" | "NoteItem"'
 methods:
-- name: clear()
-  uid: word!Word.Body#clear:member(1)
-  package: word!
-  fullName: clear()
-  summary: Очищает объект содержимого. Пользователь может отменить операцию очищения для содержимого.
-  remarks: "\\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the document body.\n    var body = context.document.body;\n\n    // Queue a command to clear the contents of the body.\n    body.clear();\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log('Cleared the body contents.');\n    });\n})\n.catch(function (error) {\n    console.log(\"Error: \" + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n\n// The Silly stories add-in sample shows how the \n// clear method can be used to clear the contents of a document.\n// https://aka.ms/sillystorywordaddin\n```"
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'clear(): void;'
-    return:
-      type: void
-      description: ''
-- name: getComments()
-  uid: word!Word.Body#getComments:member(1)
-  package: word!
-  fullName: getComments()
-  summary: Получает комментарии, связанные с телом.
-  remarks: >-
-    \[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-comments.yaml
-
-    await Word.run(async (context) => {
-      let comments = context.document.body.getComments();
-
-      // Load objects for display in Script Lab console.
-      context.load(comments);
-      await context.sync();
-
-      console.log("All comments:");
-      console.log(comments);
-    });
-
-    ```
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'getComments(): Word.CommentCollection;'
-    return:
-      type: <xref uid="word!Word.CommentCollection:class" />
-      description: ''
-- name: getHtml()
-  uid: word!Word.Body#getHtml:member(1)
-  package: word!
-  fullName: getHtml()
-  summary: Получает HTML-представление объекта тела. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, `Body.getOoxml()` используйте и преобразуем возвращенный XML в HTML.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to get the HTML contents of the body.
-        var bodyHTML = body.getHtml();
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log("Body HTML contents: " + bodyHTML.value);
-        });
-    })
-
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getHtml(): OfficeExtension.ClientResult<string>;'
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
-      description: ''
-- name: getOoxml()
-  uid: word!Word.Body#getOoxml:member(1)
-  package: word!
-  fullName: getOoxml()
-  summary: Возвращает OOXML-представление (Office Open XML) объекта содержимого.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to get the OOXML contents of the body.
-        var bodyOOXML = body.getOoxml();
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log("Body OOXML contents: " + bodyOOXML.value);
-        });
-    })
-
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getOoxml(): OfficeExtension.ClientResult<string>;'
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
-      description: ''
-- name: getRange(rangeLocation)
-  uid: word!Word.Body#getRange:member(1)
-  package: word!
-  fullName: getRange(rangeLocation)
-  summary: Возвращает весь основной текст (либо его начальную или конечную точку) в виде диапазона.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
-    parameters:
-    - id: rangeLocation
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
-      type: <xref uid="word!Word.RangeLocation:enum" />
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: getRange(rangeLocationString)
-  uid: word!Word.Body#getRange:member(2)
-  package: word!
-  fullName: getRange(rangeLocationString)
-  summary: Возвращает весь основной текст (либо его начальную или конечную точку) в виде диапазона.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
-    parameters:
-    - id: rangeLocationString
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
-      type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: getReviewedText(changeTrackingVersion)
-  uid: word!Word.Body#getReviewedText:member(1)
-  package: word!
-  fullName: getReviewedText(changeTrackingVersion)
-  summary: Получает рассмотренный текст на основе выбора ChangeTrackingVersion.
-  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'getReviewedText(changeTrackingVersion?: Word.ChangeTrackingVersion): OfficeExtension.ClientResult<string>;'
-    parameters:
-    - id: changeTrackingVersion
-      description: 'Необязательный параметр. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
-      type: <xref uid="word!Word.ChangeTrackingVersion:enum" />
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
-      description: ''
-- name: getReviewedText(changeTrackingVersionString)
-  uid: word!Word.Body#getReviewedText:member(2)
-  package: word!
-  fullName: getReviewedText(changeTrackingVersionString)
-  summary: Получает рассмотренный текст на основе выбора ChangeTrackingVersion.
-  remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'getReviewedText(changeTrackingVersionString?: "Original" | "Current"): OfficeExtension.ClientResult<string>;'
-    parameters:
-    - id: changeTrackingVersionString
-      description: 'Необязательный параметр. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
-      type: "\"Original\" | \"Current\""
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
-      description: ''
-- name: insertBreak(breakType, insertLocation)
-  uid: word!Word.Body#insertBreak:member(1)
-  package: word!
-  fullName: insertBreak(breakType, insertLocation)
-  summary: Вставляет разрыв в указанном расположении в основном документе.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (ctx) {
-
-        // Create a proxy object for the document body.
-        var body = ctx.document.body;
-
-        // Queue a command to insert a page break at the start of the document body.
-        body.insertBreak(Word.BreakType.page, Word.InsertLocation.start);
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return ctx.sync().then(function () {
-            console.log('Added a page break at the start of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log("Error: " + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
-    parameters:
-    - id: breakType
-      description: Обязательный параметр. Тип разрыва, который необходимо добавить в содержимое.
-      type: <xref uid="word!Word.BreakType:enum" />
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    return:
-      type: void
-      description: ''
-- name: insertBreak(breakTypeString, insertLocation)
-  uid: word!Word.Body#insertBreak:member(2)
-  package: word!
-  fullName: insertBreak(breakTypeString, insertLocation)
-  summary: Вставляет разрыв в указанном расположении в основном документе.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
-    parameters:
-    - id: breakTypeString
-      description: Обязательный параметр. Тип разрыва, который необходимо добавить в содержимое.
-      type: "\"Page\" | \"Next\" | \"SectionNext\" | \"SectionContinuous\" | \"SectionEven\" | \"SectionOdd\" | \"Line\""
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    return:
-      type: void
-      description: ''
-- name: insertContentControl()
-  uid: word!Word.Body#insertContentControl:member(1)
-  package: word!
-  fullName: insertContentControl()
-  summary: Включает объект содержимого в элемент управления форматированным текстом.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to wrap the body in a content control.
-        body.insertContentControl();
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Wrapped the body in a content control.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertContentControl(): Word.ContentControl;'
-    return:
-      type: <xref uid="word!Word.ContentControl:class" />
-      description: ''
-- name: insertFileFromBase64(base64File, insertLocation)
-  uid: word!Word.Body#insertFileFromBase64:member(1)
-  package: word!
-  fullName: insertFileFromBase64(base64File, insertLocation)
-  summary: Вставляет документ в содержимое в заданном расположении.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to insert base64 encoded .docx at the beginning of the content body.
-        // You will need to implement getBase64() to pass in a string of a base64 encoded docx file.
-        body.insertFileFromBase64(getBase64(), Word.InsertLocation.start);
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Added base64 encoded text to the beginning of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
-    parameters:
-    - id: base64File
-      description: Обязательный. Содержимое DOCX-файла в кодировке base64.
-      type: string
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: insertFileFromBase64(base64File, insertLocationString)
-  uid: word!Word.Body#insertFileFromBase64:member(2)
-  package: word!
-  fullName: insertFileFromBase64(base64File, insertLocationString)
-  summary: Вставляет документ в содержимое в заданном расположении.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
-    parameters:
-    - id: base64File
-      description: Обязательный. Содержимое DOCX-файла в кодировке base64.
-      type: string
-    - id: insertLocationString
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: insertHtml(html, insertLocation)
-  uid: word!Word.Body#insertHtml:member(1)
-  package: word!
-  fullName: insertHtml(html, insertLocation)
-  summary: Вставляет HTML-код в указанном расположении.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to insert HTML in to the beginning of the body.
-        body.insertHtml(
-            '<strong>This is text inserted with body.insertHtml()</strong>', Word.InsertLocation.start);
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('HTML added to the beginning of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
-    parameters:
-    - id: html
-      description: Обязательный параметр. HTML-код, который необходимо вставить в документ.
-      type: string
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: insertHtml(html, insertLocationString)
-  uid: word!Word.Body#insertHtml:member(2)
-  package: word!
-  fullName: insertHtml(html, insertLocationString)
-  summary: Вставляет HTML-код в указанном расположении.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
-    parameters:
-    - id: html
-      description: Обязательный параметр. HTML-код, который необходимо вставить в документ.
-      type: string
-    - id: insertLocationString
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: insertInlinePictureFromBase64(base64EncodedImage, insertLocation)
-  uid: word!Word.Body#insertInlinePictureFromBase64:member(1)
-  package: word!
-  fullName: insertInlinePictureFromBase64(base64EncodedImage, insertLocation)
-  summary: Вставляет рисунок в содержимое в заданном расположении.
-  remarks: >-
-    \[[Набор API: WordApi 1.2](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to insert OOXML in to the beginning of the body.
-        body.insertOoxml("<pkg:package xmlns:pkg='http://schemas.microsoft.com/office/2006/xmlPackage'><pkg:part pkg:name='/_rels/.rels' pkg:contentType='application/vnd.openxmlformats-package.relationships+xml' pkg:padding='512'><pkg:xmlData><Relationships xmlns='http://schemas.openxmlformats.org/package/2006/relationships'><Relationship Id='rId1' Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument' Target='word/document.xml'/></Relationships></pkg:xmlData></pkg:part><pkg:part pkg:name='/word/document.xml' pkg:contentType='application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'><pkg:xmlData><w:document xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' ><w:body><w:p><w:pPr><w:spacing w:before='360' w:after='0' w:line='480' w:lineRule='auto'/><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr></w:pPr><w:r><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr><w:t>This text has formatting directly applied to achieve its font size, color, line spacing, and paragraph spacing.</w:t></w:r></w:p></w:body></w:document></pkg:xmlData></pkg:part></pkg:package>", Word.InsertLocation.start);
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('OOXML added to the beginning of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-
-    // Read "Create better add-ins for Word with Office Open XML" for guidance on working with OOXML.
-
-    // https://docs.microsoft.com/office/dev/add-ins/word/create-better-add-ins-for-word-with-office-open-xml
-
-
-    // The Word-Add-in-DocumentAssembly sample shows how you can use this API to assemble a document.
-
-    // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
-    parameters:
-    - id: base64EncodedImage
-      description: Обязательный параметр. Вставляемое в основной текст изображение в кодировке base64.
-      type: string
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    return:
-      type: <xref uid="word!Word.InlinePicture:class" />
-      description: ''
-- name: insertInlinePictureFromBase64(base64EncodedImage, insertLocationString)
-  uid: word!Word.Body#insertInlinePictureFromBase64:member(2)
-  package: word!
-  fullName: insertInlinePictureFromBase64(base64EncodedImage, insertLocationString)
-  summary: Вставляет рисунок в содержимое в заданном расположении.
-  remarks: '\[[Набор API: WordApi 1.2](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
-    parameters:
-    - id: base64EncodedImage
-      description: Обязательный параметр. Вставляемое в основной текст изображение в кодировке base64.
-      type: string
-    - id: insertLocationString
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    return:
-      type: <xref uid="word!Word.InlinePicture:class" />
-      description: ''
-- name: insertOoxml(ooxml, insertLocation)
-  uid: word!Word.Body#insertOoxml:member(1)
-  package: word!
-  fullName: insertOoxml(ooxml, insertLocation)
-  summary: Вставляет OOXML-код в указанном расположении.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
-    parameters:
-    - id: ooxml
-      description: Обязательный параметр. Вставляемый OOXML-код.
-      type: string
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: insertOoxml(ooxml, insertLocationString)
-  uid: word!Word.Body#insertOoxml:member(2)
-  package: word!
-  fullName: insertOoxml(ooxml, insertLocationString)
-  summary: Вставляет OOXML-код в указанном расположении.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
-    parameters:
-    - id: ooxml
-      description: Обязательный параметр. Вставляемый OOXML-код.
-      type: string
-    - id: insertLocationString
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: insertParagraph(paragraphText, insertLocation)
-  uid: word!Word.Body#insertParagraph:member(1)
-  package: word!
-  fullName: insertParagraph(paragraphText, insertLocation)
-  summary: Вставляет абзац в указанном расположении.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```javascript
-
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to insert the paragraph at the end of the document body.
-        body.insertParagraph('Content of a new paragraph', Word.InsertLocation.end);
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Paragraph added at the end of the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-
-    // The Word-Add-in-DocumentAssembly sample shows how you can use the insertParagraph method to assemble a document.
-
-    // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertParagraph(paragraphText: string, insertLocation: Word.InsertLocation): Word.Paragraph;'
-    parameters:
-    - id: paragraphText
-      description: Обязательный параметр. Текст абзаца, который необходимо вставить.
-      type: string
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    return:
-      type: <xref uid="word!Word.Paragraph:class" />
-      description: ''
-- name: insertParagraph(paragraphText, insertLocationString)
-  uid: word!Word.Body#insertParagraph:member(2)
-  package: word!
-  fullName: insertParagraph(paragraphText, insertLocationString)
-  summary: Вставляет абзац в указанном расположении.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
-
-
-    #### <a name="examples"></a>Примеры
-
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-formatted-text.yaml
-
-    await Word.run(async (context) => {
-      // Second sentence, let's insert it as a paragraph after the previously inserted one.
-      let secondSentence = context.document.body.insertParagraph(
-        "This is the first text with a custom style.",
-        "End"
-      );
-      secondSentence.font.set({
-        bold: false,
-        italic: true,
-        name: "Berlin Sans FB",
-        color: "blue",
-        size: 30
+  - name: clear()
+    uid: 'word!Word.Body#clear:member(1)'
+    package: word!
+    fullName: clear()
+    summary: Очищает объект содержимого. Пользователь может отменить операцию очищения для содержимого.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to clear the contents of the body.
+          body.clear();
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('Cleared the body contents.');
+          });
+      })
+      .catch(function (error) {
+          console.log("Error: " + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log("Debug info: " + JSON.stringify(error.debugInfo));
+          }
       });
 
-      await context.sync();
-    });
+      // The Silly stories add-in sample shows how the 
+      // clear method can be used to clear the contents of a document.
+      // https://aka.ms/sillystorywordaddin
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type: void
+        description: ''
+  - name: getComments()
+    uid: 'word!Word.Body#getComments:member(1)'
+    package: word!
+    fullName: getComments()
+    summary: 'Получает комментарии, связанные с телом.'
+    remarks: |-
+      \[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
-    parameters:
-    - id: paragraphText
-      description: Обязательный параметр. Текст абзаца, который необходимо вставить.
-      type: string
-    - id: insertLocationString
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    return:
-      type: <xref uid="word!Word.Paragraph:class" />
-      description: ''
-- name: insertTable(rowCount, columnCount, insertLocation, values)
-  uid: word!Word.Body#insertTable:member(1)
-  package: word!
-  fullName: insertTable(rowCount, columnCount, insertLocation, values)
-  summary: Вставляет таблицу с указанным количеством строк и столбцов.
-  remarks: >-
-    \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+      #### <a name="examples"></a>Примеры
 
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/99-preview-apis/manage-comments.yaml
+      await Word.run(async (context) => {
+        let comments = context.document.body.getComments();
 
-    #### <a name="examples"></a>Примеры
+        // Load objects for display in Script Lab console.
+        comments.load();
+        await context.sync();
 
+        console.log("All comments:");
+        console.log(comments);
+      });
+      ```
+    isPreview: true
+    isDeprecated: false
+    syntax:
+      content: 'getComments(): Word.CommentCollection;'
+      return:
+        type: '<xref uid="word!Word.CommentCollection:class" />'
+        description: ''
+  - name: getHtml()
+    uid: 'word!Word.Body#getHtml:member(1)'
+    package: word!
+    fullName: getHtml()
+    summary: 'Получает HTML-представление объекта тела. При отрисовке на веб-странице или htmL-просмотра форматирование будет близким, но не точным, для форматирования документа. Этот метод не возвращает один и тот же HTML для одного и того же документа на разных платформах (Windows, Mac, Word в Интернете и т.д.). Если вам нужна точную верность или согласованность на платформах, `Body.getOoxml()` используйте и преобразуем возвращенный XML в HTML.'
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
-    ```typescript
+      #### <a name="examples"></a>Примеры
 
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/40-tables/table-cell-access.yaml
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
 
-    await Word.run(async (context) => {
-      // Use a two-dimensional array to hold the initial table values.
-      let data = [
-        ["Tokyo", "Beijing", "Seattle"],
-        ["Apple", "Orange", "Pineapple"]
-      ];
-      let table = context.document.body.insertTable(2, 3, "Start", data);
-      table.styleBuiltIn = Word.Style.gridTable5Dark_Accent2;
-      table.styleFirstColumn = false;
+          // Create a proxy object for the document body.
+          var body = context.document.body;
 
-      await context.sync();
-    });
+          // Queue a command to get the HTML contents of the body.
+          var bodyHTML = body.getHtml();
 
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertTable(rowCount: number, columnCount: number, insertLocation: Word.InsertLocation, values?: string[][]): Word.Table;'
-    parameters:
-    - id: rowCount
-      description: Обязательный. Количество строк в таблице.
-      type: number
-    - id: columnCount
-      description: Обязательный. Количество столбцов в таблице.
-      type: number
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    - id: values
-      description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
-      type: string[][]
-    return:
-      type: <xref uid="word!Word.Table:class" />
-      description: ''
-- name: insertTable(rowCount, columnCount, insertLocationString, values)
-  uid: word!Word.Body#insertTable:member(2)
-  package: word!
-  fullName: insertTable(rowCount, columnCount, insertLocationString, values)
-  summary: Вставляет таблицу с указанным количеством строк и столбцов.
-  remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertTable(rowCount: number, columnCount: number, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace", values?: string[][]): Word.Table;'
-    parameters:
-    - id: rowCount
-      description: Обязательный. Количество строк в таблице.
-      type: number
-    - id: columnCount
-      description: Обязательный. Количество столбцов в таблице.
-      type: number
-    - id: insertLocationString
-      description: 'Обязательный параметр. Возможные значения: Start и End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    - id: values
-      description: Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.
-      type: string[][]
-    return:
-      type: <xref uid="word!Word.Table:class" />
-      description: ''
-- name: insertText(text, insertLocation)
-  uid: word!Word.Body#insertText:member(1)
-  package: word!
-  fullName: insertText(text, insertLocation)
-  summary: Вставляет текст в содержимое в заданном расположении.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log("Body HTML contents: " + bodyHTML.value);
+          });
+      })
+      .catch(function (error) {
+          console.log("Error: " + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log("Debug info: " + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'getHtml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type: '<xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;'
+        description: ''
+  - name: getOoxml()
+    uid: 'word!Word.Body#getOoxml:member(1)'
+    package: word!
+    fullName: getOoxml()
+    summary: Возвращает OOXML-представление (Office Open XML) объекта содержимого.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
+      #### <a name="examples"></a>Примеры
 
-    #### <a name="examples"></a>Примеры
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
 
+          // Create a proxy object for the document body.
+          var body = context.document.body;
 
-    ```javascript
+          // Queue a command to get the OOXML contents of the body.
+          var bodyOOXML = body.getOoxml();
 
-    // Run a batch operation against the Word object model.
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log("Body OOXML contents: " + bodyOOXML.value);
+          });
+      })
+      .catch(function (error) {
+          console.log("Error: " + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log("Debug info: " + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'getOoxml(): OfficeExtension.ClientResult<string>;'
+      return:
+        type: '<xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;'
+        description: ''
+  - name: getRange(rangeLocation)
+    uid: 'word!Word.Body#getRange:member(1)'
+    package: word!
+    fullName: getRange(rangeLocation)
+    summary: Возвращает весь основной текст (либо его начальную или конечную точку) в виде диапазона.
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
+      parameters:
+        - id: rangeLocation
+          description: 'Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".'
+          type: '<xref uid="word!Word.RangeLocation:enum" />'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: getRange(rangeLocationString)
+    uid: 'word!Word.Body#getRange:member(2)'
+    package: word!
+    fullName: getRange(rangeLocationString)
+    summary: Возвращает весь основной текст (либо его начальную или конечную точку) в виде диапазона.
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
+      parameters:
+        - id: rangeLocationString
+          description: 'Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".'
+          type: '"Whole" | "Start" | "End" | "Before" | "After" | "Content"'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: getReviewedText(changeTrackingVersion)
+    uid: 'word!Word.Body#getReviewedText:member(1)'
+    package: word!
+    fullName: getReviewedText(changeTrackingVersion)
+    summary: Получает рассмотренный текст на основе выбора ChangeTrackingVersion.
+    remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: true
+    isDeprecated: false
+    syntax:
+      content: 'getReviewedText(changeTrackingVersion?: Word.ChangeTrackingVersion): OfficeExtension.ClientResult<string>;'
+      parameters:
+        - id: changeTrackingVersion
+          description: 'Необязательный параметр. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
+          type: '<xref uid="word!Word.ChangeTrackingVersion:enum" />'
+      return:
+        type: '<xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;'
+        description: ''
+  - name: getReviewedText(changeTrackingVersionString)
+    uid: 'word!Word.Body#getReviewedText:member(2)'
+    package: word!
+    fullName: getReviewedText(changeTrackingVersionString)
+    summary: Получает рассмотренный текст на основе выбора ChangeTrackingVersion.
+    remarks: '\[[API set: WordApiOnline BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: true
+    isDeprecated: false
+    syntax:
+      content: 'getReviewedText(changeTrackingVersionString?: "Original" | "Current"): OfficeExtension.ClientResult<string>;'
+      parameters:
+        - id: changeTrackingVersionString
+          description: 'Необязательный параметр. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
+          type: '"Original" | "Current"'
+      return:
+        type: '<xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;'
+        description: ''
+  - name: 'insertBreak(breakType, insertLocation)'
+    uid: 'word!Word.Body#insertBreak:member(1)'
+    package: word!
+    fullName: 'insertBreak(breakType, insertLocation)'
+    summary: Вставляет разрыв в указанном расположении в основном документе.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
-    Word.run(function (context) {
+      #### <a name="examples"></a>Примеры
 
-        // Create a proxy object for the document body.
-        var body = context.document.body;
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (ctx) {
 
-        // Queue a command to insert text in to the beginning of the body.
-        body.insertText('This is text inserted with body.insertText()', Word.InsertLocation.start);
+          // Create a proxy object for the document body.
+          var body = ctx.document.body;
 
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Text added to the beginning of the document body.');
+          // Queue a command to insert a page break at the start of the document body.
+          body.insertBreak(Word.BreakType.page, Word.InsertLocation.start);
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return ctx.sync().then(function () {
+              console.log('Added a page break at the start of the document body.');
+          });
+      })
+      .catch(function (error) {
+          console.log("Error: " + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log("Debug info: " + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
+      parameters:
+        - id: breakType
+          description: 'Обязательный параметр. Тип разрыва, который необходимо добавить в содержимое.'
+          type: '<xref uid="word!Word.BreakType:enum" />'
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+      return:
+        type: void
+        description: ''
+  - name: 'insertBreak(breakTypeString, insertLocation)'
+    uid: 'word!Word.Body#insertBreak:member(2)'
+    package: word!
+    fullName: 'insertBreak(breakTypeString, insertLocation)'
+    summary: Вставляет разрыв в указанном расположении в основном документе.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
+      parameters:
+        - id: breakTypeString
+          description: 'Обязательный параметр. Тип разрыва, который необходимо добавить в содержимое.'
+          type: '"Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line"'
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+      return:
+        type: void
+        description: ''
+  - name: insertContentControl()
+    uid: 'word!Word.Body#insertContentControl:member(1)'
+    package: word!
+    fullName: insertContentControl()
+    summary: Включает объект содержимого в элемент управления форматированным текстом.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to wrap the body in a content control.
+          body.insertContentControl();
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('Wrapped the body in a content control.');
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertContentControl(): Word.ContentControl;'
+      return:
+        type: '<xref uid="word!Word.ContentControl:class" />'
+        description: ''
+  - name: 'insertFileFromBase64(base64File, insertLocation)'
+    uid: 'word!Word.Body#insertFileFromBase64:member(1)'
+    package: word!
+    fullName: 'insertFileFromBase64(base64File, insertLocation)'
+    summary: Вставляет документ в содержимое в заданном расположении.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to insert base64 encoded .docx at the beginning of the content body.
+          // You will need to implement getBase64() to pass in a string of a base64 encoded docx file.
+          body.insertFileFromBase64(getBase64(), Word.InsertLocation.start);
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('Added base64 encoded text to the beginning of the document body.');
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocation: Word.InsertLocation): Word.Range;'
+      parameters:
+        - id: base64File
+          description: Обязательный. Содержимое DOCX-файла в кодировке base64.
+          type: string
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: 'insertFileFromBase64(base64File, insertLocationString)'
+    uid: 'word!Word.Body#insertFileFromBase64:member(2)'
+    package: word!
+    fullName: 'insertFileFromBase64(base64File, insertLocationString)'
+    summary: Вставляет документ в содержимое в заданном расположении.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertFileFromBase64(base64File: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      parameters:
+        - id: base64File
+          description: Обязательный. Содержимое DOCX-файла в кодировке base64.
+          type: string
+        - id: insertLocationString
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: 'insertHtml(html, insertLocation)'
+    uid: 'word!Word.Body#insertHtml:member(1)'
+    package: word!
+    fullName: 'insertHtml(html, insertLocation)'
+    summary: Вставляет HTML-код в указанном расположении.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to insert HTML in to the beginning of the body.
+          body.insertHtml(
+              '<strong>This is text inserted with body.insertHtml()</strong>', Word.InsertLocation.start);
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('HTML added to the beginning of the document body.');
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
+      parameters:
+        - id: html
+          description: 'Обязательный параметр. HTML-код, который необходимо вставить в документ.'
+          type: string
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: 'insertHtml(html, insertLocationString)'
+    uid: 'word!Word.Body#insertHtml:member(2)'
+    package: word!
+    fullName: 'insertHtml(html, insertLocationString)'
+    summary: Вставляет HTML-код в указанном расположении.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      parameters:
+        - id: html
+          description: 'Обязательный параметр. HTML-код, который необходимо вставить в документ.'
+          type: string
+        - id: insertLocationString
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocation)'
+    uid: 'word!Word.Body#insertInlinePictureFromBase64:member(1)'
+    package: word!
+    fullName: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocation)'
+    summary: Вставляет рисунок в содержимое в заданном расположении.
+    remarks: |-
+      \[[Набор API: WordApi 1.2](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to insert OOXML in to the beginning of the body.
+          body.insertOoxml("<pkg:package xmlns:pkg='http://schemas.microsoft.com/office/2006/xmlPackage'><pkg:part pkg:name='/_rels/.rels' pkg:contentType='application/vnd.openxmlformats-package.relationships+xml' pkg:padding='512'><pkg:xmlData><Relationships xmlns='http://schemas.openxmlformats.org/package/2006/relationships'><Relationship Id='rId1' Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument' Target='word/document.xml'/></Relationships></pkg:xmlData></pkg:part><pkg:part pkg:name='/word/document.xml' pkg:contentType='application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml'><pkg:xmlData><w:document xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' ><w:body><w:p><w:pPr><w:spacing w:before='360' w:after='0' w:line='480' w:lineRule='auto'/><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr></w:pPr><w:r><w:rPr><w:color w:val='70AD47' w:themeColor='accent6'/><w:sz w:val='28'/></w:rPr><w:t>This text has formatting directly applied to achieve its font size, color, line spacing, and paragraph spacing.</w:t></w:r></w:p></w:body></w:document></pkg:xmlData></pkg:part></pkg:package>", Word.InsertLocation.start);
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('OOXML added to the beginning of the document body.');
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+
+      // Read "Create better add-ins for Word with Office Open XML" for guidance on working with OOXML.
+      // https://docs.microsoft.com/office/dev/add-ins/word/create-better-add-ins-for-word-with-office-open-xml
+
+      // The Word-Add-in-DocumentAssembly sample shows how you can use this API to assemble a document.
+      // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
+      parameters:
+        - id: base64EncodedImage
+          description: Обязательный параметр. Вставляемое в основной текст изображение в кодировке base64.
+          type: string
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+      return:
+        type: '<xref uid="word!Word.InlinePicture:class" />'
+        description: ''
+  - name: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocationString)'
+    uid: 'word!Word.Body#insertInlinePictureFromBase64:member(2)'
+    package: word!
+    fullName: 'insertInlinePictureFromBase64(base64EncodedImage, insertLocationString)'
+    summary: Вставляет рисунок в содержимое в заданном расположении.
+    remarks: '\[[Набор API: WordApi 1.2](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
+      parameters:
+        - id: base64EncodedImage
+          description: Обязательный параметр. Вставляемое в основной текст изображение в кодировке base64.
+          type: string
+        - id: insertLocationString
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+      return:
+        type: '<xref uid="word!Word.InlinePicture:class" />'
+        description: ''
+  - name: 'insertOoxml(ooxml, insertLocation)'
+    uid: 'word!Word.Body#insertOoxml:member(1)'
+    package: word!
+    fullName: 'insertOoxml(ooxml, insertLocation)'
+    summary: Вставляет OOXML-код в указанном расположении.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
+      parameters:
+        - id: ooxml
+          description: Обязательный параметр. Вставляемый OOXML-код.
+          type: string
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: 'insertOoxml(ooxml, insertLocationString)'
+    uid: 'word!Word.Body#insertOoxml:member(2)'
+    package: word!
+    fullName: 'insertOoxml(ooxml, insertLocationString)'
+    summary: Вставляет OOXML-код в указанном расположении.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      parameters:
+        - id: ooxml
+          description: Обязательный параметр. Вставляемый OOXML-код.
+          type: string
+        - id: insertLocationString
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: 'insertParagraph(paragraphText, insertLocation)'
+    uid: 'word!Word.Body#insertParagraph:member(1)'
+    package: word!
+    fullName: 'insertParagraph(paragraphText, insertLocation)'
+    summary: Вставляет абзац в указанном расположении.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to insert the paragraph at the end of the document body.
+          body.insertParagraph('Content of a new paragraph', Word.InsertLocation.end);
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('Paragraph added at the end of the document body.');
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+
+      // The Word-Add-in-DocumentAssembly sample shows how you can use the insertParagraph method to assemble a document.
+      // https://github.com/OfficeDev/Word-Add-in-DocumentAssembly
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocation: Word.InsertLocation): Word.Paragraph;'
+      parameters:
+        - id: paragraphText
+          description: 'Обязательный параметр. Текст абзаца, который необходимо вставить.'
+          type: string
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+      return:
+        type: '<xref uid="word!Word.Paragraph:class" />'
+        description: ''
+  - name: 'insertParagraph(paragraphText, insertLocationString)'
+    uid: 'word!Word.Body#insertParagraph:member(2)'
+    package: word!
+    fullName: 'insertParagraph(paragraphText, insertLocationString)'
+    summary: Вставляет абзац в указанном расположении.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/insert-formatted-text.yaml
+      await Word.run(async (context) => {
+        // Second sentence, let's insert it as a paragraph after the previously inserted one.
+        let secondSentence = context.document.body.insertParagraph(
+          "This is the first text with a custom style.",
+          "End"
+        );
+        secondSentence.font.set({
+          bold: false,
+          italic: true,
+          name: "Berlin Sans FB",
+          color: "blue",
+          size: 30
         });
-    })
 
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
+        await context.sync();
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
+      parameters:
+        - id: paragraphText
+          description: 'Обязательный параметр. Текст абзаца, который необходимо вставить.'
+          type: string
+        - id: insertLocationString
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+      return:
+        type: '<xref uid="word!Word.Paragraph:class" />'
+        description: ''
+  - name: 'insertTable(rowCount, columnCount, insertLocation, values)'
+    uid: 'word!Word.Body#insertTable:member(1)'
+    package: word!
+    fullName: 'insertTable(rowCount, columnCount, insertLocation, values)'
+    summary: Вставляет таблицу с указанным количеством строк и столбцов.
+    remarks: |-
+      \[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertText(text: string, insertLocation: Word.InsertLocation): Word.Range;'
-    parameters:
-    - id: text
-      description: Обязательный параметр. Текст, который необходимо вставить.
-      type: string
-    - id: insertLocation
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: <xref uid="word!Word.InsertLocation:enum" />
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: insertText(text, insertLocationString)
-  uid: word!Word.Body#insertText:member(2)
-  package: word!
-  fullName: insertText(text, insertLocationString)
-  summary: Вставляет текст в содержимое в заданном расположении.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'insertText(text: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
-    parameters:
-    - id: text
-      description: Обязательный параметр. Текст, который необходимо вставить.
-      type: string
-    - id: insertLocationString
-      description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
-      type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
-    return:
-      type: <xref uid="word!Word.Range:class" />
-      description: ''
-- name: load(options)
-  uid: word!Word.Body#load:member(1)
-  package: word!
-  fullName: load(options)
-  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(options?: Word.Interfaces.BodyLoadOptions): Word.Body;'
-    parameters:
-    - id: options
-      description: Предоставляет параметры, для которых необходимо загрузить свойства объекта.
-      type: <xref uid="word!Word.Interfaces.BodyLoadOptions:interface" />
-    return:
-      type: <xref uid="word!Word.Body:class" />
-      description: ''
-- name: load(propertyNames)
-  uid: word!Word.Body#load:member(2)
-  package: word!
-  fullName: load(propertyNames)
-  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Word.Body;'
-    parameters:
-    - id: propertyNames
-      description: Запятая или массив строк, которые указывают свойства для загрузки.
-      type: string | string[]
-    return:
-      type: <xref uid="word!Word.Body:class" />
-      description: ''
-- name: load(propertyNamesAndPaths)
-  uid: word!Word.Body#load:member(3)
-  package: word!
-  fullName: load(propertyNamesAndPaths)
-  summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: >-
-      load(propertyNamesAndPaths?: {
-                  select?: string;
-                  expand?: string;
-              }): Word.Body;
-    parameters:
-    - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
-      type: >-
-        {
+      #### <a name="examples"></a>Примеры
+
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/40-tables/table-cell-access.yaml
+      await Word.run(async (context) => {
+        // Use a two-dimensional array to hold the initial table values.
+        let data = [
+          ["Tokyo", "Beijing", "Seattle"],
+          ["Apple", "Orange", "Pineapple"]
+        ];
+        let table = context.document.body.insertTable(2, 3, "Start", data);
+        table.styleBuiltIn = Word.Style.gridTable5Dark_Accent2;
+        table.styleFirstColumn = false;
+
+        await context.sync();
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertTable(rowCount: number, columnCount: number, insertLocation: Word.InsertLocation, values?: string[][]): Word.Table;'
+      parameters:
+        - id: rowCount
+          description: Обязательный. Количество строк в таблице.
+          type: number
+        - id: columnCount
+          description: Обязательный. Количество столбцов в таблице.
+          type: number
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+        - id: values
+          description: 'Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.'
+          type: 'string[][]'
+      return:
+        type: '<xref uid="word!Word.Table:class" />'
+        description: ''
+  - name: 'insertTable(rowCount, columnCount, insertLocationString, values)'
+    uid: 'word!Word.Body#insertTable:member(2)'
+    package: word!
+    fullName: 'insertTable(rowCount, columnCount, insertLocationString, values)'
+    summary: Вставляет таблицу с указанным количеством строк и столбцов.
+    remarks: '\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertTable(rowCount: number, columnCount: number, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace", values?: string[][]): Word.Table;'
+      parameters:
+        - id: rowCount
+          description: Обязательный. Количество строк в таблице.
+          type: number
+        - id: columnCount
+          description: Обязательный. Количество столбцов в таблице.
+          type: number
+        - id: insertLocationString
+          description: 'Обязательный параметр. Возможные значения: Start и End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+        - id: values
+          description: 'Необязательный двухмерный массив. Ячейки заполняются, если в массиве указаны соответствующие строки.'
+          type: 'string[][]'
+      return:
+        type: '<xref uid="word!Word.Table:class" />'
+        description: ''
+  - name: 'insertText(text, insertLocation)'
+    uid: 'word!Word.Body#insertText:member(1)'
+    package: word!
+    fullName: 'insertText(text, insertLocation)'
+    summary: Вставляет текст в содержимое в заданном расположении.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+
+      #### <a name="examples"></a>Примеры
+
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
+
+          // Create a proxy object for the document body.
+          var body = context.document.body;
+
+          // Queue a command to insert text in to the beginning of the body.
+          body.insertText('This is text inserted with body.insertText()', Word.InsertLocation.start);
+
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('Text added to the beginning of the document body.');
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertText(text: string, insertLocation: Word.InsertLocation): Word.Range;'
+      parameters:
+        - id: text
+          description: 'Обязательный параметр. Текст, который необходимо вставить.'
+          type: string
+        - id: insertLocation
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '<xref uid="word!Word.InsertLocation:enum" />'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: 'insertText(text, insertLocationString)'
+    uid: 'word!Word.Body#insertText:member(2)'
+    package: word!
+    fullName: 'insertText(text, insertLocationString)'
+    summary: Вставляет текст в содержимое в заданном расположении.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'insertText(text: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
+      parameters:
+        - id: text
+          description: 'Обязательный параметр. Текст, который необходимо вставить.'
+          type: string
+        - id: insertLocationString
+          description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
+          type: '"Before" | "After" | "Start" | "End" | "Replace"'
+      return:
+        type: '<xref uid="word!Word.Range:class" />'
+        description: ''
+  - name: load(options)
+    uid: 'word!Word.Body#load:member(1)'
+    package: word!
+    fullName: load(options)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'load(options?: Word.Interfaces.BodyLoadOptions): Word.Body;'
+      parameters:
+        - id: options
+          description: 'Предоставляет параметры, для которых необходимо загрузить свойства объекта.'
+          type: '<xref uid="word!Word.Interfaces.BodyLoadOptions:interface" />'
+      return:
+        type: '<xref uid="word!Word.Body:class" />'
+        description: ''
+  - name: load(propertyNames)
+    uid: 'word!Word.Body#load:member(2)'
+    package: word!
+    fullName: load(propertyNames)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Word.Body;'
+      parameters:
+        - id: propertyNames
+          description: 'Запятая или массив строк, которые указывают свойства для загрузки.'
+          type: 'string | string[]'
+      return:
+        type: '<xref uid="word!Word.Body:class" />'
+        description: ''
+  - name: load(propertyNamesAndPaths)
+    uid: 'word!Word.Body#load:member(3)'
+    package: word!
+    fullName: load(propertyNamesAndPaths)
+    summary: Добавляет в очередь команду для загрузки указанных свойств объекта. Перед чтением свойств требуется вызвать метод `context.sync()`.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: |-
+        load(propertyNamesAndPaths?: {
                     select?: string;
                     expand?: string;
-                }
-    return:
-      type: <xref uid="word!Word.Body:class" />
-      description: ''
-- name: search(searchText, searchOptions)
-  uid: word!Word.Body#search:member(1)
-  package: word!
-  fullName: search(searchText, searchOptions)
-  summary: Выполняет поиск с указанными SearchOptions в области объекта тела. Результат поиска — это коллекция объектов диапазона.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+                }): Word.Body;
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
+          type: |-
+            {
+                        select?: string;
+                        expand?: string;
+                    }
+      return:
+        type: '<xref uid="word!Word.Body:class" />'
+        description: ''
+  - name: 'search(searchText, searchOptions)'
+    uid: 'word!Word.Body#search:member(1)'
+    package: word!
+    fullName: 'search(searchText, searchOptions)'
+    summary: Выполняет поиск с указанными SearchOptions в области объекта тела. Результат поиска — это коллекция объектов диапазона.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
+      #### <a name="examples"></a>Примеры
 
-    #### <a name="examples"></a>Примеры
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/search.yaml
+      await Word.run(async (context) => {
+        let results = context.document.body.search("Online");
+        results.load("length");
 
+        await context.sync();
 
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/search.yaml
-
-    await Word.run(async (context) => {
-      let results = context.document.body.search("Online");
-      results.load("length");
-
-      await context.sync();
-
-      // Let's traverse the search results... and highlight...
-      for (let i = 0; i < results.items.length; i++) {
-        results.items[i].font.highlightColor = "yellow";
-      }
-
-      await context.sync();
-    });
-
-    ```
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/search.yaml
-
-    await Word.run(async (context) => {
-      // Check out how wildcard expression are built, also use the second parameter of the search method to include search modes
-      // (i.e. use wildcards).
-      let results = context.document.body.search("$*.[0-9][0-9]", { matchWildcards: true });
-      results.load("length");
-
-      await context.sync();
-
-      // Let's traverse the search results... and highlight...
-      for (let i = 0; i < results.items.length; i++) {
-        results.items[i].font.highlightColor = "red";
-        results.items[i].font.color = "white";
-      }
-
-      await context.sync();
-    });
-
-    ```
-
-    ```typescript
-
-    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/get-word-count.yaml
-
-    await Word.run(async (context) => {
-      let paragraphs = context.document.body.paragraphs;
-      paragraphs.load("text");
-      await context.sync();
-
-      let text = [];
-      paragraphs.items.forEach((item) => {
-        let paragraph = item.text.trim();
-        if (paragraph) {
-          paragraph.split(" ").forEach((term) => {
-            let currentTerm = term.trim();
-            if (currentTerm) {
-              text.push(currentTerm);
-            }
-          });
+        // Let's traverse the search results... and highlight...
+        for (let i = 0; i < results.items.length; i++) {
+          results.items[i].font.highlightColor = "yellow";
         }
+
+        await context.sync();
       });
+      ```
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/search.yaml
+      await Word.run(async (context) => {
+        // Check out how wildcard expression are built, also use the second parameter of the search method to include search modes
+        // (i.e. use wildcards).
+        let results = context.document.body.search("$*.[0-9][0-9]", { matchWildcards: true });
+        results.load("length");
 
-      let makeTextDistinct = new Set(text);
-      let distinctText = Array.from(makeTextDistinct);
-      let allSearchResults = [];
+        await context.sync();
 
-      for (let i = 0; i < distinctText.length; i++) {
-        let results = context.document.body.search(distinctText[i], { matchCase: true, matchWholeWord: true });
-        results.load("text");
+        // Let's traverse the search results... and highlight...
+        for (let i = 0; i < results.items.length; i++) {
+          results.items[i].font.highlightColor = "red";
+          results.items[i].font.color = "white";
+        }
 
-        // Map search term with its results.
-        let correlatedResults = {
-          searchTerm: distinctText[i],
-          hits: results
-        };
-
-        allSearchResults.push(correlatedResults);
-      }
-
-      await context.sync();
-
-      // Display counts.
-      allSearchResults.forEach((result) => {
-        let length = result.hits.items.length;
-
-        console.log("Search term: " + result.searchTerm + " => Count: " + length);
+        await context.sync();
       });
-    });
+      ```
+      ```typescript
+      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/word/25-paragraph/get-word-count.yaml
+      await Word.run(async (context) => {
+        let paragraphs = context.document.body.paragraphs;
+        paragraphs.load("text");
+        await context.sync();
 
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: >-
-      search(searchText: string, searchOptions?: Word.SearchOptions | {
-                  ignorePunct?: boolean;
-                  ignoreSpace?: boolean;
-                  matchCase?: boolean;
-                  matchPrefix?: boolean;
-                  matchSuffix?: boolean;
-                  matchWholeWord?: boolean;
-                  matchWildcards?: boolean;
-              }): Word.RangeCollection;
-    parameters:
-    - id: searchText
-      description: Обязательный параметр. Текст для поиска. Может быть не более 255 символов.
-      type: string
-    - id: searchOptions
-      description: Необязательный параметр. Параметры поиска.
-      type: >-
-        <xref uid="word!Word.SearchOptions:class" /> | {
+        let text = [];
+        paragraphs.items.forEach((item) => {
+          let paragraph = item.text.trim();
+          if (paragraph) {
+            paragraph.split(" ").forEach((term) => {
+              let currentTerm = term.trim();
+              if (currentTerm) {
+                text.push(currentTerm);
+              }
+            });
+          }
+        });
+
+        let makeTextDistinct = new Set(text);
+        let distinctText = Array.from(makeTextDistinct);
+        let allSearchResults = [];
+
+        for (let i = 0; i < distinctText.length; i++) {
+          let results = context.document.body.search(distinctText[i], { matchCase: true, matchWholeWord: true });
+          results.load("text");
+
+          // Map search term with its results.
+          let correlatedResults = {
+            searchTerm: distinctText[i],
+            hits: results
+          };
+
+          allSearchResults.push(correlatedResults);
+        }
+
+        await context.sync();
+
+        // Display counts.
+        allSearchResults.forEach((result) => {
+          let length = result.hits.items.length;
+
+          console.log("Search term: " + result.searchTerm + " => Count: " + length);
+        });
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: |-
+        search(searchText: string, searchOptions?: Word.SearchOptions | {
                     ignorePunct?: boolean;
                     ignoreSpace?: boolean;
                     matchCase?: boolean;
@@ -1435,159 +1338,162 @@ methods:
                     matchSuffix?: boolean;
                     matchWholeWord?: boolean;
                     matchWildcards?: boolean;
-                }
-    return:
-      type: <xref uid="word!Word.RangeCollection:class" />
-      description: ''
-- name: select(selectionMode)
-  uid: word!Word.Body#select:member(1)
-  package: word!
-  fullName: select(selectionMode)
-  summary: Выбирает содержимое и переходит к нему в пользовательском интерфейсе Word.
-  remarks: >-
-    \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
+                }): Word.RangeCollection;
+      parameters:
+        - id: searchText
+          description: Обязательный параметр. Текст для поиска. Может быть не более 255 символов.
+          type: string
+        - id: searchOptions
+          description: Необязательный параметр. Параметры поиска.
+          type: |-
+            <xref uid="word!Word.SearchOptions:class" /> | {
+                        ignorePunct?: boolean;
+                        ignoreSpace?: boolean;
+                        matchCase?: boolean;
+                        matchPrefix?: boolean;
+                        matchSuffix?: boolean;
+                        matchWholeWord?: boolean;
+                        matchWildcards?: boolean;
+                    }
+      return:
+        type: '<xref uid="word!Word.RangeCollection:class" />'
+        description: ''
+  - name: select(selectionMode)
+    uid: 'word!Word.Body#select:member(1)'
+    package: word!
+    fullName: select(selectionMode)
+    summary: Выбирает содержимое и переходит к нему в пользовательском интерфейсе Word.
+    remarks: |-
+      \[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]
 
+      #### <a name="examples"></a>Примеры
 
-    #### <a name="examples"></a>Примеры
+      ```javascript
+      // Run a batch operation against the Word object model.
+      Word.run(function (context) {
 
+          // Create a proxy object for the document body.
+          var body = context.document.body;
 
-    ```javascript
+          // Queue a command to select the document body. The Word UI will
+          // move to the selected document body.
+          body.select();
 
-    // Run a batch operation against the Word object model.
-
-    Word.run(function (context) {
-
-        // Create a proxy object for the document body.
-        var body = context.document.body;
-
-        // Queue a command to select the document body. The Word UI will
-        // move to the selected document body.
-        body.select();
-
-        // Synchronize the document state by executing the queued commands,
-        // and return a promise to indicate task completion.
-        return context.sync().then(function () {
-            console.log('Selected the document body.');
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'select(selectionMode?: Word.SelectionMode): void;'
-    parameters:
-    - id: selectionMode
-      description: 'Необязательный параметр. Возможные режимы выбора: Select, Start и End. Значение по умолчанию — Select.'
-      type: <xref uid="word!Word.SelectionMode:enum" />
-    return:
-      type: void
-      description: ''
-- name: select(selectionModeString)
-  uid: word!Word.Body#select:member(2)
-  package: word!
-  fullName: select(selectionModeString)
-  summary: Выбирает содержимое и переходит к нему в пользовательском интерфейсе Word.
-  remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'select(selectionModeString?: "Select" | "Start" | "End"): void;'
-    parameters:
-    - id: selectionModeString
-      description: 'Необязательный параметр. Возможные режимы выбора: Select, Start и End. Значение по умолчанию — Select.'
-      type: "\"Select\" | \"Start\" | \"End\""
-    return:
-      type: void
-      description: ''
-- name: set(properties, options)
-  uid: word!Word.Body#set:member(1)
-  package: word!
-  fullName: set(properties, options)
-  summary: Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'set(properties: Interfaces.BodyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    parameters:
-    - id: properties
-      description: Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.
-      type: <xref uid="word!Word.Interfaces.BodyUpdateData:interface" />
-    - id: options
-      description: Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.
-      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
-    return:
-      type: void
-      description: ''
-- name: set(properties)
-  uid: word!Word.Body#set:member(2)
-  package: word!
-  fullName: set(properties)
-  summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'set(properties: Word.Body): void;'
-    parameters:
-    - id: properties
-      description: ''
-      type: <xref uid="word!Word.Body:class" />
-    return:
-      type: void
-      description: ''
-- name: toJSON()
-  uid: word!Word.Body#toJSON:member(1)
-  package: word!
-  fullName: toJSON()
-  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект Word.Body является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.BodyData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'toJSON(): Word.Interfaces.BodyData;'
-    return:
-      type: <xref uid="word!Word.Interfaces.BodyData:interface" />
-      description: ''
-- name: track()
-  uid: word!Word.Body#track:member(1)
-  package: word!
-  fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'track(): Word.Body;'
-    return:
-      type: <xref uid="word!Word.Body:class" />
-      description: ''
-- name: untrack()
-  uid: word!Word.Body#untrack:member(1)
-  package: word!
-  fullName: untrack()
-  summary: Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'untrack(): Word.Body;'
-    return:
-      type: <xref uid="word!Word.Body:class" />
-      description: ''
-extends: <xref uid="office!OfficeExtension.ClientObject:class" />
-metadata:
-  ms.openlocfilehash: 37510767095c7927faf9f4db9d7ff0303372b710
-  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
-  ms.translationtype: MT
-  ms.contentlocale: ru-RU
-  ms.lasthandoff: 02/02/2022
-  ms.locfileid: "62324452"
+          // Synchronize the document state by executing the queued commands,
+          // and return a promise to indicate task completion.
+          return context.sync().then(function () {
+              console.log('Selected the document body.');
+          });
+      })
+      .catch(function (error) {
+          console.log('Error: ' + JSON.stringify(error));
+          if (error instanceof OfficeExtension.Error) {
+              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+          }
+      });
+      ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'select(selectionMode?: Word.SelectionMode): void;'
+      parameters:
+        - id: selectionMode
+          description: 'Необязательный параметр. Возможные режимы выбора: Select, Start и End. Значение по умолчанию — Select.'
+          type: '<xref uid="word!Word.SelectionMode:enum" />'
+      return:
+        type: void
+        description: ''
+  - name: select(selectionModeString)
+    uid: 'word!Word.Body#select:member(2)'
+    package: word!
+    fullName: select(selectionModeString)
+    summary: Выбирает содержимое и переходит к нему в пользовательском интерфейсе Word.
+    remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'select(selectionModeString?: "Select" | "Start" | "End"): void;'
+      parameters:
+        - id: selectionModeString
+          description: 'Необязательный параметр. Возможные режимы выбора: Select, Start и End. Значение по умолчанию — Select.'
+          type: '"Select" | "Start" | "End"'
+      return:
+        type: void
+        description: ''
+  - name: 'set(properties, options)'
+    uid: 'word!Word.Body#set:member(1)'
+    package: word!
+    fullName: 'set(properties, options)'
+    summary: 'Задает несколько свойств объекта одновременно. Можно передать либо обычный объект с соответствующими свойствами, либо другой объект API того же типа.'
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'set(properties: Interfaces.BodyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      parameters:
+        - id: properties
+          description: 'Объект JavaScript со свойствами, структурированными изоморфно, с свойствами объекта, на который вызван метод.'
+          type: '<xref uid="word!Word.Interfaces.BodyUpdateData:interface" />'
+        - id: options
+          description: 'Предоставляет возможность подавления ошибок, если объект свойств пытается установить любые свойства только для чтения.'
+          type: '<xref uid="office!OfficeExtension.UpdateOptions:interface" />'
+      return:
+        type: void
+        description: ''
+  - name: set(properties)
+    uid: 'word!Word.Body#set:member(2)'
+    package: word!
+    fullName: set(properties)
+    summary: Задает несколько свойств на объекте одновременно на основе существующего загруженного объекта.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'set(properties: Word.Body): void;'
+      parameters:
+        - id: properties
+          description: ''
+          type: '<xref uid="word!Word.Body:class" />'
+      return:
+        type: void
+        description: ''
+  - name: toJSON()
+    uid: 'word!Word.Body#toJSON:member(1)'
+    package: word!
+    fullName: toJSON()
+    summary: 'Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект Word.Body является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.BodyData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.'
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'toJSON(): Word.Interfaces.BodyData;'
+      return:
+        type: '<xref uid="word!Word.Interfaces.BodyData:interface" />'
+        description: ''
+  - name: track()
+    uid: 'word!Word.Body#track:member(1)'
+    package: word!
+    fullName: track()
+    summary: 'Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.'
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'track(): Word.Body;'
+      return:
+        type: '<xref uid="word!Word.Body:class" />'
+        description: ''
+  - name: untrack()
+    uid: 'word!Word.Body#untrack:member(1)'
+    package: word!
+    fullName: untrack()
+    summary: 'Освобождает память, связанную с этим объектом, если он ранее отслеживался. Этот вызов является коротким для `context.trackedObjects.remove(thisObject)`<!-- -->. Наличие большого количества отслеживаемых объектов замедляет ведущее приложение, поэтому не забывайте освобождать любые добавленные объекты после завершения их использования. Вам потребуется позвонить до `context.sync()` того, как вступает в силу выпуск памяти.'
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'untrack(): Word.Body;'
+      return:
+        type: '<xref uid="word!Word.Body:class" />'
+        description: ''
+extends: '<xref uid="office!OfficeExtension.ClientObject:class" />'
