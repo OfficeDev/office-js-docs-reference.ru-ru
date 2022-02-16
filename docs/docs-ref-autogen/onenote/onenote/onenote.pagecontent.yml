@@ -130,9 +130,9 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
-    OneNote.run(function (context) {
+    await OneNote.run(async (context) => {
 
         var page = context.application.getActivePage();
         var pageContents = page.contents;
@@ -141,19 +141,10 @@ methods:
         firstPageContent.load('type');
 
         // Run the queued commands, and return a promise to indicate task completion.
-        return context.sync()
-            .then(function () {
-                if(firstPageContent.isNull === false) {
-                    firstPageContent.delete();
-                    return context.sync();
-                }
-            });
-    })
-
-    .catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        await context.sync();
+        if (firstPageContent.isNullObject === false) {
+            firstPageContent.delete();
+            await context.sync();
         }
     });
 
@@ -215,7 +206,7 @@ methods:
               }): OneNote.PageContent;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -265,7 +256,7 @@ methods:
   uid: onenote!OneNote.PageContent#toJSON:member(1)
   package: onenote!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный OneNote. Объект PageContent — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`OneNote.Interfaces.PageContentData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный OneNote. Объект PageContent — это объект API, `toJSON` метод возвращает обычный объект JavaScript (введите как`OneNote.Interfaces.PageContentData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -278,7 +269,7 @@ methods:
   uid: onenote!OneNote.PageContent#track:member(1)
   package: onenote!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -302,9 +293,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 8b40062e693c7861e8b330b1de5834d50873173b
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: a950dcb1d625fabd4decadf9142fdb019ac3a6c4
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61518686"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62843938"

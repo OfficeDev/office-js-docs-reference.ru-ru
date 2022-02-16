@@ -61,7 +61,7 @@ properties:
   uid: word!Word.InlinePicture#hyperlink:member
   package: word!
   fullName: hyperlink
-  summary: Получает или задает гиперссылку на изображении. Используйте \# ', чтобы отделить адресную часть от необязательной части расположения.
+  summary: Получает или задает гиперссылку на изображении. Используйте '\#', чтобы отделить адресную часть от необязательной части расположения.
   remarks: '\[[Набор API: WordApi 1.1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -245,7 +245,7 @@ methods:
   package: word!
   fullName: getNext()
   summary: Возвращает следующий встроенный рисунок. Бросает ошибку, если это inline изображение является последним.
-  remarks: "\\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// To use this snippet, add an inline picture to the document and assign it an alt text title.\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the first inline picture.\n    var firstPicture = context.document.body.inlinePictures.getFirstOrNullObject();\n\n    // Queue a command to load the alternative text title of the picture.\n    context.load(firstPicture, 'altTextTitle');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (firstPicture.isNullObject) {\n            console.log('There are no inline pictures in this document.')\n        } else {\n            console.log(firstPicture.altTextTitle);\n        }\n    });   \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// To use this snippet, add an inline picture to the document and assign it an alt text title.\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n    \n    // Create a proxy object for the first inline picture.\n    var firstPicture = context.document.body.inlinePictures.getFirstOrNullObject();\n\n    // Queue a command to load the alternative text title of the picture.\n    context.load(firstPicture, 'altTextTitle');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    await context.sync();\n    if (firstPicture.isNullObject) {\n        console.log('There are no inline pictures in this document.')\n    } else {\n        console.log(firstPicture.altTextTitle);\n    }\n}); \n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -258,7 +258,7 @@ methods:
   package: word!
   fullName: getNextOrNullObject()
   summary: Возвращает следующий встроенный рисунок. Возвращает объект null, если это inline-изображение является последним.
-  remarks: "\\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// To use this snippet, add an inline picture to the document and assign it an alt text title.\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy object for the first inline picture.\n    var firstPicture = context.document.body.inlinePictures.getFirstOrNullObject();\n\n    // Queue a command to load the alternative text title of the picture.\n    context.load(firstPicture, 'altTextTitle');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        if (firstPicture.isNullObject) {\n            console.log('There are no inline pictures in this document.')\n        } else {\n            console.log(firstPicture.altTextTitle);\n        }\n    });   \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// To use this snippet, add an inline picture to the document and assign it an alt text title.\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n    \n    // Create a proxy object for the first inline picture.\n    var firstPicture = context.document.body.inlinePictures.getFirstOrNullObject();\n\n    // Queue a command to load the alternative text title of the picture.\n    context.load(firstPicture, 'altTextTitle');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    await context.sync();\n    if (firstPicture.isNullObject) {\n        console.log('There are no inline pictures in this document.')\n    } else {\n        console.log(firstPicture.altTextTitle);\n    }\n}); \n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -278,7 +278,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start" или "End".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start" или "End".
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -295,7 +295,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start" или "End".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start" или "End".
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -312,7 +312,7 @@ methods:
     content: 'insertBreak(breakType: Word.BreakType, insertLocation: Word.InsertLocation): void;'
     parameters:
     - id: breakType
-      description: Обязательный. Тип перерыва, который нужно добавить.
+      description: Обязательный элемент. Тип перерыва, который нужно добавить.
       type: <xref uid="word!Word.BreakType:enum" />
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Before и After.'
@@ -332,7 +332,7 @@ methods:
     content: 'insertBreak(breakTypeString: "Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line", insertLocation: "Before" | "After" | "Start" | "End" | "Replace"): void;'
     parameters:
     - id: breakTypeString
-      description: Обязательно. Тип перерыва, который нужно добавить.
+      description: Обязательный элемент. Тип перерыва, который нужно добавить.
       type: "\"Page\" | \"Next\" | \"SectionNext\" | \"SectionContinuous\" | \"SectionEven\" | \"SectionOdd\" | \"Line\""
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Before и After.'
@@ -405,7 +405,7 @@ methods:
     content: 'insertHtml(html: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: html
-      description: Обязательно. Вставляемый HTML.
+      description: Обязательный элемент. Вставляемый HTML.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Before и After.'
@@ -425,7 +425,7 @@ methods:
     content: 'insertHtml(html: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: html
-      description: Обязательно. Вставляемый HTML.
+      description: Обязательный элемент. Вставляемый HTML.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Before и After.'
@@ -445,10 +445,10 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный элемент. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocation
-      description: Обязательно. Значение может быть "Замените", "До" или "После".
+      description: Обязательный элемент. Значение может быть "Замените", "До" или "После".
       type: <xref uid="word!Word.InsertLocation:enum" />
     return:
       type: <xref uid="word!Word.InlinePicture:class" />
@@ -465,10 +465,10 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательно. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный элемент. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocationString
-      description: Обязательно. Значение может быть "Замените", "До" или "После".
+      description: Обязательный элемент. Значение может быть "Замените", "До" или "После".
       type: "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
     return:
       type: <xref uid="word!Word.InlinePicture:class" />
@@ -643,7 +643,7 @@ methods:
               }): Word.InlinePicture;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -727,7 +727,7 @@ methods:
   uid: word!Word.InlinePicture#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект Word.InlinePicture является объектом API, метод возвращает обычный объект `toJSON` JavaScript (введите как `Word.Interfaces.InlinePictureData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект Word.InlinePicture является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.InlinePictureData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -740,7 +740,7 @@ methods:
   uid: word!Word.InlinePicture#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -764,9 +764,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 854df5bc8c7d8b34181bc1babdb8138322da93d7
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: 1458f7d85222480d13f821e3cb568850757df84e
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60050372"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62842091"
