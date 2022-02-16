@@ -510,10 +510,10 @@ methods:
     content: 'attachToList(listId: number, level: number): Word.List;'
     parameters:
     - id: listId
-      description: Обязательный. ID существующего списка.
+      description: Обязательный элемент. ID существующего списка.
       type: number
     - id: level
-      description: Обязательный. Уровень в списке.
+      description: Обязательный элемент. Уровень в списке.
       type: number
     return:
       type: <xref uid="word!Word.List:class" />
@@ -530,11 +530,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -544,24 +544,15 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a command to clear the contents of the first paragraph.
-            paragraphs.items[0].clear();
+        // Queue a command to clear the contents of the first paragraph.
+        paragraphs.items[0].clear();
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Cleared the contents of the first paragraph.');
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Cleared the contents of the first paragraph.');
     });
 
     ```
@@ -584,11 +575,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -598,24 +589,15 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a command to delete the first paragraph.
-            paragraphs.items[0].delete();
+        // Queue a command to delete the first paragraph.
+        paragraphs.items[0].delete();
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Deleted the first paragraph.');
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Deleted the first paragraph.');
     });
 
     ```
@@ -664,11 +646,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -678,24 +660,15 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a a set of commands to get the HTML of the first paragraph.
-            var html = paragraphs.items[0].getHtml();
+        // Queue a set of commands to get the HTML of the first paragraph.
+        var html = paragraphs.items[0].getHtml();
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Paragraph HTML: ' + html.value);
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Paragraph HTML: ' + html.value);
     });
 
     ```
@@ -744,11 +717,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -758,24 +731,15 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a a set of commands to get the OOXML of the first paragraph.
-            var ooxml = paragraphs.items[0].getOoxml();
+        // Queue a set of commands to get the OOXML of the first paragraph.
+        var ooxml = paragraphs.items[0].getOoxml();
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Paragraph OOXML: ' + ooxml.value);
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Paragraph OOXML: ' + ooxml.value);
     });
 
     ```
@@ -811,11 +775,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -825,29 +789,22 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue commands to create a proxy object for the next-to-last paragraph.
-            var indexOfLastParagraph = paragraphs.items.length - 1;
-            var precedingParagraph = paragraphs.items[indexOfLastParagraph].getPreviousOrNullObject();
+        // Queue commands to create a proxy object for the next-to-last paragraph.
+        var indexOfLastParagraph = paragraphs.items.length - 1;
+        var precedingParagraph = paragraphs.items[indexOfLastParagraph].getPreviousOrNullObject();
 
-            // Queue a command to load the text of the preceding paragraph.
-            context.load(precedingParagraph, 'text');
+        // Queue a command to load the text of the preceding paragraph.
+        context.load(precedingParagraph, 'text');
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                if (precedingParagraph.isNullObject) {
-                    console.log('There are no paragraphs before the current one.');
-                } else {
-                    console.log('The preceding paragraph is: ' + precedingParagraph.text);
-                }
-            });
-        });
-    }).catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        if (precedingParagraph.isNullObject) {
+            console.log('There are no paragraphs before the current one.');
+        } else {
+            console.log('The preceding paragraph is: ' + precedingParagraph.text);
         }
     });
 
@@ -871,7 +828,7 @@ methods:
     content: 'getRange(rangeLocation?: Word.RangeLocation): Word.Range;'
     parameters:
     - id: rangeLocation
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
       type: <xref uid="word!Word.RangeLocation:enum" />
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -888,7 +845,7 @@ methods:
     content: 'getRange(rangeLocationString?: "Whole" | "Start" | "End" | "Before" | "After" | "Content"): Word.Range;'
     parameters:
     - id: rangeLocationString
-      description: Необязательный параметр. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
+      description: Необязательное свойство. Расположение диапазона может быть "Whole", "Start", "End", "After" или "Content".
       type: "\"Whole\" | \"Start\" | \"End\" | \"Before\" | \"After\" | \"Content\""
     return:
       type: <xref uid="word!Word.Range:class" />
@@ -905,7 +862,7 @@ methods:
     content: 'getReviewedText(changeTrackingVersion?: Word.ChangeTrackingVersion): OfficeExtension.ClientResult<string>;'
     parameters:
     - id: changeTrackingVersion
-      description: 'Необязательный параметр. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
+      description: 'Необязательное свойство. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
       type: <xref uid="word!Word.ChangeTrackingVersion:enum" />
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
@@ -922,7 +879,7 @@ methods:
     content: 'getReviewedText(changeTrackingVersionString?: "Original" | "Current"): OfficeExtension.ClientResult<string>;'
     parameters:
     - id: changeTrackingVersionString
-      description: 'Необязательный параметр. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
+      description: 'Необязательное свойство. ChangeTrackingVersion может быть: Original, Current. Значение по умолчанию текущее.'
       type: "\"Original\" | \"Current\""
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string&gt;
@@ -939,10 +896,10 @@ methods:
     content: 'getTextRanges(endingMarks: string[], trimSpacing?: boolean): Word.RangeCollection;'
     parameters:
     - id: endingMarks
-      description: Обязательный. Знаки препинания и/или другие знаки окончания в качестве массива строк.
+      description: Обязательный элемент. Знаки препинания и/или другие знаки окончания в качестве массива строк.
       type: string[]
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -997,11 +954,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -1012,27 +969,18 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a command to get the first paragraph.
-            var paragraph = paragraphs.items[0];
+        // Queue a command to get the first paragraph.
+        var paragraph = paragraphs.items[0];
 
-            // Queue a command to insert a page break after the first paragraph.
-            paragraph.insertBreak('page', 'After');
+        // Queue a command to insert a page break after the first paragraph.
+        paragraph.insertBreak(Word.BreakType.page, Word.InsertLocation.after);
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Inserted a page break after the paragraph.');
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Inserted a page break after the paragraph.');
     });
 
     ```
@@ -1062,11 +1010,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -1077,27 +1025,18 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a command to get the first paragraph.
-            var paragraph = paragraphs.items[0];
+        // Queue a command to get the first paragraph.
+        var paragraph = paragraphs.items[0];
 
-            // Queue a command to wrap the first paragraph in a rich text content control.
-            paragraph.insertContentControl();
+        // Queue a command to wrap the first paragraph in a rich text content control.
+        paragraph.insertContentControl();
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Wrapped the first paragraph in a content control.');
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Wrapped the first paragraph in a content control.');
     });
 
     ```
@@ -1160,11 +1099,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -1175,27 +1114,18 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a command to get the first paragraph.
-            var paragraph = paragraphs.items[0];
+        // Queue a command to get the first paragraph.
+        var paragraph = paragraphs.items[0];
 
-            // Queue a command to insert HTML content at the end of the first paragraph.
-            paragraph.insertHtml('<strong>Inserted HTML.</strong>', Word.InsertLocation.end);
+        // Queue a command to insert HTML content at the end of the first paragraph.
+        paragraph.insertHtml('<strong>Inserted HTML.</strong>', Word.InsertLocation.end);
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Inserted HTML content at the end of the first paragraph.');
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Inserted HTML content at the end of the first paragraph.');
     });
 
     ```
@@ -1245,11 +1175,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
     // Run a batch operation against the Word object model.
 
-    Word.run(function (context) {
+    await Word.run(async (context) => {
 
         // Create a proxy object for the paragraphs collection.
         var paragraphs = context.document.body.paragraphs;
@@ -1259,29 +1189,20 @@ methods:
 
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        return context.sync().then(function () {
+        await context.sync();
 
-            // Queue a command to get the first paragraph.
-            var paragraph = paragraphs.items[0];
+        // Queue a command to get the first paragraph.
+        var paragraph = paragraphs.items[0];
 
-            var b64encodedImg = "iVBORw0KGgoAAAANSUhEUgAAAB4AAAANCAIAAAAxEEnAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVDhPtY1BEoQwDMP6/0+XgIMTBAeYoTqso9Rkx1zG+tNj1H94jgGzeNSjteO5vtQQuG2seO0av8LzGbe3anzRoJ4ybm/VeKEerAEbAUpW4aWQCmrGFWykRzGBCnYy2ha3oAIq2MloW9yCCqhgJ6NtcQsqoIKdjLbFLaiACnYyf2fODbrjZcXfr2F4AAAAAElFTkSuQmCC";
+        var b64encodedImg = "iVBORw0KGgoAAAANSUhEUgAAAB4AAAANCAIAAAAxEEnAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVDhPtY1BEoQwDMP6/0+XgIMTBAeYoTqso9Rkx1zG+tNj1H94jgGzeNSjteO5vtQQuG2seO0av8LzGbe3anzRoJ4ybm/VeKEerAEbAUpW4aWQCmrGFWykRzGBCnYy2ha3oAIq2MloW9yCCqhgJ6NtcQsqoIKdjLbFLaiACnYyf2fODbrjZcXfr2F4AAAAAElFTkSuQmCC";
 
-            // Queue a command to insert a base64 encoded image at the beginning of the first paragraph.
-            paragraph.insertInlinePictureFromBase64(b64encodedImg, Word.InsertLocation.start);
+        // Queue a command to insert a base64 encoded image at the beginning of the first paragraph.
+        paragraph.insertInlinePictureFromBase64(b64encodedImg, Word.InsertLocation.start);
 
-            // Synchronize the document state by executing the queued commands,
-            // and return a promise to indicate task completion.
-            return context.sync().then(function () {
-                console.log('Added an image to the first paragraph.');
-            });
-        });
-    })
-
-    .catch(function (error) {
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        await context.sync();
+        console.log('Added an image to the first paragraph.');
     });
 
     ```
@@ -1291,7 +1212,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocation: Word.InsertLocation): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательный. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный элемент. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -1311,7 +1232,7 @@ methods:
     content: 'insertInlinePictureFromBase64(base64EncodedImage: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.InlinePicture;'
     parameters:
     - id: base64EncodedImage
-      description: Обязательный. Кодированное изображение base64, которое необходимо вставить.
+      description: Обязательный элемент. Кодированное изображение base64, которое необходимо вставить.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -1331,7 +1252,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocation: Word.InsertLocation): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательный. OOXML, который будет вставлен в абзаце.
+      description: Обязательный элемент. OOXML, который будет вставлен в абзаце.
       type: string
     - id: insertLocation
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -1351,7 +1272,7 @@ methods:
     content: 'insertOoxml(ooxml: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Range;'
     parameters:
     - id: ooxml
-      description: Обязательный. OOXML, который будет вставлен в абзаце.
+      description: Обязательный элемент. OOXML, который будет вставлен в абзаце.
       type: string
     - id: insertLocationString
       description: 'Обязательный параметр. Возможные значения: Replace, Start или End.'
@@ -1751,13 +1672,13 @@ methods:
     content: 'split(delimiters: string[], trimDelimiters?: boolean, trimSpacing?: boolean): Word.RangeCollection;'
     parameters:
     - id: delimiters
-      description: Обязательный. Делимитеры как массив строк.
+      description: Обязательный элемент. Делимитеры как массив строк.
       type: string[]
     - id: trimDelimiters
-      description: Необязательный параметр. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать делимитеры из диапазонов в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что делимитеры включены в диапазоны, возвращенные в коллекцию диапазонов.
       type: boolean
     - id: trimSpacing
-      description: Необязательный параметр. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
+      description: Необязательное свойство. Указывает, следует ли обрезать интервалы символов (пробелы, вкладки, разрывы столбцов и конечные метки абзаца) с начала и конца диапазона, возвращаемого в коллекции диапазона. Значение по умолчанию является ложным, что указывает на то, что интервалы символов в начале и конце диапазонов включены в коллекцию диапазонов.
       type: boolean
     return:
       type: <xref uid="word!Word.RangeCollection:class" />
@@ -1850,9 +1771,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: cbd3c30be28691da47043f776bb9d4125faebf31
-  ms.sourcegitcommit: 997292a6842ddd12e944eb27d0e480e0421f2569
+  ms.openlocfilehash: ef77a87fa751c9d4af979bec0e9b6c77d7f91aa9
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 02/02/2022
-  ms.locfileid: "62324165"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62837291"
