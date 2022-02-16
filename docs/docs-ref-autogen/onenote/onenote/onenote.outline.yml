@@ -63,14 +63,49 @@ methods:
   package: onenote!
   fullName: appendHtml(html)
   summary: Добавляет указанный HTML в нижнюю часть объекта Outline.
-  remarks: "\\[[Набор API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var activePage = context.application.getActivePage();\n\n    // Get pageContents of the activePage. \n    var pageContents = activePage.contents;\n\n    // Queue a command to load the pageContents to access its data.\n    context.load(pageContents);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            if (pageContents.items.length != 0 && pageContents.items[0].type == \"Outline\")\n            {\n                // First item is an outline.\n                outline = pageContents.items[0].outline;\n\n                // Queue a command to append a paragraph to the outline.\n                outline.appendHtml(\"<p>new paragraph</p>\");\n\n                // Run the queued commands.\n                return context.sync();\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    \[[Набор API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // Gets the active page.
+        var activePage = context.application.getActivePage();
+
+        // Get pageContents of the activePage.
+        var pageContents = activePage.contents;
+
+        // Queue a command to load the pageContents to access its data.
+        context.load(pageContents);
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync();
+        if (pageContents.items.length != 0 && pageContents.items[0].type == "Outline")
+        {
+            // First item is an outline.
+            let outline = pageContents.items[0].outline;
+
+            // Queue a command to append a paragraph to the outline.
+            outline.appendHtml("<p>new paragraph</p>");
+
+            // Run the queued commands.
+            await context.sync();
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'appendHtml(html: string): void;'
     parameters:
     - id: html
-      description: Строка HTML, которую необходимо добавить. См. [поддерживаемый HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) для OneNote API JavaScript надстройки.
+      description: Строка HTML, которую необходимо добавить. См[. поддерживаемый HTML](https://docs.microsoft.com/office/dev/add-ins/onenote/onenote-add-ins-page-content#supported-html) для OneNote API JavaScript надстройки.
       type: string
     return:
       type: void
@@ -120,7 +155,41 @@ methods:
   package: onenote!
   fullName: appendTable(rowCount, columnCount, values)
   summary: Добавляет таблицу с указанным количеством строк и столбцов в нижнюю часть объекта Outline.
-  remarks: "\\[[Набор API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nOneNote.run(function (context) {\n\n    // Gets the active page.\n    var activePage = context.application.getActivePage();\n\n    // Get pageContents of the activePage. \n    var pageContents = activePage.contents;\n\n    // Queue a command to load the pageContents to access its data.\n    context.load(pageContents);\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            if (pageContents.items.length != 0 && pageContents.items[0].type == \"Outline\") {\n                // First item is an outline.\n                var outline = pageContents.items[0].outline;\n\n                // Queue a command to append a paragraph to the outline.\n                outline.appendTable(2, 2, [[1, 2],[3, 4]]);\n\n                // Run the queued commands.\n                return context.sync();\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    \[[Набор API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets) \]
+
+
+    #### <a name="examples"></a>Примеры
+
+
+    ```typescript
+
+    await OneNote.run(async (context) => {
+
+        // Gets the active page.
+        var activePage = context.application.getActivePage();
+
+        // Get pageContents of the activePage.
+        var pageContents = activePage.contents;
+
+        // Queue a command to load the pageContents to access its data.
+        context.load(pageContents);
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        await context.sync();
+        if (pageContents.items.length != 0 && pageContents.items[0].type == "Outline") {
+            // First item is an outline.
+            var outline = pageContents.items[0].outline;
+
+            // Queue a command to append a paragraph to the outline.
+            outline.appendTable(2, 2, [["1", "2"],["3", "4"]]);
+
+            // Run the queued commands.
+            await context.sync();
+        }
+    });
+
+    ```
   isPreview: false
   isDeprecated: false
   syntax:
@@ -201,7 +270,7 @@ methods:
               }): OneNote.Outline;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -214,7 +283,7 @@ methods:
   uid: onenote!OneNote.Outline#toJSON:member(1)
   package: onenote!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный OneNote. Объект Outline — это объект API, метод возвращает простой `toJSON` объект JavaScript (введите как`OneNote.Interfaces.OutlineData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный OneNote. Объект Outline — это объект API, `toJSON` метод возвращает простой объект JavaScript (введите как`OneNote.Interfaces.OutlineData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -227,7 +296,7 @@ methods:
   uid: onenote!OneNote.Outline#track:member(1)
   package: onenote!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -251,9 +320,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 89036bbe8f2282b4b8e4357a06e1559a421b0892
-  ms.sourcegitcommit: 45b9cfd5647a37b668c32ebe089158815b79161c
+  ms.openlocfilehash: 21e3d4af69597048541dd46e972e859c10f8cc3f
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 12/15/2021
-  ms.locfileid: "61518455"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62842112"

@@ -133,7 +133,7 @@ properties:
   uid: excel!Excel.Workbook#isDirty:member
   package: excel!
   fullName: isDirty
-  summary: Указывает, были ли внесены изменения с момента последнего сберегаемого книги. Вы можете настроить это свойство, если вы хотите закрыть измененную книгу без ее сохранения или `true` запроса на ее сохранение.
+  summary: Указывает, были ли внесены изменения с момента последнего сберегаемого книги. Вы можете настроить это свойство `true` , если вы хотите закрыть измененную книгу без ее сохранения или запроса на ее сохранение.
   remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -289,7 +289,7 @@ properties:
   uid: excel!Excel.Workbook#readOnly:member
   package: excel!
   fullName: readOnly
-  summary: '`true`Возвращается, если книга открыта в режиме только для чтения.'
+  summary: Возвращается `true` , если книга открыта в режиме только для чтения.
   remarks: '\[[Набор API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -385,7 +385,7 @@ properties:
   uid: excel!Excel.Workbook#usePrecisionAsDisplayed:member
   package: excel!
   fullName: usePrecisionAsDisplayed
-  summary: Значение true, если вычисления в книге выполняются только с той точностью чисел, с которой они отображаются. Данные будут постоянно терять точность при переходе этого свойства `false` из `true`<!-- -->.
+  summary: Значение true, если вычисления в книге выполняются только с той точностью чисел, с которой они отображаются. Данные будут постоянно терять точность при переходе этого свойства из `false``true`<!-- -->.
   remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -472,7 +472,7 @@ methods:
   uid: excel!Excel.Workbook#getActiveChart:member(1)
   package: excel!
   fullName: getActiveChart()
-  summary: Получает текущую активную диаграмму в книге. Если нет активной диаграммы, `ItemNotFound` будет отброшено исключение.
+  summary: Получает текущую активную диаграмму в книге. Если нет активной диаграммы, будет `ItemNotFound` отброшено исключение.
   remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -498,7 +498,7 @@ methods:
   uid: excel!Excel.Workbook#getActiveSlicer:member(1)
   package: excel!
   fullName: getActiveSlicer()
-  summary: Получает текущий активный срез в книге. Если активного среза нет, `ItemNotFound` выброшено исключение.
+  summary: Получает текущий активный срез в книге. Если активного среза нет, выброшено `ItemNotFound` исключение.
   remarks: '\[[Набор API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -524,7 +524,7 @@ methods:
   uid: excel!Excel.Workbook#getIsActiveCollabSession:member(1)
   package: excel!
   fullName: getIsActiveCollabSession()
-  summary: '`true`Возвращается, если книга редактирована несколькими пользователями (с помощью соавторов). Обратите внимание, что может возникнуть задержка между изменением состояния книги и отражением изменений в результате метода.'
+  summary: Возвращается `true` , если книга редактирована несколькими пользователями (с помощью соавторов). Обратите внимание, что может возникнуть задержка между изменением состояния книги и отражением изменений в результате метода.
   remarks: '\[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -538,7 +538,7 @@ methods:
   package: excel!
   fullName: getSelectedRange()
   summary: Получает выбранный в настоящее время отдельный диапазон из книги. Если выбрано несколько диапазонов, этот метод выкинуть ошибку.
-  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var selectedRange = ctx.workbook.getSelectedRange();\n    selectedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(selectedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => { \n    var selectedRange = context.workbook.getSelectedRange();\n    selectedRange.load('address');\n    await context.sync();\n    console.log(selectedRange.address);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -550,7 +550,7 @@ methods:
   uid: excel!Excel.Workbook#getSelectedRanges:member(1)
   package: excel!
   fullName: getSelectedRanges()
-  summary: Получает текущий выделенный диапазон (один или несколько) в книге. В отличие от `getSelectedRange()`<!-- -->, этот метод возвращает `RangeAreas` объект, который представляет все выбранные диапазоны.
+  summary: Получает текущий выделенный диапазон (один или несколько) в книге. В отличие от `getSelectedRange()`<!-- -->, этот метод возвращает объект `RangeAreas` , который представляет все выбранные диапазоны.
   remarks: >-
     \[[Набор API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
 
@@ -628,7 +628,7 @@ methods:
               }): Excel.Workbook;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -727,7 +727,7 @@ methods:
   uid: excel!Excel.Workbook#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект книги — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.WorkbookData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный Excel. Объект книги — это объект API, `toJSON` метод возвращает обычный объект JavaScript (введите как`Excel.Interfaces.WorkbookData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -763,9 +763,9 @@ events:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.SelectionChangedEventArgs:interface" />&gt;
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 52e1295fc2e03279390bc66ef1fe2639ea88f7eb
-  ms.sourcegitcommit: fb28bc8fd0536b2e640f5039194fdbc31b30f5dc
+  ms.openlocfilehash: 22224d383f874b83c95f420490ed906de8071095
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/12/2022
-  ms.locfileid: "61762740"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62841192"

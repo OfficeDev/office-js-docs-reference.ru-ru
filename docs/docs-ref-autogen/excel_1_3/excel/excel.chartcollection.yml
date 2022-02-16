@@ -51,7 +51,7 @@ methods:
   package: excel!
   fullName: add(type, sourceData, seriesBy)
   summary: Создает диаграмму.
-  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Add a chart of chartType \"ColumnClustered\" on worksheet \"Charts\" \n// with sourceData from Range \"A1:B4\" and seriresBy is set to be \"auto\".\nExcel.run(function (ctx) { \n    var rangeSelection = \"A1:B4\";\n    var range = ctx.workbook.worksheets.getItem(sheetName)\n        .getRange(rangeSelection);\n    var chart = ctx.workbook.worksheets.getItem(sheetName)\n        .charts.add(\"ColumnClustered\", range, \"auto\");    return ctx.sync().then(function() {\n            console.log(\"New Chart Added\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Add a chart of chartType \"ColumnClustered\" on worksheet \"Charts\" \n// with sourceData from range \"A1:B4\" and seriresBy set to \"auto\".\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sheet1\");\n    var rangeSelection = \"A1:B4\";\n    var range = sheet.getRange(rangeSelection);\n    var chart = sheet.charts.add(\n    Excel.ChartType.columnClustered, \n    range, \n    Excel.ChartSeriesBy.auto);\n    await context.sync();\n\n    console.log(\"New Chart Added\");\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -61,7 +61,7 @@ methods:
       description: Представляет тип диаграммы. Подробные `Excel.ChartType` сведения см. в материале.
       type: <xref uid="excel!Excel.ChartType:enum" />
     - id: sourceData
-      description: Объект, `Range` соответствующий исходным данным.
+      description: Объект `Range` , соответствующий исходным данным.
       type: <xref uid="excel!Excel.Range:class" />
     - id: seriesBy
       description: Необязательный параметр. Определяет способ использования столбцов или строк в качестве рядов данных на диаграмме. Подробные `Excel.ChartSeriesBy` сведения см. в материале.
@@ -84,7 +84,7 @@ methods:
       description: Представляет тип диаграммы. Подробные `Excel.ChartType` сведения см. в материале.
       type: "\"Invalid\" | \"ColumnClustered\" | \"ColumnStacked\" | \"ColumnStacked100\" | \"3DColumnClustered\" | \"3DColumnStacked\" | \"3DColumnStacked100\" | \"BarClustered\" | \"BarStacked\" | \"BarStacked100\" | \"3DBarClustered\" | \"3DBarStacked\" | \"3DBarStacked100\" | \"LineStacked\" | \"LineStacked100\" | \"LineMarkers\" | \"LineMarkersStacked\" | \"LineMarkersStacked100\" | \"PieOfPie\" | \"PieExploded\" | \"3DPieExploded\" | \"BarOfPie\" | \"XYScatterSmooth\" | \"XYScatterSmoothNoMarkers\" | \"XYScatterLines\" | \"XYScatterLinesNoMarkers\" | \"AreaStacked\" | \"AreaStacked100\" | \"3DAreaStacked\" | \"3DAreaStacked100\" | \"DoughnutExploded\" | \"RadarMarkers\" | \"RadarFilled\" | \"Surface\" | \"SurfaceWireframe\" | \"SurfaceTopView\" | \"SurfaceTopViewWireframe\" | \"Bubble\" | \"Bubble3DEffect\" | \"StockHLC\" | \"StockOHLC\" | \"StockVHLC\" | \"StockVOHLC\" | \"CylinderColClustered\" | \"CylinderColStacked\" | \"CylinderColStacked100\" | \"CylinderBarClustered\" | \"CylinderBarStacked\" | \"CylinderBarStacked100\" | \"CylinderCol\" | \"ConeColClustered\" | \"ConeColStacked\" | \"ConeColStacked100\" | \"ConeBarClustered\" | \"ConeBarStacked\" | \"ConeBarStacked100\" | \"ConeCol\" | \"PyramidColClustered\" | \"PyramidColStacked\" | \"PyramidColStacked100\" | \"PyramidBarClustered\" | \"PyramidBarStacked\" | \"PyramidBarStacked100\" | \"PyramidCol\" | \"3DColumn\" | \"Line\" | \"3DLine\" | \"3DPie\" | \"Pie\" | \"XYScatter\" | \"3DArea\" | \"Area\" | \"Doughnut\" | \"Radar\" | \"Histogram\" | \"Boxwhisker\" | \"Pareto\" | \"RegionMap\" | \"Treemap\" | \"Waterfall\" | \"Sunburst\" | \"Funnel\""
     - id: sourceData
-      description: Объект, `Range` соответствующий исходным данным.
+      description: Объект `Range` , соответствующий исходным данным.
       type: <xref uid="excel!Excel.Range:class" />
     - id: seriesBy
       description: Необязательный параметр. Определяет способ использования столбцов или строк в качестве рядов данных на диаграмме. Подробные `Excel.ChartSeriesBy` сведения см. в материале.
@@ -97,7 +97,7 @@ methods:
   package: excel!
   fullName: getItem(name)
   summary: Получает диаграмму по ее имени. Если одно и то же имя принадлежит нескольким диаграммам, будет возвращена первая из них.
-  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Get the number of charts\nExcel.run(function (ctx) { \n    var charts = ctx.workbook.worksheets.getItem(\"Sheet1\").charts;\n    charts.load('count');\n    return ctx.sync().then(function() {\n        console.log(\"charts: Count= \" + charts.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Get the number of charts.\nawait Excel.run(async (context) => { \n    var charts = context.workbook.worksheets.getItem(\"Sheet1\").charts;\n    charts.load('count');\n    await context.sync();\n    \n    console.log(\"charts: Count= \" + charts.count);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -114,7 +114,7 @@ methods:
   package: excel!
   fullName: getItemAt(index)
   summary: Возвращает диаграмму с учетом ее положения в коллекции.
-  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var lastPosition = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.count - 1;\n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItemAt(lastPosition);\n    return ctx.sync().then(function() {\n            console.log(chart.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => { \n    var lastPosition = context.workbook.worksheets.getItem(\"Sheet1\").charts.count - 1;\n    var chart = context.workbook.worksheets.getItem(\"Sheet1\").charts.getItemAt(lastPosition);\n    await context.sync();\n\n    console.log(chart.name);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -159,7 +159,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.ChartCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var charts = ctx.workbook.worksheets.getItem(\"Sheet1\").charts;\n    charts.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < charts.items.length; i++) {\n            console.log(charts.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => { \n    var charts = context.workbook.worksheets.getItem(\"Sheet1\").charts;\n    charts.load('items');\n    await context.sync();\n    \n    for (var i = 0; i < charts.items.length; i++) {\n        console.log(charts.items[i].name);\n    }\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: excel!Excel.ChartCollection#load:member(3)
   package: excel!
@@ -172,7 +172,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.ChartCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.ChartCollection:class" />
@@ -181,7 +181,7 @@ methods:
   uid: excel!Excel.ChartCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.ChartCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.ChartCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект `Excel.ChartCollection` является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Excel.Interfaces.ChartCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -192,9 +192,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6c02568311bb6aa940f6a3a9f6051cc58d8a95b0
-  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
+  ms.openlocfilehash: ec2e544ffdff44197a40b45dbd6d7050558e60c2
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 09/24/2021
-  ms.locfileid: "59738889"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62842295"

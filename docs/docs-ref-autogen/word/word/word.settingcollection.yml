@@ -3,7 +3,7 @@ name: Word.SettingCollection
 uid: word!Word.SettingCollection:class
 package: word!
 fullName: Word.SettingCollection
-summary: Содержит коллекцию [объектов Word.Setting.](xref:word!Word.Setting:class)
+summary: Содержит коллекцию [объектов Word.Setting](xref:word!Word.Setting:class) .
 remarks: '\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \]'
 isPreview: true
 isDeprecated: false
@@ -46,10 +46,10 @@ methods:
     content: 'add(key: string, value: any): Word.Setting;'
     parameters:
     - id: key
-      description: Обязательно. Ключ параметра, который является чувствительным к делу.
+      description: Обязательный элемент. Ключ параметра, который является чувствительным к делу.
       type: string
     - id: value
-      description: Обязательно. Значение параметра.
+      description: Обязательный элемент. Значение параметра.
       type: any
     return:
       type: <xref uid="word!Word.Setting:class" />
@@ -59,7 +59,7 @@ methods:
   package: word!
   fullName: deleteAll()
   summary: Удаляет все параметры в этой надстройки.
-  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n\n    // Queue a command to get the count of settings.\n    var count = settings.getCount();\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log(count.value);\n\n        // Queue a command to delete all settings.\n        settings.deleteAll();\n\n        // Queue a command to get the new count of settings.\n        count = settings.getCount();\n    })\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    .then(context.sync)\n    .then(function () {\n        console.log(count.value);\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n\n    // Queue a command to get the count of settings.\n    var count = settings.getCount();\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n    console.log(count.value);\n\n    // Queue a command to delete all settings.\n    settings.deleteAll();\n\n    // Queue a command to get the new count of settings.\n    count = settings.getCount();\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n    console.log(count.value);\n});\n```"
   isPreview: true
   isDeprecated: false
   syntax:
@@ -72,7 +72,7 @@ methods:
   package: word!
   fullName: getCount()
   summary: Получает количество параметров.
-  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n\n    // Queue a command to get the count of settings.\n    var count = settings.getCount();\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log(count.value);\n\n        // Queue a command to delete all settings.\n        settings.deleteAll();\n\n        // Queue a command to get the new count of settings.\n        count = settings.getCount();\n    })\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    .then(context.sync)\n    .then(function () {\n        console.log(count.value);\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n\n    // Queue a command to get the count of settings.\n    var count = settings.getCount();\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n    console.log(count.value);\n\n    // Queue a command to delete all settings.\n    settings.deleteAll();\n\n    // Queue a command to get the new count of settings.\n    count = settings.getCount();\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n    console.log(count.value);\n});\n```"
   isPreview: true
   isDeprecated: false
   syntax:
@@ -85,7 +85,7 @@ methods:
   package: word!
   fullName: getItem(key)
   summary: Получает объект параметра по его ключу, который является чувствительным к делу. Если параметр не существует, выкидыш ошибку.
-  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n\n    // Queue a command to retrieve a setting.\n    var startMonth = settings.getItem('startMonth');\n\n    // Queue a command to load the setting.\n    context.load(startMonth);\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log(JSON.stringify(startMonth.value));\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n\n    // Queue a command to retrieve a setting.\n    var startMonth = settings.getItem('startMonth');\n\n    // Queue a command to load the setting.\n    context.load(startMonth);\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n    console.log(JSON.stringify(startMonth.value));\n});\n```"
   isPreview: true
   isDeprecated: false
   syntax:
@@ -102,14 +102,14 @@ methods:
   package: word!
   fullName: getItemOrNullObject(key)
   summary: Получает объект параметра по его ключу, который является чувствительным к делу. Возвращает объект null, если параметр не существует.
-  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n    \n    // Queue commands to retrieve settings.\n    var startMonth = settings.getItemOrNullObject('startMonth');\n    var endMonth = settings.getItemOrNullObject('endMonth');\n\n    // Queue commands to load settings.\n    context.load(startMonth);\n    context.load(endMonth);\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n       return context.sync().then(function () {\n           if (startMonth.isNullObject) {\n               console.log(\"No such setting.\");\n           }\n           else {\n               console.log(JSON.stringify(startMonth.value));\n           }\n            if (endMonth.isNullObject) {\n               console.log(\"No such setting.\");\n           }\n           else {\n               console.log(JSON.stringify(endMonth.value));\n           }\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[API set: WordApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Run a batch operation against the Word object model.\nawait Word.run(async (context) => {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    settings.add('startMonth', { month: 'March', year: 1998 });\n    \n    // Queue commands to retrieve settings.\n    var startMonth = settings.getItemOrNullObject('startMonth');\n    var endMonth = settings.getItemOrNullObject('endMonth');\n\n    // Queue commands to load settings.\n    context.load(startMonth);\n    context.load(endMonth);\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    await context.sync();\n        if (startMonth.isNullObject) {\n            console.log(\"No such setting.\");\n        }\n        else {\n            console.log(JSON.stringify(startMonth.value));\n        }\n        if (endMonth.isNullObject) {\n            console.log(\"No such setting.\");\n        }\n        else {\n            console.log(JSON.stringify(endMonth.value));\n        }\n});\n```"
   isPreview: true
   isDeprecated: false
   syntax:
     content: 'getItemOrNullObject(key: string): Word.Setting;'
     parameters:
     - id: key
-      description: Обязательно. Ключ, идентифицирует объект параметра.
+      description: Обязательный элемент. Ключ, идентифицирует объект параметра.
       type: string
     return:
       type: <xref uid="word!Word.Setting:class" />
@@ -160,7 +160,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Word.SettingCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="word!Word.SettingCollection:class" />
@@ -169,7 +169,7 @@ methods:
   uid: word!Word.SettingCollection#toJSON:member(1)
   package: word!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Word.SettingCollection` `toJSON` объект JavaScript (введите как `Word.Interfaces.SettingCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект `Word.SettingCollection` является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Word.Interfaces.SettingCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -182,7 +182,7 @@ methods:
   uid: word!Word.SettingCollection#track:member(1)
   package: word!
   fullName: track()
-  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании `.sync` объекта.
+  summary: Отслеживает объект для автоматической корректировки с учетом окружающих изменений в документе. Этот вызов является кратким для `context.trackedObjects.add(thisObject)`<!-- -->. `.sync` Если вы используете этот объект во время вызовов и вне последовательного выполнения пакета ".run" и получаете ошибку "InvalidObjectPath" при настройке свойства или вызове метода на объекте, необходимо добавить объект в отслеживаемую коллекцию объектов при первом создании объекта.
   remarks: ''
   isPreview: true
   isDeprecated: false
@@ -206,9 +206,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: bf53cfa2f110f823dd069fbdf5b993143a56d721
-  ms.sourcegitcommit: 99af6ef6ec4bcc36262b4e532e212d14eabdbccb
+  ms.openlocfilehash: c7d30887f2a8b198d0d1fbd4a5c4412f33601c31
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 10/01/2021
-  ms.locfileid: "60050614"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62840201"

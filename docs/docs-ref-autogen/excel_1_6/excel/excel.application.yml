@@ -78,16 +78,11 @@ methods:
     #### <a name="examples"></a>Примеры
 
 
-    ```javascript
+    ```typescript
 
-    Excel.run(function (ctx) {
-        ctx.workbook.application.calculate('Full');
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
+    await Excel.run(async (context) => {
+        context.workbook.application.calculate('Full');
+        await context.sync();
     });
 
     ```
@@ -135,7 +130,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.Application:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) {\n    var application = ctx.workbook.application;\n    application.load('calculationMode');\n    return ctx.sync().then(function() {\n        console.log(application.calculationMode);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => {\n    var application = context.workbook.application;\n    application.load('calculationMode');\n    await context.sync();\n\n    console.log(application.calculationMode);\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: excel!Excel.Application#load:member(3)
   package: excel!
@@ -152,7 +147,7 @@ methods:
               }): Excel.Application;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -202,7 +197,7 @@ methods:
   uid: excel!Excel.Application#suspendApiCalculationUntilNextSync:member(1)
   package: excel!
   fullName: suspendApiCalculationUntilNextSync()
-  summary: Приостанавливать вычисление, пока не `context.sync()` будет вызван следующий. После этого за пересчет книги и распространение всех зависимостей несет ответственность разработчик.
+  summary: Приостанавливать вычисление, пока не будет `context.sync()` вызван следующий. После этого за пересчет книги и распространение всех зависимостей несет ответственность разработчик.
   remarks: '\[[Набор API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -215,7 +210,7 @@ methods:
   uid: excel!Excel.Application#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект приложения — это объект API, метод возвращает обычный `toJSON` объект JavaScript (введите как`Excel.Interfaces.ApplicationData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный Excel. Объект приложения — это объект API, `toJSON` метод возвращает обычный объект JavaScript (введите как`Excel.Interfaces.ApplicationData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -226,9 +221,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 78696fcd5e8d84f337816baa61b1cd5539ccf1c2
-  ms.sourcegitcommit: d8c112625a77e704fde37a106c2aa39e2468da0b
+  ms.openlocfilehash: 192451a0582a799b28da03095013a352e36f2aea
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 11/11/2021
-  ms.locfileid: "60916422"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62840054"

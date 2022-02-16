@@ -63,7 +63,7 @@ methods:
   package: excel!
   fullName: clear()
   summary: Очищает формат строки элемента диаграммы.
-  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Set to show legend of Chart1 and make it on top of the chart.\nExcel.run(function (ctx) { \n    var gridlines = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").axes.valueAxis.majorGridlines;\n    gridlines.format.line.clear();\n    return ctx.sync().then(function() {\n            console.log(\"Chart Major Gridlines Format Cleared\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Clear the format of the major gridlines on Chart1. \nawait Excel.run(async (context) => { \n    var gridlines = context.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").axes.valueAxis.majorGridlines;\n    gridlines.format.line.clear();\n    await context.sync();\n    \n    console.log(\"Chart Major Gridlines Format Cleared\");\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -104,7 +104,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.ChartLineFormat:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Set chart major gridlines on value axis to be red.\nExcel.run(function (ctx) {\n    var gridlines = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").axes.valueAxis.majorGridlines;\n    gridlines.format.line.color = \"#FF0000\";\n    return ctx.sync().then(function () {\n        console.log(\"Chart Gridlines Color Updated\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\n// Set chart major gridlines on value axis to be red.\nawait Excel.run(async (context) => {\n    var gridlines = context.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").axes.valueAxis.majorGridlines;\n    gridlines.format.line.color = \"#FF0000\";\n    await context.sync()\n    \n    console.log(\"Chart Gridlines Color Updated\");\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: excel!Excel.ChartLineFormat#load:member(3)
   package: excel!
@@ -121,7 +121,7 @@ methods:
               }): Excel.ChartLineFormat;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -171,7 +171,7 @@ methods:
   uid: excel!Excel.ChartLineFormat#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект ChartLineFormat — это объект API, метод возвращает простой `toJSON` объект JavaScript (введите как`Excel.Interfaces.ChartLineFormatData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный Excel. Объект ChartLineFormat — это объект API, `toJSON` метод возвращает простой объект JavaScript (введите как`Excel.Interfaces.ChartLineFormatData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -182,9 +182,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 5792ca0af27e89869fabe5d1302d3f7d0953d186
-  ms.sourcegitcommit: dbd80963feb8cee59ceaa0facc9f24743e386216
+  ms.openlocfilehash: e1ec91bff98ea0becdbba1e4cd07b501675eb9bb
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 09/24/2021
-  ms.locfileid: "59645344"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62840523"

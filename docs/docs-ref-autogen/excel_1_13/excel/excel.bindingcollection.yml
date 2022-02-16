@@ -58,7 +58,7 @@ methods:
     content: 'add(range: Range | string, bindingType: Excel.BindingType, id: string): Excel.Binding;'
     parameters:
     - id: range
-      description: Диапазон для привязки. Может быть `Range` объектом или строкой. Строка должна включать полный адрес, включающий имя листа.
+      description: Диапазон для привязки. Может быть объектом `Range` или строкой. Строка должна включать полный адрес, включающий имя листа.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: bindingType
       description: Тип привязки. См. `Excel.BindingType`<!-- -->.
@@ -81,7 +81,7 @@ methods:
     content: 'add(range: Range | string, bindingTypeString: "Range" | "Table" | "Text", id: string): Excel.Binding;'
     parameters:
     - id: range
-      description: Диапазон для привязки. Может быть `Range` объектом или строкой. Строка должна включать полный адрес, включающий имя листа.
+      description: Диапазон для привязки. Может быть объектом `Range` или строкой. Строка должна включать полный адрес, включающий имя листа.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: bindingTypeString
       description: Тип привязки. См. `Excel.BindingType`<!-- -->.
@@ -96,7 +96,7 @@ methods:
   uid: excel!Excel.BindingCollection#addFromNamedItem:member(1)
   package: excel!
   fullName: addFromNamedItem(name, bindingType, id)
-  summary: Добавляет новую привязку с учетом именованного элемента в книге. Если названный элемент ссылается на несколько областей, ошибка `InvalidReference` будет возвращена.
+  summary: Добавляет новую привязку с учетом именованного элемента в книге. Если названный элемент ссылается на несколько областей, `InvalidReference` ошибка будет возвращена.
   remarks: '\[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -119,7 +119,7 @@ methods:
   uid: excel!Excel.BindingCollection#addFromNamedItem:member(2)
   package: excel!
   fullName: addFromNamedItem(name, bindingTypeString, id)
-  summary: Добавляет новую привязку с учетом именованного элемента в книге. Если названный элемент ссылается на несколько областей, ошибка `InvalidReference` будет возвращена.
+  summary: Добавляет новую привязку с учетом именованного элемента в книге. Если названный элемент ссылается на несколько областей, `InvalidReference` ошибка будет возвращена.
   remarks: '\[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -142,7 +142,7 @@ methods:
   uid: excel!Excel.BindingCollection#addFromSelection:member(1)
   package: excel!
   fullName: addFromSelection(bindingType, id)
-  summary: Добавляет новую привязку с учетом выделенного в настоящий момент фрагмента. Если в выборе несколько областей, ошибка `InvalidReference` будет возвращена.
+  summary: Добавляет новую привязку с учетом выделенного в настоящий момент фрагмента. Если в выборе несколько областей, `InvalidReference` ошибка будет возвращена.
   remarks: '\[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -162,7 +162,7 @@ methods:
   uid: excel!Excel.BindingCollection#addFromSelection:member(2)
   package: excel!
   fullName: addFromSelection(bindingTypeString, id)
-  summary: Добавляет новую привязку с учетом выделенного в настоящий момент фрагмента. Если в выборе несколько областей, ошибка `InvalidReference` будет возвращена.
+  summary: Добавляет новую привязку с учетом выделенного в настоящий момент фрагмента. Если в выборе несколько областей, `InvalidReference` ошибка будет возвращена.
   remarks: '\[[Набор API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -196,7 +196,7 @@ methods:
   package: excel!
   fullName: getItem(id)
   summary: Возвращает объект привязки по идентификатору.
-  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\n// Create a table binding to monitor data changes in the table. \n// When data is changed, the background color of the table will be changed to orange.\nfunction addEventHandler() {\n    // Create Table1\n    Excel.run(function (ctx) { \n        ctx.workbook.tables.add(\"Sheet1!A1:C4\", true);\n        return ctx.sync().then(function() {\n                console.log(\"My Diet Data Inserted!\");\n        })\n        .catch(function (error) {\n                console.log(JSON.stringify(error));\n        });\n    });\n    //Create a new table binding for Table1\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", Office.CoercionType.Table, { id: \"myBinding\" }, function (asyncResult) {\n        if (asyncResult.status == \"failed\") {\n            console.log(\"Action failed with error: \" + asyncResult.error.message);\n        }\n        else {\n            // If succeeded, then add event handler to the table binding.\n            Office.select(\"bindings#myBinding\").addHandlerAsync(\n                Office.EventType.BindingDataChanged, onBindingDataChanged);\n        }\n    });\n}\n    \n// when data in the table is changed, this event will be triggered.\nfunction onBindingDataChanged(eventArgs) {\n    Excel.run(function (ctx) { \n        // highlight the table in orange to indicate data has been changed.\n        ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = \"Orange\";\n        return ctx.sync().then(function() {\n                console.log(\"The value in this table got changed!\");\n        })\n        .catch(function (error) {\n                console.log(JSON.stringify(error));\n        });\n    });\n}\n```"
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nasync function onBindingDataChanged(eventArgs) {\n    await Excel.run(async (context) => { \n        // Highlight the table related to the binding in orange to indicate data has been changed.\n        context.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = \"Orange\";\n        await context.sync();\n        \n        console.log(\"The value in this table got changed!\");\n    });\n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -213,7 +213,7 @@ methods:
   package: excel!
   fullName: getItemAt(index)
   summary: Возвращает объект привязки с учетом его положения в массиве элементов.
-  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var lastPosition = ctx.workbook.bindings.count - 1;\n    var binding = ctx.workbook.bindings.getItemAt(lastPosition);\n    binding.load('type')\n    return ctx.sync().then(function() {\n            console.log(binding.type); \n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "\\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \\]\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => { \n    var lastPosition = context.workbook.bindings.count - 1;\n    var binding = context.workbook.bindings.getItemAt(lastPosition);\n    binding.load('type')\n    await context.sync();\n\n    console.log(binding.type);\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -275,7 +275,7 @@ methods:
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.BindingCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```javascript\nExcel.run(function (ctx) { \n    var bindings = ctx.workbook.bindings;\n    bindings.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < bindings.items.length; i++)\n        {\n            console.log(bindings.items[i].id);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of bindings\nExcel.run(function (ctx) { \n    var bindings = ctx.workbook.bindings;\n    bindings.load('count');\n    return ctx.sync().then(function() {\n        console.log(\"Bindings: Count= \" + bindings.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Примеры\n\n```typescript\nawait Excel.run(async (context) => { \n    var bindings = context.workbook.bindings;\n    bindings.load('items');\n    await context.sync();\n\n    for (var i = 0; i < bindings.items.length; i++) {\n        console.log(bindings.items[i].id);\n    }\n});\n```"
 - name: load(propertyNamesAndPaths)
   uid: excel!Excel.BindingCollection#load:member(3)
   package: excel!
@@ -288,7 +288,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.BindingCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.BindingCollection:class" />
@@ -297,7 +297,7 @@ methods:
   uid: excel!Excel.BindingCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) Если исходный объект является объектом API, метод возвращает обычный `Excel.BindingCollection` `toJSON` объект JavaScript (введите как `Excel.Interfaces.BindingCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) Если исходный объект `Excel.BindingCollection` является объектом API, `toJSON` метод возвращает обычный объект JavaScript (введите как `Excel.Interfaces.BindingCollectionData`<!-- -->), содержащий массив "items" с мелкими копиями любых загруженных свойств из элементов коллекции.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -308,9 +308,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: b83539e5f2a36260ea94d5fafd9e82ca6c576410
-  ms.sourcegitcommit: fb28bc8fd0536b2e640f5039194fdbc31b30f5dc
+  ms.openlocfilehash: f51e7eed458c1765478d6e487b3885c54d3ce0cb
+  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/12/2022
-  ms.locfileid: "61765404"
+  ms.lasthandoff: 02/16/2022
+  ms.locfileid: "62842400"
