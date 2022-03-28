@@ -1,9 +1,0 @@
-| Класс | Поля | Описание |
-|:---|:---|:---|
-|[Mailbox](/javascript/api/outlook/office.mailbox)|[addHandlerAsync(eventType: Office. Строка EventType\|, обработник: любая, вызываемая?: (asyncResult: Office. AsyncResult<void>) => недействительным)](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-addhandlerasync-member(1))|Добавляет обработчик для поддерживаемого события.|
-||[addHandlerAsync(eventType: Office. Строка EventType\|, обработник: любые параметры: Office. AsyncContextOptions, callback?: (asyncResult: Office. AsyncResult<void>) => недействительным)](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-addhandlerasync-member(1))|Добавляет обработчик для поддерживаемого события.|
-||[getCallbackTokenAsync (параметры: Office. AsyncContextOptions & {isRest?: boolean }, callback: (asyncResult: Office. AsyncResult<string>) => недействительными)](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-getcallbacktokenasync-member(1))|Получает строку с маркером, используемым для вызова API REST или Exchange веб-служб (EWS).|
-||[isRest](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-isrest-member)||
-||[removeHandlerAsync(eventType: Office. Строка EventType\|, вызов?: (asyncResult: Office. AsyncResult<void>) => недействительным)](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-removehandlerasync-member(1))|Удаляет обработчиков для поддерживаемого типа события.|
-||[removeHandlerAsync(eventType: Office. Строка EventType\|, параметры: Office. AsyncContextOptions, callback?: (asyncResult: Office. AsyncResult<void>) => недействительным)](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-removehandlerasync-member(1))|Удаляет обработчиков для поддерживаемого типа события.|
-||[restUrl](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-resturl-member)|Возвращает URL-адрес конечной точки REST для этой учетной записи электронной почты.|

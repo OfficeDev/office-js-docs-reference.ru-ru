@@ -1,8 +1,0 @@
-| Класс | Поля | Описание |
-|:---|:---|:---|
-|[AppointmentRead](/javascript/api/outlook/office.appointmentread)|[getSelectedEntities()](/javascript/api/outlook/office.appointmentread#outlook-office-appointmentread-getselectedentities-member(1))|Возвращает сущности, найденные в выделенном совпадении, выбранном пользователем.|
-||[getSelectedRegExMatches()](/javascript/api/outlook/office.appointmentread#outlook-office-appointmentread-getselectedregexmatches-member(1))|Возвращает строковые значения в выделенном совпадении, которые соответствуют регулярным выражениям, определенным в XML-файле манифеста.|
-|[Mailbox](/javascript/api/outlook/office.mailbox)|[displayNewMessageForm (параметры: любые)](/javascript/api/outlook/office.mailbox#outlook-office-mailbox-displaynewmessageform-member(1))|Отображает форму для создания нового сообщения.|
-|[MessageRead](/javascript/api/outlook/office.messageread)|[getSelectedEntities()](/javascript/api/outlook/office.messageread#outlook-office-messageread-getselectedentities-member(1))|Возвращает сущности, найденные в выделенном совпадении, выбранном пользователем.|
-||[getSelectedRegExMatches()](/javascript/api/outlook/office.messageread#outlook-office-messageread-getselectedregexmatches-member(1))|Возвращает строковые значения в выделенном совпадении, которые соответствуют регулярным выражениям, определенным в XML-файле манифеста.|
-|[UserProfile](/javascript/api/outlook/office.userprofile)|[accountType](/javascript/api/outlook/office.userprofile#outlook-office-userprofile-accounttype-member)|Получает тип учетной записи пользователя, связанного с почтовым ящиком.|
