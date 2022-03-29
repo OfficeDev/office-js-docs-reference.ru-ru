@@ -4,7 +4,7 @@ uid: office!Office.Actions:interface
 package: office!
 fullName: Office.Actions
 summary: Управление действиями и клавишами.
-remarks: '**Набор требований**: [SharedRuntime 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/shared-runtime-requirement-sets)'
+remarks: '**Набор требований**: [SharedRuntime 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/shared-runtime-requirement-sets)'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -14,7 +14,7 @@ properties:
   package: office!
   fullName: associate
   summary: Связывает ID действия с функцией.
-  remarks: '**Набор требований**: [SharedRuntime 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/shared-runtime-requirement-sets)'
+  remarks: '**Набор требований**: [SharedRuntime 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/shared-runtime-requirement-sets)'
   isPreview: false
   isDeprecated: false
   syntax:
@@ -27,7 +27,7 @@ methods:
   package: office!
   fullName: areShortcutsInUse(shortcuts)
   summary: Проверяет, используется ли набор комбинаций ярлыков для пользователя, как это определено другой надстройки или Office приложения.
-  remarks: '**Набор требований**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/keyboard-shortcuts-requirement-sets)'
+  remarks: '**Набор требований**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/keyboard-shortcuts-requirement-sets)'
   isPreview: true
   isDeprecated: false
   syntax:
@@ -44,7 +44,7 @@ methods:
   package: office!
   fullName: getShortcuts()
   summary: Получает существующие ярлыки для надстройки. Набор всегда включает (1) ярлыки, определенные в расширенном манифесте надстройки для клавиш и (2) пользовательские ярлыки текущего пользователя, если они существуют. Ярлык может быть, `null` если он конфликтует с ярлыком другой надстройки или с Office приложением. В частности, было `null` бы, если при запросе выбрать ярлык для использования, пользователь не выбрал действие текущей надстройки. Дополнительные сведения о конфликтах с ярлыками см. в этой ссылке избегайте комбинаций ключей, которые используются другими [надстройки.](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts#avoid-key-combinations-in-use-by-other-add-ins)<!-- -->.
-  remarks: '**Набор требований**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/keyboard-shortcuts-requirement-sets)'
+  remarks: '**Набор требований**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/keyboard-shortcuts-requirement-sets)'
   isPreview: true
   isDeprecated: false
   syntax:
@@ -57,22 +57,22 @@ methods:
   package: office!
   fullName: replaceShortcuts(shortcuts)
   summary: Заменяет существующие ярлыки надстройки пользовательскими ярлыками для пользователя.
-  remarks: '**Набор требований**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/keyboard-shortcuts-requirement-sets)'
+  remarks: '**Набор требований**: [KeyboardShortcuts 1.1](https://docs.microsoft.com/javascript/api/requirement-sets/common/keyboard-shortcuts-requirement-sets)'
   isPreview: true
   isDeprecated: false
   syntax:
     content: 'replaceShortcuts(shortcuts: {[actionId: string]: string}): Promise<void>;'
     parameters:
     - id: shortcuts
-      description: 'Объект пользовательских ярлыков с ключами— это ИД действий (как определено в расширенном манифесте), а значения — сочетания ярлыков. Пример: `{"SetItalic": "Ctrl+1", "SetBold": "Ctrl+2"}`<!-- -->. Чтобы узнать, как указать допустимый ID действия и комбинацию ключей, см. в рубрезе Добавление настраиваемой клавиши в [Office надстройки](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts)<!-- -->. (Обратите внимание, что сочетание ключей может быть `null`<!-- -->, в этом случае действие сохраняет комбинацию ключей, указанную в файле JSON.)'
+      description: 'Объект пользовательских ярлыков с ключами— это ИД действий (как определено в расширенном манифесте), а значения — сочетания ярлыков. Пример: `{"SetItalic": "Ctrl+1", "SetBold": "Ctrl+2"}`<!-- -->. Чтобы узнать, как указать допустимый ID действий и комбинацию ключей, см. в рубрезе Добавление настраиваемой клавиши в [Office надстройки](https://docs.microsoft.com/office/dev/add-ins/design/keyboard-shortcuts)<!-- -->. (Обратите внимание, что сочетание ключей может быть `null`<!-- -->, в этом случае действие сохраняет комбинацию ключей, указанную в файле JSON.)'
       type: '{[actionId: string]: string}'
     return:
       type: Promise&lt;void&gt;
       description: Обещание, которое устраняется при регистрации `shortcuts` каждого настраиваемой уступки ярлыка. Даже если существует конфликт с существующими ярлыками, настраиваемый ярлык будет зарегистрирован. В противном случае обещание будет отклонено с помощью кода ошибки и сообщения об ошибке. Код ошибки "InvalidOperation" `shortcuts` возвращается, если не существует какого-либо кода действия или если комбинация ярлыков недействительна.
 metadata:
-  ms.openlocfilehash: 1bc0231ade91b68d62b1cd0efee5d2aa333540d8
-  ms.sourcegitcommit: 4df843325f40111a29f85b605bc2b17bb2e050c7
+  ms.openlocfilehash: 2627b78116df47b9ccf5ef911b162d4380cd0020
+  ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 02/09/2022
-  ms.locfileid: "62466385"
+  ms.lasthandoff: 03/26/2022
+  ms.locfileid: "64482846"
