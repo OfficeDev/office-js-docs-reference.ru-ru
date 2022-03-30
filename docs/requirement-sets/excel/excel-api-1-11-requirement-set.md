@@ -4,12 +4,12 @@ description: Сведения о наборе требований ExcelApi 1.11
 ms.date: 04/01/2021
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: 284480174dc2f634576476fc4e2493026819ff20
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 1d002e1884e8b18981b00160d8a498ec0ff3ea51
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487631"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503185"
 ---
 # <a name="whats-new-in-excel-javascript-api-111"></a>Новые возможности в Excel API JavaScript 1.11
 
@@ -17,11 +17,11 @@ ms.locfileid: "64487631"
 
 | Функциональная область | Описание | Соответствующие объекты |
 |:--- |:--- |:--- |
-| [Комментарии](/office/dev/add-ins/excel/excel-add-ins-comments.md#mentions) |Теги и извества других пользователей книг с помощью комментариев. | [Комментарий](/javascript/api/excel/excel.comment), [CommentRichContent](/javascript/api/excel/excel.commentrichcontent) |
-| Разрешение [комментариев](/office/dev/add-ins/excel/excel-add-ins-comments.md#resolve-comment-threads) | Разрешить потоки комментариев и получить состояние разрешения. | [Comment](/javascript/api/excel/excel.comment) |
-| [Параметры культуры](/office/dev/add-ins/excel/excel-add-ins-workbooks.md#access-application-culture-settings) | Получает параметры культурной системы для книги, например форматирование номеров. | [CultureInfo](/javascript/api/excel/excel.cultureinfo), [приложение NumberFormatInfo](/javascript/api/excel/excel.numberformatinfo) [](/javascript/api/excel/excel.application) |
+| [Комментарии](/office/dev/add-ins/excel/excel-add-ins-comments#mentions) |Теги и извества других пользователей книг с помощью комментариев. | [Комментарий](/javascript/api/excel/excel.comment), [CommentRichContent](/javascript/api/excel/excel.commentrichcontent) |
+| Разрешение [комментариев](/office/dev/add-ins/excel/excel-add-ins-comments#resolve-comment-threads) | Разрешить потоки комментариев и получить состояние разрешения. | [Comment](/javascript/api/excel/excel.comment) |
+| [Параметры культуры](/office/dev/add-ins/excel/excel-add-ins-workbooks#access-application-culture-settings) | Получает параметры культурной системы для книги, например форматирование номеров. | [CultureInfo](/javascript/api/excel/excel.cultureinfo), [приложение NumberFormatInfo](/javascript/api/excel/excel.numberformatinfo) [](/javascript/api/excel/excel.application) |
 | [Вырезать и вклеить (moveTo)](/office/dev/add-ins/excel/excel-add-ins-ranges-cut-copy-paste) | Реплицирует функции cut-and-paste в Excel для диапазона. | [Range](/javascript/api/excel/excel.range) |
-| [Сохранение](/office/dev/add-ins/excel/excel-add-ins-workbooks.md#save-the-workbook) и [закрытие](/office/dev/add-ins/excel/excel-add-ins-workbooks.md#close-the-workbook) рабочей книги | Сохранение и закрытие книг. | [Workbook](/javascript/api/excel/excel.workbook) |
+| [Сохранение](/office/dev/add-ins/excel/excel-add-ins-workbooks.md#save-the-workbook) и [закрытие](/office/dev/add-ins/excel/excel-add-ins-workbooks#close-the-workbook) рабочей книги | Сохранение и закрытие книг. | [Workbook](/javascript/api/excel/excel.workbook) |
 | События таблицы | Дополнительные события и сведения о событиях для вычислений таблиц и скрытых строк. | [WorksheetCalculatedEventArgs](/javascript/api/excel/excel.worksheetcalculatedeventargs), [WorksheetRowHiddenChangedEventArgs](/javascript/api/excel/excel.worksheetrowhiddenchangedeventargs) |
 
 ## <a name="api-list"></a>Список API

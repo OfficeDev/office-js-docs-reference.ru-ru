@@ -3,12 +3,12 @@ title: Элемент Override в файле манифеста
 description: Элемент Переопределения позволяет указать значение параметра в зависимости от заданного условия.
 ms.date: 01/22/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 4cedc68a766b599e143b9e71f272d4d2aa600be3
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: f6a13d981f249f2095136bed8e1adc5c02332d8f
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487341"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503493"
 ---
 # <a name="override-element"></a>Элемент Override
 
@@ -198,7 +198,7 @@ ms.locfileid: "64487341"
 ## <a name="override-element-for-runtime"></a>Элемент Переопределения для `Runtime`
 
 > [!IMPORTANT]
-> Поддержка этого элемента была представлена в [наборе требований к почтовым ящикам 1.10](/office/dev/add-ins/reference/objectmodel/requirement-set-1.10/outlook-requirement-set-1.10) с функцией активации на [основе событий](/office/dev/add-ins/outlook/autolaunch). См [клиенты и платформы](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets#requirement-sets-supported-by-exchange-servers-and-outlook-clients), поддерживающие этот набор обязательных требований.
+> Поддержка этого элемента была представлена в [наборе требований к почтовым ящикам 1.10](../requirement-sets/outlook/requirement-set-1.10/outlook-requirement-set-1.10.md) с функцией активации на [основе событий](/office/dev/add-ins/outlook/autolaunch). См [клиенты и платформы](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets#requirement-sets-supported-by-exchange-servers-and-outlook-clients), поддерживающие этот набор обязательных требований.
 
 Элемент **Переопределения** выражает условный и может быть прочитано как "Если ... затем ..." заявление. Если элемент **Переопределения** имеет тип **RuntimeOverride**, `type` атрибут — это условие, `resid` а атрибут — следовательно. Например, ниже приводится следующее: "Если тип является "javascript", `resid` то это "JSRuntime.Url". Outlook Desktop требует этот элемент для [обработчиков точек расширения LaunchEvent](/office/dev/add-ins/reference/manifest/extensionpoint#launchevent).
 

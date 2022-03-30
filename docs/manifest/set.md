@@ -3,12 +3,12 @@ title: Элемент Set в файле манифеста
 description: Элемент Set указывает Office API JavaScript, задаваемого Office надстройки для активации Office или переопределения параметров базового манифеста.
 ms.date: 01/22/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 9f5e8273e07e1abf959def7eac262264bc922f45
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 1584a8ddff2cb03b507954d57565907eea81069c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487249"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502499"
 ---
 # <a name="set-element"></a>Элемент Set
 
@@ -22,7 +22,7 @@ ms.locfileid: "64487249"
 
 ## <a name="as-a-great-grandchild-of-a-versionoverrides-element"></a>Как правнук элемента VersionOverrides
 
-Указывает набор требований из API Office JavaScript, который должен поддерживаться версией и платформой Office (например, Windows, Mac, web и iOS или iPad) для того, чтобы [версияOverrides](versionoverrides.md) вступила в силу.[](/office/dev/add-ins/develop/office-versions-and-requirement-sets.md#specify-office-applications-and-requirement-sets)
+Указывает набор требований из API Office JavaScript, который должен поддерживаться версией и платформой Office (например, Windows, Mac, web и iOS или iPad) для того, чтобы [версияOverrides](versionoverrides.md) вступила в силу.[](/office/dev/add-ins/develop/office-versions-and-requirement-sets#specify-office-applications-and-requirement-sets)
 
 **Тип надстройки:** Области задач, Почта
 

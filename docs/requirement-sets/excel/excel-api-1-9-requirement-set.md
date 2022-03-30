@@ -4,12 +4,12 @@ description: Сведения о наборе требований ExcelApi 1.9.
 ms.date: 04/01/2021
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: d3844285442e44820b5a9bc1e0aeebc92c336e65
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: ef0f5979c9cfd41b59b3e7ae86f96fb3d7b35746
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487328"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502744"
 ---
 # <a name="whats-new-in-excel-javascript-api-19"></a>Новые возможности в Excel API JavaScript 1.9
 
@@ -18,12 +18,12 @@ ms.locfileid: "64487328"
 | Функциональная область | Описание | Соответствующие объекты |
 |:--- |:--- |:--- |
 | [Фигуры](/office/dev/add-ins/excel/excel-add-ins-shapes) | Вставка, размещение и форматирование изображений, геометрических фигур и текстовых полей. | [ShapeCollection](/javascript/api/excel/excel.shapecollection) [Shape](/javascript/api/excel/excel.shape) [GeometricShape](/javascript/api/excel/excel.geometricshape)  [Image](/javascript/api/excel/excel.image) |
-| [Автофильтр](/office/dev/add-ins/excel/excel-add-ins-worksheets.md#filter-data) | Добавление фильтров к диапазонам. | [AutoFilter](/javascript/api/excel/excel.autofilter) |
+| [Автофильтр](/office/dev/add-ins/excel/excel-add-ins-worksheets#filter-data) | Добавление фильтров к диапазонам. | [AutoFilter](/javascript/api/excel/excel.autofilter) |
 | [Области](/office/dev/add-ins/excel/excel-add-ins-multiple-ranges) | Поддержка несплошных диапазонов. | [RangeAreas](/javascript/api/excel/excel.rangeareas) |
-| [Специальные ячейки](/office/dev/add-ins/excel/excel-add-ins-multiple-ranges.md#get-special-cells-from-multiple-ranges) | Получение ячеек, содержащих даты, примечания или формулы в диапазоне. | [Range](/javascript/api/excel/excel.range#getspecialcells-celltype--cellvaluetype-)|
+| [Специальные ячейки](/office/dev/add-ins/excel/excel-add-ins-multiple-ranges#get-special-cells-from-multiple-ranges) | Получение ячеек, содержащих даты, примечания или формулы в диапазоне. | [Range](/javascript/api/excel/excel.range#getspecialcells-celltype--cellvaluetype-)|
 | [Поиск](/office/dev/add-ins/excel/excel-add-ins-ranges-string-match) | Поиск значений или формул в диапазоне или листе. | [Range](/javascript/api/excel/excel.range#find-text--criteria-)[Worksheet](/javascript/api/excel/excel.worksheet#findall-text--criteria-) |
 | [Копирование и вставка](/office/dev/add-ins/excel/excel-add-ins-ranges-cut-copy-paste) | Копирование значений, форматов и формул из одного диапазона в другой. | [Range](/javascript/api/excel/excel.range#copyfrom-sourcerange--copytype--skipblanks--transpose-) |
-| [Вычисление](/office/dev/add-ins/excel/performance.md#suspend-calculation-temporarily) | Улучшенное управление модулем вычислений Excel. | [Application](/javascript/api/excel/excel.application) |
+| [Вычисление](/office/dev/add-ins/excel/performance#suspend-calculation-temporarily) | Улучшенное управление модулем вычислений Excel. | [Application](/javascript/api/excel/excel.application) |
 | Новые диаграммы | Познакомьтесь с новыми поддерживаемыми типами диаграмм: с картами, ящик с усами, каскадная, солнечные лучи, диаграмма Парето и воронка. | [Chart](/javascript/api/excel/excel.charttype) |
 | Формат диапазона | Новые возможности для форматирования диапазонов. | [Range](/javascript/api/excel/excel.rangeformat) |
 

@@ -3,12 +3,12 @@ title: Элемент управления типом MobileButton в файле
 description: Определяет кнопку на мобильном устройстве, которая выполняет действие или запускает области задач.
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: ee1c1057d99bea49f25d869347e58c6b1adb6a1b
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 402a15465487811c0c4c6d8aa02c45b7840d711f
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486872"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502646"
 ---
 # <a name="control-element-of-type-mobilebutton"></a>Элемент управления типа MobileButton
 
@@ -31,7 +31,7 @@ ms.locfileid: "64486872"
 
 **Связанные с этими наборами требований**:
 
-- [Mailbox 1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)
+- [Mailbox 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)
 
 ## <a name="child-elements"></a>Дочерние элементы
 
@@ -55,7 +55,7 @@ ms.locfileid: "64486872"
 
 **Связанные с этими наборами требований**:
 
-- [Mailbox 1.5](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)
+- [Mailbox 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)
 
 ## <a name="examples"></a>Примеры
 

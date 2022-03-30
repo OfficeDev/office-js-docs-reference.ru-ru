@@ -3,23 +3,23 @@ title: Office пространства имен — набор требован�
 description: Office членов пространства имен, доступных для Outlook надстройки с помощью API почтовых ящиков, установленного 1.11.
 ms.date: 11/01/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: 4ea9a1b9754c23b4d94877ad673e276c81c6930e
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 7a145f43ed05909642e5ea0d99f0fe04718465c5
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487097"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502653"
 ---
 # <a name="office-mailbox-requirement-set-111"></a>Office (набор требований к почтовым ящикам 1.11)
 
 Пространство имен Office содержит общие интерфейсы, которые используются надстройками всех приложений Office. В этот список входят только интерфейсы, используемые надстройками Outlook. Полный список интерфейсов пространства имен Office см. в статье [Общий API](/javascript/api/office?view=outlook-js-1.11&preserve-view=true).
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|
 
 ## <a name="properties"></a>Свойства
 
@@ -33,7 +33,7 @@ ms.locfileid: "64487097"
 |---|---|---|:---:|
 | [AsyncResultStatus](#asyncresultstatus-string) | Создание<br>Чтение | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | [CoercionType](#coerciontype-string) | Создание<br>Чтение | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
-| [EventType](#eventtype-string) | Создание<br>Чтение | Строка | [1.5](../requirement-set-1.5/outlook-requirement-set-1.5.md) |
+| [EventType](#eventtype-string) | Создание<br>Чтение | String | [1.5](../requirement-set-1.5/outlook-requirement-set-1.5.md) |
 | [SourceProperty](#sourceproperty-string) | Создание<br>Чтение | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 
 ## <a name="namespaces"></a>Пространства имен
@@ -57,12 +57,12 @@ ms.locfileid: "64487097"
 |`Succeeded`| Строка|Вызов завершился успешно.|
 |`Failed`| String|Вызов завершился ошибкой.|
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|
 
 <br>
 
@@ -84,12 +84,12 @@ ms.locfileid: "64487097"
 |`Html`| Строка|Запрашивает возврат данных в формате HTML.|
 |`Text`| String|Запрашивает возврат данных в формате текста.|
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|
 
 <br>
 
@@ -112,16 +112,16 @@ ms.locfileid: "64487097"
 |`AttachmentsChanged`| Строка | Вложение было добавлено или удалено из элемента. | 1.8 |
 |`EnhancedLocationsChanged`| Строка | Расположение выбранного назначения изменилось. | 1.8 |
 |`ItemChanged`| Строка | Другой элемент Outlook для просмотра при закреплении области задач. | 1.5 |
-|`OfficeThemeChanged`| Строка | Тема Office почтового ящика изменилась. | 1.10 |
+|`OfficeThemeChanged`| String | Тема Office почтового ящика изменилась. | 1.10 |
 |`RecipientsChanged`| Строка | Список получателей выбранного элемента или расположения встречи изменен. | 1.7 |
-|`RecurrenceChanged`| Строка | Изменился шаблон повторяемости выбранной серии. | 1.7 |
+|`RecurrenceChanged`| String | Изменился шаблон повторяемости выбранной серии. | 1.7 |
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Минимальная версия набора обязательных элементов для почтового ящика](../outlook-api-requirement-sets.md)| 1.5 |
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|
 
 <br>
 
@@ -143,9 +143,9 @@ ms.locfileid: "64487097"
 |`Body`| Строка|Источник данных — текст сообщения.|
 |`Subject`| String|Источник данных — тема сообщения.|
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|

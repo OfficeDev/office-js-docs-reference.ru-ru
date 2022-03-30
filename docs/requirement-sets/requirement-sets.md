@@ -3,12 +3,12 @@ title: Доступность клиентских приложений и пл�
 description: Поддерживаемые наборы обязательных элементов для Excel, OneNote, Outlook, PowerPoint, Project и Word.
 ms.date: 02/15/2022
 ms.localizationpriority: high
-ms.openlocfilehash: 8c42c0d548121e14171209309c435d37b44a3153
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: d8476386631e148cf5ed6a72eb3cfb5f41caf50f
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487524"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64501813"
 ---
 # <a name="office-client-application-and-platform-availability-for-office-add-ins"></a>Доступность клиентских приложений и платформ Office для надстроек Office
 
@@ -132,11 +132,11 @@ ms.locfileid: "64487524"
 
 ## <a name="see-also"></a>См. также
 
-- [Обзор платформы надстроек Office](/office/dev/add-ins/office-add-ins)
+- [Обзор платформы надстроек Office](/office/dev/add-ins/overview/office-add-ins)
 - [Версии Office и наборы обязательных элементов](/office/dev/add-ins/develop/office-versions-and-requirement-sets)
 - [Наборы обязательных элементов общего API](common/office-add-in-requirement-sets.md)
 - [Наборы обязательных элементов для команд надстроек](common/add-in-commands-requirement-sets.md)
-- [Справочная документация по API](/office/dev/add-ins/javascript-api-for-office)
+- [Справочная документация по API](/javascript/api/overview)
 - [Журнал обновлений для Приложений Microsoft 365](/officeupdates/update-history-office365-proplus-by-date)
 - [Журнал обновлений Office 2016 и 2019 ("нажми и работай")](/officeupdates/update-history-office-2019)
 - [Журнал обновлений Office 2013 ("нажми и работай")](/officeupdates/update-history-office-2013)

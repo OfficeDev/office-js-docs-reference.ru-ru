@@ -3,12 +3,12 @@ title: Элемент Supertip в файле манифеста
 description: Элемент Supertip определяет богатый инструментарий (как название, так и описание).
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 3d2a55eb01732e93b144bdda665c477448e4eb03
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: d4e59970af7c41f5303ec9cf94ef70e1373d1a59
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487161"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64501777"
 ---
 # <a name="supertip"></a>Supertip
 
@@ -27,8 +27,8 @@ ms.locfileid: "64487161"
 **Связанные с этими наборами требований**:
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) , когда родительский **VersionOverrides** — это тип Taskpane 1.0.
-- [Почтовый ящик 1.3,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3) когда родительский **VersionOverrides** — это тип Почта 1.0.
-- [Почтовый ящик 1.5,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5) когда родительский **VersionOverrides** — это тип Почта 1.1.
+- [Почтовый ящик 1.3,](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md) когда родительский **VersionOverrides** — это тип Почта 1.0.
+- [Почтовый ящик 1.5,](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md) когда родительский **VersionOverrides** — это тип Почта 1.1.
 
 ## <a name="child-elements"></a>Дочерние элементы
 

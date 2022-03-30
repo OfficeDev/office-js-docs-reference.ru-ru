@@ -3,12 +3,12 @@ title: Элемент Icon в файле манифеста
 description: Определяет элементы Image для элементов управления Button или Menu.
 ms.date: 02/25/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: c1783fe0638463aa872631e3dd88a2ecd5d82103
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 95a89b6b9f9cb3e7e827e96fa67ac14f12bcebd8
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486868"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502527"
 ---
 # <a name="icon-element"></a>Элемент Icon
 
@@ -27,8 +27,8 @@ ms.locfileid: "64486868"
 **Связанные с этими наборами требований**:
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) , когда родительский **VersionOverrides** — это тип Taskpane 1.0.
-- [Почтовый ящик 1.3,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3) когда родительский **VersionOverrides** — это тип Почта 1.0.
-- [Почтовый ящик 1.5,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5) когда родительский **VersionOverrides** — это тип Почта 1.1.
+- [Почтовый ящик 1.3,](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md) когда родительский **VersionOverrides** — это тип Почта 1.0.
+- [Почтовый ящик 1.5,](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md) когда родительский **VersionOverrides** — это тип Почта 1.1.
 
 ## <a name="attributes"></a>Атрибуты
 

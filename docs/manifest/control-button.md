@@ -3,12 +3,12 @@ title: Элемент управления типом Button в файле ма�
 description: Определяет кнопку, которая выполняет действие или запускает области задач.
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: afed892527a6678dd7f4025169e2c213e7bd177d
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 422295af60c08d35e50d329b420284597489bd0e
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486893"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502912"
 ---
 # <a name="control-element-of-type-button"></a>Элемент управления типом Button
 
@@ -51,8 +51,8 @@ ms.locfileid: "64486893"
 **Связанные с этими наборами требований**:
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) , когда родительский **VersionOverrides** — это тип Taskpane 1.0.
-- [Почтовый ящик 1.3,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3) когда родительский **VersionOverrides** — это тип Почта 1.0.
-- [Почтовый ящик 1.5,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5) когда родительский **VersionOverrides** — это тип Почта 1.1.
+- [Почтовый ящик 1.3,](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md) когда родительский **VersionOverrides** — это тип Почта 1.0.
+- [Почтовый ящик 1.5,](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md) когда родительский **VersionOverrides** — это тип Почта 1.1.
 
 ## <a name="examples"></a>Примеры
 

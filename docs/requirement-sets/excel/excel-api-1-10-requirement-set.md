@@ -4,12 +4,12 @@ description: Сведения о наборе требований ExcelApi 1.10
 ms.date: 04/02/2021
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: 9bbf19c9fc55c00b840c147c1ff4831f73b5c558
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: a9f5db9494715b73434f068bb0f78bfcaf861f0c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486945"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503486"
 ---
 # <a name="whats-new-in-excel-javascript-api-110"></a>Новые возможности в Excel API JavaScript 1.10
 
@@ -19,7 +19,7 @@ ms.locfileid: "64486945"
 |:--- |:--- |:--- |
 | [Примечания](/office/dev/add-ins/excel/excel-add-ins-comments) | Добавление, редактирование и удаление примечаний. | [Comment](/javascript/api/excel/excel.comment), [CommentCollection](/javascript/api/excel/excel.commentcollection) |
 | [Контуры](/office/dev/add-ins/excel/excel-add-ins-ranges-group) | Групповые строки и столбцы для формирования общих контуров. | [Диапазон](/javascript/api/excel/excel.range), [таблица](/javascript/api/excel/excel.worksheet) |
-| [Slicers](/office/dev/add-ins/excel/excel-add-ins-pivottables.md#filter-with-slicers) | Вставка и настройка срезов для таблиц и сводных таблиц. | [Slicer](/javascript/api/excel/excel.slicer) |
+| [Slicers](/office/dev/add-ins/excel/excel-add-ins-pivottables#filter-with-slicers) | Вставка и настройка срезов для таблиц и сводных таблиц. | [Slicer](/javascript/api/excel/excel.slicer) |
 | [Дополнительные события таблицы](/office/dev/add-ins/excel/excel-add-ins-events) | Щелкните кнопку мыши и отсортировать события в таблице. | [Таблица (События)](/javascript/api/excel/excel.worksheet#excel-excel-worksheet-events-member) |
 
 ## <a name="api-list"></a>Список API

@@ -3,12 +3,12 @@ title: Office.context.mailbox.item — набор требований 1.4
 description: Outlook API почтовых ящиков за набором 1.4 версии объектной модели Item.
 ms.date: 07/16/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: a1e3eefeafe58b6e6ffe5331cfbffc92f950d4c0
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 43a9dae2bbfc9ca2f3356ecc9af8ec207603db83
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487558"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503010"
 ---
 # <a name="item-mailbox-requirement-set-14"></a>элемент (набор требований к почтовым ящикам 1.4)
 
@@ -16,15 +16,15 @@ ms.locfileid: "64487558"
 
 `item` используется для доступа к выбранному в настоящее время сообщению, собранию или встрече. Тип элемента можно определить с помощью `itemType` свойства.
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование|Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)|1.1|
 |[Минимальный уровень разрешений](/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)|С ограничениями|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)|Организатор встречи, участник встречи,<br>Композит сообщения или чтение сообщений|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)|Организатор встречи, участник встречи,<br>Композит сообщения или чтение сообщений|
 > [!IMPORTANT]
-> Android и iOS. Существуют ограничения, когда надстройки активируются и какие API доступны. Дополнительные сведения см. в статье [Добавление поддержки мобильных устройств в надстройку Outlook](/office/dev/add-ins/outlook/add-mobile-support.md#compose-mode-and-appointments).
+> Android и iOS. Существуют ограничения, когда надстройки активируются и какие API доступны. Дополнительные сведения см. в статье [Добавление поддержки мобильных устройств в надстройку Outlook](/office/dev/add-ins/outlook/add-mobile-support#compose-mode-and-appointments).
 
 
 ## <a name="properties"></a>Свойства
@@ -50,7 +50,7 @@ ms.locfileid: "64487558"
 | | | [Участник встречи](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentread-end-member) | Дата | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-end-member)<br>(Запрос собрания) | Дата | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | from | ReadItem | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-from-member) | [EmailAddressDetails](/javascript/api/outlook/office.emailaddressdetails?view=outlook-js-1.4&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
-| internetMessageId | ReadItem | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-internetmessageid-member) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
+| internetMessageId | ReadItem | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-internetmessageid-member) | String | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | itemClass | ReadItem | [Участник встречи](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentread-itemclass-member) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-itemclass-member) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | itemId | ReadItem | [Участник встречи](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentread-itemid-member) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
@@ -61,8 +61,8 @@ ms.locfileid: "64487558"
 | | | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-itemtype-member) | [MailboxEnums.ItemType](/javascript/api/outlook/office.mailboxenums.itemtype?view=outlook-js-1.4&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | location | ReadItem | [Организатор встречи](/javascript/api/outlook/office.appointmentcompose?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentcompose-location-member) | [Location](/javascript/api/outlook/office.location?view=outlook-js-1.4&preserve-view=true) | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [Участник встречи](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentread-location-member) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
-| | | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-location-member)<br>(Запрос собрания) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
-| normalizedSubject | ReadItem | [Участник встречи](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentread-normalizedsubject-member) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
+| | | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-location-member)<br>(Запрос собрания) | String | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
+| normalizedSubject | ReadItem | [Участник встречи](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentread-normalizedsubject-member) | String | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | | | [Чтение сообщения](/javascript/api/outlook/office.messageread?view=outlook-js-1.4&preserve-view=true#outlook-office-messageread-normalizedsubject-member) | Строка | [1.1](../requirement-set-1.1/outlook-requirement-set-1.1.md) |
 | notificationMessages | ReadItem | [Организатор встречи](/javascript/api/outlook/office.appointmentcompose?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentcompose-notificationmessages-member) | [NotificationMessages](/javascript/api/outlook/office.notificationmessages?view=outlook-js-1.4&preserve-view=true) | [1.3](../requirement-set-1.3/outlook-requirement-set-1.3.md) |
 | | | [Участник встречи](/javascript/api/outlook/office.appointmentread?view=outlook-js-1.4&preserve-view=true#outlook-office-appointmentread-notificationmessages-member) | [NotificationMessages](/javascript/api/outlook/office.notificationmessages?view=outlook-js-1.4&preserve-view=true) | [1.3](../requirement-set-1.3/outlook-requirement-set-1.3.md) |

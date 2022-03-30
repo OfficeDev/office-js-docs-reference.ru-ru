@@ -3,12 +3,12 @@ title: VersionOverrides элемент 1.0 в файле манифеста дл
 description: Справочная документация элемента VersionOverrides (почта) для Office файлов манифеста надстройок (XML).
 ms.date: 02/18/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 6f337389a1faf531e53bff30887e9d2be6acf2bf
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 23c706a23913ace16266322b22e746a3cada743a
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487156"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502380"
 ---
 # <a name="versionoverrides-10-element-in-the-manifest-file-for-a-mail-add-in"></a>VersionOverrides элемент 1.0 в файле манифеста для надстройки почты
 
@@ -27,7 +27,7 @@ ms.locfileid: "64487156"
 
 **Связанные с этими наборами требований**:
 
-- [Mailbox 1.3](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3)
+- [Mailbox 1.3](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md)
 - Некоторые детские элементы могут быть связаны с дополнительными наборами требований.
 
 ## <a name="child-elements"></a>Дочерние элементы
@@ -63,8 +63,8 @@ ms.locfileid: "64487156"
 **Связанные с этими наборами требований**:
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) , когда родительский **VersionOverrides** — это тип Taskpane 1.0.
-- [Почтовый ящик 1.3,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3) когда родительский **VersionOverrides** — это тип Почта 1.0.
-- [Почтовый ящик 1.5,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5) когда родительский **VersionOverrides** — это тип Почта 1.1.
+- [Почтовый ящик 1.3,](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md) когда родительский **VersionOverrides** — это тип Почта 1.0.
+- [Почтовый ящик 1.5,](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md) когда родительский **VersionOverrides** — это тип Почта 1.1.
 
 ## <a name="example"></a>Пример
 

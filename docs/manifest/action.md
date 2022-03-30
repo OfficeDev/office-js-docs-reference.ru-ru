@@ -3,12 +3,12 @@ title: Элемент Action в файле манифеста
 description: Этот элемент указывает действие, выполняемое, когда пользователь выбирает кнопку или элемент управления меню.
 ms.date: 02/25/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 1f35fe9b1d9048424b0a96988eff529e7917dc0f
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 46bddb5c26bb22736bdf79bebb4a22d509f3b83c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487068"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503437"
 ---
 # <a name="action-element"></a>Элемент Action
 
@@ -54,7 +54,7 @@ ms.locfileid: "64487068"
 Когда пользователь выбирает кнопку, `ExecuteFunction` которая запускает действие, надстройка отключается через 5 минут, если она не завершена к тому времени.
 
 > [!IMPORTANT]
-> Outlook: регистрация событий [почтовых ящиков](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) и элементов недоступна при **xsi:type** `ExecuteFunction`.[](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events)
+> Outlook: регистрация событий [почтовых ящиков](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) и элементов недоступна при **xsi:type** `ExecuteFunction`.[](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events)
 
 ## <a name="functionname"></a>FunctionName
 
@@ -186,10 +186,10 @@ ms.locfileid: "64487068"
 
 **Связанные с этими наборами требований**:
 
-- [Mailbox 1.5](/office/dev/add-ins/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5)
+- [Mailbox 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md)
 
 > [!IMPORTANT]
-> Хотя элемент **SupportsPinning** был представлен в наборе [требований 1.5](/office/dev/add-ins/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5), в настоящее время он поддерживается только для Microsoft 365 абонентов с помощью следующих ниже:
+> Хотя элемент **SupportsPinning** был представлен в наборе [требований 1.5](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md), в настоящее время он поддерживается только для Microsoft 365 абонентов с помощью следующих ниже:
 >
 > - Outlook 2016 или более поздней Windows (сборка 7628.1000 или более поздней)
 > - Outlook 2016 или позже на Mac (сборка 16.13.503 или более поздней сборки)

@@ -3,12 +3,12 @@ title: Outlook API надстройки 1.9
 description: Набор требований 1.9 для Outlook API надстройки.
 ms.date: 05/17/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: b6abba58e7f0ebcd3c7bfc80a9596bc9e024e3c0
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: d1268a2c12aed07d3c7bec6207d1eb6975ee6b68
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487297"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502814"
 ---
 # <a name="outlook-add-in-api-requirement-set-19"></a>Outlook API надстройки 1.9
 
@@ -27,8 +27,8 @@ ms.locfileid: "64487297"
 ### <a name="change-log"></a>Журнал изменений
 
 - [Добавлено CustomProperties.getAll](/javascript/api/outlook/office.customproperties?view=outlook-js-1.9&preserve-view=true#outlook-office-customproperties-getall-member(1)): добавляет новую функцию в `CustomProperties` объект, который получает все настраиваемые свойства.
-- Добавлен [диалоговое окно.messageChild](/office/dev/add-ins/develop/dialog-api-in-office-add-ins.md#pass-information-to-the-dialog-box): добавляет новый метод, который доставляет сообщение со страницы-организатора, например области задач или файла функций без пользовательского интерфейса, в диалоговое окно, открытое со страницы.
-- Добавлен [элемент манифеста ExtendedPermissions](/javascript/api/extendedpermissions): добавляет детский элемент в элемент [манифеста VersionOverrides](/javascript/api/versionoverrides) . Чтобы надстройка поддержала функцию [приложения-на-отправке](/office/dev/add-ins/outlook/append-on-send), `AppendOnSend` расширенное разрешение должно быть включено в коллекцию расширенных разрешений.
+- Добавлен [диалоговое окно.messageChild](/office/dev/add-ins/develop/dialog-api-in-office-add-ins#pass-information-to-the-dialog-box): добавляет новый метод, который доставляет сообщение со страницы-организатора, например области задач или файла функций без пользовательского интерфейса, в диалоговое окно, открытое со страницы.
+- Добавлен [элемент манифеста ExtendedPermissions](/javascript/api/manifest/extendedpermissions): добавляет детский элемент в элемент [манифеста VersionOverrides](/javascript/api/manifest/versionoverrides) . Чтобы надстройка поддержала функцию [приложения-на-отправке](/office/dev/add-ins/outlook/append-on-send), `AppendOnSend` расширенное разрешение должно быть включено в коллекцию расширенных разрешений.
 - Добавлен [Office.context.mailbox.displayAppointmentFormAsync](/javascript/api/outlook/office.mailbox?view=outlook-js-1.9&preserve-view=true#outlook-office-mailbox-displayappointmentformasync-member(1)): `Mailbox` добавляет новую функцию к объекту, который отображает существующую встречу. Это версия async метода `displayAppointmentForm` .
 - Добавлен [Office.context.mailbox.displayMessageFormAsync](/javascript/api/outlook/office.mailbox?view=outlook-js-1.9&preserve-view=true#outlook-office-mailbox-displaymessageformasync-member(1)): `Mailbox` добавляет новую функцию к объекту, который отображает существующее сообщение. Это версия async метода `displayMessageForm` .
 - Добавлен [Office.context.mailbox.displayNewAppointmentFormAsync](/javascript/api/outlook/office.mailbox?view=outlook-js-1.9&preserve-view=true#outlook-office-mailbox-displaynewappointmentformasync-member(1)): `Mailbox` добавляет новую функцию к объекту, который отображает новую форму встречи. Это версия async метода `displayNewAppointmentForm` .

@@ -3,12 +3,12 @@ title: Элемент Элемента в файле манифеста
 description: Указывает элемент в меню.
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 940ecd91b22677c8476a05ab8b0bf033168b293b
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 6b717bcb3041a0164716b50116f387f0b581f2ea
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487660"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502632"
 ---
 # <a name="item-element"></a>Элемент Item
 
@@ -27,8 +27,8 @@ ms.locfileid: "64487660"
 **Связанные с этими наборами требований**:
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) , когда родительский **VersionOverrides** — это тип Taskpane 1.0.
-- [Почтовый ящик 1.3,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3) когда родительский **VersionOverrides** — это тип Почта 1.0.
-- [Почтовый ящик 1.5,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5) когда родительский **VersionOverrides** — это тип Почта 1.1.
+- [Почтовый ящик 1.3,](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md) когда родительский **VersionOverrides** — это тип Почта 1.0.
+- [Почтовый ящик 1.5,](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md) когда родительский **VersionOverrides** — это тип Почта 1.1.
 
 ## <a name="child-elements"></a>Дочерние элементы
 
@@ -58,8 +58,8 @@ ms.locfileid: "64487660"
 **Связанные с этими наборами требований**:
 
 - [AddinCommands 1.1](../requirement-sets/common/add-in-commands-requirement-sets.md) , когда родительский **VersionOverrides** — это тип Taskpane 1.0.
-- [Почтовый ящик 1.3,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.3/outlook-requirement-set-1.3) когда родительский **VersionOverrides** — это тип Почта 1.0.
-- [Почтовый ящик 1.5,](/office/dev/add-ins/reference/objectmodel/requirement-set-1.5/outlook-requirement-set-1.5) когда родительский **VersionOverrides** — это тип Почта 1.1.
+- [Почтовый ящик 1.3,](../requirement-sets/outlook/requirement-set-1.3/outlook-requirement-set-1.3.md) когда родительский **VersionOverrides** — это тип Почта 1.0.
+- [Почтовый ящик 1.5,](../requirement-sets/outlook/requirement-set-1.5/outlook-requirement-set-1.5.md) когда родительский **VersionOverrides** — это тип Почта 1.1.
 
 ## <a name="examples"></a>Примеры
 

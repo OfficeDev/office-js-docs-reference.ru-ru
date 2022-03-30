@@ -3,12 +3,12 @@ title: Элемент Sets в файле манифеста
 description: Элемент Sets указывает минимальный набор API Office JavaScript, который требуется Office надстройки для активации Office или переопределения параметров базового манифеста.
 ms.date: 01/22/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: a67e719136667529df0cd1066c850771291d0f75
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 841b867ef4f40c63e114cf9b1dd5ce7ae245690c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487165"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64501771"
 ---
 # <a name="sets-element"></a>Элемент Sets
 
@@ -22,7 +22,7 @@ ms.locfileid: "64487165"
 
 ## <a name="as-a-grandchild-of-a-versionoverrides-element"></a>Как внук элемента VersionOverrides
 
-Указывает минимальный набор Office API JavaScript [(](/office/dev/add-ins/develop/office-versions-and-requirement-sets.md#specify-office-applications-and-requirement-sets)наборы требований), которые должны поддерживаться версией и платформой Office (например, Windows, Mac, web, iOS или iPad) для того, чтобы [версияOverrides](versionoverrides.md) вступила в силу.
+Указывает минимальный набор Office API JavaScript [(](/office/dev/add-ins/develop/office-versions-and-requirement-sets#specify-office-applications-and-requirement-sets)наборы требований), которые должны поддерживаться версией и платформой Office (например, Windows, Mac, web, iOS или iPad) для того, чтобы [версияOverrides](versionoverrides.md) вступила в силу.
 
 **Тип надстройки:** Области задач, Почта
 

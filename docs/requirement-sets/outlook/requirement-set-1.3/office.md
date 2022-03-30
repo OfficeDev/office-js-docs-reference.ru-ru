@@ -3,23 +3,23 @@ title: Пространство имен Office — набор обязател�
 description: Office, доступные для Outlook надстройки с помощью набора API API почтовых ящиков 1.3.
 ms.date: 05/17/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: a9277174927cd7ba48c479ba1cf6be7d1456861f
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 280f1b32d13ca4371f377467ba43ffad5ddf9317
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487420"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503024"
 ---
 # <a name="office-mailbox-requirement-set-13"></a>Office (набор требований к почтовым ящикам 1.3)
 
 Пространство имен Office содержит общие интерфейсы, которые используются надстройками всех приложений Office. В этот список входят только интерфейсы, используемые надстройками Outlook. Полный список интерфейсов пространства имен Office см. в статье [Общий API](/javascript/api/office?view=outlook-js-1.3&preserve-view=true).
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|
 
 ## <a name="properties"></a>Свойства
 
@@ -56,12 +56,12 @@ ms.locfileid: "64487420"
 |`Succeeded`| Строка|Вызов завершился успешно.|
 |`Failed`| String|Вызов завершился ошибкой.|
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|
 
 <br>
 
@@ -83,12 +83,12 @@ ms.locfileid: "64487420"
 |`Html`| Строка|Запрашивает возврат данных в формате HTML.|
 |`Text`| String|Запрашивает возврат данных в формате текста.|
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|
 
 <br>
 
@@ -110,9 +110,9 @@ ms.locfileid: "64487420"
 |`Body`| Строка|Источник данных — текст сообщения.|
 |`Subject`| String|Источник данных — тема сообщения.|
 
-##### <a name="requirements"></a>Требования
+##### <a name="requirements"></a>Requirements
 
 |Требование| Значение|
 |---|---|
 |[Версия минимального набора требований к почтовому ящику](../outlook-api-requirement-sets.md)| 1.1|
-|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview.md#extension-points)| Создание или чтение|
+|[Применимый режим Outlook](/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)| Создание или чтение|

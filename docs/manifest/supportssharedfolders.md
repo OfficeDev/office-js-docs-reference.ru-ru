@@ -3,12 +3,12 @@ title: Элемент SupportsSharedFolders в файле манифеста
 description: Элемент SupportsSharedFolders определяет, Outlook надстройка доступна в общих папках и сценариях общих почтовых ящиков.
 ms.date: 09/29/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: 2cf0066639b6d40bb2a460955b14b79fae6f45e8
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 54ef1407a4c7e0c0999cb26def04eba7d820ecd8
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487241"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502072"
 ---
 # <a name="supportssharedfolders-element"></a>Элемент SupportsSharedFolders
 
@@ -27,7 +27,7 @@ ms.locfileid: "64487241"
 
 **Связанные с этими наборами требований**:
 
-- [Mailbox 1.8](/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/outlook-requirement-set-1.8)
+- [Mailbox 1.8](../requirement-sets/outlook/requirement-set-1.8/outlook-requirement-set-1.8.md)
 
 Ниже приводится пример элемента **SupportsSharedFolders** .
 

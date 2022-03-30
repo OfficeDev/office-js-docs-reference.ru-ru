@@ -4,12 +4,12 @@ description: Сведения о наборе требований ExcelApi 1.8.
 ms.date: 03/19/2021
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: 0fcef590c8688d76f86ceae9c0c70585ec6d0b25
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 7461792da8d6a110c27a6ea0ad80ea433057f1a7
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487013"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502079"
 ---
 # <a name="whats-new-in-excel-javascript-api-18"></a>Новые возможности в Excel API JavaScript 1.8
 
@@ -29,7 +29,7 @@ ms.locfileid: "64487013"
 
 ## <a name="events"></a>События
 
-Для диаграмм добавлены [дополнительные](/office/dev/add-ins/excel/excel-add-ins-events) события. Пусть ваша надстройка реагирует на взаимодействие пользователей с диаграммой. Вы также можете [включать и отключать события](/office/dev/add-ins/excel/performance.md#enable-and-disable-events), запускаемые во всей книге.
+Для диаграмм добавлены [дополнительные](/office/dev/add-ins/excel/excel-add-ins-events) события. Пусть ваша надстройка реагирует на взаимодействие пользователей с диаграммой. Вы также можете [включать и отключать события](/office/dev/add-ins/excel/performance#enable-and-disable-events), запускаемые во всей книге.
 
 ## <a name="api-list"></a>Список API
 

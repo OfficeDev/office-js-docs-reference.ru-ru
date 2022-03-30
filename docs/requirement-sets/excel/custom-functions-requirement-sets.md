@@ -4,12 +4,12 @@ description: Сведения о наборах пользовательских
 ms.date: 02/15/2022
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: b07cc21e120115c4ccd2465e3b1dae956a2e998b
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: ad17b6fa15fb56b406af3c07f16392f46f2810bc
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486832"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502086"
 ---
 # <a name="custom-functions-requirement-sets"></a>Наборы настраиваемой функции
 
@@ -23,7 +23,7 @@ ms.locfileid: "64486832"
 
 ## <a name="customfunctionsruntime-11-12-and-13"></a>CustomFunctionsRuntime 1.1, 1.2 и 1.3
 
-CustomFunctionsRuntime 1.1 — это первая версия API. Набор требований 1.2 добавляет объект для `CustomFunctions.Error` поддержки обработки ошибок. Набор требований 1.3 добавляет [поддержку потоковой передачи XLL](/office/dev/add-ins/excel/make-custom-functions-compatible-with-xll-udf.md#custom-function-behavior-for-xll-compatible-functions) `ErrorCode` и новые параметры в [объект CustomFunctions.Error](/javascript/api/custom-functions-runtime/customfunctions.error) .
+CustomFunctionsRuntime 1.1 — это первая версия API. Набор требований 1.2 добавляет объект для `CustomFunctions.Error` поддержки обработки ошибок. Набор требований 1.3 добавляет [поддержку потоковой передачи XLL](/office/dev/add-ins/excel/make-custom-functions-compatible-with-xll-udf#custom-function-behavior-for-xll-compatible-functions) `ErrorCode` и новые параметры в [объект CustomFunctions.Error](/javascript/api/custom-functions-runtime/customfunctions.error) .
 
 ## <a name="see-also"></a>См. также
 

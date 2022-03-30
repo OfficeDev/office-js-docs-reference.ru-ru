@@ -3,12 +3,12 @@ title: Outlook API предварительного просмотра надс�
 description: Функции и API, которые в настоящее время находятся в предварительном Outlook надстройки.
 ms.date: 03/15/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 9b02b984b222bc7b7527470597c414d66fbabc13
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: f9c947804b1ddcdbf61eb08c5510f236ef94f3e2
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487583"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503353"
 ---
 # <a name="outlook-add-in-api-preview-requirement-set"></a>Outlook API предварительного просмотра надстройки
 
@@ -102,7 +102,7 @@ ms.locfileid: "64487583"
 
 ### <a name="event-based-activation"></a>Активация на основе событий
 
-Эта функция была выпущена в [наборе требований 1.10](../requirement-set-1.10/outlook-requirement-set-1.10.md). Однако дополнительные события теперь доступны в предварительном просмотре. Дополнительные дополнительные ссылки на [поддерживаемые события](/office/dev/add-ins/outlook/autolaunch.md#supported-events).
+Эта функция была выпущена в [наборе требований 1.10](../requirement-set-1.10/outlook-requirement-set-1.10.md). Однако дополнительные события теперь доступны в предварительном просмотре. Дополнительные дополнительные ссылки на [поддерживаемые события](/office/dev/add-ins/outlook/autolaunch#supported-events).
 
 **Доступно в**: Outlook на Windows (подключен к подписке Microsoft 365)
 

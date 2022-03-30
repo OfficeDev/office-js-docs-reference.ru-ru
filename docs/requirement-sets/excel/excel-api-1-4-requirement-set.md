@@ -4,12 +4,12 @@ description: Сведения о наборе требований ExcelApi 1.4.
 ms.date: 11/09/2020
 ms.prod: excel
 ms.localizationpriority: medium
-ms.openlocfilehash: cbd3545aedbcb68af0ab487516e7c241bc814fd5
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 555e75fe4d7a210e22a74081b29869a2dc17b0cb
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487113"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503472"
 ---
 # <a name="whats-new-in-excel-javascript-api-14"></a>Новые возможности API JavaScript для Excel 1.4
 
@@ -40,7 +40,7 @@ API включают в `getItem()` себя создание записи с п
 * Добавьте столбец таблицы в конец таблицы.
 * Добавьте несколько строк в таблицу одновременно.
 * `range.getColumnsAfter(count: number)` и `range.getColumnsBefore(count: number)`, чтобы вернуть определенное количество столбцов справа/слева от текущего объекта Range.
-* Методы [\*и свойства OrNullObject](/office/dev/add-ins/develop/application-specific-api-model.md#ornullobject-methods-and-properties). Эта функция позволяет получать объект с помощью ключа. Если объекта не существует, `isNullObject` свойство возвращенного объекта будет верным. Это позволяет разработчикам проверять, существует ли объект без обработки исключений. Метод `*OrNullObject` доступен на большинстве объектов коллекции.
+* Методы [\*и свойства OrNullObject](/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties). Эта функция позволяет получать объект с помощью ключа. Если объекта не существует, `isNullObject` свойство возвращенного объекта будет верным. Это позволяет разработчикам проверять, существует ли объект без обработки исключений. Метод `*OrNullObject` доступен на большинстве объектов коллекции.
 
 ```js
 worksheet.getItemOrNullObject("itemName")

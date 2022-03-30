@@ -3,12 +3,12 @@ title: Набор обязательных элементов API для над�
 description: Набор требований 1.8 для Outlook API надстройки.
 ms.date: 05/17/2021
 ms.localizationpriority: medium
-ms.openlocfilehash: 12137c1e36186a48f0e0e770bdd8102a11beac40
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 299451f0c5159d602750b1646c2b43596b646b88
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487537"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502926"
 ---
 # <a name="outlook-add-in-api-requirement-set-18"></a>Набор обязательных элементов API для надстройки Outlook 1.8
 
@@ -37,7 +37,7 @@ ms.locfileid: "64487537"
 - Добавлен объект [LocationIdentifier](/javascript/api/outlook/office.locationidentifier?view=outlook-js-1.8&preserve-view=true). Добавляет новый объект, представляющий идентификатор расположения.
 - Добавлен объект [MasterCategories](/javascript/api/outlook/office.mastercategories?view=outlook-js-1.8&preserve-view=true). Добавляет новый объект, представляющий главный список категорий для почтового ящика.
 - [Добавлены общие свойства](/javascript/api/outlook/office.sharedproperties?view=outlook-js-1.8&preserve-view=true). Добавляется новый объект, который представляет свойства элемента встречи или сообщения в общей папке.
-- Добавлен [элемент манифеста SupportsSharedFolders](//javascript/api/manifest/supportssharedfolders). Добавляет дочерний элемент к элементу манифеста [DesktopFormFactor](/javascript/api/desktopformfactor). Он определяет, доступна ли надстройка в сценариях делегирования.
+- Добавлен [элемент манифеста SupportsSharedFolders](/javascript/api/manifest/supportssharedfolders). Добавляет дочерний элемент к элементу манифеста [DesktopFormFactor](/javascript/api/manifest/desktopformfactor). Он определяет, доступна ли надстройка в сценариях делегирования.
 - Добавлен объект [Office.context.mailbox.masterCategories](office.context.mailbox.md#properties). Добавляет новое свойство, представляющее главный список категорий для почтового ящика.
 - Добавлен объект [Office.context.mailbox.item.categories](office.context.mailbox.item.md#properties). Добавляет новое свойство, представляющее набор категорий для элемента.
 - Добавлен объект [Office.context.mailbox.item.addFileAttachmentFromBase64Async](office.context.mailbox.item.md#methods). Добавляет новый метод, позволяющий вложить в сообщение или встречу файл, представленный в виде строки в кодировке base64.

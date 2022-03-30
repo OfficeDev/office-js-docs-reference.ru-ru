@@ -3,12 +3,12 @@ title: Элемент ExtensionPoint в файле манифеста
 description: Определяет, где доступны функции надстройки в пользовательском интерфейсе Office.
 ms.date: 02/11/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 43507df9b1be11ffb8d3444d8ca6f0e0696395a2
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: f3a409557fec2f48a4aaf93f5a93fd8c17648a7c
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64486984"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64503213"
 ---
 # <a name="extensionpoint-element"></a>Элемент ExtensionPoint
 
@@ -276,7 +276,7 @@ ms.locfileid: "64486984"
 Эта точка расширения добавляет кнопки на ленту для расширения модуля.
 
 > [!IMPORTANT]
-> Регистрация событий [почтовых ящиков](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) и [элементов](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) недоступна в этой точке расширения.
+> Регистрация событий [почтовых ящиков](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) и [элементов](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) недоступна в этой точке расширения.
 
 #### <a name="child-elements"></a>Дочерние элементы
 
@@ -319,7 +319,7 @@ ms.locfileid: "64486984"
 > [!NOTE]
 > Эта точка расширения поддерживается только на Android и iOS с Microsoft 365 подпиской.
 >
-> Регистрация событий [почтовых ящиков](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) и [элементов](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) недоступна в этой точке расширения.
+> Регистрация событий [почтовых ящиков](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) и [элементов](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) недоступна в этой точке расширения.
 
 #### <a name="child-elements"></a>Дочерние элементы
 
@@ -362,7 +362,7 @@ ms.locfileid: "64486984"
 Эта точка расширения позволяет надстройку активировать на основе поддерживаемых событий в форм-факторе рабочего стола. Дополнительные информацию об этом сценарии и полном списке поддерживаемых событий см. в статье Настройка надстройки [Outlook](/office/dev/add-ins/outlook/autolaunch) для статьи активации на основе событий.
 
 > [!IMPORTANT]
-> Регистрация событий [почтовых ящиков](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) и [элементов](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) недоступна в этой точке расширения.
+> Регистрация событий [почтовых ящиков](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) и [элементов](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) недоступна в этой точке расширения.
 
 #### <a name="child-elements"></a>Дочерние элементы
 
@@ -389,7 +389,7 @@ ms.locfileid: "64486984"
 Эта точка расширения добавляет обработчик для указанного события. Дополнительные сведения об использовании этой точки расширения см. в пункте [On-send для Outlook надстройки](/office/dev/add-ins/outlook/outlook-on-send-addins).
 
 > [!IMPORTANT]
-> Регистрация событий [почтовых ящиков](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox#events) и [элементов](/office/dev/add-ins/objectmodel/preview-requirement-set/office.context.mailbox.item#events) недоступна в этой точке расширения.
+> Регистрация событий [почтовых ящиков](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.md#events) и [элементов](../requirement-sets/outlook/preview-requirement-set/office.context.mailbox.item.md#events) недоступна в этой точке расширения.
 
 | Элемент | Описание  |
 |:-----|:-----|

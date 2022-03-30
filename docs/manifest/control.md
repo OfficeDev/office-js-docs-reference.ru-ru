@@ -3,12 +3,12 @@ title: Элемент Control в файле манифеста
 description: Определяет управление, которое выполняет действие или запускает области задач.
 ms.date: 02/04/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: afaa4eec98c857c982e99446e120a096e8436380
-ms.sourcegitcommit: dc06d41f1d4f0b25bf32d14c1ff377b1e77b7240
+ms.openlocfilehash: 184b1e0260e4f48b52bf45225091e24ee4192227
+ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/26/2022
-ms.locfileid: "64487393"
+ms.lasthandoff: 03/28/2022
+ms.locfileid: "64502639"
 ---
 # <a name="control-element"></a>Элемент Control
 
@@ -22,7 +22,7 @@ ms.locfileid: "64487393"
 - Почта 1.0
 - Почта 1.1
 
-Дополнительные сведения см. [в переопределениях Версии в манифесте](/office/dev/add-ins/develop/add-in-manifests.#version-overrides-in-the-manifest).
+Дополнительные сведения см. [в переопределениях Версии в манифесте](/office/dev/add-ins/develop/add-in-manifests#version-overrides-in-the-manifest).
 
 **Связанные с этими наборами требований**:
 
