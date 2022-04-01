@@ -13,7 +13,7 @@ properties:
   uid: excel!Excel.WorksheetProtection#allowEditRanges:member
   package: excel!
   fullName: allowEditRanges
-  summary: Указывает `AllowEditRangeCollection` объект, найденный в этом документе. Это коллекция объектов, которые работают с свойствами защиты `AllowEditRange` от таблиц. Когда включена защита от таблицы, объект можно использовать для редактирования определенного диапазона, сохраняя защиту на остальной части `AllowEditRange` таблицы.
+  summary: Указывает объект `AllowEditRangeCollection` , найденный в этом документе. Это коллекция объектов `AllowEditRange` , которые работают с свойствами защиты от таблиц. Когда включена защита от таблицы, `AllowEditRange` объект можно использовать для редактирования определенного диапазона, сохраняя защиту на остальной части таблицы.
   remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -93,6 +93,18 @@ properties:
     content: 'readonly protected: boolean;'
     return:
       type: boolean
+- name: savedOptions
+  uid: excel!Excel.WorksheetProtection#savedOptions:member
+  package: excel!
+  fullName: savedOptions
+  summary: Указывает параметры защиты, сохраненные в таблице. Это возвращает один и тот же `WorksheetProtectionOptions` объект независимо от состояния защиты от таблицы.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly savedOptions: Excel.WorksheetProtectionOptions;'
+    return:
+      type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
 methods:
 - name: checkPassword(password)
   uid: excel!Excel.WorksheetProtection#checkPassword:member(1)
@@ -110,7 +122,7 @@ methods:
       type: string
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;boolean&gt;
-      description: '`true`Возвращается, если пароль можно использовать для разблокировки защиты таблицы. В противном случае возвращается `false`<!-- -->.'
+      description: Возвращается `true` , если пароль можно использовать для разблокировки защиты таблицы. В противном случае возвращается `false`<!-- -->.
 - name: load(options)
   uid: excel!Excel.WorksheetProtection#load:member(1)
   package: excel!
@@ -161,7 +173,7 @@ methods:
               }): Excel.WorksheetProtection;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, и является строкой, запятой, которая указывает свойства навигации для `propertyNamesAndPaths.expand` загрузки.'
+      description: '`propertyNamesAndPaths.select` является запятой, которая указывает свойства для загрузки, `propertyNamesAndPaths.expand` и является строкой, запятой, которая указывает свойства навигации для загрузки.'
       type: >-
         {
                     select?: string;
@@ -174,7 +186,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#pauseProtection:member(1)
   package: excel!
   fullName: pauseProtection(password)
-  summary: Приостановка защиты таблиц для данного объекта таблицы для пользователя в заданном сеансе. Если пароль неправильный, этот метод бросает ошибку и `UnsupportedOperation` не может приостановить защиту. Этот метод не меняет состояние защиты, если защита таблицы не включена или уже приостановлена.
+  summary: Приостановка защиты таблиц для данного объекта таблицы для пользователя в заданном сеансе. Если пароль неправильный, этот метод бросает ошибку `UnsupportedOperation` и не может приостановить защиту. Этот метод не меняет состояние защиты, если защита таблицы не включена или уже приостановлена.
   remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -267,7 +279,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#setPassword:member(1)
   package: excel!
   fullName: setPassword(password)
-  summary: Изменяет пароль, связанный с `WorksheetProtection` объектом. Установка пароля в качестве пустой строки ("") или как `null` удаляет защиту паролей от `WorksheetProtection` объекта. Чтобы этот метод работал правильно, необходимо включить и приостановить защиту таблицы. Если защита таблиц отключена, этот метод бросает ошибку и `InvalidOperation` не меняет пароль. Если защита таблиц включена и не приостановлена, этот метод бросает ошибку и не `AccessDenied` меняет пароль.
+  summary: Изменяет пароль, связанный с объектом `WorksheetProtection` . Установка пароля в качестве пустой строки ("") `null` или как удаляет защиту паролей от `WorksheetProtection` объекта. Чтобы этот метод работал правильно, необходимо включить и приостановить защиту таблицы. Если защита таблиц отключена, этот метод `InvalidOperation` бросает ошибку и не меняет пароль. Если защита таблиц включена и не приостановлена, `AccessDenied` этот метод бросает ошибку и не меняет пароль.
   remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -275,7 +287,7 @@ methods:
     content: 'setPassword(password?: string): void;'
     parameters:
     - id: password
-      description: Пароль, связанный с `WorksheetProtection` объектом.
+      description: Пароль, связанный с объектом `WorksheetProtection` .
       type: string
     return:
       type: void
@@ -284,7 +296,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Переопределяет метод JavaScript, чтобы обеспечить более полезный выход, когда объект `toJSON()` API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает метод объекта, который `toJSON` передается ему.) В то время как исходный Excel. Объект WorksheetProtection — это объект API, метод возвращает простой `toJSON` объект JavaScript (введите как`Excel.Interfaces.WorksheetProtectionData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
+  summary: Переопределяет метод JavaScript `toJSON()` , чтобы обеспечить более полезный выход, когда объект API передается `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, в свою очередь, вызывает `toJSON` метод объекта, который передается ему.) В то время как исходный Excel. Объект WorksheetProtection — это объект API, `toJSON` метод возвращает простой объект JavaScript (введите как`Excel.Interfaces.WorksheetProtectionData`<!-- -->), содержащий неглубокие копии любых загруженных свойств ребенка из исходного объекта.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -345,7 +357,7 @@ methods:
   uid: excel!Excel.WorksheetProtection#updateOptions:member(1)
   package: excel!
   fullName: updateOptions(options)
-  summary: Измените параметры защиты таблиц, связанные с `WorksheetProtection` объектом. Чтобы этот метод работал должным образом, необходимо отключить или приостановить защиту таблицы. Если защита таблиц включена и не приостановлена, этот метод бросает ошибку и не меняет параметры `AccessDenied` защиты таблицы.
+  summary: Измените параметры защиты таблиц, связанные с объектом `WorksheetProtection` . Чтобы этот метод работал должным образом, необходимо отключить или приостановить защиту таблицы. Если защита таблиц включена и не приостановлена, `AccessDenied` этот метод бросает ошибку и не меняет параметры защиты таблицы.
   remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
@@ -353,16 +365,16 @@ methods:
     content: 'updateOptions(options: Excel.WorksheetProtectionOptions): void;'
     parameters:
     - id: options
-      description: Интерфейс параметров, связанный с `WorksheetProtection` объектом.
+      description: Интерфейс параметров, связанный с объектом `WorksheetProtection` .
       type: <xref uid="excel!Excel.WorksheetProtectionOptions:interface" />
     return:
       type: void
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 99da1f06d83baac4c7393e9e1ec3a8e1e88dfe9a
-  ms.sourcegitcommit: 6e02b85fb05123b10f85db6c2ac009fa60f24a6f
+  ms.openlocfilehash: 1d11afc5adb6e4639ab85e5a769d2ce25ec6a69c
+  ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 01/14/2022
-  ms.locfileid: "62040539"
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "64604732"

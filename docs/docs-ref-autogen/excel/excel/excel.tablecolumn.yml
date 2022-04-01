@@ -73,7 +73,7 @@ properties:
   uid: excel!Excel.TableColumn#values:member
   package: excel!
   fullName: values
-  summary: Представляет необработанные значения указанного диапазона. Возвращенные данные могут быть строкой, номером или boolean. Ячейки, содержащие ошибку, вернут строку ошибки. Если возвращенное значение начинается с плюса ("+"), минуса ("-"), или равного знака ("="), Excel интерпретирует это значение как формулу.
+  summary: Представляет необработанные значения указанного диапазона. Возвращенные данные могут быть строкой, номером или boolean. Ячейки, содержащие ошибку, вернут строку ошибки. Если возвращенное значение начинается с плюса ("+"), минуса ("-" или равного знака ("="), Excel интерпретирует это значение как формулу.
   remarks: '\[[Набор API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: false
   isDeprecated: false
@@ -85,12 +85,24 @@ properties:
   uid: excel!Excel.TableColumn#valuesAsJson:member
   package: excel!
   fullName: valuesAsJson
-  summary: Представление JSON значений в ячейках в этом столбце таблицы. В отличие от `TableColumn.values`<!-- -->поддерживает `TableColumn.valuesAsJson` все типы данных, которые могут быть в ячейке.
+  summary: Представление JSON значений в ячейках в этом столбце таблицы. В отличие от `TableColumn.values`<!-- -->поддерживает `TableColumn.valuesAsJson` все типы данных, которые могут быть в ячейке. Примеры включают отформатированные значения номеров и веб-изображения, в дополнение к стандартным значениям boolean, number и string. Данные, возвращаемые из этого API, всегда совпадают с локальным кодом en-US. Чтобы получить данные в локальном дисплее пользователя, используйте `TableColumn.valuesAsJsonLocal`<!-- -->.
   remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
   isPreview: true
   isDeprecated: false
   syntax:
     content: 'valuesAsJson: CellValue[][];'
+    return:
+      type: <xref uid="excel!Excel.CellValue:type" />[][]
+- name: valuesAsJsonLocal
+  uid: excel!Excel.TableColumn#valuesAsJsonLocal:member
+  package: excel!
+  fullName: valuesAsJsonLocal
+  summary: Представление JSON значений в ячейках в этом столбце таблицы. В отличие от `TableColumn.values`<!-- -->поддерживает `TableColumn.valuesAsJsonLocal` все типы данных, которые могут быть в ячейке. Примеры включают отформатированные значения номеров и веб-изображения, в дополнение к стандартным значениям boolean, number и string. Данные, возвращаемые из этого API, всегда совпадают с локальным отображением пользователя. Чтобы получить данные независимо от локального, используйте `TableColumn.valuesAsJson`<!-- -->.
+  remarks: '\[[API set: ExcelApi BETA (PREVIEW ONLY)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]'
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'valuesAsJsonLocal: CellValue[][];'
     return:
       type: <xref uid="excel!Excel.CellValue:type" />[][]
 methods:
@@ -270,9 +282,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: c92f577d5d7ee8ad1c8ea244680d48a4e15444ce
-  ms.sourcegitcommit: 09e003571c8c452459593f6d4513c692335d39c7
+  ms.openlocfilehash: e3708977c10fb9ed55a77c985864a683da6db860
+  ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
   ms.translationtype: MT
   ms.contentlocale: ru-RU
-  ms.lasthandoff: 02/16/2022
-  ms.locfileid: "62841255"
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "64604977"

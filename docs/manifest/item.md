@@ -1,14 +1,14 @@
 ---
 title: Элемент Элемента в файле манифеста
 description: Указывает элемент в меню.
-ms.date: 02/04/2022
+ms.date: 03/29/2022
 ms.localizationpriority: medium
-ms.openlocfilehash: 6b717bcb3041a0164716b50116f387f0b581f2ea
-ms.sourcegitcommit: fe8d1195ab75ae24f88ac54b1d40e0a89dae2d89
+ms.openlocfilehash: a2ea0d1dd8d0b01f91340c61ebf2e21abf598b84
+ms.sourcegitcommit: 07f76f08c7952f0777a7aa163fa734f88f6dee9b
 ms.translationtype: MT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/28/2022
-ms.locfileid: "64502632"
+ms.lasthandoff: 04/01/2022
+ms.locfileid: "64604249"
 ---
 # <a name="item-element"></a>Элемент Item
 
@@ -34,12 +34,12 @@ ms.locfileid: "64502632"
 
 |  Элемент |  Обязательный  |  Описание  |
 |:-----|:-----|:-----|
-|  [Label](#label)     | Да |  Текст для кнопки. |
-|  [Supertip](supertip.md)  | Да |  Суперподсказка для кнопки.    |
-|  [Icon](icon.md)      | Да |  Изображение для кнопки.         |
+|  [Label](#label)     | Да |  Текст элемента меню. |
+|  [Supertip](supertip.md)  | Да |  Супертип элемента меню.    |
+|  [Icon](icon.md)      | Нет |  Изображение элемента меню.         |
 |  [Action](action.md)    | Да |  Указание действия, которое предстоит выполнить. Элемент Item может быть только  одним ребенком **action**.  |
-|  [Enabled](enabled.md)    | Нет |  Указывает, включен ли контроль при запуске надстройки.  |
-|  [OverriddenByRibbonApi](overriddenbyribbonapi.md)      | Нет |  Указывает, должна ли кнопка отображаться в сочетаниях приложений и платформ, поддерживаюх настраиваемые контекстные вкладки. Если используется, он должен быть первым *элементом* ребенка. |
+|  [Enabled](enabled.md)    | Нет |  Указывает, включен ли элемент меню при запуске надстройки.  |
+|  [OverriddenByRibbonApi](overriddenbyribbonapi.md)      | Нет |  Указывает, должен ли элемент меню отображаться в сочетаниях приложений и платформ, поддерживаюх настраиваемые контекстные вкладки. Если используется, он должен быть первым *элементом* ребенка. |
 
 ### <a name="label"></a>Label
 
