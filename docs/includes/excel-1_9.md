@@ -11,7 +11,7 @@
 ||[getRange()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-getrange-member(1))|Возвращает объект `Range` , который представляет диапазон, к которому применяется AutoFilter.|
 ||[getRangeOrNullObject()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-getrangeornullobject-member(1))|Возвращает объект `Range` , который представляет диапазон, к которому применяется AutoFilter.|
 ||[isDataFiltered](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-isdatafiltered-member)|Указывает, есть ли у autoFilter критерии фильтрации.|
-||[reapply()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-reapply-member(1))|Применяет указанный объект Autofilter, находящийся в настоящее время в диапазоне.|
+||[reapply()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-reapply-member(1))|Применяет указанный объект AutoFilter в данный момент в диапазоне.|
 ||[remove()](/javascript/api/excel/excel.autofilter#excel-excel-autofilter-remove-member(1))|Удаляет автофильтр из диапазона.|
 |[CellBorder](/javascript/api/excel/excel.cellborder)|[color](/javascript/api/excel/excel.cellborder#excel-excel-cellborder-color-member)|Представляет свойство `color` одинарной границы.|
 ||[style](/javascript/api/excel/excel.cellborder#excel-excel-cellborder-style-member)|Представляет свойство `style` одинарной границы.|
